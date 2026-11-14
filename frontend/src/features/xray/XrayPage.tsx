@@ -343,6 +343,20 @@ export const XrayPage: React.FC = () => {
                     <span className="w-1.5 h-1.5 rounded-full bg-cyan-400 animate-pulse" />
                     Frontal Projection
                   </div>
+
+                  {/* High-Tech Animated Laser Scanning Overlay */}
+                  {isLoading && (
+                    <div className="absolute inset-0 z-30 pointer-events-none overflow-hidden rounded-xl">
+                      <div className="absolute inset-0 bg-cyan-950/25 backdrop-blur-[1px]" />
+                      <div className="absolute left-0 right-0 h-1 bg-gradient-to-r from-transparent via-cyan-400 to-transparent shadow-[0_0_15px_#06b6d4] animate-laser-sweep" />
+                      <div className="absolute inset-x-0 bottom-12 flex justify-center px-4">
+                        <div className="bg-black/90 backdrop-blur-md px-3.5 py-1.5 rounded-lg border border-cyan-500/50 text-xs font-mono text-cyan-300 flex items-center gap-2 shadow-2xl">
+                          <RefreshCw className="w-3.5 h-3.5 text-cyan-400 animate-spin" />
+                          <span>Screening Radiograph with Deep Neural Network...</span>
+                        </div>
+                      </div>
+                    </div>
+                  )}
                 </div>
 
                 {/* File Metadata & Replacement Action */}

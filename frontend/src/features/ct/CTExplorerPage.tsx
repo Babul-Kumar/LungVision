@@ -553,21 +553,40 @@ export const CTExplorerPage: React.FC = () => {
               headerAction={
                 <div className="flex items-center gap-1.5">
                   <span className="text-[11px] text-medical-muted mr-1">Structure:</span>
-                  {['lungs', 'left_lung', 'right_lung', 'heart', 'airways'].map((struct) => (
-                    <button
-                      key={struct}
-                      onClick={() => setSelectedStructure(struct)}
-                      className={`px-2.5 py-1 rounded text-[11px] font-mono capitalize transition-all ${
-                        selectedStructure === struct
-                          ? struct === 'heart'
-                            ? 'bg-rose-600 text-white font-semibold shadow-xs'
-                            : 'bg-medical-cyan text-medical-bg font-semibold shadow-xs'
-                          : 'bg-medical-surface text-medical-muted hover:text-white'
-                      }`}
-                    >
-                      {struct.replace('_', ' ')}
-                    </button>
-                  ))}
+                  {[
+                    { id: 'lungs', label: 'Bilateral Lungs', tag: '3,4' },
+                    { id: 'left_lung', label: 'Left Lung', tag: '3' },
+                    { id: 'right_lung', label: 'Right Lung', tag: '4' },
+                    { id: 'heart', label: 'Heart', tag: '2' },
+                    { id: 'airways', label: 'Airways', tag: '5' },
+                  ].map((item) => {
+                    const isPresent =
+                      !metadata ||
+                      (item.id === 'lungs' && (metadata.labels_present.includes(3) || metadata.labels_present.includes(4))) ||
+                      (item.id === 'left_lung' && metadata.labels_present.includes(3)) ||
+                      (item.id === 'right_lung' && metadata.labels_present.includes(4)) ||
+                      (item.id === 'heart' && metadata.labels_present.includes(2)) ||
+                      (item.id === 'airways' && metadata.labels_present.includes(5));
+
+                    return (
+                      <button
+                        key={item.id}
+                        onClick={() => setSelectedStructure(item.id)}
+                        className={`px-2.5 py-1 rounded text-[11px] font-mono transition-all flex items-center gap-1 ${
+                          selectedStructure === item.id
+                            ? item.id === 'heart'
+                              ? 'bg-rose-600 text-white font-semibold shadow-xs'
+                              : 'bg-medical-cyan text-medical-bg font-semibold shadow-xs'
+                            : isPresent
+                            ? 'bg-medical-surface text-medical-muted hover:text-white'
+                            : 'bg-medical-surface/40 text-slate-500 border border-slate-800 line-through opacity-70'
+                        }`}
+                        title={isPresent ? `Segmented label ${item.tag}` : `Structure label ${item.tag} outside scan subvolume`}
+                      >
+                        <span>{item.label}</span>
+                      </button>
+                    );
+                  })}
                 </div>
               }
             >
@@ -584,6 +603,17 @@ export const CTExplorerPage: React.FC = () => {
                   }}
                 />
               </div>
+
+              {/* Heart Subvolume Notice if Heart is selected on a scan without Label 2 */}
+              {selectedStructure === 'heart' && metadata && !metadata.labels_present.includes(2) && (
+                <div className="mt-3 p-3 rounded-lg bg-amber-950/40 border border-amber-800/60 text-xs text-amber-200 flex items-start gap-2.5">
+                  <AlertCircle className="w-4 h-4 text-amber-400 shrink-0 mt-0.5" />
+                  <div>
+                    <span className="font-semibold text-white">Cardiac Subvolume Notice: </span>
+                    Reference scan <code className="text-amber-300 font-mono">{activeScanId}</code> is an 80 mm thoracic subvolume centered on pulmonary nodule targets. Labels present are {metadata.labels_present.join(', ')} (Left Lung, Right Lung, Airway). The cardiac contour (label 2) is outside this subvolume's z-range. Select <strong>Bilateral Lungs</strong>, <strong>Left Lung</strong>, <strong>Right Lung</strong>, or <strong>Airways</strong> to inspect active 3D meshes.
+                  </div>
+                </div>
+              )}
 
               {selectedNoduleId && activeNodule && (
                 <div className="mt-3 p-2.5 rounded-lg bg-medical-surface border border-cyan-800/60 flex items-center justify-between text-xs font-mono">

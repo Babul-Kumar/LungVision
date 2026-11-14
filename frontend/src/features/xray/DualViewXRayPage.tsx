@@ -503,6 +503,20 @@ export const DualViewXRayPage: React.FC = () => {
                 <div className="absolute top-3 left-3 bg-black/75 backdrop-blur-md px-2.5 py-1 rounded text-[11px] font-mono text-cyan-300 border border-cyan-800/40">
                   PA / AP Frontal Projection
                 </div>
+
+                {/* Laser Scanning Overlay during Reconstruction / Screening */}
+                {(isAnalyzing || isReconstructing) && (
+                  <div className="absolute inset-0 z-30 pointer-events-none overflow-hidden rounded-xl">
+                    <div className="absolute inset-0 bg-cyan-950/25 backdrop-blur-[1px]" />
+                    <div className="absolute left-0 right-0 h-1 bg-gradient-to-r from-transparent via-cyan-400 to-transparent shadow-[0_0_15px_#06b6d4] animate-laser-sweep" />
+                    <div className="absolute inset-x-0 bottom-12 flex justify-center px-4">
+                      <div className="bg-black/90 backdrop-blur-md px-3 py-1 rounded-lg border border-cyan-500/50 text-[11px] font-mono text-cyan-300 flex items-center gap-2 shadow-2xl">
+                        <span className="w-2 h-2 rounded-full bg-cyan-400 animate-ping" />
+                        <span>{isReconstructing ? 'Calibrating Frontal Contour Silhouette...' : 'Analyzing NIH Pathologies...'}</span>
+                      </div>
+                    </div>
+                  </div>
+                )}
                 <div className="absolute top-3 right-3 flex items-center gap-2">
                   <span className="px-2 py-0.5 rounded bg-black/70 font-mono text-xs text-white border border-white/20">
                     L
@@ -641,6 +655,20 @@ export const DualViewXRayPage: React.FC = () => {
                 <div className="absolute top-3 left-3 bg-black/75 backdrop-blur-md px-2.5 py-1 rounded text-[11px] font-mono text-teal-300 border border-teal-800/40">
                   Lateral Projection (Sagittal Plane)
                 </div>
+
+                {/* Laser Scanning Overlay during Reconstruction / Screening */}
+                {isReconstructing && (
+                  <div className="absolute inset-0 z-30 pointer-events-none overflow-hidden rounded-xl">
+                    <div className="absolute inset-0 bg-teal-950/25 backdrop-blur-[1px]" />
+                    <div className="absolute left-0 right-0 h-1 bg-gradient-to-r from-transparent via-teal-400 to-transparent shadow-[0_0_15px_#14b8a6] animate-laser-sweep" />
+                    <div className="absolute inset-x-0 bottom-12 flex justify-center px-4">
+                      <div className="bg-black/90 backdrop-blur-md px-3 py-1 rounded-lg border border-teal-500/50 text-[11px] font-mono text-teal-300 flex items-center gap-2 shadow-2xl">
+                        <span className="w-2 h-2 rounded-full bg-teal-400 animate-ping" />
+                        <span>Optimizing Lateral Depth Silhouette...</span>
+                      </div>
+                    </div>
+                  </div>
+                )}
                 <div className="absolute top-3 right-3 flex items-center gap-2">
                   <span className="px-2 py-0.5 rounded bg-black/70 font-mono text-xs text-white border border-white/20">
                     A (Anterior)

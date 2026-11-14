@@ -51,10 +51,15 @@ export const Sidebar: React.FC = () => {
       </nav>
 
       {/* Sidebar Footer Info */}
-      <div className="p-3 rounded-xl bg-medical-card/60 border border-medical-border/40 text-[11px] text-medical-subtle">
-        <p className="font-semibold text-slate-300">Model Runtime</p>
-        <p className="mt-0.5">PyTorch 2.14.1 (CPU)</p>
-        <p className="mt-1 text-[10px] text-medical-muted">NIH / IN-CXR Trained Checkpoints</p>
+      <div className="p-3 rounded-xl bg-medical-card/60 border border-medical-border/40 text-[11px] text-medical-subtle hud-corner-bracket">
+        <div className="flex items-center justify-between mb-1">
+          <span className="font-semibold text-slate-300">Model Runtime</span>
+          <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
+        </div>
+        <p className="text-[10px] font-mono text-cyan-400">PyTorch 2.14.1 · SimpleITK 2.5</p>
+        <p className="mt-1 text-[10px] text-medical-muted leading-tight">
+          4 Locked Checkpoints: DenseNet121, 2x ResNet18, SSM Lung PCA (20 Modes)
+        </p>
       </div>
     </aside>
   );

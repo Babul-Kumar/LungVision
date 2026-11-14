@@ -74,8 +74,8 @@ export const DashboardPage: React.FC = () => {
                 ? `Models Ready: ${
                     typeof readiness.models_loaded === 'object' && readiness.models_loaded !== null
                       ? Object.values(readiness.models_loaded).filter(Boolean).length
-                      : (readiness as any).models_loaded_count ?? 3
-                  }/3`
+                      : (readiness as any).models_loaded_count ?? (models.length || 4)
+                  }/${models.length || 4}`
                 : 'Models Degraded'}
             </Badge>
           )}
