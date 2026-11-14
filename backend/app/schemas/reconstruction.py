@@ -84,3 +84,33 @@ class SSMReconstructionResponse(StandardResponse):
     metrics: ReconstructionMetrics
     volumetry: OrganVolumetry
     surface_mesh: MeshDescriptor
+
+
+class SSMDeformRequest(BaseModel):
+    """Parameters for interactive SSM shape deformation and structure filtering."""
+    shape_coefficients: List[float] = Field(default_factory=list, description="PCA mode coefficients")
+    structure: str = Field(default="bilateral", description="'bilateral', 'left_lung', or 'right_lung'")
+
+
+class SSMDeformMetrics(BaseModel):
+    assd_mm: float
+    hd95_mm: float
+    volume_error_pct: float
+    surface_dice: float
+    mahalanobis_distance: float
+    total_modes_used: int
+    explained_variance_pct: float
+
+
+class SSMDeformResponse(StandardResponse):
+    """Results of interactive SSM shape deformation."""
+    num_vertices: int
+    num_faces: int
+    structure: str
+    coefficients: List[float]
+    volumetry: OrganVolumetry
+    metrics: SSMDeformMetrics
+    landmarks: Dict[str, List[float]]
+    vertices: List[List[float]]
+    faces: List[List[int]]
+

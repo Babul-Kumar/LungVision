@@ -17,4 +17,10 @@
 - **Euler characteristic of combined lung mesh (\chi = -10)**: The combined mesh reported $\chi = -10$.
   **Investigation & Adaptation**: Dissected components mathematically: Right lung is an ideal genus-0 sphere ($\chi = +2$). Left lung has $\chi = -12$ (one main component with 8 micro-handles, $g = 8, \chi = -14$, plus 1 single-voxel boundary octahedron, $g = 0, \chi = +2$). The handles stem from discrete voxel discretization at the grazing intersection between the cardiac notch ellipsoid and left lung base. The surface is 100% watertight (0 boundary edges, 0 non-manifold edges) with strictly outward normals. Do not artificially force Euler characteristic; document exact topological provenance in audit records.
 
+- **Phase 2B SSM Template Vertex Count & Partition Alignment**:
+  - `backend/tests/test_ssm_reconstruction.py` originally hardcoded historical vertex count (7,652) and mode count (15) from an earlier draft before Phase 2 organic curvature and Phase 2B 20-mode models were calibrated.
+  - Furthermore, bilateral partitioning at $x=0$ on the 6,737-vertex canonical template yields 3,377 Left Lung vertices ($x < 0$) and 3,360 Right Lung vertices ($x \ge 0$).
+  - **Adaptation**: Updated assertions to validate dynamic model consistency against the loaded 6,737-vertex / 13,478-face geometry, and verified exact bilateral partition counts.
+
+
 

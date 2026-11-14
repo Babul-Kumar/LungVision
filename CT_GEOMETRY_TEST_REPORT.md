@@ -109,3 +109,4 @@ The corrected implementation:
 
 **Critical Scientific Disclaimer:**  
 The reconstructed volume ($82.3\text{ mL}$) represents an **80 mm vertical thoracic subvolume**, not a full adult human total lung capacity ($4-6\text{ L}$). Within this 80 mm field of view, the geometry is physically grounded, watertight, and topologically verified.
+

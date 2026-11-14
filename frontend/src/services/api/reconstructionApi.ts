@@ -1,6 +1,8 @@
 import { apiClient } from './client';
 import {
   ExportOBJRequest,
+  SSMDeformRequest,
+  SSMDeformResponse,
   SSMModelInfo,
   SSMReconstructionRequest,
   SSMReconstructionResponse,
@@ -9,6 +11,11 @@ import {
 export const reconstructionApi = {
   getModelInfo: async (): Promise<SSMModelInfo> => {
     const res = await apiClient.get<SSMModelInfo>('/api/v1/reconstruction/ssm/model-info');
+    return res.data;
+  },
+
+  deformShape: async (params: SSMDeformRequest): Promise<SSMDeformResponse> => {
+    const res = await apiClient.post<SSMDeformResponse>('/api/v1/reconstruction/ssm/deform', params);
     return res.data;
   },
 
@@ -34,4 +41,5 @@ export const reconstructionApi = {
     return res.data;
   },
 };
+
 

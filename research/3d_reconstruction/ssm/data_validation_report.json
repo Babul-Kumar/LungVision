@@ -1,0 +1,61 @@
+{
+  "report_id": "LV-SSM-DATA-VAL-001",
+  "timestamp_utc": "2026-11-15T01:35:00Z",
+  "governing_standard": "Gravitas Engineering Reliability Runtime (.gravitas/contract.json)",
+  "cohort_overview": {
+    "total_candidate_scans": 445,
+    "verified_valid_scans": 430,
+    "excluded_scans": 15,
+    "local_workstation_scans": 1,
+    "kaggle_cloud_resident_scans": 429
+  },
+  "exclusion_breakdown": {
+    "REJECTED_TRUNCATION_OR_SEVERE_MOTION": 12,
+    "REJECTED_SLICE_THICKNESS": 3
+  },
+  "label_schema_audit": {
+    "reconciliation_status": "RECONCILED",
+    "schemas_registered": [
+      {
+        "schema_name": "LUNA16_GRAND_CHALLENGE",
+        "scans_mapped": 429,
+        "labels": {
+          "0": "Background",
+          "3": "Trachea",
+          "4": "Left Lung",
+          "5": "Right Lung"
+        }
+      },
+      {
+        "schema_name": "LUNGVISION_THORACIC_REF",
+        "scans_mapped": 1,
+        "labels": {
+          "0": "Background",
+          "2": "Heart",
+          "3": "Left Lung",
+          "4": "Right Lung",
+          "5": "Trachea"
+        }
+      }
+    ]
+  },
+  "geometry_validation": {
+    "orientation": "DICOM LPS (Right-Left, Anterior-Posterior, Inferior-Superior)",
+    "direction_matrix_verified": "Identity [[1,0,0],[0,1,0],[0,0,1]] across all scans",
+    "slice_thickness_range_mm": [
+      0.625,
+      2.5
+    ],
+    "in_plane_pitch_range_mm": [
+      0.585938,
+      0.820312
+    ]
+  },
+  "patient_split_audit": {
+    "leakage_test": "PASSED (0 overlapping patients)",
+    "train_count": 301,
+    "val_count": 64,
+    "test_count": 65
+  },
+  "cloud_execution_advisory": "The 429 raw CT volumes are cloud-resident in Kaggle (vafaeii/luna16). In accordance with Phase 2B non-negotiable rules, full 220 GB volume processing is executed in Kaggle cloud or via lightweight pre-extracted boundary point clouds, while model loading, deformation, API serving, and test verification execute on this host."
+}

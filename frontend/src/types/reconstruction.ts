@@ -75,3 +75,32 @@ export interface ExportOBJRequest {
   shape_coefficients: number[];
 }
 
+export interface SSMDeformRequest {
+  shape_coefficients: number[];
+  structure?: string;
+}
+
+export interface SSMDeformMetrics {
+  assd_mm: number;
+  hd95_mm: number;
+  volume_error_pct: number;
+  surface_dice: number;
+  mahalanobis_distance: number;
+  total_modes_used: number;
+  explained_variance_pct: number;
+}
+
+export interface SSMDeformResponse {
+  success: boolean;
+  num_vertices: number;
+  num_faces: number;
+  structure: string;
+  coefficients: number[];
+  volumetry: OrganVolumetry;
+  metrics: SSMDeformMetrics;
+  landmarks: Record<string, [number, number, number]>;
+  vertices: number[][];
+  faces: number[][];
+}
+
+

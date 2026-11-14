@@ -16,9 +16,59 @@ vi.mock('@/services/api/ctApi', () => ({
   },
 }));
 
-// Mock ThreeMeshCanvas since WebGL is not available in JSDOM
+vi.mock('@/services/api/reconstructionApi', () => ({
+  reconstructionApi: {
+    getModelInfo: vi.fn().mockResolvedValue({
+      success: true,
+      loaded: true,
+      architecture: 'Statistical Shape Model (Point Distribution Model)',
+      num_vertices: 6737,
+      num_faces: 13478,
+      num_modes: 20,
+      total_explained_variance_pct: 100.0,
+      modes: [],
+      landmarks: [],
+      reference_volume_ml: 975.0,
+    }),
+    deformShape: vi.fn().mockResolvedValue({
+      success: true,
+      num_vertices: 6737,
+      num_faces: 13478,
+      structure: 'bilateral',
+      coefficients: [0, 0, 0, 0, 0],
+      volumetry: {
+        total_lung_volume_ml: 975.4,
+        left_lung_ml: 448.2,
+        right_lung_ml: 527.2,
+        symmetry_ratio: 1.176,
+      },
+      metrics: {
+        assd_mm: 0.072,
+        hd95_mm: 0.168,
+        volume_error_pct: 0.06,
+        surface_dice: 0.99,
+        mahalanobis_distance: 0.0,
+        total_modes_used: 5,
+        explained_variance_pct: 90.38,
+      },
+      landmarks: {
+        'Tracheal Carina': [0.0, -12.5, 35.0],
+      },
+      vertices: [[0, 0, 0]],
+      faces: [[0, 0, 0]],
+    }),
+    getTemplateMeshObj: vi.fn().mockResolvedValue('# OBJ text'),
+    exportReconstructedObj: vi.fn().mockResolvedValue('# OBJ text'),
+  },
+}));
+
+// Mock ThreeMeshCanvas and SSM3DReconstructionViewer since WebGL is not available in JSDOM
 vi.mock('@/features/ct/ThreeMeshCanvas', () => ({
   ThreeMeshCanvas: () => <div data-testid="three-canvas-mock">Three.js Mock Canvas</div>,
+}));
+
+vi.mock('@/features/xray/SSM3DReconstructionViewer', () => ({
+  SSM3DReconstructionViewer: () => <div data-testid="ssm-viewer-mock">SSM Mock Viewer</div>,
 }));
 
 describe('CTExplorerPage Feature', () => {
@@ -249,6 +299,39 @@ describe('CTExplorerPage Feature', () => {
       false,
       false
     );
+  });
+
+  it('renders and interacts with Tab 5: SSM Surface Model (Research) panel', async () => {
+    vi.mocked(ctApi.getMetadata).mockResolvedValueOnce(mockMetadata);
+    vi.mocked(ctApi.getMeasurements).mockResolvedValueOnce(mockMeasurements);
+    vi.mocked(ctApi.getMeshQuality).mockResolvedValueOnce(mockMeshQuality);
+    vi.mocked(ctApi.getAnnotations).mockResolvedValueOnce(mockAnnotations);
+
+    render(
+      <BrowserRouter future={{ v7_relativeSplatPath: true, v7_startTransition: true }}>
+        <CTExplorerPage />
+      </BrowserRouter>
+    );
+
+    await waitFor(() => {
+      expect(screen.getByText('3D Computed Tomography Explorer')).toBeInTheDocument();
+    });
+
+    // Click on Tab 5: SSM Surface Model (Research)
+    const ssmTab = screen.getByText('SSM Surface Model (Research)');
+    fireEvent.click(ssmTab);
+
+    // Verify SSM panel renders disclaimer, 3D viewport, and mode deformation controls
+    await waitFor(() => {
+      expect(screen.getByText('Statistical Shape Model Estimate — Research Only')).toBeInTheDocument();
+      expect(screen.getByText('Not a Diagnostic CT')).toBeInTheDocument();
+      expect(screen.getByText('Interactive 3D SSM Surface Deformation')).toBeInTheDocument();
+      expect(screen.getByText('Mode 1: Global Inspiratory Expansion')).toBeInTheDocument();
+      expect(screen.getByText('Mode 2: Thoracic Aspect Ratio')).toBeInTheDocument();
+      expect(screen.getByText('Continuous Organ Volumetry')).toBeInTheDocument();
+      expect(screen.getByText('Eigenspace Generalization Quality')).toBeInTheDocument();
+      expect(screen.getByText('Download Deformed OBJ Mesh')).toBeInTheDocument();
+    });
   });
 });
 

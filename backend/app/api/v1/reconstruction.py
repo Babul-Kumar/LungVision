@@ -11,6 +11,8 @@ from starlette.concurrency import run_in_threadpool
 
 from backend.app.schemas.reconstruction import (
     ExportOBJRequest,
+    SSMDeformRequest,
+    SSMDeformResponse,
     SSMModelInfoResponse,
     SSMReconstructionRequest,
     SSMReconstructionResponse
@@ -80,6 +82,34 @@ async def fit_ssm_from_projections(
             status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
             detail=f"3D SSM Reconstruction failed: {str(e)}"
         )
+
+
+@router.post(
+    "/ssm/deform",
+    response_model=SSMDeformResponse,
+    summary="Deform SSM Surface Mesh by Mode Coefficients",
+    description="Calculates deformed 3D vertices, partitioned structure, volumetry, and generalization metrics."
+)
+async def deform_ssm_shape(
+    request: SSMDeformRequest = Body(...)
+) -> SSMDeformResponse:
+    """Interactively deforms the SSM canonical template across principal modes."""
+    try:
+        result = await run_in_threadpool(
+            ssm_service.deform_shape,
+            coefficients=request.shape_coefficients,
+            structure=request.structure
+        )
+        return SSMDeformResponse(
+            success=True,
+            **result
+        )
+    except Exception as e:
+        raise HTTPException(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            detail=f"SSM deformation failed: {str(e)}"
+        )
+
 
 
 @router.get(
