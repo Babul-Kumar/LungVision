@@ -1,0 +1,16 @@
+{
+    "model": "ResNet18",
+    "pretrained_weights": "ImageNet DEFAULT",
+    "task": "Binary Normal vs Abnormal classification",
+    "input_size": 224,
+    "batch_size": 64,
+    "max_epochs": 5,
+    "completed_epochs": 5,
+    "best_epoch": 3,
+    "best_macro_source_auc": 0.9499627227664532,
+    "learning_rate": 0.0002,
+    "weight_decay": 0.0001,
+    "random_seed": 42,
+    "patient_disjoint_validation_certified": false,
+    "output_directory": "/kaggle/working/lungvision_phase2_models"
+}

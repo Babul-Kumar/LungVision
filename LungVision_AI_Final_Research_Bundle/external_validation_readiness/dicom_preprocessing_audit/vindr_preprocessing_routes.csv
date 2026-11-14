@@ -1,0 +1,3 @@
+preprocessing_route,images,normal,abnormal
+DICOM modality + VOI,14577,10534,4043
+Modality + robust percentile fallback,423,72,351

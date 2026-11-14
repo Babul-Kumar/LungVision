@@ -1,0 +1,16 @@
+metric,value
+annotation_rows,67914
+annotated_images,15000
+unique_radiologists,17
+reader_image_decisions,45000
+binary_unanimous_images,15000
+binary_disagreement_images,0
+reader_conflict_images,0
+eligible_images,15000
+normal_images,10606
+abnormal_images,4394
+dicom_files,18000
+matched_labelled_dicoms,15000
+missing_labelled_dicoms,0
+unlabelled_dicoms,3000
+sample_dicoms_decoded,20

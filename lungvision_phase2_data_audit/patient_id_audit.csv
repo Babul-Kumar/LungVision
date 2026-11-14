@@ -1,0 +1,3 @@
+source,total_images,images_with_patient_id,unique_patient_ids,images_without_patient_id
+IN-CXR,12600,0,0,12600
+VinDr,15000,0,0,15000

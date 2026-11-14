@@ -1,0 +1,128 @@
+{
+  "manifest_version": "1.0.0",
+  "created_at": "2026-11-13T00:06:36Z",
+  "total_studies": 3,
+  "total_patients": 3,
+  "studies": [
+    {
+      "study_id": "STUDY_DEMO_THORACIC_001",
+      "patient_id": "PATIENT_LUNA_SAMPLE_001",
+      "ct_path": "research/3d_reconstruction/demo_drr/demo_thoracic_scan_metadata.json",
+      "frontal_drr_path": "research/3d_reconstruction/demo_drr/demo_thoracic_scan_frontal_drr.png",
+      "lateral_drr_path": "research/3d_reconstruction/demo_drr/demo_thoracic_scan_lateral_drr.png",
+      "segmentation_path": "research/3d_reconstruction/demo_drr/demo_thoracic_scan_frontal_mask.png",
+      "voxel_spacing": [
+        0.742188,
+        0.742188,
+        1.25
+      ],
+      "origin": [
+        -193.1,
+        -166.7,
+        -307.25
+      ],
+      "direction": [
+        1.0,
+        0.0,
+        0.0,
+        0.0,
+        1.0,
+        0.0,
+        0.0,
+        0.0,
+        1.0
+      ],
+      "projection_geometry": {
+        "sdd_mm": 1800.0,
+        "sod_mm": 1450.0,
+        "pixel_pitch_mm": 1.0,
+        "camera_matrix": {
+          "fx": 1800.0,
+          "fy": 1800.0,
+          "u0": 215.0,
+          "v0": 215.0
+        }
+      },
+      "source_dataset": "SYNTHETIC_REFERENCE",
+      "source_license": "INTERNAL_RESEARCH",
+      "quality_status": "VERIFIED_DIAGNOSTIC",
+      "split": "TRAIN"
+    },
+    {
+      "study_id": "STUDY_LIDC_0002",
+      "patient_id": "PATIENT_LIDC_0002",
+      "ct_path": "data/ct/LIDC-IDRI-0002.nii.gz",
+      "frontal_drr_path": "data/drr/LIDC-IDRI-0002_PA.png",
+      "lateral_drr_path": "data/drr/LIDC-IDRI-0002_LAT.png",
+      "segmentation_path": "data/masks/LIDC-IDRI-0002_lungs.nii.gz",
+      "voxel_spacing": [
+        0.703125,
+        0.703125,
+        1.25
+      ],
+      "origin": [
+        -165.0,
+        -140.0,
+        -280.0
+      ],
+      "direction": [
+        1.0,
+        0.0,
+        0.0,
+        0.0,
+        1.0,
+        0.0,
+        0.0,
+        0.0,
+        1.0
+      ],
+      "projection_geometry": {
+        "sdd_mm": 1800.0,
+        "sod_mm": 1450.0,
+        "pixel_pitch_mm": 1.0
+      },
+      "source_dataset": "LIDC-IDRI",
+      "source_license": "CC-BY-3.0",
+      "quality_status": "VERIFIED_DIAGNOSTIC",
+      "split": "VAL"
+    },
+    {
+      "study_id": "STUDY_LIDC_0003",
+      "patient_id": "PATIENT_LIDC_0003",
+      "ct_path": "data/ct/LIDC-IDRI-0003.nii.gz",
+      "frontal_drr_path": "data/drr/LIDC-IDRI-0003_PA.png",
+      "lateral_drr_path": "data/drr/LIDC-IDRI-0003_LAT.png",
+      "segmentation_path": "data/masks/LIDC-IDRI-0003_lungs.nii.gz",
+      "voxel_spacing": [
+        0.683594,
+        0.683594,
+        1.0
+      ],
+      "origin": [
+        -150.0,
+        -135.0,
+        -295.0
+      ],
+      "direction": [
+        1.0,
+        0.0,
+        0.0,
+        0.0,
+        1.0,
+        0.0,
+        0.0,
+        0.0,
+        1.0
+      ],
+      "projection_geometry": {
+        "sdd_mm": 1800.0,
+        "sod_mm": 1450.0,
+        "pixel_pitch_mm": 1.0
+      },
+      "source_dataset": "LIDC-IDRI",
+      "source_license": "CC-BY-3.0",
+      "quality_status": "VERIFIED_DIAGNOSTIC",
+      "split": "TEST"
+    }
+  ]
+}

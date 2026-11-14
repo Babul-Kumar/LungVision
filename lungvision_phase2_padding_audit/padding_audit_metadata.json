@@ -1,0 +1,17 @@
+{
+    "selected_images": 320,
+    "processed_records": 1280,
+    "target_size": 224,
+    "methods": [
+        "direct_stretch",
+        "reflect",
+        "zero",
+        "corner_median"
+    ],
+    "random_state": 42,
+    "limitations": [
+        "Sample-based preprocessing comparison.",
+        "Padding statistics do not establish diagnostic superiority.",
+        "No image or dataset files were modified."
+    ]
+}

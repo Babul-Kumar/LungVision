@@ -1,0 +1,15 @@
+class_id,class_name,images_at_least_1_reader,images_with_2plus_readers,images_with_3_readers
+0,Aortic enlargement,3067,2346,1744
+3,Cardiomegaly,2300,1817,1297
+11,Pleural thickening,1981,882,365
+13,Pulmonary fibrosis,1617,1017,633
+7,Lung Opacity,1322,547,167
+9,Other lesion,1134,362,127
+10,Pleural effusion,1032,634,439
+8,Nodule/Mass,826,405,181
+6,Infiltration,613,245,91
+2,Calcification,452,177,57
+5,ILD,386,152,71
+4,Consolidation,353,121,31
+1,Atelectasis,186,62,18
+12,Pneumothorax,96,58,45

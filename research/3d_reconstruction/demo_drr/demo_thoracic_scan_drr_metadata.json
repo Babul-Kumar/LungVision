@@ -1,0 +1,143 @@
+{
+  "study_id": "STUDY_DEMO_THORACIC_SCAN",
+  "patient_id": "LIDC-IDRI-SAMPLE-001",
+  "scan_id": "demo_thoracic_scan",
+  "generation_timestamp": "2026-11-13T00:05:25Z",
+  "duration_ms": 145.24,
+  "generator_version": "1.0.0",
+  "input_ct": {
+    "scan_id": "demo_thoracic_scan",
+    "dimensions_zyx": [
+      64,
+      128,
+      128
+    ],
+    "spacing_xyz_mm": [
+      0.742188,
+      0.742188,
+      1.25
+    ],
+    "origin_xyz_mm": [
+      -193.1,
+      -166.7,
+      -307.25
+    ],
+    "direction_matrix": [
+      [
+        1.0,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        1.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        1.0
+      ]
+    ],
+    "sha256": "d71433b85dbdb197fc322fc57f619b2aaabf795231b6cdbdcf43fb60731dec9f",
+    "mask_sha256": "1a449b84975faa26099b78ee3877319aef69af011c3c1ab577b725e280054854",
+    "stats": {
+      "hu_min": -1000.0,
+      "hu_max": 450.0,
+      "hu_mean": -606.5552425384521
+    }
+  },
+  "projection_geometry": {
+    "sdd_mm": 1800.0,
+    "sod_mm": 1450.0,
+    "pixel_pitch_mm": 1.0,
+    "poisson_noise_enabled": false,
+    "frontal": {
+      "file_name": "demo_thoracic_scan_frontal_drr.png",
+      "file_path": "C:\\Users\\babul\\Desktop\\computer vision\\research\\3d_reconstruction\\demo_drr\\demo_thoracic_scan_frontal_drr.png",
+      "sha256": "36f8f39632c3391c4d525aa4c444bcb0182acf1132ce8d533ecd709648181876",
+      "dimensions": [
+        64,
+        128
+      ],
+      "mask_file_name": "demo_thoracic_scan_frontal_mask.png",
+      "camera_matrix": {
+        "view": "PA",
+        "source_lps": [
+          -145.599968,
+          1330.800032,
+          -267.25
+        ],
+        "detector_normal_lps": [
+          0.0,
+          -1.0,
+          0.0
+        ],
+        "sdd_mm": 1800.0,
+        "sod_mm": 1450.0,
+        "pixel_pitch_mm": 1.0,
+        "intrinsic_matrix": [
+          [
+            1800.0,
+            0.0,
+            215.0
+          ],
+          [
+            0.0,
+            1800.0,
+            215.0
+          ],
+          [
+            0.0,
+            0.0,
+            1.0
+          ]
+        ]
+      }
+    },
+    "lateral": {
+      "file_name": "demo_thoracic_scan_lateral_drr.png",
+      "file_path": "C:\\Users\\babul\\Desktop\\computer vision\\research\\3d_reconstruction\\demo_drr\\demo_thoracic_scan_lateral_drr.png",
+      "sha256": "9df0fab505a87c8c910cb002a28995b8c18a706e70db6dc6e6c7d36a1a862b5c",
+      "dimensions": [
+        64,
+        128
+      ],
+      "mask_file_name": "demo_thoracic_scan_lateral_mask.png",
+      "camera_matrix": {
+        "view": "LATERAL_LL",
+        "source_lps": [
+          -1595.599968,
+          -119.19996799999998,
+          -267.25
+        ],
+        "detector_normal_lps": [
+          1.0,
+          0.0,
+          0.0
+        ],
+        "sdd_mm": 1800.0,
+        "sod_mm": 1450.0,
+        "pixel_pitch_mm": 1.0,
+        "intrinsic_matrix": [
+          [
+            1800.0,
+            0.0,
+            215.0
+          ],
+          [
+            0.0,
+            1800.0,
+            215.0
+          ],
+          [
+            0.0,
+            0.0,
+            1.0
+          ]
+        ]
+      }
+    }
+  },
+  "clinical_notice": "DRRs are synthetic forward projections through a static supine thoracic CT volume. They do not capture upright physiological posture, deep breath-hold mechanics, or real scatter."
+}

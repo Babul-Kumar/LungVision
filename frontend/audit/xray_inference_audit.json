@@ -1,0 +1,243 @@
+{
+  "checkpoints": {
+    "densenet121": {
+      "path": "lungvision_disease_classification/checkpoints/densenet121_nih_best.pth",
+      "exists": true,
+      "size": 84457897,
+      "sha256": "8d3690cd0438587a94afb8fd2ad84c0b30f9c1cc2727ee0eb03662a02ea020af"
+    },
+    "original_resnet18": {
+      "path": "LungVision_AI_Final_Research_Bundle/models/original_resnet18/model.pth",
+      "exists": true,
+      "size": 134260367,
+      "sha256": "a293bd9e441b2713e62b7de208611bf7cc97676ea1291ce2818ff3a497528b2f"
+    },
+    "blur_resnet18": {
+      "path": "LungVision_AI_Final_Research_Bundle/models/blur_augmented_resnet18/model.pth",
+      "exists": true,
+      "size": 134263007,
+      "sha256": "7d8634454d1ac0dfa2c2dbc8d0b08155512fb52b65c9db5a9171a5b59c7d3f24"
+    }
+  },
+  "inference": {
+    "densenet121": {
+      "status": 200,
+      "response": {
+        "success": true,
+        "timestamp": "2026-11-12T18:10:40.715133+00:00",
+        "disclaimer": "For research and educational use only. Not a medical diagnosis. Independent verification by a qualified physician is strictly required.",
+        "model": {
+          "id": "densenet121_nih_6disease",
+          "architecture": "DenseNet121",
+          "task": "Multi-label chest X-ray disease classification",
+          "training_dataset": "NIH ChestX-ray14",
+          "checkpoint_epoch": 4,
+          "input_dimensions": [
+            224,
+            224,
+            3
+          ]
+        },
+        "predictions": {
+          "Cardiomegaly": {
+            "probability": 0.4101,
+            "threshold": 0.9502,
+            "experimental_flag": false
+          },
+          "Edema": {
+            "probability": 0.0401,
+            "threshold": 0.877,
+            "experimental_flag": false
+          },
+          "Consolidation": {
+            "probability": 0.9334,
+            "threshold": 0.7329,
+            "experimental_flag": true
+          },
+          "Pneumonia": {
+            "probability": 0.9811,
+            "threshold": 0.7529,
+            "experimental_flag": true
+          },
+          "Atelectasis": {
+            "probability": 0.2063,
+            "threshold": 0.7495,
+            "experimental_flag": false
+          },
+          "Pneumothorax": {
+            "probability": 0.0067,
+            "threshold": 0.5825,
+            "experimental_flag": false
+          }
+        },
+        "summary": {
+          "flagged_conditions_count": 2,
+          "highest_probability_disease": "Pneumonia",
+          "highest_probability_value": 0.9811
+        },
+        "inference_time_ms": 453.95
+      },
+      "latency_ms": 4497.671100005391
+    },
+    "original_resnet18": {
+      "status": 200,
+      "response": {
+        "success": true,
+        "timestamp": "2026-11-12T18:10:41.079287+00:00",
+        "disclaimer": "For research and educational use only. Not a medical diagnosis. Independent verification by a qualified physician is strictly required.",
+        "model": {
+          "id": "original_resnet18",
+          "architecture": "ResNet18",
+          "task": "Binary Normal vs Abnormal classification",
+          "training_dataset": "IN-CXR",
+          "checkpoint_epoch": 4,
+          "input_dimensions": [
+            224,
+            224,
+            3
+          ]
+        },
+        "prediction": {
+          "abnormal_probability": 0.6048,
+          "calibrated_threshold": 0.1765,
+          "classification": "Abnormal",
+          "experimental_flag": true
+        },
+        "inference_time_ms": 315.92
+      },
+      "latency_ms": 361.5284000115935
+    },
+    "blur_resnet18": {
+      "status": 200,
+      "response": {
+        "success": true,
+        "timestamp": "2026-11-12T18:10:41.421215+00:00",
+        "disclaimer": "For research and educational use only. Not a medical diagnosis. Independent verification by a qualified physician is strictly required.",
+        "model": {
+          "id": "blur_augmented_resnet18",
+          "architecture": "ResNet18",
+          "task": "Binary Normal vs Abnormal classification",
+          "training_dataset": "IN-CXR",
+          "checkpoint_epoch": 1,
+          "input_dimensions": [
+            224,
+            224,
+            3
+          ]
+        },
+        "prediction": {
+          "abnormal_probability": 0.3864,
+          "calibrated_threshold": 0.1879,
+          "classification": "Abnormal",
+          "experimental_flag": true
+        },
+        "inference_time_ms": 310.24
+      },
+      "latency_ms": 338.9735000091605
+    },
+    "registry": {
+      "success": true,
+      "timestamp": "2026-11-12T18:10:41.451033+00:00",
+      "disclaimer": "For research and educational use only. Not a medical diagnosis. Independent verification by a qualified physician is strictly required.",
+      "total_models": 3,
+      "models": [
+        {
+          "id": "densenet121_nih_6disease",
+          "name": "DenseNet121 NIH 6-Disease Multi-Label Classifier",
+          "architecture": "DenseNet121",
+          "task": "Multi-label chest X-ray disease classification",
+          "checkpoint_path": "C:\\Users\\babul\\Desktop\\computer vision\\lungvision_disease_classification\\checkpoints\\densenet121_nih_best.pth",
+          "sha256": "verified_epoch_4_nih_best",
+          "input_size": [
+            224,
+            224,
+            3
+          ],
+          "labels": [
+            "Cardiomegaly",
+            "Edema",
+            "Consolidation",
+            "Pneumonia",
+            "Atelectasis",
+            "Pneumothorax"
+          ],
+          "status": "production_frozen",
+          "metrics": {
+            "training_dataset": "NIH ChestX-ray14 (112,120 images)",
+            "checkpoint_epoch": 4,
+            "macro_val_auc": 0.820582,
+            "macro_val_auprc": 0.166984
+          },
+          "calibration": {
+            "Cardiomegaly": 0.950195,
+            "Edema": 0.876953,
+            "Consolidation": 0.73291,
+            "Pneumonia": 0.75293,
+            "Atelectasis": 0.749512,
+            "Pneumothorax": 0.58252
+          }
+        },
+        {
+          "id": "original_resnet18",
+          "name": "Original ResNet18 Baseline Classifier",
+          "architecture": "ResNet18",
+          "task": "Binary Normal vs Abnormal classification",
+          "checkpoint_path": "C:\\Users\\babul\\Desktop\\computer vision\\LungVision_AI_Final_Research_Bundle\\models\\original_resnet18\\model.pth",
+          "sha256": "a293bd9e441b2713e62b7de208611bf7cc97676ea1291ce2818ff3a497528b2f",
+          "input_size": [
+            224,
+            224,
+            3
+          ],
+          "labels": [
+            "Normal",
+            "Abnormal"
+          ],
+          "status": "production_frozen",
+          "metrics": {
+            "training_dataset": "IN-CXR (12,600 images)",
+            "checkpoint_epoch": 4,
+            "validation_auc": 0.933206,
+            "parameters": 11177025
+          },
+          "calibration": {
+            "selected_threshold": 0.176463,
+            "target_sensitivity": 0.9,
+            "achieved_sensitivity": 0.9,
+            "achieved_specificity": 0.7952
+          }
+        },
+        {
+          "id": "blur_augmented_resnet18",
+          "name": "Blur-Augmented ResNet18 Robustness Classifier",
+          "architecture": "ResNet18",
+          "task": "Binary Normal vs Abnormal classification",
+          "checkpoint_path": "C:\\Users\\babul\\Desktop\\computer vision\\LungVision_AI_Final_Research_Bundle\\models\\blur_augmented_resnet18\\model.pth",
+          "sha256": "7d8634454d1ac0dfa2c2dbc8d0b08155512fb52b65c9db5a9171a5b59c7d3f24",
+          "input_size": [
+            224,
+            224,
+            3
+          ],
+          "labels": [
+            "Normal",
+            "Abnormal"
+          ],
+          "status": "production_frozen",
+          "metrics": {
+            "training_dataset": "IN-CXR (Gaussian blur + rotation augmented)",
+            "checkpoint_epoch": 1,
+            "validation_auc": 0.938037,
+            "parameters": 11177025
+          },
+          "calibration": {
+            "selected_threshold": 0.187923,
+            "target_sensitivity": 0.9,
+            "achieved_sensitivity": 0.9,
+            "achieved_specificity": 0.8222
+          }
+        }
+      ]
+    }
+  }
+}

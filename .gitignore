@@ -1,0 +1,102 @@
+# ==========================================
+# LungVision AI — Comprehensive .gitignore
+# ==========================================
+
+# Operating System Files
+.DS_Store
+Thumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+
+# IDE & Editor Specific
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+*.swp
+*.swo
+
+# Python & Virtual Environments
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+venv/
+.venv/
+ENV/
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+.pytest_cache/
+.coverage
+htmlcov/
+.mypy_cache/
+.ruff_cache/
+
+# Node.js & Frontend
+node_modules/
+.vite/
+frontend/node_modules/
+frontend/dist/
+frontend/.vite/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.pnpm-debug.log*
+
+# Environment & Secrets
+.env
+.env.local
+.env.*.local
+*.pem
+*.key
+
+# Temporary Medical Uploads & Caches
+backend/data/uploads/*
+!backend/data/uploads/.gitkeep
+backend/data/cache/*
+!backend/data/cache/.gitkeep
+
+# Large Archives & Benchmark Raw Bundles
+*.zip
+*.tar
+*.tar.gz
+*.tgz
+*.rar
+*.7z
+
+# Medical Imaging Data & Volumes (Raw binaries kept outside Git)
+data/3d_reconstruction/luna16/
+*.mhd
+*.raw
+*.nii
+*.nii.gz
+*.dcm
+*.tcia
+
+# Neural Checkpoint Weights (>100MB exceed GitHub file size limit)
+*.pth
+*.pt
+*.bin
+*.ckpt
+
+# Gravitas & Agent Runtime Logs
+.agents/
+.gemini/
+.gravitas/logs/
+.system_generated/
+

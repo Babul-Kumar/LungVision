@@ -1,0 +1,9 @@
+source,split,label_name,image_count
+IN-CXR,train,Abnormal,4976
+IN-CXR,train,Normal,5035
+IN-CXR,validation,Abnormal,1244
+IN-CXR,validation,Normal,1259
+VinDr,train,Abnormal,3515
+VinDr,train,Normal,8485
+VinDr,validation,Abnormal,879
+VinDr,validation,Normal,2121

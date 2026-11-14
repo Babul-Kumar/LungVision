@@ -1,0 +1,314 @@
+{
+  "directory_summary": {
+    "root": 11,
+    ".gravitas": 1,
+    "backend": 50,
+    "frontend": 78,
+    "lungVision": 21,
+    "LungVision_AI_Final_Research_Bundle": 102,
+    "LungVision_AI_Model_Registry": 22,
+    "lungvision_disease_classification": 4,
+    "lungvision_phase2_dataset_profile": 6,
+    "lungvision_phase2_data_audit": 7,
+    "lungvision_phase2_incxr_artifact_audit": 5,
+    "lungvision_phase2_models": 13,
+    "lungvision_phase2_padding_audit": 4,
+    "lungvision_phase2_pixel_audit": 5,
+    "lungvision_phase2_preprocessing_comparison": 5,
+    "scripts": 1,
+    ".agents": 29
+  },
+  "total_files_scanned": 364,
+  "checkpoints": {
+    "lungvision_phase2_models/resnet18_best.pth": {
+      "size_bytes": 134258867,
+      "sha256": "e4e525de9107774f00804664804d593b23b6e645f930d3ddf45b5f2d898d7fb6"
+    },
+    "lungvision_phase2_models/resnet18_epoch_1.pth": {
+      "size_bytes": 134259809,
+      "sha256": "c34549ebaee5e1c6eee3ac0185df731e6944300b2653189e3358701124ec58f2"
+    },
+    "lungvision_phase2_models/resnet18_epoch_2.pth": {
+      "size_bytes": 134259809,
+      "sha256": "7e6fac963b483001df441964cc46603cece39f97ffbb46083edb8f3d560ed8b9"
+    },
+    "lungvision_phase2_models/resnet18_epoch_3.pth": {
+      "size_bytes": 134259809,
+      "sha256": "479bbb4da1fc08d880f10da7aadd938200f6484e89c6fdb0785c241b04d05212"
+    },
+    "lungvision_phase2_models/resnet18_epoch_4.pth": {
+      "size_bytes": 134259809,
+      "sha256": "69f6c78e9fe5f9a1672d2d16503a4a8f0889b8ee04b2fe392e9c970c2ea0ee6d"
+    },
+    "lungvision_phase2_models/resnet18_epoch_5.pth": {
+      "size_bytes": 134259809,
+      "sha256": "aea85feff729589385259d53bce1a1182f67d5d74736ea906bc2b0f6efe1ec3f"
+    },
+    "lungvision_disease_classification/checkpoints/densenet121_nih_best.pth": {
+      "size_bytes": 84457897,
+      "sha256": "8d3690cd0438587a94afb8fd2ad84c0b30f9c1cc2727ee0eb03662a02ea020af"
+    },
+    "LungVision_AI_Model_Registry/models/blur_augmented_resnet18/model.pth": {
+      "size_bytes": 134263007,
+      "sha256": "7d8634454d1ac0dfa2c2dbc8d0b08155512fb52b65c9db5a9171a5b59c7d3f24"
+    },
+    "LungVision_AI_Model_Registry/models/original_resnet18/model.pth": {
+      "size_bytes": 134260367,
+      "sha256": "a293bd9e441b2713e62b7de208611bf7cc97676ea1291ce2818ff3a497528b2f"
+    },
+    "LungVision_AI_Final_Research_Bundle/models/blur_augmented_resnet18/model.pth": {
+      "size_bytes": 134263007,
+      "sha256": "7d8634454d1ac0dfa2c2dbc8d0b08155512fb52b65c9db5a9171a5b59c7d3f24"
+    },
+    "LungVision_AI_Final_Research_Bundle/models/original_resnet18/model.pth": {
+      "size_bytes": 134260367,
+      "sha256": "a293bd9e441b2713e62b7de208611bf7cc97676ea1291ce2818ff3a497528b2f"
+    }
+  },
+  "duplicate_hash_groups_count": 8,
+  "duplicate_files_sample": {
+    "8739c76e681f900923b900c9df0ef75cf421d39cabb54650c4b9ad19b6a76d85": [
+      "LungVision_AI_Disease_Classification_result.zip",
+      "LungVision_AI_Final_Research_Bundle.zip",
+      "results (1).zip",
+      "results (2).zip"
+    ],
+    "a24092a2391d3e5bb9f87b0dbdc6e9cdb8c613df932c0160ddaca5481de9cfdc": [
+      "nih_test_results.csv",
+      "lungVision/nih_test_results.csv"
+    ],
+    "86726ae83dff69d12ba45d9ee92ae90bd80254a4cc0344aa44404bbfdb47e3e5": [
+      "lungvision_phase2_dataset_profile/split_profile.csv",
+      "lungvision_phase2_data_audit/source_split_label_summary.csv"
+    ],
+    "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b": [
+      "lungvision_phase2_incxr_artifact_audit/incxr_artifact_errors.csv",
+      "lungvision_phase2_pixel_audit/pixel_decode_errors.csv",
+      "LungVision_AI_Final_Research_Bundle/vindr_finding_level_analysis/false_negative_visual_audit/false_negative_image_errors.csv",
+      "LungVision_AI_Final_Research_Bundle/vindr_finding_level_analysis/gradcam_audit/vindr_gradcam_errors.csv",
+      "LungVision_AI_Final_Research_Bundle/vindr_finding_level_analysis/occlusion_faithfulness/vindr_occlusion_errors.csv",
+      "LungVision_AI_Final_Research_Bundle/external_validation_readiness/dicom_preprocessing_audit/vindr_dicom_decoding_errors.csv",
+      "LungVision_AI_Final_Research_Bundle/external_validation_readiness/dicom_preprocessing_audit/vindr_header_read_errors.csv"
+    ],
+    "3e8416745b196ea0f36ceb91063868a3de95e7d2eba3bdfb0d80b9f7acbb566f": [
+      "LungVision_AI_Model_Registry/configuration/model_registry.json",
+      "LungVision_AI_Final_Research_Bundle/model_registry_documentation/configuration/model_registry.json"
+    ],
+    "7d8634454d1ac0dfa2c2dbc8d0b08155512fb52b65c9db5a9171a5b59c7d3f24": [
+      "LungVision_AI_Model_Registry/models/blur_augmented_resnet18/model.pth",
+      "LungVision_AI_Final_Research_Bundle/models/blur_augmented_resnet18/model.pth"
+    ],
+    "a293bd9e441b2713e62b7de208611bf7cc97676ea1291ce2818ff3a497528b2f": [
+      "LungVision_AI_Model_Registry/models/original_resnet18/model.pth",
+      "LungVision_AI_Final_Research_Bundle/models/original_resnet18/model.pth"
+    ],
+    "abe4b413aa735fc546b1dab6d3629789ba11710c629b49785279971d857e46a3": [
+      "LungVision_AI_Final_Research_Bundle/external_validation_readiness/vindr_binary_label_candidates.csv",
+      "LungVision_AI_Final_Research_Bundle/external_validation_readiness/vindr_reader_agreement.csv"
+    ]
+  },
+  "large_artifacts": [
+    {
+      "path": "results.zip",
+      "size_mb": 818.92
+    },
+    {
+      "path": "lungvision_phase2_models/resnet18_best.pth",
+      "size_mb": 128.04
+    },
+    {
+      "path": "lungvision_phase2_models/resnet18_epoch_1.pth",
+      "size_mb": 128.04
+    },
+    {
+      "path": "lungvision_phase2_models/resnet18_epoch_2.pth",
+      "size_mb": 128.04
+    },
+    {
+      "path": "lungvision_phase2_models/resnet18_epoch_3.pth",
+      "size_mb": 128.04
+    },
+    {
+      "path": "lungvision_phase2_models/resnet18_epoch_4.pth",
+      "size_mb": 128.04
+    },
+    {
+      "path": "lungvision_phase2_models/resnet18_epoch_5.pth",
+      "size_mb": 128.04
+    },
+    {
+      "path": "LungVision_AI_Model_Registry/models/blur_augmented_resnet18/model.pth",
+      "size_mb": 128.04
+    },
+    {
+      "path": "LungVision_AI_Model_Registry/models/original_resnet18/model.pth",
+      "size_mb": 128.04
+    },
+    {
+      "path": "LungVision_AI_Final_Research_Bundle/models/blur_augmented_resnet18/model.pth",
+      "size_mb": 128.04
+    },
+    {
+      "path": "LungVision_AI_Final_Research_Bundle/models/original_resnet18/model.pth",
+      "size_mb": 128.04
+    },
+    {
+      "path": "lungvision_disease_classification/checkpoints/densenet121_nih_best.pth",
+      "size_mb": 80.55
+    },
+    {
+      "path": "lungvision_disease_classification/chexpert_manifest.csv",
+      "size_mb": 40.85
+    },
+    {
+      "path": "lungvision_disease_classification/nih_manifest.csv",
+      "size_mb": 18.51
+    },
+    {
+      "path": "backend/lungvision-interactive-viewer.ipynb",
+      "size_mb": 12.02
+    },
+    {
+      "path": "LungVision_AI_Final_Research_Bundle/vindr_finding_level_analysis/gradcam_audit/vindr_gradcam_radiologist_box_comparison.png",
+      "size_mb": 9.19
+    },
+    {
+      "path": "lungvision_phase2_data_audit/phase2_train_validation_split.csv",
+      "size_mb": 8.04
+    },
+    {
+      "path": "lungvision_phase2_data_audit/phase2_full_manifest.csv",
+      "size_mb": 7.88
+    },
+    {
+      "path": "lungvision_phase2_data_audit/phase2_clean_manifest.csv",
+      "size_mb": 7.85
+    },
+    {
+      "path": "LungVision_AI_Final_Research_Bundle/external_validation_readiness/dicom_preprocessing_audit/vindr_intensity_conversion_comparison.png",
+      "size_mb": 5.52
+    },
+    {
+      "path": "lungVision/nih_test_predictions_calibrated.csv",
+      "size_mb": 4.4
+    },
+    {
+      "path": "LungVision_AI_Final_Research_Bundle/external_validation_readiness/dicom_preprocessing_audit/vindr_full_header_manifest.csv",
+      "size_mb": 3.65
+    },
+    {
+      "path": "LungVision_AI_Final_Research_Bundle/external_validation_readiness/vindr_external_manifest.csv",
+      "size_mb": 3.59
+    },
+    {
+      "path": "LungVision_AI_Model_Registry/experiment_reports/image_quality_audit.csv",
+      "size_mb": 3.57
+    },
+    {
+      "path": "LungVision_AI_Final_Research_Bundle/external_validation_readiness/vindr_dicom_preview.png",
+      "size_mb": 3.5
+    },
+    {
+      "path": "LungVision_AI_Final_Research_Bundle/vindr_finding_level_analysis/false_negative_visual_audit/vindr_false_negative_radiologist_boxes.png",
+      "size_mb": 3.3
+    },
+    {
+      "path": "lungVision/__results___files/__results___24_0.png",
+      "size_mb": 2.67
+    },
+    {
+      "path": "LungVision_AI_Final_Research_Bundle/external_validation_readiness/vindr_reader_level_decisions.csv",
+      "size_mb": 2.55
+    },
+    {
+      "path": "lungVision/nih_validation_predictions.csv",
+      "size_mb": 2.43
+    },
+    {
+      "path": "lungvision_phase2_incxr_artifact_audit/incxr_full_artifact_metrics.csv",
+      "size_mb": 1.8
+    },
+    {
+      "path": "lungvision_phase2_models/validation_predictions_epoch_4.csv",
+      "size_mb": 1.73
+    },
+    {
+      "path": "lungvision_phase2_models/validation_predictions_epoch_1.csv",
+      "size_mb": 1.72
+    },
+    {
+      "path": "lungvision_phase2_models/validation_predictions_epoch_2.csv",
+      "size_mb": 1.72
+    },
+    {
+      "path": "lungvision_phase2_models/validation_predictions_epoch_3.csv",
+      "size_mb": 1.72
+    },
+    {
+      "path": "lungvision_phase2_models/validation_predictions_epoch_5.csv",
+      "size_mb": 1.72
+    },
+    {
+      "path": "LungVision_AI_Final_Research_Bundle/vindr_frozen_external_inference/vindr_frozen_model_predictions.csv",
+      "size_mb": 1.6
+    },
+    {
+      "path": "LungVision_AI_Final_Research_Bundle/vindr_finding_level_analysis/occlusion_faithfulness/vindr_occlusion_visual_examples.png",
+      "size_mb": 1.53
+    },
+    {
+      "path": "LungVision_AI_Final_Research_Bundle/external_validation_readiness/vindr_image_level_reader_votes.csv",
+      "size_mb": 1.34
+    }
+  ],
+  "code_references": {
+    "lungVision": [
+      "backend/app/config.py",
+      "backend/app/services/xray_service.py"
+    ],
+    "LungVision_AI_Final_Research_Bundle": [
+      "backend/app/config.py",
+      "backend/tests/test_xray_inference.py"
+    ],
+    "LungVision_AI_Model_Registry": [
+      "backend/app/config.py"
+    ],
+    "lungvision_disease_classification": [
+      "backend/app/config.py"
+    ],
+    "densenet121_nih_best.pth": [
+      "backend/app/config.py"
+    ],
+    "original_resnet18": [
+      "backend/app/config.py",
+      "backend/tests/test_model_registry.py",
+      "backend/tests/test_xray_inference.py",
+      "backend/app/services/model_loader.py",
+      "backend/app/services/registry_service.py",
+      "backend/app/services/xray_service.py",
+      "backend/app/api/v1/xray.py",
+      "frontend/src/services/api/xrayApi.ts",
+      "frontend/src/features/xray/XrayPage.tsx"
+    ],
+    "blur_augmented_resnet18": [
+      "backend/app/config.py",
+      "backend/tests/test_model_registry.py",
+      "backend/tests/test_xray_inference.py",
+      "backend/app/services/model_loader.py",
+      "backend/app/services/registry_service.py",
+      "backend/app/services/xray_service.py",
+      "backend/app/api/v1/xray.py",
+      "frontend/src/services/api/xrayApi.ts",
+      "frontend/src/features/xray/XrayPage.tsx"
+    ],
+    "demo_thoracic_scan": [
+      "backend/tests/test_ct_service.py",
+      "backend/app/services/ct_service.py",
+      "backend/app/services/ct/loader.py",
+      "frontend/src/store/useAppStore.ts",
+      "frontend/src/features/ct/CTExplorerPage.tsx"
+    ],
+    "results.zip": []
+  },
+  "git_status_lines": 1
+}

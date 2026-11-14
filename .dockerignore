@@ -1,0 +1,30 @@
+# Git and IDE
+.git/
+.gitignore
+.vscode/
+.idea/
+.gemini/
+.agents/
+.gravitas/
+.pytest_cache/
+
+# Node & Frontend Build
+frontend/node_modules/
+frontend/dist/
+frontend/.vite/
+
+# Python Cache & Virtual Environments
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.venv/
+venv/
+env/
+
+# Large Datasets & Archives
+results.zip
+*.zip
+*.tar.gz
+data/3d_reconstruction/luna16/raw_ct/
+

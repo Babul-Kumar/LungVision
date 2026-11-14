@@ -1,0 +1,3 @@
+preprocessing_route,normal_images,abnormal_images
+DICOM modality + Window/VOI,10534,4043
+Modality + percentile 1-99 fallback,72,351

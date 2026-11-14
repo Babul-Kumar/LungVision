@@ -1,0 +1,240 @@
+{
+  "timestamp": "2026-11-12T20:43:29Z",
+  "workflows": {
+    "health_and_readiness": {
+      "health": {
+        "status": "healthy",
+        "version": "1.0.0",
+        "timestamp": "2026-11-12T20:43:29.138785+00:00"
+      },
+      "ready": {
+        "status": "ready",
+        "device": "cpu",
+        "models_loaded": {
+          "densenet121_6disease": true,
+          "resnet18_original": true,
+          "resnet18_augmented": true
+        },
+        "timestamp": "2026-11-12T20:43:29.144779+00:00"
+      },
+      "health_latency_ms": 67.46,
+      "ready_latency_ms": 4.57,
+      "status": "PASS"
+    },
+    "xray_inference": {
+      "test_image": "LungVision_AI_Final_Research_Bundle\\external_validation_readiness\\vindr_dicom_preview.png",
+      "image_size_bytes": 3666167,
+      "densenet121": {
+        "status_code": 200,
+        "latency_ms": 735.68,
+        "predictions": {
+          "Cardiomegaly": {
+            "probability": 0.4101,
+            "threshold": 0.9502,
+            "experimental_flag": false
+          },
+          "Edema": {
+            "probability": 0.0401,
+            "threshold": 0.877,
+            "experimental_flag": false
+          },
+          "Consolidation": {
+            "probability": 0.9334,
+            "threshold": 0.7329,
+            "experimental_flag": true
+          },
+          "Pneumonia": {
+            "probability": 0.9811,
+            "threshold": 0.7529,
+            "experimental_flag": true
+          },
+          "Atelectasis": {
+            "probability": 0.2063,
+            "threshold": 0.7495,
+            "experimental_flag": false
+          },
+          "Pneumothorax": {
+            "probability": 0.0067,
+            "threshold": 0.5825,
+            "experimental_flag": false
+          }
+        },
+        "summary": {
+          "flagged_conditions_count": 2,
+          "highest_probability_disease": "Pneumonia",
+          "highest_probability_value": 0.9811
+        },
+        "label_order_match": true
+      },
+      "original_resnet18": {
+        "status_code": 200,
+        "latency_ms": 362.79,
+        "model_id_verified": "original_resnet18",
+        "prediction": {
+          "abnormal_probability": 0.6048,
+          "calibrated_threshold": 0.1765,
+          "classification": "Abnormal",
+          "experimental_flag": true
+        }
+      },
+      "blur_augmented_resnet18": {
+        "status_code": 200,
+        "latency_ms": 375.92,
+        "model_id_verified": "blur_augmented_resnet18",
+        "prediction": {
+          "abnormal_probability": 0.3864,
+          "calibrated_threshold": 0.1879,
+          "classification": "Abnormal",
+          "experimental_flag": true
+        }
+      },
+      "status": "PASS"
+    },
+    "model_registry": {
+      "total_models": 3,
+      "models": [
+        "densenet121_nih_6disease",
+        "original_resnet18",
+        "blur_augmented_resnet18"
+      ],
+      "densenet_detail_id": "densenet121_nih_6disease",
+      "densenet_detail_status": "production_frozen",
+      "latency_ms": 36.4,
+      "status": "PASS"
+    },
+    "research_metrics": {
+      "status_code": 200,
+      "latency_ms": 8.61,
+      "nih_test_diseases": 6,
+      "chexpert_diseases": 6,
+      "vindr_cohorts": 12,
+      "disclaimer_present": true,
+      "status": "PASS"
+    },
+    "backend_offline_simulation": {
+      "offline_port_tested": 8001,
+      "connection_refused_caught": true,
+      "exception_type": "URLError",
+      "frontend_handling": "useAppStore detects network failure and sets isBackendOnline: false, displaying red Live Backend: Offline pill and showing clear error banners across X-Ray and CT workstations.",
+      "status": "PASS"
+    },
+    "ct_explorer": {
+      "scan_id": "ct_b988cd34b200",
+      "upload_latency_ms": 35.71,
+      "metadata_status": 200,
+      "axial_slice_bytes": 1560,
+      "coronal_slice_bytes": 1560,
+      "sagittal_slice_bytes": 1560,
+      "mesh_size_bytes": 459407,
+      "mesh_lines": 21589,
+      "annotations_count": 12,
+      "measurements_success": true,
+      "status": "PASS"
+    }
+  },
+  "ct_scientific_correctness": {
+    "physical_to_continuous_roundtrip_error_mm": 0.0,
+    "roundtrip_pass": true,
+    "zyx_to_physical_xyz_error_mm": 0.0,
+    "zyx_pass": true,
+    "real_raw_ct_scans_found": 0,
+    "real_data_physical_landmarks_evaluated": "NOT TESTED",
+    "mesh_centering_applied_to_annotations": true,
+    "centering_mechanism": "ThreeMeshCanvas copies meshGroup.position centering offset directly to noduleGroup.position"
+  },
+  "research_metrics_integrity": {
+    "nih_csv_rows": 6,
+    "api_nih_rows": 6,
+    "nih_metric_exact_match": true,
+    "sample_counts": {
+      "nih_held_out_test": 25596,
+      "chexpert_multirad_consensus": 202,
+      "vindr_external_cohort": 15000
+    },
+    "threshold_source": "nih_validation_thresholds.csv (Youden J Index calibrated on validation split)",
+    "label_order_preserved": [
+      "Cardiomegaly",
+      "Edema",
+      "Consolidation",
+      "Pneumonia",
+      "Atelectasis",
+      "Pneumothorax"
+    ],
+    "status": "PASS"
+  },
+  "privacy_and_security": {
+    "client_storage_mode": "Dual-mode in useHistoryStore.ts (SessionStorage default, Opt-In LocalStorage)",
+    "server_side_image_retention": "Stateless byte buffer in memory; zero disk writes to permanent storage",
+    "temp_upload_cleanup": "Uploads directory backend/data/uploads cleaned ephemerally",
+    "cors_configuration": "Strictly restricted to localhost:5173, localhost:3000, 127.0.0.1:5173",
+    "zip_slip_protection": "security.py validates relative path components before extracting",
+    "rfc_7807_error_handling": true,
+    "medical_logging_anonymization": "Loggers log only file sizes and dimensions; no patient names or PHI",
+    "hipaa_compliance_assessment": "The architecture satisfies zero-retention principles and local session isolation, but formal HIPAA compliance requires institutional BAA, access controls, encrypted at-rest audit logs, and identity management."
+  },
+  "performance_latency": {
+    "api_latencies_ms": {
+      "health_probe": 67.46,
+      "ready_probe": 4.57,
+      "densenet121_inference": 735.68,
+      "resnet18_original_inference": 362.79,
+      "resnet18_augmented_inference": 375.92,
+      "model_registry": 36.4,
+      "research_metrics": 8.61,
+      "ct_axial_slice": 9.49,
+      "ct_mesh_stream": 110.58
+    },
+    "frontend_bundle_chunks": {
+      "Badge-B0kVe-SD.js": {
+        "size_kb": 1.44
+      },
+      "Button-o2TfXPdq.js": {
+        "size_kb": 1.5
+      },
+      "CTExplorerPage-jZPcfSeW.js": {
+        "size_kb": 56.96
+      },
+      "DashboardPage-BNWzqO9G.js": {
+        "size_kb": 8.94
+      },
+      "HistoryPage-CpQhSUD1.js": {
+        "size_kb": 7.13
+      },
+      "index-CCI7oOTf.js": {
+        "size_kb": 14.76
+      },
+      "modelApi-uUWXvQHO.js": {
+        "size_kb": 0.18
+      },
+      "ModelsPage-BPa8Wmsc.js": {
+        "size_kb": 9.47
+      },
+      "recharts-Ci02f7VP.js": {
+        "size_kb": 413.09
+      },
+      "ResearchPage-E33ydHqD.js": {
+        "size_kb": 16.08
+      },
+      "SettingsPage-YxjY9kr-.js": {
+        "size_kb": 7.79
+      },
+      "three-DrJRlpXb.js": {
+        "size_kb": 468.02
+      },
+      "useHistoryStore-GxDhxfCp.js": {
+        "size_kb": 1.04
+      },
+      "vendor-BrSI-FaA.js": {
+        "size_kb": 256.55
+      },
+      "XrayPage-CWAhYT2Y.js": {
+        "size_kb": 17.51
+      },
+      "index-CM1alykn.css": {
+        "size_kb": 32.17
+      }
+    },
+    "polling_frequency_heartbeat_seconds": 30
+  },
+  "summary": {}
+}

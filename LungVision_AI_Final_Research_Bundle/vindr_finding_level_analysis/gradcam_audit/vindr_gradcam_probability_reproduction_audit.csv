@@ -1,0 +1,3 @@
+model,cases,mean_absolute_probability_difference,max_absolute_probability_difference
+Augmented + CLAHE,9,5.8465125684671605e-08,2.0863360977035894e-07
+Original + CLAHE,9,5.508732403266062e-08,1.4932279777599144e-07

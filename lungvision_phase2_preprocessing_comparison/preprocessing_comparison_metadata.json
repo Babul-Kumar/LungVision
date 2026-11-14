@@ -1,0 +1,11 @@
+{
+    "sample_count": 320,
+    "successful_processed_records": 960,
+    "methods": [
+        "percentile_1_99",
+        "common_percentile",
+        "minmax"
+    ],
+    "random_state": 42,
+    "interpretation": "This experiment compares per-image intensity normalization methods. It does not prove that any method removes source-specific information."
+}

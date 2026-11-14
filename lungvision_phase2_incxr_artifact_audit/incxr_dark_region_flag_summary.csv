@@ -1,0 +1,5 @@
+split,label_name,total_images,flagged_images,flagged_percentage
+train,Abnormal,4976,549,11.032958199356912
+train,Normal,5035,291,5.779543197616683
+validation,Abnormal,1244,134,10.77170418006431
+validation,Normal,1259,80,6.354249404289118

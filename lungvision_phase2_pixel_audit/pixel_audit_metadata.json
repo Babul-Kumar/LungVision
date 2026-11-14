@@ -1,0 +1,12 @@
+{
+    "selected_images": 320,
+    "successfully_decoded": 320,
+    "failed_images": 0,
+    "samples_per_source_split_label": 40,
+    "random_state": 42,
+    "limitations": [
+        "Stratified sample, not a full dataset pixel audit.",
+        "Percentile normalization is an audit display operation.",
+        "Display statistics do not establish image quality or diagnostic value."
+    ]
+}

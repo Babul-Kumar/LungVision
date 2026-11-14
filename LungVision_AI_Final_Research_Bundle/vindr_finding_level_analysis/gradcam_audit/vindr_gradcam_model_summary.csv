@@ -1,0 +1,3 @@
+model,mean_cam_mass_inside_boxes,median_cam_mass_inside_boxes,mean_box_area,mean_cam_mass_enrichment,probability_reproduction_warnings
+Augmented + CLAHE,6.790296106688885,5.232242092037589,6.852479272959184,1.2254504953878058,0
+Original + CLAHE,7.615182433115794,5.195790370955469,6.852479272959184,1.2805608906470898,0

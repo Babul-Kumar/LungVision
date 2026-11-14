@@ -1,0 +1,16 @@
+class_name,annotation_rows,unique_images,class_id
+No finding,31818,10606,14
+Aortic enlargement,7162,3067,0
+Cardiomegaly,5427,2300,3
+Pleural thickening,4842,1981,11
+Pulmonary fibrosis,4655,1617,13
+Nodule/Mass,2580,826,8
+Lung Opacity,2483,1322,7
+Pleural effusion,2476,1032,10
+Other lesion,2203,1134,9
+Infiltration,1247,613,6
+ILD,1000,386,5
+Calcification,960,452,2
+Consolidation,556,353,4
+Atelectasis,279,186,1
+Pneumothorax,226,96,12

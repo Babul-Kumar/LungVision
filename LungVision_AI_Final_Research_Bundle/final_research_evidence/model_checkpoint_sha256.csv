@@ -1,0 +1,3 @@
+model,checkpoint_path,exists,size_bytes,sha256
+Original ResNet18,/kaggle/input/datasets/babulkumar07/lungvision/LungVision_AI_Model_Registry/models/original_resnet18/model.pth,True,134260367,a293bd9e441b2713e62b7de208611bf7cc97676ea1291ce2818ff3a497528b2f
+Blur-Augmented ResNet18,/kaggle/input/datasets/babulkumar07/lungvision/LungVision_AI_Model_Registry/models/blur_augmented_resnet18/model.pth,True,134263007,7d8634454d1ac0dfa2c2dbc8d0b08155512fb52b65c9db5a9171a5b59c7d3f24

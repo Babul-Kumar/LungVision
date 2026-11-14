@@ -1,0 +1,14 @@
+{
+    "expected_images": 12514,
+    "decoded_images": 12514,
+    "failed_images": 0,
+    "dark_region_threshold": 0.3,
+    "dark_region_flag_is_heuristic": true,
+    "images_modified": false,
+    "images_deleted": false,
+    "limitations": [
+        "Dark-region flags do not establish image corruption.",
+        "Legitimate radiographic anatomy can produce dark regions.",
+        "No automatic artifact removal was performed."
+    ]
+}

@@ -1,0 +1,47 @@
+{
+    "audit_name": "LungVision AI Phase 2 Dataset Audit",
+    "created_utc": "2026-11-09T23:32:49.513430+00:00",
+    "random_state": 42,
+    "validation_size": 0.2,
+    "incxr_root": "/kaggle/input/datasets/arjav007/in-cxr-dataset-png",
+    "vindr_root": "/kaggle/input/competitions/vinbigdata-chest-xray-abnormalities-detection",
+    "vindr_csv": "/kaggle/input/competitions/vinbigdata-chest-xray-abnormalities-detection/train.csv",
+    "incxr_images_discovered": 12600,
+    "incxr_images_labeled": 12600,
+    "vindr_annotation_rows": 67914,
+    "vindr_unique_annotated_images": 15000,
+    "vindr_dicom_matched": 15000,
+    "vindr_dicom_missing": 0,
+    "total_manifest_images": 27600,
+    "exact_duplicate_groups": 43,
+    "exact_duplicate_records": 86,
+    "quarantined_records": 86,
+    "clean_development_images": 27514,
+    "train_images": 22011,
+    "validation_images": 5503,
+    "train_validation_sha256_overlap": 0,
+    "train_validation_image_id_overlap": 0,
+    "patient_audit": [
+        {
+            "source": "IN-CXR",
+            "total_images": 12600,
+            "images_with_patient_id": 0,
+            "unique_patient_ids": 0,
+            "images_without_patient_id": 12600
+        },
+        {
+            "source": "VinDr",
+            "total_images": 15000,
+            "images_with_patient_id": 0,
+            "unique_patient_ids": 0,
+            "images_without_patient_id": 15000
+        }
+    ],
+    "limitations": [
+        "Image-level split only; patient-disjoint validation is not certified.",
+        "Missing patient identifiers prevent reliable patient-level grouping.",
+        "VinDr binary labels are derived from the three-reader training annotations.",
+        "Exact SHA256 detects byte-identical files, not visually similar images.",
+        "All members of exact duplicate groups are quarantined conservatively."
+    ]
+}

@@ -1,0 +1,5 @@
+source,split,total_images,abnormal_images,normal_images,abnormal_prevalence
+IN-CXR,train,10011,4976,5035,0.49705324143442214
+IN-CXR,validation,2503,1244,1259,0.49700359568517777
+VinDr,train,12000,3515,8485,0.29291666666666666
+VinDr,validation,3000,879,2121,0.293

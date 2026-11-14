@@ -1,0 +1,16 @@
+Metric,Value
+Images evaluated,336.0
+Patients evaluated,276.0
+Threshold,0.5
+ROC-AUC,0.6097005208333334
+Average Precision,0.695788081117281
+Accuracy,0.5744047619047619
+Precision,0.6368715083798883
+Sensitivity,0.59375
+Specificity,0.5486111111111112
+F1,0.6145552560646901
+Brier Score,0.30211462550797613
+True Negatives,79.0
+False Positives,65.0
+False Negatives,78.0
+True Positives,114.0

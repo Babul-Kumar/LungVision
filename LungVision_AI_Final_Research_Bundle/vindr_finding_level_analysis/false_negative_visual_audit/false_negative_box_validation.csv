@@ -1,0 +1,36 @@
+image_id,finding,rad_id,box_valid,xmin,ymin,xmax,ymax,width,height,reason
+63803ddfb3ea3bb435ff62c45ba78fde,Cardiomegaly,R8,True,767.0,1250.0,1616.0,1551.0,849.0,301.0,Valid
+63803ddfb3ea3bb435ff62c45ba78fde,Cardiomegaly,R9,True,721.0,1252.0,1622.0,1555.0,901.0,303.0,Valid
+63803ddfb3ea3bb435ff62c45ba78fde,Cardiomegaly,R10,True,740.0,1260.0,1597.0,1524.0,857.0,264.0,Valid
+e58d508f7915d3ada6edb4d88dc1f5f7,Cardiomegaly,R10,True,747.0,1392.0,1657.0,1693.0,910.0,301.0,Valid
+e58d508f7915d3ada6edb4d88dc1f5f7,Cardiomegaly,R8,True,731.0,1320.0,1650.0,1697.0,919.0,377.0,Valid
+e58d508f7915d3ada6edb4d88dc1f5f7,Cardiomegaly,R9,True,733.0,1417.0,1658.0,1692.0,925.0,275.0,Valid
+63803ddfb3ea3bb435ff62c45ba78fde,Aortic enlargement,R8,True,1119.0,619.0,1323.0,890.0,204.0,271.0,Valid
+63803ddfb3ea3bb435ff62c45ba78fde,Aortic enlargement,R9,True,1057.0,618.0,1348.0,871.0,291.0,253.0,Valid
+63803ddfb3ea3bb435ff62c45ba78fde,Aortic enlargement,R10,True,1139.0,634.0,1331.0,843.0,192.0,209.0,Valid
+762f339322e42d419878a7b9c887553c,Aortic enlargement,R10,True,1069.0,664.0,1364.0,925.0,295.0,261.0,Valid
+762f339322e42d419878a7b9c887553c,Aortic enlargement,R8,True,1111.0,654.0,1377.0,976.0,266.0,322.0,Valid
+762f339322e42d419878a7b9c887553c,Aortic enlargement,R9,True,1118.0,664.0,1370.0,940.0,252.0,276.0,Valid
+05d676834dbed1639cb5eea70c1e307b,Pneumothorax,R8,True,410.0,353.0,1256.0,1917.0,846.0,1564.0,Valid
+05d676834dbed1639cb5eea70c1e307b,Pneumothorax,R9,True,338.0,323.0,1266.0,1682.0,928.0,1359.0,Valid
+05d676834dbed1639cb5eea70c1e307b,Pneumothorax,R10,True,443.0,397.0,1148.0,1750.0,705.0,1353.0,Valid
+69a3e19744062d97e679adf184b667c2,Pneumothorax,R8,True,44.0,589.0,888.0,2223.0,844.0,1634.0,Valid
+69a3e19744062d97e679adf184b667c2,Pneumothorax,R10,True,54.0,603.0,855.0,2201.0,801.0,1598.0,Valid
+69a3e19744062d97e679adf184b667c2,Pneumothorax,R9,True,52.0,689.0,839.0,2234.0,787.0,1545.0,Valid
+a1e8167621dbbff8f8bf5714e43fd188,Nodule/Mass,R12,True,1945.0,1023.0,2227.0,1268.0,282.0,245.0,Valid
+a1e8167621dbbff8f8bf5714e43fd188,Nodule/Mass,R16,True,1947.0,990.0,2257.0,1315.0,310.0,325.0,Valid
+a1e8167621dbbff8f8bf5714e43fd188,Nodule/Mass,R17,True,1959.0,991.0,2244.0,1291.0,285.0,300.0,Valid
+cca122e46a24a6ccfeba9ade9f7b933c,Nodule/Mass,R8,True,1577.0,1890.0,1642.0,1956.0,65.0,66.0,Valid
+cca122e46a24a6ccfeba9ade9f7b933c,Nodule/Mass,R9,True,465.0,1506.0,509.0,1542.0,44.0,36.0,Valid
+cca122e46a24a6ccfeba9ade9f7b933c,Nodule/Mass,R8,True,461.0,1504.0,508.0,1539.0,47.0,35.0,Valid
+cca122e46a24a6ccfeba9ade9f7b933c,Nodule/Mass,R10,True,416.0,1053.0,518.0,1170.0,102.0,117.0,Valid
+cca122e46a24a6ccfeba9ade9f7b933c,Nodule/Mass,R9,True,1631.0,820.0,1656.0,847.0,25.0,27.0,Valid
+cca122e46a24a6ccfeba9ade9f7b933c,Nodule/Mass,R8,True,1635.0,822.0,1652.0,843.0,17.0,21.0,Valid
+cca122e46a24a6ccfeba9ade9f7b933c,Nodule/Mass,R10,True,1626.0,816.0,1660.0,849.0,34.0,33.0,Valid
+cca122e46a24a6ccfeba9ade9f7b933c,Nodule/Mass,R8,True,413.0,1053.0,522.0,1172.0,109.0,119.0,Valid
+d14f7d9469a5cdf6a60feea8f190f38d,Pleural effusion,R9,True,157.0,1279.0,594.0,1703.0,437.0,424.0,Valid
+d14f7d9469a5cdf6a60feea8f190f38d,Pleural effusion,R10,True,122.0,1176.0,789.0,1810.0,667.0,634.0,Valid
+d14f7d9469a5cdf6a60feea8f190f38d,Pleural effusion,R8,True,106.0,1287.0,800.0,1632.0,694.0,345.0,Valid
+ad74c895feae8a322c54bbce08626812,Pleural effusion,R8,True,1836.0,1468.0,2050.0,1832.0,214.0,364.0,Valid
+ad74c895feae8a322c54bbce08626812,Pleural effusion,R10,True,1724.0,1451.0,2053.0,1783.0,329.0,332.0,Valid
+ad74c895feae8a322c54bbce08626812,Pleural effusion,R9,True,1874.0,1424.0,2072.0,1900.0,198.0,476.0,Valid

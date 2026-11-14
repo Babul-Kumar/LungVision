@@ -1,0 +1,157 @@
+{
+  "checkpoints": {
+    "densenet121_nih_best.pth": {
+      "path": "lungvision_disease_classification\\checkpoints\\densenet121_nih_best.pth",
+      "size_bytes": 84457897,
+      "expected_size": 84457897,
+      "sha256": "8d3690cd0438587a94afb8fd2ad84c0b30f9c1cc2727ee0eb03662a02ea020af",
+      "expected_sha256": "8d3690cd0438587a94afb8fd2ad84c0b30f9c1cc2727ee0eb03662a02ea020af",
+      "sha_match": true,
+      "size_match": true,
+      "status": "PASS"
+    },
+    "original_resnet18": {
+      "path": "LungVision_AI_Final_Research_Bundle\\models\\original_resnet18\\model.pth",
+      "size_bytes": 134260367,
+      "expected_size": 134260367,
+      "sha256": "a293bd9e441b2713e62b7de208611bf7cc97676ea1291ce2818ff3a497528b2f",
+      "expected_sha256": "a293bd9e441b2713e62b7de208611bf7cc97676ea1291ce2818ff3a497528b2f",
+      "sha_match": true,
+      "size_match": true,
+      "status": "PASS"
+    },
+    "blur_augmented_resnet18": {
+      "path": "LungVision_AI_Final_Research_Bundle\\models\\blur_augmented_resnet18\\model.pth",
+      "size_bytes": 134263007,
+      "expected_size": 134263007,
+      "sha256": "7d8634454d1ac0dfa2c2dbc8d0b08155512fb52b65c9db5a9171a5b59c7d3f24",
+      "expected_sha256": "7d8634454d1ac0dfa2c2dbc8d0b08155512fb52b65c9db5a9171a5b59c7d3f24",
+      "sha_match": true,
+      "size_match": true,
+      "status": "PASS"
+    }
+  },
+  "results_zip": {
+    "path": "results.zip",
+    "size_bytes": 858694702,
+    "sha256": "ad3fa2623af307a4ebb56e4eabb6a2fd327d24a4bc023cf4e5db0461a02f2c36",
+    "status": "PASS"
+  },
+  "research_artifacts": {
+    "lungVision\\nih_validation_thresholds.csv": {
+      "exists": true,
+      "size_bytes": 790,
+      "status": "PASS"
+    },
+    "lungVision\\nih_test_calibrated_metrics.csv": {
+      "exists": true,
+      "size_bytes": 1038,
+      "status": "PASS"
+    },
+    "lungVision\\chexpert_external_metrics.csv": {
+      "exists": true,
+      "size_bytes": 915,
+      "status": "PASS"
+    },
+    "LungVision_AI_Final_Research_Bundle\\vindr_external_evaluation\\vindr_external_metrics.csv": {
+      "exists": true,
+      "size_bytes": 3981,
+      "status": "PASS"
+    },
+    "LungVision_AI_Model_Registry\\configuration\\model_registry.json": {
+      "exists": true,
+      "size_bytes": 3898,
+      "status": "PASS"
+    },
+    "LungVision_AI_Final_Research_Bundle\\project_governance\\PRD.md": {
+      "exists": true,
+      "size_bytes": 8912,
+      "status": "PASS"
+    },
+    "LungVision_AI_Final_Research_Bundle\\project_governance\\ARCHITECTURE.md": {
+      "exists": true,
+      "size_bytes": 12656,
+      "status": "PASS"
+    },
+    "LungVision_AI_Final_Research_Bundle\\project_governance\\RULES.md": {
+      "exists": true,
+      "size_bytes": 5302,
+      "status": "PASS"
+    },
+    "LungVision_AI_Final_Research_Bundle\\project_governance\\DESIGN.md": {
+      "exists": true,
+      "size_bytes": 11075,
+      "status": "PASS"
+    },
+    "LungVision_AI_Final_Research_Bundle\\project_governance\\TASK.md": {
+      "exists": true,
+      "size_bytes": 18520,
+      "status": "PASS"
+    },
+    "LungVision_AI_Final_Research_Bundle\\project_governance\\MEMORY.md": {
+      "exists": true,
+      "size_bytes": 11292,
+      "status": "PASS"
+    },
+    "docs\\ARCHITECTURE_OVERVIEW.md": {
+      "exists": true,
+      "size_bytes": 6987,
+      "status": "PASS"
+    },
+    "docs\\DEVELOPMENT_SETUP.md": {
+      "exists": true,
+      "size_bytes": 3225,
+      "status": "PASS"
+    },
+    "docs\\MODEL_ARTIFACT_INVENTORY.md": {
+      "exists": true,
+      "size_bytes": 5055,
+      "status": "PASS"
+    },
+    "docs\\REGRESSION_TEST_REPORT.md": {
+      "exists": true,
+      "size_bytes": 5169,
+      "status": "PASS"
+    },
+    "docs\\REPOSITORY_CLEANUP_REPORT.md": {
+      "exists": true,
+      "size_bytes": 3770,
+      "status": "PASS"
+    },
+    "docs\\REPOSITORY_STRUCTURE.md": {
+      "exists": true,
+      "size_bytes": 9264,
+      "status": "PASS"
+    },
+    "docs\\UI_UX_IMPROVEMENT_REPORT.md": {
+      "exists": true,
+      "size_bytes": 5113,
+      "status": "PASS"
+    }
+  },
+  "notebooks": {
+    "backend\\lungvision-interactive-viewer.ipynb": {
+      "exists": true,
+      "size_bytes": 12607604,
+      "status": "PASS"
+    }
+  },
+  "config_resolution": {
+    "densenet121": {
+      "configured_path": "C:\\Users\\babul\\Desktop\\computer vision\\lungvision_disease_classification\\checkpoints\\densenet121_nih_best.pth",
+      "resolved_path": "C:\\Users\\babul\\Desktop\\computer vision\\lungvision_disease_classification\\checkpoints\\densenet121_nih_best.pth",
+      "exists": true
+    },
+    "original_resnet18": {
+      "configured_path": "C:\\Users\\babul\\Desktop\\computer vision\\LungVision_AI_Final_Research_Bundle\\models\\original_resnet18\\model.pth",
+      "resolved_path": "C:\\Users\\babul\\Desktop\\computer vision\\LungVision_AI_Final_Research_Bundle\\models\\original_resnet18\\model.pth",
+      "exists": true
+    },
+    "blur_augmented_resnet18": {
+      "configured_path": "C:\\Users\\babul\\Desktop\\computer vision\\LungVision_AI_Final_Research_Bundle\\models\\blur_augmented_resnet18\\model.pth",
+      "resolved_path": "C:\\Users\\babul\\Desktop\\computer vision\\LungVision_AI_Final_Research_Bundle\\models\\blur_augmented_resnet18\\model.pth",
+      "exists": true
+    }
+  },
+  "status": "PASS"
+}

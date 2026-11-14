@@ -1,0 +1,15 @@
+class_id,class_name,one_reader,two_readers,three_readers
+0,Aortic enlargement,721.0,602.0,1744.0
+1,Atelectasis,124.0,44.0,18.0
+2,Calcification,275.0,120.0,57.0
+3,Cardiomegaly,483.0,520.0,1297.0
+4,Consolidation,232.0,90.0,31.0
+5,ILD,234.0,81.0,71.0
+6,Infiltration,368.0,154.0,91.0
+7,Lung Opacity,775.0,380.0,167.0
+8,Nodule/Mass,421.0,224.0,181.0
+9,Other lesion,772.0,235.0,127.0
+10,Pleural effusion,398.0,195.0,439.0
+11,Pleural thickening,1099.0,517.0,365.0
+12,Pneumothorax,38.0,13.0,45.0
+13,Pulmonary fibrosis,600.0,384.0,633.0

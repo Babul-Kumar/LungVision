@@ -1,0 +1,11 @@
+image_id,class_id,class_name,reader_support,true_label,blur-augmented_resnet18_clahe_probability,dicom_path,case_number
+63803ddfb3ea3bb435ff62c45ba78fde,3,Cardiomegaly,3,1,0.005490136,/kaggle/input/competitions/vinbigdata-chest-xray-abnormalities-detection/train/63803ddfb3ea3bb435ff62c45ba78fde.dicom,1
+e58d508f7915d3ada6edb4d88dc1f5f7,3,Cardiomegaly,3,1,0.0060531744,/kaggle/input/competitions/vinbigdata-chest-xray-abnormalities-detection/train/e58d508f7915d3ada6edb4d88dc1f5f7.dicom,2
+63803ddfb3ea3bb435ff62c45ba78fde,0,Aortic enlargement,3,1,0.005490136,/kaggle/input/competitions/vinbigdata-chest-xray-abnormalities-detection/train/63803ddfb3ea3bb435ff62c45ba78fde.dicom,3
+762f339322e42d419878a7b9c887553c,0,Aortic enlargement,3,1,0.0063444925,/kaggle/input/competitions/vinbigdata-chest-xray-abnormalities-detection/train/762f339322e42d419878a7b9c887553c.dicom,4
+05d676834dbed1639cb5eea70c1e307b,12,Pneumothorax,3,1,0.042181246,/kaggle/input/competitions/vinbigdata-chest-xray-abnormalities-detection/train/05d676834dbed1639cb5eea70c1e307b.dicom,5
+69a3e19744062d97e679adf184b667c2,12,Pneumothorax,3,1,0.04306323,/kaggle/input/competitions/vinbigdata-chest-xray-abnormalities-detection/train/69a3e19744062d97e679adf184b667c2.dicom,6
+a1e8167621dbbff8f8bf5714e43fd188,8,Nodule/Mass,3,1,0.0047480427,/kaggle/input/competitions/vinbigdata-chest-xray-abnormalities-detection/train/a1e8167621dbbff8f8bf5714e43fd188.dicom,7
+cca122e46a24a6ccfeba9ade9f7b933c,8,Nodule/Mass,3,1,0.0049928217,/kaggle/input/competitions/vinbigdata-chest-xray-abnormalities-detection/train/cca122e46a24a6ccfeba9ade9f7b933c.dicom,8
+d14f7d9469a5cdf6a60feea8f190f38d,10,Pleural effusion,3,1,0.010324015,/kaggle/input/competitions/vinbigdata-chest-xray-abnormalities-detection/train/d14f7d9469a5cdf6a60feea8f190f38d.dicom,9
+ad74c895feae8a322c54bbce08626812,10,Pleural effusion,3,1,0.018480463,/kaggle/input/competitions/vinbigdata-chest-xray-abnormalities-detection/train/ad74c895feae8a322c54bbce08626812.dicom,10

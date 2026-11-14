@@ -1,0 +1,40 @@
+{
+  "file_inventory": {
+    "dcm_count": 0,
+    "mhd_count": 0,
+    "raw_count": 0,
+    "nii_count": 0,
+    "png_count": 19,
+    "real_cxr_present": true
+  },
+  "real_cxr_densenet_inference": {
+    "status": "SUCCESS",
+    "flagged_conditions": 2,
+    "highest_disease": "Pneumonia",
+    "highest_prob": 0.9811,
+    "inference_time_ms": 406.58
+  },
+  "valid_ct_upload": {
+    "status_code": 201,
+    "registered_scan_id": "ct_93285a727bca",
+    "filename": "thoracic_patient_scan_01.zip"
+  },
+  "uploaded_scan_lifecycle": {
+    "metadata_query": "PASS",
+    "slice_rendering": "PASS",
+    "slice_dimensions": [
+      128,
+      128
+    ]
+  },
+  "invalid_ct_upload_rejection": {
+    "expected_code": 400,
+    "actual_code": 400,
+    "pass": true
+  },
+  "unsupported_ext_rejection": {
+    "expected_code": 400,
+    "actual_code": 400,
+    "pass": true
+  }
+}

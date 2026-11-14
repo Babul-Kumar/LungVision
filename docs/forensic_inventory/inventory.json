@@ -1,0 +1,3869 @@
+{
+  "scan_timestamp": "2026-11-13T00:45:56Z",
+  "scan_duration_seconds": 37.04,
+  "repo_root": "C:\\Users\\babul\\Desktop\\computer vision",
+  "summary": {
+    "total_directories": 1507,
+    "total_files": 15289,
+    "total_size_bytes": 2674789191,
+    "total_size_gb": 2.49,
+    "model_checkpoints_count": 11,
+    "archives_count": 1,
+    "notebooks_count": 10,
+    "csv_tables_count": 144,
+    "medical_images_count": 19,
+    "backend_routes_count": 0,
+    "frontend_pages_count": 8,
+    "frontend_tests_count": 10
+  },
+  "extensions_summary": {
+    ".js": 8500,
+    ".map": 2419,
+    ".ts": 2134,
+    ".json": 598,
+    ".md": 484,
+    "": 355,
+    ".csv": 144,
+    ".mjs": 119,
+    ".pyc": 82,
+    ".cjs": 64,
+    ".py": 56,
+    ".mts": 53,
+    ".cts": 48,
+    ".tsx": 34,
+    ".cmd": 30,
+    ".ps1": 30,
+    ".png": 23,
+    ".txt": 21,
+    ".yml": 21,
+    ".css": 11,
+    ".pth": 11,
+    ".html": 5,
+    ".xml": 5,
+    ".wasm": 5,
+    ".tsbuildinfo": 4,
+    ".flow": 3,
+    ".exe": 3,
+    ".applescript": 3,
+    ".bat": 2,
+    ".sh": 2
+  },
+  "models": [
+    {
+      "rel_path": "LungVision_AI_Final_Research_Bundle/models/blur_augmented_resnet18/model.pth",
+      "filename": "model.pth",
+      "format": "PTH",
+      "size_bytes": 134263007,
+      "size_mb": 128.04,
+      "sha256": "7d8634454d1ac0dfa2c2dbc8d0b08155512fb52b65c9db5a9171a5b59c7d3f24",
+      "arch": "ResNet18",
+      "params_count": null,
+      "keys_summary": [],
+      "active_in_backend": true,
+      "active_in_frontend": true,
+      "model_id": "blur_augmented_resnet18",
+      "name": "Blur-Augmented Binary Classifier (ResNet18)",
+      "load_error": "Weights only load failed. Re-running `torch.load` with `weights_only` set to `False` will likely succeed, but it can result in arbitrary code execution.Do it only if you get the file from a trusted source. WeightsUnpickler error: Unsupported class numpy._core.multiarray.scalar"
+    },
+    {
+      "rel_path": "LungVision_AI_Final_Research_Bundle/models/original_resnet18/model.pth",
+      "filename": "model.pth",
+      "format": "PTH",
+      "size_bytes": 134260367,
+      "size_mb": 128.04,
+      "sha256": "a293bd9e441b2713e62b7de208611bf7cc97676ea1291ce2818ff3a497528b2f",
+      "arch": "ResNet18",
+      "params_count": null,
+      "keys_summary": [],
+      "active_in_backend": true,
+      "active_in_frontend": true,
+      "model_id": "original_resnet18",
+      "name": "Baseline Binary Classifier (ResNet18)",
+      "load_error": "Weights only load failed. Re-running `torch.load` with `weights_only` set to `False` will likely succeed, but it can result in arbitrary code execution.Do it only if you get the file from a trusted source. WeightsUnpickler error: Unsupported class numpy._core.multiarray.scalar"
+    },
+    {
+      "rel_path": "LungVision_AI_Model_Registry/models/blur_augmented_resnet18/model.pth",
+      "filename": "model.pth",
+      "format": "PTH",
+      "size_bytes": 134263007,
+      "size_mb": 128.04,
+      "sha256": "7d8634454d1ac0dfa2c2dbc8d0b08155512fb52b65c9db5a9171a5b59c7d3f24",
+      "arch": "ResNet18",
+      "params_count": null,
+      "keys_summary": [],
+      "active_in_backend": true,
+      "active_in_frontend": true,
+      "model_id": "blur_augmented_resnet18",
+      "name": "Blur-Augmented Binary Classifier (ResNet18)",
+      "load_error": "Weights only load failed. Re-running `torch.load` with `weights_only` set to `False` will likely succeed, but it can result in arbitrary code execution.Do it only if you get the file from a trusted source. WeightsUnpickler error: Unsupported class numpy._core.multiarray.scalar"
+    },
+    {
+      "rel_path": "LungVision_AI_Model_Registry/models/original_resnet18/model.pth",
+      "filename": "model.pth",
+      "format": "PTH",
+      "size_bytes": 134260367,
+      "size_mb": 128.04,
+      "sha256": "a293bd9e441b2713e62b7de208611bf7cc97676ea1291ce2818ff3a497528b2f",
+      "arch": "ResNet18",
+      "params_count": null,
+      "keys_summary": [],
+      "active_in_backend": true,
+      "active_in_frontend": true,
+      "model_id": "original_resnet18",
+      "name": "Baseline Binary Classifier (ResNet18)",
+      "load_error": "Weights only load failed. Re-running `torch.load` with `weights_only` set to `False` will likely succeed, but it can result in arbitrary code execution.Do it only if you get the file from a trusted source. WeightsUnpickler error: Unsupported class numpy._core.multiarray.scalar"
+    },
+    {
+      "rel_path": "lungvision_disease_classification/checkpoints/densenet121_nih_best.pth",
+      "filename": "densenet121_nih_best.pth",
+      "format": "PTH",
+      "size_bytes": 84457897,
+      "size_mb": 80.55,
+      "sha256": "8d3690cd0438587a94afb8fd2ad84c0b30f9c1cc2727ee0eb03662a02ea020af",
+      "arch": "DenseNet121",
+      "params_count": null,
+      "keys_summary": [
+        "epoch",
+        "model_state_dict",
+        "optimizer_state_dict",
+        "best_val_auc",
+        "labels",
+        "image_size"
+      ],
+      "active_in_backend": true,
+      "active_in_frontend": true,
+      "model_id": "densenet121_nih",
+      "name": "NIH Six-Disease Classifier (DenseNet121)"
+    },
+    {
+      "rel_path": "lungvision_phase2_models/resnet18_best.pth",
+      "filename": "resnet18_best.pth",
+      "format": "PTH",
+      "size_bytes": 134258867,
+      "size_mb": 128.04,
+      "sha256": "e4e525de9107774f00804664804d593b23b6e645f930d3ddf45b5f2d898d7fb6",
+      "arch": "ResNet18",
+      "params_count": null,
+      "keys_summary": [
+        "epoch",
+        "model_state_dict",
+        "optimizer_state_dict",
+        "train_loss",
+        "validation_metrics",
+        "macro_source_auc",
+        "seed"
+      ],
+      "active_in_backend": false,
+      "active_in_frontend": false,
+      "model_id": "resnet18_best",
+      "name": "Phase 2 Intermediate Checkpoint (resnet18_best)"
+    },
+    {
+      "rel_path": "lungvision_phase2_models/resnet18_epoch_1.pth",
+      "filename": "resnet18_epoch_1.pth",
+      "format": "PTH",
+      "size_bytes": 134259809,
+      "size_mb": 128.04,
+      "sha256": "c34549ebaee5e1c6eee3ac0185df731e6944300b2653189e3358701124ec58f2",
+      "arch": "ResNet18",
+      "params_count": null,
+      "keys_summary": [
+        "epoch",
+        "model_state_dict",
+        "optimizer_state_dict",
+        "train_loss",
+        "validation_metrics",
+        "macro_source_auc",
+        "seed"
+      ],
+      "active_in_backend": false,
+      "active_in_frontend": false,
+      "model_id": "resnet18_epoch_1",
+      "name": "Phase 2 Intermediate Checkpoint (resnet18_epoch_1)"
+    },
+    {
+      "rel_path": "lungvision_phase2_models/resnet18_epoch_2.pth",
+      "filename": "resnet18_epoch_2.pth",
+      "format": "PTH",
+      "size_bytes": 134259809,
+      "size_mb": 128.04,
+      "sha256": "7e6fac963b483001df441964cc46603cece39f97ffbb46083edb8f3d560ed8b9",
+      "arch": "ResNet18",
+      "params_count": null,
+      "keys_summary": [
+        "epoch",
+        "model_state_dict",
+        "optimizer_state_dict",
+        "train_loss",
+        "validation_metrics",
+        "macro_source_auc",
+        "seed"
+      ],
+      "active_in_backend": false,
+      "active_in_frontend": false,
+      "model_id": "resnet18_epoch_2",
+      "name": "Phase 2 Intermediate Checkpoint (resnet18_epoch_2)"
+    },
+    {
+      "rel_path": "lungvision_phase2_models/resnet18_epoch_3.pth",
+      "filename": "resnet18_epoch_3.pth",
+      "format": "PTH",
+      "size_bytes": 134259809,
+      "size_mb": 128.04,
+      "sha256": "479bbb4da1fc08d880f10da7aadd938200f6484e89c6fdb0785c241b04d05212",
+      "arch": "ResNet18",
+      "params_count": null,
+      "keys_summary": [
+        "epoch",
+        "model_state_dict",
+        "optimizer_state_dict",
+        "train_loss",
+        "validation_metrics",
+        "macro_source_auc",
+        "seed"
+      ],
+      "active_in_backend": false,
+      "active_in_frontend": false,
+      "model_id": "resnet18_epoch_3",
+      "name": "Phase 2 Intermediate Checkpoint (resnet18_epoch_3)"
+    },
+    {
+      "rel_path": "lungvision_phase2_models/resnet18_epoch_4.pth",
+      "filename": "resnet18_epoch_4.pth",
+      "format": "PTH",
+      "size_bytes": 134259809,
+      "size_mb": 128.04,
+      "sha256": "69f6c78e9fe5f9a1672d2d16503a4a8f0889b8ee04b2fe392e9c970c2ea0ee6d",
+      "arch": "ResNet18",
+      "params_count": null,
+      "keys_summary": [
+        "epoch",
+        "model_state_dict",
+        "optimizer_state_dict",
+        "train_loss",
+        "validation_metrics",
+        "macro_source_auc",
+        "seed"
+      ],
+      "active_in_backend": false,
+      "active_in_frontend": false,
+      "model_id": "resnet18_epoch_4",
+      "name": "Phase 2 Intermediate Checkpoint (resnet18_epoch_4)"
+    },
+    {
+      "rel_path": "lungvision_phase2_models/resnet18_epoch_5.pth",
+      "filename": "resnet18_epoch_5.pth",
+      "format": "PTH",
+      "size_bytes": 134259809,
+      "size_mb": 128.04,
+      "sha256": "aea85feff729589385259d53bce1a1182f67d5d74736ea906bc2b0f6efe1ec3f",
+      "arch": "ResNet18",
+      "params_count": null,
+      "keys_summary": [
+        "epoch",
+        "model_state_dict",
+        "optimizer_state_dict",
+        "train_loss",
+        "validation_metrics",
+        "macro_source_auc",
+        "seed"
+      ],
+      "active_in_backend": false,
+      "active_in_frontend": false,
+      "model_id": "resnet18_epoch_5",
+      "name": "Phase 2 Intermediate Checkpoint (resnet18_epoch_5)"
+    }
+  ],
+  "archives": [
+    {
+      "path": "results.zip",
+      "filename": "results.zip",
+      "size_bytes": 858694702,
+      "size_mb": 818.92,
+      "sha256": "ad3fa2623af307a4ebb56e4eabb6a2fd327d24a4bc023cf4e5db0461a02f2c36",
+      "total_entries": 45,
+      "entries_by_ext": {
+        ".csv": 32,
+        ".json": 7,
+        ".pth": 6
+      },
+      "has_models": true,
+      "has_datasets": true,
+      "has_notebooks": false,
+      "sample_entries": [
+        "lungvision_phase2_data_audit/exact_duplicate_quarantine.csv",
+        "lungvision_phase2_data_audit/patient_id_audit.csv",
+        "lungvision_phase2_data_audit/phase2_audit_metadata.json",
+        "lungvision_phase2_data_audit/phase2_clean_manifest.csv",
+        "lungvision_phase2_data_audit/phase2_full_manifest.csv",
+        "lungvision_phase2_data_audit/phase2_train_validation_split.csv",
+        "lungvision_phase2_data_audit/source_split_label_summary.csv",
+        "lungvision_phase2_dataset_profile/class_weights.json",
+        "lungvision_phase2_dataset_profile/image_dimension_sample.csv",
+        "lungvision_phase2_dataset_profile/metadata_audit.csv",
+        "lungvision_phase2_dataset_profile/prevalence_profile.csv",
+        "lungvision_phase2_dataset_profile/source_profile.csv",
+        "lungvision_phase2_dataset_profile/split_profile.csv",
+        "lungvision_phase2_incxr_artifact_audit/incxr_artifact_audit_metadata.json",
+        "lungvision_phase2_incxr_artifact_audit/incxr_artifact_errors.csv",
+        "lungvision_phase2_incxr_artifact_audit/incxr_artifact_summary_by_label.csv",
+        "lungvision_phase2_incxr_artifact_audit/incxr_dark_region_flag_summary.csv",
+        "lungvision_phase2_incxr_artifact_audit/incxr_full_artifact_metrics.csv",
+        "lungvision_phase2_models/resnet18_best.pth",
+        "lungvision_phase2_models/resnet18_epoch_1.pth",
+        "lungvision_phase2_models/resnet18_epoch_2.pth",
+        "lungvision_phase2_models/resnet18_epoch_3.pth",
+        "lungvision_phase2_models/resnet18_epoch_4.pth",
+        "lungvision_phase2_models/resnet18_epoch_5.pth",
+        "lungvision_phase2_models/training_history.csv"
+      ],
+      "all_entries": [
+        "lungvision_phase2_data_audit/exact_duplicate_quarantine.csv",
+        "lungvision_phase2_data_audit/patient_id_audit.csv",
+        "lungvision_phase2_data_audit/phase2_audit_metadata.json",
+        "lungvision_phase2_data_audit/phase2_clean_manifest.csv",
+        "lungvision_phase2_data_audit/phase2_full_manifest.csv",
+        "lungvision_phase2_data_audit/phase2_train_validation_split.csv",
+        "lungvision_phase2_data_audit/source_split_label_summary.csv",
+        "lungvision_phase2_dataset_profile/class_weights.json",
+        "lungvision_phase2_dataset_profile/image_dimension_sample.csv",
+        "lungvision_phase2_dataset_profile/metadata_audit.csv",
+        "lungvision_phase2_dataset_profile/prevalence_profile.csv",
+        "lungvision_phase2_dataset_profile/source_profile.csv",
+        "lungvision_phase2_dataset_profile/split_profile.csv",
+        "lungvision_phase2_incxr_artifact_audit/incxr_artifact_audit_metadata.json",
+        "lungvision_phase2_incxr_artifact_audit/incxr_artifact_errors.csv",
+        "lungvision_phase2_incxr_artifact_audit/incxr_artifact_summary_by_label.csv",
+        "lungvision_phase2_incxr_artifact_audit/incxr_dark_region_flag_summary.csv",
+        "lungvision_phase2_incxr_artifact_audit/incxr_full_artifact_metrics.csv",
+        "lungvision_phase2_models/resnet18_best.pth",
+        "lungvision_phase2_models/resnet18_epoch_1.pth",
+        "lungvision_phase2_models/resnet18_epoch_2.pth",
+        "lungvision_phase2_models/resnet18_epoch_3.pth",
+        "lungvision_phase2_models/resnet18_epoch_4.pth",
+        "lungvision_phase2_models/resnet18_epoch_5.pth",
+        "lungvision_phase2_models/training_history.csv",
+        "lungvision_phase2_models/training_metadata.json",
+        "lungvision_phase2_models/validation_predictions_epoch_1.csv",
+        "lungvision_phase2_models/validation_predictions_epoch_2.csv",
+        "lungvision_phase2_models/validation_predictions_epoch_3.csv",
+        "lungvision_phase2_models/validation_predictions_epoch_4.csv",
+        "lungvision_phase2_models/validation_predictions_epoch_5.csv",
+        "lungvision_phase2_padding_audit/aspect_ratio_summary.csv",
+        "lungvision_phase2_padding_audit/padding_audit_metadata.json",
+        "lungvision_phase2_padding_audit/padding_audit_metrics.csv",
+        "lungvision_phase2_padding_audit/padding_method_summary.csv",
+        "lungvision_phase2_pixel_audit/pixel_audit_metadata.json",
+        "lungvision_phase2_pixel_audit/pixel_audit_metrics.csv",
+        "lungvision_phase2_pixel_audit/pixel_decode_errors.csv",
+        "lungvision_phase2_pixel_audit/pixel_domain_summary.csv",
+        "lungvision_phase2_pixel_audit/pixel_source_label_summary.csv",
+        "lungvision_phase2_preprocessing_comparison/preprocessing_comparison_metadata.json",
+        "lungvision_phase2_preprocessing_comparison/preprocessing_comparison_metrics.csv",
+        "lungvision_phase2_preprocessing_comparison/preprocessing_label_summary.csv",
+        "lungvision_phase2_preprocessing_comparison/preprocessing_source_summary.csv",
+        "lungvision_phase2_preprocessing_comparison/source_intensity_difference.csv"
+      ]
+    }
+  ],
+  "notebooks": [
+    {
+      "path": "backend/lungvision-interactive-viewer.ipynb",
+      "filename": "lungvision-interactive-viewer.ipynb",
+      "size_kb": 12312.1,
+      "sha256": "714e3a3d39d09fbb4afe5966ce146fb1329604a585a09cd9f44ac58afe7a3a17",
+      "cells_count": 57,
+      "code_cells_count": 57,
+      "markdown_cells_count": 0,
+      "cells_with_outputs": 10,
+      "kaggle_paths_found": [
+        "/kaggle/input/datasets/avc0706/luna16",
+        "/kaggle/input/datasets/vafaeii/luna16",
+        "Path(\"/kaggle/input",
+        "Path(\"/kaggle/input/datasets",
+        "Path(\"/kaggle/input/datasets/vafaeii/luna16"
+      ],
+      "models_referenced": [],
+      "datasets_referenced": [
+        "LUNA16"
+      ],
+      "has_executed_outputs": true,
+      "summary_titles": [
+        "# Previously verified scan with 12 LUNA16 annotations",
+        "# Locate original CT and segmentation files",
+        "# Read volumes",
+        "# Read annotations",
+        "# Geometry verification",
+        "# Physical coordinates -> continuous voxel coordinates",
+        "# Round to nearest voxel",
+        "# Axial"
+      ]
+    },
+    {
+      "path": "C:/Users/babul/Downloads/luna16_x2ct_multistructure_v3.ipynb",
+      "filename": "luna16_x2ct_multistructure_v3.ipynb",
+      "size_kb": 40.5,
+      "sha256": "c6000bf3ea21cb9c7a4adcee7d8d5345c7a6ee67180481c1e15a6c548fa9ce1b",
+      "cells_count": 9,
+      "code_cells_count": 8,
+      "markdown_cells_count": 1,
+      "cells_with_outputs": 0,
+      "kaggle_paths_found": [
+        "/kaggle/input",
+        "/kaggle/input."
+      ],
+      "models_referenced": [],
+      "datasets_referenced": [
+        "LUNA16"
+      ],
+      "has_executed_outputs": false,
+      "summary_titles": [
+        "# X-ray \u2192 3D CT + multi-structure morphometry + \u226510 mm mass triage (LUNA16) \u2014 v3",
+        "# ----------------------------- Reproducibility & device -----------------------",
+        "# ----------------------------- Auto-discover LUNA16 files ---------------------",
+        "# Only scans that have BOTH a CT and a lung mask are usable (no noisy threshold ",
+        "# ===================== DIAGNOSTIC: are mass targets inside the lungs? =========",
+        "# If this OOMs on a T4: base_c=24 (even number) and/or batch_size=1.",
+        "# Checkpoint chosen on reconstruction + anatomy ONLY: val AUROC with a handful o",
+        "# ------------------ best checkpoint: threshold from VAL, report on held-out TES"
+      ]
+    },
+    {
+      "path": "C:/Users/babul/Downloads/luna16_x2ct_multistructure_v3_1.ipynb",
+      "filename": "luna16_x2ct_multistructure_v3_1.ipynb",
+      "size_kb": 47.6,
+      "sha256": "605c65a445c96e7401466a1f535e9fa55245cfcabd4aafa31ba08dfd2fc52d57",
+      "cells_count": 10,
+      "code_cells_count": 9,
+      "markdown_cells_count": 1,
+      "cells_with_outputs": 0,
+      "kaggle_paths_found": [
+        "/kaggle/input",
+        "/kaggle/input."
+      ],
+      "models_referenced": [],
+      "datasets_referenced": [
+        "LUNA16"
+      ],
+      "has_executed_outputs": false,
+      "summary_titles": [
+        "# X-ray \u2192 3D CT + structure morphometry + \u226510 mm mass screening (LUNA16) \u2014 v3.1",
+        "# ----------------------------- Reproducibility & device -----------------------",
+        "# ----------------------------- Auto-discover LUNA16 files ---------------------",
+        "# Only scans that have BOTH a CT and a lung mask are usable (no noisy threshold ",
+        "# ===================== DIAGNOSTIC: are mass targets inside the lungs? =========",
+        "# If this OOMs on a T4: base_c=24 (even number) and/or batch_size=1.",
+        "# Checkpoint = reconstruction + anatomy ONLY. Val AUROC (17 positives) fluctuate",
+        "# noise, and picking the best-looking epoch on it would only inflate the test es"
+      ]
+    },
+    {
+      "path": "C:/Users/babul/Downloads/luna16_x2ct_triage_fixed.ipynb",
+      "filename": "luna16_x2ct_triage_fixed.ipynb",
+      "size_kb": 38.5,
+      "sha256": "88e3bddf0970a42cb3e2a53bea4784297fa1bac239b4a4dfc47060891fd1be27",
+      "cells_count": 8,
+      "code_cells_count": 7,
+      "markdown_cells_count": 1,
+      "cells_with_outputs": 0,
+      "kaggle_paths_found": [
+        "/kaggle/input",
+        "/kaggle/input."
+      ],
+      "models_referenced": [],
+      "datasets_referenced": [
+        "LUNA16"
+      ],
+      "has_executed_outputs": false,
+      "summary_titles": [
+        "# X-ray \u2192 3D CT reconstruction + lung triage (LUNA16) \u2014 fixed version",
+        "# ----------------------------- Reproducibility & device -----------------------",
+        "# ----------------------------- Auto-discover LUNA16 files ---------------------",
+        "# Only scans that have BOTH a CT and a lung mask are usable (no noisy threshold ",
+        "# Contrast / noise domain shift (gamma + Gaussian noise)",
+        "# Patient Z-drift on the lateral view",
+        "# Seeded 85 / 15 split",
+        "# Laplace negative log-likelihood with s = log(b):  |d| / b + log(b)"
+      ]
+    },
+    {
+      "path": "C:/Users/babul/Downloads/luna16_x2ct_triage_v2 (1).ipynb",
+      "filename": "luna16_x2ct_triage_v2 (1).ipynb",
+      "size_kb": 42.3,
+      "sha256": "ca18b2571e72b0b35cda1fc9b03ea8e7155f1400d914adb13d2e52f966718951",
+      "cells_count": 9,
+      "code_cells_count": 8,
+      "markdown_cells_count": 1,
+      "cells_with_outputs": 0,
+      "kaggle_paths_found": [
+        "/kaggle/input",
+        "/kaggle/input."
+      ],
+      "models_referenced": [],
+      "datasets_referenced": [
+        "LUNA16"
+      ],
+      "has_executed_outputs": false,
+      "summary_titles": [
+        "# X-ray \u2192 3D CT reconstruction + lung triage (LUNA16) \u2014 v2",
+        "# ----------------------------- Reproducibility & device -----------------------",
+        "# ----------------------------- Auto-discover LUNA16 files ---------------------",
+        "# Only scans that have BOTH a CT and a lung mask are usable (no noisy threshold ",
+        "# Seeded 70 / 15 / 15 split  (train / val: model + threshold selection / test: f",
+        "# ===================== DIAGNOSTICS (run before training) =====================",
+        "# (a) Do nodule target centres fall inside the lung masks?  (juxtapleural nodule",
+        "# (b) What would the centre-of-mass Z-alignment have done to perfectly registere"
+      ]
+    },
+    {
+      "path": "C:/Users/babul/Downloads/luna16_x2ct_triage_v2.ipynb",
+      "filename": "luna16_x2ct_triage_v2.ipynb",
+      "size_kb": 42.3,
+      "sha256": "ca18b2571e72b0b35cda1fc9b03ea8e7155f1400d914adb13d2e52f966718951",
+      "cells_count": 9,
+      "code_cells_count": 8,
+      "markdown_cells_count": 1,
+      "cells_with_outputs": 0,
+      "kaggle_paths_found": [
+        "/kaggle/input",
+        "/kaggle/input."
+      ],
+      "models_referenced": [],
+      "datasets_referenced": [
+        "LUNA16"
+      ],
+      "has_executed_outputs": false,
+      "summary_titles": [
+        "# X-ray \u2192 3D CT reconstruction + lung triage (LUNA16) \u2014 v2",
+        "# ----------------------------- Reproducibility & device -----------------------",
+        "# ----------------------------- Auto-discover LUNA16 files ---------------------",
+        "# Only scans that have BOTH a CT and a lung mask are usable (no noisy threshold ",
+        "# Seeded 70 / 15 / 15 split  (train / val: model + threshold selection / test: f",
+        "# ===================== DIAGNOSTICS (run before training) =====================",
+        "# (a) Do nodule target centres fall inside the lung masks?  (juxtapleural nodule",
+        "# (b) What would the centre-of-mass Z-alignment have done to perfectly registere"
+      ]
+    },
+    {
+      "path": "C:/Users/babul/Downloads/luna16_x2ct_v4_final.ipynb",
+      "filename": "luna16_x2ct_v4_final.ipynb",
+      "size_kb": 51.8,
+      "sha256": "eb08f788f9421a72e114748fbf7a1f3b429b65ce80feb500ac827c9d0ee43769",
+      "cells_count": 12,
+      "code_cells_count": 11,
+      "markdown_cells_count": 1,
+      "cells_with_outputs": 0,
+      "kaggle_paths_found": [
+        "/kaggle/input",
+        "/kaggle/input."
+      ],
+      "models_referenced": [],
+      "datasets_referenced": [
+        "LUNA16"
+      ],
+      "has_executed_outputs": false,
+      "summary_titles": [
+        "# X-ray \u2192 3D CT + lung morphometry + exploratory \u226510 mm mass screening (LUNA16) ",
+        "# ----------------------------- Reproducibility & device -----------------------",
+        "# ----------------------------- Auto-discover LUNA16 files ---------------------",
+        "# Only scans that have BOTH a CT and a lung mask are usable (no noisy threshold ",
+        "# ===================== DIAGNOSTIC: are mass targets inside the lungs? =========",
+        "# If this OOMs on a T4: base_c=24 (even number) and/or batch_size=1.",
+        "# ------------------ best checkpoint: thresholds from VAL, final numbers on held",
+        "# Trivial baselines computed from the TRAIN set only"
+      ]
+    },
+    {
+      "path": "C:/Users/babul/Downloads/lungvision-interactive-viewer (1).ipynb",
+      "filename": "lungvision-interactive-viewer (1).ipynb",
+      "size_kb": 176.2,
+      "sha256": "07d45f0f29c36e5fc2cb663b9117f5291c678c11fa6e092e7cd060bfca4d3cef",
+      "cells_count": 57,
+      "code_cells_count": 57,
+      "markdown_cells_count": 0,
+      "cells_with_outputs": 0,
+      "kaggle_paths_found": [
+        "/kaggle/input/datasets/avc0706/luna16",
+        "/kaggle/input/datasets/vafaeii/luna16",
+        "Path(\"/kaggle/input",
+        "Path(\"/kaggle/input/datasets",
+        "Path(\"/kaggle/input/datasets/vafaeii/luna16"
+      ],
+      "models_referenced": [],
+      "datasets_referenced": [
+        "LUNA16"
+      ],
+      "has_executed_outputs": false,
+      "summary_titles": [
+        "# Previously verified scan with 12 LUNA16 annotations",
+        "# Locate original CT and segmentation files",
+        "# Read volumes",
+        "# Read annotations",
+        "# Geometry verification",
+        "# Physical coordinates -> continuous voxel coordinates",
+        "# Round to nearest voxel",
+        "# Axial"
+      ]
+    },
+    {
+      "path": "C:/Users/babul/Downloads/lungvision-interactive-viewer.ipynb",
+      "filename": "lungvision-interactive-viewer.ipynb",
+      "size_kb": 12260.3,
+      "sha256": "e65c909b493c50ed5cd9899e88882b729f6fa30bf1c36ed98d1d6e53555cad7e",
+      "cells_count": 57,
+      "code_cells_count": 57,
+      "markdown_cells_count": 0,
+      "cells_with_outputs": 10,
+      "kaggle_paths_found": [
+        "/kaggle/input/datasets/avc0706/luna16",
+        "/kaggle/input/datasets/vafaeii/luna16",
+        "Path(\"/kaggle/input",
+        "Path(\"/kaggle/input/datasets",
+        "Path(\"/kaggle/input/datasets/vafaeii/luna16"
+      ],
+      "models_referenced": [],
+      "datasets_referenced": [
+        "LUNA16"
+      ],
+      "has_executed_outputs": true,
+      "summary_titles": [
+        "# Previously verified scan with 12 LUNA16 annotations",
+        "# Locate original CT and segmentation files",
+        "# Read volumes",
+        "# Read annotations",
+        "# Geometry verification",
+        "# Physical coordinates -> continuous voxel coordinates",
+        "# Round to nearest voxel",
+        "# Axial"
+      ]
+    },
+    {
+      "path": "C:/Users/babul/Downloads/LungVision_AI_Research.ipynb",
+      "filename": "LungVision_AI_Research.ipynb",
+      "size_kb": 484.1,
+      "sha256": "8e34cae7bf3f12e8e49a4796d70b7895dbd378e9cb2aae56e163dd11288cc214",
+      "cells_count": 55,
+      "code_cells_count": 26,
+      "markdown_cells_count": 29,
+      "cells_with_outputs": 26,
+      "kaggle_paths_found": [
+        "/kaggle/input",
+        "/kaggle/input/<slug>",
+        "/kaggle/input/chest-xray-india",
+        "/kaggle/input/datasets/<owner>/<slug>",
+        "/kaggle/input/datasets/avc0706/luna16",
+        "/kaggle/input/datasets/cmseibold/paxray",
+        "/kaggle/input/datasets/corochann/vinbigdata-chest-xray-original-png",
+        "/kaggle/input/datasets/eliasmarcon/luna-16",
+        "/kaggle/input/datasets/itsanmol124/mimic-cxr",
+        "/kaggle/input/datasets/omareldash75/tbx11k-original-dataset-with-bounding-boxes",
+        "/kaggle/input/datasets/usmanshams/tbx-11",
+        "/kaggle/input/datasets/vafaeii/luna16",
+        "/kaggle/input/datasets/vbookshelf/tbx11k-simplified",
+        "/kaggle/input/datasets/wasifnafee/mimic-cxr",
+        "/kaggle/input/datasets/xhlulu/vinbigdata",
+        "/kaggle/input/datasets/xhlulu/vinbigdata-chest-xray-png-512px-original-ratio",
+        "/kaggle/input/in-cxr",
+        "/kaggle/input/indian-chest-xray-dataset",
+        "/kaggle/input/luna-16",
+        "/kaggle/input/luna16",
+        "/kaggle/input/mimic-cxr",
+        "/kaggle/input/mimic-cxr-dataset",
+        "/kaggle/input/mimic-cxr-jpg",
+        "/kaggle/input/paxray",
+        "/kaggle/input/paxray-plus-plus",
+        "/kaggle/input/tbx-11",
+        "/kaggle/input/tbx11k",
+        "/kaggle/input/tbx11k-original-dataset-with-bounding-boxes",
+        "/kaggle/input/tbx11k-simplified",
+        "/kaggle/input/vinbigdata",
+        "/kaggle/input/vinbigdata-chest-xray-abnormalities-detection",
+        "/kaggle/input/vinbigdata-chest-xray-original-png",
+        "/kaggle/input/vinbigdata-chest-xray-png-512px-original-ratio",
+        "/kaggle/input/vindr-cxr",
+        "`/kaggle/input/*`",
+        "`/kaggle/input/in-cxr`).",
+        "`/kaggle/input/luna16`",
+        "`/kaggle/input/mimic-cxr-jpg`",
+        "`/kaggle/input/tbx11k`",
+        "`/kaggle/input/vindr-cxr`",
+        "os.path.exists(\"/kaggle/input",
+        "os.path.exists(\"/kaggle/input\"):",
+        "os.walk(\"/kaggle/input\"):",
+        "root[len(\"/kaggle/input\"):].count(os.sep"
+      ],
+      "models_referenced": [],
+      "datasets_referenced": [
+        "CHEXPERT",
+        "IN-CXR",
+        "LUNA16",
+        "MIMIC",
+        "VINDR"
+      ],
+      "has_executed_outputs": true,
+      "summary_titles": [
+        "# 1. Research Overview and Problem Statement",
+        "## Project Identity",
+        "## Clinical & Computational Problem Statement",
+        "### Architectural Overview of the Redesigned Three-Branch Framework",
+        "# 2. Research Questions, Hypotheses, and Scope",
+        "### Scientific Scope & Critique of Prototype (`luna16_x2ct_v4_final.ipynb`)",
+        "# 3. Runtime Inspection, GPU/RAM Checks, and Reproducibility Setup",
+        "# ------------------------------------------------------------------------------"
+      ]
+    }
+  ],
+  "tables": [
+    {
+      "path": "lungVision/chexpert_ap_only_device_auc.csv",
+      "filename": "chexpert_ap_only_device_auc.csv",
+      "size_kb": 0.76,
+      "sha256": "fa9f2bb481b3f8fdbdc352ecb8b4b4934257c2de9450f109efe97c4f83cf9c7b",
+      "row_count": 7,
+      "col_count": 10,
+      "columns": [
+        "Disease",
+        "AP_Absent_Images",
+        "AP_Present_Images",
+        "Absent_Positive",
+        "Present_Positive",
+        "Absent_AUROC",
+        "Present_AUROC",
+        "AUROC_Difference",
+        "CI_Lower",
+        "CI_Upper"
+      ]
+    },
+    {
+      "path": "lungVision/chexpert_confidence_analysis.csv",
+      "filename": "chexpert_confidence_analysis.csv",
+      "size_kb": 2.9,
+      "sha256": "71a8aea13d69a138723ebc9b47edf262f6ada062cd05b6ac64fe03ed2d6f56a8",
+      "row_count": 24,
+      "col_count": 10,
+      "columns": [
+        "Disease",
+        "Error_Type",
+        "Count",
+        "Mean",
+        "Median",
+        "Std",
+        "Minimum",
+        "Maximum",
+        "Threshold",
+        "Mean_Threshold_Distance"
+      ]
+    },
+    {
+      "path": "lungVision/chexpert_disease_wise_subgroup_metrics.csv",
+      "filename": "chexpert_disease_wise_subgroup_metrics.csv",
+      "size_kb": 6.73,
+      "sha256": "f15d43822ddca0f664ed054ecad68d77e6f7379dfe7539e68580e36d7a746038",
+      "row_count": 61,
+      "col_count": 15,
+      "columns": [
+        "Disease",
+        "Subgroup",
+        "Images",
+        "Positive",
+        "Negative",
+        "TP",
+        "FP",
+        "TN",
+        "FN",
+        "Sensitivity",
+        "Specificity",
+        "Precision",
+        "F1",
+        "Error_Rate",
+        "Subgroup_Type"
+      ]
+    },
+    {
+      "path": "lungVision/chexpert_error_analysis.csv",
+      "filename": "chexpert_error_analysis.csv",
+      "size_kb": 153.13,
+      "sha256": "dc168383292717bf470036841ed19463708ac4ffac1b364b72b3af8a761b2648",
+      "row_count": 1213,
+      "col_count": 8,
+      "columns": [
+        "image_path",
+        "patient_id",
+        "Disease",
+        "True_Label",
+        "Predicted_Label",
+        "Probability",
+        "Threshold",
+        "Error_Type"
+      ]
+    },
+    {
+      "path": "lungVision/chexpert_error_severity_summary.csv",
+      "filename": "chexpert_error_severity_summary.csv",
+      "size_kb": 0.48,
+      "sha256": "a4f4af9abfeb17dfbf8c944351ef8f1167c8c8969bb3ee37a5c1945ae214017d",
+      "row_count": 7,
+      "col_count": 8,
+      "columns": [
+        "Disease",
+        "False_Negatives",
+        "False_Positives",
+        "FN_Mean_Threshold_Gap",
+        "FP_Mean_Threshold_Excess",
+        "FN_Gap_Above_0.20",
+        "FP_Excess_Above_0.20",
+        "Total_Errors"
+      ]
+    },
+    {
+      "path": "lungVision/chexpert_external_metrics.csv",
+      "filename": "chexpert_external_metrics.csv",
+      "size_kb": 0.89,
+      "sha256": "a2905f8a38cd4ec53b4bbd24bfe0e042385808445232fbd58a72750c5beb4bc9",
+      "row_count": 7,
+      "col_count": 15,
+      "columns": [
+        "Disease",
+        "Threshold",
+        "Evaluable",
+        "Positive",
+        "Negative",
+        "AUROC",
+        "AUPRC",
+        "Precision",
+        "Sensitivity",
+        "F1",
+        "Specificity",
+        "TP",
+        "FP",
+        "TN",
+        "FN"
+      ]
+    },
+    {
+      "path": "lungVision/chexpert_external_predictions.csv",
+      "filename": "chexpert_external_predictions.csv",
+      "size_kb": 36.87,
+      "sha256": "182eac8f3256a5fe13fa3fc4af281450856bfaac763fdd8de3d59c86e9667423",
+      "row_count": 203,
+      "col_count": 14,
+      "columns": [
+        "image_path",
+        "patient_id",
+        "true_Cardiomegaly",
+        "prob_Cardiomegaly",
+        "true_Edema",
+        "prob_Edema",
+        "true_Consolidation",
+        "prob_Consolidation",
+        "true_Pneumonia",
+        "prob_Pneumonia",
+        "true_Atelectasis",
+        "prob_Atelectasis",
+        "true_Pneumothorax",
+        "prob_Pneumothorax"
+      ]
+    },
+    {
+      "path": "lungVision/chexpert_high_confidence_errors.csv",
+      "filename": "chexpert_high_confidence_errors.csv",
+      "size_kb": 19.29,
+      "sha256": "e9ef9aa00bc806c48e3b5a7f4c14a7b9e250b5bdef51b95ddfba38393681606d",
+      "row_count": 154,
+      "col_count": 8,
+      "columns": [
+        "image_path",
+        "patient_id",
+        "Disease",
+        "True_Label",
+        "Predicted_Label",
+        "Probability",
+        "Threshold",
+        "Error_Type"
+      ]
+    },
+    {
+      "path": "lungVision/chexpert_preprocessing_bootstrap.csv",
+      "filename": "chexpert_preprocessing_bootstrap.csv",
+      "size_kb": 1.31,
+      "sha256": "78c7b5935a6d53b57b68ac6a09e09760e164746597c64924988bdbd1664dc758",
+      "row_count": 7,
+      "col_count": 12,
+      "columns": [
+        "Disease",
+        "Direct_AUROC",
+        "Direct_CI_Lower",
+        "Direct_CI_Upper",
+        "Aspect_AUROC",
+        "Aspect_CI_Lower",
+        "Aspect_CI_Upper",
+        "AUROC_Difference",
+        "Difference_CI_Lower",
+        "Difference_CI_Upper",
+        "Positive_Count",
+        "Negative_Count"
+      ]
+    },
+    {
+      "path": "lungVision/chexpert_preprocessing_comparison.csv",
+      "filename": "chexpert_preprocessing_comparison.csv",
+      "size_kb": 0.73,
+      "sha256": "44ddb1588d5ed1da6bab5d0f4513fb99d32bf1016624855f43e9b248c4e1132f",
+      "row_count": 7,
+      "col_count": 6,
+      "columns": [
+        "Disease",
+        "Direct_AUROC",
+        "Direct_AUPRC",
+        "Aspect_Preserved_AUROC",
+        "Aspect_Preserved_AUPRC",
+        "AUROC_Difference"
+      ]
+    },
+    {
+      "path": "lungVision/chexpert_subgroup_auroc.csv",
+      "filename": "chexpert_subgroup_auroc.csv",
+      "size_kb": 2.1,
+      "sha256": "ad418aecb6c170ca756e3fe22177de10cf5cf4e104bdad473005c246c97a51d8",
+      "row_count": 25,
+      "col_count": 9,
+      "columns": [
+        "Disease",
+        "Subgroup",
+        "Images",
+        "Positive",
+        "Negative",
+        "AUROC",
+        "CI_Lower",
+        "CI_Upper",
+        "Subgroup_Type"
+      ]
+    },
+    {
+      "path": "lungVision/chexpert_subgroup_error_analysis.csv",
+      "filename": "chexpert_subgroup_error_analysis.csv",
+      "size_kb": 187.67,
+      "sha256": "c2f7a24fe286f248c8f6f1f3387e2d9b85899950801f43f85a934cdb459d75b7",
+      "row_count": 1213,
+      "col_count": 14,
+      "columns": [
+        "image_path",
+        "patient_id",
+        "Disease",
+        "True_Label",
+        "Predicted_Label",
+        "Probability",
+        "Threshold",
+        "Error_Type",
+        "Sex",
+        "Age",
+        "AP/PA",
+        "Support Devices",
+        "Support_Device_Status",
+        "Age_Group"
+      ]
+    },
+    {
+      "path": "lungVision/chexpert_support_device_auc_difference.csv",
+      "filename": "chexpert_support_device_auc_difference.csv",
+      "size_kb": 0.87,
+      "sha256": "90b91dad270e603e0d34f3b4732fabbda8029089f9d9b336ce13af2fee4cd0e5",
+      "row_count": 7,
+      "col_count": 9,
+      "columns": [
+        "Disease",
+        "Absent_AUROC",
+        "Present_AUROC",
+        "Difference_Present_Minus_Absent",
+        "Difference_CI_Lower",
+        "Difference_CI_Upper",
+        "Absent_Positive",
+        "Present_Positive",
+        "Bootstrap_Iterations"
+      ]
+    },
+    {
+      "path": "lungVision/nih_test_calibrated_metrics.csv",
+      "filename": "nih_test_calibrated_metrics.csv",
+      "size_kb": 1.01,
+      "sha256": "37940fd30dc4e32fd657f93053c76e0cc6d8980c0441e0b8ce5bfe31532cf073",
+      "row_count": 7,
+      "col_count": 12,
+      "columns": [
+        "Disease",
+        "Threshold",
+        "AUROC",
+        "AUPRC",
+        "Precision",
+        "Sensitivity",
+        "F1",
+        "Specificity",
+        "TP",
+        "FP",
+        "TN",
+        "FN"
+      ]
+    },
+    {
+      "path": "lungVision/nih_test_predictions_calibrated.csv",
+      "filename": "nih_test_predictions_calibrated.csv",
+      "size_kb": 4510.11,
+      "sha256": "fd05cadd745e65b7441071e42df71caf44268481d35a3c628ab19e4b8adf2592",
+      "row_count": 25597,
+      "col_count": 21,
+      "columns": [
+        "image_path",
+        "patient_id",
+        "split",
+        "true_Cardiomegaly",
+        "prob_Cardiomegaly",
+        "pred_Cardiomegaly",
+        "true_Edema",
+        "prob_Edema",
+        "pred_Edema",
+        "true_Consolidation",
+        "prob_Consolidation",
+        "pred_Consolidation",
+        "true_Pneumonia",
+        "prob_Pneumonia",
+        "pred_Pneumonia",
+        "true_Atelectasis",
+        "prob_Atelectasis",
+        "pred_Atelectasis",
+        "true_Pneumothorax",
+        "prob_Pneumothorax",
+        "pred_Pneumothorax"
+      ]
+    },
+    {
+      "path": "lungVision/nih_test_results.csv",
+      "filename": "nih_test_results.csv",
+      "size_kb": 0.39,
+      "sha256": "a24092a2391d3e5bb9f87b0dbdc6e9cdb8c613df932c0160ddaca5481de9cfdc",
+      "row_count": 7,
+      "col_count": 4,
+      "columns": [
+        "Disease",
+        "AUROC",
+        "AUPRC",
+        "Prevalence"
+      ]
+    },
+    {
+      "path": "lungVision/nih_validation_predictions.csv",
+      "filename": "nih_validation_predictions.csv",
+      "size_kb": 2488.89,
+      "sha256": "620584104cc6466df2901d1cc3c6c6cf5ef5984c34345bdf16c2e16d9c00ded4",
+      "row_count": 13502,
+      "col_count": 15,
+      "columns": [
+        "image_path",
+        "patient_id",
+        "split",
+        "true_Cardiomegaly",
+        "prob_Cardiomegaly",
+        "true_Edema",
+        "prob_Edema",
+        "true_Consolidation",
+        "prob_Consolidation",
+        "true_Pneumonia",
+        "prob_Pneumonia",
+        "true_Atelectasis",
+        "prob_Atelectasis",
+        "true_Pneumothorax",
+        "prob_Pneumothorax"
+      ]
+    },
+    {
+      "path": "lungVision/nih_validation_thresholds.csv",
+      "filename": "nih_validation_thresholds.csv",
+      "size_kb": 0.77,
+      "sha256": "30f16c6c02628c86b8891344f293cd42995a380d5cfa327bb77619e5ceff60cf",
+      "row_count": 7,
+      "col_count": 10,
+      "columns": [
+        "Disease",
+        "Best_Threshold",
+        "F1",
+        "Precision",
+        "Sensitivity",
+        "Specificity",
+        "TP",
+        "FP",
+        "TN",
+        "FN"
+      ]
+    },
+    {
+      "path": "LungVision_AI_Final_Research_Bundle/bundle_file_manifest.csv",
+      "filename": "bundle_file_manifest.csv",
+      "size_kb": 12.88,
+      "sha256": "41af18e15bbf35ce80ce2db3ff38492dc74a80fd8922f245470f9a140166d1f0",
+      "row_count": 95,
+      "col_count": 3,
+      "columns": [
+        "archive_relative_path",
+        "size_bytes",
+        "sha256"
+      ]
+    },
+    {
+      "path": "LungVision_AI_Final_Research_Bundle/expert_error_analysis/expert_all_predictions.csv",
+      "filename": "expert_all_predictions.csv",
+      "size_kb": 55.68,
+      "sha256": "79338f819cda12edcfc79a7a95dd3c1b76bdc218056b7630fc1fe4a4d61ee9f3",
+      "row_count": 337,
+      "col_count": 11,
+      "columns": [
+        "image_id",
+        "patient_id",
+        "abnormal",
+        "image_key",
+        "patient_key",
+        "actual",
+        "previous_patient_overlap",
+        "probability",
+        "predicted",
+        "error_type",
+        "image_path"
+      ]
+    },
+    {
+      "path": "LungVision_AI_Final_Research_Bundle/expert_error_analysis/expert_error_metrics.csv",
+      "filename": "expert_error_metrics.csv",
+      "size_kb": 0.37,
+      "sha256": "b0c6d1782dea571738288a67ed3e912b12fea55e27946141ef770426171d9295",
+      "row_count": 16,
+      "col_count": 2,
+      "columns": [
+        "Metric",
+        "Value"
+      ]
+    },
+    {
+      "path": "LungVision_AI_Final_Research_Bundle/expert_error_analysis/false_negatives.csv",
+      "filename": "false_negatives.csv",
+      "size_kb": 13.09,
+      "sha256": "8ee0d1a4e6ee528a6a15270aacea7da9cd8db174cc60464dde53a044243ee672",
+      "row_count": 79,
+      "col_count": 11,
+      "columns": [
+        "image_id",
+        "patient_id",
+        "abnormal",
+        "image_key",
+        "patient_key",
+        "actual",
+        "previous_patient_overlap",
+        "probability",
+        "predicted",
+        "error_type",
+        "image_path"
+      ]
+    },
+    {
+      "path": "LungVision_AI_Final_Research_Bundle/expert_error_analysis/false_positives.csv",
+      "filename": "false_positives.csv",
+      "size_kb": 10.89,
+      "sha256": "087d1a044f94b6e891ade4c0e6cb9d053e221d6e15bb9989afe039e11c9f4280",
+      "row_count": 66,
+      "col_count": 11,
+      "columns": [
+        "image_id",
+        "patient_id",
+        "abnormal",
+        "image_key",
+        "patient_key",
+        "actual",
+        "previous_patient_overlap",
+        "probability",
+        "predicted",
+        "error_type",
+        "image_path"
+      ]
+    },
+    {
+      "path": "LungVision_AI_Final_Research_Bundle/expert_error_analysis/true_negatives.csv",
+      "filename": "true_negatives.csv",
+      "size_kb": 13.14,
+      "sha256": "eaa05c7226433a3000bac9fbec13ef673f2e3375cf6dfbe55f879e7c3f888213",
+      "row_count": 80,
+      "col_count": 11,
+      "columns": [
+        "image_id",
+        "patient_id",
+        "abnormal",
+        "image_key",
+        "patient_key",
+        "actual",
+        "previous_patient_overlap",
+        "probability",
+        "predicted",
+        "error_type",
+        "image_path"
+      ]
+    },
+    {
+      "path": "LungVision_AI_Final_Research_Bundle/expert_error_analysis/true_positives.csv",
+      "filename": "true_positives.csv",
+      "size_kb": 18.95,
+      "sha256": "95b883e3614089bdb2f79f4588b21bacd66a8c364d720263afa5c553effe6909",
+      "row_count": 115,
+      "col_count": 11,
+      "columns": [
+        "image_id",
+        "patient_id",
+        "abnormal",
+        "image_key",
+        "patient_key",
+        "actual",
+        "previous_patient_overlap",
+        "probability",
+        "predicted",
+        "error_type",
+        "image_path"
+      ]
+    },
+    {
+      "path": "LungVision_AI_Final_Research_Bundle/external_validation_readiness/vindr_annotation_sample.csv",
+      "filename": "vindr_annotation_sample.csv",
+      "size_kb": 6.81,
+      "sha256": "f88ab3abd65789816798999738e6a79f6d24695c3f0b213684f39ee8d1c31d0c",
+      "row_count": 101,
+      "col_count": 8,
+      "columns": [
+        "image_id",
+        "class_name",
+        "class_id",
+        "rad_id",
+        "x_min",
+        "y_min",
+        "x_max",
+        "y_max"
+      ]
+    },
+    {
+      "path": "LungVision_AI_Final_Research_Bundle/external_validation_readiness/vindr_binary_label_candidates.csv",
+      "filename": "vindr_binary_label_candidates.csv",
+      "size_kb": 820.43,
+      "sha256": "abe4b413aa735fc546b1dab6d3629789ba11710c629b49785279971d857e46a3",
+      "row_count": 15001,
+      "col_count": 7,
+      "columns": [
+        "image_id",
+        "reader_count",
+        "abnormal_votes",
+        "normal_votes",
+        "reader_majority_abnormal",
+        "reader_majority_normal",
+        "reader_disagreement"
+      ]
+    },
+    {
+      "path": "LungVision_AI_Final_Research_Bundle/external_validation_readiness/vindr_class_distribution.csv",
+      "filename": "vindr_class_distribution.csv",
+      "size_kb": 0.42,
+      "sha256": "97b457c7a5915921e20e1ece66af1594d4c6f366808735d8cd52e9b56baf3db8",
+      "row_count": 16,
+      "col_count": 4,
+      "columns": [
+        "class_name",
+        "annotation_rows",
+        "unique_images",
+        "class_id"
+      ]
+    },
+    {
+      "path": "LungVision_AI_Final_Research_Bundle/external_validation_readiness/vindr_dicom_sample_metadata.csv",
+      "filename": "vindr_dicom_sample_metadata.csv",
+      "size_kb": 1.55,
+      "sha256": "5792cc67890248ba4dabbde8a193408682cdee08fbb289b8743e264905e78c7e",
+      "row_count": 21,
+      "col_count": 9,
+      "columns": [
+        "image_id",
+        "label",
+        "dicom_rows",
+        "dicom_columns",
+        "photometric",
+        "bits_stored",
+        "view_position",
+        "patient_id_present",
+        "patient_id"
+      ]
+    },
+    {
+      "path": "LungVision_AI_Final_Research_Bundle/external_validation_readiness/vindr_external_audit_summary.csv",
+      "filename": "vindr_external_audit_summary.csv",
+      "size_kb": 0.37,
+      "sha256": "96634c7672feb762e0ce5bef2b45470044f2b7864475b30926f38a0f4f90d8a0",
+      "row_count": 16,
+      "col_count": 2,
+      "columns": [
+        "metric",
+        "value"
+      ]
+    },
+    {
+      "path": "LungVision_AI_Final_Research_Bundle/external_validation_readiness/vindr_external_manifest.csv",
+      "filename": "vindr_external_manifest.csv",
+      "size_kb": 3674.64,
+      "sha256": "5a2516532da9c358d3f012829af3b592fb413d2c890cc46da95656e90c1b6b88",
+      "row_count": 15001,
+      "col_count": 16,
+      "columns": [
+        "image_id",
+        "reader_count",
+        "abnormal_votes",
+        "conflict_count",
+        "normal_votes",
+        "unanimous_normal",
+        "unanimous_abnormal",
+        "binary_unanimous",
+        "binary_majority",
+        "label_source",
+        "true_label",
+        "binary_label",
+        "expert_findings",
+        "finding_count",
+        "radiologists_with_positive_finding",
+        "dicom_path"
+      ]
+    },
+    {
+      "path": "LungVision_AI_Final_Research_Bundle/external_validation_readiness/vindr_image_level_reader_votes.csv",
+      "filename": "vindr_image_level_reader_votes.csv",
+      "size_kb": 1377.1,
+      "sha256": "c34f12763d3b9448023becf6ee8024a2f0e1c4ce895abcfd4a22a6586a09eb8b",
+      "row_count": 15001,
+      "col_count": 10,
+      "columns": [
+        "image_id",
+        "reader_count",
+        "abnormal_votes",
+        "conflict_count",
+        "normal_votes",
+        "unanimous_normal",
+        "unanimous_abnormal",
+        "binary_unanimous",
+        "binary_majority",
+        "label_source"
+      ]
+    },
+    {
+      "path": "LungVision_AI_Final_Research_Bundle/external_validation_readiness/vindr_reader_agreement.csv",
+      "filename": "vindr_reader_agreement.csv",
+      "size_kb": 820.43,
+      "sha256": "abe4b413aa735fc546b1dab6d3629789ba11710c629b49785279971d857e46a3",
+      "row_count": 15001,
+      "col_count": 7,
+      "columns": [
+        "image_id",
+        "reader_count",
+        "abnormal_votes",
+        "normal_votes",
+        "reader_majority_abnormal",
+        "reader_majority_normal",
+        "reader_disagreement"
+      ]
+    },
+    {
+      "path": "LungVision_AI_Final_Research_Bundle/external_validation_readiness/vindr_reader_level_decisions.csv",
+      "filename": "vindr_reader_level_decisions.csv",
+      "size_kb": 2609.47,
+      "sha256": "1ca6b831bbc2d096f6ac20c7e5e49e0ab67f327f128271f5a61b7bdfab1b1cd4",
+      "row_count": 45001,
+      "col_count": 8,
+      "columns": [
+        "image_id",
+        "rad_id",
+        "annotation_rows",
+        "has_no_finding",
+        "has_abnormal_annotation",
+        "abnormal_class_count",
+        "reader_conflict",
+        "reader_abnormal"
+      ]
+    },
+    {
+      "path": "LungVision_AI_Final_Research_Bundle/external_validation_readiness/dicom_preprocessing_audit/vindr_dicom_decoding_errors.csv",
+      "filename": "vindr_dicom_decoding_errors.csv",
+      "size_kb": 0.0,
+      "sha256": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b",
+      "row_count": 1,
+      "col_count": 1,
+      "columns": [
+        ""
+      ]
+    },
+    {
+      "path": "LungVision_AI_Final_Research_Bundle/external_validation_readiness/dicom_preprocessing_audit/vindr_dicom_intensity_summary.csv",
+      "filename": "vindr_dicom_intensity_summary.csv",
+      "size_kb": 0.51,
+      "sha256": "03f34b8c6a0de7b4bd02a0e2514c1fda63b043818e4c7d34cc871e91ac3b3948",
+      "row_count": 8,
+      "col_count": 9,
+      "columns": [
+        "",
+        "count",
+        "mean",
+        "std",
+        "min",
+        "25%",
+        "50%",
+        "75%",
+        "max"
+      ]
+    },
+    {
+      "path": "LungVision_AI_Final_Research_Bundle/external_validation_readiness/dicom_preprocessing_audit/vindr_dicom_preprocessing_metadata.csv",
+      "filename": "vindr_dicom_preprocessing_metadata.csv",
+      "size_kb": 3.27,
+      "sha256": "aef6c43b2d1cf468cd2e4b074390b933621482532ab1a1abde275d7ce86c2b3e",
+      "row_count": 21,
+      "col_count": 26,
+      "columns": [
+        "image_id",
+        "rows",
+        "columns",
+        "pixel_array_dtype",
+        "bits_allocated",
+        "bits_stored",
+        "high_bit",
+        "pixel_representation",
+        "photometric",
+        "modality",
+        "rescale_slope",
+        "rescale_intercept",
+        "window_center",
+        "window_width",
+        "voi_available",
+        "view_position",
+        "patient_id_present",
+        "raw_min",
+        "raw_max",
+        "modality_min",
+        "modality_max",
+        "modality_p01",
+        "modality_p99",
+        "valid_pixel_fraction",
+        "voi_error",
+        "true_label"
+      ]
+    },
+    {
+      "path": "LungVision_AI_Final_Research_Bundle/external_validation_readiness/dicom_preprocessing_audit/vindr_full_header_manifest.csv",
+      "filename": "vindr_full_header_manifest.csv",
+      "size_kb": 3740.18,
+      "sha256": "8c439a12b2529e22bd641eca35f2c83cddfc92536aebd7296ef78a89a6c8f2e2",
+      "row_count": 15001,
+      "col_count": 20,
+      "columns": [
+        "image_id",
+        "true_label",
+        "dicom_path",
+        "bits_allocated",
+        "bits_stored",
+        "high_bit",
+        "pixel_representation",
+        "photometric",
+        "modality",
+        "rescale_slope",
+        "rescale_intercept",
+        "has_window_center_width",
+        "has_voi_lut",
+        "voi_available",
+        "presentation_lut_shape",
+        "view_position",
+        "patient_id_present",
+        "pixel_padding_present",
+        "transfer_syntax",
+        "preprocessing_route"
+      ]
+    },
+    {
+      "path": "LungVision_AI_Final_Research_Bundle/external_validation_readiness/dicom_preprocessing_audit/vindr_header_read_errors.csv",
+      "filename": "vindr_header_read_errors.csv",
+      "size_kb": 0.0,
+      "sha256": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b",
+      "row_count": 1,
+      "col_count": 1,
+      "columns": [
+        ""
+      ]
+    },
+    {
+      "path": "LungVision_AI_Final_Research_Bundle/external_validation_readiness/dicom_preprocessing_audit/vindr_missing_voi_images.csv",
+      "filename": "vindr_missing_voi_images.csv",
+      "size_kb": 96.63,
+      "sha256": "657e144309ec061cad16e4d34e3f842faf29ee0b13dab23e5edec1f1140ba4e3",
+      "row_count": 424,
+      "col_count": 19,
+      "columns": [
+        "image_id",
+        "true_label",
+        "dicom_path",
+        "bits_allocated",
+        "bits_stored",
+        "high_bit",
+        "pixel_representation",
+        "photometric",
+        "modality",
+        "rescale_slope",
+        "rescale_intercept",
+        "has_window_center_width",
+        "has_voi_lut",
+        "voi_available",
+        "presentation_lut_shape",
+        "view_position",
+        "patient_id_present",
+        "pixel_padding_present",
+        "transfer_syntax"
+      ]
+    },
+    {
+      "path": "LungVision_AI_Final_Research_Bundle/external_validation_readiness/dicom_preprocessing_audit/vindr_preprocessing_routes.csv",
+      "filename": "vindr_preprocessing_routes.csv",
+      "size_kb": 0.13,
+      "sha256": "7d296387b56536d3acca2938e1ad8af6cb594b960ed0fc8eb1e0bd6010869e38",
+      "row_count": 3,
+      "col_count": 4,
+      "columns": [
+        "preprocessing_route",
+        "images",
+        "normal",
+        "abnormal"
+      ]
+    },
+    {
+      "path": "LungVision_AI_Final_Research_Bundle/external_validation_readiness/dicom_preprocessing_audit/vindr_voi_coverage_by_class.csv",
+      "filename": "vindr_voi_coverage_by_class.csv",
+      "size_kb": 0.16,
+      "sha256": "69b034bf11a7bf8b9bc795a352ea0956f02cad5a437b1cd53017b618a577c3d6",
+      "row_count": 3,
+      "col_count": 6,
+      "columns": [
+        "true_label",
+        "total_images",
+        "voi_available",
+        "window_available",
+        "voi_lut_available",
+        "voi_coverage_pct"
+      ]
+    },
+    {
+      "path": "LungVision_AI_Final_Research_Bundle/final_expert_statistical_analysis/expert_evaluation_metrics.csv",
+      "filename": "expert_evaluation_metrics.csv",
+      "size_kb": 3.22,
+      "sha256": "ccb5d3ea5a2064f2f0b70d4ccffed42037c2238cab5800bfdd479e7fe34f7e75",
+      "row_count": 13,
+      "col_count": 20,
+      "columns": [
+        "threshold",
+        "auc_roc",
+        "average_precision",
+        "accuracy",
+        "balanced_accuracy",
+        "precision",
+        "sensitivity",
+        "specificity",
+        "f1",
+        "brier_score",
+        "tn",
+        "fp",
+        "fn",
+        "tp",
+        "model",
+        "preprocessing",
+        "cohort",
+        "threshold_source",
+        "images",
+        "patients"
+      ]
+    },
+    {
+      "path": "LungVision_AI_Final_Research_Bundle/final_expert_statistical_analysis/expert_image_predictions.csv",
+      "filename": "expert_image_predictions.csv",
+      "size_kb": 163.88,
+      "sha256": "41eb2a28a90bb33697707c44db86b1d3874fbf4441b2276094d4aaca776749c0",
+      "row_count": 811,
+      "col_count": 11,
+      "columns": [
+        "Image ID",
+        "Patient ID",
+        "image_stem",
+        "patient_key",
+        "true_label",
+        "previous_patient_overlap",
+        "resolved_image_path",
+        "original_resnet18_baseline_probability",
+        "original_resnet18_clahe_probability",
+        "blur-augmented_resnet18_baseline_probability",
+        "blur-augmented_resnet18_clahe_probability"
+      ]
+    },
+    {
+      "path": "LungVision_AI_Final_Research_Bundle/final_expert_statistical_analysis/paired_patient_bootstrap_auc.csv",
+      "filename": "paired_patient_bootstrap_auc.csv",
+      "size_kb": 0.5,
+      "sha256": "9eb67ae40db94478803ce2c33669a8195da85a6551bf8e9ed67414f6b261a77b",
+      "row_count": 4,
+      "col_count": 7,
+      "columns": [
+        "comparison",
+        "auc_a",
+        "auc_b",
+        "observed_auc_difference",
+        "ci_lower_95",
+        "ci_upper_95",
+        "valid_repetitions"
+      ]
+    },
+    {
+      "path": "LungVision_AI_Final_Research_Bundle/final_expert_statistical_analysis/patient_disjoint_expert_manifest.csv",
+      "filename": "patient_disjoint_expert_manifest.csv",
+      "size_kb": 59.35,
+      "sha256": "d2c0c9cbe2aa5677a37ee251f059ac1f0bbe0a7c21db7a92a393a3da1d326ad3",
+      "row_count": 337,
+      "col_count": 23,
+      "columns": [
+        "Image ID",
+        "Patient ID",
+        "Abnormal",
+        "Atelectasis",
+        "Cardiomegaly",
+        "Effusion",
+        "Infiltration",
+        "Mass",
+        "Nodule",
+        "Pneumonia",
+        "Pneumothorax",
+        "Consolidation",
+        "Edema",
+        "Emphysema",
+        "Fibrosis",
+        "Pleural Thickening",
+        "Hernia",
+        "Other",
+        "image_stem",
+        "patient_key",
+        "true_label",
+        "resolved_image_path",
+        "previous_patient_overlap"
+      ]
+    },
+    {
+      "path": "LungVision_AI_Final_Research_Bundle/final_research_evidence/model_checkpoint_sha256.csv",
+      "filename": "model_checkpoint_sha256.csv",
+      "size_kb": 0.47,
+      "sha256": "f23c2d8dee4fc8e463e93e72e62f8f6390a39e773739dc2abc3d3f35281a90a1",
+      "row_count": 3,
+      "col_count": 5,
+      "columns": [
+        "model",
+        "checkpoint_path",
+        "exists",
+        "size_bytes",
+        "sha256"
+      ]
+    },
+    {
+      "path": "LungVision_AI_Final_Research_Bundle/final_research_evidence/research_artifact_inventory.csv",
+      "filename": "research_artifact_inventory.csv",
+      "size_kb": 2.15,
+      "sha256": "f912d6c2c2cce3181bce8e947b9f336bed91878dad5d7ed9516c1ec049120677",
+      "row_count": 16,
+      "col_count": 4,
+      "columns": [
+        "artifact",
+        "path",
+        "exists",
+        "size_bytes"
+      ]
+    },
+    {
+      "path": "LungVision_AI_Final_Research_Bundle/nih_expert_evaluation/expert_810_evaluation_manifest.csv",
+      "filename": "expert_810_evaluation_manifest.csv",
+      "size_kb": 143.14,
+      "sha256": "6d84c1fd8c386e0ca2539551fc3eed7aead139ae2472c156b944d2ca90a639fd",
+      "row_count": 811,
+      "col_count": 23,
+      "columns": [
+        "Image ID",
+        "Patient ID",
+        "Abnormal",
+        "Atelectasis",
+        "Cardiomegaly",
+        "Effusion",
+        "Infiltration",
+        "Mass",
+        "Nodule",
+        "Pneumonia",
+        "Pneumothorax",
+        "Consolidation",
+        "Edema",
+        "Emphysema",
+        "Fibrosis",
+        "Pleural Thickening",
+        "Hernia",
+        "Other",
+        "image_stem",
+        "patient_key",
+        "true_label",
+        "resolved_image_path",
+        "overlaps_previous_sample_patient"
+      ]
+    },
+    {
+      "path": "LungVision_AI_Final_Research_Bundle/nih_expert_evaluation/expert_evaluation_metrics.csv",
+      "filename": "expert_evaluation_metrics.csv",
+      "size_kb": 3.13,
+      "sha256": "038862368fa4dd092bacb1034efcd6016f1d235219d8115b1797dff5c6aead36",
+      "row_count": 13,
+      "col_count": 18,
+      "columns": [
+        "threshold",
+        "auc_roc",
+        "average_precision",
+        "accuracy",
+        "balanced_accuracy",
+        "precision",
+        "sensitivity",
+        "specificity",
+        "f1",
+        "brier_score",
+        "tn",
+        "fp",
+        "fn",
+        "tp",
+        "model",
+        "preprocessing",
+        "cohort",
+        "threshold_source"
+      ]
+    },
+    {
+      "path": "LungVision_AI_Final_Research_Bundle/nih_expert_evaluation/expert_image_predictions.csv",
+      "filename": "expert_image_predictions.csv",
+      "size_kb": 149.5,
+      "sha256": "68e0cf254414e44cc7e7dc408f33a935a6fe2a0be1e1e179c0e8bc7355e6fa53",
+      "row_count": 811,
+      "col_count": 9,
+      "columns": [
+        "Image ID",
+        "Patient ID",
+        "true_label",
+        "overlaps_previous_sample_patient",
+        "resolved_image_path",
+        "original_resnet18_baseline_probability",
+        "blur-augmented_resnet18_baseline_probability",
+        "original_resnet18_clahe_probability",
+        "blur-augmented_resnet18_clahe_probability"
+      ]
+    },
+    {
+      "path": "LungVision_AI_Final_Research_Bundle/nih_expert_evaluation/patient_clustered_bootstrap_auc.csv",
+      "filename": "patient_clustered_bootstrap_auc.csv",
+      "size_kb": 0.54,
+      "sha256": "d58d2249569476ea7a4bd687fe6575b5d91af4e19d3cc626c670c46b6043452c",
+      "row_count": 5,
+      "col_count": 7,
+      "columns": [
+        "model",
+        "preprocessing",
+        "patient_disjoint_auc",
+        "bootstrap_mean_auc",
+        "auc_ci_lower_95",
+        "auc_ci_upper_95",
+        "bootstrap_repetitions"
+      ]
+    },
+    {
+      "path": "LungVision_AI_Final_Research_Bundle/patient_clustered_uncertainty/model_metric_confidence_intervals.csv",
+      "filename": "model_metric_confidence_intervals.csv",
+      "size_kb": 1.65,
+      "sha256": "db53844ad8c78ade1e586a9c55bc12d8ff721145cd7977f2fba5ee839438c2ce",
+      "row_count": 17,
+      "col_count": 6,
+      "columns": [
+        "model",
+        "metric",
+        "observed_value",
+        "ci_lower_95",
+        "ci_upper_95",
+        "valid_repetitions"
+      ]
+    },
+    {
+      "path": "LungVision_AI_Final_Research_Bundle/patient_clustered_uncertainty/observed_metrics.csv",
+      "filename": "observed_metrics.csv",
+      "size_kb": 0.43,
+      "sha256": "3c9a130a1b71556d95793fc30055fe0d1828ee7094e1076e130327a72340795f",
+      "row_count": 3,
+      "col_count": 9,
+      "columns": [
+        "",
+        "ROC_AUC",
+        "Average_Precision",
+        "Accuracy",
+        "Balanced_Accuracy",
+        "Sensitivity",
+        "Specificity",
+        "Precision",
+        "F1"
+      ]
+    },
+    {
+      "path": "LungVision_AI_Final_Research_Bundle/patient_clustered_uncertainty/paired_model_difference_intervals.csv",
+      "filename": "paired_model_difference_intervals.csv",
+      "size_kb": 0.69,
+      "sha256": "24bca6ff4fad1a334338b99a56893b3eab643caa2cce66573011810138a35c18",
+      "row_count": 9,
+      "col_count": 5,
+      "columns": [
+        "metric",
+        "difference_original_minus_augmented",
+        "ci_lower_95",
+        "ci_upper_95",
+        "valid_repetitions"
+      ]
+    },
+    {
+      "path": "LungVision_AI_Final_Research_Bundle/vindr_external_evaluation/vindr_external_image_bootstrap_ci.csv",
+      "filename": "vindr_external_image_bootstrap_ci.csv",
+      "size_kb": 9.2,
+      "sha256": "765d5a0bffe6d23287daee4cafc659e159737f925c71cdc73233eb4697e16644",
+      "row_count": 73,
+      "col_count": 9,
+      "columns": [
+        "cohort",
+        "model",
+        "metric",
+        "observed_value",
+        "ci_lower_95",
+        "ci_upper_95",
+        "bootstrap_repetitions",
+        "resampling_unit",
+        "stratified_by_class"
+      ]
+    },
+    {
+      "path": "LungVision_AI_Final_Research_Bundle/vindr_external_evaluation/vindr_external_metrics.csv",
+      "filename": "vindr_external_metrics.csv",
+      "size_kb": 3.89,
+      "sha256": "8c1367e650a7e668a519f7fe43b117697e76449f8adc8f8c362a97b90047cd2f",
+      "row_count": 13,
+      "col_count": 23,
+      "columns": [
+        "ROC_AUC",
+        "Average_Precision",
+        "Accuracy",
+        "Balanced_Accuracy",
+        "Precision",
+        "Sensitivity",
+        "Specificity",
+        "F1",
+        "Brier_Score",
+        "ECE_10_bins",
+        "TN",
+        "FP",
+        "FN",
+        "TP",
+        "threshold",
+        "predicted_abnormal",
+        "predicted_abnormal_rate",
+        "cohort",
+        "model",
+        "images",
+        "normal_images",
+        "abnormal_images",
+        "positive_prevalence"
+      ]
+    },
+    {
+      "path": "LungVision_AI_Final_Research_Bundle/vindr_external_evaluation/vindr_external_paired_comparisons.csv",
+      "filename": "vindr_external_paired_comparisons.csv",
+      "size_kb": 2.72,
+      "sha256": "b8b127ed59b2e296d5108cb8ae2744e7b461eabd3eca1d290a1d62a7ed18ed0a",
+      "row_count": 19,
+      "col_count": 8,
+      "columns": [
+        "cohort",
+        "comparison",
+        "metric",
+        "observed_difference",
+        "ci_lower_95",
+        "ci_upper_95",
+        "bootstrap_repetitions",
+        "resampling_unit"
+      ]
+    },
+    {
+      "path": "LungVision_AI_Final_Research_Bundle/vindr_external_evaluation/vindr_full_cohort_threshold_ci.csv",
+      "filename": "vindr_full_cohort_threshold_ci.csv",
+      "size_kb": 6.09,
+      "sha256": "220f728a1d98ec894d51c0d1b92d035d6cdb0ae64fca35589268c0efddcefb7c",
+      "row_count": 43,
+      "col_count": 12,
+      "columns": [
+        "cohort",
+        "model",
+        "threshold_source",
+        "threshold",
+        "metric",
+        "observed_value",
+        "ci_lower_95",
+        "ci_upper_95",
+        "bootstrap_repetitions",
+        "resampling_unit",
+        "normal_images",
+        "abnormal_images"
+      ]
+    },
+    {
+      "path": "LungVision_AI_Final_Research_Bundle/vindr_external_evaluation/vindr_locked_threshold_ci.csv",
+      "filename": "vindr_locked_threshold_ci.csv",
+      "size_kb": 2.19,
+      "sha256": "1bb03f73e47349715af748ab0ec7de4839036ad57cfc83dd6f0dad7cb7926a3c",
+      "row_count": 15,
+      "col_count": 12,
+      "columns": [
+        "cohort",
+        "model",
+        "threshold_source",
+        "threshold",
+        "metric",
+        "observed_value",
+        "ci_lower_95",
+        "ci_upper_95",
+        "bootstrap_repetitions",
+        "resampling_unit",
+        "normal_images",
+        "abnormal_images"
+      ]
+    },
+    {
+      "path": "LungVision_AI_Final_Research_Bundle/vindr_external_evaluation/vindr_locked_threshold_full_cohort.csv",
+      "filename": "vindr_locked_threshold_full_cohort.csv",
+      "size_kb": 1.18,
+      "sha256": "87e34aa2189cf19669c8a3025a420b1bd2462caa7b3eb1f1b15dc8d242fd5629",
+      "row_count": 5,
+      "col_count": 19,
+      "columns": [
+        "threshold",
+        "accuracy",
+        "balanced_accuracy",
+        "sensitivity",
+        "specificity",
+        "precision",
+        "NPV",
+        "F1",
+        "TN",
+        "FP",
+        "FN",
+        "TP",
+        "predicted_abnormal",
+        "predicted_abnormal_rate",
+        "cohort",
+        "model",
+        "threshold_source",
+        "images",
+        "positive_prevalence"
+      ]
+    },
+    {
+      "path": "LungVision_AI_Final_Research_Bundle/vindr_external_evaluation/vindr_locked_threshold_transfer.csv",
+      "filename": "vindr_locked_threshold_transfer.csv",
+      "size_kb": 4.62,
+      "sha256": "e0931aacfb088a2a54079e0c19483856db8edd788fe0282bbcf40aa628a5eb72",
+      "row_count": 19,
+      "col_count": 19,
+      "columns": [
+        "threshold",
+        "accuracy",
+        "balanced_accuracy",
+        "sensitivity",
+        "specificity",
+        "precision",
+        "NPV",
+        "F1",
+        "TN",
+        "FP",
+        "FN",
+        "TP",
+        "predicted_abnormal",
+        "predicted_abnormal_rate",
+        "cohort",
+        "model",
+        "threshold_source",
+        "images",
+        "positive_prevalence"
+      ]
+    },
+    {
+      "path": "LungVision_AI_Final_Research_Bundle/vindr_external_evaluation/vindr_preprocessing_subgroup_ci.csv",
+      "filename": "vindr_preprocessing_subgroup_ci.csv",
+      "size_kb": 6.76,
+      "sha256": "65f16b1bfde1306c683a06ba99ce439c63afa8f6720bc48a76f17d302a1934f5",
+      "row_count": 49,
+      "col_count": 12,
+      "columns": [
+        "cohort",
+        "model",
+        "threshold_source",
+        "threshold",
+        "metric",
+        "observed_value",
+        "ci_lower_95",
+        "ci_upper_95",
+        "bootstrap_repetitions",
+        "resampling_unit",
+        "normal_images",
+        "abnormal_images"
+      ]
+    },
+    {
+      "path": "LungVision_AI_Final_Research_Bundle/vindr_external_evaluation/vindr_threshold_metric_confidence_intervals.csv",
+      "filename": "vindr_threshold_metric_confidence_intervals.csv",
+      "size_kb": 17.76,
+      "sha256": "b37cab49b7e81d8371304898d6a3348a6a01bc3c40d2b23789246c9704b2f3a5",
+      "row_count": 127,
+      "col_count": 12,
+      "columns": [
+        "cohort",
+        "model",
+        "threshold_source",
+        "threshold",
+        "metric",
+        "observed_value",
+        "ci_lower_95",
+        "ci_upper_95",
+        "bootstrap_repetitions",
+        "resampling_unit",
+        "normal_images",
+        "abnormal_images"
+      ]
+    },
+    {
+      "path": "LungVision_AI_Final_Research_Bundle/vindr_finding_level_analysis/vindr_all_finding_miss_rates.csv",
+      "filename": "vindr_all_finding_miss_rates.csv",
+      "size_kb": 31.56,
+      "sha256": "ac3e7d32c9cf834f688f8452aab7f50ed34822a0930723085241ccdcffa7c284",
+      "row_count": 169,
+      "col_count": 16,
+      "columns": [
+        "class_id",
+        "finding",
+        "reader_support_group",
+        "model",
+        "threshold_source",
+        "threshold",
+        "positive_images",
+        "positive_images_predicted_abnormal",
+        "positive_images_missed_as_normal",
+        "finding_positive_miss_rate",
+        "finding_positive_miss_rate_pct",
+        "miss_rate_ci_lower_95",
+        "miss_rate_ci_upper_95",
+        "mean_predicted_probability",
+        "bootstrap_repetitions",
+        "resampling_unit"
+      ]
+    },
+    {
+      "path": "LungVision_AI_Final_Research_Bundle/vindr_finding_level_analysis/vindr_augmented_clahe_finding_ranking.csv",
+      "filename": "vindr_augmented_clahe_finding_ranking.csv",
+      "size_kb": 2.88,
+      "sha256": "684d0ba75b95e7e1180e6794f1dbc60d062bf3074e415f38f723a86704dca3ec",
+      "row_count": 15,
+      "col_count": 16,
+      "columns": [
+        "class_id",
+        "finding",
+        "reader_support_group",
+        "model",
+        "threshold_source",
+        "threshold",
+        "positive_images",
+        "positive_images_predicted_abnormal",
+        "positive_images_missed_as_normal",
+        "finding_positive_miss_rate",
+        "finding_positive_miss_rate_pct",
+        "miss_rate_ci_lower_95",
+        "miss_rate_ci_upper_95",
+        "mean_predicted_probability",
+        "bootstrap_repetitions",
+        "resampling_unit"
+      ]
+    },
+    {
+      "path": "LungVision_AI_Final_Research_Bundle/vindr_finding_level_analysis/vindr_finding_model_comparison.csv",
+      "filename": "vindr_finding_model_comparison.csv",
+      "size_kb": 1.32,
+      "sha256": "669b710e06fd32c7c0dd83bce467277e534d65811dfd2aac35b4e1cacc2546bd",
+      "row_count": 15,
+      "col_count": 6,
+      "columns": [
+        "finding",
+        "Augmented + Baseline",
+        "Augmented + CLAHE",
+        "Original + Baseline",
+        "Original + CLAHE",
+        "positive_images"
+      ]
+    },
+    {
+      "path": "LungVision_AI_Final_Research_Bundle/vindr_finding_level_analysis/vindr_finding_reader_support.csv",
+      "filename": "vindr_finding_reader_support.csv",
+      "size_kb": 0.48,
+      "sha256": "b607ccb91758aee0b2d38c98f45869953daab7e436143ceff93adc1f361d9e9f",
+      "row_count": 15,
+      "col_count": 5,
+      "columns": [
+        "class_id",
+        "class_name",
+        "images_at_least_1_reader",
+        "images_with_2plus_readers",
+        "images_with_3_readers"
+      ]
+    },
+    {
+      "path": "LungVision_AI_Final_Research_Bundle/vindr_finding_level_analysis/vindr_image_finding_reader_votes.csv",
+      "filename": "vindr_image_finding_reader_votes.csv",
+      "size_kb": 854.52,
+      "sha256": "d976d2feb7f6c640e07d4bf4728f3fc0560a2bb4c6f2e33c9c48fd6e61ba5eb6",
+      "row_count": 15366,
+      "col_count": 6,
+      "columns": [
+        "image_id",
+        "class_id",
+        "class_name",
+        "reader_support",
+        "annotation_rows",
+        "true_label"
+      ]
+    },
+    {
+      "path": "LungVision_AI_Final_Research_Bundle/vindr_finding_level_analysis/vindr_two_reader_finding_miss_rates.csv",
+      "filename": "vindr_two_reader_finding_miss_rates.csv",
+      "size_kb": 15.99,
+      "sha256": "5c6fa9e22825a73c1f74a7e49dadb65aaea2cd572cce709f70cf647a71d21bb1",
+      "row_count": 85,
+      "col_count": 16,
+      "columns": [
+        "class_id",
+        "finding",
+        "reader_support_group",
+        "model",
+        "threshold_source",
+        "threshold",
+        "positive_images",
+        "positive_images_predicted_abnormal",
+        "positive_images_missed_as_normal",
+        "finding_positive_miss_rate",
+        "finding_positive_miss_rate_pct",
+        "miss_rate_ci_lower_95",
+        "miss_rate_ci_upper_95",
+        "mean_predicted_probability",
+        "bootstrap_repetitions",
+        "resampling_unit"
+      ]
+    },
+    {
+      "path": "LungVision_AI_Final_Research_Bundle/vindr_finding_level_analysis/false_negative_visual_audit/false_negative_box_validation.csv",
+      "filename": "false_negative_box_validation.csv",
+      "size_kb": 3.49,
+      "sha256": "c37570c4d0cbcd4535f07b8a558331eaebbc9dc9bf9b66b59dcf8159536ab429",
+      "row_count": 36,
+      "col_count": 11,
+      "columns": [
+        "image_id",
+        "finding",
+        "rad_id",
+        "box_valid",
+        "xmin",
+        "ymin",
+        "xmax",
+        "ymax",
+        "width",
+        "height",
+        "reason"
+      ]
+    },
+    {
+      "path": "LungVision_AI_Final_Research_Bundle/vindr_finding_level_analysis/false_negative_visual_audit/false_negative_image_errors.csv",
+      "filename": "false_negative_image_errors.csv",
+      "size_kb": 0.0,
+      "sha256": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b",
+      "row_count": 1,
+      "col_count": 1,
+      "columns": [
+        ""
+      ]
+    },
+    {
+      "path": "LungVision_AI_Final_Research_Bundle/vindr_finding_level_analysis/false_negative_visual_audit/selected_three_reader_false_negatives.csv",
+      "filename": "selected_three_reader_false_negatives.csv",
+      "size_kb": 1.94,
+      "sha256": "0f8734e86be06d3017a60a1bbaf9dc21d0967524ac52740a6e0d694cfb95de72",
+      "row_count": 11,
+      "col_count": 8,
+      "columns": [
+        "image_id",
+        "class_id",
+        "class_name",
+        "reader_support",
+        "true_label",
+        "blur-augmented_resnet18_clahe_probability",
+        "dicom_path",
+        "case_number"
+      ]
+    },
+    {
+      "path": "LungVision_AI_Final_Research_Bundle/vindr_finding_level_analysis/gradcam_audit/vindr_gradcam_box_attribution.csv",
+      "filename": "vindr_gradcam_box_attribution.csv",
+      "size_kb": 4.75,
+      "sha256": "64206c556bc0e6ca16d29b241686ee3bdbc4e3a37929ee4024078ca5fff5f2d8",
+      "row_count": 21,
+      "col_count": 15,
+      "columns": [
+        "case_number",
+        "image_id",
+        "finding",
+        "model",
+        "stored_abnormal_probability",
+        "reproduced_abnormal_probability",
+        "probability_absolute_difference",
+        "abnormal_logit",
+        "cam_mass_inside_boxes_pct",
+        "box_area_pct",
+        "cam_mass_enrichment",
+        "number_of_radiologist_boxes",
+        "three_reader_support",
+        "gradcam_target",
+        "probability_reproduction_warning"
+      ]
+    },
+    {
+      "path": "LungVision_AI_Final_Research_Bundle/vindr_finding_level_analysis/gradcam_audit/vindr_gradcam_errors.csv",
+      "filename": "vindr_gradcam_errors.csv",
+      "size_kb": 0.0,
+      "sha256": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b",
+      "row_count": 1,
+      "col_count": 1,
+      "columns": [
+        ""
+      ]
+    },
+    {
+      "path": "LungVision_AI_Final_Research_Bundle/vindr_finding_level_analysis/gradcam_audit/vindr_gradcam_finding_summary.csv",
+      "filename": "vindr_gradcam_finding_summary.csv",
+      "size_kb": 1.15,
+      "sha256": "ac1e9afbb05e7e1f508323a96dcd4769d607ac80fc12a16b90aade54c39ab34a",
+      "row_count": 11,
+      "col_count": 7,
+      "columns": [
+        "finding",
+        "model",
+        "cases",
+        "mean_cam_box_mass_pct",
+        "median_cam_box_mass_pct",
+        "mean_box_area_pct",
+        "mean_enrichment"
+      ]
+    },
+    {
+      "path": "LungVision_AI_Final_Research_Bundle/vindr_finding_level_analysis/gradcam_audit/vindr_gradcam_model_summary.csv",
+      "filename": "vindr_gradcam_model_summary.csv",
+      "size_kb": 0.31,
+      "sha256": "f2785a3e1db51789249ee82bc1ef6b1b13f2fe622fa58f8acd81bf8ffa01197a",
+      "row_count": 3,
+      "col_count": 6,
+      "columns": [
+        "model",
+        "mean_cam_mass_inside_boxes",
+        "median_cam_mass_inside_boxes",
+        "mean_box_area",
+        "mean_cam_mass_enrichment",
+        "probability_reproduction_warnings"
+      ]
+    },
+    {
+      "path": "LungVision_AI_Final_Research_Bundle/vindr_finding_level_analysis/gradcam_audit/vindr_gradcam_probability_reproduction_audit.csv",
+      "filename": "vindr_gradcam_probability_reproduction_audit.csv",
+      "size_kb": 0.21,
+      "sha256": "98d38bd6df6887d3caf0aabfdc965bde25c5114b5ef4d4429a8cf00456a49937",
+      "row_count": 3,
+      "col_count": 4,
+      "columns": [
+        "model",
+        "cases",
+        "mean_absolute_probability_difference",
+        "max_absolute_probability_difference"
+      ]
+    },
+    {
+      "path": "LungVision_AI_Final_Research_Bundle/vindr_finding_level_analysis/occlusion_faithfulness/vindr_occlusion_errors.csv",
+      "filename": "vindr_occlusion_errors.csv",
+      "size_kb": 0.0,
+      "sha256": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b",
+      "row_count": 1,
+      "col_count": 1,
+      "columns": [
+        ""
+      ]
+    },
+    {
+      "path": "LungVision_AI_Final_Research_Bundle/vindr_finding_level_analysis/occlusion_faithfulness/vindr_occlusion_individual_results.csv",
+      "filename": "vindr_occlusion_individual_results.csv",
+      "size_kb": 13.21,
+      "sha256": "8ff87fccfe6b5e528064497681003a269bb8896bbc1a17376ad92c065b10c1fd",
+      "row_count": 55,
+      "col_count": 14,
+      "columns": [
+        "image_id",
+        "finding",
+        "model",
+        "method",
+        "original_abnormal_probability",
+        "occluded_abnormal_probability",
+        "delta_abnormal_probability",
+        "original_abnormal_logit",
+        "occluded_abnormal_logit",
+        "delta_abnormal_logit",
+        "cam_target",
+        "number_of_occluded_patches",
+        "occluded_area_pct",
+        "random_probability_sd"
+      ]
+    },
+    {
+      "path": "LungVision_AI_Final_Research_Bundle/vindr_finding_level_analysis/occlusion_faithfulness/vindr_occlusion_paired_comparisons.csv",
+      "filename": "vindr_occlusion_paired_comparisons.csv",
+      "size_kb": 2.74,
+      "sha256": "8770e31d917cc5f80b15306ac7d37368393479b6d0fa109c2ce54c66f73c4c36",
+      "row_count": 19,
+      "col_count": 7,
+      "columns": [
+        "image_id",
+        "model",
+        "high_cam_delta",
+        "low_cam_delta",
+        "random_delta",
+        "high_minus_random",
+        "low_minus_random"
+      ]
+    },
+    {
+      "path": "LungVision_AI_Final_Research_Bundle/vindr_finding_level_analysis/occlusion_faithfulness/vindr_occlusion_random_repetitions.csv",
+      "filename": "vindr_occlusion_random_repetitions.csv",
+      "size_kb": 51.67,
+      "sha256": "9983c76d16ee58f20ab93c38674ea8c249e9aeac24cf3afb4ceb28c4db1ac0be",
+      "row_count": 361,
+      "col_count": 8,
+      "columns": [
+        "image_id",
+        "finding",
+        "model",
+        "random_repetition",
+        "abnormal_probability",
+        "abnormal_logit",
+        "delta_abnormal_probability",
+        "delta_abnormal_logit"
+      ]
+    },
+    {
+      "path": "LungVision_AI_Final_Research_Bundle/vindr_finding_level_analysis/occlusion_faithfulness/vindr_occlusion_summary.csv",
+      "filename": "vindr_occlusion_summary.csv",
+      "size_kb": 0.88,
+      "sha256": "79e2854d07a0de3205aba48fa2eaede360745e4ae38232f41eae6bfc53e11c54",
+      "row_count": 7,
+      "col_count": 8,
+      "columns": [
+        "model",
+        "method",
+        "cases",
+        "mean_delta_abnormal_probability",
+        "median_delta_abnormal_probability",
+        "mean_delta_abnormal_logit",
+        "median_delta_abnormal_logit",
+        "positive_probability_change_pct"
+      ]
+    },
+    {
+      "path": "LungVision_AI_Final_Research_Bundle/vindr_finding_level_analysis/reader_consensus_audit/vindr_finding_support_counts.csv",
+      "filename": "vindr_finding_support_counts.csv",
+      "size_kb": 0.52,
+      "sha256": "9991817ae37c5cca37ba3d7109dcf4cadc059c8c1499e2f6eb7675519a9dad6b",
+      "row_count": 15,
+      "col_count": 5,
+      "columns": [
+        "class_id",
+        "class_name",
+        "one_reader",
+        "two_readers",
+        "three_readers"
+      ]
+    },
+    {
+      "path": "LungVision_AI_Final_Research_Bundle/vindr_finding_level_analysis/reader_consensus_audit/vindr_reader_support_miss_rates.csv",
+      "filename": "vindr_reader_support_miss_rates.csv",
+      "size_kb": 30.5,
+      "sha256": "02a340863e2d2fc9525eba019b5db417f52fce9420e8a785f4238ed98bd84f1f",
+      "row_count": 169,
+      "col_count": 16,
+      "columns": [
+        "finding_id",
+        "finding",
+        "reader_support_group",
+        "model",
+        "positive_images",
+        "unique_image_ids",
+        "positive_images_missed",
+        "positive_images_detected",
+        "miss_rate",
+        "miss_rate_pct",
+        "wilson_ci_lower_95",
+        "wilson_ci_upper_95",
+        "mean_probability",
+        "median_probability",
+        "threshold",
+        "resampling_unit"
+      ]
+    },
+    {
+      "path": "LungVision_AI_Final_Research_Bundle/vindr_finding_level_analysis/reader_consensus_audit/vindr_support_strength_comparison.csv",
+      "filename": "vindr_support_strength_comparison.csv",
+      "size_kb": 1.01,
+      "sha256": "320776409b06631f565879a2a87f09445267362571059b14ce582363f2e8e5c8",
+      "row_count": 15,
+      "col_count": 4,
+      "columns": [
+        "finding",
+        "All 3 readers",
+        "At least 1 reader",
+        "At least 2 readers"
+      ]
+    },
+    {
+      "path": "LungVision_AI_Final_Research_Bundle/vindr_finding_level_analysis/reader_consensus_audit/vindr_three_reader_consensus_results.csv",
+      "filename": "vindr_three_reader_consensus_results.csv",
+      "size_kb": 10.06,
+      "sha256": "3a820218994d53f43feb6f5361deaf454029c5021d637779a8114b3eab6475fd",
+      "row_count": 57,
+      "col_count": 16,
+      "columns": [
+        "finding_id",
+        "finding",
+        "reader_support_group",
+        "model",
+        "positive_images",
+        "unique_image_ids",
+        "positive_images_missed",
+        "positive_images_detected",
+        "miss_rate",
+        "miss_rate_pct",
+        "wilson_ci_lower_95",
+        "wilson_ci_upper_95",
+        "mean_probability",
+        "median_probability",
+        "threshold",
+        "resampling_unit"
+      ]
+    },
+    {
+      "path": "LungVision_AI_Final_Research_Bundle/vindr_finding_level_analysis/reader_consensus_audit/vindr_three_reader_miss_rate_matrix.csv",
+      "filename": "vindr_three_reader_miss_rate_matrix.csv",
+      "size_kb": 1.27,
+      "sha256": "0eef70dc2a8cba72a23bf5da5db55297b298fc0684401cac7406a25c9d54d187",
+      "row_count": 15,
+      "col_count": 5,
+      "columns": [
+        "finding",
+        "Augmented + Baseline",
+        "Augmented + CLAHE",
+        "Original + Baseline",
+        "Original + CLAHE"
+      ]
+    },
+    {
+      "path": "LungVision_AI_Final_Research_Bundle/vindr_frozen_external_inference/vindr_frozen_model_predictions.csv",
+      "filename": "vindr_frozen_model_predictions.csv",
+      "size_kb": 1634.9,
+      "sha256": "9630b63f8ecd7816df912754687a2723fd09f3d811a91235bf3130cead085f5e",
+      "row_count": 15001,
+      "col_count": 8,
+      "columns": [
+        "row_index",
+        "image_id",
+        "true_label",
+        "preprocessing_route",
+        "original_resnet18_baseline_probability",
+        "original_resnet18_clahe_probability",
+        "blur-augmented_resnet18_baseline_probability",
+        "blur-augmented_resnet18_clahe_probability"
+      ]
+    },
+    {
+      "path": "LungVision_AI_Final_Research_Bundle/vindr_frozen_external_inference/dicom_voi_window_v1/dicom_inference_errors.csv",
+      "filename": "dicom_inference_errors.csv",
+      "size_kb": 0.02,
+      "sha256": "24196efa5cff58f1e92c4f84f16977a592022e6d3c1235514ad406c382f1c69f",
+      "row_count": 1,
+      "col_count": 3,
+      "columns": [
+        "image_id",
+        "row_index",
+        "error"
+      ]
+    },
+    {
+      "path": "LungVision_AI_Final_Research_Bundle/vindr_frozen_external_inference/dicom_voi_window_v1/preprocessing_route_distribution.csv",
+      "filename": "preprocessing_route_distribution.csv",
+      "size_kb": 0.13,
+      "sha256": "68e2dec4b36867064b200137e1cba9c4a88b60d137bfdb49cf95b27fc9874c25",
+      "row_count": 3,
+      "col_count": 3,
+      "columns": [
+        "preprocessing_route",
+        "normal_images",
+        "abnormal_images"
+      ]
+    },
+    {
+      "path": "LungVision_AI_Model_Registry/configuration/checksums.csv",
+      "filename": "checksums.csv",
+      "size_kb": 2.37,
+      "sha256": "adb406a7ee0067b05252d3751a5ef484d52599fa0c2ef567d99f1617a0d58d54",
+      "row_count": 22,
+      "col_count": 3,
+      "columns": [
+        "file",
+        "size_bytes",
+        "sha256"
+      ]
+    },
+    {
+      "path": "LungVision_AI_Model_Registry/experiment_reports/blur_robustness_metrics.csv",
+      "filename": "blur_robustness_metrics.csv",
+      "size_kb": 1.13,
+      "sha256": "95f2fe71eb84b7f943be988b87fb6a13b763f62894848634fda21641d75120c8",
+      "row_count": 6,
+      "col_count": 13,
+      "columns": [
+        "auc",
+        "average_precision",
+        "accuracy",
+        "balanced_accuracy",
+        "precision",
+        "sensitivity",
+        "specificity",
+        "f1",
+        "abnormal_prediction_rate",
+        "condition",
+        "kernel_size",
+        "sigma",
+        "auc_drop_from_original"
+      ]
+    },
+    {
+      "path": "LungVision_AI_Model_Registry/experiment_reports/image_quality_audit.csv",
+      "filename": "image_quality_audit.csv",
+      "size_kb": 3651.5,
+      "sha256": "ae0c3899776e9c90fdb32589d0031e5a96b74f3089cf2892307cc3809afb1f45",
+      "row_count": 12601,
+      "col_count": 19,
+      "columns": [
+        "resolved_image_path",
+        "label",
+        "split",
+        "width",
+        "height",
+        "aspect_ratio",
+        "mean_intensity",
+        "std_intensity",
+        "p05",
+        "p25",
+        "p50",
+        "p75",
+        "p95",
+        "black_fraction",
+        "low_intensity_fraction",
+        "dark_fraction",
+        "bright_fraction",
+        "border_black_fraction",
+        "center_black_fraction"
+      ]
+    },
+    {
+      "path": "LungVision_AI_Model_Registry/experiment_reports/individual_occlusion_summary.csv",
+      "filename": "individual_occlusion_summary.csv",
+      "size_kb": 0.75,
+      "sha256": "7430d1846a04409fdf25f5a7252b8a2aba629239a35b030b72b43a0dbf826719",
+      "row_count": 9,
+      "col_count": 7,
+      "columns": [
+        "category",
+        "validation_index",
+        "actual_label",
+        "predicted_label",
+        "abnormal_probability",
+        "original_logit",
+        "mean_occlusion_effect"
+      ]
+    },
+    {
+      "path": "LungVision_AI_Model_Registry/experiment_reports/occlusion_analysis_results.csv",
+      "filename": "occlusion_analysis_results.csv",
+      "size_kb": 2.09,
+      "sha256": "70875821f960397118cabeee185ca9b63045aa8298022cd2d806ecd5ae4ec944",
+      "row_count": 21,
+      "col_count": 8,
+      "columns": [
+        "category",
+        "validation_index",
+        "actual_label",
+        "predicted_label",
+        "abnormal_probability",
+        "original_logit",
+        "mean_occlusion_effect",
+        "maximum_occlusion_effect"
+      ]
+    },
+    {
+      "path": "LungVision_AI_Model_Registry/experiment_reports/probability_shift_statistics.csv",
+      "filename": "probability_shift_statistics.csv",
+      "size_kb": 1.0,
+      "sha256": "5c0ba963c3393599eafb2ca43b7951bb45e660cc0fe346ba21bf3d1122d48976",
+      "row_count": 11,
+      "col_count": 7,
+      "columns": [
+        "condition",
+        "actual_class",
+        "mean_probability",
+        "median_probability",
+        "std_probability",
+        "predicted_abnormal_rate",
+        "samples"
+      ]
+    },
+    {
+      "path": "LungVision_AI_Model_Registry/experiment_reports/spatial_audit_comparison.csv",
+      "filename": "spatial_audit_comparison.csv",
+      "size_kb": 0.42,
+      "sha256": "6eedc3afbe704407b0784b18951b8a6522b81ddfa16e50c9785ab51a86c8042c",
+      "row_count": 4,
+      "col_count": 6,
+      "columns": [
+        "experiment",
+        "feature_count",
+        "validation_auc",
+        "validation_accuracy",
+        "validation_balanced_accuracy",
+        "validation_average_precision"
+      ]
+    },
+    {
+      "path": "LungVision_AI_Model_Registry/experiment_reports/spatial_position_control.csv",
+      "filename": "spatial_position_control.csv",
+      "size_kb": 0.3,
+      "sha256": "b4798cd6590a2ecf0dc3395f8597ce9e5aae9a56e9a58bebf6ae6f9be4ba5dcd",
+      "row_count": 4,
+      "col_count": 4,
+      "columns": [
+        "experiment",
+        "validation_auc",
+        "validation_accuracy",
+        "average_precision"
+      ]
+    },
+    {
+      "path": "LungVision_AI_Model_Registry/test_results/original_test_metrics.csv",
+      "filename": "original_test_metrics.csv",
+      "size_kb": 0.35,
+      "sha256": "541bca9aeb3b646befc9bf3e7bcc4f2a76b51bf06b966487f3cdb6dc70921923",
+      "row_count": 12,
+      "col_count": 2,
+      "columns": [
+        "metric",
+        "value"
+      ]
+    },
+    {
+      "path": "LungVision_AI_Model_Registry/test_results/original_test_predictions.csv",
+      "filename": "original_test_predictions.csv",
+      "size_kb": 519.42,
+      "sha256": "6178450f0e90942b15270290b5f0c109266e6fd5027a4c4f72346cbd4c66493e",
+      "row_count": 1261,
+      "col_count": 17,
+      "columns": [
+        "image_id",
+        "filename",
+        "image_path",
+        "original_class",
+        "label",
+        "label_name",
+        "dataset",
+        "split",
+        "patient_id_available",
+        "resolved_image_path",
+        "actual_label",
+        "abnormal_probability",
+        "predicted_label",
+        "actual_class",
+        "predicted_class",
+        "correct_prediction",
+        "prediction_type"
+      ]
+    },
+    {
+      "path": "LungVision_AI_Model_Registry/test_results/test_model_comparison.csv",
+      "filename": "test_model_comparison.csv",
+      "size_kb": 1.8,
+      "sha256": "d525e56094bcc943f488a774ae2302ce8d6ffb3ec3941b5bb1f9b2f56b750abe",
+      "row_count": 9,
+      "col_count": 15,
+      "columns": [
+        "model",
+        "condition",
+        "auc",
+        "average_precision",
+        "accuracy",
+        "balanced_accuracy",
+        "sensitivity",
+        "specificity",
+        "precision",
+        "f1",
+        "abnormal_prediction_rate",
+        "tn",
+        "fp",
+        "fn",
+        "tp"
+      ]
+    },
+    {
+      "path": "LungVision_AI_Model_Registry/test_results/test_model_probabilities.csv",
+      "filename": "test_model_probabilities.csv",
+      "size_kb": 195.82,
+      "sha256": "c5e79f61449f0a1f733d9f6658d2b382585a24b9b147e923787069a11e8cf923",
+      "row_count": 1261,
+      "col_count": 9,
+      "columns": [
+        "Original ResNet18_Original",
+        "Original ResNet18_Mild",
+        "Original ResNet18_Moderate",
+        "Original ResNet18_Strong",
+        "Blur-Augmented ResNet18_Original",
+        "Blur-Augmented ResNet18_Mild",
+        "Blur-Augmented ResNet18_Moderate",
+        "Blur-Augmented ResNet18_Strong",
+        "actual_label"
+      ]
+    },
+    {
+      "path": "LungVision_AI_Model_Registry/training_history/augmented_training_history.csv",
+      "filename": "augmented_training_history.csv",
+      "size_kb": 0.42,
+      "sha256": "192a565623a6b88576e344278dd1a3970ebb3aaffa2eb261e7d2da2cbb12eccf",
+      "row_count": 4,
+      "col_count": 7,
+      "columns": [
+        "epoch",
+        "train_loss",
+        "val_auc",
+        "val_accuracy",
+        "val_sensitivity",
+        "val_specificity",
+        "val_f1"
+      ]
+    },
+    {
+      "path": "LungVision_AI_Model_Registry/training_history/original_training_history.csv",
+      "filename": "original_training_history.csv",
+      "size_kb": 1.84,
+      "sha256": "cb87446ea7304b22fe15736b9ade5ac6096128fc0da92c13eb32186deb497d9e",
+      "row_count": 8,
+      "col_count": 14,
+      "columns": [
+        "epoch",
+        "train_loss",
+        "train_accuracy",
+        "train_auc",
+        "train_f1",
+        "val_loss",
+        "val_accuracy",
+        "val_precision",
+        "val_recall",
+        "val_f1",
+        "val_auc",
+        "val_sensitivity",
+        "val_specificity",
+        "epoch_time_seconds"
+      ]
+    },
+    {
+      "path": "LungVision_AI_Model_Registry/validation_results/augmentation_comparison.csv",
+      "filename": "augmentation_comparison.csv",
+      "size_kb": 1.18,
+      "sha256": "ecbcdc829a06e26a9c2c1accd9a06643b6e86e0049c9958c766ba34eda7240a9",
+      "row_count": 9,
+      "col_count": 8,
+      "columns": [
+        "model",
+        "condition",
+        "auc",
+        "accuracy",
+        "sensitivity",
+        "specificity",
+        "f1",
+        "abnormal_prediction_rate"
+      ]
+    },
+    {
+      "path": "LungVision_AI_Model_Registry/validation_results/augmented_threshold_details.csv",
+      "filename": "augmented_threshold_details.csv",
+      "size_kb": 246.5,
+      "sha256": "289afac214e60fc0543635434a6e0a8b3c06a07f012462ad4bd7920d29ad932e",
+      "row_count": 1240,
+      "col_count": 14,
+      "columns": [
+        "threshold",
+        "sensitivity",
+        "specificity",
+        "precision",
+        "f1",
+        "accuracy",
+        "balanced_accuracy",
+        "tn",
+        "fp",
+        "fn",
+        "tp",
+        "abnormal_prediction_rate",
+        "model",
+        "auc"
+      ]
+    },
+    {
+      "path": "LungVision_AI_Model_Registry/validation_results/original_threshold_details.csv",
+      "filename": "original_threshold_details.csv",
+      "size_kb": 243.19,
+      "sha256": "0a2cbe43c53fece3e076bc23c513d0b530b8dbaef4fe9175fda16916ba9f0233",
+      "row_count": 1251,
+      "col_count": 14,
+      "columns": [
+        "threshold",
+        "sensitivity",
+        "specificity",
+        "precision",
+        "f1",
+        "accuracy",
+        "balanced_accuracy",
+        "tn",
+        "fp",
+        "fn",
+        "tp",
+        "abnormal_prediction_rate",
+        "model",
+        "auc"
+      ]
+    },
+    {
+      "path": "LungVision_AI_Model_Registry/validation_results/threshold_calibration_summary.csv",
+      "filename": "threshold_calibration_summary.csv",
+      "size_kb": 0.65,
+      "sha256": "2051064cb35c891dc4150b6a3da5805ce768f6a3fc8a03d3830506a5948e2558",
+      "row_count": 3,
+      "col_count": 16,
+      "columns": [
+        "model",
+        "validation_auc",
+        "default_threshold",
+        "calibrated_threshold",
+        "sensitivity_at_0.5",
+        "specificity_at_0.5",
+        "calibrated_sensitivity",
+        "calibrated_specificity",
+        "calibrated_precision",
+        "calibrated_f1",
+        "calibrated_accuracy",
+        "calibrated_abnormal_rate",
+        "tn",
+        "fp",
+        "fn",
+        "tp"
+      ]
+    },
+    {
+      "path": "lungvision_disease_classification/chexpert_manifest.csv",
+      "filename": "chexpert_manifest.csv",
+      "size_kb": 41825.81,
+      "sha256": "1df4c9cf3cd775290833ed34dcf4c825e227ad8671353eaf1c95b82624cd290e",
+      "row_count": 191230,
+      "col_count": 23,
+      "columns": [
+        "Path",
+        "Sex",
+        "Age",
+        "Frontal/Lateral",
+        "AP/PA",
+        "No Finding",
+        "Enlarged Cardiomediastinum",
+        "Cardiomegaly",
+        "Lung Opacity",
+        "Lung Lesion",
+        "Edema",
+        "Consolidation",
+        "Pneumonia",
+        "Atelectasis",
+        "Pneumothorax",
+        "Pleural Effusion",
+        "Pleural Other",
+        "Fracture",
+        "Support Devices",
+        "image_path",
+        "patient_id",
+        "official_split",
+        "split"
+      ]
+    },
+    {
+      "path": "lungvision_disease_classification/nih_manifest.csv",
+      "filename": "nih_manifest.csv",
+      "size_kb": 18954.46,
+      "sha256": "e2e47b5f022f1b3f1bc6839b856728b62e8d7239e447b8f2e93201edc143f1e9",
+      "row_count": 112121,
+      "col_count": 21,
+      "columns": [
+        "Image Index",
+        "Finding Labels",
+        "Follow-up #",
+        "Patient ID",
+        "Patient Age",
+        "Patient Gender",
+        "View Position",
+        "OriginalImage[Width",
+        "Height]",
+        "OriginalImagePixelSpacing[x",
+        "y]",
+        "Unnamed: 11",
+        "Cardiomegaly",
+        "Edema",
+        "Consolidation",
+        "Pneumonia",
+        "Atelectasis",
+        "Pneumothorax",
+        "image_path",
+        "patient_id",
+        "split"
+      ]
+    },
+    {
+      "path": "lungvision_disease_classification/nih_training_history.csv",
+      "filename": "nih_training_history.csv",
+      "size_kb": 0.58,
+      "sha256": "a185e1d59461762ce55606becf291669c469165d3ff01ed43627259cdcf66545",
+      "row_count": 6,
+      "col_count": 7,
+      "columns": [
+        "epoch",
+        "train_loss",
+        "val_loss",
+        "macro_auc",
+        "macro_auprc",
+        "learning_rate",
+        "epoch_time_sec"
+      ]
+    },
+    {
+      "path": "lungvision_phase2_dataset_profile/image_dimension_sample.csv",
+      "filename": "image_dimension_sample.csv",
+      "size_kb": 14.31,
+      "sha256": "114e621faa5ea0b2807a0d11727c35f286ffc8bb6cdb6e753b0ec20e1d8399a0",
+      "row_count": 501,
+      "col_count": 7,
+      "columns": [
+        "source",
+        "label",
+        "extension",
+        "width",
+        "height",
+        "mode",
+        "error"
+      ]
+    },
+    {
+      "path": "lungvision_phase2_dataset_profile/metadata_audit.csv",
+      "filename": "metadata_audit.csv",
+      "size_kb": 0.09,
+      "sha256": "9dd7defdac1d46637f03d272b5eb00c0373af05710cc6c1337ee9f875e53f7c2",
+      "row_count": 3,
+      "col_count": 4,
+      "columns": [
+        "source",
+        "missing_patient_ids",
+        "missing_hashes",
+        "missing_file_paths"
+      ]
+    },
+    {
+      "path": "lungvision_phase2_dataset_profile/prevalence_profile.csv",
+      "filename": "prevalence_profile.csv",
+      "size_kb": 0.26,
+      "sha256": "745b25ca450a79b5d54b66b7312589f286874b67f0f63d877995e9462280c485",
+      "row_count": 5,
+      "col_count": 6,
+      "columns": [
+        "source",
+        "split",
+        "total_images",
+        "abnormal_images",
+        "normal_images",
+        "abnormal_prevalence"
+      ]
+    },
+    {
+      "path": "lungvision_phase2_dataset_profile/source_profile.csv",
+      "filename": "source_profile.csv",
+      "size_kb": 0.18,
+      "sha256": "43ba86b31c00cfe4c564be9c9a48e3bf13bb7470b81a2d7e395ccbf15dd66d16",
+      "row_count": 3,
+      "col_count": 6,
+      "columns": [
+        "source",
+        "total_images",
+        "normal_images",
+        "abnormal_images",
+        "unique_image_ids",
+        "abnormal_prevalence"
+      ]
+    },
+    {
+      "path": "lungvision_phase2_dataset_profile/split_profile.csv",
+      "filename": "split_profile.csv",
+      "size_kb": 0.25,
+      "sha256": "86726ae83dff69d12ba45d9ee92ae90bd80254a4cc0344aa44404bbfdb47e3e5",
+      "row_count": 9,
+      "col_count": 4,
+      "columns": [
+        "source",
+        "split",
+        "label_name",
+        "image_count"
+      ]
+    },
+    {
+      "path": "lungvision_phase2_data_audit/exact_duplicate_quarantine.csv",
+      "filename": "exact_duplicate_quarantine.csv",
+      "size_kb": 23.61,
+      "sha256": "5fc336f0693dae7e2f7aed4665b123021562f562564e42b6e9df783d0a0120e2",
+      "row_count": 87,
+      "col_count": 11,
+      "columns": [
+        "image_id",
+        "source",
+        "label",
+        "label_name",
+        "file_path",
+        "file_name",
+        "extension",
+        "patient_id",
+        "reader_count",
+        "reader_unanimous",
+        "sha256"
+      ]
+    },
+    {
+      "path": "lungvision_phase2_data_audit/patient_id_audit.csv",
+      "filename": "patient_id_audit.csv",
+      "size_kb": 0.13,
+      "sha256": "b9bfe2d06a09243d6fd75cc29517ceab8043c3c028afe4db64e2cf019e521d28",
+      "row_count": 3,
+      "col_count": 5,
+      "columns": [
+        "source",
+        "total_images",
+        "images_with_patient_id",
+        "unique_patient_ids",
+        "images_without_patient_id"
+      ]
+    },
+    {
+      "path": "lungvision_phase2_data_audit/phase2_clean_manifest.csv",
+      "filename": "phase2_clean_manifest.csv",
+      "size_kb": 8041.7,
+      "sha256": "4c8d29811e9a87a789e705d9006614090e6eb716e47f885f9830cb3f83b4ed68",
+      "row_count": 27515,
+      "col_count": 14,
+      "columns": [
+        "image_id",
+        "source",
+        "label",
+        "label_name",
+        "file_path",
+        "file_name",
+        "extension",
+        "patient_id",
+        "reader_count",
+        "reader_unanimous",
+        "sha256",
+        "exact_duplicate",
+        "duplicate_group",
+        "quarantined"
+      ]
+    },
+    {
+      "path": "lungvision_phase2_data_audit/phase2_full_manifest.csv",
+      "filename": "phase2_full_manifest.csv",
+      "size_kb": 8071.5,
+      "sha256": "c1e28388ebbd9d0edd73f71e9f99ad6a3f24190d6bcc5b8a5fb90bb70da1f7dd",
+      "row_count": 27601,
+      "col_count": 14,
+      "columns": [
+        "image_id",
+        "source",
+        "label",
+        "label_name",
+        "file_path",
+        "file_name",
+        "extension",
+        "patient_id",
+        "reader_count",
+        "reader_unanimous",
+        "sha256",
+        "exact_duplicate",
+        "duplicate_group",
+        "quarantined"
+      ]
+    },
+    {
+      "path": "lungvision_phase2_data_audit/phase2_train_validation_split.csv",
+      "filename": "phase2_train_validation_split.csv",
+      "size_kb": 8229.79,
+      "sha256": "d4fce8269d0d71d02af7fd37719393711581dd85d44c7640492972b733bc9742",
+      "row_count": 27515,
+      "col_count": 15,
+      "columns": [
+        "image_id",
+        "source",
+        "label",
+        "label_name",
+        "file_path",
+        "file_name",
+        "extension",
+        "patient_id",
+        "reader_count",
+        "reader_unanimous",
+        "sha256",
+        "exact_duplicate",
+        "duplicate_group",
+        "quarantined",
+        "split"
+      ]
+    },
+    {
+      "path": "lungvision_phase2_data_audit/source_split_label_summary.csv",
+      "filename": "source_split_label_summary.csv",
+      "size_kb": 0.25,
+      "sha256": "86726ae83dff69d12ba45d9ee92ae90bd80254a4cc0344aa44404bbfdb47e3e5",
+      "row_count": 9,
+      "col_count": 4,
+      "columns": [
+        "source",
+        "split",
+        "label_name",
+        "image_count"
+      ]
+    },
+    {
+      "path": "lungvision_phase2_incxr_artifact_audit/incxr_artifact_errors.csv",
+      "filename": "incxr_artifact_errors.csv",
+      "size_kb": 0.0,
+      "sha256": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b",
+      "row_count": 1,
+      "col_count": 1,
+      "columns": [
+        ""
+      ]
+    },
+    {
+      "path": "lungvision_phase2_incxr_artifact_audit/incxr_artifact_summary_by_label.csv",
+      "filename": "incxr_artifact_summary_by_label.csv",
+      "size_kb": 0.76,
+      "sha256": "e5ca4a6f2e9dadc5333341211469252d5e6ae1801c1eb6a9d64aa7f8b9e17979",
+      "row_count": 5,
+      "col_count": 13,
+      "columns": [
+        "",
+        "mean_intensity",
+        "mean_intensity",
+        "mean_intensity",
+        "std_intensity",
+        "std_intensity",
+        "std_intensity",
+        "near_black_fraction",
+        "near_black_fraction",
+        "near_black_fraction",
+        "near_white_fraction",
+        "near_white_fraction",
+        "near_white_fraction"
+      ]
+    },
+    {
+      "path": "lungvision_phase2_incxr_artifact_audit/incxr_dark_region_flag_summary.csv",
+      "filename": "incxr_dark_region_flag_summary.csv",
+      "size_kb": 0.23,
+      "sha256": "e0086fbd13009fcd239a009c81d7d9cfbd5b01f932180ab8c5721183b4844bd4",
+      "row_count": 5,
+      "col_count": 5,
+      "columns": [
+        "split",
+        "label_name",
+        "total_images",
+        "flagged_images",
+        "flagged_percentage"
+      ]
+    },
+    {
+      "path": "lungvision_phase2_incxr_artifact_audit/incxr_full_artifact_metrics.csv",
+      "filename": "incxr_full_artifact_metrics.csv",
+      "size_kb": 1843.82,
+      "sha256": "6d393ca3ff64e43285da29d6a7d04d5b35e3a166d57c7db3aa4a2639be5a4b4e",
+      "row_count": 12515,
+      "col_count": 12,
+      "columns": [
+        "image_id",
+        "label_name",
+        "split",
+        "width",
+        "height",
+        "mean_intensity",
+        "std_intensity",
+        "minimum",
+        "maximum",
+        "near_black_fraction",
+        "near_white_fraction",
+        "dark_region_flag"
+      ]
+    },
+    {
+      "path": "lungvision_phase2_models/training_history.csv",
+      "filename": "training_history.csv",
+      "size_kb": 0.59,
+      "sha256": "2b50b2542822a5c84dfb54a66c1734e032a0226ce9104b11c98488c738b87fad",
+      "row_count": 6,
+      "col_count": 7,
+      "columns": [
+        "epoch",
+        "train_loss",
+        "macro_source_auc",
+        "incxr_auc",
+        "vindr_auc",
+        "pooled_auc",
+        "learning_rate"
+      ]
+    },
+    {
+      "path": "lungvision_phase2_models/validation_predictions_epoch_1.csv",
+      "filename": "validation_predictions_epoch_1.csv",
+      "size_kb": 1762.81,
+      "sha256": "2e6497f67c4ac28b4478a2681d2a0fd18b29a07758b22406188469e8b30fa54e",
+      "row_count": 5504,
+      "col_count": 17,
+      "columns": [
+        "image_id",
+        "source",
+        "label",
+        "label_name",
+        "file_path",
+        "file_name",
+        "extension",
+        "patient_id",
+        "reader_count",
+        "reader_unanimous",
+        "sha256",
+        "exact_duplicate",
+        "duplicate_group",
+        "quarantined",
+        "split",
+        "probability",
+        "prediction"
+      ]
+    },
+    {
+      "path": "lungvision_phase2_models/validation_predictions_epoch_2.csv",
+      "filename": "validation_predictions_epoch_2.csv",
+      "size_kb": 1757.83,
+      "sha256": "930e4f580cc1877cf1c04ea8925d506ebdd5e311209713954ac8c0a8c25ab248",
+      "row_count": 5504,
+      "col_count": 17,
+      "columns": [
+        "image_id",
+        "source",
+        "label",
+        "label_name",
+        "file_path",
+        "file_name",
+        "extension",
+        "patient_id",
+        "reader_count",
+        "reader_unanimous",
+        "sha256",
+        "exact_duplicate",
+        "duplicate_group",
+        "quarantined",
+        "split",
+        "probability",
+        "prediction"
+      ]
+    },
+    {
+      "path": "lungvision_phase2_models/validation_predictions_epoch_3.csv",
+      "filename": "validation_predictions_epoch_3.csv",
+      "size_kb": 1761.89,
+      "sha256": "7cdd1462efcb0273943da0245934e4d12b88ce23a7ad1bf13b5c346678e55055",
+      "row_count": 5504,
+      "col_count": 17,
+      "columns": [
+        "image_id",
+        "source",
+        "label",
+        "label_name",
+        "file_path",
+        "file_name",
+        "extension",
+        "patient_id",
+        "reader_count",
+        "reader_unanimous",
+        "sha256",
+        "exact_duplicate",
+        "duplicate_group",
+        "quarantined",
+        "split",
+        "probability",
+        "prediction"
+      ]
+    },
+    {
+      "path": "lungvision_phase2_models/validation_predictions_epoch_4.csv",
+      "filename": "validation_predictions_epoch_4.csv",
+      "size_kb": 1767.46,
+      "sha256": "6185cb26a028aa67e99adb9c06f9bb42a222eea4e6c878f55c4f4c3ff0c8457e",
+      "row_count": 5504,
+      "col_count": 17,
+      "columns": [
+        "image_id",
+        "source",
+        "label",
+        "label_name",
+        "file_path",
+        "file_name",
+        "extension",
+        "patient_id",
+        "reader_count",
+        "reader_unanimous",
+        "sha256",
+        "exact_duplicate",
+        "duplicate_group",
+        "quarantined",
+        "split",
+        "probability",
+        "prediction"
+      ]
+    },
+    {
+      "path": "lungvision_phase2_models/validation_predictions_epoch_5.csv",
+      "filename": "validation_predictions_epoch_5.csv",
+      "size_kb": 1766.3,
+      "sha256": "bdc13813046bb9a102b0d28a6cebac2f5973e8b4061c215d633e8a290bbb2f33",
+      "row_count": 5504,
+      "col_count": 17,
+      "columns": [
+        "image_id",
+        "source",
+        "label",
+        "label_name",
+        "file_path",
+        "file_name",
+        "extension",
+        "patient_id",
+        "reader_count",
+        "reader_unanimous",
+        "sha256",
+        "exact_duplicate",
+        "duplicate_group",
+        "quarantined",
+        "split",
+        "probability",
+        "prediction"
+      ]
+    },
+    {
+      "path": "lungvision_phase2_padding_audit/aspect_ratio_summary.csv",
+      "filename": "aspect_ratio_summary.csv",
+      "size_kb": 0.17,
+      "sha256": "ee8d4772d92bb2232ee8c47c729b1f79f4f99afa59f855477d14876ec0360fb9",
+      "row_count": 3,
+      "col_count": 7,
+      "columns": [
+        "source",
+        "count",
+        "mean",
+        "median",
+        "std",
+        "min",
+        "max"
+      ]
+    },
+    {
+      "path": "lungvision_phase2_padding_audit/padding_audit_metrics.csv",
+      "filename": "padding_audit_metrics.csv",
+      "size_kb": 198.1,
+      "sha256": "6133269e3ad0daa49509337a82a09bb3f148284413e239a7494d2f00150db821",
+      "row_count": 1281,
+      "col_count": 14,
+      "columns": [
+        "source",
+        "split",
+        "label",
+        "image_id",
+        "method",
+        "original_width",
+        "original_height",
+        "resized_width",
+        "resized_height",
+        "pad_fraction",
+        "mean_intensity",
+        "std_intensity",
+        "near_black_fraction",
+        "original_aspect_ratio"
+      ]
+    },
+    {
+      "path": "lungvision_phase2_padding_audit/padding_method_summary.csv",
+      "filename": "padding_method_summary.csv",
+      "size_kb": 1.96,
+      "sha256": "c78beeb35559d017ec16549f9b7e097b148f76896e704d6cc47ad240be002452",
+      "row_count": 11,
+      "col_count": 14,
+      "columns": [
+        "",
+        "",
+        "pad_fraction",
+        "pad_fraction",
+        "pad_fraction",
+        "mean_intensity",
+        "mean_intensity",
+        "mean_intensity",
+        "std_intensity",
+        "std_intensity",
+        "std_intensity",
+        "near_black_fraction",
+        "near_black_fraction",
+        "near_black_fraction"
+      ]
+    },
+    {
+      "path": "lungvision_phase2_pixel_audit/pixel_audit_metrics.csv",
+      "filename": "pixel_audit_metrics.csv",
+      "size_kb": 76.32,
+      "sha256": "9fd8c016cea8fd067650cc51cba10ccb44b8a53f885ce527acf9895a1d3750d4",
+      "row_count": 321,
+      "col_count": 20,
+      "columns": [
+        "source",
+        "split",
+        "label",
+        "label_name",
+        "image_id",
+        "width",
+        "height",
+        "raw_min",
+        "raw_max",
+        "raw_mean",
+        "raw_std",
+        "display_mean_0_255",
+        "display_std_0_255",
+        "near_black_fraction",
+        "near_white_fraction",
+        "photometric",
+        "modality_lut_applied",
+        "voi_applied",
+        "voi_method",
+        "monochrome1"
+      ]
+    },
+    {
+      "path": "lungvision_phase2_pixel_audit/pixel_decode_errors.csv",
+      "filename": "pixel_decode_errors.csv",
+      "size_kb": 0.0,
+      "sha256": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b",
+      "row_count": 1,
+      "col_count": 1,
+      "columns": [
+        ""
+      ]
+    },
+    {
+      "path": "lungvision_phase2_pixel_audit/pixel_domain_summary.csv",
+      "filename": "pixel_domain_summary.csv",
+      "size_kb": 1.08,
+      "sha256": "75196e95f835402df41a2ce60a9eaafaa3ee7b8e99cd0b8b6702c9250e690c9e",
+      "row_count": 5,
+      "col_count": 19,
+      "columns": [
+        "",
+        "raw_mean",
+        "raw_mean",
+        "raw_mean",
+        "raw_std",
+        "raw_std",
+        "raw_std",
+        "display_mean_0_255",
+        "display_mean_0_255",
+        "display_mean_0_255",
+        "display_std_0_255",
+        "display_std_0_255",
+        "display_std_0_255",
+        "near_black_fraction",
+        "near_black_fraction",
+        "near_black_fraction",
+        "near_white_fraction",
+        "near_white_fraction",
+        "near_white_fraction"
+      ]
+    },
+    {
+      "path": "lungvision_phase2_pixel_audit/pixel_source_label_summary.csv",
+      "filename": "pixel_source_label_summary.csv",
+      "size_kb": 0.88,
+      "sha256": "7f4c0ceaccee21692600c0bd744d3a69ca5217a582280122f0952238e2e7109a",
+      "row_count": 7,
+      "col_count": 10,
+      "columns": [
+        "",
+        "",
+        "display_mean_0_255",
+        "display_mean_0_255",
+        "display_std_0_255",
+        "display_std_0_255",
+        "near_black_fraction",
+        "near_black_fraction",
+        "near_white_fraction",
+        "near_white_fraction"
+      ]
+    },
+    {
+      "path": "lungvision_phase2_preprocessing_comparison/preprocessing_comparison_metrics.csv",
+      "filename": "preprocessing_comparison_metrics.csv",
+      "size_kb": 138.23,
+      "sha256": "889a10878690e758c03e8f3101e097ff3b14a4e001727997ba6fb60b91121cb7",
+      "row_count": 961,
+      "col_count": 9,
+      "columns": [
+        "source",
+        "split",
+        "label",
+        "image_id",
+        "method",
+        "mean_0_255",
+        "std_0_255",
+        "near_black_fraction",
+        "near_white_fraction"
+      ]
+    },
+    {
+      "path": "lungvision_phase2_preprocessing_comparison/preprocessing_label_summary.csv",
+      "filename": "preprocessing_label_summary.csv",
+      "size_kb": 1.28,
+      "sha256": "dedb23a25d5e34abad675513fbd6b03d532f56102fc0cc621080719bf5757677",
+      "row_count": 15,
+      "col_count": 7,
+      "columns": [
+        "",
+        "",
+        "",
+        "mean_0_255",
+        "mean_0_255",
+        "std_0_255",
+        "std_0_255"
+      ]
+    },
+    {
+      "path": "lungvision_phase2_preprocessing_comparison/preprocessing_source_summary.csv",
+      "filename": "preprocessing_source_summary.csv",
+      "size_kb": 1.76,
+      "sha256": "440bb44a43a8bb52a0bd706f5e12c1c5fdf626dc919f578cafaec575c3d809b2",
+      "row_count": 9,
+      "col_count": 14,
+      "columns": [
+        "",
+        "",
+        "mean_0_255",
+        "mean_0_255",
+        "mean_0_255",
+        "std_0_255",
+        "std_0_255",
+        "std_0_255",
+        "near_black_fraction",
+        "near_black_fraction",
+        "near_black_fraction",
+        "near_white_fraction",
+        "near_white_fraction",
+        "near_white_fraction"
+      ]
+    },
+    {
+      "path": "lungvision_phase2_preprocessing_comparison/source_intensity_difference.csv",
+      "filename": "source_intensity_difference.csv",
+      "size_kb": 0.26,
+      "sha256": "78f2e35a73b5b22e258de2b3da3461ef258562660d199ff1c5d4e8e5b81ce039",
+      "row_count": 4,
+      "col_count": 4,
+      "columns": [
+        "method",
+        "incxr_mean",
+        "vindr_mean",
+        "absolute_source_difference"
+      ]
+    }
+  ],
+  "images": [
+    {
+      "path": "lungVision/__results___files/__results___18_0.png",
+      "filename": "__results___18_0.png",
+      "ext": ".png",
+      "size_kb": 85.24,
+      "is_drr": false,
+      "is_clinical": false,
+      "is_figure": true
+    },
+    {
+      "path": "lungVision/__results___files/__results___19_3.png",
+      "filename": "__results___19_3.png",
+      "ext": ".png",
+      "size_kb": 55.48,
+      "is_drr": false,
+      "is_clinical": false,
+      "is_figure": true
+    },
+    {
+      "path": "lungVision/__results___files/__results___24_0.png",
+      "filename": "__results___24_0.png",
+      "ext": ".png",
+      "size_kb": 2732.69,
+      "is_drr": false,
+      "is_clinical": false,
+      "is_figure": true
+    },
+    {
+      "path": "LungVision_AI_Final_Research_Bundle/expert_error_analysis/expert_error_dashboard.png",
+      "filename": "expert_error_dashboard.png",
+      "ext": ".png",
+      "size_kb": 231.89,
+      "is_drr": false,
+      "is_clinical": false,
+      "is_figure": false
+    },
+    {
+      "path": "LungVision_AI_Final_Research_Bundle/external_validation_readiness/vindr_dicom_preview.png",
+      "filename": "vindr_dicom_preview.png",
+      "ext": ".png",
+      "size_kb": 3580.24,
+      "is_drr": false,
+      "is_clinical": true,
+      "is_figure": false
+    },
+    {
+      "path": "LungVision_AI_Final_Research_Bundle/external_validation_readiness/dicom_preprocessing_audit/vindr_intensity_conversion_comparison.png",
+      "filename": "vindr_intensity_conversion_comparison.png",
+      "ext": ".png",
+      "size_kb": 5657.34,
+      "is_drr": false,
+      "is_clinical": true,
+      "is_figure": false
+    },
+    {
+      "path": "LungVision_AI_Final_Research_Bundle/final_expert_statistical_analysis/expert_auc_comparison.png",
+      "filename": "expert_auc_comparison.png",
+      "ext": ".png",
+      "size_kb": 53.32,
+      "is_drr": false,
+      "is_clinical": false,
+      "is_figure": false
+    },
+    {
+      "path": "LungVision_AI_Final_Research_Bundle/nih_expert_evaluation/expert_patient_disjoint_auc.png",
+      "filename": "expert_patient_disjoint_auc.png",
+      "ext": ".png",
+      "size_kb": 56.11,
+      "is_drr": false,
+      "is_clinical": false,
+      "is_figure": false
+    },
+    {
+      "path": "LungVision_AI_Final_Research_Bundle/patient_clustered_uncertainty/paired_metric_difference_confidence_intervals.png",
+      "filename": "paired_metric_difference_confidence_intervals.png",
+      "ext": ".png",
+      "size_kb": 81.8,
+      "is_drr": false,
+      "is_clinical": false,
+      "is_figure": false
+    },
+    {
+      "path": "LungVision_AI_Final_Research_Bundle/vindr_external_evaluation/vindr_external_confusion_matrices.png",
+      "filename": "vindr_external_confusion_matrices.png",
+      "ext": ".png",
+      "size_kb": 130.53,
+      "is_drr": false,
+      "is_clinical": true,
+      "is_figure": false
+    },
+    {
+      "path": "LungVision_AI_Final_Research_Bundle/vindr_external_evaluation/vindr_external_roc_pr_curves.png",
+      "filename": "vindr_external_roc_pr_curves.png",
+      "ext": ".png",
+      "size_kb": 179.33,
+      "is_drr": false,
+      "is_clinical": true,
+      "is_figure": false
+    },
+    {
+      "path": "LungVision_AI_Final_Research_Bundle/vindr_external_evaluation/vindr_locked_threshold_confidence_intervals.png",
+      "filename": "vindr_locked_threshold_confidence_intervals.png",
+      "ext": ".png",
+      "size_kb": 60.26,
+      "is_drr": false,
+      "is_clinical": true,
+      "is_figure": false
+    },
+    {
+      "path": "LungVision_AI_Final_Research_Bundle/vindr_external_evaluation/vindr_locked_threshold_transfer.png",
+      "filename": "vindr_locked_threshold_transfer.png",
+      "ext": ".png",
+      "size_kb": 117.23,
+      "is_drr": false,
+      "is_clinical": true,
+      "is_figure": false
+    },
+    {
+      "path": "LungVision_AI_Final_Research_Bundle/vindr_finding_level_analysis/vindr_finding_miss_rate_heatmap.png",
+      "filename": "vindr_finding_miss_rate_heatmap.png",
+      "ext": ".png",
+      "size_kb": 221.05,
+      "is_drr": false,
+      "is_clinical": true,
+      "is_figure": false
+    },
+    {
+      "path": "LungVision_AI_Final_Research_Bundle/vindr_finding_level_analysis/false_negative_visual_audit/vindr_false_negative_radiologist_boxes.png",
+      "filename": "vindr_false_negative_radiologist_boxes.png",
+      "ext": ".png",
+      "size_kb": 3377.57,
+      "is_drr": false,
+      "is_clinical": true,
+      "is_figure": false
+    },
+    {
+      "path": "LungVision_AI_Final_Research_Bundle/vindr_finding_level_analysis/gradcam_audit/vindr_gradcam_radiologist_box_comparison.png",
+      "filename": "vindr_gradcam_radiologist_box_comparison.png",
+      "ext": ".png",
+      "size_kb": 9411.21,
+      "is_drr": false,
+      "is_clinical": true,
+      "is_figure": false
+    },
+    {
+      "path": "LungVision_AI_Final_Research_Bundle/vindr_finding_level_analysis/occlusion_faithfulness/vindr_occlusion_effect_comparison.png",
+      "filename": "vindr_occlusion_effect_comparison.png",
+      "ext": ".png",
+      "size_kb": 168.44,
+      "is_drr": false,
+      "is_clinical": true,
+      "is_figure": false
+    },
+    {
+      "path": "LungVision_AI_Final_Research_Bundle/vindr_finding_level_analysis/occlusion_faithfulness/vindr_occlusion_visual_examples.png",
+      "filename": "vindr_occlusion_visual_examples.png",
+      "ext": ".png",
+      "size_kb": 1563.61,
+      "is_drr": false,
+      "is_clinical": true,
+      "is_figure": false
+    },
+    {
+      "path": "LungVision_AI_Final_Research_Bundle/vindr_finding_level_analysis/reader_consensus_audit/three_reader_consensus_miss_rate_heatmap.png",
+      "filename": "three_reader_consensus_miss_rate_heatmap.png",
+      "ext": ".png",
+      "size_kb": 228.15,
+      "is_drr": false,
+      "is_clinical": true,
+      "is_figure": false
+    }
+  ],
+  "backend_routes": [],
+  "frontend": {
+    "pages": [
+      "src/features/ct/CTExplorerPage.tsx",
+      "src/features/dashboard/DashboardPage.tsx",
+      "src/features/history/HistoryPage.tsx",
+      "src/features/models/ModelsPage.tsx",
+      "src/features/research/ResearchPage.tsx",
+      "src/features/settings/SettingsPage.tsx",
+      "src/features/xray/DualViewXRayPage.tsx",
+      "src/features/xray/XrayPage.tsx"
+    ],
+    "components_count": 16,
+    "tests": [
+      "tests/App.test.tsx",
+      "tests/components/DisclaimerBanner.test.tsx",
+      "tests/components/ProbabilityBar.test.tsx",
+      "tests/features/CTExplorerPage.test.tsx",
+      "tests/features/DashboardPage.test.tsx",
+      "tests/features/DualViewXRayPage.test.tsx",
+      "tests/features/ExplainabilityAndDualMode.test.tsx",
+      "tests/features/ModelsPage.test.tsx",
+      "tests/features/ResearchPage.test.tsx",
+      "tests/features/XrayPage.test.tsx"
+    ]
+  },
+  "duplicates": {
+    "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b": [
+      "backend/app/api/__init__.py",
+      "backend/app/api/v1/__init__.py",
+      "backend/app/core/__init__.py",
+      "backend/app/schemas/__init__.py",
+      "backend/app/services/__init__.py",
+      "LungVision_AI_Final_Research_Bundle/external_validation_readiness/dicom_preprocessing_audit/vindr_dicom_decoding_errors.csv",
+      "LungVision_AI_Final_Research_Bundle/external_validation_readiness/dicom_preprocessing_audit/vindr_header_read_errors.csv",
+      "LungVision_AI_Final_Research_Bundle/vindr_finding_level_analysis/false_negative_visual_audit/false_negative_image_errors.csv",
+      "LungVision_AI_Final_Research_Bundle/vindr_finding_level_analysis/gradcam_audit/vindr_gradcam_errors.csv",
+      "LungVision_AI_Final_Research_Bundle/vindr_finding_level_analysis/occlusion_faithfulness/vindr_occlusion_errors.csv",
+      "lungvision_phase2_incxr_artifact_audit/incxr_artifact_errors.csv",
+      "lungvision_phase2_pixel_audit/pixel_decode_errors.csv"
+    ],
+    "abe4b413aa735fc546b1dab6d3629789ba11710c629b49785279971d857e46a3": [
+      "LungVision_AI_Final_Research_Bundle/external_validation_readiness/vindr_binary_label_candidates.csv",
+      "LungVision_AI_Final_Research_Bundle/external_validation_readiness/vindr_reader_agreement.csv"
+    ],
+    "7d8634454d1ac0dfa2c2dbc8d0b08155512fb52b65c9db5a9171a5b59c7d3f24": [
+      "LungVision_AI_Final_Research_Bundle/models/blur_augmented_resnet18/model.pth",
+      "LungVision_AI_Model_Registry/models/blur_augmented_resnet18/model.pth"
+    ],
+    "a293bd9e441b2713e62b7de208611bf7cc97676ea1291ce2818ff3a497528b2f": [
+      "LungVision_AI_Final_Research_Bundle/models/original_resnet18/model.pth",
+      "LungVision_AI_Model_Registry/models/original_resnet18/model.pth"
+    ],
+    "ef3b4471c3932d0200da8ad5b5ee86825ef73db1efb331336ee77b7f847f6142": [
+      "LungVision_AI_Final_Research_Bundle/model_registry_documentation/README.md",
+      "LungVision_AI_Model_Registry/README.md"
+    ],
+    "3e8416745b196ea0f36ceb91063868a3de95e7d2eba3bdfb0d80b9f7acbb566f": [
+      "LungVision_AI_Final_Research_Bundle/model_registry_documentation/configuration/model_registry.json",
+      "LungVision_AI_Model_Registry/configuration/model_registry.json"
+    ],
+    "86726ae83dff69d12ba45d9ee92ae90bd80254a4cc0344aa44404bbfdb47e3e5": [
+      "lungvision_phase2_dataset_profile/split_profile.csv",
+      "lungvision_phase2_data_audit/source_split_label_summary.csv"
+    ]
+  }
+}

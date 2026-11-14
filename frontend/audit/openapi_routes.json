@@ -1,0 +1,505 @@
+[
+  {
+    "method": "GET",
+    "path": "/",
+    "summary": "Root",
+    "operation_id": "root__get",
+    "parameters": [],
+    "request_body": false,
+    "responses": [
+      "200"
+    ],
+    "frontend_consumers": [
+      "services/api/ctApi.ts",
+      "services/api/healthApi.ts",
+      "services/api/modelApi.ts",
+      "services/api/researchApi.ts",
+      "services/api/xrayApi.ts"
+    ]
+  },
+  {
+    "method": "POST",
+    "path": "/api/v1/ct/upload",
+    "summary": "Upload CT Scan Volume",
+    "operation_id": "upload_ct_scan_api_v1_ct_upload_post",
+    "parameters": [],
+    "request_body": true,
+    "responses": [
+      "201",
+      "422"
+    ],
+    "frontend_consumers": [
+      "services/api/ctApi.ts"
+    ]
+  },
+  {
+    "method": "GET",
+    "path": "/api/v1/ct/{scan_id}",
+    "summary": "Get CT Scan Summary",
+    "operation_id": "get_ct_scan_summary_api_v1_ct__scan_id__get",
+    "parameters": [
+      {
+        "name": "scan_id",
+        "in": "path",
+        "required": true,
+        "schema": {
+          "type": "string",
+          "title": "Scan Id"
+        }
+      }
+    ],
+    "request_body": false,
+    "responses": [
+      "200",
+      "422"
+    ],
+    "frontend_consumers": [
+      "services/api/ctApi.ts"
+    ]
+  },
+  {
+    "method": "GET",
+    "path": "/api/v1/ct/{scan_id}/annotations",
+    "summary": "Get LUNA16 Nodule Annotations",
+    "operation_id": "get_ct_annotations_api_v1_ct__scan_id__annotations_get",
+    "parameters": [
+      {
+        "name": "scan_id",
+        "in": "path",
+        "required": true,
+        "schema": {
+          "type": "string",
+          "title": "Scan Id"
+        }
+      }
+    ],
+    "request_body": false,
+    "responses": [
+      "200",
+      "422"
+    ],
+    "frontend_consumers": [
+      "services/api/ctApi.ts"
+    ]
+  },
+  {
+    "method": "GET",
+    "path": "/api/v1/ct/{scan_id}/measurements",
+    "summary": "Quantitative Lung Volume Analysis",
+    "operation_id": "get_ct_measurements_api_v1_ct__scan_id__measurements_get",
+    "parameters": [
+      {
+        "name": "scan_id",
+        "in": "path",
+        "required": true,
+        "schema": {
+          "type": "string",
+          "title": "Scan Id"
+        }
+      }
+    ],
+    "request_body": false,
+    "responses": [
+      "200",
+      "422"
+    ],
+    "frontend_consumers": [
+      "services/api/ctApi.ts"
+    ]
+  },
+  {
+    "method": "GET",
+    "path": "/api/v1/ct/{scan_id}/mesh",
+    "summary": "Stream 3D Surface Mesh (OBJ)",
+    "operation_id": "get_ct_mesh_api_v1_ct__scan_id__mesh_get",
+    "parameters": [
+      {
+        "name": "scan_id",
+        "in": "path",
+        "required": true,
+        "schema": {
+          "type": "string",
+          "title": "Scan Id"
+        }
+      },
+      {
+        "name": "structure",
+        "in": "query",
+        "required": false,
+        "schema": {
+          "type": "string",
+          "description": "Anatomical structure: 'lungs', 'left_lung', 'right_lung', 'airways'",
+          "default": "lungs",
+          "title": "Structure"
+        },
+        "description": "Anatomical structure: 'lungs', 'left_lung', 'right_lung', 'airways'"
+      },
+      {
+        "name": "step",
+        "in": "query",
+        "required": false,
+        "schema": {
+          "type": "integer",
+          "maximum": 8,
+          "minimum": 1,
+          "description": "Marching cubes downsampling step (1=full, 2=lightweight)",
+          "default": 1,
+          "title": "Step"
+        },
+        "description": "Marching cubes downsampling step (1=full, 2=lightweight)"
+      },
+      {
+        "name": "pad_boundary",
+        "in": "query",
+        "required": false,
+        "schema": {
+          "type": "boolean",
+          "description": "Apply 1-voxel padding to ensure watertight closed surfaces",
+          "default": true,
+          "title": "Pad Boundary"
+        },
+        "description": "Apply 1-voxel padding to ensure watertight closed surfaces"
+      },
+      {
+        "name": "download",
+        "in": "query",
+        "required": false,
+        "schema": {
+          "type": "boolean",
+          "description": "If true, sets attachment header for file download",
+          "default": false,
+          "title": "Download"
+        },
+        "description": "If true, sets attachment header for file download"
+      }
+    ],
+    "request_body": false,
+    "responses": [
+      "200",
+      "422"
+    ],
+    "frontend_consumers": [
+      "services/api/ctApi.ts"
+    ]
+  },
+  {
+    "method": "GET",
+    "path": "/api/v1/ct/{scan_id}/mesh/quality",
+    "summary": "Get 3D Mesh Quality Audit Metrics",
+    "operation_id": "get_mesh_quality_api_v1_ct__scan_id__mesh_quality_get",
+    "parameters": [
+      {
+        "name": "scan_id",
+        "in": "path",
+        "required": true,
+        "schema": {
+          "type": "string",
+          "title": "Scan Id"
+        }
+      },
+      {
+        "name": "structure",
+        "in": "query",
+        "required": false,
+        "schema": {
+          "type": "string",
+          "description": "Target structure to audit",
+          "default": "lungs",
+          "title": "Structure"
+        },
+        "description": "Target structure to audit"
+      }
+    ],
+    "request_body": false,
+    "responses": [
+      "200",
+      "422"
+    ],
+    "frontend_consumers": [
+      "services/api/ctApi.ts"
+    ]
+  },
+  {
+    "method": "GET",
+    "path": "/api/v1/ct/{scan_id}/metadata",
+    "summary": "Get Detailed Volume Metadata",
+    "operation_id": "get_ct_metadata_api_v1_ct__scan_id__metadata_get",
+    "parameters": [
+      {
+        "name": "scan_id",
+        "in": "path",
+        "required": true,
+        "schema": {
+          "type": "string",
+          "title": "Scan Id"
+        }
+      }
+    ],
+    "request_body": false,
+    "responses": [
+      "200",
+      "422"
+    ],
+    "frontend_consumers": [
+      "services/api/ctApi.ts"
+    ]
+  },
+  {
+    "method": "GET",
+    "path": "/api/v1/ct/{scan_id}/segmentation",
+    "summary": "Get Structural Segmentation Metadata",
+    "operation_id": "get_ct_segmentation_api_v1_ct__scan_id__segmentation_get",
+    "parameters": [
+      {
+        "name": "scan_id",
+        "in": "path",
+        "required": true,
+        "schema": {
+          "type": "string",
+          "title": "Scan Id"
+        }
+      }
+    ],
+    "request_body": false,
+    "responses": [
+      "200",
+      "422"
+    ],
+    "frontend_consumers": [
+      "services/api/ctApi.ts"
+    ]
+  },
+  {
+    "method": "GET",
+    "path": "/api/v1/ct/{scan_id}/slice",
+    "summary": "Extract Orthogonal 2D Slice",
+    "operation_id": "get_ct_slice_api_v1_ct__scan_id__slice_get",
+    "parameters": [
+      {
+        "name": "scan_id",
+        "in": "path",
+        "required": true,
+        "schema": {
+          "type": "string",
+          "title": "Scan Id"
+        }
+      },
+      {
+        "name": "view",
+        "in": "query",
+        "required": false,
+        "schema": {
+          "type": "string",
+          "description": "Orthogonal view: 'axial', 'coronal', 'sagittal'",
+          "default": "axial",
+          "title": "View"
+        },
+        "description": "Orthogonal view: 'axial', 'coronal', 'sagittal'"
+      },
+      {
+        "name": "slice_index",
+        "in": "query",
+        "required": false,
+        "schema": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "Slice depth index",
+          "default": 32,
+          "title": "Slice Index"
+        },
+        "description": "Slice depth index"
+      },
+      {
+        "name": "window",
+        "in": "query",
+        "required": false,
+        "schema": {
+          "type": "string",
+          "description": "Window preset: 'lung', 'mediastinum', 'bone', 'abdomen'",
+          "default": "lung",
+          "title": "Window"
+        },
+        "description": "Window preset: 'lung', 'mediastinum', 'bone', 'abdomen'"
+      },
+      {
+        "name": "window_center",
+        "in": "query",
+        "required": false,
+        "schema": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "description": "Custom HU window center",
+          "title": "Window Center"
+        },
+        "description": "Custom HU window center"
+      },
+      {
+        "name": "window_width",
+        "in": "query",
+        "required": false,
+        "schema": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "description": "Custom HU window width",
+          "title": "Window Width"
+        },
+        "description": "Custom HU window width"
+      },
+      {
+        "name": "overlay_mask",
+        "in": "query",
+        "required": false,
+        "schema": {
+          "type": "boolean",
+          "description": "Whether to alpha-blend segmentation mask contour",
+          "default": true,
+          "title": "Overlay Mask"
+        },
+        "description": "Whether to alpha-blend segmentation mask contour"
+      },
+      {
+        "name": "show_nodules",
+        "in": "query",
+        "required": false,
+        "schema": {
+          "type": "boolean",
+          "description": "Whether to render intersecting nodule markers",
+          "default": true,
+          "title": "Show Nodules"
+        },
+        "description": "Whether to render intersecting nodule markers"
+      }
+    ],
+    "request_body": false,
+    "responses": [
+      "200",
+      "422"
+    ],
+    "frontend_consumers": [
+      "services/api/ctApi.ts"
+    ]
+  },
+  {
+    "method": "GET",
+    "path": "/api/v1/health",
+    "summary": "Liveness Probe",
+    "operation_id": "health_check_api_v1_health_get",
+    "parameters": [],
+    "request_body": false,
+    "responses": [
+      "200"
+    ],
+    "frontend_consumers": [
+      "services/api/healthApi.ts"
+    ]
+  },
+  {
+    "method": "GET",
+    "path": "/api/v1/models",
+    "summary": "List Registered Neural Networks",
+    "operation_id": "list_models_api_v1_models_get",
+    "parameters": [],
+    "request_body": false,
+    "responses": [
+      "200"
+    ],
+    "frontend_consumers": [
+      "services/api/modelApi.ts"
+    ]
+  },
+  {
+    "method": "GET",
+    "path": "/api/v1/models/{model_id}",
+    "summary": "Get Model Details by ID",
+    "operation_id": "get_model_details_api_v1_models__model_id__get",
+    "parameters": [
+      {
+        "name": "model_id",
+        "in": "path",
+        "required": true,
+        "schema": {
+          "type": "string",
+          "title": "Model Id"
+        }
+      }
+    ],
+    "request_body": false,
+    "responses": [
+      "200",
+      "422"
+    ],
+    "frontend_consumers": [
+      "services/api/modelApi.ts"
+    ]
+  },
+  {
+    "method": "GET",
+    "path": "/api/v1/ready",
+    "summary": "Readiness Probe",
+    "operation_id": "readiness_check_api_v1_ready_get",
+    "parameters": [],
+    "request_body": false,
+    "responses": [
+      "200"
+    ],
+    "frontend_consumers": [
+      "services/api/healthApi.ts"
+    ]
+  },
+  {
+    "method": "GET",
+    "path": "/api/v1/research/metrics",
+    "summary": "Get Historical Benchmark Evaluation Metrics",
+    "operation_id": "get_research_metrics_api_v1_research_metrics_get",
+    "parameters": [],
+    "request_body": false,
+    "responses": [
+      "200"
+    ],
+    "frontend_consumers": [
+      "services/api/researchApi.ts"
+    ]
+  },
+  {
+    "method": "POST",
+    "path": "/api/v1/xray/predict",
+    "summary": "Multi-Label 6-Disease Classification",
+    "operation_id": "predict_xray_multilabel_api_v1_xray_predict_post",
+    "parameters": [],
+    "request_body": true,
+    "responses": [
+      "200",
+      "422"
+    ],
+    "frontend_consumers": [
+      "services/api/xrayApi.ts"
+    ]
+  },
+  {
+    "method": "POST",
+    "path": "/api/v1/xray/predict-binary",
+    "summary": "Binary Normal vs Abnormal Classification",
+    "operation_id": "predict_xray_binary_api_v1_xray_predict_binary_post",
+    "parameters": [],
+    "request_body": true,
+    "responses": [
+      "200",
+      "422"
+    ],
+    "frontend_consumers": [
+      "services/api/xrayApi.ts"
+    ]
+  }
+]

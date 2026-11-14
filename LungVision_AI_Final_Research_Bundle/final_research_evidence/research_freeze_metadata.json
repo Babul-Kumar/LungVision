@@ -1,0 +1,16 @@
+{
+    "project": "LungVision AI",
+    "report_generated_utc": "2026-11-07T00:10:19.084782+00:00",
+    "status": "Experimental research only",
+    "external_dataset": "VinDr-CXR",
+    "external_evaluation_images": 15000,
+    "models_frozen": [
+        "Original + CLAHE",
+        "Augmented + CLAHE"
+    ],
+    "result_files_available": 15,
+    "result_files_expected": 15,
+    "checkpoints_verified": 2,
+    "patient_clustered_vindr_bootstrap": false,
+    "clinical_validation_completed": false
+}

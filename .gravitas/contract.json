@@ -1,0 +1,39 @@
+{
+  "mode": "audit",
+  "objective": "LungVision AI — Phase 2B Readiness & Scientific Evidence Reconciliation: Resolve critical research discrepancies in model provenance, DRR physics, reconstruction evidence, multi-patient LUNA16 segmentation readiness, and scientific validation.",
+  "acceptance_criteria": [
+    "1. Model Provenance Reconciliation: Investigate DenseNet121 hash/parameter-count discrepancies, NIH macro AUROC differences, ResNet18 thresholds, and inference paths; author MODEL_PROVENANCE_RECONCILIATION.md.",
+    "2. DRR Physics Reconciliation: Inspect backend/app/services/drr_generator.py, scripts/3d_reconstruction/generate_drr.py, compare SOD 1000/SID 1400 vs SOD 1450/SDD 1800, check Siddon-Jacobs, coordinates, detector, HU conversion; author DRR_PHYSICS_RECONCILIATION.md.",
+    "3. Reconstruction Evidence Audit: Investigate SSM deformation, landmark detection, biplanar fusion endpoint, silhouette loss, differentiable renderer, PCT, E6 shortcut audit, Phase 2A results; distinguish 2D biplanar classification from 3D reconstruction; author RECONSTRUCTION_EVIDENCE_AUDIT.md.",
+    "4. Multi-Patient SSM Readiness: Investigate the reported 445 precomputed LUNA16 segmentation masks, scan IDs, mask-CT correspondence, physical geometry, label definitions, mesh extraction, missing scans, splits, and Kaggle notebook access; author SSM_MULTI_PATIENT_READINESS.md.",
+    "5. Scientific Validation & Go/No-Go Decision: Verify provenance of proposed SSM metrics/targets (PCA explained variance, correspondence, surface error, Dice, ASSD, HD95, landmark error); distinguish targets from achieved results; deliver authoritative Go/No-Go decision in PHASE_2B_GO_NO_GO.md."
+  ],
+  "non_goals": [
+    "Do not download datasets, retrain models, modify checkpoints, or delete files",
+    "Do not repeat the full directory inventory",
+    "Do not overwrite historical research artifacts",
+    "Do not assume Kaggle paths are accessible from Windows host without evidence"
+  ],
+  "risk": "low",
+  "budget": "deep",
+  "allowed_write_scope": [
+    "docs/forensic_inventory/",
+    ".gravitas/",
+    "scripts/verification/"
+  ],
+  "verification": "impact",
+  "policy": {
+    "planning": "deep",
+    "context_depth": "full",
+    "verification_depth": "impact",
+    "delegation": "none",
+    "reason_codes": [
+      "model-provenance-reconciliation",
+      "drr-physics-reconciliation",
+      "reconstruction-evidence-audit",
+      "ssm-multi-patient-readiness",
+      "scientific-validation-go-no-go"
+    ]
+  },
+  "status": "completed"
+}

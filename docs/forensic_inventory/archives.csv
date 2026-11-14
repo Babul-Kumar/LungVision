@@ -1,0 +1,2 @@
+path,filename,size_bytes,size_mb,sha256,total_entries,has_models,has_datasets
+results.zip,results.zip,858694702,818.92,ad3fa2623af307a4ebb56e4eabb6a2fd327d24a4bc023cf4e5db0461a02f2c36,45,True,True

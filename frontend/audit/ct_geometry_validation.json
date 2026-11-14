@@ -1,0 +1,256 @@
+{
+  "coordinate_invertibility": {
+    "max_roundtrip_error_mm": 1.4210854715202004e-14,
+    "pass": true
+  },
+  "rotated_matrix_invertibility": {
+    "roundtrip_error_mm": 3.552713678800501e-14,
+    "pass": true
+  },
+  "demo_mesh_validation": {
+    "vertex_count": 27540,
+    "face_count": 55072,
+    "mesh_bounds_x": [
+      -178.627334,
+      -111.088226
+    ],
+    "mesh_bounds_y": [
+      -142.57889,
+      -95.821046
+    ],
+    "mesh_bounds_z": [
+      -297.875,
+      -236.625
+    ],
+    "within_physical_scan_bounds": true,
+    "watertight": true,
+    "euler_number": 4,
+    "connected_components": 2,
+    "voxel_volume_ml": 128.98,
+    "mesh_volume_ml": 128.9,
+    "volume_difference_pct": 0.06
+  },
+  "nodule_alignment": [
+    {
+      "nodule_id": "nodule_01",
+      "coord_mm": [
+        -145.2,
+        -132.4,
+        -270.5
+      ],
+      "voxel_coords": [
+        65,
+        46,
+        29
+      ],
+      "inside_volume": true,
+      "center_label": 0,
+      "min_dist_to_mesh_surface_mm": 5.59
+    },
+    {
+      "nodule_id": "nodule_02",
+      "coord_mm": [
+        -130.8,
+        -110.2,
+        -265.0
+      ],
+      "voxel_coords": [
+        84,
+        76,
+        34
+      ],
+      "inside_volume": true,
+      "center_label": 4,
+      "min_dist_to_mesh_surface_mm": 8.97
+    },
+    {
+      "nodule_id": "nodule_03",
+      "coord_mm": [
+        -150.1,
+        -120.0,
+        -250.0
+      ],
+      "voxel_coords": [
+        58,
+        63,
+        46
+      ],
+      "inside_volume": true,
+      "center_label": 0,
+      "min_dist_to_mesh_surface_mm": 0.41
+    },
+    {
+      "nodule_id": "nodule_04",
+      "coord_mm": [
+        -110.5,
+        -140.2,
+        -280.0
+      ],
+      "voxel_coords": [
+        111,
+        36,
+        22
+      ],
+      "inside_volume": true,
+      "center_label": 0,
+      "min_dist_to_mesh_surface_mm": 6.88
+    },
+    {
+      "nodule_id": "nodule_05",
+      "coord_mm": [
+        -138.0,
+        -105.0,
+        -240.0
+      ],
+      "voxel_coords": [
+        74,
+        83,
+        54
+      ],
+      "inside_volume": true,
+      "center_label": 4,
+      "min_dist_to_mesh_surface_mm": 0.61
+    },
+    {
+      "nodule_id": "nodule_06",
+      "coord_mm": [
+        -120.4,
+        -125.0,
+        -260.0
+      ],
+      "voxel_coords": [
+        98,
+        56,
+        38
+      ],
+      "inside_volume": true,
+      "center_label": 4,
+      "min_dist_to_mesh_surface_mm": 8.0
+    },
+    {
+      "nodule_id": "nodule_07",
+      "coord_mm": [
+        -135.0,
+        -115.0,
+        -275.0
+      ],
+      "voxel_coords": [
+        78,
+        70,
+        26
+      ],
+      "inside_volume": true,
+      "center_label": 4,
+      "min_dist_to_mesh_surface_mm": 6.29
+    },
+    {
+      "nodule_id": "nodule_08",
+      "coord_mm": [
+        -115.0,
+        -130.0,
+        -255.0
+      ],
+      "voxel_coords": [
+        105,
+        49,
+        42
+      ],
+      "inside_volume": true,
+      "center_label": 4,
+      "min_dist_to_mesh_surface_mm": 1.74
+    },
+    {
+      "nodule_id": "nodule_09",
+      "coord_mm": [
+        -125.0,
+        -145.0,
+        -290.0
+      ],
+      "voxel_coords": [
+        92,
+        29,
+        14
+      ],
+      "inside_volume": true,
+      "center_label": 0,
+      "min_dist_to_mesh_surface_mm": 2.44
+    },
+    {
+      "nodule_id": "nodule_10",
+      "coord_mm": [
+        -142.0,
+        -100.0,
+        -245.0
+      ],
+      "voxel_coords": [
+        69,
+        90,
+        50
+      ],
+      "inside_volume": true,
+      "center_label": 0,
+      "min_dist_to_mesh_surface_mm": 5.38
+    },
+    {
+      "nodule_id": "nodule_11",
+      "coord_mm": [
+        -140.0,
+        -135.0,
+        -260.0
+      ],
+      "voxel_coords": [
+        72,
+        43,
+        38
+      ],
+      "inside_volume": true,
+      "center_label": 0,
+      "min_dist_to_mesh_surface_mm": 1.76
+    },
+    {
+      "nodule_id": "nodule_12",
+      "coord_mm": [
+        -128.0,
+        -120.0,
+        -250.0
+      ],
+      "voxel_coords": [
+        88,
+        63,
+        46
+      ],
+      "inside_volume": true,
+      "center_label": 4,
+      "min_dist_to_mesh_surface_mm": 13.38
+    }
+  ],
+  "slice_geometry": {
+    "axial": {
+      "view": "axial",
+      "slice_index": 32,
+      "total_slices": 64,
+      "aspect_ratio": 1.0,
+      "window_center": -600.0,
+      "window_width": 1500.0,
+      "b64_length": 1650
+    },
+    "coronal": {
+      "view": "coronal",
+      "slice_index": 32,
+      "total_slices": 128,
+      "aspect_ratio": 1.684,
+      "window_center": -600.0,
+      "window_width": 1500.0,
+      "b64_length": 466
+    },
+    "sagittal": {
+      "view": "sagittal",
+      "slice_index": 32,
+      "total_slices": 128,
+      "aspect_ratio": 1.684,
+      "window_center": -600.0,
+      "window_width": 1500.0,
+      "b64_length": 538
+    }
+  }
+}

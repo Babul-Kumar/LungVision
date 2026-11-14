@@ -1,0 +1,186 @@
+[
+  {
+    "route": "GET /",
+    "scenario": "Discovery root metadata",
+    "expected": 200,
+    "actual": 200,
+    "latency_ms": 2859.02,
+    "valid_schema": true
+  },
+  {
+    "route": "GET /api/v1/health",
+    "scenario": "Liveness probe",
+    "expected": 200,
+    "actual": 200,
+    "latency_ms": 4.84,
+    "valid_schema": true
+  },
+  {
+    "route": "GET /api/v1/ready",
+    "scenario": "Readiness probe",
+    "expected": 200,
+    "actual": 200,
+    "latency_ms": 3.96,
+    "valid_schema": true
+  },
+  {
+    "route": "GET /api/v1/models",
+    "scenario": "List registered models",
+    "expected": 200,
+    "actual": 200,
+    "latency_ms": 4.22,
+    "valid_schema": true
+  },
+  {
+    "route": "GET /api/v1/models/{model_id}",
+    "scenario": "Get DenseNet121 detail",
+    "expected": 200,
+    "actual": 200,
+    "latency_ms": 4.32,
+    "valid_schema": true
+  },
+  {
+    "route": "GET /api/v1/models/{model_id}",
+    "scenario": "Non-existent model lookup",
+    "expected": 404,
+    "actual": 404,
+    "latency_ms": 3.46,
+    "valid_schema": true
+  },
+  {
+    "route": "GET /api/v1/research/metrics",
+    "scenario": "Historical research benchmarks",
+    "expected": 200,
+    "actual": 200,
+    "latency_ms": 7.67,
+    "valid_schema": true
+  },
+  {
+    "route": "GET /api/v1/ct/{scan_id}",
+    "scenario": "CT scan summary descriptor",
+    "expected": 200,
+    "actual": 200,
+    "latency_ms": 4.63,
+    "valid_schema": true
+  },
+  {
+    "route": "GET /api/v1/ct/{scan_id}",
+    "scenario": "Missing CT scan lookup",
+    "expected": 404,
+    "actual": 404,
+    "latency_ms": 2.76,
+    "valid_schema": true
+  },
+  {
+    "route": "GET /api/v1/ct/{scan_id}/metadata",
+    "scenario": "Full geometric metadata",
+    "expected": 200,
+    "actual": 200,
+    "latency_ms": 4.97,
+    "valid_schema": true
+  },
+  {
+    "route": "GET /api/v1/ct/{scan_id}/slice",
+    "scenario": "Extract axial slice 32 with lung window",
+    "expected": 200,
+    "actual": 200,
+    "latency_ms": 26.72,
+    "valid_schema": true
+  },
+  {
+    "route": "GET /api/v1/ct/{scan_id}/slice",
+    "scenario": "Invalid anatomical view plane",
+    "expected": 422,
+    "actual": 200,
+    "latency_ms": 7.76,
+    "valid_schema": false
+  },
+  {
+    "route": "GET /api/v1/ct/{scan_id}/mesh",
+    "scenario": "Stream Wavefront OBJ 3D mesh",
+    "expected": 200,
+    "actual": 200,
+    "latency_ms": 112.45,
+    "valid_schema": true
+  },
+  {
+    "route": "GET /api/v1/ct/{scan_id}/mesh/quality",
+    "scenario": "Trimesh manifold & watertight audit",
+    "expected": 200,
+    "actual": 200,
+    "latency_ms": 343.19,
+    "valid_schema": true
+  },
+  {
+    "route": "GET /api/v1/ct/{scan_id}/annotations",
+    "scenario": "LUNA16 mapped nodule coordinates",
+    "expected": 200,
+    "actual": 200,
+    "latency_ms": 3.86,
+    "valid_schema": true
+  },
+  {
+    "route": "GET /api/v1/ct/{scan_id}/measurements",
+    "scenario": "Quantitative lung volumetry & airway analysis",
+    "expected": 200,
+    "actual": 200,
+    "latency_ms": 40.93,
+    "valid_schema": true
+  },
+  {
+    "route": "GET /api/v1/ct/{scan_id}/segmentation",
+    "scenario": "Structural segmentation metadata descriptor",
+    "expected": 200,
+    "actual": 200,
+    "latency_ms": 4.76,
+    "valid_schema": true
+  },
+  {
+    "route": "POST /api/v1/xray/predict",
+    "scenario": "DenseNet121 6-disease inference on real 2544x2516 CXR",
+    "expected": 200,
+    "actual": 200,
+    "latency_ms": 559.11,
+    "valid_schema": true
+  },
+  {
+    "route": "POST /api/v1/xray/predict",
+    "scenario": "Reject corrupted image file",
+    "expected": 400,
+    "actual": 400,
+    "latency_ms": 4.17,
+    "valid_schema": true
+  },
+  {
+    "route": "POST /api/v1/xray/predict-binary",
+    "scenario": "Original ResNet18 binary inference on real CXR",
+    "expected": 200,
+    "actual": 200,
+    "latency_ms": 372.49,
+    "valid_schema": true
+  },
+  {
+    "route": "POST /api/v1/xray/predict-binary",
+    "scenario": "Blur ResNet18 binary inference on real CXR",
+    "expected": 200,
+    "actual": 200,
+    "latency_ms": 447.91,
+    "valid_schema": true
+  },
+  {
+    "route": "POST /api/v1/xray/predict-binary",
+    "scenario": "Reject unrecognized binary model name",
+    "expected": 404,
+    "actual": 404,
+    "latency_ms": 30.03,
+    "valid_schema": true
+  },
+  {
+    "route": "POST /api/v1/ct/upload",
+    "scenario": "Reject fake CT archive missing ZIP magic bytes",
+    "expected": 400,
+    "actual": 400,
+    "latency_ms": 4.94,
+    "valid_schema": true
+  }
+]
