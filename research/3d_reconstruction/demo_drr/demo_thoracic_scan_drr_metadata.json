@@ -2,8 +2,8 @@
   "study_id": "STUDY_DEMO_THORACIC_SCAN",
   "patient_id": "LIDC-IDRI-SAMPLE-001",
   "scan_id": "demo_thoracic_scan",
-  "generation_timestamp": "2026-11-13T00:05:25Z",
-  "duration_ms": 145.24,
+  "generation_timestamp": "2026-11-14T20:30:37Z",
+  "duration_ms": 115.21,
   "generator_version": "1.0.0",
   "input_ct": {
     "scan_id": "demo_thoracic_scan",
@@ -39,12 +39,12 @@
         1.0
       ]
     ],
-    "sha256": "d71433b85dbdb197fc322fc57f619b2aaabf795231b6cdbdcf43fb60731dec9f",
-    "mask_sha256": "1a449b84975faa26099b78ee3877319aef69af011c3c1ab577b725e280054854",
+    "sha256": "39396920796ce3293748500e3036017ec4d51254853693e6d4da125ded9b2725",
+    "mask_sha256": "726ec0a6cdf0a186ff76df641fdc6d009c7f8efce7178c05e17c1b1230e59d48",
     "stats": {
       "hu_min": -1000.0,
       "hu_max": 450.0,
-      "hu_mean": -606.5552425384521
+      "hu_mean": -603.580207824707
     }
   },
   "projection_geometry": {
@@ -55,7 +55,7 @@
     "frontal": {
       "file_name": "demo_thoracic_scan_frontal_drr.png",
       "file_path": "C:\\Users\\babul\\Desktop\\computer vision\\research\\3d_reconstruction\\demo_drr\\demo_thoracic_scan_frontal_drr.png",
-      "sha256": "36f8f39632c3391c4d525aa4c444bcb0182acf1132ce8d533ecd709648181876",
+      "sha256": "617d8d686a328cf1d7af7442d927421dea6c66eaacb1bd1d02b3d2d526d53624",
       "dimensions": [
         64,
         128
@@ -98,7 +98,7 @@
     "lateral": {
       "file_name": "demo_thoracic_scan_lateral_drr.png",
       "file_path": "C:\\Users\\babul\\Desktop\\computer vision\\research\\3d_reconstruction\\demo_drr\\demo_thoracic_scan_lateral_drr.png",
-      "sha256": "9df0fab505a87c8c910cb002a28995b8c18a706e70db6dc6e6c7d36a1a862b5c",
+      "sha256": "1c3c237be1ab3ebf25f55c00ee85bcdcf9eb0b363d2df9847f6d7fdbd29c5497",
       "dimensions": [
         64,
         128

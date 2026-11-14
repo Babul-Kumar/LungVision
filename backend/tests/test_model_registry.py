@@ -14,6 +14,7 @@ def test_list_models(client):
     assert "densenet121_nih_6disease" in ids
     assert "original_resnet18" in ids
     assert "blur_augmented_resnet18" in ids
+    assert "ssm_lung_pca_v1" in ids
 
 
 def test_get_model_by_id(client):
@@ -25,6 +26,14 @@ def test_get_model_by_id(client):
     assert model["architecture"] == "DenseNet121"
     assert len(model["labels"]) == 6
     assert "Cardiomegaly" in model["labels"]
+
+    # Also verify SSM model query
+    ssm_resp = client.get("/api/v1/models/ssm_lung_pca_v1")
+    assert ssm_resp.status_code == status.HTTP_200_OK
+    ssm_model = ssm_resp.json()
+    assert ssm_model["id"] == "ssm_lung_pca_v1"
+    assert ssm_model["architecture"] == "Point Distribution Model (PDM) / Orthogonal PCA"
+
 
 
 def test_get_unknown_model_returns_404(client):

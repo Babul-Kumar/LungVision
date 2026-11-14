@@ -127,3 +127,4 @@ def test_backend_runtime_sync():
     assert backend_model.exists()
     assert backend_obj.exists()
     assert os.path.getsize(backend_obj) > 10000  # Valid Wavefront OBJ mesh
+

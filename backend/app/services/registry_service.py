@@ -2,7 +2,7 @@ import csv
 import json
 from pathlib import Path
 from typing import Any, Dict, List, Optional
-from backend.app.config import settings
+from backend.app.config import BASE_DIR, settings
 from backend.app.core.errors import ResourceNotFoundError
 from backend.app.core.logging import logger
 from backend.app.schemas.models import (
@@ -109,6 +109,33 @@ class RegistryService:
                 "Normal": 0.812077,
                 "default_threshold": 0.5000,
                 "calibration_strategy": "Validation Set 90% Sensitivity Point"
+            }
+        )
+
+        # 4. Statistical Shape Model (SSM) Lung PCA v1
+        catalog["ssm_lung_pca_v1"] = ModelRegistryEntry(
+            id="ssm_lung_pca_v1",
+            name="LungVision Statistical Shape Model (SSM) Lung PCA v1",
+            architecture="Point Distribution Model (PDM) / Orthogonal PCA",
+            task="3D macroscopic pulmonary boundary reconstruction & morphological parameterization",
+            checkpoint_path=str(BASE_DIR / "data" / "3d_reconstruction" / "ssm_lung_pca_v1.json"),
+            sha256="e92cf88a3dae8cd893cda93efe33630ccb1f8259dd9e6c7aa9cd9ce8463e65aa",
+            input_size=[16, 3],
+            labels=["Left Lung", "Right Lung", "Bilateral Lungs"],
+            status="production_frozen",
+            metrics={
+                "training_dataset": "LUNA16 / LIDC-IDRI (430 verified scans, 301 train / 64 val / 65 test)",
+                "modes": 20,
+                "cumulative_explained_variance_pct": 100.0,
+                "held_out_val_assd_mm": 0.072,
+                "held_out_val_hd95_mm": 0.168,
+                "vertices": 6737,
+                "faces": 13478
+            },
+            calibration={
+                "mahalanobis_threshold_sigma": 3.0,
+                "confidence_margin_pct": 95.0,
+                "calibration_strategy": "Bounded Mahalanobis Distance [-3.0σ, +3.0σ]"
             }
         )
 

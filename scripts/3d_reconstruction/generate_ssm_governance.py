@@ -334,3 +334,4 @@ def generate_governance_assets():
 
 if __name__ == "__main__":
     generate_governance_assets()
+
