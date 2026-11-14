@@ -111,6 +111,11 @@ class CTMeshQualityResponse(StandardResponse):
     voxel_volume_ml: float
     volume_difference_pct: Optional[float] = None
     volume_discrepancy_percent: Optional[float] = None
+    boundary_edges: Optional[int] = 0
+    non_manifold_edges: Optional[int] = 0
+    signed_volume_ml: Optional[float] = None
+    signed_volume_positive: Optional[bool] = None
+    granular_statuses: Optional[Dict[str, Dict[str, Any]]] = None
 
 
 class CTMeasurementResponse(StandardResponse):

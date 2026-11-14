@@ -113,6 +113,16 @@ class CTMeshService:
         components = mesh.split(only_watertight=False)
         degenerate = int(np.count_nonzero(mesh.area_faces < 1e-10))
 
+        # Mathematical edge and signed volume audit (Cell 44 & 45)
+        signed_vol = float(mesh.volume)
+        signed_vol_ml = (signed_vol / 1000.0) if math.isfinite(signed_vol) else None
+
+        edges_unique = mesh.edges_unique
+        edges_unique_inverse = mesh.edges_unique_inverse
+        edge_counts = np.bincount(edges_unique_inverse, minlength=len(edges_unique))
+        boundary_edges = int(np.sum(edge_counts == 1))
+        non_manifold_edges = int(np.sum(edge_counts > 2))
+
         return {
             "watertight": is_watertight,
             "winding_consistent": bool(mesh.is_winding_consistent),
@@ -121,6 +131,10 @@ class CTMeshService:
             "connected_components": len(components),
             "degenerate_faces": degenerate,
             "degenerate_face_count": degenerate,
+            "boundary_edges": boundary_edges,
+            "non_manifold_edges": non_manifold_edges,
+            "signed_volume_ml": round(signed_vol_ml, 3) if signed_vol_ml is not None else None,
+            "signed_volume_positive": bool(signed_vol > 0) if math.isfinite(signed_vol) else False,
             "surface_area_mm2": round(float(mesh.area), 2),
             "bounding_box_volume_mm3": round(float(mesh.bounding_box.volume), 2),
             "mesh_volume_ml": round(mesh_volume_ml, 2) if math.isfinite(mesh_volume_ml) else None,

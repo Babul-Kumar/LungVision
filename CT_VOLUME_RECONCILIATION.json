@@ -1,0 +1,117 @@
+{
+  "scan_metadata": {
+    "scan_id": "demo_thoracic_scan",
+    "series_uid": "1.3.6.1.4.1.14519.5.2.1.6279.6001.176030616406569931557298712518",
+    "filename": "1.3.6.1.4.1.14519.5.2.1.6279.6001.176030616406569931557298712518.mhd",
+    "array_dimensions_zyx": [
+      64,
+      128,
+      128
+    ],
+    "axis_order": [
+      "Z (Superior-Inferior)",
+      "Y (Anterior-Posterior)",
+      "X (Right-Left)"
+    ],
+    "spacing_xyz_mm": [
+      0.742188,
+      0.742188,
+      1.25
+    ],
+    "origin_xyz_mm": [
+      -193.1,
+      -166.7,
+      -307.25
+    ],
+    "direction_matrix": [
+      [
+        1.0,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        1.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        1.0
+      ]
+    ],
+    "physical_bounding_box_mm": {
+      "x_range": [
+        -193.1,
+        -98.1
+      ],
+      "y_range": [
+        -166.7,
+        -71.7
+      ],
+      "z_range": [
+        -307.25,
+        -227.25
+      ],
+      "span_x_mm": 95.0,
+      "span_y_mm": 95.0,
+      "span_z_mm": 80.0,
+      "total_fov_volume_ml": 722.0
+    },
+    "is_cropped_or_subvolume": true,
+    "cropping_explanation": "The reference thoracic volume spans 95.0 x 95.0 x 80.0 mm (722.0 mL total FOV volume). Normal adult human lungs span approximately 300 x 250 x 200 mm with total volume of 4,000 - 6,000 mL. The current reference scan is a calibrated thoracic subvolume / ROI representing the mid-mediastinal and hilar thoracic section rather than the entire adult thorax from clavicles to costophrenic angles. This explains why total segmented lung volume is 82.3 mL rather than adult total lung capacity (4-6 L).",
+    "complete_lung_anatomy_included": false
+  },
+  "labels": {
+    "0": {
+      "label_id": 0,
+      "name": "Background (Air/Chest Wall/Bone)",
+      "voxel_count": 914816,
+      "volume_mm3": 629900.019,
+      "volume_ml": 629.9,
+      "percentage_of_scan": 87.2437
+    },
+    "2": {
+      "label_id": 2,
+      "name": "Heart (Cardiac Silhouette)",
+      "voxel_count": 12925,
+      "volume_mm3": 8899.558,
+      "volume_ml": 8.9,
+      "percentage_of_scan": 1.2326
+    },
+    "3": {
+      "label_id": 3,
+      "name": "Left Lung Parenchyma",
+      "voxel_count": 53627,
+      "volume_mm3": 36925.074,
+      "volume_ml": 36.925,
+      "percentage_of_scan": 5.1143
+    },
+    "4": {
+      "label_id": 4,
+      "name": "Right Lung Parenchyma",
+      "voxel_count": 65892,
+      "volume_mm3": 45370.186,
+      "volume_ml": 45.37,
+      "percentage_of_scan": 6.284
+    },
+    "5": {
+      "label_id": 5,
+      "name": "Trachea / Main Bronchi",
+      "voxel_count": 1316,
+      "volume_mm3": 906.137,
+      "volume_ml": 0.906,
+      "percentage_of_scan": 0.1255
+    }
+  },
+  "derived_measurements": {
+    "left_lung_ml": 36.925,
+    "right_lung_ml": 45.37,
+    "total_lung_ml": 82.295,
+    "heart_ml": 8.9,
+    "trachea_airway_ml": 0.906,
+    "bilateral_ratio_left_to_right": 0.814,
+    "right_lung_percentage": 55.13,
+    "left_lung_percentage": 44.87
+  }
+}

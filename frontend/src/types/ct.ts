@@ -98,6 +98,11 @@ export interface CTMeshQualityResponse {
   voxel_volume_ml?: number | null;
   volume_difference_pct?: number | null;
   volume_discrepancy_percent?: number | null;
+  signed_volume_ml?: number | null;
+  signed_volume_positive?: boolean;
+  boundary_edges?: number;
+  non_manifold_edges?: number;
+  granular_statuses?: Record<string, { status: string; label: string; evidence: string }>;
   disclaimer: string;
 }
 

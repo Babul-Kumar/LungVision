@@ -590,7 +590,7 @@ export const CTExplorerPage: React.FC = () => {
                       size="sm"
                     >
                       {((meshQuality as any).winding_consistent ?? meshQuality.is_winding_consistent)
-                        ? 'Consistent'
+                        ? 'Consistent (Outward)'
                         : 'Inverted'}
                     </Badge>
                   </div>
@@ -618,6 +618,38 @@ export const CTExplorerPage: React.FC = () => {
                 </div>
               ) : (
                 <div className="py-6 text-center text-xs text-medical-muted">Evaluating mesh topology...</div>
+              )}
+            </Card>
+
+            {/* Multi-Dimensional Verification Matrix Card */}
+            <Card title="Anatomical & Geometric Verification Matrix" subtitle="Independent validation of 7 critical geometric pillars">
+              {meshQuality?.granular_statuses ? (
+                <div className="space-y-2 text-xs">
+                  {Object.entries(meshQuality.granular_statuses).map(([key, item]) => (
+                    <div key={key} className="p-2 rounded bg-medical-surface/40 border border-medical-border/40">
+                      <div className="flex items-center justify-between mb-1">
+                        <span className="font-medium text-slate-200">{item.label}</span>
+                        <Badge
+                          variant={
+                            item.status === 'PASSED'
+                              ? 'emerald'
+                              : item.status === 'WARNING'
+                              ? 'amber'
+                              : item.status === 'UNVERIFIED'
+                              ? 'slate'
+                              : 'rose'
+                          }
+                          size="sm"
+                        >
+                          {item.status}
+                        </Badge>
+                      </div>
+                      <p className="text-[11px] text-medical-muted leading-tight">{item.evidence}</p>
+                    </div>
+                  ))}
+                </div>
+              ) : (
+                <div className="py-4 text-center text-xs text-medical-muted">Loading verification matrix...</div>
               )}
             </Card>
           </div>
