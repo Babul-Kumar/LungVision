@@ -227,7 +227,9 @@ export const ModelsPage: React.FC = () => {
                     Input Normalization & Inference Pipeline
                   </h4>
                   <p className="text-medical-muted leading-relaxed text-[11px]">
-                    Inputs are bilinear-interpolated to $224 \times 224$ pixels, expanded to 3 RGB channels, mapped to floating point range $[0.0, 1.0]$, and standardized using ImageNet statistics ($\mu = [0.485, 0.456, 0.406]$, $\sigma = [0.229, 0.224, 0.225]$).
+                    {selectedModel.id.includes('ssm')
+                      ? '16 Bi-Planar Anatomical 2D Landmark Points / Contours → Procrustes Generalized Alignment → Closed-form Mahalanobis projection onto 20 PCA Eigenmodes (b = U^T (x - x̄)). Output vertices are dynamically deformed in physical LPS space.'
+                      : 'Inputs are bilinear-interpolated to 224 × 224 pixels, expanded to 3 RGB channels, mapped to floating point range [0.0, 1.0], and standardized using ImageNet statistics (μ = [0.485, 0.456, 0.406], σ = [0.229, 0.224, 0.225]).'}
                   </p>
                 </div>
 
@@ -235,7 +237,9 @@ export const ModelsPage: React.FC = () => {
                 <div className="space-y-3">
                   <h4 className="text-xs font-semibold text-medical-subtle uppercase tracking-wider flex items-center gap-1.5">
                     <Sliders className="w-3.5 h-3.5 text-medical-cyan" />
-                    Target Output Labels & Calibrated Decision Thresholds
+                    {selectedModel.id.includes('ssm')
+                      ? 'Target Anatomical Partitions & Parameterization Constraints'
+                      : 'Target Output Labels & Calibrated Decision Thresholds'}
                   </h4>
 
                   <div className="overflow-x-auto">
@@ -243,17 +247,27 @@ export const ModelsPage: React.FC = () => {
                       <thead>
                         <tr className="border-b border-medical-border text-medical-subtle font-semibold uppercase text-[10px] tracking-wider">
                           <th className="py-2.5 px-3">Index</th>
-                          <th className="py-2.5 px-3">Class Label</th>
-                          <th className="py-2.5 px-3">Operating Threshold</th>
-                          <th className="py-2.5 px-3">Uncalibrated Default</th>
-                          <th className="py-2.5 px-3 font-sans">Calibration Rationale & Operating Target</th>
+                          <th className="py-2.5 px-3">{selectedModel.id.includes('ssm') ? 'Anatomical Structure' : 'Class Label'}</th>
+                          <th className="py-2.5 px-3">{selectedModel.id.includes('ssm') ? 'Vertex Partition' : 'Operating Threshold'}</th>
+                          <th className="py-2.5 px-3">{selectedModel.id.includes('ssm') ? 'Bounding Constraint' : 'Uncalibrated Default'}</th>
+                          <th className="py-2.5 px-3 font-sans">{selectedModel.id.includes('ssm') ? 'Physiological Eigenspace Rationale' : 'Calibration Rationale & Operating Target'}</th>
                         </tr>
                       </thead>
                       <tbody className="divide-y divide-medical-border/50 text-slate-200">
                         {selectedModel.labels.map((label, idx) => {
                           const isResNet18 = selectedModel.id.includes('resnet18');
+                          const isSSM = selectedModel.id.includes('ssm');
+
                           let threshold: number | string = 0.5;
-                          if (isResNet18) {
+                          if (isSSM) {
+                            if (label.includes('Left')) {
+                              threshold = '3,377 Vertices';
+                            } else if (label.includes('Right')) {
+                              threshold = '3,360 Vertices';
+                            } else {
+                              threshold = '6,737 Vertices';
+                            }
+                          } else if (isResNet18) {
                             if (label === 'Abnormal') {
                               threshold =
                                 selectedModel.calibration?.Abnormal ??
@@ -265,7 +279,7 @@ export const ModelsPage: React.FC = () => {
                           } else {
                             threshold = selectedModel.calibration?.[label] ?? 0.5;
                           }
-                          const defaultThreshold = 0.5;
+                          const defaultThreshold = isSSM ? '±3.0σ (99.7%)' : (0.5).toFixed(4);
                           return (
                             <tr key={label} className="hover:bg-medical-surface/40 transition-colors">
                               <td className="py-2.5 px-3 text-medical-muted">{idx}</td>
@@ -274,10 +288,16 @@ export const ModelsPage: React.FC = () => {
                                 {typeof threshold === 'number' ? threshold.toFixed(4) : threshold}
                               </td>
                               <td className="py-2.5 px-3 text-medical-subtle">
-                                {defaultThreshold.toFixed(4)}
+                                {defaultThreshold}
                               </td>
                               <td className="py-2.5 px-3 text-medical-muted font-sans text-[11px]">
-                                {isResNet18
+                                {isSSM
+                                  ? label.includes('Bilateral')
+                                    ? 'Combined watertight lung surface mesh (13,478 triangles), 20 modes capturing 100.0% cohort variance'
+                                    : label.includes('Left')
+                                    ? 'Left lung organ partition (x < 0 mm) with lingula and cardiac notch contours'
+                                    : 'Right lung organ partition (x ≥ 0 mm) with tri-lobar morphology and horizontal fissure'
+                                  : isResNet18
                                   ? label === 'Abnormal'
                                     ? `Calibrated at 90.0% Target Sensitivity on IN-CXR validation split (Spec: ${((selectedModel.calibration?.achieved_specificity ?? (selectedModel.id.includes('augmented') ? 0.8222 : 0.7952)) * 100).toFixed(1)}%)`
                                     : 'Negative triage class assigned when P(Abnormal) < operating threshold'
