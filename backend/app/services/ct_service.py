@@ -91,7 +91,7 @@ class CTService:
             direction_matrix=[list(row) for row in vol.direction_matrix],
             supported_views=["axial", "coronal", "sagittal"],
             window_presets=window_dict,
-            anatomical_structures=["lungs", "left_lung", "right_lung", "airways"],
+            anatomical_structures=["lungs", "left_lung", "right_lung", "heart", "airways"],
             labels_present=vol.labels,
             annotation_count=len(vol.annotations),
             geometry_validation={

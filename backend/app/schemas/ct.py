@@ -38,7 +38,7 @@ class CTMetadataResponse(StandardResponse):
         "bone": WindowPreset(center=400, width=1800),
         "abdomen": WindowPreset(center=40, width=400)
     }
-    anatomical_structures: List[str] = ["lungs", "left_lung", "right_lung", "airways"]
+    anatomical_structures: List[str] = ["lungs", "left_lung", "right_lung", "heart", "airways"]
     labels_present: List[int] = []
     annotation_count: int = 0
     geometry_validation: Dict[str, Any] = {}
@@ -124,6 +124,7 @@ class CTMeasurementResponse(StandardResponse):
     voxel_volume_mm3: Optional[float] = None
     lungs: Dict[str, Any]
     airway: Dict[str, Any]
+    heart: Optional[Dict[str, Any]] = None
     label_audit: List[Dict[str, Any]]
 
 

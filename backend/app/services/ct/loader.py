@@ -182,7 +182,7 @@ def create_reference_thoracic_volume(scan_id: str = "demo_thoracic_scan") -> CTV
       Series UID: 1.3.6.1.4.1.14519.5.2.1.6279.6001.176030616406569931557298712518
       Spacing: (0.742188, 0.742188, 1.25) mm
       Origin: (-193.1, -166.7, -307.25) mm
-      Labels: 0 (Background), 3 (Left Lung), 4 (Right Lung), 5 (Trachea/Airway)
+      Labels: 0 (Background), 2 (Heart), 3 (Left Lung), 4 (Right Lung), 5 (Trachea/Airway)
     """
     z_dim, y_dim, x_dim = 64, 128, 128
     spacing = (0.742188, 0.742188, 1.25)
@@ -196,8 +196,9 @@ def create_reference_thoracic_volume(scan_id: str = "demo_thoracic_scan") -> CTV
     z_grid, y_grid, x_grid = np.ogrid[:z_dim, :y_dim, :x_dim]
     cz, cy, cx = z_dim / 2.0, y_dim / 2.0, x_dim / 2.0
 
-    # Thoracic body envelope with cranial tapering and smooth chest wall (-500 to +100 HU)
-    body_taper = np.clip(1.0 - 0.22 * np.maximum(0.0, (z_grid - cz) / (z_dim * 0.45)) ** 2, 0.78, 1.0)
+    # Thoracic body envelope with smooth organic cranial tapering
+    z_t = np.clip(z_grid / (z_dim - 1), 0.0, 1.0)
+    body_taper = 0.82 + 0.18 * np.sin(np.pi * z_t ** 0.6)
     body_3d = (((x_grid - cx) / (x_dim * 0.44 * body_taper)) ** 2 + ((y_grid - cy) / (y_dim * 0.38 * body_taper)) ** 2) < 1.0
     ct_arr[body_3d] = 40  # Soft tissue (+40 HU)
 
@@ -210,40 +211,50 @@ def create_reference_thoracic_volume(scan_id: str = "demo_thoracic_scan") -> CTV
     rib_mask = (rib_ring >= 0.88) & (rib_ring <= 1.02) & (z_grid % 5 <= 2) & body_3d
     ct_arr[rib_mask] = 400
 
-    # Trachea & Main Bronchi (Label 5) (-950 HU)
+    # 2. 3D Anatomical Heart (Cardiac Silhouette) (Label 2) (+40 HU soft tissue)
+    # Situated in anterior-inferior mediastinum, tilted to anatomical left
+    hx, hy, hz = cx - 7.5, cy - 6.5, 23.5
+    heart_dist_sq = ((x_grid - hx) / 15.0) ** 2 + ((y_grid - hy) / 17.5) ** 2 + ((z_grid - hz) / 12.0) ** 2
+    heart_mask = (heart_dist_sq <= 1.0) & body_3d
+    ct_arr[heart_mask] = 40
+    mask_arr[heart_mask] = 2
+
+    # 3. Trachea & Main Bronchi (Label 5) (-950 HU)
     # Trachea descends in midline from z=58 to z=34
-    trachea_main = (((x_grid - cx) / (x_dim * 0.04)) ** 2 + ((y_grid - (cy - y_dim * 0.06)) / (y_dim * 0.04)) ** 2) < 1.0
-    trachea_mask = trachea_main & (z_grid >= 34) & (z_grid <= 58)
-    
+    trachea_main = (((x_grid - cx) / 3.5) ** 2 + ((y_grid - (cy - 5.0)) / 3.5) ** 2 < 1.0) & (z_grid >= 34) & (z_grid <= 58)
     # Bronchial bifurcation (carina around z=34 down to z=26)
-    left_bronchus = (((x_grid - (cx - (34 - z_grid) * 0.8)) / (x_dim * 0.03)) ** 2 + ((y_grid - cy) / (y_dim * 0.03)) ** 2 < 1.0) & (z_grid >= 26) & (z_grid < 34)
-    right_bronchus = (((x_grid - (cx + (34 - z_grid) * 0.8)) / (x_dim * 0.03)) ** 2 + ((y_grid - cy) / (y_dim * 0.03)) ** 2 < 1.0) & (z_grid >= 26) & (z_grid < 34)
-    
-    airway_mask = trachea_mask | left_bronchus | right_bronchus
+    left_bronchus = (((x_grid - (cx - (34 - z_grid) * 0.8)) / 3.0) ** 2 + ((y_grid - cy) / 3.0) ** 2 < 1.0) & (z_grid >= 26) & (z_grid < 34)
+    right_bronchus = (((x_grid - (cx + (34 - z_grid) * 0.8)) / 3.0) ** 2 + ((y_grid - cy) / 3.0) ** 2 < 1.0) & (z_grid >= 26) & (z_grid < 34)
+    airway_mask = (trachea_main | left_bronchus | right_bronchus) & body_3d
     ct_arr[airway_mask] = -950
     mask_arr[airway_mask] = 5
 
-    # Anatomical Lung Parenchyma with Apical Dome and Diaphragmatic Curvature
-    # Superior apex dome tapering between z=36 and z=56
-    lung_taper = np.clip(1.0 - np.maximum(0.0, (z_grid - 34.0) / 21.0) ** 2, 0.08, 1.0)
-    
-    # Diaphragmatic dome: rises higher in the central/anterior abdomen (z=18-20) and drops posteriorly/laterally (z=8-10)
-    diaphragm_dome = 9.0 + 8.0 * np.exp(-(((x_grid - cx) / 28.0) ** 2 + ((y_grid - (cy + 6.0)) / 28.0) ** 2))
-    lung_z_bounds = (z_grid >= diaphragm_dome) & (z_grid <= 55)
+    # 4. Anatomical Lung Parenchyma with Continuous Apical Dome, Diaphragmatic Curvature, and Cardiac Fossa (-850 HU)
+    diaphragm_right = 7.0 + 8.0 * np.exp(-(((x_grid - 88.0) / 26.0) ** 2 + ((y_grid - 64.0) / 30.0) ** 2))
+    diaphragm_left = 6.0 + 7.0 * np.exp(-(((x_grid - 40.0) / 26.0) ** 2 + ((y_grid - 64.0) / 30.0) ** 2))
+
+    z_norm = np.clip((z_grid - 7.0) / 49.0, 0.0, 1.0)
+    lung_profile = np.sin(np.pi * z_norm ** 0.55)
+
+    cardiac_impression = heart_dist_sq < 1.25
 
     # Left Lung (Label 3) (-850 HU)
-    left_rx = (x_dim * 0.18) * np.sqrt(lung_taper)
-    left_ry = (y_dim * 0.27) * np.sqrt(lung_taper)
-    left_lung_mask = (((x_grid - (cx - x_dim * 0.21)) / left_rx) ** 2 + ((y_grid - cy) / left_ry) ** 2 < 1.0) & lung_z_bounds
-
-    # Cardiac silhouette indentation (heart notch in left mid-lower anterior lung)
-    cardiac_notch = (((x_grid - (cx - x_dim * 0.08)) / (x_dim * 0.12)) ** 2 + ((y_grid - (cy - y_dim * 0.06)) / (y_dim * 0.14)) ** 2 < 1.0) & (z_grid >= 14) & (z_grid <= 32)
-    left_lung_mask = left_lung_mask & ~cardiac_notch & ~airway_mask
+    left_cx, left_cy = 38.0, 64.0
+    left_rx = 24.0 * lung_profile
+    left_ry = 36.0 * lung_profile
+    left_z_valid = (z_grid >= diaphragm_left) & (z_grid <= 57)
+    left_base_shape = (((x_grid - left_cx) / np.maximum(left_rx, 1e-3)) ** 2 + 
+                       ((y_grid - left_cy) / np.maximum(left_ry, 1e-3)) ** 2 < 1.0)
+    left_lung_mask = left_base_shape & left_z_valid & ~cardiac_impression & ~airway_mask & body_3d
 
     # Right Lung (Label 4) (-850 HU)
-    right_rx = (x_dim * 0.19) * np.sqrt(lung_taper)
-    right_ry = (y_dim * 0.27) * np.sqrt(lung_taper)
-    right_lung_mask = (((x_grid - (cx + x_dim * 0.21)) / right_rx) ** 2 + ((y_grid - cy) / right_ry) ** 2 < 1.0) & lung_z_bounds & ~airway_mask
+    right_cx, right_cy = 90.0, 64.0
+    right_rx = 25.5 * lung_profile
+    right_ry = 36.5 * lung_profile
+    right_z_valid = (z_grid >= diaphragm_right) & (z_grid <= 57)
+    right_base_shape = (((x_grid - right_cx) / np.maximum(right_rx, 1e-3)) ** 2 + 
+                        ((y_grid - right_cy) / np.maximum(right_ry, 1e-3)) ** 2 < 1.0)
+    right_lung_mask = right_base_shape & right_z_valid & ~(heart_dist_sq < 1.05) & ~airway_mask & body_3d
 
     # Assign HU and segmentation labels
     ct_arr[left_lung_mask] = -850
@@ -252,34 +263,29 @@ def create_reference_thoracic_volume(scan_id: str = "demo_thoracic_scan") -> CTV
     ct_arr[right_lung_mask] = -850
     mask_arr[right_lung_mask] = 4
 
-    # Mediastinal soft tissue (+40 HU) for heart and great vessels
-    ct_arr[cardiac_notch & body_3d] = 40
-
-    # 2. Populate 12 realistic LUNA16 nodule annotations matching the notebook
-    # Scaled to fall within the calibrated thoracic coordinates
-    sample_nodules = [
-        {"coordX": -145.2, "coordY": -132.4, "coordZ": -270.5, "diameter_mm": 5.4},
-        {"coordX": -130.8, "coordY": -110.2, "coordZ": -265.0, "diameter_mm": 8.2},
-        {"coordX": -150.1, "coordY": -120.0, "coordZ": -250.0, "diameter_mm": 4.1},
-        {"coordX": -110.5, "coordY": -140.2, "coordZ": -280.0, "diameter_mm": 6.8},
-        {"coordX": -138.0, "coordY": -105.0, "coordZ": -240.0, "diameter_mm": 7.5},
-        {"coordX": -120.4, "coordY": -125.0, "coordZ": -260.0, "diameter_mm": 11.2},
-        {"coordX": -135.0, "coordY": -115.0, "coordZ": -275.0, "diameter_mm": 5.0},
-        {"coordX": -115.0, "coordY": -130.0, "coordZ": -255.0, "diameter_mm": 6.1},
-        {"coordX": -125.0, "coordY": -145.0, "coordZ": -290.0, "diameter_mm": 4.8},
-        {"coordX": -142.0, "coordY": -100.0, "coordZ": -245.0, "diameter_mm": 9.4},
-        {"coordX": -140.0, "coordY": -135.0, "coordZ": -260.0, "diameter_mm": 3.9},
-        {"coordX": -128.0, "coordY": -120.0, "coordZ": -250.0, "diameter_mm": 7.0},
+    # 5. Populate 12 realistic LUNA16 nodule annotations strictly inside lung tissue
+    # 6 in Left Lung, 6 in Right Lung distributed across lobes
+    nodule_specs = [
+        # (voxel_z, voxel_y, voxel_x, diameter_mm)
+        (48, 62, 36, 5.4),   # Left upper lobe
+        (42, 70, 32, 8.2),   # Left mid posterior
+        (38, 55, 40, 4.1),   # Left upper lateral
+        (28, 68, 30, 6.8),   # Left mid lateral
+        (22, 62, 28, 7.5),   # Left lower lateral
+        (18, 72, 35, 11.2),  # Left lower posterior
+        (50, 60, 92, 5.0),   # Right upper apical
+        (44, 72, 88, 6.1),   # Right upper posterior
+        (36, 56, 96, 4.8),   # Right mid lateral
+        (30, 68, 86, 9.4),   # Right mid central
+        (24, 62, 98, 3.9),   # Right lower lateral
+        (20, 70, 90, 7.0),   # Right lower central
     ]
 
-    # Map physical coords to voxel coords
     annotations = []
-    for idx, nodule in enumerate(sample_nodules):
-        px, py, pz = nodule["coordX"], nodule["coordY"], nodule["coordZ"]
-        vx = int(round((px - origin[0]) / spacing[0]))
-        vy = int(round((py - origin[1]) / spacing[1]))
-        vz = int(round((pz - origin[2]) / spacing[2]))
-
+    for idx, (vz, vy, vx, diam) in enumerate(nodule_specs):
+        px = round(origin[0] + vx * spacing[0], 2)
+        py = round(origin[1] + vy * spacing[1], 2)
+        pz = round(origin[2] + vz * spacing[2], 2)
         inside = (0 <= vx < x_dim) and (0 <= vy < y_dim) and (0 <= vz < z_dim)
         center_lbl = int(mask_arr[vz, vy, vx]) if inside else None
 
@@ -292,7 +298,7 @@ def create_reference_thoracic_volume(scan_id: str = "demo_thoracic_scan") -> CTV
             "voxel_x": vx,
             "voxel_y": vy,
             "voxel_z": vz,
-            "diameter_mm": nodule["diameter_mm"],
+            "diameter_mm": diam,
             "inside_volume": inside,
             "center_label": center_lbl
         })
@@ -305,7 +311,7 @@ def create_reference_thoracic_volume(scan_id: str = "demo_thoracic_scan") -> CTV
         origin_xyz=origin,
         direction_matrix=dir_mat,
         mask_array=mask_arr,
-        labels=[0, 3, 4, 5],
+        labels=[0, 2, 3, 4, 5],
         annotations=annotations,
         geometry_valid=True,
         geometry_mismatches=[]

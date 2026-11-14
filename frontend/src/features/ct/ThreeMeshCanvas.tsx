@@ -172,12 +172,23 @@ export const ThreeMeshCanvas: React.FC<ThreeMeshCanvasProps> = ({
           }
 
           let totalVerts = 0;
+          let meshColor = 0x06b6d4; // Cyan for bilateral lungs
+          if (structure.includes('heart')) {
+            meshColor = 0xf43f5e; // Crimson rose for heart
+          } else if (structure.includes('airway') || structure.includes('trachea')) {
+            meshColor = 0xf59e0b; // Amber for airways
+          } else if (structure.includes('left_lung')) {
+            meshColor = 0x38bdf8; // Sky blue for left lung
+          } else if (structure.includes('right_lung')) {
+            meshColor = 0x2dd4bf; // Teal for right lung
+          }
+
           const material = new THREE.MeshStandardMaterial({
-            color: structure.includes('airway') ? 0xf59e0b : 0x06b6d4,
+            color: meshColor,
             roughness: 0.35,
-            metalness: 0.1,
+            metalness: 0.15,
             transparent: true,
-            opacity: 0.85,
+            opacity: structure.includes('heart') ? 0.92 : 0.85,
             side: THREE.DoubleSide,
             wireframe: false,
           });

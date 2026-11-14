@@ -34,10 +34,14 @@ class CTMeshService:
             binary = (mask == 3).astype(np.uint8)
         elif structure_lower in ("right_lung", "lung_4", "label_4"):
             binary = (mask == 4).astype(np.uint8)
+        elif structure_lower in ("heart", "cardiac", "label_2"):
+            binary = (mask == 2).astype(np.uint8)
         elif structure_lower in ("airways", "trachea", "label_5"):
             binary = (mask == 5).astype(np.uint8)
-        elif structure_lower in ("lungs", "both_lungs", "all"):
+        elif structure_lower in ("lungs", "both_lungs"):
             binary = np.isin(mask, [3, 4]).astype(np.uint8)
+        elif structure_lower in ("all", "all_organs", "lungs_heart"):
+            binary = np.isin(mask, [2, 3, 4, 5]).astype(np.uint8)
         else:
             binary = (mask > 0).astype(np.uint8)
 

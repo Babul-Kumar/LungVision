@@ -37,7 +37,9 @@ class CTMeasurementService:
             pct = (count / total_voxels) * 100.0
 
             name = "Background"
-            if lbl_int == 3:
+            if lbl_int == 2:
+                name = "Heart (Label 2)"
+            elif lbl_int == 3:
                 name = "Left Lung (Label 3)"
             elif lbl_int == 4:
                 name = "Right Lung (Label 4)"
@@ -54,10 +56,12 @@ class CTMeasurementService:
             })
 
         # 2. Individual and Total Lung Metrics
+        heart_voxels = int(np.count_nonzero(mask == 2))
         left_voxels = int(np.count_nonzero(mask == 3))
         right_voxels = int(np.count_nonzero(mask == 4))
         airway_voxels = int(np.count_nonzero(mask == 5))
 
+        heart_ml = heart_voxels * voxel_vol_ml
         left_ml = left_voxels * voxel_vol_ml
         right_ml = right_voxels * voxel_vol_ml
         airway_ml = airway_voxels * voxel_vol_ml
@@ -96,6 +100,10 @@ class CTMeasurementService:
             "airway": {
                 "trachea_volume_ml": round(airway_ml, 2),
                 "trachea_voxels": airway_voxels
+            },
+            "heart": {
+                "heart_volume_ml": round(heart_ml, 2),
+                "heart_voxels": heart_voxels
             },
             "label_audit": label_audit,
             "disclaimer": (

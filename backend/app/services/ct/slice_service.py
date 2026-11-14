@@ -18,6 +18,7 @@ WINDOW_PRESETS: Dict[str, Tuple[float, float]] = {
 
 # Label Color Palette (RGB)
 LABEL_COLORS: Dict[int, Tuple[int, int, int]] = {
+    2: (225, 29, 72),    # Rose / Crimson - Heart (Cardiac Silhouette)
     3: (65, 105, 225),   # Royal Blue - Left Lung
     4: (255, 140, 0),    # Dark Orange - Right Lung
     5: (50, 205, 50),    # Lime Green - Trachea / Airway

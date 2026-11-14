@@ -432,13 +432,15 @@ export const CTExplorerPage: React.FC = () => {
               headerAction={
                 <div className="flex items-center gap-1.5">
                   <span className="text-[11px] text-medical-muted mr-1">Structure:</span>
-                  {['lungs', 'left_lung', 'right_lung', 'airways'].map((struct) => (
+                  {['lungs', 'left_lung', 'right_lung', 'heart', 'airways'].map((struct) => (
                     <button
                       key={struct}
                       onClick={() => setSelectedStructure(struct)}
                       className={`px-2.5 py-1 rounded text-[11px] font-mono capitalize transition-all ${
                         selectedStructure === struct
-                          ? 'bg-medical-cyan text-medical-bg font-semibold shadow-xs'
+                          ? struct === 'heart'
+                            ? 'bg-rose-600 text-white font-semibold shadow-xs'
+                            : 'bg-medical-cyan text-medical-bg font-semibold shadow-xs'
                           : 'bg-medical-surface text-medical-muted hover:text-white'
                       }`}
                     >
@@ -524,6 +526,15 @@ export const CTExplorerPage: React.FC = () => {
                       ).toFixed(1)} mL
                     </span>
                   </div>
+
+                  {(measurements as any).heart?.heart_volume_ml != null && (
+                    <div className="flex justify-between py-1 border-b border-medical-border/60">
+                      <span className="text-medical-muted">Cardiac Silhouette (Heart):</span>
+                      <span className="font-mono text-rose-400 font-medium">
+                        {(measurements as any).heart.heart_volume_ml.toFixed(1)} mL
+                      </span>
+                    </div>
+                  )}
 
                   <div className="flex justify-between py-1 border-b border-medical-border/60">
                     <span className="text-medical-muted">Bilateral Symmetry Ratio:</span>
