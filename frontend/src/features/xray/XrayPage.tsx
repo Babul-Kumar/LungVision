@@ -55,9 +55,24 @@ export const XrayPage: React.FC = () => {
 
   // App Store user experience mode
   const { userExperienceMode, setUserExperienceMode } = useAppStore();
+  const [loadingSample, setLoadingSample] = useState(false);
 
   const fileInputRef = useRef<HTMLInputElement>(null);
   const addHistoryItem = useHistoryStore((state) => state.addHistoryItem);
+
+  const loadSampleImage = async () => {
+    try {
+      setLoadingSample(true);
+      const res = await fetch('/samples/sample_frontal.png');
+      const blob = await res.blob();
+      const file = new File([blob], 'demo_frontal_chest_xray.png', { type: 'image/png' });
+      handleFileSelection(file);
+    } catch (err) {
+      console.error('Failed to load sample X-ray:', err);
+    } finally {
+      setLoadingSample(false);
+    }
+  };
 
   // Revoke object URL on unmount to prevent memory leaks
   useEffect(() => {
@@ -238,6 +253,22 @@ export const XrayPage: React.FC = () => {
 
       <DisclaimerBanner />
 
+      {/* 3-Step Guided Workflow Banner */}
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-3 p-1.5 bg-slate-900/60 rounded-xl border border-slate-800/80 text-xs shadow-inner">
+        <div className={`flex items-center gap-2.5 px-3 py-2 rounded-lg transition-all ${selectedFile ? 'bg-cyan-950/40 text-cyan-300 font-semibold border border-cyan-800/40 shadow-xs' : 'text-slate-400'}`}>
+          <span className="w-5 h-5 rounded-full bg-cyan-500/20 text-cyan-400 flex items-center justify-center font-mono text-[10px] font-bold">1</span>
+          <span>Upload or Select Radiograph</span>
+        </div>
+        <div className={`flex items-center gap-2.5 px-3 py-2 rounded-lg transition-all ${selectedFile && (multiLabelResult || binaryResult || isLoading) ? 'bg-cyan-950/40 text-cyan-300 font-semibold border border-cyan-800/40 shadow-xs' : 'text-slate-400'}`}>
+          <span className="w-5 h-5 rounded-full bg-cyan-500/20 text-cyan-400 flex items-center justify-center font-mono text-[10px] font-bold">2</span>
+          <span>Choose Screening Model</span>
+        </div>
+        <div className={`flex items-center gap-2.5 px-3 py-2 rounded-lg transition-all ${(multiLabelResult || binaryResult) ? 'bg-emerald-950/40 text-emerald-300 font-semibold border border-emerald-800/40 shadow-xs' : 'text-slate-400'}`}>
+          <span className="w-5 h-5 rounded-full bg-emerald-500/20 text-emerald-400 flex items-center justify-center font-mono text-[10px] font-bold">3</span>
+          <span>Review Verified Findings</span>
+        </div>
+      </div>
+
       {/* Main Grid: Upload & Controls (5 Cols) + Results (7 Cols) */}
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
         {/* Left Column (5 Cols): Radiograph Ingestion & Inspection */}
@@ -246,10 +277,21 @@ export const XrayPage: React.FC = () => {
             title="Radiograph Upload"
             subtitle="Frontal thoracic projection & inspection (DICOM-derived PNG, JPEG, or WebP)"
             headerAction={
-              selectedFile && (
+              selectedFile ? (
                 <Badge variant="cyan" size="sm">
                   {(selectedFile.size / (1024 * 1024)).toFixed(2)} MB
                 </Badge>
+              ) : (
+                <button
+                  type="button"
+                  onClick={loadSampleImage}
+                  disabled={loadingSample}
+                  className="px-2.5 py-1 rounded-lg bg-cyan-950/70 hover:bg-cyan-900/80 text-cyan-300 border border-cyan-500/40 text-[11px] font-medium transition-all flex items-center gap-1.5 shadow-sm"
+                  title="Load demo frontal radiograph"
+                >
+                  <Sparkles className="w-3 h-3 text-cyan-400" />
+                  <span>{loadingSample ? 'Loading...' : 'Try Demo X-Ray'}</span>
+                </button>
               )
             }
           >
@@ -283,10 +325,22 @@ export const XrayPage: React.FC = () => {
                 <p className="text-xs text-medical-muted mt-1.5 max-w-xs z-10">
                   Native 224×224 bilinear interpolation · RGB normalized · Max 20 MB
                 </p>
-                <div className="mt-4 flex items-center gap-2 text-[11px] text-medical-subtle font-mono z-10">
-                  <span className="px-2 py-0.5 rounded bg-slate-900/80 border border-slate-700 text-slate-300 group-hover:border-cyan-500/30">PNG</span>
-                  <span className="px-2 py-0.5 rounded bg-slate-900/80 border border-slate-700 text-slate-300 group-hover:border-cyan-500/30">JPEG</span>
-                  <span className="px-2 py-0.5 rounded bg-slate-900/80 border border-slate-700 text-slate-300 group-hover:border-cyan-500/30">WebP</span>
+
+                {/* Instant Try Demo Button inside dropzone */}
+                <div className="mt-4 pt-3 border-t border-slate-800/80 w-full max-w-xs flex items-center justify-center gap-2 z-10">
+                  <span className="text-[11px] text-slate-400">No image on hand?</span>
+                  <button
+                    type="button"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      loadSampleImage();
+                    }}
+                    disabled={loadingSample}
+                    className="px-3 py-1 rounded-lg bg-cyan-950/80 hover:bg-cyan-900 text-cyan-300 border border-cyan-500/40 text-xs font-medium transition-all flex items-center gap-1.5 shadow-sm hover:scale-105 active:scale-95"
+                  >
+                    <Sparkles className="w-3.5 h-3.5 text-cyan-400" />
+                    <span>{loadingSample ? 'Loading Demo...' : 'Load Sample X-Ray'}</span>
+                  </button>
                 </div>
               </div>
             ) : (

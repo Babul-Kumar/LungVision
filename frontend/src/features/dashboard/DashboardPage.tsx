@@ -11,6 +11,7 @@ import {
   AlertCircle,
   FileText,
   SplitSquareVertical,
+  Sparkles,
 } from 'lucide-react';
 import { Card } from '@/components/common/Card';
 import { Badge } from '@/components/common/Badge';
@@ -56,13 +57,47 @@ export const DashboardPage: React.FC = () => {
               Research Edition
             </Badge>
           </h2>
-          <p className="text-sm text-medical-muted mt-1">
+          <p className="text-sm text-medical-muted mt-1 max-w-2xl">
             Automated multi-label chest radiograph screening & 3D computed tomography volumetric exploration.
           </p>
+
+          {/* Primary Quick Start Action Bar */}
+          <div className="flex flex-wrap items-center gap-3 mt-4">
+            <Link to="/xray">
+              <Button
+                variant="primary"
+                size="md"
+                className="bg-gradient-to-r from-cyan-500 to-teal-400 text-slate-950 font-bold shadow-lg shadow-cyan-500/20 hover:shadow-cyan-500/40 border-0"
+              >
+                <Scan className="w-4 h-4 mr-2" />
+                <span>Start 2D X-Ray Screening</span>
+              </Button>
+            </Link>
+            <Link to="/ct-explorer">
+              <Button
+                variant="outline"
+                size="md"
+                className="border-teal-500/40 bg-teal-950/30 text-teal-300 hover:bg-teal-900/50 hover:text-white"
+              >
+                <Box className="w-4 h-4 mr-2" />
+                <span>Explore 3D CT Volume</span>
+              </Button>
+            </Link>
+            <Link to="/dual-view">
+              <Button
+                variant="outline"
+                size="md"
+                className="border-cyan-500/30 bg-cyan-950/20 text-cyan-300 hover:bg-cyan-900/40 hover:text-white"
+              >
+                <SplitSquareVertical className="w-4 h-4 mr-2" />
+                <span>Bi-Planar 3D Lab</span>
+              </Button>
+            </Link>
+          </div>
         </div>
 
         {/* Live System Badges */}
-        <div className="flex items-center gap-2.5">
+        <div className="flex items-center gap-2.5 self-start md:self-center">
           <Badge variant={isBackendOnline ? 'emerald' : 'rose'} size="md">
             <span className="w-2 h-2 rounded-full bg-current animate-pulse mr-1" />
             {isBackendOnline ? 'Live Backend: Online' : 'Live Backend: Offline'}
@@ -84,11 +119,107 @@ export const DashboardPage: React.FC = () => {
 
       <DisclaimerBanner compact />
 
-      {/* Futuristic Clinical Telemetry Bar */}
+      {/* Clinical Quick-Launch Demonstrations */}
+      <div className="p-4 sm:p-5 rounded-2xl bg-gradient-to-r from-slate-950/90 via-medical-surface/80 to-slate-950/90 border border-medical-border/80 shadow-xl">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-4">
+          <div>
+            <div className="flex items-center gap-2">
+              <Sparkles className="w-4 h-4 text-medical-cyan" />
+              <h3 className="text-sm font-bold text-white uppercase tracking-wider">
+                Instant Clinical Demonstrations
+              </h3>
+            </div>
+            <p className="text-xs text-medical-muted mt-0.5">
+              Launch pre-calibrated thoracic clinical workflows with sample imaging data in one click.
+            </p>
+          </div>
+          <span className="text-[11px] font-mono text-medical-subtle self-start sm:self-auto">
+            Zero File Setup Required
+          </span>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+          {/* Demo 1 */}
+          <Link
+            to="/xray"
+            className="p-3.5 rounded-xl bg-slate-900/60 border border-cyan-500/30 hover:border-cyan-400 hover:bg-cyan-950/20 transition-all group flex flex-col justify-between"
+          >
+            <div>
+              <div className="flex items-center justify-between text-xs mb-1.5">
+                <span className="font-semibold text-cyan-300 flex items-center gap-1.5">
+                  <Scan className="w-3.5 h-3.5" />
+                  Frontal CXR Pathology
+                </span>
+                <span className="text-[10px] font-mono text-cyan-400/80 bg-cyan-950/60 px-1.5 py-0.5 rounded border border-cyan-800/40">
+                  DenseNet121
+                </span>
+              </div>
+              <p className="text-[11px] text-slate-300 leading-relaxed">
+                Screen validated adult radiograph across 6 pulmonary conditions with dual Doctor/Patient views.
+              </p>
+            </div>
+            <div className="mt-3 flex items-center justify-between text-[11px] text-cyan-400 group-hover:text-cyan-300 font-medium">
+              <span>Launch Screening Demo</span>
+              <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
+            </div>
+          </Link>
+
+          {/* Demo 2 */}
+          <Link
+            to="/dual-view"
+            className="p-3.5 rounded-xl bg-slate-900/60 border border-teal-500/30 hover:border-teal-400 hover:bg-teal-950/20 transition-all group flex flex-col justify-between"
+          >
+            <div>
+              <div className="flex items-center justify-between text-xs mb-1.5">
+                <span className="font-semibold text-teal-300 flex items-center gap-1.5">
+                  <SplitSquareVertical className="w-3.5 h-3.5" />
+                  Bi-Planar 3D Reconstruction
+                </span>
+                <span className="text-[10px] font-mono text-teal-400/80 bg-teal-950/60 px-1.5 py-0.5 rounded border border-teal-800/40">
+                  20-Mode SSM
+                </span>
+              </div>
+              <p className="text-[11px] text-slate-300 leading-relaxed">
+                Pair frontal and lateral radiographic silhouettes to synthesize watertight 3D lung surfaces.
+              </p>
+            </div>
+            <div className="mt-3 flex items-center justify-between text-[11px] text-teal-400 group-hover:text-teal-300 font-medium">
+              <span>Launch 3D SSM Fitting</span>
+              <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
+            </div>
+          </Link>
+
+          {/* Demo 3 */}
+          <Link
+            to="/ct-explorer"
+            className="p-3.5 rounded-xl bg-slate-900/60 border border-blue-500/30 hover:border-blue-400 hover:bg-blue-950/20 transition-all group flex flex-col justify-between"
+          >
+            <div>
+              <div className="flex items-center justify-between text-xs mb-1.5">
+                <span className="font-semibold text-blue-300 flex items-center gap-1.5">
+                  <Box className="w-3.5 h-3.5" />
+                  LUNA16 CT Nodule Registry
+                </span>
+                <span className="text-[10px] font-mono text-blue-400/80 bg-blue-950/60 px-1.5 py-0.5 rounded border border-blue-800/40">
+                  12 Nodules
+                </span>
+              </div>
+              <p className="text-[11px] text-slate-300 leading-relaxed">
+                Explore 3D Marching Cubes lung mesh, scrub axial/coronal/sagittal slices, and inspect registered nodules.
+              </p>
+            </div>
+            <div className="mt-3 flex items-center justify-between text-[11px] text-blue-400 group-hover:text-blue-300 font-medium">
+              <span>Launch CT Workspace</span>
+              <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
+            </div>
+          </Link>
+        </div>
+      </div>
+
+      {/* Modern Clinical Telemetry Bar */}
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
-        <div className="glass-panel p-3.5 rounded-xl border border-cyan-500/20 hud-corner-bracket relative overflow-hidden group hover:border-cyan-400/50 transition-all">
-          <div className="absolute top-0 right-0 w-24 h-24 bg-cyan-500/5 rounded-full blur-2xl group-hover:bg-cyan-500/10 transition-colors pointer-events-none" />
-          <div className="flex items-center justify-between mb-1">
+        <div className="glass-panel p-4 rounded-xl border border-cyan-500/30 relative overflow-hidden group hover:border-cyan-400/60 transition-all">
+          <div className="flex items-center justify-between mb-1.5">
             <span className="text-[10px] font-mono uppercase tracking-wider text-cyan-400 font-semibold">NIH Macro AUROC</span>
             <span className="w-1.5 h-1.5 rounded-full bg-cyan-400 animate-ping" />
           </div>
@@ -96,12 +227,11 @@ export const DashboardPage: React.FC = () => {
             0.843
             <span className="text-[11px] font-normal text-cyan-300/80 font-sans">val peak</span>
           </div>
-          <div className="text-[10px] text-medical-subtle mt-0.5">DenseNet121 6-Condition Screening</div>
+          <div className="text-[11px] text-medical-subtle mt-1">DenseNet121 6-Condition Screening</div>
         </div>
 
-        <div className="glass-panel p-3.5 rounded-xl border border-teal-500/20 hud-corner-bracket relative overflow-hidden group hover:border-teal-400/50 transition-all">
-          <div className="absolute top-0 right-0 w-24 h-24 bg-teal-500/5 rounded-full blur-2xl group-hover:bg-teal-500/10 transition-colors pointer-events-none" />
-          <div className="flex items-center justify-between mb-1">
+        <div className="glass-panel p-4 rounded-xl border border-teal-500/30 relative overflow-hidden group hover:border-teal-400/60 transition-all">
+          <div className="flex items-center justify-between mb-1.5">
             <span className="text-[10px] font-mono uppercase tracking-wider text-teal-400 font-semibold">SSM 3D Variance</span>
             <span className="w-1.5 h-1.5 rounded-full bg-teal-400" />
           </div>
@@ -109,12 +239,11 @@ export const DashboardPage: React.FC = () => {
             99.2%
             <span className="text-[11px] font-normal text-teal-300/80 font-sans">15 modes</span>
           </div>
-          <div className="text-[10px] text-medical-subtle mt-0.5">Bi-Planar PDM Eigenmodes</div>
+          <div className="text-[11px] text-medical-subtle mt-1">Bi-Planar PDM Eigenmodes</div>
         </div>
 
-        <div className="glass-panel p-3.5 rounded-xl border border-emerald-500/20 hud-corner-bracket relative overflow-hidden group hover:border-emerald-400/50 transition-all">
-          <div className="absolute top-0 right-0 w-24 h-24 bg-emerald-500/5 rounded-full blur-2xl group-hover:bg-emerald-500/10 transition-colors pointer-events-none" />
-          <div className="flex items-center justify-between mb-1">
+        <div className="glass-panel p-4 rounded-xl border border-emerald-500/30 relative overflow-hidden group hover:border-emerald-400/60 transition-all">
+          <div className="flex items-center justify-between mb-1.5">
             <span className="text-[10px] font-mono uppercase tracking-wider text-emerald-400 font-semibold">Mesh Watertightness</span>
             <span className="w-1.5 h-1.5 rounded-full bg-emerald-400" />
           </div>
@@ -122,12 +251,11 @@ export const DashboardPage: React.FC = () => {
             100%
             <span className="text-[11px] font-normal text-emerald-300/80 font-sans">Euler=2</span>
           </div>
-          <div className="text-[10px] text-medical-subtle mt-0.5">Divergence Theorem Organ Volumes</div>
+          <div className="text-[11px] text-medical-subtle mt-1">Divergence Theorem Organ Volumes</div>
         </div>
 
-        <div className="glass-panel p-3.5 rounded-xl border border-blue-500/20 hud-corner-bracket relative overflow-hidden group hover:border-blue-400/50 transition-all">
-          <div className="absolute top-0 right-0 w-24 h-24 bg-blue-500/5 rounded-full blur-2xl group-hover:bg-blue-500/10 transition-colors pointer-events-none" />
-          <div className="flex items-center justify-between mb-1">
+        <div className="glass-panel p-4 rounded-xl border border-blue-500/30 relative overflow-hidden group hover:border-blue-400/60 transition-all">
+          <div className="flex items-center justify-between mb-1.5">
             <span className="text-[10px] font-mono uppercase tracking-wider text-blue-400 font-semibold">FastAPI Event Loop</span>
             <span className="w-1.5 h-1.5 rounded-full bg-blue-400" />
           </div>
@@ -135,7 +263,7 @@ export const DashboardPage: React.FC = () => {
             ~85 ms
             <span className="text-[11px] font-normal text-blue-300/80 font-sans">async threadpool</span>
           </div>
-          <div className="text-[10px] text-medical-subtle mt-0.5">Non-blocking Concurrency Safe</div>
+          <div className="text-[11px] text-medical-subtle mt-1">Non-blocking Concurrency Safe</div>
         </div>
       </div>
 
@@ -147,7 +275,6 @@ export const DashboardPage: React.FC = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5">
           {/* Module 1: 2D X-Ray */}
           <Card className="hover:border-cyan-400/60 hover:shadow-lg hover:shadow-cyan-950/40 transition-all duration-300 flex flex-col justify-between group glass-panel hud-corner-bracket relative overflow-hidden">
-            <div className="absolute top-0 right-0 w-32 h-32 bg-cyan-500/5 rounded-full blur-2xl group-hover:bg-cyan-500/15 transition-all pointer-events-none" />
             <div className="space-y-3 relative z-10">
               <div className="w-11 h-11 rounded-xl bg-gradient-to-br from-cyan-950 to-cyan-900/80 border border-cyan-500/30 flex items-center justify-center text-cyan-400 group-hover:scale-105 group-hover:shadow-md group-hover:shadow-cyan-500/30 group-hover:text-cyan-300 transition-all">
                 <Scan className="w-5 h-5" />
@@ -171,7 +298,6 @@ export const DashboardPage: React.FC = () => {
 
           {/* Module 2: Dual-View CXR Lab */}
           <Card className="hover:border-cyan-400/60 hover:shadow-lg hover:shadow-cyan-950/40 transition-all duration-300 flex flex-col justify-between group glass-panel hud-corner-bracket relative overflow-hidden">
-            <div className="absolute top-0 right-0 w-32 h-32 bg-cyan-500/5 rounded-full blur-2xl group-hover:bg-cyan-500/15 transition-all pointer-events-none" />
             <div className="space-y-3 relative z-10">
               <div className="w-11 h-11 rounded-xl bg-gradient-to-br from-cyan-950 to-cyan-900/80 border border-cyan-500/30 flex items-center justify-center text-cyan-400 group-hover:scale-105 group-hover:shadow-md group-hover:shadow-cyan-500/30 group-hover:text-cyan-300 transition-all">
                 <SplitSquareVertical className="w-5 h-5" />
@@ -195,7 +321,6 @@ export const DashboardPage: React.FC = () => {
 
           {/* Module 3: 3D CT Explorer */}
           <Card className="hover:border-teal-400/60 hover:shadow-lg hover:shadow-teal-950/40 transition-all duration-300 flex flex-col justify-between group glass-panel hud-corner-bracket relative overflow-hidden">
-            <div className="absolute top-0 right-0 w-32 h-32 bg-teal-500/5 rounded-full blur-2xl group-hover:bg-teal-500/15 transition-all pointer-events-none" />
             <div className="space-y-3 relative z-10">
               <div className="w-11 h-11 rounded-xl bg-gradient-to-br from-teal-950 to-teal-900/80 border border-teal-500/30 flex items-center justify-center text-teal-400 group-hover:scale-105 group-hover:shadow-md group-hover:shadow-teal-500/30 group-hover:text-teal-300 transition-all">
                 <Box className="w-5 h-5" />
@@ -219,7 +344,6 @@ export const DashboardPage: React.FC = () => {
 
           {/* Module 4: Research Benchmarks */}
           <Card className="hover:border-blue-400/60 hover:shadow-lg hover:shadow-blue-950/40 transition-all duration-300 flex flex-col justify-between group glass-panel hud-corner-bracket relative overflow-hidden">
-            <div className="absolute top-0 right-0 w-32 h-32 bg-blue-500/5 rounded-full blur-2xl group-hover:bg-blue-500/15 transition-all pointer-events-none" />
             <div className="space-y-3 relative z-10">
               <div className="w-11 h-11 rounded-xl bg-gradient-to-br from-blue-950 to-blue-900/80 border border-blue-500/30 flex items-center justify-center text-blue-400 group-hover:scale-105 group-hover:shadow-md group-hover:shadow-blue-500/30 group-hover:text-blue-300 transition-all">
                 <LineChart className="w-5 h-5" />

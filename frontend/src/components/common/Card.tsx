@@ -22,7 +22,7 @@ export const Card: React.FC<CardProps> = ({
     <div
       className={twMerge(
         clsx(
-          'bg-medical-card border border-medical-border rounded-xl p-5 shadow-sm transition-all',
+          'bg-slate-900/60 backdrop-blur-md border border-slate-800/80 rounded-2xl p-5 sm:p-6 shadow-sm transition-all hover:border-slate-700/80',
           className
         )
       )}

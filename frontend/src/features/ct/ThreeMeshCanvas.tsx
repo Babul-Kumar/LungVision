@@ -41,6 +41,7 @@ export const ThreeMeshCanvas: React.FC<ThreeMeshCanvasProps> = ({
   const rendererRef = useRef<THREE.WebGLRenderer | null>(null);
   const cameraRef = useRef<THREE.PerspectiveCamera | null>(null);
   const controlsRef = useRef<OrbitControls | null>(null);
+  const rootGroupRef = useRef<THREE.Group | null>(null);
   const meshGroupRef = useRef<THREE.Group | null>(null);
   const noduleGroupRef = useRef<THREE.Group | null>(null);
   const animFrameIdRef = useRef<number | null>(null);
@@ -128,23 +129,25 @@ export const ThreeMeshCanvas: React.FC<ThreeMeshCanvasProps> = ({
     rimLight.position.set(0, 400, 250);
     scene.add(rimLight);
 
-    // Groups
+    // Root group for anatomical registration & shared rotation
+    const rootGroup = new THREE.Group();
+    scene.add(rootGroup);
+    rootGroupRef.current = rootGroup;
+
+    // Groups parented under rootGroup
     const meshGroup = new THREE.Group();
-    scene.add(meshGroup);
+    rootGroup.add(meshGroup);
     meshGroupRef.current = meshGroup;
 
     const noduleGroup = new THREE.Group();
-    scene.add(noduleGroup);
+    rootGroup.add(noduleGroup);
     noduleGroupRef.current = noduleGroup;
 
     // Animation Loop
     const animate = () => {
       animFrameIdRef.current = requestAnimationFrame(animate);
-      if (isAutoRotatingRef.current && meshGroupRef.current) {
-        meshGroupRef.current.rotation.z += 0.006;
-        if (noduleGroupRef.current) {
-          noduleGroupRef.current.rotation.z = meshGroupRef.current.rotation.z;
-        }
+      if (isAutoRotatingRef.current && rootGroupRef.current) {
+        rootGroupRef.current.rotation.z += 0.006;
       }
       controls.update();
       renderer.render(scene, camera);
@@ -286,17 +289,20 @@ export const ThreeMeshCanvas: React.FC<ThreeMeshCanvasProps> = ({
             }
           });
 
+          // Reset rootGroup transform before calculating bounding box
+          if (rootGroupRef.current) {
+            rootGroupRef.current.position.set(0, 0, 0);
+            rootGroupRef.current.rotation.set(0, 0, 0);
+          }
+
           meshGroupRef.current.add(obj);
           setVertexCount(totalVerts);
 
-          // Center bounding box to viewport
+          // Center bounding box to viewport via rootGroup offset
           const box = new THREE.Box3().setFromObject(obj);
           const center = box.getCenter(new THREE.Vector3());
-          meshGroupRef.current.position.sub(center); // Recenter at origin
-          meshGroupRef.current.rotation.z = 0; // Reset rotation
-          if (noduleGroupRef.current) {
-            noduleGroupRef.current.position.copy(meshGroupRef.current.position);
-            noduleGroupRef.current.rotation.z = 0;
+          if (rootGroupRef.current) {
+            rootGroupRef.current.position.set(-center.x, -center.y, -center.z);
           }
         }
       } catch (err: any) {
@@ -319,7 +325,7 @@ export const ThreeMeshCanvas: React.FC<ThreeMeshCanvasProps> = ({
 
   // 3. Render 3D Nodule Spheres from LUNA16 Annotations
   useEffect(() => {
-    if (!noduleGroupRef.current || !meshGroupRef.current) return;
+    if (!noduleGroupRef.current) return;
 
     // Clear previous nodule spheres
     while (noduleGroupRef.current.children.length > 0) {
@@ -328,9 +334,6 @@ export const ThreeMeshCanvas: React.FC<ThreeMeshCanvasProps> = ({
       if (child.geometry) child.geometry.dispose();
       if (child.material) (child.material as THREE.Material).dispose();
     }
-
-    // Offset nodule group by the same centering offset as mesh group
-    noduleGroupRef.current.position.copy(meshGroupRef.current.position);
 
     annotations.forEach((nodule) => {
       const isSelected = selectedNoduleId === nodule.nodule_id;
@@ -346,7 +349,7 @@ export const ThreeMeshCanvas: React.FC<ThreeMeshCanvasProps> = ({
       });
 
       const sphere = new THREE.Mesh(sphereGeom, sphereMat);
-      // Nodule coordinates are in physical millimeters (X, Y, Z)
+      // Nodule coordinates are in physical millimeters (X, Y, Z) matching the mesh space
       sphere.position.set(nodule.coordX_mm, nodule.coordY_mm, nodule.coordZ_mm);
       sphere.userData = { noduleId: nodule.nodule_id };
 

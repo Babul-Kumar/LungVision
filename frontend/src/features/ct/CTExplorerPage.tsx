@@ -1188,12 +1188,13 @@ export const CTExplorerPage: React.FC = () => {
                     </td>
                     <td className="p-3">
                       <Button
-                        variant="ghost"
+                        variant="outline"
                         size="sm"
                         onClick={() => jumpToNodule(nodule)}
-                        className="text-medical-cyan text-xs p-1 hover:text-cyan-300"
+                        className="text-cyan-300 border-cyan-500/40 bg-cyan-950/30 hover:bg-cyan-900/60 text-xs py-1 px-2.5 flex items-center gap-1.5 transition-all shadow-xs"
                       >
-                        View in Slice
+                        <Crosshair className="w-3.5 h-3.5 text-cyan-400" />
+                        <span>Jump to Slice</span>
                       </Button>
                     </td>
                   </tr>

@@ -84,6 +84,44 @@ export const DualViewXRayPage: React.FC = () => {
   const frontalInputRef = useRef<HTMLInputElement>(null);
   const lateralInputRef = useRef<HTMLInputElement>(null);
   const location = useLocation();
+  const [loadingSamplePair, setLoadingSamplePair] = useState(false);
+  const [loadingSampleSlot, setLoadingSampleSlot] = useState<'frontal' | 'lateral' | null>(null);
+
+  const loadSamplePair = async () => {
+    try {
+      setLoadingSamplePair(true);
+      const [resF, resL] = await Promise.all([
+        fetch('/samples/sample_frontal.png'),
+        fetch('/samples/sample_lateral.png'),
+      ]);
+      const [blobF, blobL] = await Promise.all([resF.blob(), resL.blob()]);
+      const fileF = new File([blobF], 'demo_frontal_chest_xray.png', { type: 'image/png' });
+      const fileL = new File([blobL], 'demo_lateral_chest_xray.png', { type: 'image/png' });
+      processImageFile(fileF, setFrontal);
+      processImageFile(fileL, setLateral);
+    } catch (err) {
+      console.error('Failed to load sample pair:', err);
+    } finally {
+      setLoadingSamplePair(false);
+    }
+  };
+
+  const loadSampleSlot = async (slot: 'frontal' | 'lateral') => {
+    try {
+      setLoadingSampleSlot(slot);
+      const url = slot === 'frontal' ? '/samples/sample_frontal.png' : '/samples/sample_lateral.png';
+      const filename = slot === 'frontal' ? 'demo_frontal_projection.png' : 'demo_lateral_projection.png';
+      const setter = slot === 'frontal' ? setFrontal : setLateral;
+      const res = await fetch(url);
+      const blob = await res.blob();
+      const file = new File([blob], filename, { type: 'image/png' });
+      processImageFile(file, setter);
+    } catch (err) {
+      console.error(`Failed to load sample ${slot}:`, err);
+    } finally {
+      setLoadingSampleSlot(null);
+    }
+  };
 
   // Load exported DRRs if passed via navigation state from CT Explorer
   useEffect(() => {
@@ -345,7 +383,21 @@ export const DualViewXRayPage: React.FC = () => {
         </div>
 
         {/* Global Action Bar */}
-        <div className="flex items-center gap-3">
+        <div className="flex flex-wrap items-center gap-2.5">
+          {(!frontal.file || !lateral.file) && (
+            <Button
+              variant="outline"
+              size="md"
+              onClick={loadSamplePair}
+              disabled={loadingSamplePair}
+              className="text-cyan-300 border-cyan-500/40 bg-cyan-950/40 hover:bg-cyan-900/60 transition-all"
+              title="Load demo bi-planar paired radiograph"
+            >
+              <Sparkles className="w-4 h-4 mr-1.5 text-cyan-400" />
+              <span>{loadingSamplePair ? 'Loading Pair...' : 'Try Demo Pair'}</span>
+            </Button>
+          )}
+
           <Button
             variant="outline"
             size="md"
@@ -480,6 +532,18 @@ export const DualViewXRayPage: React.FC = () => {
               <span className="mt-3 text-[10px] font-mono px-2 py-0.5 rounded bg-slate-900/90 border border-cyan-500/30 text-cyan-400 font-semibold z-10 shadow-sm">
                 Slot A: Frontal View
               </span>
+              <button
+                type="button"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  loadSampleSlot('frontal');
+                }}
+                disabled={loadingSampleSlot === 'frontal'}
+                className="mt-3 px-3 py-1.5 text-[11px] font-mono rounded-lg bg-cyan-950/80 hover:bg-cyan-900 border border-cyan-500/50 text-cyan-300 flex items-center gap-1.5 shadow-md z-20 hover:scale-105 transition-all"
+              >
+                <Sparkles className="w-3.5 h-3.5 text-cyan-400" />
+                <span>{loadingSampleSlot === 'frontal' ? 'Loading Frontal...' : 'Try Demo Frontal'}</span>
+              </button>
             </div>
           ) : (
             <div className="space-y-3">
@@ -632,6 +696,18 @@ export const DualViewXRayPage: React.FC = () => {
               <span className="mt-3 text-[10px] font-mono px-2 py-0.5 rounded bg-slate-900/90 border border-teal-500/30 text-teal-400 font-semibold z-10 shadow-sm">
                 Slot B: Lateral View
               </span>
+              <button
+                type="button"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  loadSampleSlot('lateral');
+                }}
+                disabled={loadingSampleSlot === 'lateral'}
+                className="mt-3 px-3 py-1.5 text-[11px] font-mono rounded-lg bg-teal-950/80 hover:bg-teal-900 border border-teal-500/50 text-teal-300 flex items-center gap-1.5 shadow-md z-20 hover:scale-105 transition-all"
+              >
+                <Sparkles className="w-3.5 h-3.5 text-teal-400" />
+                <span>{loadingSampleSlot === 'lateral' ? 'Loading Lateral...' : 'Try Demo Lateral'}</span>
+              </button>
             </div>
           ) : (
             <div className="space-y-3">
