@@ -1,6 +1,7 @@
 from typing import Optional
 from fastapi import APIRouter, File, Query, Response, UploadFile, status
 from fastapi.responses import PlainTextResponse
+from starlette.concurrency import run_in_threadpool
 from backend.app.config import settings
 from backend.app.core.security import validate_ct_archive
 from backend.app.schemas.ct import (
@@ -33,7 +34,7 @@ async def upload_ct_scan(
     content = await file.read()
     validate_ct_archive(file, content, settings.MAX_CT_SIZE_BYTES)
     filename = file.filename or "ct_upload.zip"
-    return ct_service.register_upload(filename, content)
+    return await run_in_threadpool(ct_service.register_upload, filename, content)
 
 
 @router.get(
@@ -72,7 +73,8 @@ async def get_ct_slice(
     show_nodules: bool = Query(True, description="Whether to render intersecting nodule markers")
 ) -> CTSliceResponse:
     """Extracts a windowed cross-sectional slice image encoded as base64 PNG."""
-    return ct_service.get_slice(
+    return await run_in_threadpool(
+        ct_service.get_slice,
         scan_id=scan_id,
         view=view,
         slice_index=slice_index,
@@ -106,7 +108,8 @@ async def get_ct_mesh(
     download: bool = Query(False, description="If true, sets attachment header for file download")
 ):
     """Generates and streams a 3D Wavefront OBJ mesh with physical coordinates for Three.js rendering."""
-    obj_data, metadata = ct_service.generate_surface_mesh(
+    obj_data, metadata = await run_in_threadpool(
+        ct_service.generate_surface_mesh,
         scan_id=scan_id,
         structure=structure,
         step=step,
@@ -130,7 +133,7 @@ async def get_mesh_quality(
     structure: str = Query("lungs", description="Target structure to audit")
 ) -> CTMeshQualityResponse:
     """Evaluates mesh watertightness, Euler number, winding consistency, and mesh vs voxel volume discrepancy."""
-    return ct_service.get_mesh_quality(scan_id=scan_id, structure=structure)
+    return await run_in_threadpool(ct_service.get_mesh_quality, scan_id=scan_id, structure=structure)
 
 
 @router.get(
@@ -140,7 +143,7 @@ async def get_mesh_quality(
 )
 async def get_ct_measurements(scan_id: str) -> CTMeasurementResponse:
     """Computes exact physical lung volumes in mL, symmetry ratios, and full label distribution audit."""
-    return ct_service.get_measurements(scan_id)
+    return await run_in_threadpool(ct_service.get_measurements, scan_id)
 
 
 @router.get(
@@ -179,7 +182,8 @@ async def get_ct_drr(
 ) -> DRRProjectionResponse:
     """Synthesizes a 2D radiograph directly from 3D CT volume attenuation line integrals."""
     volume = ct_service.get_volume(scan_id)
-    return drr_service.generate_drr(
+    return await run_in_threadpool(
+        drr_service.generate_drr,
         volume=volume,
         view=view,
         sdd_mm=sdd_mm,

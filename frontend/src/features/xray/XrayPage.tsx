@@ -1,4 +1,4 @@
-import React, { useState, useRef, ChangeEvent, DragEvent } from 'react';
+import React, { useState, useRef, useEffect, ChangeEvent, DragEvent } from 'react';
 import { Link } from 'react-router-dom';
 import {
   UploadCloud,
@@ -59,6 +59,15 @@ export const XrayPage: React.FC = () => {
   const fileInputRef = useRef<HTMLInputElement>(null);
   const addHistoryItem = useHistoryStore((state) => state.addHistoryItem);
 
+  // Revoke object URL on unmount to prevent memory leaks
+  useEffect(() => {
+    return () => {
+      if (previewUrl && previewUrl.startsWith('blob:')) {
+        URL.revokeObjectURL(previewUrl);
+      }
+    };
+  }, [previewUrl]);
+
   const handleFileSelection = (file: File) => {
     // Client-side file validation
     const validTypes = ['image/png', 'image/jpeg', 'image/webp'];
@@ -77,11 +86,11 @@ export const XrayPage: React.FC = () => {
     setBinaryResult(null);
     setZoomScale(1.0);
 
-    const reader = new FileReader();
-    reader.onload = (e) => {
-      setPreviewUrl(e.target?.result as string);
-    };
-    reader.readAsDataURL(file);
+    if (previewUrl && previewUrl.startsWith('blob:')) {
+      URL.revokeObjectURL(previewUrl);
+    }
+    const objectUrl = URL.createObjectURL(file);
+    setPreviewUrl(objectUrl);
   };
 
   const onFileInputChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -258,29 +267,33 @@ export const XrayPage: React.FC = () => {
                 onDragLeave={handleDragLeave}
                 onDrop={handleDrop}
                 onClick={() => fileInputRef.current?.click()}
-                className={`h-72 border-2 border-dashed rounded-xl flex flex-col items-center justify-center p-6 text-center cursor-pointer transition-all ${
+                className={`h-72 border-2 border-dashed rounded-xl flex flex-col items-center justify-center p-6 text-center cursor-pointer transition-all hud-corner-bracket relative overflow-hidden group ${
                   isDragOver
-                    ? 'border-medical-cyan bg-cyan-950/20'
-                    : 'border-medical-border hover:border-medical-cyan/50 hover:bg-medical-surface/40'
+                    ? 'border-cyan-400 bg-cyan-950/30 glow-cyan-sm'
+                    : 'border-slate-700/80 hover:border-cyan-400/60 hover:bg-slate-900/40'
                 }`}
               >
-                <div className="w-12 h-12 rounded-xl bg-medical-surface border border-medical-border flex items-center justify-center text-medical-cyan mb-3 shadow-inner">
-                  <UploadCloud className="w-6 h-6" />
+                <div className="absolute inset-0 medical-grid opacity-30 pointer-events-none" />
+                <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-cyan-950 to-slate-900 border border-cyan-500/30 flex items-center justify-center text-cyan-400 mb-3 shadow-lg shadow-cyan-950/50 group-hover:scale-110 group-hover:border-cyan-400 group-hover:shadow-cyan-500/20 transition-all z-10">
+                  <UploadCloud className="w-7 h-7" />
                 </div>
-                <p className="text-sm font-semibold text-white">Click or drag X-ray image here</p>
-                <p className="text-xs text-medical-muted mt-1.5 max-w-xs">
+                <p className="text-sm font-semibold text-white z-10 group-hover:text-cyan-300 transition-colors">
+                  Click or drag X-ray image here
+                </p>
+                <p className="text-xs text-medical-muted mt-1.5 max-w-xs z-10">
                   Native 224×224 bilinear interpolation · RGB normalized · Max 20 MB
                 </p>
-                <div className="mt-4 flex items-center gap-2 text-[11px] text-medical-subtle font-mono">
-                  <span className="px-1.5 py-0.5 rounded bg-medical-bg border border-medical-border/60">PNG</span>
-                  <span className="px-1.5 py-0.5 rounded bg-medical-bg border border-medical-border/60">JPEG</span>
-                  <span className="px-1.5 py-0.5 rounded bg-medical-bg border border-medical-border/60">WebP</span>
+                <div className="mt-4 flex items-center gap-2 text-[11px] text-medical-subtle font-mono z-10">
+                  <span className="px-2 py-0.5 rounded bg-slate-900/80 border border-slate-700 text-slate-300 group-hover:border-cyan-500/30">PNG</span>
+                  <span className="px-2 py-0.5 rounded bg-slate-900/80 border border-slate-700 text-slate-300 group-hover:border-cyan-500/30">JPEG</span>
+                  <span className="px-2 py-0.5 rounded bg-slate-900/80 border border-slate-700 text-slate-300 group-hover:border-cyan-500/30">WebP</span>
                 </div>
               </div>
             ) : (
               <div className="space-y-3">
                 {/* Image Inspection Viewport with Zoom Controls */}
-                <div className="relative rounded-xl overflow-hidden border border-medical-border bg-black h-80 flex items-center justify-center group select-none">
+                <div className="relative rounded-xl overflow-hidden border border-slate-700/80 bg-black h-80 flex items-center justify-center group select-none hud-corner-bracket shadow-inner">
+                  <div className="absolute inset-0 medical-grid-fine opacity-20 pointer-events-none" />
                   <div
                     className="w-full h-full flex items-center justify-center overflow-hidden cursor-grab active:cursor-grabbing"
                     style={{
@@ -296,38 +309,39 @@ export const XrayPage: React.FC = () => {
                   </div>
 
                   {/* Zoom Toolbar Overlay */}
-                  <div className="absolute bottom-2.5 right-2.5 flex items-center gap-1 bg-medical-bg/85 backdrop-blur-md px-2 py-1 rounded-lg border border-medical-border/80 shadow-md">
+                  <div className="absolute bottom-2.5 right-2.5 flex items-center gap-1 bg-slate-950/85 backdrop-blur-md px-2.5 py-1 rounded-lg border border-slate-700/80 shadow-xl z-20">
                     <button
                       onClick={zoomOut}
                       disabled={zoomScale <= 0.75}
-                      className="p-1 text-medical-muted hover:text-white disabled:opacity-30 transition-colors"
+                      className="p-1 text-slate-400 hover:text-white disabled:opacity-30 transition-colors"
                       title="Zoom Out"
                     >
                       <ZoomOut className="w-3.5 h-3.5" />
                     </button>
-                    <span className="text-[10px] font-mono text-medical-cyan px-1 min-w-[32px] text-center">
+                    <span className="text-[10px] font-mono text-cyan-400 px-1 min-w-[32px] text-center font-bold">
                       {Math.round(zoomScale * 100)}%
                     </span>
                     <button
                       onClick={zoomIn}
                       disabled={zoomScale >= 3.0}
-                      className="p-1 text-medical-muted hover:text-white disabled:opacity-30 transition-colors"
+                      className="p-1 text-slate-400 hover:text-white disabled:opacity-30 transition-colors"
                       title="Zoom In"
                     >
                       <ZoomIn className="w-3.5 h-3.5" />
                     </button>
-                    <div className="h-3 w-px bg-medical-border mx-0.5" />
+                    <div className="h-3 w-px bg-slate-700 mx-0.5" />
                     <button
                       onClick={zoomReset}
-                      className="p-1 text-medical-muted hover:text-white transition-colors"
+                      className="p-1 text-slate-400 hover:text-white transition-colors"
                       title="Fit to Screen"
                     >
                       <Maximize2 className="w-3.5 h-3.5" />
                     </button>
                   </div>
 
-                  <div className="absolute top-2.5 left-2.5 bg-black/75 backdrop-blur-md px-2 py-0.5 rounded text-[10px] font-mono text-slate-300 border border-white/10">
-                    Frontal View
+                  <div className="absolute top-2.5 left-2.5 bg-black/80 backdrop-blur-md px-2.5 py-1 rounded-md text-[10px] font-mono text-cyan-300 border border-cyan-500/30 flex items-center gap-1.5 z-20">
+                    <span className="w-1.5 h-1.5 rounded-full bg-cyan-400 animate-pulse" />
+                    Frontal Projection
                   </div>
                 </div>
 
@@ -338,7 +352,7 @@ export const XrayPage: React.FC = () => {
                   </span>
                   <button
                     onClick={resetAll}
-                    className="text-medical-rose hover:text-rose-300 hover:underline flex items-center gap-1 transition-colors text-xs"
+                    className="text-rose-400 hover:text-rose-300 hover:underline flex items-center gap-1 transition-colors text-xs"
                   >
                     <RefreshCw className="w-3 h-3" />
                     <span>Replace Image</span>
@@ -386,12 +400,12 @@ export const XrayPage: React.FC = () => {
               <Button
                 variant="primary"
                 size="md"
-                className="w-full"
+                className="w-full bg-gradient-to-r from-cyan-600 via-teal-600 to-cyan-500 hover:from-cyan-500 hover:to-teal-400 font-semibold shadow-lg shadow-cyan-950/50 hover:shadow-cyan-500/30 hover:scale-[1.01] transition-all"
                 onClick={runInference}
                 disabled={!selectedFile || isLoading}
                 isLoading={isLoading}
               >
-                <Sparkles className="w-4 h-4 mr-1.5" />
+                <Sparkles className="w-4 h-4 mr-1.5 text-cyan-200" />
                 <span>
                   {isLoading
                     ? 'Computing Neural Probabilities...'

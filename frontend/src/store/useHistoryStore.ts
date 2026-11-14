@@ -21,6 +21,37 @@ interface HistoryState {
 const STORAGE_KEY = 'lungvision_session_history';
 const PREF_KEY = 'lungvision_persist_pref';
 
+function sanitizeHistoryData(data: any): any {
+  if (!data || typeof data !== 'object') return data;
+  if (Array.isArray(data)) {
+    return data.slice(0, 50).map(sanitizeHistoryData);
+  }
+  const clean: Record<string, any> = {};
+  for (const [key, value] of Object.entries(data)) {
+    // Exclude large base64 strings and bulky 3D geometry arrays to prevent QuotaExceededError
+    if (
+      key === 'image_base64' ||
+      key === 'heatmap_base64' ||
+      key === 'overlay_base64' ||
+      key === 'drr_image_base64' ||
+      key === 'previewUrl' ||
+      key === 'vertices' ||
+      key === 'faces'
+    ) {
+      continue;
+    }
+    if (typeof value === 'string' && (value.startsWith('data:image/') || value.length > 2048)) {
+      continue;
+    }
+    if (typeof value === 'object' && value !== null) {
+      clean[key] = sanitizeHistoryData(value);
+    } else {
+      clean[key] = value;
+    }
+  }
+  return clean;
+}
+
 const getInitialPersistence = (): boolean => {
   try {
     return localStorage.getItem(PREF_KEY) === 'true';
@@ -70,6 +101,7 @@ export const useHistoryStore = create<HistoryState>((set, get) => ({
 
     const newItem: HistoryItem = {
       ...item,
+      data: sanitizeHistoryData(item.data),
       filename: cleanFilename,
       id: Math.random().toString(36).substring(2, 9),
       timestamp: new Date().toISOString(),

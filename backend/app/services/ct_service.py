@@ -20,7 +20,8 @@ from backend.app.services.ct.geometry import validate_geometry
 from backend.app.services.ct.loader import (
     CTVolume,
     create_reference_thoracic_volume,
-    load_itk_volume
+    load_itk_volume,
+    load_volume_from_payload
 )
 from backend.app.services.ct.measurement_service import measurement_service
 from backend.app.services.ct.mesh_service import mesh_service
@@ -59,11 +60,8 @@ class CTService:
 
         scan_id = f"ct_{uuid.uuid4().hex[:12]}"
 
-        # Create a new volume instance based on the uploaded payload
-        # For full MHD/NIfTI parsing, SimpleITK reads from temp file
-        # Here we initialize a valid CTVolume registered under the new ID
-        new_vol = create_reference_thoracic_volume(scan_id=scan_id)
-        new_vol.filename = filename
+        # Parse uploaded payload (MHD, NIfTI, DICOM archive, or calibrated fallback)
+        new_vol = load_volume_from_payload(filename=filename, content=content, scan_id=scan_id)
 
         self.volumes[scan_id] = new_vol
         logger.info(f"Registered CT scan '{scan_id}' ({filename}, {len(content)} bytes)")

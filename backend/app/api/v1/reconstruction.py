@@ -7,6 +7,7 @@ Version: 1.0.0
 from typing import Any, Dict, List, Optional
 from fastapi import APIRouter, Body, HTTPException, Query, status
 from fastapi.responses import PlainTextResponse
+from starlette.concurrency import run_in_threadpool
 
 from backend.app.schemas.reconstruction import (
     ExportOBJRequest,
@@ -29,7 +30,7 @@ router = APIRouter(prefix="/reconstruction", tags=["3D Anatomical Reconstruction
 async def get_ssm_model_info() -> SSMModelInfoResponse:
     """Returns metadata for the calibrated Statistical Shape Model."""
     try:
-        info = ssm_service.get_model_info()
+        info = await run_in_threadpool(ssm_service.get_model_info)
         return SSMModelInfoResponse(
             success=True,
             **info,
@@ -53,7 +54,8 @@ async def fit_ssm_from_projections(
 ) -> SSMReconstructionResponse:
     """Performs non-linear multi-view fitting to synthesize patient-specific 3D lung surfaces."""
     try:
-        result = ssm_service.fit_from_projections(
+        result = await run_in_threadpool(
+            ssm_service.fit_from_projections,
             frontal_aspect_ratio=request.frontal_aspect_ratio,
             lateral_aspect_ratio=request.lateral_aspect_ratio,
             estimated_inspiratory_effort=request.estimated_inspiratory_effort,
@@ -89,8 +91,8 @@ async def fit_ssm_from_projections(
 async def get_template_mesh():
     """Streams the mean shape template mesh as Wavefront OBJ."""
     try:
-        verts = ssm_service.synthesize_shape()
-        obj_text = ssm_service.export_reconstructed_obj(verts)
+        verts = await run_in_threadpool(ssm_service.synthesize_shape)
+        obj_text = await run_in_threadpool(ssm_service.export_reconstructed_obj, verts)
         return PlainTextResponse(
             content=obj_text,
             media_type="text/plain",
@@ -115,8 +117,8 @@ async def export_reconstructed_obj(
     """Generates a patient-specific OBJ file from deformation coefficients."""
     try:
         coeffs = request.shape_coefficients if request and request.shape_coefficients else []
-        verts = ssm_service.synthesize_shape(coeffs)
-        obj_text = ssm_service.export_reconstructed_obj(verts)
+        verts = await run_in_threadpool(ssm_service.synthesize_shape, coeffs)
+        obj_text = await run_in_threadpool(ssm_service.export_reconstructed_obj, verts)
         return PlainTextResponse(
             content=obj_text,
             media_type="text/plain",

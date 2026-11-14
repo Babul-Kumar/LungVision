@@ -99,27 +99,30 @@ export const CTExplorerPage: React.FC = () => {
     };
   }, [activeScanId, selectedStructure]);
 
-  // 2. Load 2D Slice on Navigation or Filter Change
+  // 2. Load 2D Slice on Navigation or Filter Change with debounce
   useEffect(() => {
     if (activeTab !== 'mpr') return;
 
     let isCancelled = false;
-    setLoadingSlice(true);
+    const timer = setTimeout(() => {
+      setLoadingSlice(true);
 
-    ctApi
-      .getSlice(activeScanId, mprView, sliceIndex, windowPreset, overlayMask, showNodules)
-      .then((data) => {
-        if (!isCancelled) setCurrentSlice(data);
-      })
-      .catch((err) => {
-        console.error('Slice fetch error:', err);
-      })
-      .finally(() => {
-        if (!isCancelled) setLoadingSlice(false);
-      });
+      ctApi
+        .getSlice(activeScanId, mprView, sliceIndex, windowPreset, overlayMask, showNodules)
+        .then((data) => {
+          if (!isCancelled) setCurrentSlice(data);
+        })
+        .catch((err) => {
+          console.error('Slice fetch error:', err);
+        })
+        .finally(() => {
+          if (!isCancelled) setLoadingSlice(false);
+        });
+    }, 30);
 
     return () => {
       isCancelled = true;
+      clearTimeout(timer);
     };
   }, [activeScanId, activeTab, mprView, sliceIndex, windowPreset, overlayMask, showNodules]);
 
@@ -368,13 +371,13 @@ export const CTExplorerPage: React.FC = () => {
       )}
 
       {/* Main Exploration Tabs */}
-      <div className="flex items-center gap-2 border-b border-medical-border pb-2">
+      <div className="glass-panel p-1.5 rounded-xl border border-slate-700/60 flex flex-wrap items-center gap-1.5">
         <button
           onClick={() => setActiveTab('3d')}
           className={`flex items-center gap-2 px-4 py-2 rounded-lg text-xs font-medium transition-all ${
             activeTab === '3d'
-              ? 'bg-medical-cyan text-medical-bg font-semibold shadow-sm'
-              : 'text-medical-muted hover:text-white hover:bg-medical-surface'
+              ? 'bg-gradient-to-r from-cyan-500 to-teal-400 text-slate-950 font-bold shadow-md shadow-cyan-500/30'
+              : 'text-slate-400 hover:text-white hover:bg-slate-800/60'
           }`}
         >
           <Box className="w-4 h-4" />
@@ -385,8 +388,8 @@ export const CTExplorerPage: React.FC = () => {
           onClick={() => setActiveTab('mpr')}
           className={`flex items-center gap-2 px-4 py-2 rounded-lg text-xs font-medium transition-all ${
             activeTab === 'mpr'
-              ? 'bg-medical-cyan text-medical-bg font-semibold shadow-sm'
-              : 'text-medical-muted hover:text-white hover:bg-medical-surface'
+              ? 'bg-gradient-to-r from-cyan-500 to-teal-400 text-slate-950 font-bold shadow-md shadow-cyan-500/30'
+              : 'text-slate-400 hover:text-white hover:bg-slate-800/60'
           }`}
         >
           <Layers className="w-4 h-4" />
@@ -397,8 +400,8 @@ export const CTExplorerPage: React.FC = () => {
           onClick={() => setActiveTab('annotations')}
           className={`flex items-center gap-2 px-4 py-2 rounded-lg text-xs font-medium transition-all ${
             activeTab === 'annotations'
-              ? 'bg-medical-cyan text-medical-bg font-semibold shadow-sm'
-              : 'text-medical-muted hover:text-white hover:bg-medical-surface'
+              ? 'bg-gradient-to-r from-cyan-500 to-teal-400 text-slate-950 font-bold shadow-md shadow-cyan-500/30'
+              : 'text-slate-400 hover:text-white hover:bg-slate-800/60'
           }`}
         >
           <Crosshair className="w-4 h-4" />
@@ -409,8 +412,8 @@ export const CTExplorerPage: React.FC = () => {
           onClick={() => setActiveTab('drr')}
           className={`flex items-center gap-2 px-4 py-2 rounded-lg text-xs font-medium transition-all ${
             activeTab === 'drr'
-              ? 'bg-medical-cyan text-medical-bg font-semibold shadow-sm'
-              : 'text-medical-muted hover:text-white hover:bg-medical-surface'
+              ? 'bg-gradient-to-r from-cyan-500 to-teal-400 text-slate-950 font-bold shadow-md shadow-cyan-500/30'
+              : 'text-slate-400 hover:text-white hover:bg-slate-800/60'
           }`}
         >
           <Film className="w-4 h-4" />

@@ -1,4 +1,5 @@
 from fastapi import APIRouter, File, Form, Query, UploadFile, status
+from starlette.concurrency import run_in_threadpool
 from backend.app.config import settings
 from backend.app.core.security import validate_image_file
 from backend.app.schemas.xray import XRayBinaryResponse, XRayMultiLabelResponse
@@ -31,7 +32,7 @@ async def predict_xray_multilabel(
     """
     content = await file.read()
     validate_image_file(file, content, settings.MAX_IMAGE_SIZE_BYTES)
-    return xray_service.predict_multilabel(content)
+    return await run_in_threadpool(xray_service.predict_multilabel, content)
 
 
 @router.post(
@@ -50,5 +51,5 @@ async def predict_xray_binary(
     """Executes binary Normal/Abnormal classification using the frozen ResNet18 checkpoints."""
     content = await file.read()
     validate_image_file(file, content, settings.MAX_IMAGE_SIZE_BYTES)
-    return xray_service.predict_binary(content, model_id=model_id)
+    return await run_in_threadpool(xray_service.predict_binary, content, model_id=model_id)
 

@@ -187,23 +187,30 @@ export const DualViewXRayPage: React.FC = () => {
       return;
     }
 
-    const reader = new FileReader();
-    reader.onload = (e) => {
-      const url = e.target?.result as string;
-      const img = new Image();
-      img.onload = () => {
-        setView({
+    const objectUrl = URL.createObjectURL(file);
+    const img = new Image();
+    img.onload = () => {
+      setView((prev) => {
+        if (prev.previewUrl && prev.previewUrl.startsWith('blob:')) {
+          URL.revokeObjectURL(prev.previewUrl);
+        }
+        return {
           file,
-          previewUrl: url,
+          previewUrl: objectUrl,
           width: img.naturalWidth,
           height: img.naturalHeight,
           isDragOver: false,
           error: null,
-        });
-      };
-      img.src = url;
+        };
+      });
     };
-    reader.readAsDataURL(file);
+    img.onerror = () => {
+      setView((prev) => ({
+        ...prev,
+        error: 'Failed to decode image data.',
+      }));
+    };
+    img.src = objectUrl;
   };
 
   // Zoom helpers
@@ -456,20 +463,21 @@ export const DualViewXRayPage: React.FC = () => {
                 }
               }}
               onClick={() => frontalInputRef.current?.click()}
-              className={`h-96 border-2 border-dashed rounded-xl flex flex-col items-center justify-center p-6 text-center cursor-pointer transition-all ${
+              className={`h-96 border-2 border-dashed rounded-xl flex flex-col items-center justify-center p-6 text-center cursor-pointer transition-all hud-corner-bracket relative overflow-hidden group ${
                 frontal.isDragOver
-                  ? 'border-medical-cyan bg-cyan-950/20'
-                  : 'border-medical-border hover:border-medical-cyan/50 hover:bg-medical-surface/40'
+                  ? 'border-cyan-400 bg-cyan-950/30 glow-cyan-sm'
+                  : 'border-slate-700/80 hover:border-cyan-400/60 hover:bg-slate-900/40'
               }`}
             >
-              <div className="w-12 h-12 rounded-xl bg-medical-surface border border-medical-border flex items-center justify-center text-medical-cyan mb-3">
-                <UploadCloud className="w-6 h-6" />
+              <div className="absolute inset-0 medical-grid opacity-30 pointer-events-none" />
+              <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-cyan-950 to-slate-900 border border-cyan-500/30 flex items-center justify-center text-cyan-400 mb-3 shadow-lg shadow-cyan-950/50 group-hover:scale-110 group-hover:border-cyan-400 transition-all z-10">
+                <UploadCloud className="w-7 h-7" />
               </div>
-              <p className="text-sm font-semibold text-white">Upload Frontal (PA / AP) View</p>
-              <p className="text-xs text-medical-muted mt-1.5 max-w-xs">
+              <p className="text-sm font-semibold text-white z-10 group-hover:text-cyan-300 transition-colors">Upload Frontal (PA / AP) View</p>
+              <p className="text-xs text-medical-muted mt-1.5 max-w-xs z-10">
                 Drag and drop posteroanterior or anteroposterior chest radiograph
               </p>
-              <span className="mt-3 text-[10px] font-mono px-2 py-0.5 rounded bg-medical-bg border border-medical-border text-medical-cyan">
+              <span className="mt-3 text-[10px] font-mono px-2 py-0.5 rounded bg-slate-900/90 border border-cyan-500/30 text-cyan-400 font-semibold z-10 shadow-sm">
                 Slot A: Frontal View
               </span>
             </div>
@@ -593,20 +601,21 @@ export const DualViewXRayPage: React.FC = () => {
                 }
               }}
               onClick={() => lateralInputRef.current?.click()}
-              className={`h-96 border-2 border-dashed rounded-xl flex flex-col items-center justify-center p-6 text-center cursor-pointer transition-all ${
+              className={`h-96 border-2 border-dashed rounded-xl flex flex-col items-center justify-center p-6 text-center cursor-pointer transition-all hud-corner-bracket relative overflow-hidden group ${
                 lateral.isDragOver
-                  ? 'border-medical-teal bg-teal-950/20'
-                  : 'border-medical-border hover:border-medical-teal/50 hover:bg-medical-surface/40'
+                  ? 'border-teal-400 bg-teal-950/30 glow-cyan-sm'
+                  : 'border-slate-700/80 hover:border-teal-400/60 hover:bg-slate-900/40'
               }`}
             >
-              <div className="w-12 h-12 rounded-xl bg-medical-surface border border-medical-border flex items-center justify-center text-medical-teal mb-3">
-                <UploadCloud className="w-6 h-6" />
+              <div className="absolute inset-0 medical-grid opacity-30 pointer-events-none" />
+              <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-teal-950 to-slate-900 border border-teal-500/30 flex items-center justify-center text-teal-400 mb-3 shadow-lg shadow-teal-950/50 group-hover:scale-110 group-hover:border-teal-400 transition-all z-10">
+                <UploadCloud className="w-7 h-7" />
               </div>
-              <p className="text-sm font-semibold text-white">Upload Lateral View</p>
-              <p className="text-xs text-medical-muted mt-1.5 max-w-xs">
+              <p className="text-sm font-semibold text-white z-10 group-hover:text-teal-300 transition-colors">Upload Lateral View</p>
+              <p className="text-xs text-medical-muted mt-1.5 max-w-xs z-10">
                 Drag and drop left or right lateral thoracic radiograph
               </p>
-              <span className="mt-3 text-[10px] font-mono px-2 py-0.5 rounded bg-medical-bg border border-medical-border text-medical-teal">
+              <span className="mt-3 text-[10px] font-mono px-2 py-0.5 rounded bg-slate-900/90 border border-teal-500/30 text-teal-400 font-semibold z-10 shadow-sm">
                 Slot B: Lateral View
               </span>
             </div>

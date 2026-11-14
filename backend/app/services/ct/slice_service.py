@@ -57,16 +57,16 @@ class CTSliceService:
         elif view == "coronal":
             total_slices = shape[1]
             clamped_idx = max(0, min(slice_idx, total_slices - 1))
-            # Coronal: rows are Z, cols are X
-            ct_slice = volume.ct_array[:, clamped_idx, :]
-            mask_slice = volume.mask_array[:, clamped_idx, :] if volume.mask_array is not None else None
+            # Coronal: rows are Z (inverted so row 0 is cranial/superior), cols are X
+            ct_slice = volume.ct_array[:, clamped_idx, :][::-1, :]
+            mask_slice = volume.mask_array[:, clamped_idx, :][::-1, :] if volume.mask_array is not None else None
             aspect_ratio = volume.spacing_xyz[2] / volume.spacing_xyz[0]  # sz / sx
         elif view == "sagittal":
             total_slices = shape[2]
             clamped_idx = max(0, min(slice_idx, total_slices - 1))
-            # Sagittal: rows are Z, cols are Y
-            ct_slice = volume.ct_array[:, :, clamped_idx]
-            mask_slice = volume.mask_array[:, :, clamped_idx] if volume.mask_array is not None else None
+            # Sagittal: rows are Z (inverted so row 0 is cranial/superior), cols are Y
+            ct_slice = volume.ct_array[:, :, clamped_idx][::-1, :]
+            mask_slice = volume.mask_array[:, :, clamped_idx][::-1, :] if volume.mask_array is not None else None
             aspect_ratio = volume.spacing_xyz[2] / volume.spacing_xyz[1]  # sz / sy
         else:
             view = "axial"
@@ -129,6 +129,9 @@ class CTSliceService:
             draw = ImageDraw.Draw(pil_img)
             for nodule in intersecting_nodules:
                 nx, ny = nodule["pos_2d"]
+                if view in ("coronal", "sagittal"):
+                    ny = (shape[0] - 1) - ny
+                    nodule["pos_2d"] = (nx, ny)
                 # Adjust for aspect ratio
                 ny_scaled = ny * aspect_ratio if abs(aspect_ratio - 1.0) > 0.05 else ny
                 r = max(4, int(nodule["diameter_mm"] / 2.0))
