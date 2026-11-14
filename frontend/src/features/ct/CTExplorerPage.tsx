@@ -15,6 +15,12 @@ import {
   Sliders,
   Activity,
   RotateCcw,
+  Play,
+  Pause,
+  ZoomIn,
+  ZoomOut,
+  Maximize2,
+  Sun,
 } from 'lucide-react';
 import { Card } from '@/components/common/Card';
 import { Button } from '@/components/common/Button';
@@ -58,6 +64,9 @@ export const CTExplorerPage: React.FC = () => {
   const [showNodules, setShowNodules] = useState<boolean>(true);
   const [currentSlice, setCurrentSlice] = useState<CTSliceResponse | null>(null);
   const [loadingSlice, setLoadingSlice] = useState<boolean>(false);
+  const [isCinePlaying, setIsCinePlaying] = useState<boolean>(false);
+  const [mprZoom, setMprZoom] = useState<number>(1.0);
+  const [mprInvert, setMprInvert] = useState<boolean>(false);
 
   // Upload States
   const [isUploading, setIsUploading] = useState<boolean>(false);
@@ -348,6 +357,25 @@ export const CTExplorerPage: React.FC = () => {
   const stepSlice = (delta: number) => {
     setSliceIndex((prev) => Math.max(0, Math.min(prev + delta, maxIndex)));
   };
+
+  // Mouse wheel scroll handler for MPR slice scrubbing
+  const handleMprWheel = (e: React.WheelEvent<HTMLDivElement>) => {
+    e.preventDefault();
+    if (e.deltaY < 0) {
+      stepSlice(1);
+    } else {
+      stepSlice(-1);
+    }
+  };
+
+  // Cine loop automated playback
+  useEffect(() => {
+    if (!isCinePlaying || activeTab !== 'mpr') return;
+    const interval = setInterval(() => {
+      setSliceIndex((prev) => (prev >= maxIndex ? 0 : prev + 1));
+    }, 90);
+    return () => clearInterval(interval);
+  }, [isCinePlaying, activeTab, maxIndex]);
 
   // Orientation compass markers
   const getOrientationLabels = (view: 'axial' | 'coronal' | 'sagittal') => {
@@ -994,8 +1022,72 @@ export const CTExplorerPage: React.FC = () => {
             <Card
               title={`${mprView.toUpperCase()} Orthogonal Viewport`}
               subtitle={`Window: ${windowPreset.toUpperCase()} · Slice: ${sliceIndex} · ${currentSlice?.nodules_on_slice?.length || 0} intersecting nodules`}
+              headerAction={
+                <div className="flex items-center gap-2">
+                  {/* Cine Play/Pause */}
+                  <Button
+                    variant="outline"
+                    size="sm"
+                    onClick={() => setIsCinePlaying((p) => !p)}
+                    className={`text-xs py-1 px-2.5 transition-colors ${
+                      isCinePlaying ? 'border-cyan-500 bg-cyan-950/60 text-cyan-300' : 'text-slate-300'
+                    }`}
+                    title={isCinePlaying ? 'Pause Cine Playback' : 'Start Auto Cine Loop'}
+                  >
+                    {isCinePlaying ? <Pause className="w-3.5 h-3.5 mr-1 text-cyan-400" /> : <Play className="w-3.5 h-3.5 mr-1" />}
+                    <span>{isCinePlaying ? 'Pause Cine' : 'Cine Loop'}</span>
+                  </Button>
+
+                  {/* Invert Grayscale */}
+                  <Button
+                    variant="ghost"
+                    size="sm"
+                    onClick={() => setMprInvert((i) => !i)}
+                    className={`p-1.5 h-auto transition-colors ${
+                      mprInvert ? 'text-amber-300 bg-amber-950/50' : 'text-slate-400 hover:text-white'
+                    }`}
+                    title="Invert CT Grayscale (Negative/Positive)"
+                  >
+                    <Sun className="w-3.5 h-3.5" />
+                  </Button>
+
+                  {/* Zoom Controls */}
+                  <div className="flex items-center gap-1 bg-black/75 border border-white/10 rounded-lg p-0.5 shadow-sm">
+                    <button
+                      onClick={() => setMprZoom((z) => Math.max(z - 0.25, 0.75))}
+                      disabled={mprZoom <= 0.75}
+                      className="p-1 text-slate-400 hover:text-white disabled:opacity-30 transition-colors"
+                      title="Zoom Out"
+                    >
+                      <ZoomOut className="w-3.5 h-3.5" />
+                    </button>
+                    <span className="text-[10px] font-mono text-cyan-400 px-1 min-w-[28px] text-center font-bold">
+                      {Math.round(mprZoom * 100)}%
+                    </span>
+                    <button
+                      onClick={() => setMprZoom((z) => Math.min(z + 0.25, 2.5))}
+                      disabled={mprZoom >= 2.5}
+                      className="p-1 text-slate-400 hover:text-white disabled:opacity-30 transition-colors"
+                      title="Zoom In"
+                    >
+                      <ZoomIn className="w-3.5 h-3.5" />
+                    </button>
+                    <button
+                      onClick={() => setMprZoom(1.0)}
+                      className="p-1 text-slate-400 hover:text-white transition-colors border-l border-white/10 ml-0.5"
+                      title="Fit to Screen"
+                    >
+                      <Maximize2 className="w-3.5 h-3.5" />
+                    </button>
+                  </div>
+                </div>
+              }
             >
-              <div className="relative min-h-[460px] bg-black rounded-xl border border-medical-border flex items-center justify-center overflow-hidden select-none">
+              <div
+                onWheel={handleMprWheel}
+                className="relative min-h-[460px] bg-black rounded-xl border border-medical-border flex items-center justify-center overflow-hidden select-none cursor-ns-resize group"
+                title="Scroll mouse wheel over image to scrub CT slices"
+              >
                 {/* Cardinal Anatomical Compass Orientation Labels */}
                 <div className="absolute top-2.5 left-1/2 -translate-x-1/2 z-20 px-2 py-0.5 rounded bg-black/75 border border-white/10 text-[10px] font-mono font-bold text-slate-300">
                   {orientation.top}
@@ -1017,23 +1109,38 @@ export const CTExplorerPage: React.FC = () => {
                 )}
 
                 {currentSlice?.image_base64 ? (
-                  <img
-                    src={currentSlice.image_base64}
-                    alt={`${mprView} CT slice`}
-                    className="max-h-[440px] w-auto object-contain select-none"
-                  />
+                  <div
+                    className="w-full h-full flex items-center justify-center overflow-hidden"
+                    style={{
+                      transform: `scale(${mprZoom})`,
+                      filter: mprInvert ? 'invert(1)' : 'none',
+                      transition: 'transform 0.12s ease-out',
+                    }}
+                  >
+                    <img
+                      src={currentSlice.image_base64}
+                      alt={`${mprView} CT slice`}
+                      className="max-h-[440px] w-auto object-contain select-none pointer-events-none"
+                    />
+                  </div>
                 ) : (
                   <div className="text-xs text-medical-muted">Loading orthogonal slice...</div>
                 )}
 
                 {/* Top Left Metadata Tag */}
-                <div className="absolute top-2.5 left-2.5 text-[10px] font-mono text-medical-cyan bg-black/75 px-2 py-1 rounded border border-white/10 z-20">
-                  {mprView.toUpperCase()} [{sliceIndex}/{maxIndex}]
+                <div className="absolute top-2.5 left-2.5 text-[10px] font-mono text-medical-cyan bg-black/75 px-2 py-1 rounded border border-white/10 z-20 flex items-center gap-1.5">
+                  <span className="w-1.5 h-1.5 rounded-full bg-cyan-400 animate-pulse" />
+                  <span>{mprView.toUpperCase()} [{sliceIndex}/{maxIndex}]</span>
                 </div>
 
                 {/* Bottom Right Window Tag */}
                 <div className="absolute bottom-2.5 right-2.5 text-[10px] font-mono text-slate-400 bg-black/75 px-2 py-1 rounded border border-white/10 z-20">
                   Window: {windowPreset.toUpperCase()}
+                </div>
+
+                {/* Bottom Left Mouse Hint */}
+                <div className="absolute bottom-2.5 left-2.5 text-[10px] font-mono text-slate-500 bg-black/70 px-2 py-0.5 rounded opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none">
+                  Mouse Wheel: Scrub Slices · Click: Target Nodule
                 </div>
               </div>
             </Card>
