@@ -63,7 +63,7 @@ export const SSM3DReconstructionViewer: React.FC<SSM3DReconstructionViewerProps>
     isAutoRotatingRef.current = isAutoRotating;
   }, [isAutoRotating]);
 
-  // Compute anatomical view label based on camera position
+  // Compute anatomical view label based on camera position (only update state if changed)
   const updateViewLabel = useCallback(() => {
     if (!cameraRef.current) return;
     const pos = cameraRef.current.position;
@@ -71,15 +71,16 @@ export const SSM3DReconstructionViewer: React.FC<SSM3DReconstructionViewerProps>
     const y = Math.abs(pos.y);
     const z = Math.abs(pos.z);
 
+    let newLabel = 'Anterior Oblique 3D';
     if (z > x * 2 && z > y * 2) {
-      setActiveViewName(pos.z > 0 ? 'Superior (Axial Top)' : 'Inferior (Axial Bottom)');
+      newLabel = pos.z > 0 ? 'Superior (Axial Top)' : 'Inferior (Axial Bottom)';
     } else if (y > x * 1.5 && y > z * 1.5) {
-      setActiveViewName(pos.y < 0 ? 'Anterior (Frontal AP)' : 'Posterior (Dorsal PA)');
+      newLabel = pos.y < 0 ? 'Anterior (Frontal AP)' : 'Posterior (Dorsal PA)';
     } else if (x > y * 1.5 && x > z * 1.5) {
-      setActiveViewName(pos.x > 0 ? 'Right Lateral' : 'Left Lateral');
-    } else {
-      setActiveViewName('Anterior Oblique 3D');
+      newLabel = pos.x > 0 ? 'Right Lateral' : 'Left Lateral';
     }
+
+    setActiveViewName((prev) => (prev !== newLabel ? newLabel : prev));
   }, []);
 
   // 1. Initialize Three.js Scene, Camera, Controls, Lights
@@ -168,31 +169,36 @@ export const SSM3DReconstructionViewer: React.FC<SSM3DReconstructionViewerProps>
       rendererRef.current.setSize(w, h);
     };
 
-    // Landmark hover raycaster
+    // Landmark hover raycaster (throttled via requestAnimationFrame)
+    let mouseMoveRaf: number | null = null;
     const handleMouseMove = (e: MouseEvent) => {
-      if (!container || !rendererRef.current || !cameraRef.current || !landmarkGroupRef.current) {
-        return;
-      }
-      const rect = container.getBoundingClientRect();
-      const mouse = new THREE.Vector2(
-        ((e.clientX - rect.left) / rect.width) * 2 - 1,
-        -((e.clientY - rect.top) / rect.height) * 2 + 1
-      );
-      const raycaster = new THREE.Raycaster();
-      raycaster.setFromCamera(mouse, cameraRef.current);
-      const intersects = raycaster.intersectObjects(landmarkGroupRef.current.children, true);
-      if (intersects.length > 0 && intersects[0].object.userData?.landmarkName) {
-        const name = intersects[0].object.userData.landmarkName;
-        const coords = intersects[0].object.userData.coords || [0, 0, 0];
-        setHoveredLandmark({
-          name,
-          coords,
-          x: e.clientX - rect.left,
-          y: e.clientY - rect.top,
-        });
-      } else {
-        setHoveredLandmark(null);
-      }
+      if (mouseMoveRaf) return;
+      mouseMoveRaf = requestAnimationFrame(() => {
+        mouseMoveRaf = null;
+        if (!container || !rendererRef.current || !cameraRef.current || !landmarkGroupRef.current) {
+          return;
+        }
+        const rect = container.getBoundingClientRect();
+        const mouse = new THREE.Vector2(
+          ((e.clientX - rect.left) / rect.width) * 2 - 1,
+          -((e.clientY - rect.top) / rect.height) * 2 + 1
+        );
+        const raycaster = new THREE.Raycaster();
+        raycaster.setFromCamera(mouse, cameraRef.current);
+        const intersects = raycaster.intersectObjects(landmarkGroupRef.current.children, true);
+        if (intersects.length > 0 && intersects[0].object.userData?.landmarkName) {
+          const name = intersects[0].object.userData.landmarkName;
+          const coords = intersects[0].object.userData.coords || [0, 0, 0];
+          setHoveredLandmark({
+            name,
+            coords,
+            x: e.clientX - rect.left,
+            y: e.clientY - rect.top,
+          });
+        } else {
+          setHoveredLandmark((prev) => (prev !== null ? null : prev));
+        }
+      });
     };
 
     container.addEventListener('mousemove', handleMouseMove);

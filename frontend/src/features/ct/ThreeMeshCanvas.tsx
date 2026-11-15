@@ -52,7 +52,7 @@ export const ThreeMeshCanvas: React.FC<ThreeMeshCanvasProps> = ({
     isAutoRotatingRef.current = isAutoRotating;
   }, [isAutoRotating]);
 
-  // Compute anatomical view label based on camera position
+  // Compute anatomical view label based on camera position (only update state if changed)
   const updateViewLabel = useCallback(() => {
     if (!cameraRef.current) return;
     const pos = cameraRef.current.position;
@@ -60,15 +60,16 @@ export const ThreeMeshCanvas: React.FC<ThreeMeshCanvasProps> = ({
     const y = Math.abs(pos.y);
     const z = Math.abs(pos.z);
 
+    let newLabel = 'Anterior Oblique 3D';
     if (z > x * 2 && z > y * 2) {
-      setActiveViewName(pos.z > 0 ? 'Superior (Axial Top)' : 'Inferior (Axial Bottom)');
+      newLabel = pos.z > 0 ? 'Superior (Axial Top)' : 'Inferior (Axial Bottom)';
     } else if (y > x * 1.5 && y > z * 1.5) {
-      setActiveViewName(pos.y < 0 ? 'Anterior (Frontal AP)' : 'Posterior (Dorsal PA)');
+      newLabel = pos.y < 0 ? 'Anterior (Frontal AP)' : 'Posterior (Dorsal PA)';
     } else if (x > y * 1.5 && x > z * 1.5) {
-      setActiveViewName(pos.x > 0 ? 'Right Lateral' : 'Left Lateral');
-    } else {
-      setActiveViewName('Anterior Oblique 3D');
+      newLabel = pos.x > 0 ? 'Right Lateral' : 'Left Lateral';
     }
+
+    setActiveViewName((prev) => (prev !== newLabel ? newLabel : prev));
   }, []);
 
   // 1. Initialize Scene, Camera, Renderer, Controls
@@ -191,18 +192,23 @@ export const ThreeMeshCanvas: React.FC<ThreeMeshCanvasProps> = ({
       }
     };
 
+    let mouseMoveRaf: number | null = null;
     const handleMouseMove = (e: MouseEvent) => {
-      const nodule = getIntersectedNodule(e);
-      if (nodule && container) {
-        const rect = container.getBoundingClientRect();
-        setHoveredNodule({
-          nodule,
-          x: e.clientX - rect.left,
-          y: e.clientY - rect.top,
-        });
-      } else {
-        setHoveredNodule(null);
-      }
+      if (mouseMoveRaf) return;
+      mouseMoveRaf = requestAnimationFrame(() => {
+        mouseMoveRaf = null;
+        const nodule = getIntersectedNodule(e);
+        if (nodule && container) {
+          const rect = container.getBoundingClientRect();
+          setHoveredNodule({
+            nodule,
+            x: e.clientX - rect.left,
+            y: e.clientY - rect.top,
+          });
+        } else {
+          setHoveredNodule((prev) => (prev !== null ? null : prev));
+        }
+      });
     };
 
     container.addEventListener('click', handleClick);

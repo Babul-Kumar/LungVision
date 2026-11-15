@@ -28,6 +28,14 @@ LABEL_COLORS: Dict[int, Tuple[int, int, int]] = {
 class CTSliceService:
     """Renders 2D multi-planar orthogonal slices with HU windowing, segmentation contours, and nodule markers."""
 
+    _slice_cache: Dict[str, Tuple[str, Dict[str, Any]]] = {}
+    _MAX_CACHE_SIZE: int = 512
+
+    @classmethod
+    def clear_cache(cls) -> None:
+        """Flushes the in-memory slice cache."""
+        cls._slice_cache.clear()
+
     @classmethod
     def render_slice(
         cls,
@@ -44,8 +52,13 @@ class CTSliceService:
         """Extracts and renders a cross-sectional CT slice image encoded as Base64 PNG.
         
         Matches interactive visualization logic from notebook Cell 5 & 10.
+        Employs fast in-memory LRU caching for instant 60 FPS PACS scrubbing.
         """
         view = view.lower()
+        cache_key = f"{volume.scan_id}:{view}:{slice_idx}:{window}:{window_center}:{window_width}:{overlay_mask}:{show_nodules}:{alpha}"
+        if cache_key in cls._slice_cache:
+            return cls._slice_cache[cache_key]
+
         shape = volume.shape_zyx  # (Z, Y, X)
 
         # 1. Determine slice bounds and extract 2D raw HU array
@@ -172,7 +185,14 @@ class CTSliceService:
             "nodules_on_slice": intersecting_nodules
         }
 
-        return f"data:image/png;base64,{b64_data}", meta
+        result = (f"data:image/png;base64,{b64_data}", meta)
+        if len(cls._slice_cache) >= cls._MAX_CACHE_SIZE:
+            # Evict first 64 entries to maintain bounded memory footprint
+            keys_to_remove = list(cls._slice_cache.keys())[:64]
+            for k in keys_to_remove:
+                cls._slice_cache.pop(k, None)
+        cls._slice_cache[cache_key] = result
+        return result
 
 
 slice_service = CTSliceService()

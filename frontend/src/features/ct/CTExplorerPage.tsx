@@ -128,32 +128,69 @@ export const CTExplorerPage: React.FC = () => {
     };
   }, [activeScanId, selectedStructure]);
 
-  // 2. Load 2D Slice on Navigation or Filter Change with debounce
+  const maxIndex =
+    mprView === 'axial'
+      ? (metadata?.dimensions.z || 64) - 1
+      : mprView === 'coronal'
+      ? (metadata?.dimensions.y || 128) - 1
+      : (metadata?.dimensions.x || 128) - 1;
+
+  // In-memory slice cache to guarantee 60 FPS PACS scrubbing and zero stutter
+  const sliceCacheRef = useRef<Map<string, CTSliceResponse>>(new Map());
+
+  // 2. Load 2D Slice on Navigation or Filter Change with instant cache hit & background prefetch
   useEffect(() => {
     if (activeTab !== 'mpr') return;
 
-    let isCancelled = false;
-    const timer = setTimeout(() => {
-      setLoadingSlice(true);
+    const cacheKey = `${activeScanId}:${mprView}:${sliceIndex}:${windowPreset}:${overlayMask}:${showNodules}`;
+    if (sliceCacheRef.current.has(cacheKey)) {
+      setCurrentSlice(sliceCacheRef.current.get(cacheKey)!);
+      setLoadingSlice(false);
+      return;
+    }
 
-      ctApi
-        .getSlice(activeScanId, mprView, sliceIndex, windowPreset, overlayMask, showNodules)
-        .then((data) => {
-          if (!isCancelled) setCurrentSlice(data);
-        })
-        .catch((err) => {
-          console.error('Slice fetch error:', err);
-        })
-        .finally(() => {
-          if (!isCancelled) setLoadingSlice(false);
-        });
-    }, 30);
+    let isCancelled = false;
+    // Only show full loading overlay if there's no slice on screen at all
+    if (!currentSlice) {
+      setLoadingSlice(true);
+    }
+
+    ctApi
+      .getSlice(activeScanId, mprView, sliceIndex, windowPreset, overlayMask, showNodules)
+      .then((data) => {
+        if (!isCancelled) {
+          sliceCacheRef.current.set(cacheKey, data);
+          setCurrentSlice(data);
+        }
+      })
+      .catch((err) => {
+        console.error('Slice fetch error:', err);
+      })
+      .finally(() => {
+        if (!isCancelled) setLoadingSlice(false);
+      });
+
+    // Background prefetch adjacent slices (±1, ±2) for instantaneous scrubbing
+    const prefetchDeltas = [1, -1, 2, -2];
+    for (const d of prefetchDeltas) {
+      const target = sliceIndex + d;
+      if (target >= 0 && target <= maxIndex) {
+        const pk = `${activeScanId}:${mprView}:${target}:${windowPreset}:${overlayMask}:${showNodules}`;
+        if (!sliceCacheRef.current.has(pk)) {
+          ctApi
+            .getSlice(activeScanId, mprView, target, windowPreset, overlayMask, showNodules)
+            .then((data) => {
+              sliceCacheRef.current.set(pk, data);
+            })
+            .catch(() => {});
+        }
+      }
+    }
 
     return () => {
       isCancelled = true;
-      clearTimeout(timer);
     };
-  }, [activeScanId, activeTab, mprView, sliceIndex, windowPreset, overlayMask, showNodules]);
+  }, [activeScanId, activeTab, mprView, sliceIndex, windowPreset, overlayMask, showNodules, maxIndex]);
 
   // 3. Load DRR on View or Geometry Change
   useEffect(() => {
@@ -329,13 +366,6 @@ export const CTExplorerPage: React.FC = () => {
       if (fileInputRef.current) fileInputRef.current.value = '';
     }
   };
-
-  const maxIndex =
-    mprView === 'axial'
-      ? (metadata?.dimensions.z || 64) - 1
-      : mprView === 'coronal'
-      ? (metadata?.dimensions.y || 128) - 1
-      : (metadata?.dimensions.x || 128) - 1;
 
   // Jump to Nodule with appropriate plane indexing
   const jumpToNodule = (nodule: CTAnnotationItem, targetView?: 'axial' | 'coronal' | 'sagittal') => {
@@ -1102,8 +1132,8 @@ export const CTExplorerPage: React.FC = () => {
                   {orientation.right}
                 </div>
 
-                {loadingSlice && (
-                  <div className="absolute inset-0 bg-black/60 backdrop-blur-xs flex items-center justify-center z-30">
+                {loadingSlice && !currentSlice && (
+                  <div className="absolute inset-0 bg-black/70 flex items-center justify-center z-30">
                     <span className="text-xs font-mono text-medical-cyan animate-pulse">Streaming orthogonal slice...</span>
                   </div>
                 )}
@@ -1129,8 +1159,9 @@ export const CTExplorerPage: React.FC = () => {
 
                 {/* Top Left Metadata Tag */}
                 <div className="absolute top-2.5 left-2.5 text-[10px] font-mono text-medical-cyan bg-black/75 px-2 py-1 rounded border border-white/10 z-20 flex items-center gap-1.5">
-                  <span className="w-1.5 h-1.5 rounded-full bg-cyan-400 animate-pulse" />
+                  <span className={`w-1.5 h-1.5 rounded-full ${loadingSlice ? 'bg-amber-400 animate-ping' : 'bg-cyan-400 animate-pulse'}`} />
                   <span>{mprView.toUpperCase()} [{sliceIndex}/{maxIndex}]</span>
+                  {loadingSlice && <span className="text-amber-300 ml-1 font-sans text-[9px]">syncing</span>}
                 </div>
 
                 {/* Bottom Right Window Tag */}

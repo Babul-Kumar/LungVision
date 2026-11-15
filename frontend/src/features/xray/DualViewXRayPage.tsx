@@ -279,6 +279,15 @@ export const DualViewXRayPage: React.FC = () => {
     setLateralZoom(1.0);
   };
 
+  const handleZoomWheel = (e: React.WheelEvent<HTMLDivElement>, target: 'frontal' | 'lateral') => {
+    e.preventDefault();
+    if (e.deltaY < 0) {
+      handleZoomIn(target);
+    } else {
+      handleZoomOut(target);
+    }
+  };
+
   // Run frontal inference
   const executeAnalysis = async () => {
     if (!frontal.file) return;
@@ -547,7 +556,11 @@ export const DualViewXRayPage: React.FC = () => {
             </div>
           ) : (
             <div className="space-y-3">
-              <div className="relative rounded-xl overflow-hidden border border-medical-border bg-black h-96 flex items-center justify-center select-none">
+              <div
+                onWheel={(e) => handleZoomWheel(e, 'frontal')}
+                className="relative rounded-xl overflow-hidden border border-medical-border bg-black h-96 flex items-center justify-center select-none cursor-ns-resize"
+                title="Scroll mouse wheel to zoom frontal radiograph"
+              >
                 <div
                   className="w-full h-full flex items-center justify-center overflow-hidden"
                   style={{
@@ -711,7 +724,11 @@ export const DualViewXRayPage: React.FC = () => {
             </div>
           ) : (
             <div className="space-y-3">
-              <div className="relative rounded-xl overflow-hidden border border-medical-border bg-black h-96 flex items-center justify-center select-none">
+              <div
+                onWheel={(e) => handleZoomWheel(e, 'lateral')}
+                className="relative rounded-xl overflow-hidden border border-medical-border bg-black h-96 flex items-center justify-center select-none cursor-ns-resize"
+                title="Scroll mouse wheel to zoom lateral radiograph"
+              >
                 <div
                   className="w-full h-full flex items-center justify-center overflow-hidden"
                   style={{

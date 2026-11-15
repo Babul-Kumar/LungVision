@@ -180,6 +180,15 @@ export const XrayPage: React.FC = () => {
   const zoomOut = () => setZoomScale((prev) => Math.max(prev - 0.25, 0.75));
   const zoomReset = () => setZoomScale(1.0);
 
+  const handleXrayWheel = (e: React.WheelEvent<HTMLDivElement>) => {
+    e.preventDefault();
+    if (e.deltaY < 0) {
+      setZoomScale((prev) => Math.min(prev + 0.15, 3.5));
+    } else {
+      setZoomScale((prev) => Math.max(prev - 0.15, 0.75));
+    }
+  };
+
   const openExplainModal = (disease?: DiseaseName) => {
     if (disease) setSelectedExplainDisease(disease);
     setIsExplainModalOpen(true);
@@ -346,7 +355,11 @@ export const XrayPage: React.FC = () => {
             ) : (
               <div className="space-y-3">
                 {/* Image Inspection Viewport with Zoom Controls */}
-                <div className="relative rounded-xl overflow-hidden border border-slate-700/80 bg-black h-80 flex items-center justify-center group select-none hud-corner-bracket shadow-inner">
+                <div
+                  onWheel={handleXrayWheel}
+                  className="relative rounded-xl overflow-hidden border border-slate-700/80 bg-black h-80 flex items-center justify-center group select-none hud-corner-bracket shadow-inner cursor-ns-resize"
+                  title="Scroll mouse wheel to zoom image"
+                >
                   <div className="absolute inset-0 medical-grid-fine opacity-20 pointer-events-none" />
                   <div
                     className="w-full h-full flex items-center justify-center overflow-hidden cursor-grab active:cursor-grabbing"
