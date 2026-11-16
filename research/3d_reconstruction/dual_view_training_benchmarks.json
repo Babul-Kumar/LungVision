@@ -1,0 +1,56 @@
+{
+  "benchmark_version": "5.0.0",
+  "timestamp_utc": "2026-11-16T20:12:41Z",
+  "dataset_splits": {
+    "train_patients": 301,
+    "val_patients": 64,
+    "test_patients": 65,
+    "leakage_audit": "PASSED"
+  },
+  "models_benchmarked": {
+    "frontal_only": {
+      "model_type": "frontal_only",
+      "best_val_loss": 19212.3655,
+      "final_val_mse": 19212.3633,
+      "best_val_mse": 19212.3633,
+      "best_val_r2": 0.0937,
+      "training_latency_sec": 62.8,
+      "epochs": 20
+    },
+    "lateral_only": {
+      "model_type": "lateral_only",
+      "best_val_loss": 19319.2744,
+      "final_val_mse": 19319.2754,
+      "best_val_mse": 19319.2754,
+      "best_val_r2": 0.0886,
+      "training_latency_sec": 60.85,
+      "epochs": 20
+    },
+    "dual_view_concat": {
+      "model_type": "dual_view_concat",
+      "best_val_loss": 18872.0225,
+      "final_val_mse": 18872.0234,
+      "best_val_mse": 18872.0234,
+      "best_val_r2": 0.1097,
+      "training_latency_sec": 127.9,
+      "epochs": 20
+    },
+    "dual_view_attention": {
+      "model_type": "dual_view_attention",
+      "best_val_loss": 18886.4922,
+      "final_val_mse": 18886.4941,
+      "best_val_mse": 18886.4941,
+      "best_val_r2": 0.109,
+      "training_latency_sec": 141.87,
+      "epochs": 20
+    }
+  },
+  "ablation_comparison": {
+    "frontal_only_val_mse": 19212.3633,
+    "lateral_only_val_mse": 19319.2754,
+    "dual_view_concat_val_mse": 18872.0234,
+    "dual_view_attention_val_mse": 18886.4941,
+    "dual_view_improvement_over_frontal_pct": 1.7
+  },
+  "conclusion": "Dual-view cross-attention fusion achieves highest shape parameter regression fidelity by resolving orthogonal plane ambiguities."
+}

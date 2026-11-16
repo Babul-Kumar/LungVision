@@ -20,6 +20,8 @@ interface SSM3DReconstructionViewerProps {
   objData?: string | null;
   vertices?: number[][] | null;
   faces?: number[][] | null;
+  referenceVertices?: number[][] | null;
+  referenceFaces?: number[][] | null;
   cardiacMesh?: {
     vertex_count?: number;
     face_count?: number;
@@ -44,6 +46,8 @@ export const SSM3DReconstructionViewer: React.FC<SSM3DReconstructionViewerProps>
   objData,
   vertices,
   faces,
+  referenceVertices,
+  referenceFaces,
   cardiacMesh,
   landmarks,
   onExportObj,
@@ -53,6 +57,7 @@ export const SSM3DReconstructionViewer: React.FC<SSM3DReconstructionViewerProps>
   const [wireframe, setWireframe] = useState<boolean>(false);
   const [showLandmarks, setShowLandmarks] = useState<boolean>(true);
   const [showHeart, setShowHeart] = useState<boolean>(true);
+  const [showReferenceCT, setShowReferenceCT] = useState<boolean>(true);
   const [colorMode, setColorMode] = useState<'pleura' | 'bilateral' | 'platinum'>('pleura');
   const [isAutoRotating, setIsAutoRotating] = useState<boolean>(false);
   const [activeViewName, setActiveViewName] = useState<string>('Oblique 3D');
@@ -66,6 +71,7 @@ export const SSM3DReconstructionViewer: React.FC<SSM3DReconstructionViewerProps>
   const controlsRef = useRef<OrbitControls | null>(null);
   const meshGroupRef = useRef<THREE.Group | null>(null);
   const cardiacGroupRef = useRef<THREE.Group | null>(null);
+  const referenceGroupRef = useRef<THREE.Group | null>(null);
   const landmarkGroupRef = useRef<THREE.Group | null>(null);
   const animFrameIdRef = useRef<number | null>(null);
   const isAutoRotatingRef = useRef(false);
@@ -162,6 +168,10 @@ export const SSM3DReconstructionViewer: React.FC<SSM3DReconstructionViewerProps>
     scene.add(cardiacGroup);
     cardiacGroupRef.current = cardiacGroup;
 
+    const referenceGroup = new THREE.Group();
+    scene.add(referenceGroup);
+    referenceGroupRef.current = referenceGroup;
+
     const landmarkGroup = new THREE.Group();
     scene.add(landmarkGroup);
     landmarkGroupRef.current = landmarkGroup;
@@ -173,6 +183,9 @@ export const SSM3DReconstructionViewer: React.FC<SSM3DReconstructionViewerProps>
         meshGroupRef.current.rotation.z += 0.006;
         if (cardiacGroupRef.current) {
           cardiacGroupRef.current.rotation.z = meshGroupRef.current.rotation.z;
+        }
+        if (referenceGroupRef.current) {
+          referenceGroupRef.current.rotation.z = meshGroupRef.current.rotation.z;
         }
         if (landmarkGroupRef.current) {
           landmarkGroupRef.current.rotation.z = meshGroupRef.current.rotation.z;
@@ -262,6 +275,19 @@ export const SSM3DReconstructionViewer: React.FC<SSM3DReconstructionViewerProps>
       while (cardiacGroupRef.current.children.length > 0) {
         const child = cardiacGroupRef.current.children[0] as THREE.Mesh;
         cardiacGroupRef.current.remove(child);
+        if (child.geometry) child.geometry.dispose();
+        if (Array.isArray(child.material)) {
+          child.material.forEach((m) => m.dispose());
+        } else if (child.material) {
+          child.material.dispose();
+        }
+      }
+    }
+
+    if (referenceGroupRef.current) {
+      while (referenceGroupRef.current.children.length > 0) {
+        const child = referenceGroupRef.current.children[0] as THREE.Mesh;
+        referenceGroupRef.current.remove(child);
         if (child.geometry) child.geometry.dispose();
         if (Array.isArray(child.material)) {
           child.material.forEach((m) => m.dispose());
@@ -441,6 +467,36 @@ export const SSM3DReconstructionViewer: React.FC<SSM3DReconstructionViewerProps>
         cFaceCount = cardiacMesh.faces.length;
       }
 
+      // Build Reference CT Ground Truth Mesh (Cyan Translucent)
+      if (referenceVertices && referenceFaces && referenceGroupRef.current) {
+        const refGeo = new THREE.BufferGeometry();
+        const refPos = new Float32Array(referenceVertices.length * 3);
+        for (let i = 0; i < referenceVertices.length; i++) {
+          refPos[i * 3] = referenceVertices[i][0];
+          refPos[i * 3 + 1] = referenceVertices[i][1];
+          refPos[i * 3 + 2] = referenceVertices[i][2];
+        }
+        refGeo.setAttribute('position', new THREE.BufferAttribute(refPos, 3));
+        const refIdx: number[] = [];
+        for (let f = 0; f < referenceFaces.length; f++) {
+          refIdx.push(referenceFaces[f][0], referenceFaces[f][1], referenceFaces[f][2]);
+        }
+        refGeo.setIndex(refIdx);
+        refGeo.computeVertexNormals();
+
+        const refMat = new THREE.MeshPhysicalMaterial({
+          color: 0x06b6d4, // Cyan translucent CT reference
+          roughness: 0.35,
+          metalness: 0.05,
+          transparent: true,
+          opacity: wireframe ? 0.75 : 0.45,
+          wireframe: wireframe,
+          side: THREE.DoubleSide,
+        });
+        const refMesh = new THREE.Mesh(refGeo, refMat);
+        referenceGroupRef.current.add(refMesh);
+      }
+
       setVertexCount(vertices.length + cVertCount);
       setFaceCount(faces.length + cFaceCount);
 
@@ -453,18 +509,29 @@ export const SSM3DReconstructionViewer: React.FC<SSM3DReconstructionViewerProps>
         cardiacGroupRef.current.rotation.z = 0;
         cardiacGroupRef.current.visible = showHeart;
       }
+      if (referenceGroupRef.current) {
+        referenceGroupRef.current.position.copy(meshGroupRef.current.position);
+        referenceGroupRef.current.rotation.z = 0;
+        referenceGroupRef.current.visible = showReferenceCT;
+      }
       if (landmarkGroupRef.current) {
         landmarkGroupRef.current.position.copy(meshGroupRef.current.position);
         landmarkGroupRef.current.rotation.z = 0;
       }
     }
-  }, [objData, vertices, faces, cardiacMesh, wireframe, colorMode, showHeart]);
+  }, [objData, vertices, faces, referenceVertices, referenceFaces, cardiacMesh, wireframe, colorMode, showHeart, showReferenceCT]);
 
   useEffect(() => {
     if (cardiacGroupRef.current) {
       cardiacGroupRef.current.visible = showHeart;
     }
   }, [showHeart]);
+
+  useEffect(() => {
+    if (referenceGroupRef.current) {
+      referenceGroupRef.current.visible = showReferenceCT;
+    }
+  }, [showReferenceCT]);
 
   // 3. Render Landmark Markers
   useEffect(() => {
@@ -642,6 +709,21 @@ export const SSM3DReconstructionViewer: React.FC<SSM3DReconstructionViewerProps>
             <span className="text-xs">🫀</span>
             <span className="hidden sm:inline">Cardiac Silhouette</span>
           </button>
+
+          {referenceVertices && (
+            <button
+              onClick={() => setShowReferenceCT((r) => !r)}
+              className={`px-2 py-1 rounded text-xs font-medium flex items-center gap-1 transition-colors ${
+                showReferenceCT
+                  ? 'bg-cyan-100 text-cyan-950 font-semibold border border-cyan-300'
+                  : 'text-[#5e4b75] hover:text-[#1a082e] hover:bg-slate-100'
+              }`}
+              title="Toggle Ground Truth Reference CT Mesh Overlay"
+            >
+              {showReferenceCT ? <Eye className="w-3.5 h-3.5 text-cyan-700" /> : <EyeOff className="w-3.5 h-3.5 text-slate-400" />}
+              <span className="hidden sm:inline">CT Ground Truth (Cyan)</span>
+            </button>
+          )}
 
           <button
             onClick={() => setColorMode((c) => (c === 'pleura' ? 'bilateral' : c === 'bilateral' ? 'platinum' : 'pleura'))}

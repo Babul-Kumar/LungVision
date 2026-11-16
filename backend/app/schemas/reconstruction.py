@@ -1,7 +1,7 @@
 """
 LungVision AI — Statistical Shape Model 3D Reconstruction Schemas
 Schema: backend/app/schemas/reconstruction.py
-Version: 1.0.0
+Version: 5.0.0
 """
 
 from typing import Any, Dict, List, Optional
@@ -85,6 +85,7 @@ class MeshDescriptor(BaseModel):
     landmarks: Dict[str, List[float]] = {}
     vertices: Optional[List[List[float]]] = None
     faces: Optional[List[List[int]]] = None
+    uncertainties_mm: Optional[List[float]] = None
 
 
 class SSMReconstructionResponse(StandardResponse):
@@ -127,3 +128,46 @@ class SSMDeformResponse(StandardResponse):
     vertices: List[List[float]]
     faces: List[List[int]]
 
+
+# Phase 5 Dual-View Specific Schemas
+
+class ComparisonMetrics(BaseModel):
+    """Quantitative surface metrics comparing estimated 3D shape against ground truth reference CT."""
+    surface_dice: float = Field(..., description="Surface Dice overlap (2mm tolerance)")
+    assd_mm: float = Field(..., description="Average Symmetric Surface Distance in millimeters")
+    hd95_mm: float = Field(..., description="95th percentile Hausdorff Distance in millimeters")
+    volume_error_pct: float = Field(..., description="Relative volume error percentage")
+    mean_landmark_error_mm: Optional[float] = Field(default=None, description="Euclidean landmark error across 16 points")
+    left_lung_dice: Optional[float] = Field(default=None, description="Left lung surface Dice overlap")
+    right_lung_dice: Optional[float] = Field(default=None, description="Right lung surface Dice overlap")
+    reference_volume_ml: Optional[float] = Field(default=None, description="Ground truth CT lung volume in mL")
+    predicted_volume_ml: Optional[float] = Field(default=None, description="Predicted 3D mesh volume in mL")
+
+
+class DualViewReconstructionRequest(BaseModel):
+    """Request payload for patient-specific dual-view 3D shape reconstruction."""
+    patient_id: Optional[str] = Field(default=None, description="Patient identifier for pair verification")
+    frontal_image_base64: Optional[str] = Field(default=None, description="Base64-encoded Frontal PA/AP radiograph")
+    lateral_image_base64: Optional[str] = Field(default=None, description="Base64-encoded Lateral LL radiograph")
+    fusion_model: str = Field(default="dual_view_attention", description="'dual_view_attention', 'dual_view_concat', 'frontal_only', 'lateral_only'")
+    allow_single_view: bool = Field(default=False, description="Whether to permit single-view fallback when lateral is missing")
+    include_mesh_geometry: bool = Field(default=True, description="Whether to include vertex coordinate arrays")
+    compare_with_reference_ct: bool = Field(default=True, description="Whether to compute ground-truth CT comparison if available")
+
+
+class DualViewReconstructionResponse(StandardResponse):
+    """Response payload for patient-specific dual-view 3D shape reconstruction."""
+    status: str
+    patient_id: str
+    pairing_status: str
+    fusion_model_used: str
+    latency_ms: float
+    predicted_coefficients: List[float]
+    volumetry: OrganVolumetry
+    surface_mesh: MeshDescriptor
+    left_lung_mesh: Optional[MeshDescriptor] = None
+    right_lung_mesh: Optional[MeshDescriptor] = None
+    reference_ct_mesh: Optional[MeshDescriptor] = None
+    comparison_metrics: Optional[ComparisonMetrics] = None
+    uncertainty: Dict[str, float]
+    disclaimer: str

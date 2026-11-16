@@ -179,4 +179,36 @@ describe('DualViewXRayPage Feature', () => {
       expect(screen.getByText(/1.75 mm/i)).toBeInTheDocument();
     });
   });
+
+  it('renders Phase 5 dual-view pairing status, model selector, structure filter, and non-diagnostic disclaimer', async () => {
+    render(
+      <BrowserRouter future={{ v7_relativeSplatPath: true, v7_startTransition: true }}>
+        <DualViewXRayPage />
+      </BrowserRouter>
+    );
+
+    // Patient ID input & Pairing Status
+    expect(screen.getByText(/Patient Cohort Identifier/i)).toBeInTheDocument();
+    expect(screen.getByDisplayValue('LIDC-IDRI-0002')).toBeInTheDocument();
+    expect(screen.getByText(/Dual-View Pairing Status/i)).toBeInTheDocument();
+    expect(screen.getByText(/Awaiting Radiograph Upload/i)).toBeInTheDocument();
+
+    // Shape Parameter Predictor dropdown
+    expect(screen.getByText(/Shape Parameter Predictor/i)).toBeInTheDocument();
+    const select = screen.getByRole('combobox');
+    expect(select).toBeInTheDocument();
+    expect(screen.getByText(/Dual-View Cross-Attention \(Recommended - ASSD 4.82mm\)/i)).toBeInTheDocument();
+
+    // Non-diagnostic research disclaimer
+    expect(
+      screen.getByText(/Estimated Anatomical Surface Reconstruction — Not a CT Scan/i)
+    ).toBeInTheDocument();
+    expect(
+      screen.getByText(/It does NOT synthesize Hounsfield Units, parenchymal tissue density/i)
+    ).toBeInTheDocument();
+
+    await waitFor(() => {
+      expect(reconstructionApi.getModelInfo).toHaveBeenCalled();
+    });
+  });
 });

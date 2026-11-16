@@ -1,0 +1,124 @@
+{
+  "audit_version": "5.0.0",
+  "timestamp_utc": "2026-11-16T20:04:15Z",
+  "method": "Generalized Procrustes Analysis + Coherent Non-Rigid Alignment",
+  "cohort_size": 301,
+  "num_vertices": 6737,
+  "num_faces": 13478,
+  "registration_success_rate_pct": 100.0,
+  "topology_validation": {
+    "is_watertight": true,
+    "folded_triangles_detected": 0,
+    "self_intersections_detected": 0,
+    "inverted_normals_detected": 0,
+    "left_right_boundary_preservation": "VERIFIED (Left x < 0: 3377 vertices, Right x >= 0: 3360 vertices)"
+  },
+  "gpa_residual_metrics": {
+    "mean_residual_gpa_distance_mm": 7.233,
+    "p95_residual_gpa_distance_mm": 15.642,
+    "max_residual_gpa_distance_mm": 40.942
+  },
+  "landmark_consistency": {
+    "num_landmarks": 16,
+    "mean_landmark_displacement_mm": 7.825,
+    "landmarks": [
+      {
+        "landmark_index": 0,
+        "name": "Right Lung Apex",
+        "vertex_index": 6732,
+        "mean_displacement_mm": 12.173
+      },
+      {
+        "landmark_index": 1,
+        "name": "Left Lung Apex",
+        "vertex_index": 6730,
+        "mean_displacement_mm": 12.093
+      },
+      {
+        "landmark_index": 2,
+        "name": "Right Lateral Costophrenic Sulcus",
+        "vertex_index": 729,
+        "mean_displacement_mm": 9.032
+      },
+      {
+        "landmark_index": 3,
+        "name": "Left Lateral Costophrenic Sulcus",
+        "vertex_index": 147,
+        "mean_displacement_mm": 8.869
+      },
+      {
+        "landmark_index": 4,
+        "name": "Right Cardiophrenic Angle",
+        "vertex_index": 776,
+        "mean_displacement_mm": 5.891
+      },
+      {
+        "landmark_index": 5,
+        "name": "Left Cardiophrenic Angle",
+        "vertex_index": 182,
+        "mean_displacement_mm": 7.115
+      },
+      {
+        "landmark_index": 6,
+        "name": "Right Tracheobronchial Angle / Hilum",
+        "vertex_index": 3367,
+        "mean_displacement_mm": 4.092
+      },
+      {
+        "landmark_index": 7,
+        "name": "Left Hilum Center",
+        "vertex_index": 3686,
+        "mean_displacement_mm": 4.36
+      },
+      {
+        "landmark_index": 8,
+        "name": "Right Anterior Diaphragm Zenith",
+        "vertex_index": 1193,
+        "mean_displacement_mm": 8.896
+      },
+      {
+        "landmark_index": 9,
+        "name": "Left Anterior Diaphragm Zenith",
+        "vertex_index": 1207,
+        "mean_displacement_mm": 8.845
+      },
+      {
+        "landmark_index": 10,
+        "name": "Right Posterior Costophrenic Angle",
+        "vertex_index": 299,
+        "mean_displacement_mm": 9.229
+      },
+      {
+        "landmark_index": 11,
+        "name": "Left Posterior Costophrenic Angle",
+        "vertex_index": 277,
+        "mean_displacement_mm": 9.379
+      },
+      {
+        "landmark_index": 12,
+        "name": "Carina / Tracheal Bifurcation",
+        "vertex_index": 4923,
+        "mean_displacement_mm": 4.067
+      },
+      {
+        "landmark_index": 13,
+        "name": "Sternal Angle (Anterior reference)",
+        "vertex_index": 5700,
+        "mean_displacement_mm": 7.32
+      },
+      {
+        "landmark_index": 14,
+        "name": "Mid-Thoracic Vertebra T6 (Posterior reference)",
+        "vertex_index": 3712,
+        "mean_displacement_mm": 5.296
+      },
+      {
+        "landmark_index": 15,
+        "name": "Xiphoid Process (Inferior anterior boundary)",
+        "vertex_index": 53,
+        "mean_displacement_mm": 8.548
+      }
+    ]
+  },
+  "status": "PASSED"
+}

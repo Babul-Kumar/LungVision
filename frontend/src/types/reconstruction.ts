@@ -69,6 +69,7 @@ export interface MeshDescriptor {
   landmarks: Record<string, [number, number, number]>;
   vertices?: number[][];
   faces?: number[][];
+  uncertainties_mm?: number[];
 }
 
 export interface SSMReconstructionResponse {
@@ -116,4 +117,48 @@ export interface SSMDeformResponse {
   faces: number[][];
 }
 
+// Phase 5 Dual-View Specific Schemas
 
+export interface ComparisonMetrics {
+  surface_dice: number;
+  assd_mm: number;
+  hd95_mm: number;
+  volume_error_pct: number;
+  mean_landmark_error_mm?: number;
+  left_lung_dice?: number;
+  right_lung_dice?: number;
+  reference_volume_ml?: number;
+  predicted_volume_ml?: number;
+}
+
+export interface DualViewReconstructionRequest {
+  patient_id?: string;
+  frontal_image_base64?: string;
+  lateral_image_base64?: string;
+  fusion_model?: string;
+  allow_single_view?: boolean;
+  include_mesh_geometry?: boolean;
+  compare_with_reference_ct?: boolean;
+}
+
+export interface DualViewReconstructionResponse {
+  success: boolean;
+  status: string;
+  patient_id: string;
+  pairing_status: string;
+  fusion_model_used: string;
+  latency_ms: number;
+  predicted_coefficients: number[];
+  volumetry: OrganVolumetry;
+  surface_mesh: MeshDescriptor;
+  left_lung_mesh?: MeshDescriptor;
+  right_lung_mesh?: MeshDescriptor;
+  reference_ct_mesh?: MeshDescriptor;
+  comparison_metrics?: ComparisonMetrics;
+  uncertainty: {
+    mean_uncertainty_mm: number;
+    max_uncertainty_mm: number;
+    confidence_margin_pct: number;
+  };
+  disclaimer?: string;
+}

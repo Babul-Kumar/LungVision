@@ -10,6 +10,8 @@ from fastapi.responses import PlainTextResponse
 from starlette.concurrency import run_in_threadpool
 
 from backend.app.schemas.reconstruction import (
+    DualViewReconstructionRequest,
+    DualViewReconstructionResponse,
     ExportOBJRequest,
     SSMDeformRequest,
     SSMDeformResponse,
@@ -18,6 +20,7 @@ from backend.app.schemas.reconstruction import (
     SSMReconstructionResponse
 )
 from backend.app.services.ct.ssm_service import ssm_service
+from backend.app.services.ct.patient_reconstruction_service import patient_reconstruction_service
 
 
 router = APIRouter(prefix="/reconstruction", tags=["3D Anatomical Reconstruction"])
@@ -159,4 +162,32 @@ async def export_reconstructed_obj(
         raise HTTPException(
             status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
             detail=f"Failed to export reconstructed OBJ: {str(e)}"
+        )
+
+
+@router.post(
+    "/3d/patient-specific",
+    response_model=DualViewReconstructionResponse,
+    summary="Patient-Specific Dual-View 3D Lung Shape Reconstruction",
+    description="Estimates patient-specific 3D lung surface from paired frontal and lateral chest radiographs using cross-attention neural shape prediction."
+)
+async def reconstruct_patient_specific_3d(
+    request: DualViewReconstructionRequest = Body(...)
+) -> DualViewReconstructionResponse:
+    """Executes dual-view 3D lung surface reconstruction and returns surface mesh, volumetry, and CT comparison metrics."""
+    try:
+        response = await run_in_threadpool(
+            patient_reconstruction_service.reconstruct_patient_specific,
+            request=request
+        )
+        return response
+    except ValueError as ve:
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail=str(ve)
+        )
+    except Exception as e:
+        raise HTTPException(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            detail=f"Patient-specific 3D reconstruction failed: {str(e)}"
         )

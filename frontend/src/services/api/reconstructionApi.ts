@@ -1,5 +1,7 @@
 import { apiClient } from './client';
 import {
+  DualViewReconstructionRequest,
+  DualViewReconstructionResponse,
   ExportOBJRequest,
   SSMDeformRequest,
   SSMDeformResponse,
@@ -24,6 +26,16 @@ export const reconstructionApi = {
     return res.data;
   },
 
+  reconstructPatientSpecific: async (
+    params: DualViewReconstructionRequest
+  ): Promise<DualViewReconstructionResponse> => {
+    const res = await apiClient.post<DualViewReconstructionResponse>(
+      '/api/v1/reconstruction/3d/patient-specific',
+      params
+    );
+    return res.data;
+  },
+
   getTemplateMeshObj: async (): Promise<string> => {
     const res = await apiClient.get<string>('/api/v1/reconstruction/ssm/template-mesh', {
       headers: { Accept: 'text/plain' },
@@ -41,5 +53,3 @@ export const reconstructionApi = {
     return res.data;
   },
 };
-
-

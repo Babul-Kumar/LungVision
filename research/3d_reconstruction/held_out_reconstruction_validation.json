@@ -1,0 +1,590 @@
+{
+  "evaluation_version": "5.0.0",
+  "timestamp_utc": "2026-11-16T20:17:19Z",
+  "task": "Patient-Specific Dual-View 3D Lung Shape Reconstruction Held-Out CT Validation",
+  "cohort_specification": {
+    "held_out_cohort": "LUNA16 / LIDC-IDRI Held-Out Test Set",
+    "num_test_patients": 65,
+    "patient_disjoint_split": "VERIFIED (Zero overlap with 301 train / 64 val subjects)",
+    "leakage_audit": "PASSED (No CT metadata or spacing used in feature pipeline)",
+    "ground_truth_modality": "Physical 3D Marching Cubes lung surface extracted from paired CT volume",
+    "evaluation_resolution": "2mm surface tolerance, DICOM LPS physical millimeter frame"
+  },
+  "cohort_summary_by_model": {
+    "mean_shape_only": {
+      "num_patients": 65,
+      "assd_mm": {
+        "mean": 5.0845,
+        "median": 4.739,
+        "std": 2.098,
+        "p90": 7.724,
+        "ci_95": [
+          4.5607,
+          5.6083
+        ]
+      },
+      "hd95_mm": {
+        "mean": 10.0703,
+        "median": 9.313,
+        "std": 4.915,
+        "p95": 18.849,
+        "ci_95": [
+          8.8431,
+          11.2976
+        ]
+      },
+      "surface_dice_2mm": {
+        "mean": 0.1429,
+        "median": 0.0891,
+        "ci_95": [
+          0.1063,
+          0.1796
+        ],
+        "left_lung_mean": 0.1467,
+        "right_lung_mean": 0.1391
+      },
+      "volume_error_pct": {
+        "mean": 11.6342,
+        "median": 7.97,
+        "ci_95": [
+          8.9454,
+          14.3229
+        ]
+      },
+      "landmark_error_mm": {
+        "mean": 8.2168,
+        "median": 7.15,
+        "ci_95": [
+          7.0575,
+          9.376
+        ]
+      }
+    },
+    "frontal_only": {
+      "num_patients": 65,
+      "assd_mm": {
+        "mean": 5.0845,
+        "median": 4.739,
+        "std": 2.098,
+        "p90": 7.725,
+        "ci_95": [
+          4.5607,
+          5.6084
+        ]
+      },
+      "hd95_mm": {
+        "mean": 10.0709,
+        "median": 9.302,
+        "std": 4.915,
+        "p95": 18.861,
+        "ci_95": [
+          8.8436,
+          11.2982
+        ]
+      },
+      "surface_dice_2mm": {
+        "mean": 0.1428,
+        "median": 0.0885,
+        "ci_95": [
+          0.1062,
+          0.1794
+        ],
+        "left_lung_mean": 0.1466,
+        "right_lung_mean": 0.1391
+      },
+      "volume_error_pct": {
+        "mean": 11.6354,
+        "median": 7.97,
+        "ci_95": [
+          8.9465,
+          14.3243
+        ]
+      },
+      "landmark_error_mm": {
+        "mean": 8.2166,
+        "median": 7.15,
+        "ci_95": [
+          7.0574,
+          9.3758
+        ]
+      }
+    },
+    "lateral_only": {
+      "num_patients": 65,
+      "assd_mm": {
+        "mean": 5.084,
+        "median": 4.742,
+        "std": 2.097,
+        "p90": 7.723,
+        "ci_95": [
+          4.5603,
+          5.6078
+        ]
+      },
+      "hd95_mm": {
+        "mean": 10.0702,
+        "median": 9.315,
+        "std": 4.915,
+        "p95": 18.846,
+        "ci_95": [
+          8.8429,
+          11.2974
+        ]
+      },
+      "surface_dice_2mm": {
+        "mean": 0.1429,
+        "median": 0.0888,
+        "ci_95": [
+          0.1063,
+          0.1796
+        ],
+        "left_lung_mean": 0.1469,
+        "right_lung_mean": 0.139
+      },
+      "volume_error_pct": {
+        "mean": 11.6282,
+        "median": 7.99,
+        "ci_95": [
+          8.9409,
+          14.3154
+        ]
+      },
+      "landmark_error_mm": {
+        "mean": 8.2182,
+        "median": 7.15,
+        "ci_95": [
+          7.059,
+          9.3773
+        ]
+      }
+    },
+    "dual_view_concat": {
+      "num_patients": 65,
+      "assd_mm": {
+        "mean": 5.0847,
+        "median": 4.737,
+        "std": 2.097,
+        "p90": 7.725,
+        "ci_95": [
+          4.5609,
+          5.6085
+        ]
+      },
+      "hd95_mm": {
+        "mean": 10.0694,
+        "median": 9.303,
+        "std": 4.913,
+        "p95": 18.856,
+        "ci_95": [
+          8.8425,
+          11.2964
+        ]
+      },
+      "surface_dice_2mm": {
+        "mean": 0.1429,
+        "median": 0.0885,
+        "ci_95": [
+          0.1062,
+          0.1795
+        ],
+        "left_lung_mean": 0.1466,
+        "right_lung_mean": 0.1391
+      },
+      "volume_error_pct": {
+        "mean": 11.6378,
+        "median": 7.95,
+        "ci_95": [
+          8.9479,
+          14.3278
+        ]
+      },
+      "landmark_error_mm": {
+        "mean": 8.2175,
+        "median": 7.15,
+        "ci_95": [
+          7.0585,
+          9.3766
+        ]
+      }
+    },
+    "dual_view_attention": {
+      "num_patients": 65,
+      "assd_mm": {
+        "mean": 4.8244,
+        "median": 4.496,
+        "std": 2.089,
+        "p90": 7.402,
+        "ci_95": [
+          4.3028,
+          5.3459
+        ]
+      },
+      "hd95_mm": {
+        "mean": 9.4609,
+        "median": 8.673,
+        "std": 4.893,
+        "p95": 18.303,
+        "ci_95": [
+          8.2391,
+          10.6826
+        ]
+      },
+      "surface_dice_2mm": {
+        "mean": 0.1594,
+        "median": 0.0908,
+        "ci_95": [
+          0.1176,
+          0.2013
+        ],
+        "left_lung_mean": 0.1648,
+        "right_lung_mean": 0.1541
+      },
+      "volume_error_pct": {
+        "mean": 10.7958,
+        "median": 6.98,
+        "ci_95": [
+          8.2144,
+          13.3773
+        ]
+      },
+      "landmark_error_mm": {
+        "mean": 7.7115,
+        "median": 6.67,
+        "ci_95": [
+          6.5638,
+          8.8593
+        ]
+      }
+    }
+  },
+  "ablation_comparison": {
+    "frontal_vs_dual_view": {
+      "assd_reduction_mm": 0.26,
+      "assd_relative_improvement_pct": 5.12,
+      "hd95_reduction_mm": 0.61,
+      "dice_improvement": 0.0166,
+      "volume_error_reduction_pct": 0.84,
+      "statistical_significance": {
+        "paired_t_statistic": -37.1801,
+        "paired_t_pvalue": 4.73784e-45,
+        "wilcoxon_signed_rank_pvalue": 2.402213e-12,
+        "statistically_significant": true
+      }
+    }
+  },
+  "target_benchmarks_audit": {
+    "assd_le_2_5mm": {
+      "achieved_value_mm": 4.8244,
+      "target_mm": 2.5,
+      "status": "UNMET"
+    },
+    "hd95_le_7_0mm": {
+      "achieved_value_mm": 9.4609,
+      "target_mm": 7.0,
+      "status": "UNMET"
+    },
+    "volume_error_le_7_5pct": {
+      "achieved_value_pct": 10.7958,
+      "target_pct": 7.5,
+      "status": "UNMET"
+    },
+    "surface_dice_ge_0_85": {
+      "achieved_value": 0.1594,
+      "target": 0.85,
+      "status": "UNMET"
+    }
+  },
+  "patient_wise_sample": [
+    {
+      "patient_id": "LIDC-IDRI-0002",
+      "frontal_metrics": {
+        "surface_dice_2mm": 0.1293,
+        "assd_mm": 4.421,
+        "hd95_mm": 9.102,
+        "volume_error_pct": 0.79,
+        "mean_landmark_error_mm": 5.57,
+        "reference_volume_ml": 3924.4,
+        "predicted_volume_ml": 3893.3,
+        "left_lung_dice": 0.1244,
+        "right_lung_dice": 0.1342,
+        "left_lung_assd_mm": 4.377,
+        "right_lung_assd_mm": 4.358
+      },
+      "dual_view_attention_metrics": {
+        "surface_dice_2mm": 0.1398,
+        "assd_mm": 4.197,
+        "hd95_mm": 8.399,
+        "volume_error_pct": 0.35,
+        "mean_landmark_error_mm": 5.25,
+        "reference_volume_ml": 3924.4,
+        "predicted_volume_ml": 3910.8,
+        "left_lung_dice": 0.1365,
+        "right_lung_dice": 0.1432,
+        "left_lung_assd_mm": 4.166,
+        "right_lung_assd_mm": 4.148
+      }
+    },
+    {
+      "patient_id": "LIDC-IDRI-0005",
+      "frontal_metrics": {
+        "surface_dice_2mm": 0.7226,
+        "assd_mm": 1.613,
+        "hd95_mm": 4.054,
+        "volume_error_pct": 1.56,
+        "mean_landmark_error_mm": 1.71,
+        "reference_volume_ml": 3955.2,
+        "predicted_volume_ml": 3893.3,
+        "left_lung_dice": 0.8582,
+        "right_lung_dice": 0.5863,
+        "left_lung_assd_mm": 1.256,
+        "right_lung_assd_mm": 1.961
+      },
+      "dual_view_attention_metrics": {
+        "surface_dice_2mm": 0.7858,
+        "assd_mm": 1.374,
+        "hd95_mm": 3.302,
+        "volume_error_pct": 1.09,
+        "mean_landmark_error_mm": 1.41,
+        "reference_volume_ml": 3955.2,
+        "predicted_volume_ml": 3912.0,
+        "left_lung_dice": 0.9292,
+        "right_lung_dice": 0.6417,
+        "left_lung_assd_mm": 1.048,
+        "right_lung_assd_mm": 1.699
+      }
+    },
+    {
+      "patient_id": "LIDC-IDRI-0007",
+      "frontal_metrics": {
+        "surface_dice_2mm": 0.0629,
+        "assd_mm": 5.294,
+        "hd95_mm": 11.383,
+        "volume_error_pct": 9.57,
+        "mean_landmark_error_mm": 6.56,
+        "reference_volume_ml": 3553.2,
+        "predicted_volume_ml": 3893.3,
+        "left_lung_dice": 0.0785,
+        "right_lung_dice": 0.0473,
+        "left_lung_assd_mm": 5.535,
+        "right_lung_assd_mm": 5.284
+      },
+      "dual_view_attention_metrics": {
+        "surface_dice_2mm": 0.0677,
+        "assd_mm": 5.028,
+        "hd95_mm": 10.631,
+        "volume_error_pct": 8.6,
+        "mean_landmark_error_mm": 6.19,
+        "reference_volume_ml": 3553.2,
+        "predicted_volume_ml": 3859.0,
+        "left_lung_dice": 0.0847,
+        "right_lung_dice": 0.0506,
+        "left_lung_assd_mm": 5.248,
+        "right_lung_assd_mm": 4.999
+      }
+    },
+    {
+      "patient_id": "LIDC-IDRI-0012",
+      "frontal_metrics": {
+        "surface_dice_2mm": 0.0533,
+        "assd_mm": 6.207,
+        "hd95_mm": 12.579,
+        "volume_error_pct": 16.35,
+        "mean_landmark_error_mm": 12.08,
+        "reference_volume_ml": 4654.5,
+        "predicted_volume_ml": 3893.3,
+        "left_lung_dice": 0.0524,
+        "right_lung_dice": 0.0542,
+        "left_lung_assd_mm": 5.572,
+        "right_lung_assd_mm": 6.046
+      },
+      "dual_view_attention_metrics": {
+        "surface_dice_2mm": 0.0545,
+        "assd_mm": 5.951,
+        "hd95_mm": 11.917,
+        "volume_error_pct": 15.42,
+        "mean_landmark_error_mm": 11.46,
+        "reference_volume_ml": 4654.5,
+        "predicted_volume_ml": 3936.9,
+        "left_lung_dice": 0.0518,
+        "right_lung_dice": 0.0571,
+        "left_lung_assd_mm": 5.387,
+        "right_lung_assd_mm": 5.81
+      }
+    },
+    {
+      "patient_id": "LIDC-IDRI-0027",
+      "frontal_metrics": {
+        "surface_dice_2mm": 0.0551,
+        "assd_mm": 7.087,
+        "hd95_mm": 15.153,
+        "volume_error_pct": 7.14,
+        "mean_landmark_error_mm": 11.09,
+        "reference_volume_ml": 3633.9,
+        "predicted_volume_ml": 3893.3,
+        "left_lung_dice": 0.0684,
+        "right_lung_dice": 0.0417,
+        "left_lung_assd_mm": 7.052,
+        "right_lung_assd_mm": 7.085
+      },
+      "dual_view_attention_metrics": {
+        "surface_dice_2mm": 0.0606,
+        "assd_mm": 6.833,
+        "hd95_mm": 14.545,
+        "volume_error_pct": 6.82,
+        "mean_landmark_error_mm": 10.64,
+        "reference_volume_ml": 3633.9,
+        "predicted_volume_ml": 3881.8,
+        "left_lung_dice": 0.0773,
+        "right_lung_dice": 0.0437,
+        "left_lung_assd_mm": 6.804,
+        "right_lung_assd_mm": 6.831
+      }
+    },
+    {
+      "patient_id": "LIDC-IDRI-0033",
+      "frontal_metrics": {
+        "surface_dice_2mm": 0.0254,
+        "assd_mm": 9.292,
+        "hd95_mm": 17.792,
+        "volume_error_pct": 48.51,
+        "mean_landmark_error_mm": 14.58,
+        "reference_volume_ml": 2621.7,
+        "predicted_volume_ml": 3893.4,
+        "left_lung_dice": 0.0249,
+        "right_lung_dice": 0.0259,
+        "left_lung_assd_mm": 9.692,
+        "right_lung_assd_mm": 10.279
+      },
+      "dual_view_attention_metrics": {
+        "surface_dice_2mm": 0.0273,
+        "assd_mm": 8.964,
+        "hd95_mm": 17.201,
+        "volume_error_pct": 46.44,
+        "mean_landmark_error_mm": 13.98,
+        "reference_volume_ml": 2621.7,
+        "predicted_volume_ml": 3839.1,
+        "left_lung_dice": 0.0287,
+        "right_lung_dice": 0.0259,
+        "left_lung_assd_mm": 9.306,
+        "right_lung_assd_mm": 9.912
+      }
+    },
+    {
+      "patient_id": "LIDC-IDRI-0038",
+      "frontal_metrics": {
+        "surface_dice_2mm": 0.1296,
+        "assd_mm": 4.256,
+        "hd95_mm": 7.249,
+        "volume_error_pct": 17.43,
+        "mean_landmark_error_mm": 4.81,
+        "reference_volume_ml": 3315.5,
+        "predicted_volume_ml": 3893.3,
+        "left_lung_dice": 0.1131,
+        "right_lung_dice": 0.1461,
+        "left_lung_assd_mm": 4.229,
+        "right_lung_assd_mm": 4.4
+      },
+      "dual_view_attention_metrics": {
+        "surface_dice_2mm": 0.1492,
+        "assd_mm": 3.913,
+        "hd95_mm": 6.633,
+        "volume_error_pct": 15.67,
+        "mean_landmark_error_mm": 4.32,
+        "reference_volume_ml": 3315.5,
+        "predicted_volume_ml": 3835.2,
+        "left_lung_dice": 0.1415,
+        "right_lung_dice": 0.1568,
+        "left_lung_assd_mm": 3.865,
+        "right_lung_assd_mm": 4.054
+      }
+    },
+    {
+      "patient_id": "LIDC-IDRI-0039",
+      "frontal_metrics": {
+        "surface_dice_2mm": 0.0834,
+        "assd_mm": 5.324,
+        "hd95_mm": 10.114,
+        "volume_error_pct": 18.91,
+        "mean_landmark_error_mm": 9.54,
+        "reference_volume_ml": 3274.2,
+        "predicted_volume_ml": 3893.4,
+        "left_lung_dice": 0.0871,
+        "right_lung_dice": 0.0798,
+        "left_lung_assd_mm": 5.594,
+        "right_lung_assd_mm": 5.555
+      },
+      "dual_view_attention_metrics": {
+        "surface_dice_2mm": 0.0882,
+        "assd_mm": 5.075,
+        "hd95_mm": 9.502,
+        "volume_error_pct": 17.77,
+        "mean_landmark_error_mm": 8.94,
+        "reference_volume_ml": 3274.2,
+        "predicted_volume_ml": 3856.1,
+        "left_lung_dice": 0.0877,
+        "right_lung_dice": 0.0887,
+        "left_lung_assd_mm": 5.31,
+        "right_lung_assd_mm": 5.269
+      }
+    },
+    {
+      "patient_id": "LIDC-IDRI-0042",
+      "frontal_metrics": {
+        "surface_dice_2mm": 0.0696,
+        "assd_mm": 6.842,
+        "hd95_mm": 16.969,
+        "volume_error_pct": 9.19,
+        "mean_landmark_error_mm": 15.21,
+        "reference_volume_ml": 4287.2,
+        "predicted_volume_ml": 3893.3,
+        "left_lung_dice": 0.0628,
+        "right_lung_dice": 0.0765,
+        "left_lung_assd_mm": 5.912,
+        "right_lung_assd_mm": 6.484
+      },
+      "dual_view_attention_metrics": {
+        "surface_dice_2mm": 0.0739,
+        "assd_mm": 6.626,
+        "hd95_mm": 16.303,
+        "volume_error_pct": 8.8,
+        "mean_landmark_error_mm": 14.64,
+        "reference_volume_ml": 4287.2,
+        "predicted_volume_ml": 3909.9,
+        "left_lung_dice": 0.0663,
+        "right_lung_dice": 0.0815,
+        "left_lung_assd_mm": 5.768,
+        "right_lung_assd_mm": 6.305
+      }
+    },
+    {
+      "patient_id": "LIDC-IDRI-0048",
+      "frontal_metrics": {
+        "surface_dice_2mm": 0.2442,
+        "assd_mm": 2.966,
+        "hd95_mm": 6.13,
+        "volume_error_pct": 4.41,
+        "mean_landmark_error_mm": 3.02,
+        "reference_volume_ml": 3729.0,
+        "predicted_volume_ml": 3893.3,
+        "left_lung_dice": 0.3548,
+        "right_lung_dice": 0.133,
+        "left_lung_assd_mm": 3.084,
+        "right_lung_assd_mm": 2.898
+      },
+      "dual_view_attention_metrics": {
+        "surface_dice_2mm": 0.2653,
+        "assd_mm": 2.715,
+        "hd95_mm": 5.491,
+        "volume_error_pct": 3.26,
+        "mean_landmark_error_mm": 2.69,
+        "reference_volume_ml": 3729.0,
+        "predicted_volume_ml": 3850.5,
+        "left_lung_dice": 0.4081,
+        "right_lung_dice": 0.1217,
+        "left_lung_assd_mm": 2.794,
+        "right_lung_assd_mm": 2.671
+      }
+    }
+  ],
+  "scientific_disclaimer": "This estimated 3D lung boundary reconstruction pipeline provides continuous anatomical shape guidance from paired radiographs. It does not synthesize diagnostic CT voxel Hounsfield Units, internal parenchymal textures, or cross-sectional pathology. For research use only."
+}

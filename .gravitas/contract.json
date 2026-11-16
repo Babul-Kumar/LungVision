@@ -1,33 +1,32 @@
 {
   "mode": "implementation",
-  "objective": "LungVision AI — Phase 2B Multi-Patient Statistical Shape Model (SSM) Training, Validation, and Full-Stack Research Integration.",
+  "objective": "LungVision AI — Phase 5 Patient-Specific Dual-View 3D Lung Shape Reconstruction from Paired Radiographs.",
   "acceptance_criteria": [
-    "Gate A: Pre-Flight Data & Label Governance (Reconcile label schemas across LUNA16 Grand Challenge and Thoracic Reference; audit 445 scans down to 430 verified; 0 patient leakage across 70/15/15 train/val/test split).",
-    "Gate B: Canonical Template & Organic Curvature (Design 6,737-vertex canonical lung mesh with 16 anatomical landmarks and bilateral partitioning).",
-    "Gate C: Generalized Procrustes Alignment (GPA alignment across 301 training cohort shapes with 100% registration convergence).",
-    "Gate D: PCA Basis & Eigenspace Verification (Fit 20 modes on training cohort with 100.0% variance explained; Top 5 modes capture 90.38%; zero leakage verified).",
-    "Gate E: Held-Out Generalization Evaluation (Validate on 64 val and 65 test unseen patients: ASSD <= 2.5 mm, HD95 <= 7.0 mm, Vol Error <= 7.5%, Surface Dice >= 0.85).",
-    "Gate F: Lightweight Model Serialization (Export ssm_lung_pca_v1.json at 4.36 MB, well under 15 MB limit; sync to backend runtime).",
-    "Gate G: Full-Stack Integration & Research Panel (Expose /ssm/deform endpoint; add Tab 5 in CTExplorerPage with physiological mode sliders, volumetry, metrics, and scientific disclaimer).",
-    "Gate H: Full Test Suite Verification (46/46 pytest tests passed; 26/26 vitest tests passed; clean production build with 0 TypeScript errors)."
+    "Gate A: Multi-Patient SSM & Correspondence Governance (Audit 430 patient cohort with 301 train / 64 val / 65 test split; verify canonical template, bilateral partitioning, 16 anatomical landmarks, Generalized Procrustes Analysis, and export ssm_lung_pca_v2.json).",
+    "Gate B: Paired Dual-View Input Pipeline (Ingest Frontal PA/AP and Lateral LL radiographs with view identity, aspect ratio, patient pairing validation, and mismatch rejection).",
+    "Gate C: Controlled Shape Parameter Prediction (Implement and benchmark Frontal-only, Lateral-only, Dual-view concatenation fusion, and Dual-view cross-attention fusion models predicting M=20 SSM coefficients with zero CT metadata leakage).",
+    "Gate D: Patient-Specific 3D Reconstruction Service (Continuous surface synthesis s = mean + P*b, left/right lung partitioning, divergence theorem volumetry, vertex uncertainty estimation, and experimental REST endpoint /api/v1/reconstruction/3d/patient-specific).",
+    "Gate E: Held-Out CT Surface Validation (Rigorous evaluation across 65 held-out test patients against reference CT segmentations: Dice, ASSD, HD95, Volume Error %, Landmark Error, 95% CIs, and Frontal vs Dual-view ablation).",
+    "Gate F: Research Dashboard Integration (Interactive DualViewXRayPage with paired upload, patient verification, 3D predicted mesh rendering, Left/Right toggle, CT ground truth comparison, quantitative scorecard, and non-diagnostic disclaimer).",
+    "Gate G: Comprehensive Automated Verification (Complete test suite covering split integrity, mesh correspondence, PCA boundaries, paired input, shape prediction, 3D reconstruction, volume calculation, API isolation, and frontend UI)."
   ],
   "non_goals": [
-    "Do not delete existing models, checkpoints, masks, or research assets",
-    "Do not download 220 GB LUNA16 collection locally; use cloud-hybrid execution",
-    "Do not claim SSM synthesizes diagnostic CT Hounsfield Units or internal tissue"
+    "Do not modify or retrain frozen DenseNet121 weights (8d3690cd...)",
+    "Do not alter frozen NIH production classification thresholds",
+    "Do not download 220 GB LUNA16 raw CT scans locally; use verified manifest and cloud-hybrid processing",
+    "Do not use CT spacing, CT dimensions, or mask metadata as predictor inputs (prevent shortcut learning)",
+    "Never display predicted 3D mesh as an actual CT scan or claim diagnostic CT synthesis"
   ],
-  "risk": "low",
+  "risk": "medium",
   "budget": "deep",
   "allowed_write_scope": [
     ".",
     "backend/",
     "frontend/",
-    "docs/",
     "research/",
     "scripts/",
     "data/",
-    ".gravitas/",
-    "scripts/verification/"
+    ".gravitas/"
   ],
   "verification": "impact",
   "policy": {
@@ -36,14 +35,14 @@
     "verification_depth": "impact",
     "delegation": "none",
     "reason_codes": [
-      "ssm-data-governance",
-      "canonical-template-generation",
-      "procrustes-registration",
-      "pca-eigenspace-decomposition",
-      "held-out-generalization-validation",
-      "lightweight-model-serialization",
-      "full-stack-workstation-integration",
-      "governance-and-test-verification"
+      "multi-patient-ssm-training",
+      "mesh-correspondence-audit",
+      "paired-dual-view-pipeline",
+      "dual-view-fusion-models",
+      "patient-specific-3d-reconstruction",
+      "held-out-ct-surface-validation",
+      "full-stack-workspace-integration",
+      "automated-regression-testing"
     ]
   },
   "status": "completed"
