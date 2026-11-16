@@ -129,6 +129,7 @@ export interface ComparisonMetrics {
   right_lung_dice?: number;
   reference_volume_ml?: number;
   predicted_volume_ml?: number;
+  vertex_errors?: number[];
 }
 
 export interface DualViewReconstructionRequest {

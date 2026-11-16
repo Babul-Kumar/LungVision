@@ -197,7 +197,8 @@ describe('DualViewXRayPage Feature', () => {
     expect(screen.getByText(/Shape Parameter Predictor/i)).toBeInTheDocument();
     const select = screen.getByRole('combobox');
     expect(select).toBeInTheDocument();
-    expect(screen.getByText(/Dual-View Cross-Attention \(Recommended - ASSD 4.82mm\)/i)).toBeInTheDocument();
+    expect(screen.getByText(/Phase 5B Heteroscedastic V2 \(Recommended - ASSD 4.71mm\)/i)).toBeInTheDocument();
+    expect(screen.getByText(/Phase 5 Dual-View Cross-Attention \(ASSD 4.82mm\)/i)).toBeInTheDocument();
 
     // Non-diagnostic research disclaimer
     expect(

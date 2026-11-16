@@ -142,6 +142,7 @@ class ComparisonMetrics(BaseModel):
     right_lung_dice: Optional[float] = Field(default=None, description="Right lung surface Dice overlap")
     reference_volume_ml: Optional[float] = Field(default=None, description="Ground truth CT lung volume in mL")
     predicted_volume_ml: Optional[float] = Field(default=None, description="Predicted 3D mesh volume in mL")
+    vertex_errors: Optional[List[float]] = Field(default=None, description="Per-vertex Euclidean error distances in mm for heatmap visualization")
 
 
 class DualViewReconstructionRequest(BaseModel):
@@ -149,7 +150,7 @@ class DualViewReconstructionRequest(BaseModel):
     patient_id: Optional[str] = Field(default=None, description="Patient identifier for pair verification")
     frontal_image_base64: Optional[str] = Field(default=None, description="Base64-encoded Frontal PA/AP radiograph")
     lateral_image_base64: Optional[str] = Field(default=None, description="Base64-encoded Lateral LL radiograph")
-    fusion_model: str = Field(default="dual_view_attention", description="'dual_view_attention', 'dual_view_concat', 'frontal_only', 'lateral_only'")
+    fusion_model: str = Field(default="dual_view_heteroscedastic", description="'dual_view_heteroscedastic', 'dual_view_attention', 'dual_view_concat', 'frontal_only', 'lateral_only'")
     allow_single_view: bool = Field(default=False, description="Whether to permit single-view fallback when lateral is missing")
     include_mesh_geometry: bool = Field(default=True, description="Whether to include vertex coordinate arrays")
     compare_with_reference_ct: bool = Field(default=True, description="Whether to compute ground-truth CT comparison if available")

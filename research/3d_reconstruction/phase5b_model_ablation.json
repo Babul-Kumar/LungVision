@@ -1,0 +1,73 @@
+{
+  "report_version": "5.1.0",
+  "timestamp_utc": "2026-11-16T20:57:24Z",
+  "task": "Task C: Shape Parameter Prediction Improvement & Controlled Model Ablation",
+  "cohort": {
+    "train_patients": 301,
+    "val_patients": 64,
+    "test_patients": 65
+  },
+  "ablations": {
+    "baseline_dual_view_attention": {
+      "description": "Phase 5 Cross-Attention Baseline (MSE + Mahalanobis loss)",
+      "val_mse": 18521.9834,
+      "heteroscedastic_uncertainty": false,
+      "bilateral_refinement": false
+    },
+    "heteroscedastic_uncertainty_only": {
+      "description": "Heteroscedastic Gaussian NLL loss with log-variance uncertainty head",
+      "val_mse": 20208.21411,
+      "heteroscedastic_uncertainty": true,
+      "bilateral_refinement": false
+    },
+    "mahalanobis_alpha_sweep": {
+      "alpha_0.0": {
+        "alpha": 0.0,
+        "val_mse": 20892.83276,
+        "val_mahalanobis_distance": 0.24
+      },
+      "alpha_0.001": {
+        "alpha": 0.001,
+        "val_mse": 20880.06494,
+        "val_mahalanobis_distance": 0.272
+      },
+      "alpha_0.005": {
+        "alpha": 0.005,
+        "val_mse": 20688.0,
+        "val_mahalanobis_distance": 0.187
+      },
+      "alpha_0.01": {
+        "alpha": 0.01,
+        "val_mse": 20757.36914,
+        "val_mahalanobis_distance": 0.195
+      },
+      "alpha_0.05": {
+        "alpha": 0.05,
+        "val_mse": 20860.46167,
+        "val_mahalanobis_distance": 0.177
+      }
+    },
+    "full_phase5b_heteroscedastic_v2": {
+      "description": "Full Phase 5B Heteroscedastic Cross-Attention + Bilateral Refinement + Log-Variance",
+      "val_mse": 17820.33032,
+      "best_val_loss": 3293.36728,
+      "mean_mahalanobis_distance": 0.434,
+      "anatomical_plausibility": "VERIFIED (Mean D_M < 3.0 SD; chi-square 99th percentile: 6.13)"
+    }
+  },
+  "selected_v2_architecture": {
+    "model_name": "HeteroscedasticDualViewCrossAttentionPredictor",
+    "checkpoint_research": "research\\3d_reconstruction\\checkpoints\\dual_view_shape_predictor_v2_best.pth",
+    "checkpoint_backend": "backend\\data\\checkpoints\\dual_view_shape_predictor_v2_best.pth",
+    "val_mse": 17820.33032,
+    "mahalanobis_distance": 0.434,
+    "features": [
+      "Multi-head bidirectional coronal-sagittal cross-attention",
+      "Residual feed-forward networks with GELU activation",
+      "Heteroscedastic uncertainty estimation outputting log-variance log(sigma_b^2)",
+      "Bilateral left/right anatomical residual deformation refinement",
+      "Mahalanobis regularized loss (alpha=0.005) enforcing physiological bounds"
+    ]
+  },
+  "verdict": "MODEL_IMPROVEMENT_VALIDATED"
+}

@@ -37,6 +37,7 @@ from backend.app.models.dual_view_shape_predictor import (
     DualViewConcatShapePredictor,
     FrontalOnlyShapePredictor,
     LateralOnlyShapePredictor,
+    HeteroscedasticDualViewCrossAttentionPredictor,
     create_shape_predictor,
 )
 from backend.app.schemas.reconstruction import (
@@ -49,6 +50,7 @@ from backend.app.schemas.reconstruction import (
 
 SSM_MODEL_PATH = BASE_DIR / "data" / "3d_reconstruction" / "ssm_lung_pca_v2.json"
 CHECKPOINT_PATH = BASE_DIR / "data" / "checkpoints" / "dual_view_shape_predictor_best.pth"
+CHECKPOINT_V2_PATH = BASE_DIR / "data" / "checkpoints" / "dual_view_shape_predictor_v2_best.pth"
 
 
 class PatientReconstructionService:
@@ -114,7 +116,7 @@ class PatientReconstructionService:
                     ckpt_p = alt_ckpt
 
             num_modes = len(self.eigenvalues)
-            # Default attention model
+            # Default attention model (Phase 5)
             model_attn = DualViewCrossAttentionShapePredictor(num_modes=num_modes).to(self.device)
             if ckpt_p.exists():
                 state = torch.load(ckpt_p, map_location=self.device)
@@ -126,6 +128,25 @@ class PatientReconstructionService:
 
             model_attn.eval()
             self.models["dual_view_attention"] = model_attn
+
+            # Phase 5B Heteroscedastic V2 Model
+            ckpt_v2_p = CHECKPOINT_V2_PATH
+            if not ckpt_v2_p.exists():
+                alt_ckpt_v2 = BASE_DIR.parent / "research" / "3d_reconstruction" / "checkpoints" / "dual_view_shape_predictor_v2_best.pth"
+                if alt_ckpt_v2.exists():
+                    ckpt_v2_p = alt_ckpt_v2
+
+            model_v2 = HeteroscedasticDualViewCrossAttentionPredictor(num_modes=num_modes).to(self.device)
+            if ckpt_v2_p.exists():
+                state_v2 = torch.load(ckpt_v2_p, map_location=self.device)
+                if "state_dict" in state_v2:
+                    model_v2.load_state_dict(state_v2["state_dict"])
+                else:
+                    model_v2.load_state_dict(state_v2)
+                logger.info(f"Loaded Phase 5B heteroscedastic weights from {ckpt_v2_p}")
+            model_v2.eval()
+            self.models["dual_view_heteroscedastic"] = model_v2
+            self.models["dual_view_v2"] = model_v2
 
             # Also instantiate ablation models
             self.models["dual_view_concat"] = DualViewConcatShapePredictor(num_modes=num_modes).to(self.device).eval()
@@ -180,7 +201,7 @@ class PatientReconstructionService:
         self,
         frontal_tensor: Optional[torch.Tensor],
         lateral_tensor: Optional[torch.Tensor],
-        model_type: str = "dual_view_attention",
+        model_type: str = "dual_view_heteroscedastic",
     ) -> Tuple[np.ndarray, Dict[str, float]]:
         """
         Predicts SSM PCA deformation coefficients b in R^M and vertex uncertainties.
@@ -188,9 +209,10 @@ class PatientReconstructionService:
         self._ensure_loaded()
         m_type = model_type.lower()
         if m_type not in self.models:
-            m_type = "dual_view_attention"
+            m_type = "dual_view_heteroscedastic"
 
         model = self.models[m_type]
+        log_var_np = None
         with torch.no_grad():
             if m_type == "frontal_only":
                 if frontal_tensor is None:
@@ -200,6 +222,17 @@ class PatientReconstructionService:
                 if lateral_tensor is None:
                     raise FileValidationError("Lateral image is required for lateral-only model.")
                 pred = model(None, lateral_tensor.to(self.device))
+            elif m_type in ("dual_view_heteroscedastic", "dual_view_v2"):
+                if frontal_tensor is None or lateral_tensor is None:
+                    raise FileValidationError(
+                        "Both frontal and lateral radiographs are required for dual-view fusion models."
+                    )
+                pred, log_var = model(
+                    frontal_tensor.to(self.device),
+                    lateral_tensor.to(self.device),
+                    return_uncertainty=True,
+                )
+                log_var_np = log_var.cpu().squeeze(0).numpy()
             else:
                 if frontal_tensor is None or lateral_tensor is None:
                     raise FileValidationError(
@@ -209,15 +242,21 @@ class PatientReconstructionService:
 
         coeffs = pred.cpu().squeeze(0).numpy()  # (M,)
 
-        # Compute vertex-wise closed-form spatial uncertainty
-        # sigma_i = sqrt(sum_m (b_m^2 / lambda_m) * P_{i,m}^2)
-        safe_evals = np.maximum(self.eigenvalues, 1e-3)
-        maha_weights = (coeffs ** 2) / safe_evals  # (M,)
+        # Compute vertex-wise spatial uncertainty
         P = self.eigenvectors  # (3N, M)
         N = len(self.mean_shape)
         P_reshaped = P.reshape(N, 3, len(coeffs))  # (N, 3, M)
         P_sq = np.sum(P_reshaped ** 2, axis=1)  # (N, M)
-        vertex_sigmas = np.sqrt(np.dot(P_sq, maha_weights))  # (N,)
+
+        if log_var_np is not None:
+            # Heteroscedastic model-learned variance
+            mode_variances = np.exp(log_var_np)
+            vertex_sigmas = np.sqrt(np.dot(P_sq, mode_variances))  # (N,)
+        else:
+            # Closed-form Mahalanobis prior uncertainty
+            safe_evals = np.maximum(self.eigenvalues, 1e-3)
+            maha_weights = (coeffs ** 2) / safe_evals  # (M,)
+            vertex_sigmas = np.sqrt(np.dot(P_sq, maha_weights))  # (N,)
 
         uncertainty_info = {
             "mean_uncertainty_mm": round(float(np.mean(vertex_sigmas)), 2),
@@ -365,6 +404,7 @@ class PatientReconstructionService:
             right_lung_dice=round(right_dice, 4),
             reference_volume_ml=round(ref_vol, 1),
             predicted_volume_ml=round(pred_vol, 1),
+            vertex_errors=[round(float(d), 2) for d in dists_p2r],
         )
 
     def reconstruct_patient_specific(

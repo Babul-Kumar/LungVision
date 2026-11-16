@@ -1,0 +1,794 @@
+{
+  "report_version": "5.1.0",
+  "timestamp_utc": "2026-11-16T20:39:51Z",
+  "task": "Task B: Baseline Model Comparison on Held-Out Test Patients",
+  "cohort_size": 65,
+  "models_evaluated": [
+    "mean_shape_baseline",
+    "frontal_only",
+    "lateral_only",
+    "dual_view_concat",
+    "dual_view_attention",
+    "oracle_ct_projection"
+  ],
+  "cohort_summaries": {
+    "mean_shape_baseline": {
+      "num_patients": 65,
+      "assd_mm": {
+        "mean": 5.0844,
+        "median": 4.7391,
+        "std": 2.1139,
+        "ci_95": [
+          4.5606,
+          5.6082
+        ]
+      },
+      "hd95_mm": {
+        "mean": 10.0704,
+        "median": 9.3127,
+        "std": 4.9529,
+        "ci_95": [
+          8.8431,
+          11.2976
+        ]
+      },
+      "hd_max_mm": {
+        "mean": 14.4664,
+        "median": 12.2396,
+        "std": 8.4952,
+        "ci_95": [
+          12.3614,
+          16.5714
+        ]
+      },
+      "surface_dice_1mm": {
+        "mean": 0.0248,
+        "median": 0.0119,
+        "std": 0.0442,
+        "ci_95": [
+          0.0139,
+          0.0358
+        ]
+      },
+      "surface_dice_2mm": {
+        "mean": 0.1429,
+        "median": 0.0891,
+        "std": 0.1479,
+        "ci_95": [
+          0.1063,
+          0.1796
+        ]
+      },
+      "surface_dice_3mm": {
+        "mean": 0.3298,
+        "median": 0.2684,
+        "std": 0.1977,
+        "ci_95": [
+          0.2809,
+          0.3788
+        ]
+      },
+      "surface_dice_5mm": {
+        "mean": 0.6315,
+        "median": 0.5946,
+        "std": 0.239,
+        "ci_95": [
+          0.5723,
+          0.6907
+        ]
+      },
+      "volume_error_ml": {
+        "mean": 426.6334,
+        "median": 291.84,
+        "std": 361.8352,
+        "ci_95": [
+          336.975,
+          516.2918
+        ]
+      },
+      "volume_error_pct": {
+        "mean": 11.6342,
+        "median": 7.97,
+        "std": 10.8511,
+        "ci_95": [
+          8.9454,
+          14.3229
+        ]
+      },
+      "mean_landmark_error_mm": {
+        "mean": 8.2168,
+        "median": 7.15,
+        "std": 4.6783,
+        "ci_95": [
+          7.0575,
+          9.376
+        ]
+      },
+      "left_lung_assd_mm": {
+        "mean": 4.9744,
+        "median": 4.6833,
+        "std": 2.12,
+        "ci_95": [
+          4.4491,
+          5.4998
+        ]
+      },
+      "right_lung_assd_mm": {
+        "mean": 5.1465,
+        "median": 4.7444,
+        "std": 2.197,
+        "ci_95": [
+          4.6021,
+          5.6909
+        ]
+      },
+      "left_lung_dice_2mm": {
+        "mean": 0.1467,
+        "median": 0.0891,
+        "std": 0.1574,
+        "ci_95": [
+          0.1077,
+          0.1857
+        ]
+      },
+      "right_lung_dice_2mm": {
+        "mean": 0.1391,
+        "median": 0.094,
+        "std": 0.1443,
+        "ci_95": [
+          0.1033,
+          0.1748
+        ]
+      }
+    },
+    "frontal_only": {
+      "num_patients": 65,
+      "assd_mm": {
+        "mean": 5.0836,
+        "median": 4.7404,
+        "std": 2.1141,
+        "ci_95": [
+          4.5598,
+          5.6075
+        ]
+      },
+      "hd95_mm": {
+        "mean": 10.0694,
+        "median": 9.3168,
+        "std": 4.9535,
+        "ci_95": [
+          8.842,
+          11.2969
+        ]
+      },
+      "hd_max_mm": {
+        "mean": 14.4669,
+        "median": 12.2749,
+        "std": 8.5011,
+        "ci_95": [
+          12.3605,
+          16.5734
+        ]
+      },
+      "surface_dice_1mm": {
+        "mean": 0.025,
+        "median": 0.0117,
+        "std": 0.0445,
+        "ci_95": [
+          0.0139,
+          0.036
+        ]
+      },
+      "surface_dice_2mm": {
+        "mean": 0.1431,
+        "median": 0.0889,
+        "std": 0.1486,
+        "ci_95": [
+          0.1063,
+          0.18
+        ]
+      },
+      "surface_dice_3mm": {
+        "mean": 0.3298,
+        "median": 0.2694,
+        "std": 0.1976,
+        "ci_95": [
+          0.2808,
+          0.3788
+        ]
+      },
+      "surface_dice_5mm": {
+        "mean": 0.6317,
+        "median": 0.5954,
+        "std": 0.2389,
+        "ci_95": [
+          0.5725,
+          0.6909
+        ]
+      },
+      "volume_error_ml": {
+        "mean": 426.5885,
+        "median": 291.52,
+        "std": 361.8409,
+        "ci_95": [
+          336.9287,
+          516.2482
+        ]
+      },
+      "volume_error_pct": {
+        "mean": 11.6326,
+        "median": 7.98,
+        "std": 10.8487,
+        "ci_95": [
+          8.9444,
+          14.3208
+        ]
+      },
+      "mean_landmark_error_mm": {
+        "mean": 8.2166,
+        "median": 7.13,
+        "std": 4.6792,
+        "ci_95": [
+          7.0572,
+          9.3761
+        ]
+      },
+      "left_lung_assd_mm": {
+        "mean": 4.9725,
+        "median": 4.6816,
+        "std": 2.1189,
+        "ci_95": [
+          4.4475,
+          5.4976
+        ]
+      },
+      "right_lung_assd_mm": {
+        "mean": 5.1458,
+        "median": 4.7441,
+        "std": 2.1974,
+        "ci_95": [
+          4.6013,
+          5.6902
+        ]
+      },
+      "left_lung_dice_2mm": {
+        "mean": 0.1468,
+        "median": 0.0912,
+        "std": 0.1578,
+        "ci_95": [
+          0.1077,
+          0.1859
+        ]
+      },
+      "right_lung_dice_2mm": {
+        "mean": 0.1395,
+        "median": 0.094,
+        "std": 0.1453,
+        "ci_95": [
+          0.1035,
+          0.1755
+        ]
+      }
+    },
+    "lateral_only": {
+      "num_patients": 65,
+      "assd_mm": {
+        "mean": 5.0839,
+        "median": 4.7421,
+        "std": 2.1137,
+        "ci_95": [
+          4.5602,
+          5.6077
+        ]
+      },
+      "hd95_mm": {
+        "mean": 10.0705,
+        "median": 9.3244,
+        "std": 4.9528,
+        "ci_95": [
+          8.8433,
+          11.2977
+        ]
+      },
+      "hd_max_mm": {
+        "mean": 14.4654,
+        "median": 12.2119,
+        "std": 8.4917,
+        "ci_95": [
+          12.3612,
+          16.5695
+        ]
+      },
+      "surface_dice_1mm": {
+        "mean": 0.0249,
+        "median": 0.0117,
+        "std": 0.0445,
+        "ci_95": [
+          0.0139,
+          0.0359
+        ]
+      },
+      "surface_dice_2mm": {
+        "mean": 0.1429,
+        "median": 0.0886,
+        "std": 0.1478,
+        "ci_95": [
+          0.1063,
+          0.1795
+        ]
+      },
+      "surface_dice_3mm": {
+        "mean": 0.33,
+        "median": 0.2687,
+        "std": 0.1978,
+        "ci_95": [
+          0.2809,
+          0.379
+        ]
+      },
+      "surface_dice_5mm": {
+        "mean": 0.6316,
+        "median": 0.5957,
+        "std": 0.2389,
+        "ci_95": [
+          0.5724,
+          0.6908
+        ]
+      },
+      "volume_error_ml": {
+        "mean": 426.5134,
+        "median": 290.99,
+        "std": 361.8494,
+        "ci_95": [
+          336.8515,
+          516.1753
+        ]
+      },
+      "volume_error_pct": {
+        "mean": 11.6278,
+        "median": 7.99,
+        "std": 10.8448,
+        "ci_95": [
+          8.9406,
+          14.315
+        ]
+      },
+      "mean_landmark_error_mm": {
+        "mean": 8.2169,
+        "median": 7.14,
+        "std": 4.6785,
+        "ci_95": [
+          7.0576,
+          9.3762
+        ]
+      },
+      "left_lung_assd_mm": {
+        "mean": 4.9738,
+        "median": 4.6801,
+        "std": 2.1194,
+        "ci_95": [
+          4.4486,
+          5.4989
+        ]
+      },
+      "right_lung_assd_mm": {
+        "mean": 5.1457,
+        "median": 4.7466,
+        "std": 2.1962,
+        "ci_95": [
+          4.6015,
+          5.6899
+        ]
+      },
+      "left_lung_dice_2mm": {
+        "mean": 0.1468,
+        "median": 0.09,
+        "std": 0.1573,
+        "ci_95": [
+          0.1079,
+          0.1858
+        ]
+      },
+      "right_lung_dice_2mm": {
+        "mean": 0.139,
+        "median": 0.0946,
+        "std": 0.1441,
+        "ci_95": [
+          0.1033,
+          0.1747
+        ]
+      }
+    },
+    "dual_view_concat": {
+      "num_patients": 65,
+      "assd_mm": {
+        "mean": 5.084,
+        "median": 4.7411,
+        "std": 2.1136,
+        "ci_95": [
+          4.5603,
+          5.6077
+        ]
+      },
+      "hd95_mm": {
+        "mean": 10.0709,
+        "median": 9.3277,
+        "std": 4.9522,
+        "ci_95": [
+          8.8438,
+          11.298
+        ]
+      },
+      "hd_max_mm": {
+        "mean": 14.4644,
+        "median": 12.2154,
+        "std": 8.4912,
+        "ci_95": [
+          12.3603,
+          16.5684
+        ]
+      },
+      "surface_dice_1mm": {
+        "mean": 0.0249,
+        "median": 0.0116,
+        "std": 0.0445,
+        "ci_95": [
+          0.0139,
+          0.036
+        ]
+      },
+      "surface_dice_2mm": {
+        "mean": 0.1429,
+        "median": 0.0894,
+        "std": 0.1476,
+        "ci_95": [
+          0.1064,
+          0.1795
+        ]
+      },
+      "surface_dice_3mm": {
+        "mean": 0.3299,
+        "median": 0.2678,
+        "std": 0.1976,
+        "ci_95": [
+          0.2809,
+          0.3789
+        ]
+      },
+      "surface_dice_5mm": {
+        "mean": 0.6316,
+        "median": 0.5946,
+        "std": 0.239,
+        "ci_95": [
+          0.5723,
+          0.6908
+        ]
+      },
+      "volume_error_ml": {
+        "mean": 426.486,
+        "median": 290.78,
+        "std": 361.8562,
+        "ci_95": [
+          336.8224,
+          516.1496
+        ]
+      },
+      "volume_error_pct": {
+        "mean": 11.6268,
+        "median": 7.99,
+        "std": 10.8427,
+        "ci_95": [
+          8.9401,
+          14.3135
+        ]
+      },
+      "mean_landmark_error_mm": {
+        "mean": 8.2175,
+        "median": 7.14,
+        "std": 4.6783,
+        "ci_95": [
+          7.0583,
+          9.3768
+        ]
+      },
+      "left_lung_assd_mm": {
+        "mean": 4.9742,
+        "median": 4.68,
+        "std": 2.1197,
+        "ci_95": [
+          4.449,
+          5.4995
+        ]
+      },
+      "right_lung_assd_mm": {
+        "mean": 5.1454,
+        "median": 4.7456,
+        "std": 2.1958,
+        "ci_95": [
+          4.6013,
+          5.6895
+        ]
+      },
+      "left_lung_dice_2mm": {
+        "mean": 0.1469,
+        "median": 0.0903,
+        "std": 0.1569,
+        "ci_95": [
+          0.108,
+          0.1858
+        ]
+      },
+      "right_lung_dice_2mm": {
+        "mean": 0.1389,
+        "median": 0.0946,
+        "std": 0.144,
+        "ci_95": [
+          0.1032,
+          0.1746
+        ]
+      }
+    },
+    "dual_view_attention": {
+      "num_patients": 65,
+      "assd_mm": {
+        "mean": 4.8244,
+        "median": 4.4961,
+        "std": 2.1049,
+        "ci_95": [
+          4.3028,
+          5.346
+        ]
+      },
+      "hd95_mm": {
+        "mean": 9.4609,
+        "median": 8.6733,
+        "std": 4.9306,
+        "ci_95": [
+          8.2391,
+          10.6826
+        ]
+      },
+      "hd_max_mm": {
+        "mean": 13.5678,
+        "median": 11.0881,
+        "std": 8.407,
+        "ci_95": [
+          11.4846,
+          15.651
+        ]
+      },
+      "surface_dice_1mm": {
+        "mean": 0.0352,
+        "median": 0.0125,
+        "std": 0.085,
+        "ci_95": [
+          0.0142,
+          0.0563
+        ]
+      },
+      "surface_dice_2mm": {
+        "mean": 0.1594,
+        "median": 0.0908,
+        "std": 0.1688,
+        "ci_95": [
+          0.1176,
+          0.2013
+        ]
+      },
+      "surface_dice_3mm": {
+        "mean": 0.3591,
+        "median": 0.293,
+        "std": 0.2172,
+        "ci_95": [
+          0.3053,
+          0.4129
+        ]
+      },
+      "surface_dice_5mm": {
+        "mean": 0.6605,
+        "median": 0.6329,
+        "std": 0.2462,
+        "ci_95": [
+          0.5995,
+          0.7215
+        ]
+      },
+      "volume_error_ml": {
+        "mean": 395.8315,
+        "median": 253.12,
+        "std": 349.5116,
+        "ci_95": [
+          309.2268,
+          482.4363
+        ]
+      },
+      "volume_error_pct": {
+        "mean": 10.7958,
+        "median": 6.98,
+        "std": 10.4178,
+        "ci_95": [
+          8.2144,
+          13.3773
+        ]
+      },
+      "mean_landmark_error_mm": {
+        "mean": 7.7115,
+        "median": 6.67,
+        "std": 4.6321,
+        "ci_95": [
+          6.5638,
+          8.8593
+        ]
+      },
+      "left_lung_assd_mm": {
+        "mean": 4.7244,
+        "median": 4.4372,
+        "std": 2.0991,
+        "ci_95": [
+          4.2042,
+          5.2445
+        ]
+      },
+      "right_lung_assd_mm": {
+        "mean": 4.8809,
+        "median": 4.5017,
+        "std": 2.1887,
+        "ci_95": [
+          4.3386,
+          5.4232
+        ]
+      },
+      "left_lung_dice_2mm": {
+        "mean": 0.1648,
+        "median": 0.0962,
+        "std": 0.1822,
+        "ci_95": [
+          0.1196,
+          0.2099
+        ]
+      },
+      "right_lung_dice_2mm": {
+        "mean": 0.1541,
+        "median": 0.097,
+        "std": 0.1605,
+        "ci_95": [
+          0.1143,
+          0.1938
+        ]
+      }
+    },
+    "oracle_ct_projection": {
+      "num_patients": 65,
+      "assd_mm": {
+        "mean": 0.0165,
+        "median": 0.0139,
+        "std": 0.0122,
+        "ci_95": [
+          0.0135,
+          0.0196
+        ]
+      },
+      "hd95_mm": {
+        "mean": 0.0369,
+        "median": 0.033,
+        "std": 0.0279,
+        "ci_95": [
+          0.03,
+          0.0438
+        ]
+      },
+      "hd_max_mm": {
+        "mean": 0.7973,
+        "median": 0.6258,
+        "std": 0.6146,
+        "ci_95": [
+          0.645,
+          0.9496
+        ]
+      },
+      "surface_dice_1mm": {
+        "mean": 0.9998,
+        "median": 1.0,
+        "std": 0.0005,
+        "ci_95": [
+          0.9997,
+          0.9999
+        ]
+      },
+      "surface_dice_2mm": {
+        "mean": 1.0,
+        "median": 1.0,
+        "std": 0.0001,
+        "ci_95": [
+          0.9999,
+          1.0
+        ]
+      },
+      "surface_dice_3mm": {
+        "mean": 1.0,
+        "median": 1.0,
+        "std": 0.0,
+        "ci_95": [
+          1.0,
+          1.0
+        ]
+      },
+      "surface_dice_5mm": {
+        "mean": 1.0,
+        "median": 1.0,
+        "std": 0.0,
+        "ci_95": [
+          1.0,
+          1.0
+        ]
+      },
+      "volume_error_ml": {
+        "mean": 0.0823,
+        "median": 0.05,
+        "std": 0.1127,
+        "ci_95": [
+          0.0544,
+          0.1102
+        ]
+      },
+      "volume_error_pct": {
+        "mean": 0.0012,
+        "median": 0.0,
+        "std": 0.0038,
+        "ci_95": [
+          0.0003,
+          0.0022
+        ]
+      },
+      "mean_landmark_error_mm": {
+        "mean": 0.0208,
+        "median": 0.02,
+        "std": 0.0179,
+        "ci_95": [
+          0.0163,
+          0.0252
+        ]
+      },
+      "left_lung_assd_mm": {
+        "mean": 0.0205,
+        "median": 0.0165,
+        "std": 0.014,
+        "ci_95": [
+          0.017,
+          0.024
+        ]
+      },
+      "right_lung_assd_mm": {
+        "mean": 0.0126,
+        "median": 0.0111,
+        "std": 0.0109,
+        "ci_95": [
+          0.0099,
+          0.0153
+        ]
+      },
+      "left_lung_dice_2mm": {
+        "mean": 1.0,
+        "median": 1.0,
+        "std": 0.0003,
+        "ci_95": [
+          0.9999,
+          1.0
+        ]
+      },
+      "right_lung_dice_2mm": {
+        "mean": 1.0,
+        "median": 1.0,
+        "std": 0.0,
+        "ci_95": [
+          1.0,
+          1.0
+        ]
+      }
+    }
+  },
+  "ablation_summary": {
+    "frontal_vs_dual_attention_assd_reduction_mm": 0.2592,
+    "frontal_vs_dual_attention_relative_gain_pct": 5.1
+  }
+}

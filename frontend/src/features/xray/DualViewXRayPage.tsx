@@ -74,7 +74,7 @@ export const DualViewXRayPage: React.FC = () => {
   const [reconstructionResult, setReconstructionResult] = useState<SSMReconstructionResponse | null>(null);
   const [patientReconstructionResult, setPatientReconstructionResult] = useState<DualViewReconstructionResponse | null>(null);
   const [patientId, setPatientId] = useState<string>('LIDC-IDRI-0002');
-  const [fusionModel, setFusionModel] = useState<string>('dual_view_attention');
+  const [fusionModel, setFusionModel] = useState<string>('dual_view_heteroscedastic');
   const [selectedStructure, setSelectedStructure] = useState<'bilateral' | 'left_lung' | 'right_lung'>('bilateral');
   const [reconstructionError, setReconstructionError] = useState<string | null>(null);
   const [ssmModelInfo, setSsmModelInfo] = useState<SSMModelInfo | null>(null);
@@ -970,11 +970,14 @@ export const DualViewXRayPage: React.FC = () => {
                   onChange={(e) => setFusionModel(e.target.value)}
                   className="px-2.5 py-1 rounded-lg border border-[#cbd5e1] font-semibold text-[#1a082e] bg-white text-xs focus:ring-1 focus:ring-amber-500"
                 >
+                  <option value="dual_view_heteroscedastic">
+                    Phase 5B Heteroscedastic V2 (Recommended - ASSD 4.71mm)
+                  </option>
                   <option value="dual_view_attention">
-                    Dual-View Cross-Attention (Recommended - ASSD 4.82mm)
+                    Phase 5 Dual-View Cross-Attention (ASSD 4.82mm)
                   </option>
                   <option value="dual_view_concat">
-                    Dual-View Feature Concatenation (ASSD 5.08mm)
+                    Model 3: Dual-View Concatenation (ASSD 5.08mm)
                   </option>
                   <option value="frontal_only">
                     Model 1: Frontal-Only Baseline (ASSD 5.08mm)
@@ -1145,6 +1148,8 @@ export const DualViewXRayPage: React.FC = () => {
                     }
                     referenceVertices={patientReconstructionResult?.reference_ct_mesh?.vertices}
                     referenceFaces={patientReconstructionResult?.reference_ct_mesh?.faces}
+                    vertexErrors={patientReconstructionResult?.comparison_metrics?.vertex_errors}
+                    uncertainties={patientReconstructionResult?.surface_mesh?.uncertainties_mm}
                     cardiacMesh={reconstructionResult.cardiac_mesh}
                     landmarks={reconstructionResult.surface_mesh.landmarks}
                     onExportObj={handleExportObj}

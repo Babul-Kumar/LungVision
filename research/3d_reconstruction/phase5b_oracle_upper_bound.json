@@ -1,0 +1,265 @@
+{
+  "report_version": "5.1.0",
+  "timestamp_utc": "2026-11-16T20:39:51Z",
+  "task": "Task B: Oracle Coefficient Reconstruction Upper Bound Analysis",
+  "description": "Diagnostic upper-bound experiment: best-fitting PCA coefficients projected directly from held-out reference CT surface into the 20-mode SSM manifold.",
+  "theoretical_role": "Defines the fundamental representation limit of the 20-mode Point Distribution Model (PDM). Demonstrates error attributable to linear subspace truncation vs. 2D radiograph feature prediction error.",
+  "cohort_size": 65,
+  "oracle_performance": {
+    "num_patients": 65,
+    "assd_mm": {
+      "mean": 0.0165,
+      "median": 0.0139,
+      "std": 0.0122,
+      "ci_95": [
+        0.0135,
+        0.0196
+      ]
+    },
+    "hd95_mm": {
+      "mean": 0.0369,
+      "median": 0.033,
+      "std": 0.0279,
+      "ci_95": [
+        0.03,
+        0.0438
+      ]
+    },
+    "hd_max_mm": {
+      "mean": 0.7973,
+      "median": 0.6258,
+      "std": 0.6146,
+      "ci_95": [
+        0.645,
+        0.9496
+      ]
+    },
+    "surface_dice_1mm": {
+      "mean": 0.9998,
+      "median": 1.0,
+      "std": 0.0005,
+      "ci_95": [
+        0.9997,
+        0.9999
+      ]
+    },
+    "surface_dice_2mm": {
+      "mean": 1.0,
+      "median": 1.0,
+      "std": 0.0001,
+      "ci_95": [
+        0.9999,
+        1.0
+      ]
+    },
+    "surface_dice_3mm": {
+      "mean": 1.0,
+      "median": 1.0,
+      "std": 0.0,
+      "ci_95": [
+        1.0,
+        1.0
+      ]
+    },
+    "surface_dice_5mm": {
+      "mean": 1.0,
+      "median": 1.0,
+      "std": 0.0,
+      "ci_95": [
+        1.0,
+        1.0
+      ]
+    },
+    "volume_error_ml": {
+      "mean": 0.0823,
+      "median": 0.05,
+      "std": 0.1127,
+      "ci_95": [
+        0.0544,
+        0.1102
+      ]
+    },
+    "volume_error_pct": {
+      "mean": 0.0012,
+      "median": 0.0,
+      "std": 0.0038,
+      "ci_95": [
+        0.0003,
+        0.0022
+      ]
+    },
+    "mean_landmark_error_mm": {
+      "mean": 0.0208,
+      "median": 0.02,
+      "std": 0.0179,
+      "ci_95": [
+        0.0163,
+        0.0252
+      ]
+    },
+    "left_lung_assd_mm": {
+      "mean": 0.0205,
+      "median": 0.0165,
+      "std": 0.014,
+      "ci_95": [
+        0.017,
+        0.024
+      ]
+    },
+    "right_lung_assd_mm": {
+      "mean": 0.0126,
+      "median": 0.0111,
+      "std": 0.0109,
+      "ci_95": [
+        0.0099,
+        0.0153
+      ]
+    },
+    "left_lung_dice_2mm": {
+      "mean": 1.0,
+      "median": 1.0,
+      "std": 0.0003,
+      "ci_95": [
+        0.9999,
+        1.0
+      ]
+    },
+    "right_lung_dice_2mm": {
+      "mean": 1.0,
+      "median": 1.0,
+      "std": 0.0,
+      "ci_95": [
+        1.0,
+        1.0
+      ]
+    }
+  },
+  "gap_analysis_to_learned_models": {
+    "oracle_vs_dual_attention": {
+      "assd_gap_mm": 4.8079,
+      "hd95_gap_mm": 9.424,
+      "dice_2mm_gap": 0.8406,
+      "volume_error_gap_pct": 10.79,
+      "relative_manifold_efficiency_pct": 5.13
+    },
+    "oracle_vs_frontal_only": {
+      "assd_gap_mm": 5.0671,
+      "hd95_gap_mm": 10.0325,
+      "dice_2mm_gap": 0.8569,
+      "volume_error_gap_pct": 11.63
+    }
+  },
+  "sample_patient_records": [
+    {
+      "patient_id": "LIDC-IDRI-0002",
+      "mean_assd_mm": 4.4227,
+      "frontal_assd_mm": 4.4242,
+      "lateral_assd_mm": 4.4215,
+      "dual_attention_assd_mm": 4.1972,
+      "oracle_assd_mm": 0.004,
+      "oracle_hd95_mm": 0.0077,
+      "oracle_dice_2mm": 1.0,
+      "oracle_vol_err_pct": 0.0
+    },
+    {
+      "patient_id": "LIDC-IDRI-0005",
+      "mean_assd_mm": 1.6143,
+      "frontal_assd_mm": 1.6083,
+      "lateral_assd_mm": 1.6158,
+      "dual_attention_assd_mm": 1.374,
+      "oracle_assd_mm": 0.0079,
+      "oracle_hd95_mm": 0.0211,
+      "oracle_dice_2mm": 1.0,
+      "oracle_vol_err_pct": 0.0
+    },
+    {
+      "patient_id": "LIDC-IDRI-0007",
+      "mean_assd_mm": 5.2936,
+      "frontal_assd_mm": 5.2899,
+      "lateral_assd_mm": 5.2927,
+      "dual_attention_assd_mm": 5.0276,
+      "oracle_assd_mm": 0.0156,
+      "oracle_hd95_mm": 0.0359,
+      "oracle_dice_2mm": 1.0,
+      "oracle_vol_err_pct": 0.0
+    },
+    {
+      "patient_id": "LIDC-IDRI-0012",
+      "mean_assd_mm": 6.2097,
+      "frontal_assd_mm": 6.2128,
+      "lateral_assd_mm": 6.2145,
+      "dual_attention_assd_mm": 5.9512,
+      "oracle_assd_mm": 0.0217,
+      "oracle_hd95_mm": 0.0351,
+      "oracle_dice_2mm": 1.0,
+      "oracle_vol_err_pct": 0.0
+    },
+    {
+      "patient_id": "LIDC-IDRI-0027",
+      "mean_assd_mm": 7.0877,
+      "frontal_assd_mm": 7.0857,
+      "lateral_assd_mm": 7.0877,
+      "dual_attention_assd_mm": 6.8327,
+      "oracle_assd_mm": 0.036,
+      "oracle_hd95_mm": 0.0724,
+      "oracle_dice_2mm": 0.999,
+      "oracle_vol_err_pct": 0.02
+    },
+    {
+      "patient_id": "LIDC-IDRI-0033",
+      "mean_assd_mm": 9.2891,
+      "frontal_assd_mm": 9.2854,
+      "lateral_assd_mm": 9.2827,
+      "dual_attention_assd_mm": 8.9645,
+      "oracle_assd_mm": 0.0059,
+      "oracle_hd95_mm": 0.0129,
+      "oracle_dice_2mm": 1.0,
+      "oracle_vol_err_pct": 0.0
+    },
+    {
+      "patient_id": "LIDC-IDRI-0038",
+      "mean_assd_mm": 4.2537,
+      "frontal_assd_mm": 4.2498,
+      "lateral_assd_mm": 4.2483,
+      "dual_attention_assd_mm": 3.9132,
+      "oracle_assd_mm": 0.0277,
+      "oracle_hd95_mm": 0.0798,
+      "oracle_dice_2mm": 1.0,
+      "oracle_vol_err_pct": 0.01
+    },
+    {
+      "patient_id": "LIDC-IDRI-0039",
+      "mean_assd_mm": 5.3216,
+      "frontal_assd_mm": 5.317,
+      "lateral_assd_mm": 5.3167,
+      "dual_attention_assd_mm": 5.0751,
+      "oracle_assd_mm": 0.014,
+      "oracle_hd95_mm": 0.0253,
+      "oracle_dice_2mm": 1.0,
+      "oracle_vol_err_pct": 0.0
+    },
+    {
+      "patient_id": "LIDC-IDRI-0042",
+      "mean_assd_mm": 6.843,
+      "frontal_assd_mm": 6.8434,
+      "lateral_assd_mm": 6.8445,
+      "dual_attention_assd_mm": 6.626,
+      "oracle_assd_mm": 0.0171,
+      "oracle_hd95_mm": 0.0473,
+      "oracle_dice_2mm": 1.0,
+      "oracle_vol_err_pct": 0.0
+    },
+    {
+      "patient_id": "LIDC-IDRI-0048",
+      "mean_assd_mm": 2.9653,
+      "frontal_assd_mm": 2.9606,
+      "lateral_assd_mm": 2.9643,
+      "dual_attention_assd_mm": 2.7147,
+      "oracle_assd_mm": 0.008,
+      "oracle_hd95_mm": 0.0194,
+      "oracle_dice_2mm": 1.0,
+      "oracle_vol_err_pct": 0.0
+    }
+  ],
+  "verdict": "ORACLE_UPPER_BOUND_ESTABLISHED"
+}

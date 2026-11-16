@@ -1,21 +1,23 @@
 {
   "mode": "implementation",
-  "objective": "LungVision AI — Phase 5 Patient-Specific Dual-View 3D Lung Shape Reconstruction from Paired Radiographs.",
+  "objective": "LungVision AI — Phase 5B 3D Lung Reconstruction Accuracy Optimization and Anatomical Validation.",
   "acceptance_criteria": [
-    "Gate A: Multi-Patient SSM & Correspondence Governance (Audit 430 patient cohort with 301 train / 64 val / 65 test split; verify canonical template, bilateral partitioning, 16 anatomical landmarks, Generalized Procrustes Analysis, and export ssm_lung_pca_v2.json).",
-    "Gate B: Paired Dual-View Input Pipeline (Ingest Frontal PA/AP and Lateral LL radiographs with view identity, aspect ratio, patient pairing validation, and mismatch rejection).",
-    "Gate C: Controlled Shape Parameter Prediction (Implement and benchmark Frontal-only, Lateral-only, Dual-view concatenation fusion, and Dual-view cross-attention fusion models predicting M=20 SSM coefficients with zero CT metadata leakage).",
-    "Gate D: Patient-Specific 3D Reconstruction Service (Continuous surface synthesis s = mean + P*b, left/right lung partitioning, divergence theorem volumetry, vertex uncertainty estimation, and experimental REST endpoint /api/v1/reconstruction/3d/patient-specific).",
-    "Gate E: Held-Out CT Surface Validation (Rigorous evaluation across 65 held-out test patients against reference CT segmentations: Dice, ASSD, HD95, Volume Error %, Landmark Error, 95% CIs, and Frontal vs Dual-view ablation).",
-    "Gate F: Research Dashboard Integration (Interactive DualViewXRayPage with paired upload, patient verification, 3D predicted mesh rendering, Left/Right toggle, CT ground truth comparison, quantitative scorecard, and non-diagnostic disclaimer).",
-    "Gate G: Comprehensive Automated Verification (Complete test suite covering split integrity, mesh correspondence, PCA boundaries, paired input, shape prediction, 3D reconstruction, volume calculation, API isolation, and frontend UI)."
+    "Gate A: Forensic SSM Validation & PCA Spectrum Audit (Audit fit_multi_patient_ssm.py, verified_multi_patient_manifest.json, ssm_lung_pca_v2.json; investigate the 100.0% variance claim; compute full eigenvalue spectrum, condition number, effective rank, and reconstruction errors for 1, 3, 5, 10, 15, 20 modes into phase5b_ssm_spectrum_audit.json).",
+    "Gate B: Baseline Comparison & Oracle Upper Bound (Evaluate Mean SSM, Frontal-only, Lateral-only, Dual-concat, Dual-attention, and Oracle CT-projected coefficients on identical 65 held-out test patients; export phase5b_baseline_comparison.json and phase5b_oracle_upper_bound.json).",
+    "Gate C: Improved Shape Prediction & Model Ablation (Investigate heteroscedastic coefficient prediction with uncertainty log-variance, multi-task left/right shape heads, and enhanced cross-attention; verify anatomical plausibility and Mahalanobis limits; export phase5b_model_ablation.json and new model checkpoint).",
+    "Gate D: Mesh Surface Quality & Correspondence Regularization (Evaluate Laplacian/Taubin surface smoothing, normal consistency, non-self-intersection, and left/right boundary preservation on held-out reference surfaces; export phase5b_surface_quality_metrics.json).",
+    "Gate E: Bilateral Volumetry Audit (Verify divergence theorem volume calculation, units mm3->mL, mesh closure, signed orientation, left/right separation, and comparison against ground-truth CT mask volume; export phase5b_volumetry_audit.json).",
+    "Gate F: Rigorous Statistical Validation (Patient-level paired evaluation with ASSD, HD95, Dice at 1/2/3/5mm, Volumetric Error; audit Wilcoxon W=0, ties/non-zero pairs, exact vs asymptotic p-values, Holm-Bonferroni correction, and effect sizes into phase5b_statistical_validation.json).",
+    "Gate G: Multi-Condition Robustness Assessment (Evaluate PA vs AP, rotation, translation/crop, exposure variations, resolutions, and missing lateral view fallback; export phase5b_robustness_report.json).",
+    "Gate H: Frontend Visualization Enhancement (Update DualViewXRayPage and SSM3DReconstructionViewer with side-by-side predicted vs reference CT, error heatmap vertex coloring, uncertainty visualization, and responsive controls).",
+    "Gate I: Automated Test Suite & Authoritative Report (Add comprehensive backend and frontend tests verifying all Phase 5B capabilities while preserving production invariants, and publish PHASE_5B_RECONSTRUCTION_IMPROVEMENT_REPORT.md)."
   ],
   "non_goals": [
     "Do not modify or retrain frozen DenseNet121 weights (8d3690cd...)",
     "Do not alter frozen NIH production classification thresholds",
-    "Do not download 220 GB LUNA16 raw CT scans locally; use verified manifest and cloud-hybrid processing",
-    "Do not use CT spacing, CT dimensions, or mask metadata as predictor inputs (prevent shortcut learning)",
-    "Never display predicted 3D mesh as an actual CT scan or claim diagnostic CT synthesis"
+    "Do not overwrite existing Phase 5 checkpoints (dual_view_shape_predictor_best.pth) or PCA artifact v2",
+    "Do not use CT spacing, dimensions, or mask metadata as predictor inputs (prevent shortcut learning)",
+    "Never display predicted 3D mesh as an actual CT scan or make unsupported clinical diagnostic claims"
   ],
   "risk": "medium",
   "budget": "deep",
@@ -35,14 +37,16 @@
     "verification_depth": "impact",
     "delegation": "none",
     "reason_codes": [
-      "multi-patient-ssm-training",
-      "mesh-correspondence-audit",
-      "paired-dual-view-pipeline",
-      "dual-view-fusion-models",
-      "patient-specific-3d-reconstruction",
-      "held-out-ct-surface-validation",
-      "full-stack-workspace-integration",
-      "automated-regression-testing"
+      "forensic-ssm-validation",
+      "pca-spectrum-audit",
+      "oracle-upper-bound-benchmark",
+      "heteroscedastic-shape-prediction",
+      "surface-regularization-smoothing",
+      "bilateral-volumetry-audit",
+      "rigorous-paired-statistical-testing",
+      "multi-condition-robustness-audit",
+      "frontend-heatmap-visualization",
+      "preservation-of-production-invariants"
     ]
   },
   "status": "completed"

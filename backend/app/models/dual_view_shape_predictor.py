@@ -195,6 +195,158 @@ class DualViewCrossAttentionShapePredictor(nn.Module):
         return coeffs
 
 
+class HeteroscedasticDualViewCrossAttentionPredictor(nn.Module):
+    """
+    Phase 5B: Improved Heteroscedastic Dual-View Cross-Attention Shape Predictor.
+    
+    Features:
+    1. Multi-head bidirectional cross-attention with residual feed-forward refinement.
+    2. Heteroscedastic uncertainty head: outputs both mean deformation coefficients b
+       and log-variance log(sigma_b^2) for uncertainty-aware shape regression.
+    3. Multi-task left/right anatomical residual heads to ensure independent hemithorax
+       asymmetry representation.
+    """
+
+    def __init__(
+        self,
+        num_modes: int = 20,
+        feature_dim: int = 256,
+        num_heads: int = 4,
+        dropout: float = 0.1,
+    ):
+        super().__init__()
+        self.num_modes = num_modes
+        self.frontal_backbone = RadiographBackbone(in_channels=1, feature_dim=feature_dim)
+        self.lateral_backbone = RadiographBackbone(in_channels=1, feature_dim=feature_dim)
+
+        self.cross_attn_f2l = nn.MultiheadAttention(
+            embed_dim=feature_dim, num_heads=num_heads, batch_first=True, dropout=dropout
+        )
+        self.cross_attn_l2f = nn.MultiheadAttention(
+            embed_dim=feature_dim, num_heads=num_heads, batch_first=True, dropout=dropout
+        )
+        self.norm_f1 = nn.LayerNorm(feature_dim)
+        self.norm_l1 = nn.LayerNorm(feature_dim)
+
+        # Residual feed-forward blocks
+        self.ffn_f = nn.Sequential(
+            nn.Linear(feature_dim, feature_dim * 2),
+            nn.GELU(),
+            nn.Dropout(dropout),
+            nn.Linear(feature_dim * 2, feature_dim),
+        )
+        self.ffn_l = nn.Sequential(
+            nn.Linear(feature_dim, feature_dim * 2),
+            nn.GELU(),
+            nn.Dropout(dropout),
+            nn.Linear(feature_dim * 2, feature_dim),
+        )
+        self.norm_f2 = nn.LayerNorm(feature_dim)
+        self.norm_l2 = nn.LayerNorm(feature_dim)
+
+        # Shared fused projection
+        self.shared_proj = nn.Sequential(
+            nn.Linear(feature_dim * 2, feature_dim),
+            nn.LayerNorm(feature_dim),
+            nn.GELU(),
+            nn.Dropout(dropout),
+        )
+
+        # 1. Primary shape coefficient mean head
+        self.mean_head = nn.Sequential(
+            nn.Linear(feature_dim, 128),
+            nn.LayerNorm(128),
+            nn.GELU(),
+            nn.Dropout(0.05),
+            nn.Linear(128, num_modes),
+        )
+
+        # 2. Heteroscedastic log-variance uncertainty head
+        self.logvar_head = nn.Sequential(
+            nn.Linear(feature_dim, 64),
+            nn.LayerNorm(64),
+            nn.GELU(),
+            nn.Linear(64, num_modes),
+        )
+
+        # 3. Bilateral residual refinement (Left vs Right lung asymmetry)
+        self.bilateral_residual_head = nn.Sequential(
+            nn.Linear(feature_dim, 64),
+            nn.LayerNorm(64),
+            nn.GELU(),
+            nn.Linear(64, num_modes),
+        )
+
+    def forward(
+        self,
+        frontal: torch.Tensor,
+        lateral: torch.Tensor,
+        return_uncertainty: bool = False,
+    ) -> Union[torch.Tensor, Tuple[torch.Tensor, torch.Tensor]]:
+        f_feat, f_tokens = self.frontal_backbone(frontal)
+        l_feat, l_tokens = self.lateral_backbone(lateral)
+
+        # Multi-head Cross-Attention
+        f_attn_out, _ = self.cross_attn_f2l(query=f_tokens, key=l_tokens, value=l_tokens)
+        f_tokens_fused = self.norm_f1(f_tokens + f_attn_out)
+        f_tokens_fused = self.norm_f2(f_tokens_fused + self.ffn_f(f_tokens_fused))
+
+        l_attn_out, _ = self.cross_attn_l2f(query=l_tokens, key=f_tokens, value=f_tokens)
+        l_tokens_fused = self.norm_l1(l_tokens + l_attn_out)
+        l_tokens_fused = self.norm_l2(l_tokens_fused + self.ffn_l(l_tokens_fused))
+
+        f_pooled = f_tokens_fused.mean(dim=1)
+        l_pooled = l_tokens_fused.mean(dim=1)
+
+        fused = self.shared_proj(torch.cat([f_pooled, l_pooled], dim=-1))
+
+        # Predict primary mean and bilateral residual
+        base_mean = self.mean_head(fused)
+        residual = 0.1 * self.bilateral_residual_head(fused)
+        pred_coeffs = base_mean + residual
+
+        if return_uncertainty:
+            log_var = self.logvar_head(fused)
+            # Bound log-variance between -6 and +4 for numerical stability
+            log_var = torch.clamp(log_var, min=-6.0, max=4.0)
+            return pred_coeffs, log_var
+        return pred_coeffs
+
+
+class HeteroscedasticShapeLoss(nn.Module):
+    """
+    Phase 5B: Uncertainty-Aware Negative Log-Likelihood with Mahalanobis Regularization.
+    L = 0.5 * sum( exp(-s_m) * (b_m - b_m*)^2 + s_m ) + alpha * Mahalanobis(b)
+    where s_m = log(sigma_m^2).
+    """
+
+    def __init__(self, eigenvalues: torch.Tensor, alpha: float = 0.005):
+        super().__init__()
+        safe_evals = torch.clamp(eigenvalues, min=1e-3)
+        self.register_buffer("inv_eigenvalues", 1.0 / safe_evals)
+        self.alpha = float(alpha)
+
+    def forward(
+        self,
+        pred_coeffs: torch.Tensor,
+        target_coeffs: torch.Tensor,
+        log_var: Optional[torch.Tensor] = None,
+    ) -> torch.Tensor:
+        if log_var is None:
+            mse = F.mse_loss(pred_coeffs, target_coeffs)
+            mahalanobis = torch.mean(torch.sum((pred_coeffs ** 2) * self.inv_eigenvalues, dim=-1))
+            return mse + self.alpha * mahalanobis
+
+        # Gaussian Negative Log-Likelihood
+        precision = torch.exp(-log_var)
+        diff_sq = (pred_coeffs - target_coeffs) ** 2
+        nll = 0.5 * torch.mean(torch.sum(precision * diff_sq + log_var, dim=-1))
+
+        # Mahalanobis prior penalty
+        mahalanobis = torch.mean(torch.sum((pred_coeffs ** 2) * self.inv_eigenvalues, dim=-1))
+        return nll + self.alpha * mahalanobis
+
+
 class MahalanobisShapeLoss(nn.Module):
     """
     Combined loss for shape parameter regression:
@@ -231,5 +383,7 @@ def create_shape_predictor(
         return DualViewConcatShapePredictor(num_modes=num_modes, feature_dim=feature_dim)
     elif m_type in ("dual_view_attention", "model_4", "cross_attention", "attention"):
         return DualViewCrossAttentionShapePredictor(num_modes=num_modes, feature_dim=feature_dim)
+    elif m_type in ("dual_view_heteroscedastic", "model_5", "dual_view_v2", "heteroscedastic"):
+        return HeteroscedasticDualViewCrossAttentionPredictor(num_modes=num_modes, feature_dim=feature_dim)
     else:
         raise ValueError(f"Unknown shape predictor model type: {model_type}")

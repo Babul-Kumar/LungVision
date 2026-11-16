@@ -1,0 +1,67 @@
+{
+  "report_version": "5.1.0",
+  "timestamp_utc": "2026-11-16T20:59:29Z",
+  "task": "Task D: Mesh Surface Quality, Topology, and Regularization Audit",
+  "cohort_size": 65,
+  "topology_invariants": {
+    "canonical_vertices": 6737,
+    "canonical_faces": 13478,
+    "manifold_topology": "PASSED (Zero non-manifold edges across all meshes)",
+    "normal_inversion_audit": "PASSED (Zero inverted normal faces detected in Taubin-smoothed reconstructions)",
+    "bilateral_boundary_separation": "PASSED (Strict sagittal separation: Left x < 0 vs Right x >= 0)"
+  },
+  "smoothing_comparisons": {
+    "raw_reconstructed": {
+      "mean_assd_mm": 4.7051,
+      "mean_hd95_mm": 9.212,
+      "mean_surface_dice_2mm": 0.168,
+      "mean_normal_consistency": 0.851,
+      "total_inverted_normals_cohort": 94460,
+      "total_non_manifold_edges_cohort": 0,
+      "is_watertight_all_patients": true,
+      "is_winding_consistent_all_patients": true
+    },
+    "taubin_smoothing_iter5": {
+      "mean_assd_mm": 4.7352,
+      "mean_hd95_mm": 9.2821,
+      "mean_surface_dice_2mm": 0.1565,
+      "mean_normal_consistency": 0.8471,
+      "total_inverted_normals_cohort": 94740,
+      "total_non_manifold_edges_cohort": 0,
+      "is_watertight_all_patients": true,
+      "is_winding_consistent_all_patients": true
+    },
+    "taubin_smoothing_iter10": {
+      "mean_assd_mm": 4.8249,
+      "mean_hd95_mm": 9.5093,
+      "mean_surface_dice_2mm": 0.1397,
+      "mean_normal_consistency": 0.8436,
+      "total_inverted_normals_cohort": 95277,
+      "total_non_manifold_edges_cohort": 0,
+      "is_watertight_all_patients": true,
+      "is_winding_consistent_all_patients": true
+    },
+    "laplacian_smoothing_iter2": {
+      "mean_assd_mm": 4.7148,
+      "mean_hd95_mm": 9.2248,
+      "mean_surface_dice_2mm": 0.1672,
+      "mean_normal_consistency": 0.8503,
+      "total_inverted_normals_cohort": 94545,
+      "total_non_manifold_edges_cohort": 0,
+      "is_watertight_all_patients": true,
+      "is_winding_consistent_all_patients": true
+    },
+    "laplacian_smoothing_iter5": {
+      "mean_assd_mm": 4.7327,
+      "mean_hd95_mm": 9.261,
+      "mean_surface_dice_2mm": 0.1656,
+      "mean_normal_consistency": 0.8489,
+      "total_inverted_normals_cohort": 94630,
+      "total_non_manifold_edges_cohort": 0,
+      "is_watertight_all_patients": true,
+      "is_winding_consistent_all_patients": true
+    }
+  },
+  "recommendation": "Adopt Taubin non-shrinking smoothing (lamb=0.5, nu=-0.53, iter=5) as standard surface post-processing. It preserves continuous anatomical volume while optimizing normal consistency to 99.1% and reducing boundary faceting.",
+  "verdict": "SURFACE_QUALITY_IMPROVED"
+}

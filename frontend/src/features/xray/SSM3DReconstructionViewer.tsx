@@ -22,6 +22,8 @@ interface SSM3DReconstructionViewerProps {
   faces?: number[][] | null;
   referenceVertices?: number[][] | null;
   referenceFaces?: number[][] | null;
+  vertexErrors?: number[] | null;
+  uncertainties?: number[] | null;
   cardiacMesh?: {
     vertex_count?: number;
     face_count?: number;
@@ -48,6 +50,8 @@ export const SSM3DReconstructionViewer: React.FC<SSM3DReconstructionViewerProps>
   faces,
   referenceVertices,
   referenceFaces,
+  vertexErrors,
+  uncertainties,
   cardiacMesh,
   landmarks,
   onExportObj,
@@ -58,7 +62,7 @@ export const SSM3DReconstructionViewer: React.FC<SSM3DReconstructionViewerProps>
   const [showLandmarks, setShowLandmarks] = useState<boolean>(true);
   const [showHeart, setShowHeart] = useState<boolean>(true);
   const [showReferenceCT, setShowReferenceCT] = useState<boolean>(true);
-  const [colorMode, setColorMode] = useState<'pleura' | 'bilateral' | 'platinum'>('pleura');
+  const [colorMode, setColorMode] = useState<'pleura' | 'bilateral' | 'platinum' | 'error_heatmap' | 'uncertainty'>('pleura');
   const [isAutoRotating, setIsAutoRotating] = useState<boolean>(false);
   const [activeViewName, setActiveViewName] = useState<string>('Oblique 3D');
   const [vertexCount, setVertexCount] = useState<number>(0);
@@ -331,6 +335,18 @@ export const SSM3DReconstructionViewer: React.FC<SSM3DReconstructionViewerProps>
           wireframe: wireframe,
           side: THREE.DoubleSide,
         });
+      } else if (colorMode === 'error_heatmap' || colorMode === 'uncertainty') {
+        return new THREE.MeshPhysicalMaterial({
+          roughness: 0.32,
+          metalness: 0.04,
+          clearcoat: 0.5,
+          clearcoatRoughness: 0.14,
+          vertexColors: true,
+          transparent: true,
+          opacity: wireframe ? 0.9 : 0.96,
+          wireframe: wireframe,
+          side: THREE.DoubleSide,
+        });
       } else {
         // High-contrast clinical platinum morphology
         return new THREE.MeshPhysicalMaterial({
@@ -413,7 +429,7 @@ export const SSM3DReconstructionViewer: React.FC<SSM3DReconstructionViewerProps>
       }
       geometry.setAttribute('position', new THREE.BufferAttribute(posArray, 3));
 
-      // Bilateral anatomical coloration (Left Lung: Ice Silver / Platinum Rose, Right Lung: Champagne Gold / Marigold)
+      // Bilateral anatomical coloration, Error Heatmap, or Uncertainty Map
       if (colorMode === 'bilateral') {
         const colors = new Float32Array(vertices.length * 3);
         for (let i = 0; i < vertices.length; i++) {
@@ -428,6 +444,50 @@ export const SSM3DReconstructionViewer: React.FC<SSM3DReconstructionViewerProps>
             colors[i * 3] = 1.0;
             colors[i * 3 + 1] = 0.91;
             colors[i * 3 + 2] = 0.68;
+          }
+        }
+        geometry.setAttribute('color', new THREE.BufferAttribute(colors, 3));
+      } else if (colorMode === 'error_heatmap' && vertexErrors && vertexErrors.length === vertices.length) {
+        const colors = new Float32Array(vertices.length * 3);
+        for (let i = 0; i < vertices.length; i++) {
+          const err = vertexErrors[i];
+          if (err < 2.0) {
+            // High fidelity (< 2mm): Emerald Green
+            colors[i * 3] = 0.16;
+            colors[i * 3 + 1] = 0.8;
+            colors[i * 3 + 2] = 0.44;
+          } else if (err < 5.0) {
+            // Moderate deviation (2-5mm): Amber Gold
+            colors[i * 3] = 0.96;
+            colors[i * 3 + 1] = 0.68;
+            colors[i * 3 + 2] = 0.12;
+          } else {
+            // Significant deviation (>= 5mm): Crimson Red
+            colors[i * 3] = 0.92;
+            colors[i * 3 + 1] = 0.24;
+            colors[i * 3 + 2] = 0.24;
+          }
+        }
+        geometry.setAttribute('color', new THREE.BufferAttribute(colors, 3));
+      } else if (colorMode === 'uncertainty' && uncertainties && uncertainties.length === vertices.length) {
+        const colors = new Float32Array(vertices.length * 3);
+        for (let i = 0; i < vertices.length; i++) {
+          const u = uncertainties[i];
+          if (u < 4.0) {
+            // High confidence (uncertainty <= 4mm): Cyan
+            colors[i * 3] = 0.06;
+            colors[i * 3 + 1] = 0.72;
+            colors[i * 3 + 2] = 0.84;
+          } else if (u < 7.0) {
+            // Moderate uncertainty (4-7mm): Purple
+            colors[i * 3] = 0.55;
+            colors[i * 3 + 1] = 0.36;
+            colors[i * 3 + 2] = 0.92;
+          } else {
+            // Boundary variance (>= 7mm): Magenta / Rose
+            colors[i * 3] = 0.88;
+            colors[i * 3 + 1] = 0.22;
+            colors[i * 3 + 2] = 0.65;
           }
         }
         geometry.setAttribute('color', new THREE.BufferAttribute(colors, 3));
@@ -726,25 +786,40 @@ export const SSM3DReconstructionViewer: React.FC<SSM3DReconstructionViewerProps>
           )}
 
           <button
-            onClick={() => setColorMode((c) => (c === 'pleura' ? 'bilateral' : c === 'bilateral' ? 'platinum' : 'pleura'))}
+            onClick={() =>
+              setColorMode((c) => {
+                if (c === 'pleura') return 'bilateral';
+                if (c === 'bilateral') return 'platinum';
+                if (c === 'platinum' && vertexErrors && vertexErrors.length > 0) return 'error_heatmap';
+                if ((c === 'platinum' || c === 'error_heatmap') && uncertainties && uncertainties.length > 0)
+                  return 'uncertainty';
+                return 'pleura';
+              })
+            }
             className={`px-2 py-1 rounded text-xs font-medium flex items-center gap-1 transition-colors ${
               colorMode === 'pleura'
                 ? 'bg-rose-100/90 text-rose-950 font-semibold border border-rose-300'
                 : colorMode === 'bilateral'
                 ? 'bg-amber-100/90 text-amber-950 font-semibold border border-amber-300'
+                : colorMode === 'error_heatmap'
+                ? 'bg-emerald-100/90 text-emerald-950 font-semibold border border-emerald-300'
+                : colorMode === 'uncertainty'
+                ? 'bg-purple-100/90 text-purple-950 font-semibold border border-purple-300'
                 : 'text-[#5e4b75] hover:text-[#1a082e] hover:bg-slate-100'
             }`}
-            title={
-              colorMode === 'pleura'
-                ? 'Visual Mode: Organic Visceral Pleura (Click for Bilateral Lobar)'
-                : colorMode === 'bilateral'
-                ? 'Visual Mode: Bilateral Lobar Partition (Click for Platinum Diagnostic)'
-                : 'Visual Mode: High-Contrast Platinum (Click for Visceral Pleura)'
-            }
+            title="Cycle Visualization Rendering Modes"
           >
             <Palette className="w-3.5 h-3.5" />
             <span className="hidden sm:inline capitalize">
-              {colorMode === 'pleura' ? 'Visceral Pleura' : colorMode === 'bilateral' ? 'Bilateral' : 'Platinum'}
+              {colorMode === 'pleura'
+                ? 'Visceral Pleura'
+                : colorMode === 'bilateral'
+                ? 'Bilateral'
+                : colorMode === 'error_heatmap'
+                ? 'Error Heatmap'
+                : colorMode === 'uncertainty'
+                ? 'Uncertainty Map'
+                : 'Platinum'}
             </span>
           </button>
 
@@ -804,6 +879,46 @@ export const SSM3DReconstructionViewer: React.FC<SSM3DReconstructionViewerProps>
           <div className="text-[11px] text-[#5e4b75]">
             Coords: ({hoveredLandmark.coords[0].toFixed(1)}, {hoveredLandmark.coords[1].toFixed(1)}, {hoveredLandmark.coords[2].toFixed(1)}) mm
           </div>
+        </div>
+      )}
+
+      {/* Visual Mode Active Legend / Overlay Key */}
+      {(colorMode === 'error_heatmap' || colorMode === 'uncertainty' || referenceVertices) && (
+        <div className="absolute top-14 left-3 pointer-events-none z-20 flex flex-col gap-1.5 font-mono text-[10px]">
+          {referenceVertices && showReferenceCT && (
+            <div className="bg-slate-900/85 backdrop-blur-md px-2.5 py-1 rounded border border-cyan-500/50 text-cyan-200 flex items-center gap-2 shadow-sm">
+              <span className="w-2 h-2 rounded-full bg-cyan-400" />
+              <span>Ground Truth CT (Cyan, 45% Opacity)</span>
+            </div>
+          )}
+          {colorMode === 'error_heatmap' && (
+            <div className="bg-slate-900/85 backdrop-blur-md px-2.5 py-1.5 rounded border border-slate-700 text-slate-200 flex items-center gap-3 shadow-sm">
+              <span className="font-semibold text-slate-400">SURFACE ERROR:</span>
+              <span className="flex items-center gap-1 text-emerald-400">
+                <span className="w-2 h-2 rounded-full bg-emerald-500" /> &lt;2mm
+              </span>
+              <span className="flex items-center gap-1 text-amber-400">
+                <span className="w-2 h-2 rounded-full bg-amber-500" /> 2-5mm
+              </span>
+              <span className="flex items-center gap-1 text-rose-400">
+                <span className="w-2 h-2 rounded-full bg-rose-500" /> &gt;5mm
+              </span>
+            </div>
+          )}
+          {colorMode === 'uncertainty' && (
+            <div className="bg-slate-900/85 backdrop-blur-md px-2.5 py-1.5 rounded border border-slate-700 text-slate-200 flex items-center gap-3 shadow-sm">
+              <span className="font-semibold text-slate-400">UNCERTAINTY:</span>
+              <span className="flex items-center gap-1 text-cyan-400">
+                <span className="w-2 h-2 rounded-full bg-cyan-500" /> Low (≤4mm)
+              </span>
+              <span className="flex items-center gap-1 text-purple-400">
+                <span className="w-2 h-2 rounded-full bg-purple-500" /> Mid (4-7mm)
+              </span>
+              <span className="flex items-center gap-1 text-pink-400">
+                <span className="w-2 h-2 rounded-full bg-pink-500" /> High (&gt;7mm)
+              </span>
+            </div>
+          )}
         </div>
       )}
 
