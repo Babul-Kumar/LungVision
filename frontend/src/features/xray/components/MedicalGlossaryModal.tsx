@@ -26,42 +26,42 @@ export const MedicalGlossaryModal: React.FC<MedicalGlossaryModalProps> = ({ isOp
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm animate-in fade-in duration-200">
-      <div className="relative w-full max-w-3xl max-h-[85vh] bg-[#140a22] border border-white/10 rounded-2xl shadow-2xl overflow-hidden flex flex-col">
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-[#1a082e]/50 backdrop-blur-sm animate-in fade-in duration-200">
+      <div className="relative w-full max-w-3xl max-h-[85vh] bg-white border border-[#e2e8f0] rounded-2xl shadow-2xl overflow-hidden flex flex-col">
         {/* Header */}
-        <div className="p-5 border-b border-white/10 flex items-center justify-between bg-[#0e0719]/90">
+        <div className="p-5 border-b border-[#e2e8f0] flex items-center justify-between bg-slate-50/90">
           <div className="flex items-center gap-3">
-            <div className="w-9 h-9 rounded-xl bg-amber-950/60 border border-amber-800/60 flex items-center justify-center text-amber-400">
+            <div className="w-9 h-9 rounded-xl bg-amber-50 border border-amber-200 flex items-center justify-center text-amber-700 shadow-xs">
               <BookOpen className="w-5 h-5" />
             </div>
             <div>
               <div className="flex items-center gap-2">
-                <h3 className="text-lg font-bold text-white">Medical & AI Radiology Glossary</h3>
+                <h3 className="text-lg font-bold text-[#1a082e]">Medical & AI Radiology Glossary</h3>
                 <Badge variant="amber" size="sm">Plain-Language Reference</Badge>
               </div>
-              <p className="text-xs text-slate-400 mt-0.5">
+              <p className="text-xs text-[#5e4b75] mt-0.5">
                 Clear definitions of thoracic anatomy, radiographic terms, and deep learning metrics.
               </p>
             </div>
           </div>
           <button
             onClick={onClose}
-            className="p-1.5 rounded-lg text-slate-400 hover:text-white hover:bg-white/10 transition-colors"
+            className="p-1.5 rounded-lg text-[#5e4b75] hover:text-[#1a082e] hover:bg-slate-200/50 transition-colors"
           >
             <X className="w-5 h-5" />
           </button>
         </div>
 
         {/* Search & Filter Bar */}
-        <div className="p-4 bg-black/30 border-b border-white/10 flex flex-col sm:flex-row gap-3">
+        <div className="p-4 bg-slate-100/70 border-b border-[#e2e8f0] flex flex-col sm:flex-row gap-3">
           <div className="relative flex-1">
-            <Search className="w-4 h-4 text-slate-400 absolute left-3 top-1/2 -translate-y-1/2" />
+            <Search className="w-4 h-4 text-[#5e4b75] absolute left-3 top-1/2 -translate-y-1/2" />
             <input
               type="text"
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               placeholder="Search medical or technical terms (e.g., Atelectasis, AUROC, Threshold)..."
-              className="w-full bg-[#180d28]/90 border border-white/10 rounded-lg pl-9 pr-3 py-1.5 text-xs text-white placeholder-slate-500 focus:outline-none focus:border-amber-400"
+              className="w-full bg-white border border-[#cbd5e1] rounded-lg pl-9 pr-3 py-1.5 text-xs text-[#1a082e] placeholder-[#5e4b75]/70 focus:outline-none focus:border-amber-500 shadow-xs"
             />
           </div>
 
@@ -70,10 +70,10 @@ export const MedicalGlossaryModal: React.FC<MedicalGlossaryModalProps> = ({ isOp
               <button
                 key={cat}
                 onClick={() => setSelectedCategory(cat)}
-                className={`px-3 py-1.5 rounded-lg capitalize transition-all ${
+                className={`px-3 py-1.5 rounded-lg capitalize transition-all font-medium ${
                   selectedCategory === cat
-                    ? 'bg-gradient-to-r from-amber-400 via-amber-500 to-amber-600 text-[#0c0614] font-bold shadow-md shadow-amber-950/40 border border-amber-300/40'
-                    : 'bg-medical-surface text-slate-400 hover:text-white border border-white/10'
+                    ? 'bg-gradient-to-r from-amber-500 to-amber-600 text-white font-bold shadow-xs border border-amber-600'
+                    : 'bg-white text-[#5e4b75] hover:text-[#1a082e] border border-[#e2e8f0]'
                 }`}
               >
                 {cat}
@@ -85,25 +85,25 @@ export const MedicalGlossaryModal: React.FC<MedicalGlossaryModalProps> = ({ isOp
         {/* Glossary Terms List */}
         <div className="p-5 overflow-y-auto space-y-3.5">
           {filteredTerms.length === 0 ? (
-            <div className="text-center py-12 text-slate-400 text-xs">
+            <div className="text-center py-12 text-[#5e4b75] text-xs">
               No matching glossary terms found for "{searchQuery}".
             </div>
           ) : (
             filteredTerms.map((item) => (
               <div
                 key={item.term}
-                className="p-4 rounded-xl bg-medical-surface border border-white/10 space-y-2 hover:border-amber-400/40 transition-colors"
+                className="p-4 rounded-xl bg-white border border-[#e2e8f0] space-y-2 hover:border-amber-400/60 shadow-xs transition-colors"
               >
                 <div className="flex items-center justify-between gap-2">
-                  <h4 className="text-sm font-bold text-white flex items-center gap-2">
+                  <h4 className="text-sm font-bold text-[#1a082e] flex items-center gap-2">
                     {item.term}
                   </h4>
-                  <span className="text-[10px] font-mono uppercase px-2 py-0.5 rounded bg-medical-card border border-white/10 text-amber-400">
+                  <span className="text-[10px] font-mono uppercase px-2 py-0.5 rounded bg-amber-50 border border-amber-200 text-amber-900 font-semibold">
                     {item.category}
                   </span>
                 </div>
-                <p className="text-xs font-medium text-slate-200">{item.shortDefinition}</p>
-                <p className="text-xs text-slate-400 leading-relaxed pt-1 border-t border-white/[0.08]">
+                <p className="text-xs font-medium text-[#1a082e]">{item.shortDefinition}</p>
+                <p className="text-xs text-[#5e4b75] leading-relaxed pt-1 border-t border-[#e2e8f0]">
                   {item.detailedExplanation}
                 </p>
               </div>
@@ -112,11 +112,11 @@ export const MedicalGlossaryModal: React.FC<MedicalGlossaryModalProps> = ({ isOp
         </div>
 
         {/* Footer */}
-        <div className="p-3 border-t border-white/10 bg-[#0e0719]/90 flex items-center justify-between text-xs text-slate-400">
+        <div className="p-3 border-t border-[#e2e8f0] bg-slate-50/90 flex items-center justify-between text-xs text-[#5e4b75]">
           <span>{filteredTerms.length} terms displayed</span>
           <button
             onClick={onClose}
-            className="px-4 py-1.5 rounded-lg bg-medical-surface border border-white/10 text-white hover:border-amber-400/40 hover:bg-medical-card transition-colors text-xs font-medium"
+            className="px-4 py-1.5 rounded-lg bg-white border border-[#e2e8f0] text-[#1a082e] hover:border-amber-400 hover:bg-slate-50 transition-colors text-xs font-semibold shadow-xs"
           >
             Close Glossary
           </button>

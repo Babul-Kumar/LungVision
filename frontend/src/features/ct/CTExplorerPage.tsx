@@ -424,22 +424,22 @@ export const CTExplorerPage: React.FC = () => {
   return (
     <div className="space-y-6">
       {/* Header & Scan Switcher */}
-      <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4 pb-4 border-b border-medical-border">
+      <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4 pb-4 border-b border-[#e2e8f0]">
         <div>
           <div className="flex items-center gap-2 mb-1">
-            <span className="text-[11px] font-mono uppercase tracking-wider text-amber-400 bg-amber-950/40 px-2 py-0.5 rounded border border-amber-800/40">
+            <span className="text-[11px] font-mono uppercase tracking-wider text-amber-800 bg-amber-50 px-2 py-0.5 rounded border border-amber-200 font-semibold">
               Workstation Module
             </span>
-            <span className="text-xs text-white/20">·</span>
-            <span className="text-xs text-slate-400">Volumetric Computed Tomography</span>
+            <span className="text-xs text-slate-300">·</span>
+            <span className="text-xs text-[#5e4b75]">Volumetric Computed Tomography</span>
           </div>
-          <h2 className="text-2xl font-bold tracking-tight text-slate-100 flex items-center gap-2.5">
+          <h2 className="text-2xl font-bold tracking-tight text-[#1a082e] flex items-center gap-2.5">
             3D Computed Tomography Explorer
             <Badge variant="silver" size="sm">
               SimpleITK & Three.js
             </Badge>
           </h2>
-          <p className="text-xs text-slate-400 mt-1">
+          <p className="text-xs text-[#5e4b75] mt-1">
             Volumetric MPR slicing, watertight marching cubes meshes, LUNA16 nodule mapping, and quantitative lung volumetry.
           </p>
         </div>
@@ -460,7 +460,7 @@ export const CTExplorerPage: React.FC = () => {
               setActiveScanId(e.target.value);
               setSelectedNoduleId(null);
             }}
-            className="bg-[#150a22] border border-white/10 rounded-lg px-3 py-1.5 text-xs font-mono text-slate-100 focus:outline-none focus:border-amber-400 shadow-sm"
+            className="bg-white border border-[#cbd5e1] rounded-lg px-3 py-1.5 text-xs font-mono text-[#1a082e] focus:outline-none focus:border-amber-500 shadow-xs"
           >
             <option value="demo_thoracic_scan">Reference Thoracic Scan (LUNA16 12-Nodule Series)</option>
             {activeScanId !== 'demo_thoracic_scan' && (
@@ -474,9 +474,9 @@ export const CTExplorerPage: React.FC = () => {
             onClick={() => fileInputRef.current?.click()}
             disabled={isUploading}
             isLoading={isUploading}
-            className="border-white/10 hover:border-amber-400 text-slate-200 shadow-sm"
+            className="border-[#e2e8f0] bg-white hover:bg-slate-50 text-[#1a082e] shadow-xs"
           >
-            <UploadCloud className="w-3.5 h-3.5 mr-1" />
+            <UploadCloud className="w-3.5 h-3.5 mr-1 text-amber-600" />
             <span>Upload CT (.zip)</span>
           </Button>
         </div>
@@ -485,8 +485,8 @@ export const CTExplorerPage: React.FC = () => {
       <DisclaimerBanner compact />
 
       {uploadError && (
-        <div className="p-3 bg-rose-950/60 border border-rose-800 rounded-lg text-xs text-rose-300 flex items-center gap-2">
-          <AlertCircle className="w-4 h-4 text-rose-400 shrink-0" />
+        <div className="p-3 bg-rose-50 border border-rose-200 rounded-lg text-xs text-rose-800 flex items-center gap-2">
+          <AlertCircle className="w-4 h-4 text-rose-600 shrink-0" />
           <span>{uploadError}</span>
         </div>
       )}
@@ -494,57 +494,57 @@ export const CTExplorerPage: React.FC = () => {
       {/* Spatial Metadata Strip */}
       {metadata && (
         <div className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-6 gap-3">
-          <div className="bg-[#160c26]/80 border border-white/10 rounded-lg p-3 shadow-md shadow-black/20">
-            <span className="text-[10px] text-slate-400 uppercase font-semibold block">Dimensions (X, Y, Z)</span>
-            <span className="text-xs font-mono text-slate-100 mt-1 block">
+          <div className="bg-white border border-[#e2e8f0] rounded-lg p-3 shadow-xs">
+            <span className="text-[10px] text-[#5e4b75] uppercase font-semibold block">Dimensions (X, Y, Z)</span>
+            <span className="text-xs font-mono text-[#1a082e] mt-1 block font-semibold">
               {metadata.dimensions.x} × {metadata.dimensions.y} × {metadata.dimensions.z}
             </span>
           </div>
 
-          <div className="bg-[#160c26]/80 border border-white/10 rounded-lg p-3 shadow-md shadow-black/20">
-            <span className="text-[10px] text-slate-400 uppercase font-semibold block">Voxel Spacing (mm)</span>
-            <span className="text-xs font-mono text-slate-100 mt-1 block">
+          <div className="bg-white border border-[#e2e8f0] rounded-lg p-3 shadow-xs">
+            <span className="text-[10px] text-[#5e4b75] uppercase font-semibold block">Voxel Spacing (mm)</span>
+            <span className="text-xs font-mono text-[#1a082e] mt-1 block">
               {(metadata.spacing_mm ?? []).map((s) => (typeof s === 'number' ? s.toFixed(3) : String(s))).join(', ')}
             </span>
           </div>
 
-          <div className="bg-[#160c26]/80 border border-white/10 rounded-lg p-3 shadow-md shadow-black/20">
-            <span className="text-[10px] text-slate-400 uppercase font-semibold block">LUNA16 Annotations</span>
-            <span className="text-xs font-mono text-amber-400 mt-1 block">
+          <div className="bg-white border border-[#e2e8f0] rounded-lg p-3 shadow-xs">
+            <span className="text-[10px] text-[#5e4b75] uppercase font-semibold block">LUNA16 Annotations</span>
+            <span className="text-xs font-mono text-amber-800 font-bold mt-1 block">
               {metadata.annotation_count} Mapped Nodules
             </span>
           </div>
 
-          <div className="bg-[#160c26]/80 border border-white/10 rounded-lg p-3 shadow-md shadow-black/20">
-            <span className="text-[10px] text-slate-400 uppercase font-semibold block">Geometry Status</span>
+          <div className="bg-white border border-[#e2e8f0] rounded-lg p-3 shadow-xs">
+            <span className="text-[10px] text-[#5e4b75] uppercase font-semibold block">Geometry Status</span>
             <Badge variant={metadata.geometry_validation.status === 'PASSED' ? 'emerald' : 'rose'} size="sm" className="mt-1">
               <CheckCircle2 className="w-3 h-3 mr-1" />
               {metadata.geometry_validation.status} (atol=1e-3)
             </Badge>
           </div>
 
-          <div className="bg-[#160c26]/80 border border-white/10 rounded-lg p-3 shadow-md shadow-black/20">
-            <span className="text-[10px] text-slate-400 uppercase font-semibold block">Segmented Labels</span>
-            <span className="text-xs font-mono text-slate-300 mt-1 block">
+          <div className="bg-white border border-[#e2e8f0] rounded-lg p-3 shadow-xs">
+            <span className="text-[10px] text-[#5e4b75] uppercase font-semibold block">Segmented Labels</span>
+            <span className="text-xs font-mono text-[#5e4b75] mt-1 block">
               {metadata.labels_present.join(', ')} (Left/Right/Airway)
             </span>
           </div>
 
-          <div className="bg-[#160c26]/80 border border-white/10 rounded-lg p-3 shadow-md shadow-black/20">
-            <span className="text-[10px] text-slate-400 uppercase font-semibold block">Volumetric Engine</span>
-            <span className="text-xs font-mono text-slate-300 mt-1 block">SimpleITK 2.5</span>
+          <div className="bg-white border border-[#e2e8f0] rounded-lg p-3 shadow-xs">
+            <span className="text-[10px] text-[#5e4b75] uppercase font-semibold block">Volumetric Engine</span>
+            <span className="text-xs font-mono text-[#5e4b75] mt-1 block">SimpleITK 2.5</span>
           </div>
         </div>
       )}
 
       {/* Main Exploration Tabs */}
-      <div className="p-1.5 rounded-xl border border-white/10 bg-[#12071f]/80 backdrop-blur-xl flex flex-wrap items-center gap-1.5">
+      <div className="p-1.5 rounded-xl border border-[#e2e8f0] bg-white/95 backdrop-blur-xl flex flex-wrap items-center gap-1.5 shadow-xs">
         <button
           onClick={() => setActiveTab('3d')}
           className={`flex items-center gap-2 px-4 py-2 rounded-lg text-xs font-medium transition-all ${
             activeTab === '3d'
-              ? 'bg-gradient-to-r from-amber-400 via-amber-500 to-amber-600 text-[#0c0614] font-bold shadow-lg shadow-amber-950/40 border border-amber-300/40'
-              : 'text-slate-300 hover:text-white hover:bg-white/[0.04]'
+              ? 'bg-gradient-to-r from-amber-500 to-amber-600 text-white font-bold shadow-xs border border-amber-600'
+              : 'text-[#5e4b75] hover:text-[#1a082e] hover:bg-slate-100'
           }`}
         >
           <Box className="w-4 h-4" />
@@ -555,8 +555,8 @@ export const CTExplorerPage: React.FC = () => {
           onClick={() => setActiveTab('mpr')}
           className={`flex items-center gap-2 px-4 py-2 rounded-lg text-xs font-medium transition-all ${
             activeTab === 'mpr'
-              ? 'bg-gradient-to-r from-amber-400 via-amber-500 to-amber-600 text-[#0c0614] font-bold shadow-lg shadow-amber-950/40 border border-amber-300/40'
-              : 'text-slate-300 hover:text-white hover:bg-white/[0.04]'
+              ? 'bg-gradient-to-r from-amber-500 to-amber-600 text-white font-bold shadow-xs border border-amber-600'
+              : 'text-[#5e4b75] hover:text-[#1a082e] hover:bg-slate-100'
           }`}
         >
           <Layers className="w-4 h-4" />
@@ -567,8 +567,8 @@ export const CTExplorerPage: React.FC = () => {
           onClick={() => setActiveTab('annotations')}
           className={`flex items-center gap-2 px-4 py-2 rounded-lg text-xs font-medium transition-all ${
             activeTab === 'annotations'
-              ? 'bg-gradient-to-r from-amber-400 via-amber-500 to-amber-600 text-[#0c0614] font-bold shadow-lg shadow-amber-950/40 border border-amber-300/40'
-              : 'text-slate-300 hover:text-white hover:bg-white/[0.04]'
+              ? 'bg-gradient-to-r from-amber-500 to-amber-600 text-white font-bold shadow-xs border border-amber-600'
+              : 'text-[#5e4b75] hover:text-[#1a082e] hover:bg-slate-100'
           }`}
         >
           <Crosshair className="w-4 h-4" />
@@ -579,8 +579,8 @@ export const CTExplorerPage: React.FC = () => {
           onClick={() => setActiveTab('drr')}
           className={`flex items-center gap-2 px-4 py-2 rounded-lg text-xs font-medium transition-all ${
             activeTab === 'drr'
-              ? 'bg-gradient-to-r from-amber-400 via-amber-500 to-amber-600 text-[#0c0614] font-bold shadow-lg shadow-amber-950/40 border border-amber-300/40'
-              : 'text-slate-300 hover:text-white hover:bg-white/[0.04]'
+              ? 'bg-gradient-to-r from-amber-500 to-amber-600 text-white font-bold shadow-xs border border-amber-600'
+              : 'text-[#5e4b75] hover:text-[#1a082e] hover:bg-slate-100'
           }`}
         >
           <Film className="w-4 h-4" />
@@ -591,8 +591,8 @@ export const CTExplorerPage: React.FC = () => {
           onClick={() => setActiveTab('ssm')}
           className={`flex items-center gap-2 px-4 py-2 rounded-lg text-xs font-medium transition-all ${
             activeTab === 'ssm'
-              ? 'bg-gradient-to-r from-amber-400 via-amber-500 to-amber-600 text-[#0c0614] font-bold shadow-lg shadow-amber-950/40 border border-amber-300/40'
-              : 'text-slate-300 hover:text-white hover:bg-white/[0.04]'
+              ? 'bg-gradient-to-r from-amber-500 to-amber-600 text-white font-bold shadow-xs border border-amber-600'
+              : 'text-[#5e4b75] hover:text-[#1a082e] hover:bg-slate-100'
           }`}
         >
           <Sliders className="w-4 h-4" />
@@ -610,7 +610,7 @@ export const CTExplorerPage: React.FC = () => {
               subtitle="Streamed directly from backend Marching Cubes pipeline (1-Voxel Zero Padded Watertight Mesh)"
               headerAction={
                 <div className="flex items-center gap-1.5">
-                  <span className="text-[11px] text-medical-muted mr-1">Structure:</span>
+                  <span className="text-[11px] text-[#5e4b75] mr-1">Structure:</span>
                   {[
                     { id: 'lungs', label: 'Bilateral Lungs', tag: '3,4' },
                     { id: 'left_lung', label: 'Left Lung', tag: '3' },
@@ -634,10 +634,10 @@ export const CTExplorerPage: React.FC = () => {
                           selectedStructure === item.id
                             ? item.id === 'heart'
                               ? 'bg-rose-600 text-white font-semibold shadow-xs'
-                              : 'bg-gradient-to-r from-amber-400 via-amber-500 to-amber-600 text-[#0c0614] font-bold shadow-md shadow-amber-950/40 border border-amber-300/40'
+                              : 'bg-gradient-to-r from-amber-500 to-amber-600 text-white font-bold shadow-xs border border-amber-600'
                             : isPresent
-                            ? 'bg-[#1e1033] text-slate-300 hover:text-white border border-white/10'
-                            : 'bg-black/30 text-slate-600 border border-white/5 line-through opacity-70'
+                            ? 'bg-white text-[#5e4b75] hover:text-[#1a082e] border border-[#e2e8f0]'
+                            : 'bg-slate-100 text-slate-400 border border-slate-200 line-through opacity-70'
                         }`}
                         title={isPresent ? `Segmented label ${item.tag}` : `Structure label ${item.tag} outside scan subvolume`}
                       >
@@ -664,30 +664,30 @@ export const CTExplorerPage: React.FC = () => {
 
               {/* Heart Subvolume Notice if Heart is selected on a scan without Label 2 */}
               {selectedStructure === 'heart' && metadata && !metadata.labels_present.includes(2) && (
-                <div className="mt-3 p-3 rounded-lg bg-amber-950/40 border border-amber-800/60 text-xs text-amber-200 flex items-start gap-2.5">
-                  <AlertCircle className="w-4 h-4 text-amber-400 shrink-0 mt-0.5" />
+                <div className="mt-3 p-3 rounded-lg bg-amber-50 border border-amber-200 text-xs text-amber-900 flex items-start gap-2.5">
+                  <AlertCircle className="w-4 h-4 text-amber-600 shrink-0 mt-0.5" />
                   <div>
-                    <span className="font-semibold text-white">Cardiac Subvolume Notice: </span>
-                    Reference scan <code className="text-amber-300 font-mono">{activeScanId}</code> is an 80 mm thoracic subvolume centered on pulmonary nodule targets. Labels present are {metadata.labels_present.join(', ')} (Left Lung, Right Lung, Airway). The cardiac contour (label 2) is outside this subvolume's z-range. Select <strong>Bilateral Lungs</strong>, <strong>Left Lung</strong>, <strong>Right Lung</strong>, or <strong>Airways</strong> to inspect active 3D meshes.
+                    <span className="font-semibold text-amber-900">Cardiac Subvolume Notice: </span>
+                    Reference scan <code className="text-amber-800 font-mono">{activeScanId}</code> is an 80 mm thoracic subvolume centered on pulmonary nodule targets. Labels present are {metadata.labels_present.join(', ')} (Left Lung, Right Lung, Airway). The cardiac contour (label 2) is outside this subvolume's z-range. Select <strong>Bilateral Lungs</strong>, <strong>Left Lung</strong>, <strong>Right Lung</strong>, or <strong>Airways</strong> to inspect active 3D meshes.
                   </div>
                 </div>
               )}
 
               {selectedNoduleId && activeNodule && (
-                <div className="mt-3 p-2.5 rounded-lg bg-[#180d28] border border-amber-500/40 flex items-center justify-between text-xs font-mono shadow-md shadow-black/30">
+                <div className="mt-3 p-2.5 rounded-lg bg-white border border-amber-400 flex items-center justify-between text-xs font-mono shadow-xs">
                   <div className="flex items-center gap-2">
-                    <Crosshair className="w-4 h-4 text-amber-400 animate-pulse" />
-                    <span>Selected Nodule: <strong className="text-white">{activeNodule.nodule_id}</strong></span>
-                    <span className="text-white/20">|</span>
-                    <span className="text-amber-300 font-semibold">{typeof activeNodule.diameter_mm === 'number' ? activeNodule.diameter_mm.toFixed(1) : (activeNodule.diameter_mm ?? 'N/A')} mm</span>
-                    <span className="text-white/20">|</span>
-                    <span className="text-slate-300">Voxel: ({activeNodule.voxel_x}, {activeNodule.voxel_y}, {activeNodule.voxel_z})</span>
+                    <Crosshair className="w-4 h-4 text-amber-600 animate-pulse" />
+                    <span>Selected Nodule: <strong className="text-[#1a082e]">{activeNodule.nodule_id}</strong></span>
+                    <span className="text-slate-300">|</span>
+                    <span className="text-amber-800 font-semibold">{typeof activeNodule.diameter_mm === 'number' ? activeNodule.diameter_mm.toFixed(1) : (activeNodule.diameter_mm ?? 'N/A')} mm</span>
+                    <span className="text-slate-300">|</span>
+                    <span className="text-[#5e4b75]">Voxel: ({activeNodule.voxel_x}, {activeNodule.voxel_y}, {activeNodule.voxel_z})</span>
                   </div>
                   <Button
                     variant="ghost"
                     size="sm"
                     onClick={() => jumpToNodule(activeNodule)}
-                    className="text-amber-300 hover:text-amber-200 text-xs py-0.5 px-2"
+                    className="text-amber-900 hover:text-amber-950 hover:bg-amber-50 text-xs py-0.5 px-2 font-semibold"
                   >
                     View in MPR Slice
                   </Button>
@@ -702,32 +702,32 @@ export const CTExplorerPage: React.FC = () => {
             <Card title="Quantitative Lung Volumetry" subtitle="Computed from verified voxel segmentation counts">
               {measurements ? (
                 <div className="space-y-3.5 text-xs">
-                  <div className="p-3 bg-[#150a22] rounded-lg border border-white/10 flex items-center justify-between">
-                    <span className="text-slate-400">Total Segmented Volume:</span>
-                    <strong className="text-sm font-mono text-white">
+                  <div className="p-3 bg-slate-50 rounded-lg border border-[#e2e8f0] flex items-center justify-between shadow-xs">
+                    <span className="text-[#5e4b75]">Total Segmented Volume:</span>
+                    <strong className="text-sm font-mono text-[#1a082e]">
                       {(measurements.lungs?.total_lung_volume_ml ?? 0).toFixed(1)} mL
                     </strong>
                   </div>
 
                   <div className="grid grid-cols-2 gap-2.5">
-                    <div className="p-3 bg-[#180e29] border border-white/10 rounded-lg">
-                      <span className="text-[10px] text-slate-400 uppercase font-semibold block">Left Lung</span>
-                      <strong className="text-sm font-mono text-slate-100 mt-1 block">
+                    <div className="p-3 bg-slate-50 border border-[#e2e8f0] rounded-lg">
+                      <span className="text-[10px] text-[#5e4b75] uppercase font-semibold block">Left Lung</span>
+                      <strong className="text-sm font-mono text-[#1a082e] mt-1 block">
                         {(measurements.lungs?.left_lung_ml ?? 0).toFixed(1)} mL
                       </strong>
                     </div>
 
-                    <div className="p-3 bg-amber-950/30 border border-amber-500/30 rounded-lg">
-                      <span className="text-[10px] text-amber-300 uppercase font-semibold block">Right Lung</span>
-                      <strong className="text-sm font-mono text-amber-200 mt-1 block">
+                    <div className="p-3 bg-amber-50/70 border border-amber-200 rounded-lg">
+                      <span className="text-[10px] text-amber-900 uppercase font-semibold block">Right Lung</span>
+                      <strong className="text-sm font-mono text-amber-900 mt-1 block font-bold">
                         {(measurements.lungs?.right_lung_ml ?? 0).toFixed(1)} mL
                       </strong>
                     </div>
                   </div>
 
-                  <div className="flex justify-between py-1 border-b border-medical-border/60">
-                    <span className="text-medical-muted">Trachea / Main Bronchus:</span>
-                    <span className="font-mono text-amber-400 font-medium">
+                  <div className="flex justify-between py-1 border-b border-[#e2e8f0]">
+                    <span className="text-[#5e4b75]">Trachea / Main Bronchus:</span>
+                    <span className="font-mono text-amber-800 font-bold">
                       {(
                         measurements.airway?.trachea_volume_ml ??
                         measurements.lungs?.trachea_airway_ml ??
@@ -737,17 +737,17 @@ export const CTExplorerPage: React.FC = () => {
                   </div>
 
                   {(measurements as any).heart?.heart_volume_ml != null && (
-                    <div className="flex justify-between py-1 border-b border-medical-border/60">
-                      <span className="text-medical-muted">Cardiac Silhouette (Heart):</span>
-                      <span className="font-mono text-rose-400 font-medium">
+                    <div className="flex justify-between py-1 border-b border-[#e2e8f0]">
+                      <span className="text-[#5e4b75]">Cardiac Silhouette (Heart):</span>
+                      <span className="font-mono text-rose-700 font-bold">
                         {(measurements as any).heart.heart_volume_ml.toFixed(1)} mL
                       </span>
                     </div>
                   )}
 
-                  <div className="flex justify-between py-1 border-b border-medical-border/60">
-                    <span className="text-medical-muted">Bilateral Symmetry Ratio:</span>
-                    <span className="font-mono text-white font-medium">
+                  <div className="flex justify-between py-1 border-b border-[#e2e8f0]">
+                    <span className="text-[#5e4b75]">Bilateral Symmetry Ratio:</span>
+                    <span className="font-mono text-[#1a082e] font-semibold">
                       {measurements.lungs?.lung_symmetry_ratio != null
                         ? measurements.lungs.lung_symmetry_ratio.toFixed(3)
                         : measurements.lungs?.volume_balance?.relative_difference_pct != null
@@ -757,8 +757,8 @@ export const CTExplorerPage: React.FC = () => {
                   </div>
 
                   <div className="flex justify-between py-1">
-                    <span className="text-medical-muted">Voxel Unit Volume:</span>
-                    <span className="font-mono text-slate-300">
+                    <span className="text-[#5e4b75]">Voxel Unit Volume:</span>
+                    <span className="font-mono text-[#1a082e]">
                       {(
                         measurements.physical_voxel_volume_mm3 ??
                         measurements.voxel_volume_mm3 ??
@@ -768,7 +768,7 @@ export const CTExplorerPage: React.FC = () => {
                   </div>
                 </div>
               ) : (
-                <div className="py-6 text-center text-xs text-medical-muted">Loading volume metrics...</div>
+                <div className="py-6 text-center text-xs text-[#5e4b75]">Loading volume metrics...</div>
               )}
             </Card>
 
@@ -776,20 +776,20 @@ export const CTExplorerPage: React.FC = () => {
             <Card title="Trimesh Quality & Topology Audit" subtitle="Evaluates mesh manifoldness and watertightness">
               {meshQuality ? (
                 <div className="space-y-2.5 text-xs">
-                  <div className="flex items-center justify-between py-1 border-b border-medical-border/60">
-                    <span className="text-medical-muted">Watertight Status:</span>
+                  <div className="flex items-center justify-between py-1 border-b border-[#e2e8f0]">
+                    <span className="text-[#5e4b75]">Watertight Status:</span>
                     <Badge variant={meshQuality.watertight ? 'emerald' : 'rose'} size="sm">
                       {meshQuality.watertight ? 'Watertight Closed' : 'Open Boundaries'}
                     </Badge>
                   </div>
 
-                  <div className="flex items-center justify-between py-1 border-b border-medical-border/60">
-                    <span className="text-medical-muted">Euler Characteristic (χ):</span>
-                    <span className="font-mono text-emerald-400 font-semibold">{meshQuality.euler_number ?? 'N/A'}</span>
+                  <div className="flex items-center justify-between py-1 border-b border-[#e2e8f0]">
+                    <span className="text-[#5e4b75]">Euler Characteristic (χ):</span>
+                    <span className="font-mono text-emerald-700 font-bold">{meshQuality.euler_number ?? 'N/A'}</span>
                   </div>
 
-                  <div className="flex items-center justify-between py-1 border-b border-medical-border/60">
-                    <span className="text-medical-muted">Winding Consistency:</span>
+                  <div className="flex items-center justify-between py-1 border-b border-[#e2e8f0]">
+                    <span className="text-[#5e4b75]">Winding Consistency:</span>
                     <Badge
                       variant={
                         ((meshQuality as any).winding_consistent ?? meshQuality.is_winding_consistent)
@@ -804,29 +804,29 @@ export const CTExplorerPage: React.FC = () => {
                     </Badge>
                   </div>
 
-                  <div className="flex items-center justify-between py-1 border-b border-medical-border/60">
-                    <span className="text-medical-muted">Degenerate Faces:</span>
-                    <span className="font-mono text-slate-300">
+                  <div className="flex items-center justify-between py-1 border-b border-[#e2e8f0]">
+                    <span className="text-[#5e4b75]">Degenerate Faces:</span>
+                    <span className="font-mono text-[#1a082e]">
                       {(meshQuality as any).degenerate_faces ?? meshQuality.degenerate_face_count ?? 0}
                     </span>
                   </div>
 
-                  <div className="flex items-center justify-between py-1 border-b border-white/[0.08]">
-                    <span className="text-slate-400">Surface Area:</span>
-                    <span className="font-mono text-slate-100">
+                  <div className="flex items-center justify-between py-1 border-b border-[#e2e8f0]">
+                    <span className="text-[#5e4b75]">Surface Area:</span>
+                    <span className="font-mono text-[#1a082e]">
                       {(meshQuality.surface_area_mm2 ?? 0).toLocaleString()} mm²
                     </span>
                   </div>
 
                   <div className="flex items-center justify-between py-1">
-                    <span className="text-medical-muted">Mesh vs Voxel Diff:</span>
-                    <span className="font-mono text-slate-300">
+                    <span className="text-[#5e4b75]">Mesh vs Voxel Diff:</span>
+                    <span className="font-mono text-[#1a082e]">
                       {((meshQuality as any).volume_difference_pct ?? meshQuality.volume_discrepancy_percent ?? 0.0).toFixed(2)}%
                     </span>
                   </div>
                 </div>
               ) : (
-                <div className="py-6 text-center text-xs text-medical-muted">Evaluating mesh topology...</div>
+                <div className="py-6 text-center text-xs text-[#5e4b75]">Evaluating mesh topology...</div>
               )}
             </Card>
 
@@ -835,9 +835,9 @@ export const CTExplorerPage: React.FC = () => {
               {meshQuality?.granular_statuses ? (
                 <div className="space-y-2 text-xs">
                   {Object.entries(meshQuality.granular_statuses).map(([key, item]) => (
-                    <div key={key} className="p-2 rounded bg-medical-surface/40 border border-medical-border/40">
+                    <div key={key} className="p-2 rounded bg-slate-50 border border-[#e2e8f0]">
                       <div className="flex items-center justify-between mb-1">
-                        <span className="font-medium text-slate-200">{item.label}</span>
+                        <span className="font-semibold text-[#1a082e]">{item.label}</span>
                         <Badge
                           variant={
                             item.status === 'PASSED'
@@ -853,12 +853,12 @@ export const CTExplorerPage: React.FC = () => {
                           {item.status}
                         </Badge>
                       </div>
-                      <p className="text-[11px] text-medical-muted leading-tight">{item.evidence}</p>
+                      <p className="text-[11px] text-[#5e4b75] leading-tight">{item.evidence}</p>
                     </div>
                   ))}
                 </div>
               ) : (
-                <div className="py-4 text-center text-xs text-medical-muted">Loading verification matrix...</div>
+                <div className="py-4 text-center text-xs text-[#5e4b75]">Loading verification matrix...</div>
               )}
             </Card>
           </div>
@@ -894,8 +894,8 @@ export const CTExplorerPage: React.FC = () => {
                         }}
                         className={`p-2 rounded-lg border text-center capitalize transition-all ${
                           mprView === view
-                            ? 'bg-gradient-to-r from-amber-400 via-amber-500 to-amber-600 text-[#0c0614] font-bold shadow-md shadow-amber-950/40 border border-amber-300/40'
-                            : 'bg-[#150a22] text-slate-300 border border-white/10 hover:text-white'
+                            ? 'bg-gradient-to-r from-amber-500 to-amber-600 text-white font-bold shadow-xs border border-amber-600'
+                            : 'bg-white text-[#5e4b75] border border-[#e2e8f0] hover:text-[#1a082e] hover:bg-slate-50'
                         }`}
                       >
                         {view}
@@ -907,10 +907,10 @@ export const CTExplorerPage: React.FC = () => {
                 {/* Slice Slider with Step Buttons */}
                 <div>
                   <div className="flex items-center justify-between mb-1.5">
-                    <label className="text-[11px] font-semibold text-slate-400 uppercase tracking-wider">
+                    <label className="text-[11px] font-semibold text-[#5e4b75] uppercase tracking-wider">
                       Slice Navigation:
                     </label>
-                    <span className="font-mono text-amber-300 font-bold text-sm">
+                    <span className="font-mono text-amber-800 font-bold text-sm">
                       {sliceIndex} / {maxIndex}
                     </span>
                   </div>
@@ -921,23 +921,23 @@ export const CTExplorerPage: React.FC = () => {
                     max={maxIndex}
                     value={sliceIndex}
                     onChange={(e) => setSliceIndex(parseInt(e.target.value, 10))}
-                    className="w-full accent-amber-500 bg-[#140a22] cursor-pointer"
+                    className="w-full accent-amber-500 cursor-pointer"
                   />
 
                   {/* Step Buttons */}
-                  <div className="flex items-center justify-between mt-2 pt-1 border-t border-white/[0.08] text-[11px]">
+                  <div className="flex items-center justify-between mt-2 pt-1 border-t border-[#e2e8f0] text-[11px]">
                     <div className="flex items-center gap-1">
                       <button
                         onClick={() => stepSlice(-5)}
                         disabled={sliceIndex <= 0}
-                        className="px-2 py-0.5 rounded bg-[#180e28] border border-white/10 text-slate-300 hover:text-white disabled:opacity-30"
+                        className="px-2 py-0.5 rounded bg-white border border-[#e2e8f0] text-[#5e4b75] hover:text-[#1a082e] hover:bg-slate-50 disabled:opacity-30 shadow-xs"
                       >
                         -5
                       </button>
                       <button
                         onClick={() => stepSlice(-1)}
                         disabled={sliceIndex <= 0}
-                        className="px-2 py-0.5 rounded bg-[#180e28] border border-white/10 text-slate-300 hover:text-white disabled:opacity-30 flex items-center"
+                        className="px-2 py-0.5 rounded bg-white border border-[#e2e8f0] text-[#5e4b75] hover:text-[#1a082e] hover:bg-slate-50 disabled:opacity-30 flex items-center shadow-xs"
                       >
                         <ChevronLeft className="w-3 h-3" />
                       </button>
@@ -954,8 +954,8 @@ export const CTExplorerPage: React.FC = () => {
                         ) : null
                       );
                       return phys != null ? (
-                        <span className="text-[10px] text-slate-400 font-mono">
-                          Coord: <strong className="text-slate-200">{Number(phys).toFixed(2)} mm</strong>
+                        <span className="text-[10px] text-[#5e4b75] font-mono">
+                          Coord: <strong className="text-[#1a082e]">{Number(phys).toFixed(2)} mm</strong>
                         </span>
                       ) : null;
                     })()}
@@ -964,14 +964,14 @@ export const CTExplorerPage: React.FC = () => {
                       <button
                         onClick={() => stepSlice(1)}
                         disabled={sliceIndex >= maxIndex}
-                        className="px-2 py-0.5 rounded bg-[#180e28] border border-white/10 text-slate-300 hover:text-white disabled:opacity-30 flex items-center"
+                        className="px-2 py-0.5 rounded bg-white border border-[#e2e8f0] text-[#5e4b75] hover:text-[#1a082e] hover:bg-slate-50 disabled:opacity-30 flex items-center shadow-xs"
                       >
                         <ChevronRight className="w-3 h-3" />
                       </button>
                       <button
                         onClick={() => stepSlice(5)}
                         disabled={sliceIndex >= maxIndex}
-                        className="px-2 py-0.5 rounded bg-[#180e28] border border-white/10 text-slate-300 hover:text-white disabled:opacity-30"
+                        className="px-2 py-0.5 rounded bg-white border border-[#e2e8f0] text-[#5e4b75] hover:text-[#1a082e] hover:bg-slate-50 disabled:opacity-30 shadow-xs"
                       >
                         +5
                       </button>
@@ -981,13 +981,13 @@ export const CTExplorerPage: React.FC = () => {
 
                 {/* Window Presets */}
                 <div>
-                  <label className="text-[11px] font-semibold text-slate-400 uppercase tracking-wider block mb-1.5">
+                  <label className="text-[11px] font-semibold text-[#5e4b75] uppercase tracking-wider block mb-1.5">
                     Clinical Windowing Preset:
                   </label>
                   <select
                     value={windowPreset}
                     onChange={(e) => setWindowPreset(e.target.value)}
-                    className="w-full bg-[#150a22] border border-white/10 rounded-lg p-2 text-xs font-mono text-white focus:outline-none focus:border-amber-400 shadow-sm"
+                    className="w-full bg-white border border-[#cbd5e1] rounded-lg p-2 text-xs font-mono text-[#1a082e] focus:outline-none focus:border-amber-500 shadow-xs"
                   >
                     <option value="lung">Lung Window (-600 HU Center / 1500 HU Width)</option>
                     <option value="mediastinum">Mediastinum Window (50 HU Center / 350 HU Width)</option>
@@ -997,8 +997,8 @@ export const CTExplorerPage: React.FC = () => {
                 </div>
 
                 {/* Overlays */}
-                <div className="pt-3 border-t border-white/[0.08] space-y-2">
-                  <label className="text-[11px] font-semibold text-slate-400 uppercase tracking-wider block">
+                <div className="pt-3 border-t border-[#e2e8f0] space-y-2">
+                  <label className="text-[11px] font-semibold text-[#5e4b75] uppercase tracking-wider block">
                     Diagnostic Overlays:
                   </label>
                   <label className="flex items-center gap-2.5 cursor-pointer">
@@ -1008,7 +1008,7 @@ export const CTExplorerPage: React.FC = () => {
                       onChange={(e) => setOverlayMask(e.target.checked)}
                       className="accent-amber-500 rounded"
                     />
-                    <span className="text-slate-300">Segmentation Mask (Labels 3, 4, 5)</span>
+                    <span className="text-[#1a082e]">Segmentation Mask (Labels 3, 4, 5)</span>
                   </label>
                   <label className="flex items-center gap-2.5 cursor-pointer">
                     <input
@@ -1017,28 +1017,28 @@ export const CTExplorerPage: React.FC = () => {
                       onChange={(e) => setShowNodules(e.target.checked)}
                       className="accent-amber-500 rounded"
                     />
-                    <span className="text-slate-300">LUNA16 Nodule Crosshairs</span>
+                    <span className="text-[#1a082e]">LUNA16 Nodule Crosshairs</span>
                   </label>
                 </div>
 
                 {/* Active Nodule Jumper if selected */}
                 {selectedNoduleId && activeNodule && (
-                  <div className="pt-3 border-t border-white/[0.08]">
-                    <span className="text-[10px] text-slate-400 uppercase tracking-wider block mb-1">
+                  <div className="pt-3 border-t border-[#e2e8f0]">
+                    <span className="text-[10px] text-[#5e4b75] uppercase tracking-wider block mb-1 font-semibold">
                       Targeted Nodule Focus:
                     </span>
-                    <div className="p-2.5 bg-amber-950/30 border border-amber-600/40 rounded-lg space-y-1 text-[11px]">
+                    <div className="p-2.5 bg-amber-50/70 border border-amber-300 rounded-lg space-y-1 text-[11px]">
                       <div className="flex justify-between">
-                        <span className="text-slate-400">Nodule ID:</span>
-                        <span className="font-mono font-bold text-white">{activeNodule.nodule_id}</span>
+                        <span className="text-[#5e4b75]">Nodule ID:</span>
+                        <span className="font-mono font-bold text-[#1a082e]">{activeNodule.nodule_id}</span>
                       </div>
                       <div className="flex justify-between">
-                        <span className="text-slate-400">Diameter:</span>
-                        <span className="font-mono text-amber-300 font-semibold">{typeof activeNodule.diameter_mm === 'number' ? activeNodule.diameter_mm.toFixed(1) : (activeNodule.diameter_mm ?? 'N/A')} mm</span>
+                        <span className="text-[#5e4b75]">Diameter:</span>
+                        <span className="font-mono text-amber-800 font-bold">{typeof activeNodule.diameter_mm === 'number' ? activeNodule.diameter_mm.toFixed(1) : (activeNodule.diameter_mm ?? 'N/A')} mm</span>
                       </div>
                       <div className="flex justify-between">
-                        <span className="text-slate-400">Location:</span>
-                        <span className="font-mono text-amber-300">({activeNodule.voxel_x}, {activeNodule.voxel_y}, {activeNodule.voxel_z})</span>
+                        <span className="text-[#5e4b75]">Location:</span>
+                        <span className="font-mono text-[#1a082e]">({activeNodule.voxel_x}, {activeNodule.voxel_y}, {activeNodule.voxel_z})</span>
                       </div>
                     </div>
                   </div>
@@ -1060,11 +1060,11 @@ export const CTExplorerPage: React.FC = () => {
                     size="sm"
                     onClick={() => setIsCinePlaying((p) => !p)}
                     className={`text-xs py-1 px-2.5 transition-colors ${
-                      isCinePlaying ? 'border-amber-500 bg-amber-950/60 text-amber-300' : 'text-slate-300'
+                      isCinePlaying ? 'border-amber-300 bg-amber-50 text-amber-900 font-semibold' : 'border-[#e2e8f0] bg-white text-[#1a082e]'
                     }`}
                     title={isCinePlaying ? 'Pause Cine Playback' : 'Start Auto Cine Loop'}
                   >
-                    {isCinePlaying ? <Pause className="w-3.5 h-3.5 mr-1 text-amber-400" /> : <Play className="w-3.5 h-3.5 mr-1" />}
+                    {isCinePlaying ? <Pause className="w-3.5 h-3.5 mr-1 text-amber-600" /> : <Play className="w-3.5 h-3.5 mr-1 text-amber-600" />}
                     <span>{isCinePlaying ? 'Pause Cine' : 'Cine Loop'}</span>
                   </Button>
 
@@ -1074,7 +1074,7 @@ export const CTExplorerPage: React.FC = () => {
                     size="sm"
                     onClick={() => setMprInvert((i) => !i)}
                     className={`p-1.5 h-auto transition-colors ${
-                      mprInvert ? 'text-amber-300 bg-amber-950/50' : 'text-slate-400 hover:text-white'
+                      mprInvert ? 'text-amber-800 bg-amber-50 font-semibold' : 'text-[#5e4b75] hover:text-[#1a082e]'
                     }`}
                     title="Invert CT Grayscale (Negative/Positive)"
                   >
@@ -1082,29 +1082,29 @@ export const CTExplorerPage: React.FC = () => {
                   </Button>
 
                   {/* Zoom Controls */}
-                  <div className="flex items-center gap-1 bg-black/75 border border-white/10 rounded-lg p-0.5 shadow-sm">
+                  <div className="flex items-center gap-1 bg-white border border-[#e2e8f0] rounded-lg p-0.5 shadow-xs">
                     <button
                       onClick={() => setMprZoom((z) => Math.max(z - 0.25, 0.75))}
                       disabled={mprZoom <= 0.75}
-                      className="p-1 text-slate-400 hover:text-white disabled:opacity-30 transition-colors"
+                      className="p-1 text-[#5e4b75] hover:text-[#1a082e] disabled:opacity-30 transition-colors"
                       title="Zoom Out"
                     >
                       <ZoomOut className="w-3.5 h-3.5" />
                     </button>
-                    <span className="text-[10px] font-mono text-amber-300 px-1 min-w-[28px] text-center font-bold">
+                    <span className="text-[10px] font-mono text-amber-800 px-1 min-w-[28px] text-center font-bold">
                       {Math.round(mprZoom * 100)}%
                     </span>
                     <button
                       onClick={() => setMprZoom((z) => Math.min(z + 0.25, 2.5))}
                       disabled={mprZoom >= 2.5}
-                      className="p-1 text-slate-400 hover:text-white disabled:opacity-30 transition-colors"
+                      className="p-1 text-[#5e4b75] hover:text-[#1a082e] disabled:opacity-30 transition-colors"
                       title="Zoom In"
                     >
                       <ZoomIn className="w-3.5 h-3.5" />
                     </button>
                     <button
                       onClick={() => setMprZoom(1.0)}
-                      className="p-1 text-slate-400 hover:text-white transition-colors border-l border-white/10 ml-0.5"
+                      className="p-1 text-[#5e4b75] hover:text-[#1a082e] transition-colors border-l border-[#e2e8f0] ml-0.5"
                       title="Fit to Screen"
                     >
                       <Maximize2 className="w-3.5 h-3.5" />
@@ -1115,25 +1115,25 @@ export const CTExplorerPage: React.FC = () => {
             >
               <div
                 onWheel={handleMprWheel}
-                className="relative min-h-[460px] bg-black rounded-xl border border-white/10 flex items-center justify-center overflow-hidden select-none cursor-ns-resize group"
+                className="relative min-h-[460px] bg-[#120720] rounded-xl border border-[#e2e8f0] flex items-center justify-center overflow-hidden select-none cursor-ns-resize group shadow-inner"
                 title="Scroll mouse wheel over image to scrub CT slices"
               >
                 {/* Cardinal Anatomical Compass Orientation Labels */}
-                <div className="absolute top-2.5 left-1/2 -translate-x-1/2 z-20 px-2 py-0.5 rounded bg-black/75 border border-white/10 text-[10px] font-mono font-bold text-slate-300">
+                <div className="absolute top-2.5 left-1/2 -translate-x-1/2 z-20 px-2 py-0.5 rounded bg-white/95 border border-[#e2e8f0] text-[10px] font-mono font-bold text-[#1a082e] shadow-xs">
                   {orientation.top}
                 </div>
-                <div className="absolute bottom-2.5 left-1/2 -translate-x-1/2 z-20 px-2 py-0.5 rounded bg-black/75 border border-white/10 text-[10px] font-mono font-bold text-slate-300">
+                <div className="absolute bottom-2.5 left-1/2 -translate-x-1/2 z-20 px-2 py-0.5 rounded bg-white/95 border border-[#e2e8f0] text-[10px] font-mono font-bold text-[#1a082e] shadow-xs">
                   {orientation.bottom}
                 </div>
-                <div className="absolute left-2.5 top-1/2 -translate-y-1/2 z-20 px-2 py-0.5 rounded bg-black/75 border border-white/10 text-[10px] font-mono font-bold text-slate-300">
+                <div className="absolute left-2.5 top-1/2 -translate-y-1/2 z-20 px-2 py-0.5 rounded bg-white/95 border border-[#e2e8f0] text-[10px] font-mono font-bold text-[#1a082e] shadow-xs">
                   {orientation.left}
                 </div>
-                <div className="absolute right-2.5 top-1/2 -translate-y-1/2 z-20 px-2 py-0.5 rounded bg-black/75 border border-white/10 text-[10px] font-mono font-bold text-slate-300">
+                <div className="absolute right-2.5 top-1/2 -translate-y-1/2 z-20 px-2 py-0.5 rounded bg-white/95 border border-[#e2e8f0] text-[10px] font-mono font-bold text-[#1a082e] shadow-xs">
                   {orientation.right}
                 </div>
 
                 {loadingSlice && !currentSlice && (
-                  <div className="absolute inset-0 bg-black/70 flex items-center justify-center z-30">
+                  <div className="absolute inset-0 bg-[#1a082e]/70 flex items-center justify-center z-30">
                     <span className="text-xs font-mono text-amber-300 animate-pulse">Streaming orthogonal slice...</span>
                   </div>
                 )}
@@ -1154,23 +1154,23 @@ export const CTExplorerPage: React.FC = () => {
                     />
                   </div>
                 ) : (
-                  <div className="text-xs text-slate-400">Loading orthogonal slice...</div>
+                  <div className="text-xs text-[#5e4b75]">Loading orthogonal slice...</div>
                 )}
 
                 {/* Top Left Metadata Tag */}
-                <div className="absolute top-2.5 left-2.5 text-[10px] font-mono text-amber-300 bg-black/80 px-2 py-1 rounded border border-white/10 z-20 flex items-center gap-1.5">
-                  <span className={`w-1.5 h-1.5 rounded-full ${loadingSlice ? 'bg-amber-400 animate-ping' : 'bg-amber-400 animate-pulse'}`} />
+                <div className="absolute top-2.5 left-2.5 text-[10px] font-mono text-[#1a082e] bg-white/95 px-2 py-1 rounded border border-[#e2e8f0] z-20 flex items-center gap-1.5 shadow-xs font-semibold">
+                  <span className={`w-1.5 h-1.5 rounded-full ${loadingSlice ? 'bg-amber-500 animate-ping' : 'bg-amber-500 animate-pulse'}`} />
                   <span>{mprView.toUpperCase()} [{sliceIndex}/{maxIndex}]</span>
-                  {loadingSlice && <span className="text-amber-300 ml-1 font-sans text-[9px]">syncing</span>}
+                  {loadingSlice && <span className="text-amber-700 ml-1 font-sans text-[9px]">syncing</span>}
                 </div>
 
                 {/* Bottom Right Window Tag */}
-                <div className="absolute bottom-2.5 right-2.5 text-[10px] font-mono text-slate-400 bg-black/75 px-2 py-1 rounded border border-white/10 z-20">
+                <div className="absolute bottom-2.5 right-2.5 text-[10px] font-mono text-[#5e4b75] bg-white/95 px-2 py-1 rounded border border-[#e2e8f0] z-20 shadow-xs font-semibold">
                   Window: {windowPreset.toUpperCase()}
                 </div>
 
                 {/* Bottom Left Mouse Hint */}
-                <div className="absolute bottom-2.5 left-2.5 text-[10px] font-mono text-slate-500 bg-black/70 px-2 py-0.5 rounded opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none">
+                <div className="absolute bottom-2.5 left-2.5 text-[10px] font-mono text-[#5e4b75] bg-white/90 px-2 py-0.5 rounded opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none border border-[#e2e8f0] shadow-xs">
                   Mouse Wheel: Scrub Slices · Click: Target Nodule
                 </div>
               </div>
@@ -1184,7 +1184,7 @@ export const CTExplorerPage: React.FC = () => {
         <Card title="Mapped LUNA16 Nodule Coordinates" subtitle="Ground-truth spatial annotations mapped to voxel grid">
           <div className="overflow-x-auto">
             <table className="w-full text-left text-xs font-mono">
-              <thead className="bg-medical-surface border-b border-medical-border text-medical-muted uppercase text-[10px]">
+              <thead className="bg-slate-50 border-b border-[#e2e8f0] text-[#5e4b75] uppercase text-[10px]">
                 <tr>
                   <th className="p-3">Nodule ID</th>
                   <th className="p-3">Physical X (mm)</th>
@@ -1196,22 +1196,22 @@ export const CTExplorerPage: React.FC = () => {
                   <th className="p-3">Action</th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-medical-border/60">
+              <tbody className="divide-y divide-[#e2e8f0]">
                 {annotations.map((nodule) => (
                   <tr
                     key={nodule.nodule_id}
-                    className={`hover:bg-white/[0.04] transition-colors ${
-                      selectedNoduleId === nodule.nodule_id ? 'bg-amber-950/30' : ''
+                    className={`hover:bg-amber-50/30 transition-colors ${
+                      selectedNoduleId === nodule.nodule_id ? 'bg-amber-50/60' : ''
                     }`}
                   >
-                    <td className="p-3 font-semibold text-white">{nodule.nodule_id}</td>
-                    <td className="p-3 text-slate-300">{typeof nodule.coordX_mm === 'number' ? nodule.coordX_mm.toFixed(2) : (nodule.coordX_mm ?? '0.00')}</td>
-                    <td className="p-3 text-slate-300">{typeof nodule.coordY_mm === 'number' ? nodule.coordY_mm.toFixed(2) : (nodule.coordY_mm ?? '0.00')}</td>
-                    <td className="p-3 text-slate-300">{typeof nodule.coordZ_mm === 'number' ? nodule.coordZ_mm.toFixed(2) : (nodule.coordZ_mm ?? '0.00')}</td>
-                    <td className="p-3 text-slate-200 font-mono">
+                    <td className="p-3 font-semibold text-[#1a082e]">{nodule.nodule_id}</td>
+                    <td className="p-3 text-[#5e4b75]">{typeof nodule.coordX_mm === 'number' ? nodule.coordX_mm.toFixed(2) : (nodule.coordX_mm ?? '0.00')}</td>
+                    <td className="p-3 text-[#5e4b75]">{typeof nodule.coordY_mm === 'number' ? nodule.coordY_mm.toFixed(2) : (nodule.coordY_mm ?? '0.00')}</td>
+                    <td className="p-3 text-[#5e4b75]">{typeof nodule.coordZ_mm === 'number' ? nodule.coordZ_mm.toFixed(2) : (nodule.coordZ_mm ?? '0.00')}</td>
+                    <td className="p-3 text-[#1a082e] font-mono">
                       ({nodule.voxel_x}, {nodule.voxel_y}, {nodule.voxel_z})
                     </td>
-                    <td className="p-3 text-amber-400 font-semibold">{typeof nodule.diameter_mm === 'number' ? nodule.diameter_mm.toFixed(1) : (nodule.diameter_mm ?? '0.0')} mm</td>
+                    <td className="p-3 text-amber-800 font-bold">{typeof nodule.diameter_mm === 'number' ? nodule.diameter_mm.toFixed(1) : (nodule.diameter_mm ?? '0.0')} mm</td>
                     <td className="p-3">
                       <Badge variant={nodule.inside_volume ? 'emerald' : 'rose'} size="sm">
                         {nodule.inside_volume ? 'Inside Scan' : 'Outside'}
@@ -1222,9 +1222,9 @@ export const CTExplorerPage: React.FC = () => {
                         variant="outline"
                         size="sm"
                         onClick={() => jumpToNodule(nodule)}
-                        className="text-amber-300 border-amber-500/40 bg-amber-950/30 hover:bg-amber-900/60 text-xs py-1 px-2.5 flex items-center gap-1.5 transition-all shadow-xs"
+                        className="text-amber-900 border-amber-300 bg-amber-50 hover:bg-amber-100 text-xs py-1 px-2.5 flex items-center gap-1.5 transition-all shadow-xs font-semibold"
                       >
-                        <Crosshair className="w-3.5 h-3.5 text-amber-400" />
+                        <Crosshair className="w-3.5 h-3.5 text-amber-600" />
                         <span>Jump to Slice</span>
                       </Button>
                     </td>
@@ -1240,21 +1240,21 @@ export const CTExplorerPage: React.FC = () => {
       {activeTab === 'drr' && (
         <div className="space-y-6">
           {/* Top Banner explaining the CT-to-DRR synthesis */}
-          <div className="bg-[#160c26]/80 border border-white/10 rounded-xl p-4 flex flex-col md:flex-row items-start md:items-center justify-between gap-4 shadow-xl">
+          <div className="bg-white border border-[#e2e8f0] rounded-xl p-4 flex flex-col md:flex-row items-start md:items-center justify-between gap-4 shadow-xs">
             <div className="flex items-start gap-3">
-              <div className="p-2.5 rounded-lg bg-amber-950/40 border border-amber-800/60 text-amber-400 mt-0.5">
+              <div className="p-2.5 rounded-lg bg-amber-50 border border-amber-200 text-amber-700 mt-0.5 shadow-xs">
                 <Film className="w-5 h-5" />
               </div>
               <div>
                 <div className="flex items-center gap-2">
-                  <h3 className="text-sm font-semibold text-white">
+                  <h3 className="text-sm font-semibold text-[#1a082e]">
                     CT-to-DRR Radiographic Synthesis & Dual-View 3D Bridge
                   </h3>
                   <Badge variant="amber" size="sm">
                     Beer-Lambert Attenuation
                   </Badge>
                 </div>
-                <p className="text-xs text-slate-400 mt-1 max-w-2xl">
+                <p className="text-xs text-[#5e4b75] mt-1 max-w-2xl">
                   Simulates physical clinical X-ray projections directly from 3D CT attenuation coefficients (μ = μ_water · (1 + HU/1000)). Synthesizes calibrated Frontal (PA) and Lateral (LL) radiographs to feed the bi-planar 3D reconstruction pipeline.
                 </p>
               </div>
@@ -1266,7 +1266,7 @@ export const CTExplorerPage: React.FC = () => {
                 size="sm"
                 onClick={handleDownloadDRR}
                 disabled={!drrData}
-                className="border-white/10 hover:border-amber-400 text-xs text-slate-200"
+                className="border-[#e2e8f0] bg-white hover:bg-slate-50 text-xs text-[#1a082e] shadow-xs"
               >
                 <Download className="w-3.5 h-3.5 mr-1" />
                 <span>Save Radiograph</span>
@@ -1277,7 +1277,7 @@ export const CTExplorerPage: React.FC = () => {
                 onClick={handleExportToDualView}
                 disabled={loadingDRR || isExportingToDualView}
                 isLoading={isExportingToDualView}
-                className="bg-gradient-to-r from-amber-400 via-amber-500 to-amber-600 text-[#0c0614] hover:from-amber-300 hover:to-amber-500 font-semibold text-xs shadow-md shadow-amber-950/50 border border-amber-300/40"
+                className="bg-gradient-to-r from-amber-500 to-amber-600 text-white font-bold text-xs shadow-xs border border-amber-600"
               >
                 <span>Export to Dual-View Lab</span>
                 <ArrowRight className="w-3.5 h-3.5 ml-1" />
@@ -1295,7 +1295,7 @@ export const CTExplorerPage: React.FC = () => {
                 <div className="space-y-4 text-xs">
                   {/* Projection View Selector */}
                   <div>
-                    <label className="text-[11px] font-semibold text-slate-400 uppercase tracking-wider block mb-1.5">
+                    <label className="text-[11px] font-semibold text-[#5e4b75] uppercase tracking-wider block mb-1.5">
                       Radiographic Projection View:
                     </label>
                     <div className="grid grid-cols-2 gap-2">
@@ -1303,8 +1303,8 @@ export const CTExplorerPage: React.FC = () => {
                         onClick={() => setDrrView('frontal')}
                         className={`p-2.5 rounded-lg border text-center transition-all ${
                           drrView === 'frontal'
-                            ? 'bg-gradient-to-r from-amber-400 via-amber-500 to-amber-600 text-[#0c0614] font-bold shadow-md shadow-amber-950/40 border border-amber-300/40'
-                            : 'bg-[#150a22] text-slate-300 border border-white/10 hover:text-white'
+                            ? 'bg-gradient-to-r from-amber-500 to-amber-600 text-white font-bold shadow-xs border border-amber-600'
+                            : 'bg-white text-[#5e4b75] border border-[#e2e8f0] hover:text-[#1a082e] hover:bg-slate-50'
                         }`}
                       >
                         <div className="text-xs font-bold">Frontal (PA)</div>
@@ -1315,8 +1315,8 @@ export const CTExplorerPage: React.FC = () => {
                         onClick={() => setDrrView('lateral')}
                         className={`p-2.5 rounded-lg border text-center transition-all ${
                           drrView === 'lateral'
-                            ? 'bg-gradient-to-r from-amber-400 via-amber-500 to-amber-600 text-[#0c0614] font-bold shadow-md shadow-amber-950/40 border border-amber-300/40'
-                            : 'bg-[#150a22] text-slate-300 border border-white/10 hover:text-white'
+                            ? 'bg-gradient-to-r from-amber-500 to-amber-600 text-white font-bold shadow-xs border border-amber-600'
+                            : 'bg-white text-[#5e4b75] border border-[#e2e8f0] hover:text-[#1a082e] hover:bg-slate-50'
                         }`}
                       >
                         <div className="text-xs font-bold">Lateral (LL)</div>
@@ -1328,10 +1328,10 @@ export const CTExplorerPage: React.FC = () => {
                   {/* SDD Slider */}
                   <div>
                     <div className="flex items-center justify-between mb-1.5">
-                      <label className="text-[11px] font-semibold text-slate-400 uppercase tracking-wider">
+                      <label className="text-[11px] font-semibold text-[#5e4b75] uppercase tracking-wider">
                         Source-to-Detector Distance (SDD):
                       </label>
-                      <span className="font-mono text-amber-300 font-bold text-xs">
+                      <span className="font-mono text-amber-800 font-bold text-xs">
                         {drrSdd.toFixed(0)} mm
                       </span>
                     </div>
@@ -1342,9 +1342,9 @@ export const CTExplorerPage: React.FC = () => {
                       step={50}
                       value={drrSdd}
                       onChange={(e) => setDrrSdd(parseFloat(e.target.value))}
-                      className="w-full accent-amber-500 bg-[#140a22] cursor-pointer"
+                      className="w-full accent-amber-500 cursor-pointer"
                     />
-                    <div className="flex justify-between text-[10px] text-slate-400 mt-1 font-mono">
+                    <div className="flex justify-between text-[10px] text-[#5e4b75] mt-1 font-mono">
                       <span>1200 mm</span>
                       <span>Standard: 1800 mm</span>
                       <span>2200 mm</span>
@@ -1354,10 +1354,10 @@ export const CTExplorerPage: React.FC = () => {
                   {/* SOD Slider */}
                   <div>
                     <div className="flex items-center justify-between mb-1.5">
-                      <label className="text-[11px] font-semibold text-slate-400 uppercase tracking-wider">
+                      <label className="text-[11px] font-semibold text-[#5e4b75] uppercase tracking-wider">
                         Source-to-Object Distance (SOD):
                       </label>
-                      <span className="font-mono text-amber-300 font-bold text-xs">
+                      <span className="font-mono text-amber-800 font-bold text-xs">
                         {drrSod.toFixed(0)} mm
                       </span>
                     </div>
@@ -1368,9 +1368,9 @@ export const CTExplorerPage: React.FC = () => {
                       step={50}
                       value={drrSod}
                       onChange={(e) => setDrrSod(parseFloat(e.target.value))}
-                      className="w-full accent-amber-500 bg-[#140a22] cursor-pointer"
+                      className="w-full accent-amber-500 cursor-pointer"
                     />
-                    <div className="flex justify-between text-[10px] text-slate-400 mt-1 font-mono">
+                    <div className="flex justify-between text-[10px] text-[#5e4b75] mt-1 font-mono">
                       <span>1000 mm</span>
                       <span>Standard: 1450 mm</span>
                       <span>1800 mm</span>
@@ -1378,19 +1378,19 @@ export const CTExplorerPage: React.FC = () => {
                   </div>
 
                   {/* Magnification Factor Calculation */}
-                  <div className="p-3 bg-medical-surface rounded-lg border border-medical-border/80 flex items-center justify-between">
+                  <div className="p-3 bg-slate-50 rounded-lg border border-[#e2e8f0] flex items-center justify-between">
                     <div>
-                      <span className="text-[10px] text-medical-muted uppercase font-semibold block">Geometric Magnification (M)</span>
-                      <span className="text-[11px] text-slate-300 font-mono">M = SDD / SOD</span>
+                      <span className="text-[10px] text-[#5e4b75] uppercase font-semibold block">Geometric Magnification (M)</span>
+                      <span className="text-[11px] text-[#5e4b75] font-mono">M = SDD / SOD</span>
                     </div>
-                    <span className="text-sm font-mono font-bold text-emerald-400">
+                    <span className="text-sm font-mono font-bold text-emerald-700">
                       {(drrSdd / Math.max(1, drrSod)).toFixed(3)}×
                     </span>
                   </div>
 
                   {/* Physics & Overlay Toggles */}
-                  <div className="pt-3 border-t border-medical-border/60 space-y-2.5">
-                    <label className="text-[11px] font-semibold text-medical-subtle uppercase tracking-wider block">
+                  <div className="pt-3 border-t border-[#e2e8f0] space-y-2.5">
+                    <label className="text-[11px] font-semibold text-[#5e4b75] uppercase tracking-wider block">
                       Simulation & Visual Enhancements:
                     </label>
 
@@ -1402,8 +1402,8 @@ export const CTExplorerPage: React.FC = () => {
                         className="accent-amber-500 rounded"
                       />
                       <div>
-                        <span className="text-slate-300 block">Lung Boundary Silhouette</span>
-                        <span className="text-[10px] text-slate-400 block">Project 2D anatomical contours from ground-truth mask</span>
+                        <span className="text-[#1a082e] block font-medium">Lung Boundary Silhouette</span>
+                        <span className="text-[10px] text-[#5e4b75] block">Project 2D anatomical contours from ground-truth mask</span>
                       </div>
                     </label>
 
@@ -1415,34 +1415,34 @@ export const CTExplorerPage: React.FC = () => {
                         className="accent-amber-500 rounded"
                       />
                       <div>
-                        <span className="text-slate-300 block">Quantum Photon Poisson Noise</span>
-                        <span className="text-[10px] text-slate-400 block">Simulate physical quantum detector photon mottle</span>
+                        <span className="text-[#1a082e] block font-medium">Quantum Photon Poisson Noise</span>
+                        <span className="text-[10px] text-[#5e4b75] block">Simulate physical quantum detector photon mottle</span>
                       </div>
                     </label>
                   </div>
 
                   {/* Projection Matrix & Attenuation Stats */}
                   {drrData && (
-                    <div className="pt-3 border-t border-white/[0.08] space-y-2">
-                      <label className="text-[11px] font-semibold text-slate-400 uppercase tracking-wider block">
+                    <div className="pt-3 border-t border-[#e2e8f0] space-y-2">
+                      <label className="text-[11px] font-semibold text-[#5e4b75] uppercase tracking-wider block">
                         Projection Radiometry:
                       </label>
                       <div className="grid grid-cols-2 gap-2 text-[11px] font-mono">
-                        <div className="p-2 bg-black/40 rounded border border-white/5">
-                          <span className="text-slate-400 text-[10px] block">Mean Attenuation:</span>
-                          <span className="text-slate-200">{drrData.attenuation_stats.mean_line_integral.toFixed(3)}</span>
+                        <div className="p-2 bg-slate-50 rounded border border-[#e2e8f0]">
+                          <span className="text-[#5e4b75] text-[10px] block">Mean Attenuation:</span>
+                          <span className="text-[#1a082e] font-semibold">{drrData.attenuation_stats.mean_line_integral.toFixed(3)}</span>
                         </div>
-                        <div className="p-2 bg-black/40 rounded border border-white/5">
-                          <span className="text-slate-400 text-[10px] block">Max Line Integral:</span>
-                          <span className="text-slate-200">{drrData.attenuation_stats.max_line_integral.toFixed(2)}</span>
+                        <div className="p-2 bg-slate-50 rounded border border-[#e2e8f0]">
+                          <span className="text-[#5e4b75] text-[10px] block">Max Line Integral:</span>
+                          <span className="text-[#1a082e] font-semibold">{drrData.attenuation_stats.max_line_integral.toFixed(2)}</span>
                         </div>
-                        <div className="p-2 bg-black/40 rounded border border-white/5">
-                          <span className="text-slate-400 text-[10px] block">Matrix Resolution:</span>
-                          <span className="text-slate-200">{drrData.dimensions.width} × {drrData.dimensions.height}</span>
+                        <div className="p-2 bg-slate-50 rounded border border-[#e2e8f0]">
+                          <span className="text-[#5e4b75] text-[10px] block">Matrix Resolution:</span>
+                          <span className="text-[#1a082e] font-semibold">{drrData.dimensions.width} × {drrData.dimensions.height}</span>
                         </div>
-                        <div className="p-2 bg-black/40 rounded border border-white/5">
-                          <span className="text-slate-400 text-[10px] block">Forward Runtime:</span>
-                          <span className="text-slate-100">{drrData.computation_latency_ms.toFixed(1)} ms</span>
+                        <div className="p-2 bg-slate-50 rounded border border-[#e2e8f0]">
+                          <span className="text-[#5e4b75] text-[10px] block">Forward Runtime:</span>
+                          <span className="text-[#1a082e] font-semibold">{drrData.computation_latency_ms.toFixed(1)} ms</span>
                         </div>
                       </div>
                     </div>
@@ -1464,23 +1464,23 @@ export const CTExplorerPage: React.FC = () => {
                   )
                 }
               >
-                <div className="relative min-h-[500px] bg-black rounded-xl border border-white/10 flex items-center justify-center overflow-hidden select-none">
+                <div className="relative min-h-[500px] bg-[#120720] rounded-xl border border-[#e2e8f0] flex items-center justify-center overflow-hidden select-none shadow-inner">
                   {/* Orientation tags */}
-                  <div className="absolute top-3 left-1/2 -translate-x-1/2 z-20 px-2.5 py-0.5 rounded bg-black/80 border border-white/10 text-[10px] font-mono font-bold text-slate-300">
+                  <div className="absolute top-3 left-1/2 -translate-x-1/2 z-20 px-2.5 py-0.5 rounded bg-white/95 border border-[#e2e8f0] text-[10px] font-mono font-bold text-[#1a082e] shadow-xs">
                     S (Superior)
                   </div>
-                  <div className="absolute bottom-3 left-1/2 -translate-x-1/2 z-20 px-2.5 py-0.5 rounded bg-black/80 border border-white/10 text-[10px] font-mono font-bold text-slate-300">
+                  <div className="absolute bottom-3 left-1/2 -translate-x-1/2 z-20 px-2.5 py-0.5 rounded bg-white/95 border border-[#e2e8f0] text-[10px] font-mono font-bold text-[#1a082e] shadow-xs">
                     I (Inferior)
                   </div>
-                  <div className="absolute left-3 top-1/2 -translate-y-1/2 z-20 px-2.5 py-0.5 rounded bg-black/80 border border-white/10 text-[10px] font-mono font-bold text-slate-300">
+                  <div className="absolute left-3 top-1/2 -translate-y-1/2 z-20 px-2.5 py-0.5 rounded bg-white/95 border border-[#e2e8f0] text-[10px] font-mono font-bold text-[#1a082e] shadow-xs">
                     {drrView === 'frontal' ? 'R (Patient Right)' : 'A (Anterior)'}
                   </div>
-                  <div className="absolute right-3 top-1/2 -translate-y-1/2 z-20 px-2.5 py-0.5 rounded bg-black/80 border border-white/10 text-[10px] font-mono font-bold text-slate-300">
+                  <div className="absolute right-3 top-1/2 -translate-y-1/2 z-20 px-2.5 py-0.5 rounded bg-white/95 border border-[#e2e8f0] text-[10px] font-mono font-bold text-[#1a082e] shadow-xs">
                     {drrView === 'frontal' ? 'L (Patient Left)' : 'P (Posterior)'}
                   </div>
 
                   {loadingDRR && (
-                    <div className="absolute inset-0 bg-black/70 backdrop-blur-xs flex flex-col items-center justify-center z-30 gap-2">
+                    <div className="absolute inset-0 bg-[#1a082e]/70 backdrop-blur-xs flex flex-col items-center justify-center z-30 gap-2">
                       <Film className="w-8 h-8 text-amber-400 animate-pulse" />
                       <span className="text-xs font-mono text-amber-300 animate-pulse">
                         Ray-casting Beer-Lambert attenuation integral...
@@ -1489,8 +1489,8 @@ export const CTExplorerPage: React.FC = () => {
                   )}
 
                   {drrError && (
-                    <div className="p-4 bg-rose-950/80 border border-rose-800 rounded-lg text-xs text-rose-300 flex items-center gap-2 m-6">
-                      <AlertCircle className="w-5 h-5 text-rose-400 shrink-0" />
+                    <div className="p-4 bg-rose-50 border border-rose-200 rounded-lg text-xs text-rose-800 flex items-center gap-2 m-6">
+                      <AlertCircle className="w-5 h-5 text-rose-600 shrink-0" />
                       <span>{drrError}</span>
                     </div>
                   )}
@@ -1506,13 +1506,13 @@ export const CTExplorerPage: React.FC = () => {
                   ) : null}
 
                   {/* Top-Left View Tag */}
-                  <div className="absolute top-3 left-3 text-[10px] font-mono text-amber-300 bg-black/80 px-2.5 py-1 rounded border border-white/10 z-20">
+                  <div className="absolute top-3 left-3 text-[10px] font-mono text-[#1a082e] bg-white/95 px-2.5 py-1 rounded border border-[#e2e8f0] z-20 shadow-xs font-semibold">
                     {drrView.toUpperCase()} · DRR SYNTHESIS
                   </div>
 
                   {/* Bottom-Right Geometry Tag */}
                   {drrData && (
-                    <div className="absolute bottom-3 right-3 text-[10px] font-mono text-slate-400 bg-black/80 px-2.5 py-1 rounded border border-white/10 z-20">
+                    <div className="absolute bottom-3 right-3 text-[10px] font-mono text-[#5e4b75] bg-white/95 px-2.5 py-1 rounded border border-[#e2e8f0] z-20 shadow-xs">
                       SDD: {drrData.geometry.sdd_mm}mm · SOD: {drrData.geometry.sod_mm}mm · M: {drrData.geometry.magnification_factor.toFixed(2)}x
                     </div>
                   )}
@@ -1520,11 +1520,11 @@ export const CTExplorerPage: React.FC = () => {
               </Card>
 
               {/* Research Disclaimer */}
-              <div className="p-3 rounded-lg bg-medical-surface border border-medical-border text-[11px] text-medical-muted flex items-center justify-between">
+              <div className="p-3 rounded-lg bg-slate-50 border border-[#e2e8f0] text-[11px] text-[#5e4b75] flex items-center justify-between">
                 <span>
                   <strong>Scientific Validation Note:</strong> DRRs are computed via linear ray attenuation integrals for statistical shape modeling & bi-planar reconstruction calibration. Not for diagnostic use.
                 </span>
-                <span className="font-mono text-medical-subtle text-[10px]">SimpleITK Beer-Lambert</span>
+                <span className="font-mono text-amber-800 text-[10px] font-semibold">SimpleITK Beer-Lambert</span>
               </div>
             </div>
           </div>
@@ -1535,17 +1535,17 @@ export const CTExplorerPage: React.FC = () => {
       {activeTab === 'ssm' && (
         <div className="space-y-6">
           {/* Prominent Scientific Disclaimer Banner */}
-          <div className="bg-amber-950/40 border border-amber-600/40 rounded-xl p-4 flex flex-col md:flex-row items-start md:items-center justify-between gap-4 shadow-lg shadow-amber-950/20">
+          <div className="bg-amber-50 border border-amber-300 rounded-xl p-4 flex flex-col md:flex-row items-start md:items-center justify-between gap-4 shadow-xs">
             <div className="flex items-start gap-3">
-              <div className="p-2.5 rounded-lg bg-amber-500/20 border border-amber-500/30 text-amber-400 mt-0.5 shrink-0">
+              <div className="p-2.5 rounded-lg bg-amber-100 border border-amber-300 text-amber-800 mt-0.5 shrink-0 shadow-xs">
                 <AlertCircle className="w-5 h-5" />
               </div>
               <div>
                 <div className="flex items-center gap-2">
-                  <h4 className="text-sm font-semibold text-white">Statistical Shape Model Estimate — Research Only</h4>
+                  <h4 className="text-sm font-semibold text-amber-950">Statistical Shape Model Estimate — Research Only</h4>
                   <Badge variant="amber" size="sm">Not a Diagnostic CT</Badge>
                 </div>
-                <p className="text-xs text-amber-200/80 mt-1 leading-relaxed max-w-4xl">
+                <p className="text-xs text-amber-900/90 mt-1 leading-relaxed max-w-4xl">
                   This model predicts an <strong>estimated 3D macroscopic lung surface boundary</strong> constrained by learned anatomical shape variation modes (M=20 PCA eigenspace). It does <strong>NOT</strong> reconstruct diagnostic CT Hounsfield Units, internal parenchymal attenuation, or replacement cross-sections from radiographs.
                 </p>
               </div>
@@ -1570,15 +1570,15 @@ export const CTExplorerPage: React.FC = () => {
                 headerAction={
                   <div className="flex items-center gap-2">
                     {/* Structure Selector */}
-                    <div className="flex items-center bg-[#150a22] p-1 rounded-lg border border-white/10">
+                    <div className="flex items-center bg-slate-100 p-1 rounded-lg border border-[#e2e8f0]">
                       {(['bilateral', 'left_lung', 'right_lung'] as const).map((struct) => (
                         <button
                           key={struct}
                           onClick={() => setSsmStructure(struct)}
                           className={`px-2.5 py-1 rounded text-[11px] font-mono capitalize transition-all ${
                             ssmStructure === struct
-                              ? 'bg-gradient-to-r from-amber-400 via-amber-500 to-amber-600 text-[#0c0614] font-bold shadow-md shadow-amber-950/40 border border-amber-300/40'
-                              : 'text-slate-400 hover:text-white'
+                              ? 'bg-gradient-to-r from-amber-500 to-amber-600 text-white font-bold shadow-xs border border-amber-600'
+                              : 'text-[#5e4b75] hover:text-[#1a082e]'
                           }`}
                         >
                           {struct === 'bilateral' ? 'Bilateral Lungs' : struct.replace('_', ' ')}
@@ -1592,6 +1592,7 @@ export const CTExplorerPage: React.FC = () => {
                       size="sm"
                       onClick={() => applySSMPreset('mean')}
                       title="Reset shape to mean canonical template"
+                      className="text-[#5e4b75] hover:text-[#1a082e]"
                     >
                       <RotateCcw className="w-3.5 h-3.5 mr-1" />
                       <span>Reset</span>
@@ -1600,15 +1601,15 @@ export const CTExplorerPage: React.FC = () => {
                 }
               >
                 {/* Presets Bar */}
-                <div className="mb-3 p-2 bg-[#180e28]/80 rounded-lg border border-white/10 flex flex-wrap items-center justify-between gap-2">
+                <div className="mb-3 p-2 bg-slate-50 rounded-lg border border-[#e2e8f0] flex flex-wrap items-center justify-between gap-2 shadow-xs">
                   <div className="flex items-center gap-1.5">
-                    <span className="text-[11px] font-mono text-slate-400 mr-1">Geometry Mode:</span>
+                    <span className="text-[11px] font-mono text-[#5e4b75] mr-1">Geometry Mode:</span>
                     <button
                       onClick={() => applySSMPreset('mean')}
                       className={`px-2 py-0.5 rounded text-[11px] font-mono transition-all ${
                         ssmGeometryPreset === 'mean'
-                          ? 'bg-gradient-to-r from-amber-400 via-amber-500 to-amber-600 text-[#0c0614] font-bold'
-                          : 'bg-[#150a22] text-slate-300 hover:text-white border border-white/10'
+                          ? 'bg-gradient-to-r from-amber-500 to-amber-600 text-white font-bold shadow-xs'
+                          : 'bg-white text-[#5e4b75] hover:text-[#1a082e] border border-[#e2e8f0]'
                       }`}
                     >
                       Mean Shape (b=0)
@@ -1617,8 +1618,8 @@ export const CTExplorerPage: React.FC = () => {
                       onClick={() => applySSMPreset('held_out_val')}
                       className={`px-2 py-0.5 rounded text-[11px] font-mono transition-all ${
                         ssmGeometryPreset === 'held_out_val'
-                          ? 'bg-gradient-to-r from-amber-400 via-amber-500 to-amber-600 text-[#0c0614] font-bold'
-                          : 'bg-[#150a22] text-slate-300 hover:text-white border border-white/10'
+                          ? 'bg-gradient-to-r from-amber-500 to-amber-600 text-white font-bold shadow-xs'
+                          : 'bg-white text-[#5e4b75] hover:text-[#1a082e] border border-[#e2e8f0]'
                       }`}
                     >
                       Held-Out Val (LIDC-0004)
@@ -1627,40 +1628,40 @@ export const CTExplorerPage: React.FC = () => {
                       onClick={() => applySSMPreset('reference')}
                       className={`px-2 py-0.5 rounded text-[11px] font-mono transition-all ${
                         ssmGeometryPreset === 'reference'
-                          ? 'bg-gradient-to-r from-amber-400 via-amber-500 to-amber-600 text-[#0c0614] font-bold'
-                          : 'bg-[#150a22] text-slate-300 hover:text-white border border-white/10'
+                          ? 'bg-gradient-to-r from-amber-500 to-amber-600 text-white font-bold shadow-xs'
+                          : 'bg-white text-[#5e4b75] hover:text-[#1a082e] border border-[#e2e8f0]'
                       }`}
                     >
                       Reference CT Fit
                     </button>
                     {ssmGeometryPreset === 'custom' && (
-                      <span className="px-2 py-0.5 rounded text-[11px] font-mono bg-purple-500/20 text-purple-300 border border-purple-500/30">
+                      <span className="px-2 py-0.5 rounded text-[11px] font-mono bg-purple-50 text-purple-900 border border-purple-200 font-semibold">
                         Custom Deformation
                       </span>
                     )}
                   </div>
 
                   {ssmDeformResult && (
-                    <div className="text-[11px] font-mono text-amber-300">
+                    <div className="text-[11px] font-mono text-amber-800 font-semibold">
                       {ssmDeformResult.num_vertices.toLocaleString()} Vertices · {ssmDeformResult.num_faces.toLocaleString()} Faces
                     </div>
                   )}
                 </div>
 
                 {/* 3D Canvas Viewport */}
-                <div className="h-[420px] relative rounded-xl overflow-hidden border border-white/10 bg-[#0c0614]">
+                <div className="h-[420px] relative rounded-xl overflow-hidden border border-[#e2e8f0] bg-[#120720] shadow-inner">
                   {loadingSSM && (
-                    <div className="absolute inset-0 bg-[#0c0614]/80 backdrop-blur-xs flex items-center justify-center z-30">
-                      <div className="flex items-center gap-2 px-4 py-2 rounded-lg bg-[#180e28] border border-amber-500/40 text-amber-300 font-mono text-xs">
-                        <Activity className="w-4 h-4 animate-spin text-amber-400" />
+                    <div className="absolute inset-0 bg-[#1a082e]/80 backdrop-blur-xs flex items-center justify-center z-30">
+                      <div className="flex items-center gap-2 px-4 py-2 rounded-lg bg-white border border-amber-400 text-amber-900 font-mono text-xs shadow-xl">
+                        <Activity className="w-4 h-4 animate-spin text-amber-600" />
                         <span>Deforming SSM Eigenspace...</span>
                       </div>
                     </div>
                   )}
 
                   {ssmError && (
-                    <div className="absolute top-4 left-4 right-4 bg-rose-950/80 border border-rose-800 rounded-lg p-3 text-xs text-rose-300 flex items-center gap-2 z-30">
-                      <AlertCircle className="w-4 h-4 shrink-0" />
+                    <div className="absolute top-4 left-4 right-4 bg-rose-50 border border-rose-200 rounded-lg p-3 text-xs text-rose-800 flex items-center gap-2 z-30">
+                      <AlertCircle className="w-4 h-4 shrink-0 text-rose-600" />
                       <span>{ssmError}</span>
                     </div>
                   )}
@@ -1675,13 +1676,13 @@ export const CTExplorerPage: React.FC = () => {
                 </div>
 
                 {/* Mode Deformation Sliders */}
-                <div className="mt-4 space-y-3 pt-3 border-t border-white/[0.08]">
+                <div className="mt-4 space-y-3 pt-3 border-t border-[#e2e8f0]">
                   <div className="flex items-center justify-between">
-                    <h5 className="text-xs font-semibold uppercase tracking-wider text-amber-400 font-mono flex items-center gap-1.5">
-                      <Sliders className="w-3.5 h-3.5" />
+                    <h5 className="text-xs font-semibold uppercase tracking-wider text-amber-800 font-mono flex items-center gap-1.5">
+                      <Sliders className="w-3.5 h-3.5 text-amber-600" />
                       Top 5 Physiological Shape Modes (±3.0 Standard Deviations)
                     </h5>
-                    <span className="text-[11px] font-mono text-slate-400">
+                    <span className="text-[11px] font-mono text-[#5e4b75]">
                       Cumulative Variance: 90.38% (Modes 1–5)
                     </span>
                   </div>
@@ -1698,32 +1699,32 @@ export const CTExplorerPage: React.FC = () => {
                       return (
                         <div
                           key={mode.modeNum}
-                          className="p-2.5 rounded-lg bg-[#180e28]/80 border border-white/10 hover:border-amber-400/30 transition-colors"
+                          className="p-2.5 rounded-lg bg-slate-50 border border-[#e2e8f0] hover:border-amber-400/40 transition-colors shadow-xs"
                         >
                           <div className="flex items-center justify-between mb-1.5">
                             <div>
-                              <span className="text-xs font-semibold text-white">
+                              <span className="text-xs font-semibold text-[#1a082e]">
                                 Mode {mode.modeNum}: {mode.name}
                               </span>
-                              <span className="text-[10px] text-amber-400 font-mono ml-2">
+                              <span className="text-[10px] text-amber-800 font-mono font-bold ml-2">
                                 ({mode.varPct}% variance)
                               </span>
-                              <p className="text-[10px] text-slate-400 mt-0.5">{mode.desc}</p>
+                              <p className="text-[10px] text-[#5e4b75] mt-0.5">{mode.desc}</p>
                             </div>
                             <span
                               className={`text-xs font-mono font-bold px-2 py-0.5 rounded ${
                                 Math.abs(weight) > 0.05
                                   ? weight > 0
-                                    ? 'bg-amber-950 text-amber-300 border border-amber-800'
-                                    : 'bg-purple-950 text-purple-300 border border-purple-800'
-                                  : 'bg-black/40 text-slate-400 border border-white/10'
+                                    ? 'bg-amber-50 text-amber-900 border border-amber-300'
+                                    : 'bg-purple-50 text-purple-900 border border-purple-200'
+                                  : 'bg-white text-[#5e4b75] border border-[#e2e8f0]'
                               }`}
                             >
                               {weight >= 0 ? `+${weight.toFixed(2)}` : weight.toFixed(2)} σ
                             </span>
                           </div>
                           <div className="flex items-center gap-3">
-                            <span className="text-[10px] font-mono text-slate-500">-3.0σ</span>
+                            <span className="text-[10px] font-mono text-[#5e4b75]">-3.0σ</span>
                             <input
                               type="range"
                               min="-3.0"
@@ -1731,9 +1732,9 @@ export const CTExplorerPage: React.FC = () => {
                               step="0.05"
                               value={weight}
                               onChange={(e) => handleModeWeightChange(mode.index, parseFloat(e.target.value))}
-                              className="w-full accent-amber-400 h-1.5 bg-[#12071f] rounded-lg cursor-pointer"
+                              className="w-full accent-amber-500 h-1.5 cursor-pointer"
                             />
-                            <span className="text-[10px] font-mono text-slate-500">+3.0σ</span>
+                            <span className="text-[10px] font-mono text-[#5e4b75]">+3.0σ</span>
                           </div>
                         </div>
                       );
@@ -1752,10 +1753,10 @@ export const CTExplorerPage: React.FC = () => {
               >
                 {ssmDeformResult ? (
                   <div className="space-y-3.5">
-                    <div className="p-3.5 bg-[#150a22] rounded-xl border border-white/10 flex items-center justify-between">
+                    <div className="p-3.5 bg-slate-50 rounded-xl border border-[#e2e8f0] flex items-center justify-between shadow-xs">
                       <div>
-                        <span className="text-xs text-slate-400 block">Total Segmented Volume (TLV):</span>
-                        <span className="text-2xl font-bold font-mono text-slate-100">
+                        <span className="text-xs text-[#5e4b75] block">Total Segmented Volume (TLV):</span>
+                        <span className="text-2xl font-bold font-mono text-[#1a082e]">
                           {ssmDeformResult.volumetry.total_lung_volume_ml.toLocaleString(undefined, {
                             minimumFractionDigits: 1,
                             maximumFractionDigits: 1,
@@ -1769,34 +1770,34 @@ export const CTExplorerPage: React.FC = () => {
                     </div>
 
                     <div className="grid grid-cols-2 gap-3">
-                      <div className="p-3 rounded-xl bg-[#180e28]/80 border border-white/10">
-                        <span className="text-[11px] text-slate-400 block">Right Lung (3 Lobes)</span>
-                        <strong className="text-base font-mono text-amber-300">
+                      <div className="p-3 rounded-xl bg-amber-50/70 border border-amber-200">
+                        <span className="text-[11px] text-amber-900 uppercase font-semibold block">Right Lung (3 Lobes)</span>
+                        <strong className="text-base font-mono text-amber-900 font-bold">
                           {ssmDeformResult.volumetry.right_lung_ml.toFixed(1)} mL
                         </strong>
-                        <span className="text-[10px] text-slate-400 block mt-0.5">
+                        <span className="text-[10px] text-[#5e4b75] block mt-0.5">
                           ~{((ssmDeformResult.volumetry.right_lung_ml / Math.max(ssmDeformResult.volumetry.total_lung_volume_ml, 1)) * 100).toFixed(0)}% volume
                         </span>
                       </div>
 
-                      <div className="p-3 rounded-xl bg-[#180e28]/80 border border-white/10">
-                        <span className="text-[11px] text-slate-400 block">Left Lung (2 Lobes)</span>
-                        <strong className="text-base font-mono text-slate-100">
+                      <div className="p-3 rounded-xl bg-slate-50 border border-[#e2e8f0]">
+                        <span className="text-[11px] text-[#5e4b75] uppercase font-semibold block">Left Lung (2 Lobes)</span>
+                        <strong className="text-base font-mono text-[#1a082e]">
                           {ssmDeformResult.volumetry.left_lung_ml.toFixed(1)} mL
                         </strong>
-                        <span className="text-[10px] text-slate-400 block mt-0.5">
+                        <span className="text-[10px] text-[#5e4b75] block mt-0.5">
                           ~{((ssmDeformResult.volumetry.left_lung_ml / Math.max(ssmDeformResult.volumetry.total_lung_volume_ml, 1)) * 100).toFixed(0)}% volume
                         </span>
                       </div>
                     </div>
 
-                    <div className="p-2.5 rounded-lg bg-black/40 border border-white/10 flex items-center justify-between text-xs font-mono">
-                      <span className="text-slate-400">Bilateral Symmetry (R/L):</span>
-                      <span className="text-white font-semibold">{ssmDeformResult.volumetry.symmetry_ratio.toFixed(3)}</span>
+                    <div className="p-2.5 rounded-lg bg-slate-50 border border-[#e2e8f0] flex items-center justify-between text-xs font-mono">
+                      <span className="text-[#5e4b75]">Bilateral Symmetry (R/L):</span>
+                      <span className="text-[#1a082e] font-semibold">{ssmDeformResult.volumetry.symmetry_ratio.toFixed(3)}</span>
                     </div>
                   </div>
                 ) : (
-                  <div className="p-6 text-center text-xs text-slate-400">Computing volumetrics...</div>
+                  <div className="p-6 text-center text-xs text-[#5e4b75]">Computing volumetrics...</div>
                 )}
               </Card>
 
@@ -1808,58 +1809,58 @@ export const CTExplorerPage: React.FC = () => {
                 {ssmDeformResult ? (
                   <div className="space-y-3">
                     <div className="grid grid-cols-2 gap-2.5">
-                      <div className="p-2.5 rounded-lg bg-[#150a22] border border-white/10">
-                        <span className="text-[10px] text-slate-400 block uppercase">Mean ASSD</span>
-                        <strong className="text-sm font-mono text-emerald-400">
+                      <div className="p-2.5 rounded-lg bg-slate-50 border border-[#e2e8f0]">
+                        <span className="text-[10px] text-[#5e4b75] block uppercase font-medium">Mean ASSD</span>
+                        <strong className="text-sm font-mono text-emerald-700 font-bold">
                           {ssmDeformResult.metrics.assd_mm.toFixed(3)} mm
                         </strong>
-                        <span className="text-[9px] text-slate-500 block mt-0.5">Validation Cohort: ≤ 2.50 mm</span>
+                        <span className="text-[9px] text-[#5e4b75] block mt-0.5">Validation Cohort: ≤ 2.50 mm</span>
                       </div>
 
-                      <div className="p-2.5 rounded-lg bg-[#150a22] border border-white/10">
-                        <span className="text-[10px] text-slate-400 block uppercase">Hausdorff 95 (HD95)</span>
-                        <strong className="text-sm font-mono text-emerald-400">
+                      <div className="p-2.5 rounded-lg bg-slate-50 border border-[#e2e8f0]">
+                        <span className="text-[10px] text-[#5e4b75] block uppercase font-medium">Hausdorff 95 (HD95)</span>
+                        <strong className="text-sm font-mono text-emerald-700 font-bold">
                           {ssmDeformResult.metrics.hd95_mm.toFixed(3)} mm
                         </strong>
-                        <span className="text-[9px] text-slate-500 block mt-0.5">Validation Cohort: ≤ 7.00 mm</span>
+                        <span className="text-[9px] text-[#5e4b75] block mt-0.5">Validation Cohort: ≤ 7.00 mm</span>
                       </div>
 
-                      <div className="p-2.5 rounded-lg bg-[#150a22] border border-white/10">
-                        <span className="text-[10px] text-slate-400 block uppercase">Relative Vol Error</span>
-                        <strong className="text-sm font-mono text-slate-100">
+                      <div className="p-2.5 rounded-lg bg-slate-50 border border-[#e2e8f0]">
+                        <span className="text-[10px] text-[#5e4b75] block uppercase font-medium">Relative Vol Error</span>
+                        <strong className="text-sm font-mono text-[#1a082e]">
                           {ssmDeformResult.metrics.volume_error_pct.toFixed(2)}%
                         </strong>
-                        <span className="text-[9px] text-slate-500 block mt-0.5">Validation Cohort: ≤ 7.50%</span>
+                        <span className="text-[9px] text-[#5e4b75] block mt-0.5">Validation Cohort: ≤ 7.50%</span>
                       </div>
 
-                      <div className="p-2.5 rounded-lg bg-[#150a22] border border-white/10">
-                        <span className="text-[10px] text-slate-400 block uppercase">Surface Dice @ 2mm</span>
-                        <strong className="text-sm font-mono text-amber-300">
+                      <div className="p-2.5 rounded-lg bg-slate-50 border border-[#e2e8f0]">
+                        <span className="text-[10px] text-[#5e4b75] block uppercase font-medium">Surface Dice @ 2mm</span>
+                        <strong className="text-sm font-mono text-amber-800 font-bold">
                           {ssmDeformResult.metrics.surface_dice.toFixed(3)}
                         </strong>
-                        <span className="text-[9px] text-slate-500 block mt-0.5">Acceptance: ≥ 0.850</span>
+                        <span className="text-[9px] text-[#5e4b75] block mt-0.5">Acceptance: ≥ 0.850</span>
                       </div>
                     </div>
 
-                    <div className="p-2.5 rounded-lg bg-black/40 border border-white/10 space-y-1.5 text-xs font-mono">
+                    <div className="p-2.5 rounded-lg bg-slate-50 border border-[#e2e8f0] space-y-1.5 text-xs font-mono">
                       <div className="flex items-center justify-between">
-                        <span className="text-slate-400">Cumulative Variance (5 Modes):</span>
-                        <span className="text-amber-300 font-semibold">90.38%</span>
+                        <span className="text-[#5e4b75]">Cumulative Variance (5 Modes):</span>
+                        <span className="text-amber-800 font-bold">90.38%</span>
                       </div>
                       <div className="flex items-center justify-between">
-                        <span className="text-slate-400">Full Model (20 Modes):</span>
-                        <span className="text-emerald-300 font-semibold">100.0%</span>
+                        <span className="text-[#5e4b75]">Full Model (20 Modes):</span>
+                        <span className="text-emerald-700 font-bold">100.0%</span>
                       </div>
                       <div className="flex items-center justify-between">
-                        <span className="text-slate-400">Mahalanobis Distance (DM):</span>
-                        <span className={`font-semibold ${ssmDeformResult.metrics.mahalanobis_distance <= 3.0 ? 'text-emerald-400' : 'text-amber-400'}`}>
+                        <span className="text-[#5e4b75]">Mahalanobis Distance (DM):</span>
+                        <span className={`font-semibold ${ssmDeformResult.metrics.mahalanobis_distance <= 3.0 ? 'text-emerald-700' : 'text-amber-800'}`}>
                           {ssmDeformResult.metrics.mahalanobis_distance.toFixed(2)} σ
                         </span>
                       </div>
                     </div>
                   </div>
                 ) : (
-                  <div className="p-6 text-center text-xs text-slate-400">Evaluating metrics...</div>
+                  <div className="p-6 text-center text-xs text-[#5e4b75]">Evaluating metrics...</div>
                 )}
               </Card>
 
@@ -1869,34 +1870,34 @@ export const CTExplorerPage: React.FC = () => {
                 subtitle="Standardized Wavefront OBJ stream with 16 anatomical landmarks"
               >
                 <div className="space-y-3">
-                  <div className="p-3 rounded-lg bg-[#150a22] border border-white/10 space-y-2 text-xs">
-                    <div className="flex items-center justify-between text-slate-400 font-mono text-[11px]">
+                  <div className="p-3 rounded-lg bg-slate-50 border border-[#e2e8f0] space-y-2 text-xs">
+                    <div className="flex items-center justify-between text-[#5e4b75] font-mono text-[11px]">
                       <span>Model Architecture:</span>
-                      <span className="text-white font-semibold">
+                      <span className="text-[#1a082e] font-semibold">
                         {ssmModelInfo?.architecture || 'Point Distribution Model (PDM)'}
                       </span>
                     </div>
-                    <div className="flex items-center justify-between text-slate-400 font-mono text-[11px]">
+                    <div className="flex items-center justify-between text-[#5e4b75] font-mono text-[11px]">
                       <span>Model Artifact:</span>
-                      <span className="text-amber-300 font-semibold">
+                      <span className="text-amber-800 font-bold">
                         ssm_lung_pca_v1.json ({ssmModelInfo?.num_modes || 20} Modes)
                       </span>
                     </div>
-                    <div className="flex items-center justify-between text-medical-muted font-mono text-[11px]">
+                    <div className="flex items-center justify-between text-[#5e4b75] font-mono text-[11px]">
                       <span>Training Cohort:</span>
-                      <span className="text-white">301 Patients (70.0%)</span>
+                      <span className="text-[#1a082e]">301 Patients (70.0%)</span>
                     </div>
-                    <div className="flex items-center justify-between text-medical-muted font-mono text-[11px]">
+                    <div className="flex items-center justify-between text-[#5e4b75] font-mono text-[11px]">
                       <span>Validation Cohort:</span>
-                      <span className="text-white">64 Patients (14.9%)</span>
+                      <span className="text-[#1a082e]">64 Patients (14.9%)</span>
                     </div>
-                    <div className="flex items-center justify-between text-medical-muted font-mono text-[11px]">
+                    <div className="flex items-center justify-between text-[#5e4b75] font-mono text-[11px]">
                       <span>Testing Cohort:</span>
-                      <span className="text-white">65 Patients (15.1%)</span>
+                      <span className="text-[#1a082e]">65 Patients (15.1%)</span>
                     </div>
-                    <div className="flex items-center justify-between text-medical-muted font-mono text-[11px]">
+                    <div className="flex items-center justify-between text-[#5e4b75] font-mono text-[11px]">
                       <span>Zero Leakage Status:</span>
-                      <span className="text-emerald-400 font-semibold">PASSED (0 Overlap)</span>
+                      <span className="text-emerald-700 font-bold">PASSED (0 Overlap)</span>
                     </div>
                   </div>
 

@@ -59,19 +59,19 @@ export const ModelsPage: React.FC = () => {
   return (
     <div className="space-y-6">
       {/* Page Header */}
-      <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 pb-6 border-b border-white/[0.08]">
+      <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 pb-6 border-b border-[#e2e8f0]">
         <div>
           <div className="flex items-center gap-2 mb-1">
-            <span className="text-[11px] font-mono uppercase tracking-wider text-amber-400 bg-amber-950/40 px-2 py-0.5 rounded border border-amber-800/40">
+            <span className="text-[11px] font-mono uppercase tracking-wider text-amber-900 bg-amber-100 px-2 py-0.5 rounded border border-amber-300 font-semibold">
               Registry Module
             </span>
-            <span className="text-xs text-white/20">·</span>
-            <span className="text-xs text-slate-400">Neural Network Catalog</span>
+            <span className="text-xs text-slate-300">·</span>
+            <span className="text-xs text-[#5e4b75]">Neural Network Catalog</span>
           </div>
-          <h2 className="text-2xl font-bold tracking-tight text-white flex items-center gap-2.5">
+          <h2 className="text-2xl font-bold tracking-tight text-[#1a082e] flex items-center gap-2.5">
             Audited Model Registry & Checkpoints
           </h2>
-          <p className="text-sm text-slate-400 mt-1">
+          <p className="text-sm text-[#5e4b75] mt-1">
             Immutable, production-frozen PyTorch neural network checkpoints with cryptographic hashes & calibrated thresholds.
           </p>
         </div>
@@ -85,19 +85,19 @@ export const ModelsPage: React.FC = () => {
       <DisclaimerBanner compact />
 
       {loading ? (
-        <div className="h-64 flex flex-col items-center justify-center border border-white/10 rounded-xl bg-medical-surface/40 space-y-3">
-          <div className="w-8 h-8 border-2 border-amber-400 border-t-transparent rounded-full animate-spin" />
-          <span className="text-xs font-mono text-slate-400">Loading model registry specifications...</span>
+        <div className="h-64 flex flex-col items-center justify-center border border-[#e2e8f0] rounded-xl bg-white space-y-3 shadow-xs">
+          <div className="w-8 h-8 border-2 border-amber-500 border-t-transparent rounded-full animate-spin" />
+          <span className="text-xs font-mono text-[#5e4b75]">Loading model registry specifications...</span>
         </div>
       ) : error ? (
-        <div className="p-6 border border-rose-500/40 bg-rose-950/20 rounded-xl text-rose-300 text-sm">
+        <div className="p-6 border border-rose-200 bg-rose-50 rounded-xl text-rose-800 text-sm">
           {error}
         </div>
       ) : (
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
           {/* Left Column: Model List Selection (4 Cols) */}
           <div className="lg:col-span-4 space-y-3">
-            <h3 className="text-xs font-semibold text-slate-400 uppercase tracking-wider px-1">
+            <h3 className="text-xs font-semibold text-[#5e4b75] uppercase tracking-wider px-1">
               Available Models ({models.length})
             </h3>
 
@@ -110,17 +110,17 @@ export const ModelsPage: React.FC = () => {
                     onClick={() => setSelectedModelId(model.id)}
                     className={`w-full text-left p-4 rounded-xl border transition-all ${
                       isSelected
-                        ? 'bg-[#1c102f] border-amber-400 shadow-md shadow-amber-950/40 ring-1 ring-amber-400/40'
-                        : 'bg-medical-surface/40 border-white/10 hover:border-white/20 hover:bg-[#180d28]/70'
+                        ? 'bg-amber-50/70 border-amber-500 shadow-sm ring-1 ring-amber-400'
+                        : 'bg-white border-[#e2e8f0] hover:border-amber-400 hover:bg-[#f8fafc] shadow-xs'
                     }`}
                   >
                     <div className="flex items-start justify-between">
                       <div>
-                        <h4 className="font-semibold text-sm text-white">{model.name}</h4>
+                        <h4 className="font-semibold text-sm text-[#1a082e]">{model.name}</h4>
                         <div className="flex items-center gap-2 mt-1">
-                          <span className="text-xs font-mono text-amber-400 font-bold">{model.architecture}</span>
-                          <span className="text-xs text-white/20">·</span>
-                          <span className="text-[11px] text-slate-400">{model.task}</span>
+                          <span className="text-xs font-mono text-amber-800 font-bold">{model.architecture}</span>
+                          <span className="text-xs text-slate-300">·</span>
+                          <span className="text-[11px] text-[#5e4b75]">{model.task}</span>
                         </div>
                       </div>
                       <Badge variant="amber" size="sm">
@@ -128,16 +128,16 @@ export const ModelsPage: React.FC = () => {
                       </Badge>
                     </div>
 
-                    <div className="mt-3 flex items-center justify-between text-[11px] text-slate-400 border-t border-white/10 pt-2 font-mono">
+                    <div className="mt-3 flex items-center justify-between text-[11px] text-[#5e4b75] border-t border-[#e2e8f0] pt-2 font-mono">
                       <span>Dataset: {model.metrics?.training_dataset ?? (model as any).dataset ?? 'Clinical Cohort'}</span>
                       {(readiness?.models_loaded as Record<string, boolean> | undefined)?.[model.id] ? (
-                        <span className="text-emerald-400 font-semibold flex items-center gap-1">
-                          <CheckCircle2 className="w-3 h-3" />
+                        <span className="text-emerald-700 font-semibold flex items-center gap-1">
+                          <CheckCircle2 className="w-3 h-3 text-emerald-600" />
                           Ready
                         </span>
                       ) : (
-                        <span className="text-slate-400 font-semibold flex items-center gap-1">
-                          <CheckCircle2 className="w-3 h-3 text-amber-400" />
+                        <span className="text-[#5e4b75] font-semibold flex items-center gap-1">
+                          <CheckCircle2 className="w-3 h-3 text-amber-600" />
                           Verified
                         </span>
                       )}
@@ -170,63 +170,63 @@ export const ModelsPage: React.FC = () => {
               >
                 {/* Architectural Specifications Grid */}
                 <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 mb-6">
-                  <div className="bg-[#180d28]/70 p-3 rounded-lg border border-white/10">
-                    <span className="text-[10px] text-slate-400 uppercase font-semibold block">Training Dataset</span>
-                    <span className="text-xs font-bold text-white mt-1 block">
+                  <div className="bg-[#f8fafc] p-3 rounded-lg border border-[#e2e8f0]">
+                    <span className="text-[10px] text-[#5e4b75] uppercase font-semibold block">Training Dataset</span>
+                    <span className="text-xs font-bold text-[#1a082e] mt-1 block">
                       {selectedModel.metrics?.training_dataset ?? (selectedModel as any).dataset ?? 'Clinical Cohort'}
                     </span>
                   </div>
-                  <div className="bg-[#180d28]/70 p-3 rounded-lg border border-white/10">
-                    <span className="text-[10px] text-slate-400 uppercase font-semibold block">Input Dimensions</span>
-                    <span className="text-xs font-bold font-mono text-amber-400 mt-1 block">
+                  <div className="bg-[#f8fafc] p-3 rounded-lg border border-[#e2e8f0]">
+                    <span className="text-[10px] text-[#5e4b75] uppercase font-semibold block">Input Dimensions</span>
+                    <span className="text-xs font-bold font-mono text-amber-800 mt-1 block">
                       {selectedModel.input_size ? `${selectedModel.input_size.join(' × ')}` : '224 × 224 × 3'}
                     </span>
                   </div>
-                  <div className="bg-[#180d28]/70 p-3 rounded-lg border border-white/10">
-                    <span className="text-[10px] text-slate-400 uppercase font-semibold block">Parameters</span>
-                    <span className="text-xs font-bold font-mono text-emerald-400 mt-1 block">
+                  <div className="bg-[#f8fafc] p-3 rounded-lg border border-[#e2e8f0]">
+                    <span className="text-[10px] text-[#5e4b75] uppercase font-semibold block">Parameters</span>
+                    <span className="text-xs font-bold font-mono text-emerald-700 mt-1 block">
                       {typeof (selectedModel.metrics?.parameters ?? selectedModel.parameters_count) === 'number'
                         ? `${(Number(selectedModel.metrics?.parameters ?? selectedModel.parameters_count) / 1e6).toFixed(2)}M`
                         : '7.0M'}
                     </span>
                   </div>
-                  <div className="bg-[#180d28]/70 p-3 rounded-lg border border-white/10">
-                    <span className="text-[10px] text-slate-400 uppercase font-semibold block">Checkpoint Epoch</span>
-                    <span className="text-xs font-bold font-mono text-amber-400 mt-1 block">
+                  <div className="bg-[#f8fafc] p-3 rounded-lg border border-[#e2e8f0]">
+                    <span className="text-[10px] text-[#5e4b75] uppercase font-semibold block">Checkpoint Epoch</span>
+                    <span className="text-xs font-bold font-mono text-amber-800 mt-1 block">
                       {selectedModel.metrics?.checkpoint_epoch ?? 'Epoch 4 (Best)'}
                     </span>
                   </div>
                 </div>
 
                 {/* Sanitized Relative Checkpoint File & Checksum */}
-                <div className="bg-[#180d28]/50 p-4 rounded-xl border border-white/10 space-y-2 mb-6">
+                <div className="bg-white p-4 rounded-xl border border-[#e2e8f0] space-y-2 mb-6 shadow-xs">
                   <div className="flex items-center justify-between text-xs">
-                    <span className="text-slate-400 flex items-center gap-1.5">
-                      <HardDrive className="w-3.5 h-3.5 text-amber-400" />
+                    <span className="text-[#5e4b75] flex items-center gap-1.5">
+                      <HardDrive className="w-3.5 h-3.5 text-amber-600" />
                       Repository Checkpoint Path:
                     </span>
-                    <span className="font-mono text-slate-300 text-[11px] truncate max-w-md bg-medical-card px-2 py-0.5 rounded border border-white/10">
+                    <span className="font-mono text-[#1a082e] text-[11px] truncate max-w-md bg-[#f8fafc] px-2 py-0.5 rounded border border-[#e2e8f0]">
                       {formatCheckpointPath(selectedModel.checkpoint_path)}
                     </span>
                   </div>
                   <div className="flex items-center justify-between text-xs">
-                    <span className="text-slate-400 flex items-center gap-1.5">
-                      <Hash className="w-3.5 h-3.5 text-emerald-400" />
+                    <span className="text-[#5e4b75] flex items-center gap-1.5">
+                      <Hash className="w-3.5 h-3.5 text-emerald-600" />
                       Cryptographic SHA-256:
                     </span>
-                    <span className="font-mono text-emerald-300 text-[11px] truncate max-w-md">
+                    <span className="font-mono text-emerald-800 text-[11px] truncate max-w-md">
                       {selectedModel.sha256 || '8d3690cd0438587a94afb8fd2ad84c0b30f9c1cc2727ee0eb03662a02ea020af'}
                     </span>
                   </div>
                 </div>
 
                 {/* Preprocessing Pipeline Description */}
-                <div className="mb-6 p-3.5 rounded-xl bg-medical-card/40 border border-white/10 text-xs">
-                  <h4 className="text-[11px] font-semibold text-slate-400 uppercase tracking-wider mb-1.5 flex items-center gap-1.5">
-                    <Layers className="w-3.5 h-3.5 text-amber-400" />
+                <div className="mb-6 p-3.5 rounded-xl bg-[#f8fafc] border border-[#e2e8f0] text-xs">
+                  <h4 className="text-[11px] font-semibold text-[#5e4b75] uppercase tracking-wider mb-1.5 flex items-center gap-1.5">
+                    <Layers className="w-3.5 h-3.5 text-amber-600" />
                     Input Normalization & Inference Pipeline
                   </h4>
-                  <p className="text-slate-400 leading-relaxed text-[11px]">
+                  <p className="text-[#5e4b75] leading-relaxed text-[11px]">
                     {selectedModel.id.includes('ssm')
                       ? '16 Bi-Planar Anatomical 2D Landmark Points / Contours → Procrustes Generalized Alignment → Closed-form Mahalanobis projection onto 20 PCA Eigenmodes (b = U^T (x - x̄)). Output vertices are dynamically deformed in physical LPS space.'
                       : 'Inputs are bilinear-interpolated to 224 × 224 pixels, expanded to 3 RGB channels, mapped to floating point range [0.0, 1.0], and standardized using ImageNet statistics (μ = [0.485, 0.456, 0.406], σ = [0.229, 0.224, 0.225]).'}
@@ -235,8 +235,8 @@ export const ModelsPage: React.FC = () => {
 
                 {/* Target Output Labels & Calibrated Operating Thresholds */}
                 <div className="space-y-3">
-                  <h4 className="text-xs font-semibold text-slate-400 uppercase tracking-wider flex items-center gap-1.5">
-                    <Sliders className="w-3.5 h-3.5 text-amber-400" />
+                  <h4 className="text-xs font-semibold text-[#5e4b75] uppercase tracking-wider flex items-center gap-1.5">
+                    <Sliders className="w-3.5 h-3.5 text-amber-600" />
                     {selectedModel.id.includes('ssm')
                       ? 'Target Anatomical Partitions & Parameterization Constraints'
                       : 'Target Output Labels & Calibrated Decision Thresholds'}
@@ -245,7 +245,7 @@ export const ModelsPage: React.FC = () => {
                   <div className="overflow-x-auto">
                     <table className="w-full text-left text-xs border-collapse font-mono">
                       <thead>
-                        <tr className="border-b border-white/10 text-slate-400 font-semibold uppercase text-[10px] tracking-wider">
+                        <tr className="border-b border-[#e2e8f0] text-[#5e4b75] bg-slate-50 font-semibold uppercase text-[10px] tracking-wider">
                           <th className="py-2.5 px-3">Index</th>
                           <th className="py-2.5 px-3">{selectedModel.id.includes('ssm') ? 'Anatomical Structure' : 'Class Label'}</th>
                           <th className="py-2.5 px-3">{selectedModel.id.includes('ssm') ? 'Vertex Partition' : 'Operating Threshold'}</th>
@@ -253,7 +253,7 @@ export const ModelsPage: React.FC = () => {
                           <th className="py-2.5 px-3 font-sans">{selectedModel.id.includes('ssm') ? 'Physiological Eigenspace Rationale' : 'Calibration Rationale & Operating Target'}</th>
                         </tr>
                       </thead>
-                      <tbody className="divide-y divide-white/[0.08] text-slate-200">
+                      <tbody className="divide-y divide-[#e2e8f0] text-[#1a082e]">
                         {selectedModel.labels.map((label, idx) => {
                           const isResNet18 = selectedModel.id.includes('resnet18');
                           const isSSM = selectedModel.id.includes('ssm');
@@ -281,16 +281,16 @@ export const ModelsPage: React.FC = () => {
                           }
                           const defaultThreshold = isSSM ? '±3.0σ (99.7%)' : (0.5).toFixed(4);
                           return (
-                            <tr key={label} className="hover:bg-white/5 transition-colors">
-                              <td className="py-2.5 px-3 text-slate-500">{idx}</td>
-                              <td className="py-2.5 px-3 font-semibold text-white">{label}</td>
-                              <td className="py-2.5 px-3 text-amber-400 font-bold">
+                            <tr key={label} className="hover:bg-amber-50/40 transition-colors">
+                              <td className="py-2.5 px-3 text-[#5e4b75]">{idx}</td>
+                              <td className="py-2.5 px-3 font-semibold text-[#1a082e]">{label}</td>
+                              <td className="py-2.5 px-3 text-amber-800 font-bold">
                                 {typeof threshold === 'number' ? threshold.toFixed(4) : threshold}
                               </td>
-                              <td className="py-2.5 px-3 text-medical-subtle">
+                              <td className="py-2.5 px-3 text-[#7e6c96]">
                                 {defaultThreshold}
                               </td>
-                              <td className="py-2.5 px-3 text-medical-muted font-sans text-[11px]">
+                              <td className="py-2.5 px-3 text-[#5e4b75] font-sans text-[11px]">
                                 {isSSM
                                   ? label.includes('Bilateral')
                                     ? 'Combined watertight lung surface mesh (13,478 triangles), 20 modes capturing 100.0% cohort variance'
@@ -312,7 +312,7 @@ export const ModelsPage: React.FC = () => {
                 </div>
 
                 {/* Verification Assurance Tag */}
-                <div className="mt-6 pt-4 border-t border-medical-border/60 flex items-center justify-between text-xs text-medical-subtle">
+                <div className="mt-6 pt-4 border-t border-[#e2e8f0] flex items-center justify-between text-xs text-[#7e6c96]">
                   <span>Audited under Gravitas Engineering Runtime</span>
                   <span className="font-mono text-[10px]">PyTorch CPU / CUDA Compatible</span>
                 </div>

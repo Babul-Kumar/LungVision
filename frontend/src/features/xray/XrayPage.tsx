@@ -197,21 +197,21 @@ export const XrayPage: React.FC = () => {
   return (
     <div className="space-y-6">
       {/* Page Header */}
-      <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 pb-6 border-b border-white/[0.08]">
+      <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 pb-6 border-b border-[#e2e8f0]">
         <div>
           <div className="flex items-center gap-2 mb-1">
-            <span className="text-[11px] font-mono uppercase tracking-wider text-amber-400 bg-amber-950/40 px-2 py-0.5 rounded border border-amber-800/40">
+            <span className="text-[11px] font-mono uppercase tracking-wider text-amber-900 bg-amber-100 px-2 py-0.5 rounded border border-amber-300 font-semibold">
               Workstation Module
             </span>
-            <span className="text-xs text-white/20">·</span>
+            <span className="text-xs text-slate-300">·</span>
             <Badge variant="amber" size="sm">
               DenseNet121 & ResNet18
             </Badge>
           </div>
-          <h2 className="text-2xl font-bold tracking-tight text-slate-100 flex items-center gap-2.5">
+          <h2 className="text-2xl font-bold tracking-tight text-[#1a082e] flex items-center gap-2.5">
             2D Chest X-Ray Screening
           </h2>
-          <p className="text-sm text-slate-400 mt-1">
+          <p className="text-sm text-[#5e4b75] mt-1">
             Multi-label pathology screening (DenseNet121) and binary normal/abnormal triage (ResNet18) with locked empirical thresholds.
           </p>
         </div>
@@ -219,7 +219,7 @@ export const XrayPage: React.FC = () => {
         {/* Global Toolbar: Model Selector & Quick Module Links */}
         <div className="flex flex-wrap items-center gap-2">
           {/* Screening Mode Tabs */}
-          <div className="flex items-center gap-1.5 p-1 bg-[#150a22] rounded-xl border border-white/10">
+          <div className="flex items-center gap-1.5 p-1 bg-white rounded-xl border border-[#e2e8f0] shadow-xs">
             <button
               onClick={() => {
                 setActiveModelType('multilabel');
@@ -227,8 +227,8 @@ export const XrayPage: React.FC = () => {
               }}
               className={`px-3.5 py-1.5 rounded-lg text-xs font-medium transition-all ${
                 activeModelType === 'multilabel'
-                  ? 'bg-gradient-to-r from-amber-400 via-amber-500 to-amber-600 text-[#0c0614] font-bold shadow-md shadow-amber-950/40 border border-amber-300/40'
-                  : 'text-slate-400 hover:text-white'
+                  ? 'bg-gradient-to-r from-amber-500 via-amber-500 to-amber-600 text-white font-semibold shadow-xs'
+                  : 'text-[#5e4b75] hover:text-[#1a082e]'
               }`}
             >
               6-Disease Multi-Label
@@ -240,8 +240,8 @@ export const XrayPage: React.FC = () => {
               }}
               className={`px-3.5 py-1.5 rounded-lg text-xs font-medium transition-all ${
                 activeModelType === 'binary'
-                  ? 'bg-gradient-to-r from-amber-400 via-amber-500 to-amber-600 text-[#0c0614] font-bold shadow-md shadow-amber-950/40 border border-amber-300/40'
-                  : 'text-slate-400 hover:text-white'
+                  ? 'bg-gradient-to-r from-amber-500 via-amber-500 to-amber-600 text-white font-semibold shadow-xs'
+                  : 'text-[#5e4b75] hover:text-[#1a082e]'
               }`}
             >
               Binary (Normal / Abnormal)
@@ -251,10 +251,10 @@ export const XrayPage: React.FC = () => {
           {/* Quick Dual-View Lab Link */}
           <Link
             to="/dual-view"
-            className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-[#150a22] border border-white/10 hover:border-amber-400 text-xs text-slate-300 hover:text-amber-300 transition-all"
+            className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-white border border-[#e2e8f0] hover:border-amber-400 text-xs text-[#1a082e] hover:text-amber-800 transition-all shadow-xs"
             title="Open Dual-View X-Ray Research Lab"
           >
-            <SplitSquareVertical className="w-3.5 h-3.5" />
+            <SplitSquareVertical className="w-3.5 h-3.5 text-amber-600" />
             <span className="hidden sm:inline">Dual-View Lab</span>
           </Link>
         </div>
@@ -263,17 +263,17 @@ export const XrayPage: React.FC = () => {
       <DisclaimerBanner />
 
       {/* 3-Step Guided Workflow Banner */}
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-3 p-1.5 bg-[#150a22]/80 rounded-xl border border-white/10 text-xs shadow-inner">
-        <div className={`flex items-center gap-2.5 px-3 py-2 rounded-lg transition-all ${selectedFile ? 'bg-amber-950/40 text-amber-300 font-semibold border border-amber-800/40 shadow-xs' : 'text-slate-400'}`}>
-          <span className="w-5 h-5 rounded-full bg-amber-500/20 text-amber-400 flex items-center justify-center font-mono text-[10px] font-bold">1</span>
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-3 p-1.5 bg-white rounded-xl border border-[#e2e8f0] text-xs shadow-xs">
+        <div className={`flex items-center gap-2.5 px-3 py-2 rounded-lg transition-all ${selectedFile ? 'bg-amber-50 text-amber-900 font-semibold border border-amber-300 shadow-xs' : 'text-[#5e4b75]'}`}>
+          <span className="w-5 h-5 rounded-full bg-amber-100 text-amber-900 flex items-center justify-center font-mono text-[10px] font-bold">1</span>
           <span>Upload or Select Radiograph</span>
         </div>
-        <div className={`flex items-center gap-2.5 px-3 py-2 rounded-lg transition-all ${selectedFile && (multiLabelResult || binaryResult || isLoading) ? 'bg-amber-950/40 text-amber-300 font-semibold border border-amber-800/40 shadow-xs' : 'text-slate-400'}`}>
-          <span className="w-5 h-5 rounded-full bg-amber-500/20 text-amber-400 flex items-center justify-center font-mono text-[10px] font-bold">2</span>
+        <div className={`flex items-center gap-2.5 px-3 py-2 rounded-lg transition-all ${selectedFile && (multiLabelResult || binaryResult || isLoading) ? 'bg-amber-50 text-amber-900 font-semibold border border-amber-300 shadow-xs' : 'text-[#5e4b75]'}`}>
+          <span className="w-5 h-5 rounded-full bg-amber-100 text-amber-900 flex items-center justify-center font-mono text-[10px] font-bold">2</span>
           <span>Choose Screening Model</span>
         </div>
-        <div className={`flex items-center gap-2.5 px-3 py-2 rounded-lg transition-all ${(multiLabelResult || binaryResult) ? 'bg-emerald-950/40 text-emerald-300 font-semibold border border-emerald-800/40 shadow-xs' : 'text-slate-400'}`}>
-          <span className="w-5 h-5 rounded-full bg-emerald-500/20 text-emerald-400 flex items-center justify-center font-mono text-[10px] font-bold">3</span>
+        <div className={`flex items-center gap-2.5 px-3 py-2 rounded-lg transition-all ${(multiLabelResult || binaryResult) ? 'bg-emerald-50 text-emerald-900 font-semibold border border-emerald-300 shadow-xs' : 'text-[#5e4b75]'}`}>
+          <span className="w-5 h-5 rounded-full bg-emerald-100 text-emerald-900 flex items-center justify-center font-mono text-[10px] font-bold">3</span>
           <span>Review Verified Findings</span>
         </div>
       </div>
@@ -295,10 +295,10 @@ export const XrayPage: React.FC = () => {
                   type="button"
                   onClick={loadSampleImage}
                   disabled={loadingSample}
-                  className="px-2.5 py-1 rounded-lg bg-amber-950/70 hover:bg-amber-900/80 text-amber-300 border border-amber-500/40 text-[11px] font-medium transition-all flex items-center gap-1.5 shadow-sm"
+                  className="px-2.5 py-1 rounded-lg bg-amber-100 hover:bg-amber-200 text-amber-900 border border-amber-300 text-[11px] font-semibold transition-all flex items-center gap-1.5 shadow-xs"
                   title="Load demo frontal radiograph"
                 >
-                  <Sparkles className="w-3 h-3 text-amber-400" />
+                  <Sparkles className="w-3 h-3 text-amber-700" />
                   <span>{loadingSample ? 'Loading...' : 'Try Demo X-Ray'}</span>
                 </button>
               )
@@ -320,23 +320,23 @@ export const XrayPage: React.FC = () => {
                 onClick={() => fileInputRef.current?.click()}
                 className={`h-72 border-2 border-dashed rounded-xl flex flex-col items-center justify-center p-6 text-center cursor-pointer transition-all relative overflow-hidden group ${
                   isDragOver
-                    ? 'border-amber-400 bg-amber-950/30'
-                    : 'border-white/10 hover:border-amber-400/50 hover:bg-[#180e28]/50'
+                    ? 'border-amber-500 bg-amber-50/60'
+                    : 'border-[#cbd5e1] hover:border-amber-500 hover:bg-amber-50/20'
                 }`}
               >
-                <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-[#28133d] to-[#150a22] border border-amber-500/30 flex items-center justify-center text-amber-400 mb-3 shadow-xl shadow-amber-950/40 group-hover:scale-105 group-hover:border-amber-400 transition-all z-10">
+                <div className="w-14 h-14 rounded-2xl bg-amber-50 border border-amber-200 flex items-center justify-center text-amber-700 mb-3 shadow-sm group-hover:scale-105 group-hover:border-amber-400 transition-all z-10">
                   <UploadCloud className="w-7 h-7" />
                 </div>
-                <p className="text-sm font-semibold text-white z-10 group-hover:text-amber-300 transition-colors">
+                <p className="text-sm font-semibold text-[#1a082e] z-10 group-hover:text-amber-800 transition-colors">
                   Click or drag X-ray image here
                 </p>
-                <p className="text-xs text-slate-400 mt-1.5 max-w-xs z-10">
+                <p className="text-xs text-[#5e4b75] mt-1.5 max-w-xs z-10">
                   Native 224×224 bilinear interpolation · RGB normalized · Max 20 MB
                 </p>
 
                 {/* Instant Try Demo Button inside dropzone */}
-                <div className="mt-4 pt-3 border-t border-white/[0.08] w-full max-w-xs flex items-center justify-center gap-2 z-10">
-                  <span className="text-[11px] text-slate-400">No image on hand?</span>
+                <div className="mt-4 pt-3 border-t border-[#e2e8f0] w-full max-w-xs flex items-center justify-center gap-2 z-10">
+                  <span className="text-[11px] text-[#5e4b75]">No image on hand?</span>
                   <button
                     type="button"
                     onClick={(e) => {
@@ -344,9 +344,9 @@ export const XrayPage: React.FC = () => {
                       loadSampleImage();
                     }}
                     disabled={loadingSample}
-                    className="px-3 py-1 rounded-lg bg-amber-950/80 hover:bg-amber-900 text-amber-300 border border-amber-500/40 text-xs font-medium transition-all flex items-center gap-1.5 shadow-sm hover:scale-105 active:scale-95"
+                    className="px-3 py-1 rounded-lg bg-amber-100 hover:bg-amber-200 text-amber-900 border border-amber-300 text-xs font-semibold transition-all flex items-center gap-1.5 shadow-xs hover:scale-105 active:scale-95"
                   >
-                    <Sparkles className="w-3.5 h-3.5 text-amber-400" />
+                    <Sparkles className="w-3.5 h-3.5 text-amber-700" />
                     <span>{loadingSample ? 'Loading Demo...' : 'Load Sample X-Ray'}</span>
                   </button>
                 </div>
@@ -356,7 +356,7 @@ export const XrayPage: React.FC = () => {
                 {/* Image Inspection Viewport with Zoom Controls */}
                 <div
                   onWheel={handleXrayWheel}
-                  className="relative rounded-xl overflow-hidden border border-white/10 bg-[#0a0512] h-80 flex items-center justify-center group select-none shadow-inner cursor-ns-resize"
+                  className="relative rounded-xl overflow-hidden border border-[#e2e8f0] bg-[#120720] h-80 flex items-center justify-center group select-none shadow-inner cursor-ns-resize"
                   title="Scroll mouse wheel to zoom image"
                 >
                   <div className="absolute inset-0 medical-grid-fine opacity-20 pointer-events-none" />
@@ -375,49 +375,49 @@ export const XrayPage: React.FC = () => {
                   </div>
 
                   {/* Zoom Toolbar Overlay */}
-                  <div className="absolute bottom-2.5 right-2.5 flex items-center gap-1 bg-[#0e0719]/90 backdrop-blur-md px-2.5 py-1 rounded-lg border border-white/10 shadow-xl z-20">
+                  <div className="absolute bottom-2.5 right-2.5 flex items-center gap-1 bg-white/95 backdrop-blur-md px-2.5 py-1 rounded-lg border border-[#e2e8f0] shadow-md z-20">
                     <button
                       onClick={zoomOut}
                       disabled={zoomScale <= 0.75}
-                      className="p-1 text-slate-400 hover:text-white disabled:opacity-30 transition-colors"
+                      className="p-1 text-[#5e4b75] hover:text-[#1a082e] disabled:opacity-30 transition-colors"
                       title="Zoom Out"
                     >
                       <ZoomOut className="w-3.5 h-3.5" />
                     </button>
-                    <span className="text-[10px] font-mono text-amber-400 px-1 min-w-[32px] text-center font-bold">
+                    <span className="text-[10px] font-mono text-amber-900 px-1 min-w-[32px] text-center font-bold">
                       {Math.round(zoomScale * 100)}%
                     </span>
                     <button
                       onClick={zoomIn}
                       disabled={zoomScale >= 3.0}
-                      className="p-1 text-slate-400 hover:text-white disabled:opacity-30 transition-colors"
+                      className="p-1 text-[#5e4b75] hover:text-[#1a082e] disabled:opacity-30 transition-colors"
                       title="Zoom In"
                     >
                       <ZoomIn className="w-3.5 h-3.5" />
                     </button>
-                    <div className="h-3 w-px bg-white/10 mx-0.5" />
+                    <div className="h-3 w-px bg-slate-200 mx-0.5" />
                     <button
                       onClick={zoomReset}
-                      className="p-1 text-slate-400 hover:text-white transition-colors"
+                      className="p-1 text-[#5e4b75] hover:text-[#1a082e] transition-colors"
                       title="Fit to Screen"
                     >
                       <Maximize2 className="w-3.5 h-3.5" />
                     </button>
                   </div>
 
-                  <div className="absolute top-2.5 left-2.5 bg-[#0e0719]/90 backdrop-blur-md px-2.5 py-1 rounded-md text-[10px] font-mono text-amber-300 border border-amber-500/30 flex items-center gap-1.5 z-20">
-                    <span className="w-1.5 h-1.5 rounded-full bg-amber-400 animate-pulse" />
+                  <div className="absolute top-2.5 left-2.5 bg-white/95 backdrop-blur-md px-2.5 py-1 rounded-md text-[10px] font-mono text-amber-900 border border-amber-300 flex items-center gap-1.5 z-20 font-semibold shadow-xs">
+                    <span className="w-1.5 h-1.5 rounded-full bg-amber-500 animate-pulse" />
                     Frontal Projection
                   </div>
 
                   {/* Luxury Animated Laser Scanning Overlay */}
                   {isLoading && (
                     <div className="absolute inset-0 z-30 pointer-events-none overflow-hidden rounded-xl">
-                      <div className="absolute inset-0 bg-[#0c0614]/40 backdrop-blur-[1px]" />
+                      <div className="absolute inset-0 bg-[#1a082e]/40 backdrop-blur-[1px]" />
                       <div className="absolute left-0 right-0 h-1 bg-gradient-to-r from-transparent via-amber-400 to-transparent shadow-[0_0_15px_#f59e0b] animate-laser-sweep" />
                       <div className="absolute inset-x-0 bottom-12 flex justify-center px-4">
-                        <div className="bg-[#0e0719]/95 backdrop-blur-md px-3.5 py-1.5 rounded-lg border border-amber-500/50 text-xs font-mono text-amber-300 flex items-center gap-2 shadow-2xl">
-                          <RefreshCw className="w-3.5 h-3.5 text-amber-400 animate-spin" />
+                        <div className="bg-white/95 backdrop-blur-md px-3.5 py-1.5 rounded-lg border border-amber-300 text-xs font-mono text-amber-900 flex items-center gap-2 shadow-xl">
+                          <RefreshCw className="w-3.5 h-3.5 text-amber-600 animate-spin" />
                           <span>Screening Radiograph with Deep Neural Network...</span>
                         </div>
                       </div>
@@ -443,8 +443,8 @@ export const XrayPage: React.FC = () => {
 
             {/* Binary Model Selector if in Binary Mode */}
             {activeModelType === 'binary' && (
-              <div className="mt-4 pt-4 border-t border-medical-border/60 space-y-2">
-                <label className="text-[11px] font-semibold text-medical-subtle uppercase tracking-wider block">
+              <div className="mt-4 pt-4 border-t border-[#e2e8f0] space-y-2">
+                <label className="text-[11px] font-semibold text-[#5e4b75] uppercase tracking-wider block">
                   Select ResNet18 Variant:
                 </label>
                 <div className="grid grid-cols-2 gap-2">
@@ -452,24 +452,24 @@ export const XrayPage: React.FC = () => {
                     onClick={() => setBinaryModelId('original_resnet18')}
                     className={`p-2.5 rounded-lg border text-left text-xs transition-all ${
                       binaryModelId === 'original_resnet18'
-                        ? 'border-amber-400 bg-amber-950/30 text-white font-medium ring-1 ring-amber-400/30'
-                        : 'border-medical-border text-medical-muted hover:border-white/20 hover:text-slate-200'
+                        ? 'border-amber-500 bg-amber-50 text-amber-950 font-semibold ring-1 ring-amber-400'
+                        : 'border-[#e2e8f0] text-[#5e4b75] hover:border-amber-400 hover:text-[#1a082e] hover:bg-slate-50'
                     }`}
                   >
-                    <div className="font-semibold text-amber-400">Original ResNet18</div>
-                    <div className="text-[10px] text-medical-muted mt-0.5">Threshold: 0.1765 (90% Sens)</div>
+                    <div className="font-semibold text-amber-900">Original ResNet18</div>
+                    <div className="text-[10px] text-[#5e4b75] mt-0.5">Threshold: 0.1765 (90% Sens)</div>
                   </button>
 
                   <button
                     onClick={() => setBinaryModelId('blur_augmented_resnet18')}
                     className={`p-2.5 rounded-lg border text-left text-xs transition-all ${
                       binaryModelId === 'blur_augmented_resnet18'
-                        ? 'border-slate-300 bg-white/10 text-white font-medium ring-1 ring-white/30'
-                        : 'border-medical-border text-medical-muted hover:border-white/20 hover:text-slate-200'
+                        ? 'border-purple-400 bg-purple-50 text-purple-950 font-semibold ring-1 ring-purple-300'
+                        : 'border-[#e2e8f0] text-[#5e4b75] hover:border-amber-400 hover:text-[#1a082e] hover:bg-slate-50'
                     }`}
                   >
-                    <div className="font-semibold text-slate-200">Blur-Augmented</div>
-                    <div className="text-[10px] text-medical-muted mt-0.5">Threshold: 0.1879 (Robust)</div>
+                    <div className="font-semibold text-[#1a082e]">Blur-Augmented</div>
+                    <div className="text-[10px] text-[#5e4b75] mt-0.5">Threshold: 0.1879 (Robust)</div>
                   </button>
                 </div>
               </div>
@@ -480,12 +480,12 @@ export const XrayPage: React.FC = () => {
               <Button
                 variant="primary"
                 size="md"
-                className="w-full bg-gradient-to-r from-amber-400 via-amber-500 to-amber-600 hover:from-amber-300 hover:to-amber-500 text-[#0c0614] font-bold shadow-lg shadow-amber-950/50 hover:shadow-amber-500/30 hover:scale-[1.01] transition-all border border-amber-300/40"
+                className="w-full bg-gradient-to-r from-amber-500 via-amber-500 to-amber-600 hover:from-amber-400 hover:to-amber-500 text-white font-semibold shadow-md shadow-amber-500/25 transition-all border border-amber-400/40"
                 onClick={runInference}
                 disabled={!selectedFile || isLoading}
                 isLoading={isLoading}
               >
-                <Sparkles className="w-4 h-4 mr-1.5 text-[#0c0614]" />
+                <Sparkles className="w-4 h-4 mr-1.5 text-white" />
                 <span>
                   {isLoading
                     ? 'Computing Neural Probabilities...'
@@ -495,8 +495,8 @@ export const XrayPage: React.FC = () => {
             </div>
 
             {errorMessage && (
-              <div className="mt-4 p-3 bg-rose-950/50 border border-rose-800/80 rounded-lg text-xs text-rose-300 flex items-start gap-2">
-                <AlertCircle className="w-4 h-4 text-rose-400 shrink-0 mt-0.5" />
+              <div className="mt-4 p-3 bg-rose-50 border border-rose-200 rounded-lg text-xs text-rose-800 flex items-start gap-2">
+                <AlertCircle className="w-4 h-4 text-rose-600 shrink-0 mt-0.5" />
                 <span>{errorMessage}</span>
               </div>
             )}
@@ -506,26 +506,26 @@ export const XrayPage: React.FC = () => {
           <div className="grid grid-cols-2 gap-2 text-xs">
             <button
               onClick={() => openExplainModal()}
-              className="p-3 rounded-xl bg-medical-card border border-medical-border hover:border-amber-400/40 text-left transition-all"
+              className="p-3 rounded-xl bg-white border border-[#e2e8f0] hover:border-amber-400 text-left transition-all shadow-xs"
             >
-              <div className="flex items-center gap-1.5 text-amber-400 font-semibold">
+              <div className="flex items-center gap-1.5 text-amber-700 font-semibold">
                 <BookOpen className="w-3.5 h-3.5" />
                 <span>Clinical Guide</span>
               </div>
-              <p className="text-[11px] text-medical-muted mt-1">
+              <p className="text-[11px] text-[#5e4b75] mt-1">
                 Explore the 6 diseases & threshold definitions
               </p>
             </button>
 
             <button
               onClick={() => setIsGlossaryModalOpen(true)}
-              className="p-3 rounded-xl bg-medical-card border border-medical-border hover:border-white/30 text-left transition-all"
+              className="p-3 rounded-xl bg-white border border-[#e2e8f0] hover:border-amber-400 text-left transition-all shadow-xs"
             >
-              <div className="flex items-center gap-1.5 text-slate-200 font-semibold">
-                <HelpCircle className="w-3.5 h-3.5" />
+              <div className="flex items-center gap-1.5 text-[#1a082e] font-semibold">
+                <HelpCircle className="w-3.5 h-3.5 text-amber-600" />
                 <span>Medical Glossary</span>
               </div>
-              <p className="text-[11px] text-medical-muted mt-1">
+              <p className="text-[11px] text-[#5e4b75] mt-1">
                 Definitions for AUROC, Youden J & Projections
               </p>
             </button>
@@ -548,17 +548,17 @@ export const XrayPage: React.FC = () => {
             headerAction={
               <div className="flex items-center gap-2">
                 {/* INTERFACE MODE SELECTOR (Patient vs Doctor) */}
-                <div className="flex items-center gap-1 p-0.5 bg-medical-bg rounded-lg border border-medical-border text-xs">
+                <div className="flex items-center gap-1 p-0.5 bg-slate-100 rounded-lg border border-[#e2e8f0] text-xs">
                   <button
                     onClick={() => setUserExperienceMode('patient')}
                     className={`flex items-center gap-1 px-2.5 py-1 rounded-md text-xs font-medium transition-all ${
                       userExperienceMode === 'patient'
-                        ? 'bg-[#25143a] text-slate-100 font-semibold shadow-sm border border-white/20'
-                        : 'text-medical-muted hover:text-white'
+                        ? 'bg-white text-[#1a082e] font-semibold shadow-xs border border-[#e2e8f0]'
+                        : 'text-[#5e4b75] hover:text-[#1a082e]'
                     }`}
                     title="Switch to Patient-Friendly View"
                   >
-                    <UserCheck className="w-3.5 h-3.5" />
+                    <UserCheck className="w-3.5 h-3.5 text-emerald-600" />
                     <span>Patient View</span>
                   </button>
 
@@ -566,8 +566,8 @@ export const XrayPage: React.FC = () => {
                     onClick={() => setUserExperienceMode('doctor')}
                     className={`flex items-center gap-1 px-2.5 py-1 rounded-md text-xs font-medium transition-all ${
                       userExperienceMode === 'doctor'
-                        ? 'bg-gradient-to-r from-amber-400 via-amber-500 to-amber-600 text-[#0c0614] font-semibold shadow-sm'
-                        : 'text-medical-muted hover:text-white'
+                        ? 'bg-gradient-to-r from-amber-500 via-amber-500 to-amber-600 text-white font-semibold shadow-xs'
+                        : 'text-[#5e4b75] hover:text-[#1a082e]'
                     }`}
                     title="Switch to Doctor / Researcher View"
                   >
@@ -580,7 +580,7 @@ export const XrayPage: React.FC = () => {
                 {(multiLabelResult || binaryResult) && (
                   <button
                     onClick={resetAll}
-                    className="p-1.5 rounded-lg bg-medical-surface border border-medical-border text-medical-muted hover:text-white"
+                    className="p-1.5 rounded-lg bg-white border border-[#e2e8f0] text-[#5e4b75] hover:text-[#1a082e] hover:bg-slate-50 shadow-xs"
                     title="Screen Another Image"
                   >
                     <RefreshCw className="w-3.5 h-3.5" />

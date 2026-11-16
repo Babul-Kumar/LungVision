@@ -14,17 +14,17 @@ import {
 
 export const AppLayout: React.FC = () => {
   return (
-    <div className="min-h-screen flex flex-col bg-medical-bg text-medical-text">
+    <div className="min-h-screen flex flex-col bg-[#f1f5f9] text-[#1a082e]">
       {/* Top Navigation */}
       <Navbar />
 
       {/* Main Container */}
-      <div className="flex-1 flex overflow-hidden">
+      <div className="flex-1 flex overflow-hidden bg-[#f1f5f9]">
         {/* Desktop Sidebar */}
         <Sidebar />
 
         {/* Content Viewport */}
-        <main className="flex-1 overflow-y-auto p-4 sm:p-6 lg:p-8 flex flex-col justify-between">
+        <main className="flex-1 overflow-y-auto p-4 sm:p-6 lg:p-8 flex flex-col justify-between bg-[#f1f5f9]">
           <div className="max-w-7xl w-full mx-auto space-y-6">
             <Suspense fallback={<RouteLoadingSkeleton />}>
               <Outlet />
@@ -32,9 +32,9 @@ export const AppLayout: React.FC = () => {
           </div>
 
           {/* Persistent Clinical Disclaimer Footer */}
-          <footer className="mt-12 pt-6 border-t border-medical-border/60 max-w-7xl w-full mx-auto">
+          <footer className="mt-12 pt-6 border-t border-[#e2e8f0] max-w-7xl w-full mx-auto">
             <DisclaimerBanner compact />
-            <div className="flex flex-col sm:flex-row items-center justify-between mt-3 text-[11px] text-medical-subtle gap-2">
+            <div className="flex flex-col sm:flex-row items-center justify-between mt-3 text-[11px] text-[#5e4b75] gap-2">
               <span>© 2026 LungVision AI Research Group. All rights reserved.</span>
               <span>FastAPI REST Gateway · Three.js 3D CT Engine · Vite React SPA</span>
             </div>
@@ -43,12 +43,12 @@ export const AppLayout: React.FC = () => {
       </div>
 
       {/* Mobile Bottom Navigation Bar */}
-      <div className="md:hidden border-t border-white/[0.08] bg-[#0e0719]/95 backdrop-blur-xl flex items-center justify-around py-2 px-3 sticky bottom-0 z-40">
+      <div className="md:hidden border-t border-[#e2e8f0] bg-white/95 backdrop-blur-xl flex items-center justify-around py-2 px-3 sticky bottom-0 z-40 shadow-xs">
         <NavLink
           to="/dashboard"
           className={({ isActive }) =>
             `flex flex-col items-center gap-1 text-[10px] ${
-              isActive ? 'text-amber-400 font-semibold' : 'text-slate-400'
+              isActive ? 'text-amber-800 font-semibold' : 'text-[#5e4b75]'
             }`
           }
         >
@@ -59,7 +59,7 @@ export const AppLayout: React.FC = () => {
           to="/xray"
           className={({ isActive }) =>
             `flex flex-col items-center gap-1 text-[10px] ${
-              isActive ? 'text-amber-400 font-semibold' : 'text-slate-400'
+              isActive ? 'text-amber-800 font-semibold' : 'text-[#5e4b75]'
             }`
           }
         >
@@ -70,7 +70,7 @@ export const AppLayout: React.FC = () => {
           to="/ct-explorer"
           className={({ isActive }) =>
             `flex flex-col items-center gap-1 text-[10px] ${
-              isActive ? 'text-amber-400 font-semibold' : 'text-slate-400'
+              isActive ? 'text-amber-800 font-semibold' : 'text-[#5e4b75]'
             }`
           }
         >
@@ -81,7 +81,7 @@ export const AppLayout: React.FC = () => {
           to="/research"
           className={({ isActive }) =>
             `flex flex-col items-center gap-1 text-[10px] ${
-              isActive ? 'text-amber-400 font-semibold' : 'text-slate-400'
+              isActive ? 'text-amber-800 font-semibold' : 'text-[#5e4b75]'
             }`
           }
         >
@@ -92,7 +92,7 @@ export const AppLayout: React.FC = () => {
           to="/models"
           className={({ isActive }) =>
             `flex flex-col items-center gap-1 text-[10px] ${
-              isActive ? 'text-amber-400 font-semibold' : 'text-slate-400'
+              isActive ? 'text-amber-800 font-semibold' : 'text-[#5e4b75]'
             }`
           }
         >

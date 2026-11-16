@@ -99,25 +99,25 @@ export const ResearchPage: React.FC = () => {
   return (
     <div className="space-y-8">
       {/* Page Header */}
-      <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 pb-6 border-b border-white/[0.08]">
+      <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 pb-6 border-b border-[#e2e8f0]">
         <div>
-          <h2 className="text-2xl font-bold tracking-tight text-white flex items-center gap-2.5">
-            <LineChart className="w-6 h-6 text-amber-400" />
+          <h2 className="text-2xl font-bold tracking-tight text-[#1a082e] flex items-center gap-2.5">
+            <LineChart className="w-6 h-6 text-amber-600" />
             Research Evidence & Benchmark Registry
           </h2>
-          <p className="text-sm text-slate-400 mt-1">
+          <p className="text-sm text-[#5e4b75] mt-1">
             Audited retrospective benchmarks across NIH ChestX-ray14, Stanford CheXpert, and VinDr-CXR cohorts.
           </p>
         </div>
 
         {/* Tab Controls */}
-        <div className="flex items-center gap-1.5 bg-[#150a22] p-1 rounded-xl border border-white/10 shadow-inner">
+        <div className="flex items-center gap-1.5 bg-white p-1 rounded-xl border border-[#e2e8f0] shadow-xs">
           <button
             onClick={() => setActiveTab('nih')}
             className={`px-3.5 py-1.5 rounded-lg text-xs font-medium transition-all ${
               activeTab === 'nih'
-                ? 'bg-gradient-to-r from-amber-400 via-amber-500 to-amber-600 text-[#0c0614] font-bold shadow-md shadow-amber-950/40 border border-amber-300/40'
-                : 'text-slate-400 hover:text-white'
+                ? 'bg-gradient-to-r from-amber-500 to-amber-600 text-white font-bold shadow-xs border border-amber-600'
+                : 'text-[#5e4b75] hover:text-[#1a082e]'
             }`}
           >
             NIH ChestX-ray14
@@ -126,8 +126,8 @@ export const ResearchPage: React.FC = () => {
             onClick={() => setActiveTab('chexpert')}
             className={`px-3.5 py-1.5 rounded-lg text-xs font-medium transition-all ${
               activeTab === 'chexpert'
-                ? 'bg-gradient-to-r from-amber-400 via-amber-500 to-amber-600 text-[#0c0614] font-bold shadow-md shadow-amber-950/40 border border-amber-300/40'
-                : 'text-slate-400 hover:text-white'
+                ? 'bg-gradient-to-r from-amber-500 to-amber-600 text-white font-bold shadow-xs border border-amber-600'
+                : 'text-[#5e4b75] hover:text-[#1a082e]'
             }`}
           >
             CheXpert External
@@ -136,8 +136,8 @@ export const ResearchPage: React.FC = () => {
             onClick={() => setActiveTab('vindr')}
             className={`px-3.5 py-1.5 rounded-lg text-xs font-medium transition-all ${
               activeTab === 'vindr'
-                ? 'bg-gradient-to-r from-amber-400 via-amber-500 to-amber-600 text-[#0c0614] font-bold shadow-md shadow-amber-950/40 border border-amber-300/40'
-                : 'text-slate-400 hover:text-white'
+                ? 'bg-gradient-to-r from-amber-500 to-amber-600 text-white font-bold shadow-xs border border-amber-600'
+                : 'text-[#5e4b75] hover:text-[#1a082e]'
             }`}
           >
             VinDr-CXR (15k)
@@ -146,8 +146,8 @@ export const ResearchPage: React.FC = () => {
             onClick={() => setActiveTab('ssm')}
             className={`px-3.5 py-1.5 rounded-lg text-xs font-medium transition-all ${
               activeTab === 'ssm'
-                ? 'bg-gradient-to-r from-amber-400 via-amber-500 to-amber-600 text-[#0c0614] font-bold shadow-md shadow-amber-950/40 border border-amber-300/40'
-                : 'text-slate-400 hover:text-white'
+                ? 'bg-gradient-to-r from-amber-500 to-amber-600 text-white font-bold shadow-xs border border-amber-600'
+                : 'text-[#5e4b75] hover:text-[#1a082e]'
             }`}
           >
             3D SSM Geometry
@@ -158,16 +158,16 @@ export const ResearchPage: React.FC = () => {
       <DisclaimerBanner />
 
       {loading ? (
-        <div className="h-64 flex flex-col items-center justify-center border border-white/10 rounded-xl bg-medical-surface/40 space-y-3">
-          <div className="w-8 h-8 border-2 border-amber-400 border-t-transparent rounded-full animate-spin" />
-          <span className="text-sm text-slate-400">Loading research metrics from backend...</span>
+        <div className="h-64 flex flex-col items-center justify-center border border-[#e2e8f0] rounded-xl bg-white space-y-3 shadow-xs">
+          <div className="w-8 h-8 border-2 border-amber-500 border-t-transparent rounded-full animate-spin" />
+          <span className="text-sm text-[#5e4b75]">Loading research metrics from backend...</span>
         </div>
       ) : error ? (
-        <div className="p-6 border border-rose-500/40 bg-rose-950/20 rounded-xl text-rose-300 text-sm flex items-start gap-3">
-          <ShieldAlert className="w-5 h-5 text-rose-400 shrink-0 mt-0.5" />
+        <div className="p-6 border border-rose-200 bg-rose-50 rounded-xl text-rose-800 text-sm flex items-start gap-3">
+          <ShieldAlert className="w-5 h-5 text-rose-600 shrink-0 mt-0.5" />
           <div>
-            <h4 className="font-semibold text-rose-200">Benchmark Data Unavailable</h4>
-            <p className="mt-1 text-xs text-rose-300/80">{error}</p>
+            <h4 className="font-semibold text-rose-900">Benchmark Data Unavailable</h4>
+            <p className="mt-1 text-xs text-rose-700">{error}</p>
           </div>
         </div>
       ) : !data ? null : (
@@ -219,10 +219,12 @@ export const ResearchPage: React.FC = () => {
                         />
                         <Tooltip
                           contentStyle={{
-                            backgroundColor: '#140a22',
-                            borderColor: 'rgba(255,255,255,0.1)',
+                            backgroundColor: '#ffffff',
+                            borderColor: '#e2e8f0',
                             borderRadius: '12px',
                             fontSize: '12px',
+                            color: '#1a082e',
+                            boxShadow: '0 4px 12px rgba(26,8,46,0.08)',
                           }}
                         />
                         <Legend wrapperStyle={{ fontSize: '12px', paddingTop: '10px' }} />
@@ -275,7 +277,7 @@ export const ResearchPage: React.FC = () => {
                 <div className="overflow-x-auto">
                   <table className="w-full text-left text-xs border-collapse">
                     <thead>
-                      <tr className="border-b border-white/10 text-slate-400 font-semibold uppercase tracking-wider">
+                      <tr className="border-b border-[#e2e8f0] text-[#5e4b75] bg-slate-50 font-semibold uppercase tracking-wider font-mono text-[10px]">
                         <th className="py-2.5 px-3">Disease Label</th>
                         <th className="py-2.5 px-3">Threshold</th>
                         <th className="py-2.5 px-3">AUROC</th>
@@ -287,18 +289,18 @@ export const ResearchPage: React.FC = () => {
                         <th className="py-2.5 px-3">TP / FP / FN</th>
                       </tr>
                     </thead>
-                    <tbody className="divide-y divide-white/[0.08] text-slate-200">
+                    <tbody className="divide-y divide-[#e2e8f0] text-[#1a082e]">
                       {data.nih_test_metrics.map((row) => (
-                        <tr key={row.Disease} className="hover:bg-white/5 transition-colors">
-                          <td className="py-2.5 px-3 font-semibold text-white">{row.Disease}</td>
-                          <td className="py-2.5 px-3 font-mono text-amber-400">{row.Threshold.toFixed(4)}</td>
-                          <td className="py-2.5 px-3 font-mono text-emerald-400 font-bold">{row.AUROC.toFixed(4)}</td>
-                          <td className="py-2.5 px-3 font-mono text-slate-200">{row.AUPRC.toFixed(4)}</td>
-                          <td className="py-2.5 px-3 font-mono text-amber-300">{(row.Sensitivity * 100).toFixed(1)}%</td>
-                          <td className="py-2.5 px-3 font-mono text-slate-300">{(row.Specificity * 100).toFixed(1)}%</td>
-                          <td className="py-2.5 px-3 font-mono text-slate-300">{(row.Precision * 100).toFixed(1)}%</td>
-                          <td className="py-2.5 px-3 font-mono text-amber-400">{row.F1.toFixed(3)}</td>
-                          <td className="py-2.5 px-3 font-mono text-medical-muted text-[11px]">
+                        <tr key={row.Disease} className="hover:bg-amber-50/40 transition-colors">
+                          <td className="py-2.5 px-3 font-semibold text-[#1a082e]">{row.Disease}</td>
+                          <td className="py-2.5 px-3 font-mono text-amber-800 font-semibold">{row.Threshold.toFixed(4)}</td>
+                          <td className="py-2.5 px-3 font-mono text-emerald-700 font-bold">{row.AUROC.toFixed(4)}</td>
+                          <td className="py-2.5 px-3 font-mono text-[#5e4b75]">{row.AUPRC.toFixed(4)}</td>
+                          <td className="py-2.5 px-3 font-mono text-amber-700">{(row.Sensitivity * 100).toFixed(1)}%</td>
+                          <td className="py-2.5 px-3 font-mono text-[#5e4b75]">{(row.Specificity * 100).toFixed(1)}%</td>
+                          <td className="py-2.5 px-3 font-mono text-[#5e4b75]">{(row.Precision * 100).toFixed(1)}%</td>
+                          <td className="py-2.5 px-3 font-mono text-amber-800 font-semibold">{row.F1.toFixed(3)}</td>
+                          <td className="py-2.5 px-3 font-mono text-[#7e6c96] text-[11px]">
                             {row.TP ?? '-'} / {row.FP ?? '-'} / {row.FN ?? '-'}
                           </td>
                         </tr>
@@ -355,10 +357,12 @@ export const ResearchPage: React.FC = () => {
                       />
                       <Tooltip
                         contentStyle={{
-                          backgroundColor: '#140a22',
-                          borderColor: 'rgba(255,255,255,0.1)',
+                          backgroundColor: '#ffffff',
+                          borderColor: '#e2e8f0',
                           borderRadius: '12px',
                           fontSize: '12px',
+                          color: '#1a082e',
+                          boxShadow: '0 4px 12px rgba(26,8,46,0.08)',
                         }}
                       />
                       <Legend wrapperStyle={{ fontSize: '12px', paddingTop: '10px' }} />
@@ -375,7 +379,7 @@ export const ResearchPage: React.FC = () => {
                 <div className="overflow-x-auto">
                   <table className="w-full text-left text-xs border-collapse">
                     <thead>
-                      <tr className="border-b border-white/10 text-slate-400 font-semibold uppercase tracking-wider">
+                      <tr className="border-b border-[#e2e8f0] text-[#5e4b75] bg-slate-50 font-semibold uppercase tracking-wider font-mono text-[10px]">
                         <th className="py-2.5 px-3">Disease</th>
                         <th className="py-2.5 px-3">Threshold</th>
                         <th className="py-2.5 px-3">Cases (+ / -)</th>
@@ -386,19 +390,19 @@ export const ResearchPage: React.FC = () => {
                         <th className="py-2.5 px-3">F1 Score</th>
                       </tr>
                     </thead>
-                    <tbody className="divide-y divide-white/[0.08] text-slate-200">
+                    <tbody className="divide-y divide-[#e2e8f0] text-[#1a082e]">
                       {data.chexpert_external_metrics.map((row) => (
-                        <tr key={row.Disease} className="hover:bg-white/5 transition-colors">
-                          <td className="py-2.5 px-3 font-semibold text-white">{row.Disease}</td>
-                          <td className="py-2.5 px-3 font-mono text-amber-400">{row.Threshold.toFixed(4)}</td>
-                          <td className="py-2.5 px-3 font-mono text-medical-muted">
+                        <tr key={row.Disease} className="hover:bg-amber-50/40 transition-colors">
+                          <td className="py-2.5 px-3 font-semibold text-[#1a082e]">{row.Disease}</td>
+                          <td className="py-2.5 px-3 font-mono text-amber-800 font-semibold">{row.Threshold.toFixed(4)}</td>
+                          <td className="py-2.5 px-3 font-mono text-[#5e4b75]">
                             {row.Positive} / {row.Negative} ({row.Evaluable} total)
                           </td>
-                          <td className="py-2.5 px-3 font-mono text-emerald-400 font-bold">{row.AUROC.toFixed(4)}</td>
-                          <td className="py-2.5 px-3 font-mono text-slate-200">{row.AUPRC.toFixed(4)}</td>
-                          <td className="py-2.5 px-3 font-mono text-amber-300">{(row.Sensitivity * 100).toFixed(1)}%</td>
-                          <td className="py-2.5 px-3 font-mono text-slate-300">{(row.Specificity * 100).toFixed(1)}%</td>
-                          <td className="py-2.5 px-3 font-mono text-amber-400">{row.F1.toFixed(3)}</td>
+                          <td className="py-2.5 px-3 font-mono text-emerald-700 font-bold">{row.AUROC.toFixed(4)}</td>
+                          <td className="py-2.5 px-3 font-mono text-[#5e4b75]">{row.AUPRC.toFixed(4)}</td>
+                          <td className="py-2.5 px-3 font-mono text-amber-700">{(row.Sensitivity * 100).toFixed(1)}%</td>
+                          <td className="py-2.5 px-3 font-mono text-[#5e4b75]">{(row.Specificity * 100).toFixed(1)}%</td>
+                          <td className="py-2.5 px-3 font-mono text-amber-800 font-semibold">{row.F1.toFixed(3)}</td>
                         </tr>
                       ))}
                     </tbody>
@@ -446,26 +450,26 @@ export const ResearchPage: React.FC = () => {
                     </div>
                     <div className="mt-3 space-y-2">
                       <div className="flex justify-between text-xs">
-                        <span className="text-medical-muted">ROC AUC:</span>
-                        <span className="font-mono font-bold text-emerald-400 text-sm">
+                        <span className="text-[#5e4b75]">ROC AUC:</span>
+                        <span className="font-mono font-bold text-emerald-700 text-sm">
                           {m.ROC_AUC.toFixed(4)}
                         </span>
                       </div>
                       <div className="flex justify-between text-xs">
-                        <span className="text-medical-muted">Avg Precision:</span>
-                        <span className="font-mono text-slate-200">
+                        <span className="text-[#5e4b75]">Avg Precision:</span>
+                        <span className="font-mono text-[#5e4b75]">
                           {m.Average_Precision.toFixed(4)}
                         </span>
                       </div>
                       <div className="flex justify-between text-xs">
-                        <span className="text-medical-muted">Sensitivity / Spec:</span>
-                        <span className="font-mono text-slate-300">
+                        <span className="text-[#5e4b75]">Sensitivity / Spec:</span>
+                        <span className="font-mono text-[#5e4b75]">
                           {(m.Sensitivity * 100).toFixed(1)}% / {(m.Specificity * 100).toFixed(1)}%
                         </span>
                       </div>
                       <div className="flex justify-between text-xs">
-                        <span className="text-medical-muted">Brier / ECE:</span>
-                        <span className="font-mono text-amber-400">
+                        <span className="text-[#5e4b75]">Brier / ECE:</span>
+                        <span className="font-mono text-amber-800 font-semibold">
                           {m.Brier_Score?.toFixed(4) ?? 'N/A'} / {m.ECE_10_bins?.toFixed(4) ?? 'N/A'}
                         </span>
                       </div>
@@ -479,7 +483,7 @@ export const ResearchPage: React.FC = () => {
                 <div className="overflow-x-auto">
                   <table className="w-full text-left text-xs border-collapse">
                     <thead>
-                      <tr className="border-b border-white/10 text-slate-400 font-semibold uppercase tracking-wider">
+                      <tr className="border-b border-[#e2e8f0] text-[#5e4b75] bg-slate-50 font-semibold uppercase tracking-wider font-mono text-[10px]">
                         <th className="py-2.5 px-3">Model</th>
                         <th className="py-2.5 px-3">Cohort</th>
                         <th className="py-2.5 px-3">ROC AUC</th>
@@ -491,18 +495,18 @@ export const ResearchPage: React.FC = () => {
                         <th className="py-2.5 px-3">ECE (10 bins)</th>
                       </tr>
                     </thead>
-                    <tbody className="divide-y divide-white/[0.08] text-slate-200">
+                    <tbody className="divide-y divide-[#e2e8f0] text-[#1a082e]">
                       {data.vindr_external_metrics.map((row, idx) => (
-                        <tr key={idx} className="hover:bg-white/5 transition-colors">
-                          <td className="py-2.5 px-3 font-semibold text-white">{row.model}</td>
-                          <td className="py-2.5 px-3 text-slate-400">{row.cohort}</td>
-                          <td className="py-2.5 px-3 font-mono text-emerald-400 font-bold">{row.ROC_AUC.toFixed(4)}</td>
-                          <td className="py-2.5 px-3 font-mono text-slate-200">{row.Average_Precision.toFixed(4)}</td>
-                          <td className="py-2.5 px-3 font-mono text-slate-300">{(row.Accuracy * 100).toFixed(1)}%</td>
-                          <td className="py-2.5 px-3 font-mono text-amber-300">{(row.Sensitivity * 100).toFixed(1)}%</td>
-                          <td className="py-2.5 px-3 font-mono text-slate-300">{(row.Specificity * 100).toFixed(1)}%</td>
-                          <td className="py-2.5 px-3 font-mono text-amber-300">{row.Brier_Score?.toFixed(4) ?? 'N/A'}</td>
-                          <td className="py-2.5 px-3 font-mono text-amber-400">{row.ECE_10_bins?.toFixed(4) ?? 'N/A'}</td>
+                        <tr key={idx} className="hover:bg-amber-50/40 transition-colors">
+                          <td className="py-2.5 px-3 font-semibold text-[#1a082e]">{row.model}</td>
+                          <td className="py-2.5 px-3 text-[#5e4b75]">{row.cohort}</td>
+                          <td className="py-2.5 px-3 font-mono text-emerald-700 font-bold">{row.ROC_AUC.toFixed(4)}</td>
+                          <td className="py-2.5 px-3 font-mono text-[#5e4b75]">{row.Average_Precision.toFixed(4)}</td>
+                          <td className="py-2.5 px-3 font-mono text-[#5e4b75]">{(row.Accuracy * 100).toFixed(1)}%</td>
+                          <td className="py-2.5 px-3 font-mono text-amber-700">{(row.Sensitivity * 100).toFixed(1)}%</td>
+                          <td className="py-2.5 px-3 font-mono text-[#5e4b75]">{(row.Specificity * 100).toFixed(1)}%</td>
+                          <td className="py-2.5 px-3 font-mono text-amber-800 font-semibold">{row.Brier_Score?.toFixed(4) ?? 'N/A'}</td>
+                          <td className="py-2.5 px-3 font-mono text-amber-800 font-semibold">{row.ECE_10_bins?.toFixed(4) ?? 'N/A'}</td>
                         </tr>
                       ))}
                     </tbody>
@@ -540,9 +544,9 @@ export const ResearchPage: React.FC = () => {
               {/* Generalization Benchmark Cards */}
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
                 {SSM_GENERALIZATION_METRICS.map((item, idx) => (
-                  <Card key={idx} className="relative overflow-hidden bg-[#160c26]/80 border border-white/10 shadow-xl">
+                  <Card key={idx} className="relative overflow-hidden bg-white border border-[#e2e8f0] shadow-xs">
                     <div className="flex items-center justify-between mb-2">
-                      <span className="text-[10px] font-mono text-amber-400 font-bold uppercase tracking-wider">
+                      <span className="text-[10px] font-mono text-amber-800 font-bold uppercase tracking-wider">
                         Validation Metric
                       </span>
                       <Badge variant="emerald" size="sm">
@@ -550,15 +554,15 @@ export const ResearchPage: React.FC = () => {
                         Verified
                       </Badge>
                     </div>
-                    <div className="text-xs font-semibold text-white mb-2 leading-snug">
+                    <div className="text-xs font-semibold text-[#1a082e] mb-2 leading-snug">
                       {item.metric}
                     </div>
-                    <div className="text-2xl font-bold font-mono text-amber-300">
+                    <div className="text-2xl font-bold font-mono text-amber-700">
                       {item.ssm_value}
                     </div>
-                    <div className="mt-2 text-[11px] text-slate-400 flex items-center justify-between pt-2 border-t border-white/10">
-                      <span>Baseline: <strong className="text-slate-300">{item.baseline_value}</strong></span>
-                      <span className="text-emerald-400 font-semibold">{item.gain}</span>
+                    <div className="mt-2 text-[11px] text-[#5e4b75] flex items-center justify-between pt-2 border-t border-[#e2e8f0]">
+                      <span>Baseline: <strong className="text-[#1a082e]">{item.baseline_value}</strong></span>
+                      <span className="text-emerald-700 font-semibold">{item.gain}</span>
                     </div>
                   </Card>
                 ))}
@@ -570,20 +574,22 @@ export const ResearchPage: React.FC = () => {
                   <div className="h-72 w-full pt-4">
                     <ResponsiveContainer width="100%" height="100%" minWidth={100} minHeight={100}>
                       <BarChart data={SSM_MODE_METRICS} margin={{ top: 10, right: 20, left: 0, bottom: 20 }}>
-                        <CartesianGrid strokeDasharray="3 3" stroke="#25163a" vertical={false} />
-                        <XAxis dataKey="mode" stroke="#64748b" tick={{ fill: '#94a3b8', fontSize: 11 }} />
-                        <YAxis domain={[0, 60]} stroke="#64748b" tick={{ fill: '#94a3b8', fontSize: 11 }} tickFormatter={(v) => `${v}%`} />
+                        <CartesianGrid strokeDasharray="3 3" stroke="#e2e8f0" vertical={false} />
+                        <XAxis dataKey="mode" stroke="#64748b" tick={{ fill: '#5e4b75', fontSize: 11 }} />
+                        <YAxis domain={[0, 60]} stroke="#64748b" tick={{ fill: '#5e4b75', fontSize: 11 }} tickFormatter={(v) => `${v}%`} />
                         <Tooltip
                           contentStyle={{
-                            backgroundColor: '#140a22',
-                            borderColor: 'rgba(255,255,255,0.1)',
+                            backgroundColor: '#ffffff',
+                            borderColor: '#e2e8f0',
                             borderRadius: '12px',
                             fontSize: '12px',
+                            color: '#1a082e',
+                            boxShadow: '0 4px 12px rgba(26,8,46,0.08)',
                           }}
                           formatter={(val: any) => [`${val}%`, 'Explained Variance']}
                         />
                         <Legend wrapperStyle={{ fontSize: '12px', paddingTop: '10px' }} />
-                        <Bar dataKey="variance_pct" fill="#f59e0b" name="Explained Variance (%)" radius={[4, 4, 0, 0]} />
+                        <Bar dataKey="variance_pct" fill="#d97706" name="Explained Variance (%)" radius={[4, 4, 0, 0]} />
                       </BarChart>
                     </ResponsiveContainer>
                   </div>
@@ -592,28 +598,28 @@ export const ResearchPage: React.FC = () => {
                 {/* Cohort & Eigenspace Telemetry Card */}
                 <Card title="Model Specifications & Data Governance">
                   <div className="space-y-3.5 text-xs">
-                    <div className="p-2.5 rounded-lg bg-medical-bg/80 border border-white/10">
-                      <div className="text-[10px] text-slate-400 uppercase font-semibold">Cohort Split (Zero Leakage)</div>
-                      <div className="text-white font-mono font-bold mt-1">430 Verified Patients</div>
-                      <div className="text-[11px] text-slate-400 mt-0.5">301 Train · 64 Val · 65 Held-Out Test</div>
+                    <div className="p-2.5 rounded-lg bg-[#f8fafc] border border-[#e2e8f0]">
+                      <div className="text-[10px] text-[#5e4b75] uppercase font-semibold">Cohort Split (Zero Leakage)</div>
+                      <div className="text-[#1a082e] font-mono font-bold mt-1">430 Verified Patients</div>
+                      <div className="text-[11px] text-[#5e4b75] mt-0.5">301 Train · 64 Val · 65 Held-Out Test</div>
                     </div>
 
-                    <div className="p-2.5 rounded-lg bg-medical-bg/80 border border-white/10">
-                      <div className="text-[10px] text-slate-400 uppercase font-semibold">Mesh Parameterization</div>
-                      <div className="text-amber-400 font-mono font-bold mt-1">6,737 Vertices · 13,478 Triangles</div>
-                      <div className="text-[11px] text-slate-400 mt-0.5">16 3D Anatomical Landmarks</div>
+                    <div className="p-2.5 rounded-lg bg-[#f8fafc] border border-[#e2e8f0]">
+                      <div className="text-[10px] text-[#5e4b75] uppercase font-semibold">Mesh Parameterization</div>
+                      <div className="text-amber-900 font-mono font-bold mt-1">6,737 Vertices · 13,478 Triangles</div>
+                      <div className="text-[11px] text-[#5e4b75] mt-0.5">16 3D Anatomical Landmarks</div>
                     </div>
 
-                    <div className="p-2.5 rounded-lg bg-medical-bg/80 border border-white/10">
-                      <div className="text-[10px] text-slate-400 uppercase font-semibold">Variance Coverage</div>
-                      <div className="text-emerald-400 font-mono font-bold mt-1">100.0% Variance across 20 Modes</div>
-                      <div className="text-[11px] text-slate-400 mt-0.5">Top 5 modes capture 90.38%</div>
+                    <div className="p-2.5 rounded-lg bg-[#f8fafc] border border-[#e2e8f0]">
+                      <div className="text-[10px] text-[#5e4b75] uppercase font-semibold">Variance Coverage</div>
+                      <div className="text-emerald-800 font-mono font-bold mt-1">100.0% Variance across 20 Modes</div>
+                      <div className="text-[11px] text-[#5e4b75] mt-0.5">Top 5 modes capture 90.38%</div>
                     </div>
 
-                    <div className="p-2.5 rounded-lg bg-medical-bg/80 border border-white/10">
-                      <div className="text-[10px] text-slate-400 uppercase font-semibold">Model Artifact Footprint</div>
-                      <div className="text-amber-400 font-mono font-bold mt-1">4.36 MB JSON (Lightweight)</div>
-                      <div className="text-[11px] text-slate-400 mt-0.5">Zero external binary weights needed</div>
+                    <div className="p-2.5 rounded-lg bg-[#f8fafc] border border-[#e2e8f0]">
+                      <div className="text-[10px] text-[#5e4b75] uppercase font-semibold">Model Artifact Footprint</div>
+                      <div className="text-amber-900 font-mono font-bold mt-1">4.36 MB JSON (Lightweight)</div>
+                      <div className="text-[11px] text-[#5e4b75] mt-0.5">Zero external binary weights needed</div>
                     </div>
                   </div>
                 </Card>
@@ -624,20 +630,20 @@ export const ResearchPage: React.FC = () => {
                 <div className="overflow-x-auto">
                   <table className="w-full text-left text-xs border-collapse">
                     <thead>
-                      <tr className="border-b border-white/10 text-slate-400 font-semibold uppercase tracking-wider font-mono text-[10px]">
+                      <tr className="border-b border-[#e2e8f0] text-[#5e4b75] bg-slate-50 font-semibold uppercase tracking-wider font-mono text-[10px]">
                         <th className="py-2.5 px-3">Eigenmode</th>
                         <th className="py-2.5 px-3">Variance (%)</th>
                         <th className="py-2.5 px-3">Cumulative (%)</th>
                         <th className="py-2.5 px-3 font-sans">Anatomical / Physiological Interpretation</th>
                       </tr>
                     </thead>
-                    <tbody className="divide-y divide-white/[0.08] text-slate-200 font-mono">
+                    <tbody className="divide-y divide-[#e2e8f0] text-[#1a082e] font-mono">
                       {SSM_MODE_METRICS.map((row, idx) => (
-                        <tr key={idx} className="hover:bg-white/5 transition-colors">
-                          <td className="py-2.5 px-3 font-semibold text-amber-400">{row.mode}</td>
-                          <td className="py-2.5 px-3 text-white font-bold">{row.variance_pct.toFixed(2)}%</td>
-                          <td className="py-2.5 px-3 text-emerald-400">{row.cumulative_pct.toFixed(2)}%</td>
-                          <td className="py-2.5 px-3 font-sans text-slate-300 text-[11px]">{row.interpretation}</td>
+                        <tr key={idx} className="hover:bg-amber-50/40 transition-colors">
+                          <td className="py-2.5 px-3 font-semibold text-amber-900">{row.mode}</td>
+                          <td className="py-2.5 px-3 text-[#1a082e] font-bold">{row.variance_pct.toFixed(2)}%</td>
+                          <td className="py-2.5 px-3 text-emerald-700">{row.cumulative_pct.toFixed(2)}%</td>
+                          <td className="py-2.5 px-3 font-sans text-[#5e4b75] text-[11px]">{row.interpretation}</td>
                         </tr>
                       ))}
                     </tbody>
@@ -646,12 +652,12 @@ export const ResearchPage: React.FC = () => {
               </Card>
             </div>
           )}
-          <Card className="bg-medical-surface/50 border-white/10">
-            <h4 className="text-xs font-semibold text-slate-400 tracking-wider uppercase mb-3 flex items-center gap-2">
-              <Info className="w-4 h-4 text-amber-400" />
+          <Card className="bg-white border-[#e2e8f0] shadow-xs">
+            <h4 className="text-xs font-semibold text-[#5e4b75] tracking-wider uppercase mb-3 flex items-center gap-2">
+              <Info className="w-4 h-4 text-amber-600" />
               Audited Benchmark Notes & Methodology
             </h4>
-            <ul className="space-y-2 text-xs text-medical-muted list-disc list-inside">
+            <ul className="space-y-2 text-xs text-[#5e4b75] list-disc list-inside">
               {data.notes.map((note, index) => (
                 <li key={index} className="leading-relaxed">
                   {note}

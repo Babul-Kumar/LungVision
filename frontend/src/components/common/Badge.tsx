@@ -16,16 +16,16 @@ export const Badge: React.FC<BadgeProps> = ({
   className,
 }) => {
   const variantStyles = {
-    emerald: 'bg-emerald-950/70 text-emerald-300 border-emerald-700/50 shadow-xs',
-    amber: 'bg-amber-950/70 text-amber-300 border-amber-600/50 shadow-[0_0_12px_rgba(245,158,11,0.2)]',
-    marigold: 'bg-amber-950/70 text-amber-300 border-amber-600/50 shadow-[0_0_12px_rgba(245,158,11,0.2)]',
-    rose: 'bg-rose-950/70 text-rose-300 border-rose-700/50 shadow-xs',
-    cyan: 'bg-[#2a1740]/80 text-amber-300 border-amber-600/40 shadow-[0_0_10px_rgba(245,158,11,0.15)]',
-    blue: 'bg-[#231339]/90 text-amber-200 border-amber-500/30 shadow-xs',
-    slate: 'bg-[#1a0e2b]/90 text-slate-200 border-white/10 shadow-xs',
-    silver: 'bg-[#1f1233]/90 text-slate-100 border-white/15 shadow-xs',
-    teal: 'bg-[#1f1233]/90 text-slate-100 border-white/15 shadow-xs',
-    aubergine: 'bg-[#2b1642]/90 text-[#f5d0fe] border-[#7e22ce]/40',
+    emerald: 'bg-emerald-50 text-emerald-800 border-emerald-300/80 shadow-xs',
+    amber: 'bg-amber-50 text-amber-900 border-amber-300 shadow-xs',
+    marigold: 'bg-amber-50 text-amber-900 border-amber-300 shadow-xs',
+    rose: 'bg-rose-50 text-rose-800 border-rose-300/80 shadow-xs',
+    cyan: 'bg-amber-50 text-amber-900 border-amber-300 shadow-xs',
+    blue: 'bg-amber-50 text-amber-900 border-amber-300 shadow-xs',
+    slate: 'bg-slate-100 text-[#1a082e] border-slate-300 shadow-xs',
+    silver: 'bg-[#f1f5f9] text-[#1a082e] border-[#cbd5e1] shadow-xs',
+    teal: 'bg-[#f1f5f9] text-[#1a082e] border-[#cbd5e1] shadow-xs',
+    aubergine: 'bg-[#f5effc] text-[#2a0e4a] border-[#d8c3ea] shadow-xs',
   };
 
   const sizeStyles = {

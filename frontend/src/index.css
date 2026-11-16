@@ -4,7 +4,7 @@
 
 @layer base {
   :root {
-    color-scheme: dark;
+    color-scheme: light;
   }
 
   html {
@@ -15,13 +15,13 @@
   }
 
   body {
-    background-color: #0c0614;
+    background-color: #f1f5f9;
     background-image: 
-      radial-gradient(at 0% 0%, rgba(107, 33, 168, 0.18) 0px, transparent 55%),
-      radial-gradient(at 100% 0%, rgba(245, 158, 11, 0.09) 0px, transparent 50%),
-      radial-gradient(at 50% 100%, rgba(226, 232, 240, 0.05) 0px, transparent 50%);
+      radial-gradient(at 0% 0%, rgba(226, 232, 240, 0.75) 0px, transparent 55%),
+      radial-gradient(at 100% 0%, rgba(254, 243, 199, 0.35) 0px, transparent 50%),
+      radial-gradient(at 50% 100%, rgba(241, 245, 249, 0.95) 0px, transparent 50%);
     background-attachment: fixed;
-    color: #f8fafc;
+    color: #1a082e;
     font-family: 'Inter', system-ui, -apple-system, sans-serif;
   }
 }
@@ -33,17 +33,17 @@
 }
 
 ::-webkit-scrollbar-track {
-  background: #12091c;
+  background: #f1f5f9;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #2f1847;
+  background: #cbd5e1;
   border-radius: 3px;
-  border: 1px solid rgba(226, 232, 240, 0.1);
+  border: 1px solid #e2e8f0;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #f59e0b;
+  background: #d97706;
 }
 
 /* Three.js viewport styling */
@@ -57,24 +57,24 @@
 .medical-grid {
   background-size: 28px 28px;
   background-image: 
-    linear-gradient(to right, rgba(226, 232, 240, 0.02) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(226, 232, 240, 0.02) 1px, transparent 1px);
+    linear-gradient(to right, rgba(26, 8, 46, 0.03) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(26, 8, 46, 0.03) 1px, transparent 1px);
 }
 
 .medical-grid-fine {
   background-size: 14px 14px;
   background-image: 
-    linear-gradient(to right, rgba(245, 158, 11, 0.03) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(245, 158, 11, 0.03) 1px, transparent 1px);
+    linear-gradient(to right, rgba(217, 119, 6, 0.04) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(217, 119, 6, 0.04) 1px, transparent 1px);
 }
 
-/* Deep Aubergine Frosted Glass Panel with Ice Silver Bevel */
+/* Porcelain White Card Surface with Ice Silver Bevel */
 .glass-panel {
-  background: rgba(22, 12, 36, 0.78);
+  background: rgba(255, 255, 255, 0.92);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
-  border: 1px solid rgba(226, 232, 240, 0.12);
-  box-shadow: 0 12px 36px -8px rgba(0, 0, 0, 0.65), inset 0 1px 0 0 rgba(255, 255, 255, 0.08);
+  border: 1px solid #e2e8f0;
+  box-shadow: 0 10px 30px -5px rgba(26, 8, 46, 0.05), inset 0 1px 0 0 rgba(255, 255, 255, 0.9);
 }
 
 .glow-marigold {
@@ -125,8 +125,8 @@
   left: -1px;
   width: 5px;
   height: 5px;
-  border-top: 1px solid rgba(226, 232, 240, 0.3);
-  border-left: 1px solid rgba(226, 232, 240, 0.3);
+  border-top: 1px solid rgba(26, 8, 46, 0.2);
+  border-left: 1px solid rgba(26, 8, 46, 0.2);
   pointer-events: none;
   transition: border-color 0.25s ease;
 }
@@ -138,15 +138,15 @@
   right: -1px;
   width: 5px;
   height: 5px;
-  border-bottom: 1px solid rgba(226, 232, 240, 0.3);
-  border-right: 1px solid rgba(226, 232, 240, 0.3);
+  border-bottom: 1px solid rgba(26, 8, 46, 0.2);
+  border-right: 1px solid rgba(26, 8, 46, 0.2);
   pointer-events: none;
   transition: border-color 0.25s ease;
 }
 
 .hud-corner-bracket:hover::before,
 .hud-corner-bracket:hover::after {
-  border-color: rgba(245, 158, 11, 0.7);
+  border-color: rgba(217, 119, 6, 0.8);
 }
 
 /* Rich Marigold Laser Sweep */

@@ -17,14 +17,14 @@ export const Button: React.FC<ButtonProps> = ({
   disabled,
   ...props
 }) => {
-  const baseStyles = 'inline-flex items-center justify-center font-medium rounded-lg transition-all duration-150 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-[#0c0614] disabled:opacity-50 disabled:cursor-not-allowed';
+  const baseStyles = 'inline-flex items-center justify-center font-medium rounded-lg transition-all duration-150 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-white disabled:opacity-50 disabled:cursor-not-allowed';
 
   const variantStyles = {
-    primary: 'bg-gradient-to-r from-amber-400 via-amber-500 to-amber-600 text-[#0c0614] hover:from-amber-300 hover:to-amber-500 focus:ring-amber-400 shadow-md shadow-amber-950/40 border border-amber-300/40 font-semibold',
-    secondary: 'bg-[#201135] text-slate-100 border border-white/10 hover:bg-[#2b1747] hover:border-white/20 focus:ring-white/20',
-    outline: 'border border-amber-500/40 text-amber-300 hover:bg-amber-500/10 hover:border-amber-400 focus:ring-amber-500',
-    danger: 'bg-rose-600 text-white hover:bg-rose-500 focus:ring-rose-500 shadow-md shadow-rose-950/40',
-    ghost: 'text-slate-300 hover:text-white hover:bg-white/[0.06]',
+    primary: 'bg-gradient-to-r from-amber-500 via-amber-500 to-amber-600 text-white hover:from-amber-400 hover:to-amber-500 focus:ring-amber-500 shadow-md shadow-amber-500/25 border border-amber-400/40 font-semibold',
+    secondary: 'bg-white text-[#1a082e] border border-[#e2e8f0] hover:bg-[#f8fafc] hover:border-[#cbd5e1] focus:ring-amber-400/30 shadow-xs font-medium',
+    outline: 'border border-amber-600/40 text-[#92400e] bg-amber-50/50 hover:bg-amber-50 hover:border-amber-500 focus:ring-amber-500 font-medium',
+    danger: 'bg-rose-600 text-white hover:bg-rose-500 focus:ring-rose-500 shadow-md shadow-rose-500/25 font-semibold',
+    ghost: 'text-[#4c3a63] hover:text-[#1a082e] hover:bg-[#f1f5f9]',
   };
 
   const sizeStyles = {

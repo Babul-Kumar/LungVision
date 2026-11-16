@@ -38,24 +38,24 @@ export default {
           600: '#64748b',
         },
         medical: {
-          bg: '#0d0716',         // Velvet Deep Aubergine
-          surface: '#150c23',    // Rich Aubergine Surface
-          card: '#1c102f',       // Elevated Aubergine Card
-          hover: '#291742',      // Deep Aubergine Hover
-          border: 'rgba(226, 232, 240, 0.12)', // Ice Silver Hairline
-          'border-active': '#f59e0b',          // Marigold Active
-          cyan: '#f59e0b',       // Mapped to Marigold Gold
-          teal: '#e2e8f0',       // Mapped to Ice Silver
-          marigold: '#f59e0b',
-          silver: '#e2e8f0',
-          aubergine: '#1a0e2b',
-          blue: '#f59e0b',       // Mapped to Marigold Gold
-          amber: '#f59e0b',
-          rose: '#f43f5e',
-          emerald: '#10b981',
-          text: '#f8fafc',       // Ice Silver Text
-          muted: '#cbd5e1',      // Silver Mist Muted
-          subtle: '#94a3b8',     // Platinum Subtle
+          bg: '#f1f5f9',              // Luminous Ice Silver Canvas Background
+          surface: '#ffffff',         // Porcelain White Card Surface
+          card: '#ffffff',            // Pure Crisp Card Surface
+          hover: '#f8fafc',           // Ice Silver Hover Surface
+          border: '#e2e8f0',          // Hairline Ice Silver Platinum Border
+          'border-active': '#d97706', // Marigold Active Border
+          cyan: '#d97706',            // Mapped to Warm Marigold Gold
+          teal: '#1a082e',            // Deep Aubergine Accent
+          marigold: '#d97706',        // Classic Royal Marigold
+          silver: '#f1f5f9',          // Ice Silver Base
+          aubergine: '#1a082e',       // Imperial Deep Aubergine
+          blue: '#d97706',            // Mapped to Marigold Gold
+          amber: '#d97706',
+          rose: '#e11d48',
+          emerald: '#059669',
+          text: '#1a082e',            // High-Contrast Deep Aubergine Typography
+          muted: '#5e4b75',           // Refined Muted Aubergine
+          subtle: '#7e6c96',          // Subtle Plum Silver
         }
       },
       fontFamily: {

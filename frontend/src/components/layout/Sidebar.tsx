@@ -53,13 +53,13 @@ export const Sidebar: React.FC = () => {
   }, [navigate]);
 
   return (
-    <aside className="w-64 border-r border-white/[0.08] bg-[#0c0517]/80 backdrop-blur-xl p-4 flex flex-col justify-between shrink-0 hidden md:flex">
+    <aside className="w-64 border-r border-[#e2e8f0] bg-white/95 backdrop-blur-xl p-4 flex flex-col justify-between shrink-0 hidden md:flex shadow-xs">
       <nav className="space-y-1.5">
         <div className="flex items-center justify-between px-3 py-2">
-          <span className="text-[11px] font-semibold text-slate-400 tracking-wider uppercase">
+          <span className="text-[11px] font-semibold text-[#5e4b75] tracking-wider uppercase">
             Diagnostic Modules
           </span>
-          <span className="text-[10px] font-mono text-slate-400 bg-black/40 px-1.5 py-0.5 rounded border border-white/10">
+          <span className="text-[10px] font-mono text-[#5e4b75] bg-slate-100 px-1.5 py-0.5 rounded border border-[#e2e8f0]">
             Alt+1..8
           </span>
         </div>
@@ -73,23 +73,23 @@ export const Sidebar: React.FC = () => {
               className={({ isActive }) =>
                 `flex items-center justify-between px-3.5 py-2.5 rounded-lg text-sm font-medium transition-all group ${
                   isActive
-                    ? 'bg-gradient-to-r from-amber-500/15 via-amber-500/8 to-transparent text-amber-300 border-l-2 border-l-amber-400 border-t border-b border-r border-amber-500/20 shadow-md shadow-amber-950/20 font-semibold'
-                    : 'text-slate-300 hover:text-white hover:bg-white/[0.04] border border-transparent'
+                    ? 'bg-gradient-to-r from-amber-500/15 via-amber-500/5 to-transparent text-[#92400e] border-l-2 border-l-amber-500 border-t border-b border-r border-amber-300/40 shadow-xs font-semibold'
+                    : 'text-[#4c3a63] hover:text-[#1a082e] hover:bg-slate-50 border border-transparent'
                 }`
               }
             >
               <div className="flex items-center gap-3">
-                <Icon className="w-4 h-4 shrink-0 group-hover:text-amber-400 transition-colors" />
+                <Icon className="w-4 h-4 shrink-0 group-hover:text-amber-600 transition-colors" />
                 <span>{item.label}</span>
               </div>
 
               <div className="flex items-center gap-1.5">
                 {item.badge && (
-                  <span className="text-[10px] font-mono font-medium px-1.5 py-0.5 rounded bg-amber-950/70 text-amber-300 border border-amber-600/40">
+                  <span className="text-[10px] font-mono font-medium px-1.5 py-0.5 rounded bg-amber-100 text-amber-900 border border-amber-300">
                     {item.badge}
                   </span>
                 )}
-                <span className="hidden group-hover:inline text-[9px] font-mono text-slate-400 bg-black/40 px-1 py-0.5 rounded">
+                <span className="hidden group-hover:inline text-[9px] font-mono text-[#5e4b75] bg-slate-100 px-1 py-0.5 rounded border border-[#e2e8f0]">
                   {item.shortcut}
                 </span>
               </div>
@@ -99,13 +99,13 @@ export const Sidebar: React.FC = () => {
       </nav>
 
       {/* Sidebar Footer Info */}
-      <div className="p-3.5 rounded-xl bg-[#170b28]/80 border border-white/10 text-[11px]">
+      <div className="p-3.5 rounded-xl bg-[#f8fafc] border border-[#e2e8f0] text-[11px]">
         <div className="flex items-center justify-between mb-1">
-          <span className="font-semibold text-slate-200">Model Runtime</span>
-          <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
+          <span className="font-semibold text-[#1a082e]">Model Runtime</span>
+          <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
         </div>
-        <p className="text-[10px] font-mono text-amber-400">PyTorch 2.14.1 · SimpleITK 2.5</p>
-        <p className="mt-1 text-[10px] text-slate-400 leading-tight">
+        <p className="text-[10px] font-mono text-amber-800 font-medium">PyTorch 2.14.1 · SimpleITK 2.5</p>
+        <p className="mt-1 text-[10px] text-[#5e4b75] leading-tight">
           4 Locked Checkpoints: DenseNet121, 2x ResNet18, SSM Lung PCA (20 Modes)
         </p>
       </div>

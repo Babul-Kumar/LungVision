@@ -92,7 +92,7 @@ export const SSM3DReconstructionViewer: React.FC<SSM3DReconstructionViewerProps>
     const height = container.clientHeight || 450;
 
     const scene = new THREE.Scene();
-    scene.background = new THREE.Color(0x0c0614);
+    scene.background = new THREE.Color(0x160a28);
     sceneRef.current = scene;
 
     const camera = new THREE.PerspectiveCamera(45, width / height, 1, 4000);
@@ -417,56 +417,56 @@ export const SSM3DReconstructionViewer: React.FC<SSM3DReconstructionViewerProps>
   };
 
   return (
-    <div className="relative w-full h-[460px] rounded-xl overflow-hidden bg-[#0c0614] border border-white/10 flex flex-col">
+    <div className="relative w-full h-[460px] rounded-xl overflow-hidden bg-[#160a28] border border-[#e2e8f0] flex flex-col shadow-inner">
       {/* 3D Canvas Mount Point */}
       <div ref={mountRef} className="w-full h-full cursor-grab active:cursor-grabbing" />
 
       {/* Viewport Overlay HUD Header */}
       <div className="absolute top-3 left-3 right-3 flex items-center justify-between pointer-events-none z-20">
-        <div className="flex items-center gap-2 pointer-events-auto bg-[#140a22]/85 backdrop-blur-md px-3 py-1.5 rounded-lg border border-white/10 text-xs shadow-xl">
-          <span className="w-2 h-2 rounded-full bg-amber-400 animate-pulse" />
-          <span className="font-semibold text-white font-mono">SSM 3D Surface</span>
-          <span className="text-white/20">|</span>
-          <span className="text-slate-300">{vertexCount.toLocaleString()} Vertices</span>
-          <span className="text-white/20">·</span>
-          <span className="text-slate-300">{faceCount.toLocaleString()} Triangles</span>
+        <div className="flex items-center gap-2 pointer-events-auto bg-white/95 backdrop-blur-md px-3 py-1.5 rounded-lg border border-[#e2e8f0] text-xs shadow-md">
+          <span className="w-2 h-2 rounded-full bg-amber-500 animate-pulse" />
+          <span className="font-semibold text-[#1a082e] font-mono">SSM 3D Surface</span>
+          <span className="text-slate-300">|</span>
+          <span className="text-[#5e4b75]">{vertexCount.toLocaleString()} Vertices</span>
+          <span className="text-slate-300">·</span>
+          <span className="text-[#5e4b75]">{faceCount.toLocaleString()} Triangles</span>
         </div>
 
         {/* Viewport Action Controls */}
-        <div className="flex items-center gap-1.5 pointer-events-auto bg-[#140a22]/85 backdrop-blur-md p-1.5 rounded-lg border border-white/10 shadow-xl">
+        <div className="flex items-center gap-1.5 pointer-events-auto bg-white/95 backdrop-blur-md p-1.5 rounded-lg border border-[#e2e8f0] shadow-md">
           {/* Quick Camera Presets */}
-          <div className="flex items-center gap-1 mr-1 border-r border-white/10 pr-1.5 text-[10px] font-mono">
+          <div className="flex items-center gap-1 mr-1 border-r border-[#e2e8f0] pr-1.5 text-[10px] font-mono">
             <button
               onClick={() => setAnatomicalView('AP')}
-              className="px-1.5 py-1 rounded hover:bg-white/10 text-slate-300 hover:text-amber-300 transition-colors"
+              className="px-1.5 py-1 rounded hover:bg-slate-100 text-[#5e4b75] hover:text-amber-800 transition-colors"
               title="Anterior (Frontal AP View)"
             >
               AP
             </button>
             <button
               onClick={() => setAnatomicalView('PA')}
-              className="px-1.5 py-1 rounded hover:bg-white/10 text-slate-300 hover:text-amber-300 transition-colors"
+              className="px-1.5 py-1 rounded hover:bg-slate-100 text-[#5e4b75] hover:text-amber-800 transition-colors"
               title="Posterior (Dorsal PA View)"
             >
               PA
             </button>
             <button
               onClick={() => setAnatomicalView('RL')}
-              className="px-1.5 py-1 rounded hover:bg-white/10 text-slate-300 hover:text-amber-300 transition-colors"
+              className="px-1.5 py-1 rounded hover:bg-slate-100 text-[#5e4b75] hover:text-amber-800 transition-colors"
               title="Right Lateral View"
             >
               RL
             </button>
             <button
               onClick={() => setAnatomicalView('LL')}
-              className="px-1.5 py-1 rounded hover:bg-white/10 text-slate-300 hover:text-amber-300 transition-colors"
+              className="px-1.5 py-1 rounded hover:bg-slate-100 text-[#5e4b75] hover:text-amber-800 transition-colors"
               title="Left Lateral View"
             >
               LL
             </button>
             <button
               onClick={() => setAnatomicalView('SI')}
-              className="px-1.5 py-1 rounded hover:bg-white/10 text-slate-300 hover:text-amber-300 transition-colors"
+              className="px-1.5 py-1 rounded hover:bg-slate-100 text-[#5e4b75] hover:text-amber-800 transition-colors"
               title="Superior (Top-Down View)"
             >
               SI
@@ -476,8 +476,8 @@ export const SSM3DReconstructionViewer: React.FC<SSM3DReconstructionViewerProps>
           <button
             onClick={() => setWireframe((w) => !w)}
             className={`px-2 py-1 rounded text-xs font-medium flex items-center gap-1 transition-colors ${wireframe
-              ? 'bg-amber-500/20 text-amber-300 font-semibold'
-              : 'text-slate-400 hover:text-white'
+              ? 'bg-amber-100 text-amber-900 font-semibold'
+              : 'text-[#5e4b75] hover:text-[#1a082e] hover:bg-slate-100'
               }`}
             title="Toggle Wireframe Mesh"
           >
@@ -488,8 +488,8 @@ export const SSM3DReconstructionViewer: React.FC<SSM3DReconstructionViewerProps>
           <button
             onClick={() => setShowLandmarks((s) => !s)}
             className={`px-2 py-1 rounded text-xs font-medium flex items-center gap-1 transition-colors ${showLandmarks
-              ? 'bg-amber-500/20 text-amber-300 font-semibold'
-              : 'text-slate-400 hover:text-white'
+              ? 'bg-amber-100 text-amber-900 font-semibold'
+              : 'text-[#5e4b75] hover:text-[#1a082e] hover:bg-slate-100'
               }`}
             title="Toggle Anatomical Landmarks"
           >
@@ -499,7 +499,7 @@ export const SSM3DReconstructionViewer: React.FC<SSM3DReconstructionViewerProps>
 
           <button
             onClick={() => setColorMode((c) => (c === 'silver' ? 'bilateral' : 'silver'))}
-            className={`p-1.5 rounded hover:bg-white/10 text-xs transition-colors ${colorMode === 'bilateral' ? 'text-amber-300 font-semibold' : 'text-slate-400 hover:text-white'
+            className={`p-1.5 rounded hover:bg-slate-100 text-xs transition-colors ${colorMode === 'bilateral' ? 'text-amber-800 font-semibold bg-amber-50' : 'text-[#5e4b75] hover:text-[#1a082e]'
               }`}
             title={colorMode === 'bilateral' ? 'Bilateral Color Partition' : 'Single Shaded Color'}
           >
@@ -508,7 +508,7 @@ export const SSM3DReconstructionViewer: React.FC<SSM3DReconstructionViewerProps>
 
           <button
             onClick={() => setIsAutoRotating((prev) => !prev)}
-            className={`p-1.5 rounded hover:bg-white/10 text-xs transition-colors ${isAutoRotating ? 'text-amber-400' : 'text-slate-400 hover:text-white'
+            className={`p-1.5 rounded hover:bg-slate-100 text-xs transition-colors ${isAutoRotating ? 'text-amber-700 bg-amber-50' : 'text-[#5e4b75] hover:text-[#1a082e]'
               }`}
             title={isAutoRotating ? 'Pause 360° Rotation' : 'Start 360° Rotation'}
           >
@@ -517,7 +517,7 @@ export const SSM3DReconstructionViewer: React.FC<SSM3DReconstructionViewerProps>
 
           <button
             onClick={handleExportSnapshot}
-            className="p-1.5 rounded hover:bg-white/10 text-slate-400 hover:text-amber-300 transition-colors"
+            className="p-1.5 rounded hover:bg-slate-100 text-[#5e4b75] hover:text-amber-800 transition-colors"
             title="Export High-Res Snapshot (PNG)"
           >
             <Camera className="w-3.5 h-3.5" />
@@ -525,7 +525,7 @@ export const SSM3DReconstructionViewer: React.FC<SSM3DReconstructionViewerProps>
 
           <button
             onClick={() => setAnatomicalView('OBLIQUE')}
-            className="p-1.5 rounded hover:bg-white/10 text-slate-400 hover:text-white transition-colors"
+            className="p-1.5 rounded hover:bg-slate-100 text-[#5e4b75] hover:text-[#1a082e] transition-colors"
             title="Reset Camera View"
           >
             <RotateCcw className="w-3.5 h-3.5" />
@@ -537,7 +537,7 @@ export const SSM3DReconstructionViewer: React.FC<SSM3DReconstructionViewerProps>
               size="sm"
               onClick={onExportObj}
               disabled={isExporting}
-              className="text-xs ml-1 py-1 h-auto"
+              className="text-xs ml-1 py-1 h-auto text-[#1a082e] border-[#e2e8f0] bg-white hover:bg-slate-50"
             >
               <Download className="w-3 h-3 mr-1" />
               <span>{isExporting ? '...' : 'OBJ'}</span>
@@ -549,17 +549,17 @@ export const SSM3DReconstructionViewer: React.FC<SSM3DReconstructionViewerProps>
       {/* Interactive Landmark Hover Tooltip */}
       {hoveredLandmark && (
         <div
-          className="absolute z-30 pointer-events-none bg-[#0e0719]/95 backdrop-blur-md p-2.5 rounded-lg border border-amber-500/50 text-xs shadow-2xl font-mono text-slate-200"
+          className="absolute z-30 pointer-events-none bg-white/95 backdrop-blur-md p-2.5 rounded-lg border border-amber-400 text-xs shadow-xl font-mono text-[#1a082e]"
           style={{
             left: `${Math.min(hoveredLandmark.x + 12, 360)}px`,
             top: `${Math.min(hoveredLandmark.y + 12, 320)}px`,
           }}
         >
-          <div className="flex items-center gap-1.5 text-amber-400 font-bold mb-1">
+          <div className="flex items-center gap-1.5 text-amber-800 font-bold mb-1">
             <MapPin className="w-3.5 h-3.5" />
             <span>Landmark: {hoveredLandmark.name.replace(/_/g, ' ')}</span>
           </div>
-          <div className="text-[11px] text-slate-300">
+          <div className="text-[11px] text-[#5e4b75]">
             Coords: ({hoveredLandmark.coords[0].toFixed(1)}, {hoveredLandmark.coords[1].toFixed(1)}, {hoveredLandmark.coords[2].toFixed(1)}) mm
           </div>
         </div>
@@ -567,12 +567,12 @@ export const SSM3DReconstructionViewer: React.FC<SSM3DReconstructionViewerProps>
 
       {/* Orbit Controls Guide Bottom Pill & Active View Indicator */}
       <div className="absolute bottom-3 left-3 right-3 flex items-center justify-between pointer-events-none z-20">
-        <div className="bg-black/70 backdrop-blur-md px-2.5 py-1 rounded text-[10px] text-slate-400 border border-white/10 font-mono">
+        <div className="bg-white/90 backdrop-blur-md px-2.5 py-1 rounded text-[10px] text-[#5e4b75] border border-[#e2e8f0] font-mono shadow-xs">
           Left click: Rotate · Right click: Pan · Scroll: Zoom
         </div>
 
-        <div className="text-[10px] font-mono text-amber-300 bg-amber-950/70 backdrop-blur-md px-2.5 py-1 rounded border border-amber-800/40 flex items-center gap-1.5">
-          <span className="w-1.5 h-1.5 rounded-full bg-amber-400 animate-pulse" />
+        <div className="text-[10px] font-mono text-amber-900 bg-amber-50/95 backdrop-blur-md px-2.5 py-1 rounded border border-amber-300 flex items-center gap-1.5 shadow-xs font-semibold">
+          <span className="w-1.5 h-1.5 rounded-full bg-amber-500 animate-pulse" />
           <span>VIEW: {activeViewName.toUpperCase()}</span>
         </div>
       </div>
