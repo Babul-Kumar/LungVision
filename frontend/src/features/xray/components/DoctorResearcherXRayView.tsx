@@ -169,8 +169,8 @@ export const DoctorResearcherXRayView: React.FC<DoctorResearcherXRayViewProps> =
               <h4 className="text-xs font-bold uppercase tracking-wider text-[#1a082e]">
                 Six Disease Output Activations (Strict NIH ChestX-ray14 Ordering)
               </h4>
-              <span className="text-[11px] text-medical-muted font-mono">
-                Flagged: {multiLabelResult.summary.flagged_conditions_count} / 6
+              <span className="text-[11px] text-[#5e4b75] font-mono font-medium">
+                Flagged: <strong className="text-[#1a082e] font-bold">{multiLabelResult.summary.flagged_conditions_count}</strong> / 6
               </span>
             </div>
 
@@ -185,13 +185,13 @@ export const DoctorResearcherXRayView: React.FC<DoctorResearcherXRayViewProps> =
                       threshold={pred.threshold}
                       experimentalFlag={pred.experimental_flag}
                     />
-                    <div className="flex items-center justify-between text-[10px] font-mono text-medical-muted px-1">
+                    <div className="flex items-center justify-between text-[11px] font-mono text-[#5e4b75] px-1">
                       <span>
-                        Raw Probability: <strong>{pred.probability.toFixed(6)}</strong> · Threshold: <strong>{pred.threshold.toFixed(6)}</strong>
+                        Raw Probability: <strong className="text-[#1a082e] font-bold">{pred.probability.toFixed(6)}</strong> · Threshold: <strong className="text-[#1a082e] font-bold">{pred.threshold.toFixed(6)}</strong>
                       </span>
                       <button
                         onClick={() => onOpenExplainability(disease)}
-                        className="text-amber-400 hover:text-amber-300 hover:underline text-[10px]"
+                        className="text-amber-800 hover:text-amber-950 hover:underline font-semibold text-[11px] transition-colors"
                       >
                         Clinical Details & Signs →
                       </button>
@@ -203,16 +203,16 @@ export const DoctorResearcherXRayView: React.FC<DoctorResearcherXRayViewProps> =
           </div>
 
           {/* Technical Caveats & Domain Generalization */}
-          <div className="p-4 rounded-xl bg-amber-950/20 border border-amber-800/40 space-y-2 text-xs">
-            <div className="font-bold text-amber-300 flex items-center gap-2 uppercase tracking-wider text-[11px]">
-              <ShieldAlert className="w-4 h-4 text-amber-400" />
+          <div className="p-4 rounded-xl bg-amber-50/90 border border-amber-300 space-y-2 text-xs shadow-xs">
+            <div className="font-bold text-amber-950 flex items-center gap-2 uppercase tracking-wider text-[11px]">
+              <ShieldAlert className="w-4 h-4 text-amber-700 shrink-0" />
               Evaluation Benchmark & Domain Generalization Caveats
             </div>
-            <p className="text-amber-100/90 leading-relaxed text-[11px]">
-              <strong>External Generalization (CheXpert Drop):</strong> When evaluating this model on external Stanford CheXpert radiographs with locked NIH calibration thresholds, macro AUROC dropped from <strong>0.8206</strong> to <strong>0.6277</strong> (-23.5% relative drop). This demonstrates high sensitivity to hospital-specific beam hardware, projection protocols (AP vs PA), and patient demographics.
+            <p className="text-amber-950/90 leading-relaxed text-[11px]">
+              <strong className="text-amber-950 font-bold">External Generalization (CheXpert Drop):</strong> When evaluating this model on external Stanford CheXpert radiographs with locked NIH calibration thresholds, macro AUROC dropped from <strong className="text-amber-950 font-bold">0.8206</strong> to <strong className="text-amber-950 font-bold">0.6277</strong> (-23.5% relative drop). This demonstrates high sensitivity to hospital-specific beam hardware, projection protocols (AP vs PA), and patient demographics.
             </p>
-            <p className="text-amber-100/80 leading-relaxed text-[11px]">
-              <strong>Non-Diagnostic Notice:</strong> Never treat output probabilities as clinical risk percentages. Model outputs represent relative visual activation vectors on retrospective public datasets and have NOT been validated in prospective clinical trials.
+            <p className="text-amber-950/85 leading-relaxed text-[11px]">
+              <strong className="text-amber-950 font-bold">Non-Diagnostic Notice:</strong> Never treat output probabilities as clinical risk percentages. Model outputs represent relative visual activation vectors on retrospective public datasets and have NOT been validated in prospective clinical trials.
             </p>
           </div>
         </div>
@@ -300,7 +300,7 @@ export const DoctorResearcherXRayView: React.FC<DoctorResearcherXRayViewProps> =
             <FileCode className="w-4 h-4 text-amber-600" />
             {showRawJson ? 'Hide Raw Backend JSON Payload' : 'Inspect Raw Backend JSON Payload'}
           </span>
-          {showRawJson ? <ChevronUp className="w-4 h-4 text-amber-600" /> : <ChevronDown className="w-4 h-4 text-[#7e6c96]" />}
+          {showRawJson ? <ChevronUp className="w-4 h-4 text-amber-600" /> : <ChevronDown className="w-4 h-4 text-[#5e4b75]" />}
         </button>
 
         {showRawJson && (

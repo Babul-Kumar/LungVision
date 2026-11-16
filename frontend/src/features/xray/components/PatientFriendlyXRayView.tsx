@@ -181,7 +181,7 @@ export const PatientFriendlyXRayView: React.FC<PatientFriendlyXRayViewProps> = (
                     <span className="text-emerald-700 font-semibold">not flagged</span>
                   )}.
                 </div>
-                <p className="text-[10px] text-[#7e6c96] pt-1 border-t border-[#e2e8f0] italic">
+                <p className="text-[10px] text-[#5e4b75] pt-1 border-t border-[#e2e8f0] italic font-medium">
                   * Note: "Highest model score" means this was simply the highest mathematical score among the 6 tested conditions. It is NOT a confirmed diagnosis, suspicion, or certainty.
                 </p>
               </div>
@@ -260,7 +260,7 @@ export const PatientFriendlyXRayView: React.FC<PatientFriendlyXRayViewProps> = (
               <Info className="w-4 h-4 text-amber-600" />
               {showDetailedScores ? 'Hide Detailed Numbers' : 'View Detailed Numbers for All 6 Conditions'}
             </span>
-            {showDetailedScores ? <ChevronUp className="w-4 h-4 text-amber-600" /> : <ChevronDown className="w-4 h-4 text-[#7e6c96]" />}
+            {showDetailedScores ? <ChevronUp className="w-4 h-4 text-amber-600" /> : <ChevronDown className="w-4 h-4 text-[#5e4b75]" />}
           </button>
 
           {showDetailedScores && (

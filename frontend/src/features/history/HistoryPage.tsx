@@ -175,7 +175,7 @@ export const HistoryPage: React.FC = () => {
 
         {filteredItems.length === 0 ? (
           <div className="h-64 flex flex-col items-center justify-center border border-dashed border-[#e2e8f0] rounded-xl text-center p-6 text-[#5e4b75] bg-white shadow-xs">
-            <History className="w-10 h-10 text-slate-400 mb-2" />
+            <History className="w-10 h-10 text-[#5e4b75] mb-2" />
             <p className="text-sm font-semibold text-[#1a082e]">No Activity Logged Yet</p>
             <p className="text-xs text-[#5e4b75] max-w-sm mt-1">
               Screen chest radiographs or explore 3D CT volumes to generate an ephemeral audit trail.
@@ -211,7 +211,7 @@ export const HistoryPage: React.FC = () => {
                   </div>
                 </div>
 
-                <div className="flex items-center gap-4 text-[#7e6c96] font-mono text-[11px] self-end sm:self-center">
+                <div className="flex items-center gap-4 text-[#5e4b75] font-mono text-[11px] self-end sm:self-center font-medium">
                   <span className="flex items-center gap-1">
                     <Clock className="w-3.5 h-3.5" />
                     {new Date(item.timestamp).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', second: '2-digit' })}

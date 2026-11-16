@@ -177,11 +177,11 @@ export const ResearchPage: React.FC = () => {
             <div className="space-y-6">
               <div className="flex items-center justify-between">
                 <div>
-                  <h3 className="text-lg font-bold text-white flex items-center gap-2">
+                  <h3 className="text-lg font-bold text-[#1a082e] flex items-center gap-2">
                     NIH ChestX-ray14 Held-Out Test Set (DenseNet121)
                     <Badge variant="emerald" size="sm">Calibrated Epoch 4</Badge>
                   </h3>
-                  <p className="text-xs text-slate-400 mt-0.5">
+                  <p className="text-xs text-[#5e4b75] mt-0.5">
                     Multi-label evaluation on held-out test split. Thresholds calibrated for high-sensitivity triage.
                   </p>
                 </div>
@@ -317,11 +317,11 @@ export const ResearchPage: React.FC = () => {
             <div className="space-y-6">
               <div className="flex items-center justify-between">
                 <div>
-                  <h3 className="text-lg font-bold text-white flex items-center gap-2">
+                  <h3 className="text-lg font-bold text-[#1a082e] flex items-center gap-2">
                     Stanford CheXpert External Generalization
                     <Badge variant="silver" size="sm">Cross-Hospital Validation</Badge>
                   </h3>
-                  <p className="text-xs text-medical-muted mt-0.5">
+                  <p className="text-xs text-[#5e4b75] mt-0.5">
                     Testing domain transferability of NIH-calibrated thresholds against the Stanford CheXpert validation cohort.
                   </p>
                 </div>
@@ -417,11 +417,11 @@ export const ResearchPage: React.FC = () => {
             <div className="space-y-6">
               <div className="flex items-center justify-between">
                 <div>
-                  <h3 className="text-lg font-bold text-white flex items-center gap-2">
+                  <h3 className="text-lg font-bold text-[#1a082e] flex items-center gap-2">
                     VinDr-CXR 15,000-Image External Validation (ResNet18)
                     <Badge variant="amber" size="sm">Binary Normal/Abnormal</Badge>
                   </h3>
-                  <p className="text-xs text-medical-muted mt-0.5">
+                  <p className="text-xs text-[#5e4b75] mt-0.5">
                     Rigorous external verification comparing Baseline vs Blur-Augmented ResNet18 across real Vietnamese hospital radiographs.
                   </p>
                 </div>
@@ -441,7 +441,7 @@ export const ResearchPage: React.FC = () => {
                 {data.vindr_external_metrics.slice(0, 2).map((m, idx) => (
                   <Card key={idx} className="bg-medical-surface/70">
                     <div className="flex items-center justify-between">
-                      <span className="text-xs font-semibold text-amber-400 uppercase">
+                      <span className="text-xs font-bold text-amber-900 uppercase tracking-wide">
                         {m.model || (idx === 0 ? 'Original ResNet18' : 'Blur-Augmented ResNet18')}
                       </span>
                       <Badge variant={idx === 1 ? 'emerald' : 'silver'} size="sm">
@@ -521,12 +521,12 @@ export const ResearchPage: React.FC = () => {
             <div className="space-y-6">
               <div className="flex items-center justify-between">
                 <div>
-                  <h3 className="text-lg font-bold text-white flex items-center gap-2">
+                  <h3 className="text-lg font-bold text-[#1a082e] flex items-center gap-2">
                     Phase 2B: Multi-Patient 3D Statistical Shape Model (SSM)
                     <Badge variant="amber" size="sm">N=430 CT Cohort</Badge>
                     <Badge variant="emerald" size="sm">Zero Leakage Split</Badge>
                   </h3>
-                  <p className="text-xs text-medical-muted mt-0.5">
+                  <p className="text-xs text-[#5e4b75] mt-0.5">
                     PCA eigenspace decomposition on canonical organic lung surface mesh (N=6,737 vertices, 13,478 triangles, 16 anatomical landmarks).
                   </p>
                 </div>

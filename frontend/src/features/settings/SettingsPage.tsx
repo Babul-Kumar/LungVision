@@ -182,7 +182,7 @@ export const SettingsPage: React.FC = () => {
                 href="http://localhost:8000/openapi.json"
                 target="_blank"
                 rel="noreferrer"
-                className="text-xs text-[#7e6c96] hover:text-[#1a082e] flex items-center gap-1 font-mono"
+                className="text-xs text-[#5e4b75] hover:text-[#1a082e] font-medium flex items-center gap-1 font-mono"
               >
                 <span>OpenAPI 3.1.0 JSON</span>
               </a>

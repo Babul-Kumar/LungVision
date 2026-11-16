@@ -55,7 +55,7 @@ export default {
           emerald: '#059669',
           text: '#1a082e',            // High-Contrast Deep Aubergine Typography
           muted: '#5e4b75',           // Refined Muted Aubergine
-          subtle: '#7e6c96',          // Subtle Plum Silver
+          subtle: '#5e4b75',          // High-Contrast Plum Aubergine
         }
       },
       fontFamily: {

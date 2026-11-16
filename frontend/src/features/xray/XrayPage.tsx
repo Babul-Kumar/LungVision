@@ -426,13 +426,13 @@ export const XrayPage: React.FC = () => {
                 </div>
 
                 {/* File Metadata & Replacement Action */}
-                <div className="flex items-center justify-between text-xs text-medical-muted px-1">
-                  <span className="truncate max-w-[220px] font-mono text-[11px]" title={selectedFile?.name}>
+                <div className="flex items-center justify-between text-xs text-[#5e4b75] px-1 font-mono">
+                  <span className="truncate max-w-[220px] text-[11px] font-medium text-[#1a082e]" title={selectedFile?.name}>
                     {selectedFile?.name}
                   </span>
                   <button
                     onClick={resetAll}
-                    className="text-rose-400 hover:text-rose-300 hover:underline flex items-center gap-1 transition-colors text-xs"
+                    className="text-rose-700 hover:text-rose-900 hover:underline font-semibold flex items-center gap-1 transition-colors text-xs"
                   >
                     <RefreshCw className="w-3 h-3" />
                     <span>Replace Image</span>

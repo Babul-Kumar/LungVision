@@ -72,11 +72,11 @@ export const ProbabilityBar: React.FC<ProbabilityBarProps> = ({
         />
       </div>
 
-      {/* Subtle relative position bar sub-label */}
-      <div className="flex justify-between items-center text-[10px] text-[#7e6c96] mt-1 font-mono">
-        <span>0%</span>
-        <span className="text-[#5e4b75]">Cutoff: {(threshold * 100).toFixed(1)}%</span>
-        <span>100%</span>
+      {/* Relative position bar sub-label */}
+      <div className="flex justify-between items-center text-[10px] text-[#5e4b75] mt-1.5 font-mono font-medium">
+        <span className="text-[#5e4b75]">0%</span>
+        <span className="text-[#1a082e] font-semibold">Cutoff: {(threshold * 100).toFixed(1)}%</span>
+        <span className="text-[#5e4b75]">100%</span>
       </div>
     </div>
   );

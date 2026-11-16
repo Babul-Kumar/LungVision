@@ -391,7 +391,7 @@ export const DashboardPage: React.FC = () => {
               <div className="h-44 flex flex-col items-center justify-center text-center text-xs text-[#5e4b75] p-4">
                 <AlertCircle className="w-8 h-8 text-amber-600 mb-2" />
                 <p>No models returned from gateway.</p>
-                <p className="text-[11px] text-slate-400 mt-0.5">Verify backend is active on port 8000.</p>
+                <p className="text-[11px] text-[#5e4b75] mt-0.5">Verify backend is active on port 8000.</p>
               </div>
             ) : (
               <div className="divide-y divide-[#f1f5f9]">
@@ -425,7 +425,7 @@ export const DashboardPage: React.FC = () => {
                             </>
                           )}
                         </span>
-                        <div className="flex items-center gap-1.5 text-[#7e6c96] text-[10px] justify-end">
+                        <div className="flex items-center gap-1.5 text-[#5e4b75] text-[10px] justify-end font-medium">
                           {m.metrics?.parameters && (
                             <span>{(m.metrics.parameters / 1000000).toFixed(2)}M</span>
                           )}
@@ -457,9 +457,9 @@ export const DashboardPage: React.FC = () => {
           >
             {recentHistory.length === 0 ? (
               <div className="h-44 flex flex-col items-center justify-center text-center text-xs text-[#5e4b75] p-4">
-                <History className="w-8 h-8 text-slate-400 mb-2" />
-                <p>No inferences recorded in this session.</p>
-                <p className="text-[11px] text-slate-400 mt-0.5">Screen an image to record an audit entry.</p>
+                <History className="w-8 h-8 text-[#5e4b75] mb-2" />
+                <p className="text-[#1a082e] font-semibold">No inferences recorded in this session.</p>
+                <p className="text-[11px] text-[#5e4b75] mt-0.5">Screen an image to record an audit entry.</p>
               </div>
             ) : (
               <div className="divide-y divide-[#f1f5f9]">
@@ -467,9 +467,9 @@ export const DashboardPage: React.FC = () => {
                   <div key={item.id} className="py-2.5 flex items-center justify-between text-xs">
                     <div className="flex items-center gap-2.5 truncate max-w-[200px]">
                       <FileText className="w-3.5 h-3.5 text-amber-600 shrink-0" />
-                      <span className="font-mono text-[#1a082e] truncate text-[11px]">{item.filename}</span>
+                      <span className="font-mono text-[#1a082e] truncate text-[11px] font-medium">{item.filename}</span>
                     </div>
-                    <span className="text-[#7e6c96] text-[10px] font-mono">
+                    <span className="text-[#5e4b75] text-[10px] font-mono font-medium">
                       {new Date(item.timestamp).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
                     </span>
                   </div>

@@ -490,7 +490,7 @@ export const DualViewXRayPage: React.FC = () => {
                 </Badge>
                 <button
                   onClick={() => setFrontal(initialViewState)}
-                  className="text-xs text-rose-400 hover:underline"
+                  className="text-xs text-rose-700 hover:text-rose-900 font-semibold hover:underline"
                 >
                   Clear
                 </button>
@@ -627,8 +627,8 @@ export const DualViewXRayPage: React.FC = () => {
               </div>
 
               {/* Frontal File Metadata */}
-              <div className="flex items-center justify-between text-xs text-medical-muted px-1 font-mono">
-                <span className="truncate max-w-[240px]" title={frontal.file?.name}>
+              <div className="flex items-center justify-between text-xs text-[#5e4b75] px-1 font-mono">
+                <span className="truncate max-w-[240px] font-medium text-[#1a082e]" title={frontal.file?.name}>
                   {frontal.file?.name}
                 </span>
                 <span>
@@ -639,8 +639,8 @@ export const DualViewXRayPage: React.FC = () => {
             </div>
           )}
           {frontal.error && (
-            <div className="mt-2 text-xs text-rose-400 flex items-center gap-1.5">
-              <AlertCircle className="w-3.5 h-3.5 shrink-0" />
+            <div className="mt-2 text-xs text-rose-700 font-semibold flex items-center gap-1.5">
+              <AlertCircle className="w-3.5 h-3.5 shrink-0 text-rose-600" />
               <span>{frontal.error}</span>
             </div>
           )}
@@ -658,7 +658,7 @@ export const DualViewXRayPage: React.FC = () => {
                 </Badge>
                 <button
                   onClick={() => setLateral(initialViewState)}
-                  className="text-xs text-rose-400 hover:underline"
+                  className="text-xs text-rose-700 hover:text-rose-900 font-semibold hover:underline"
                 >
                   Clear
                 </button>
@@ -795,8 +795,8 @@ export const DualViewXRayPage: React.FC = () => {
               </div>
 
               {/* Lateral File Metadata */}
-              <div className="flex items-center justify-between text-xs text-medical-muted px-1 font-mono">
-                <span className="truncate max-w-[240px]" title={lateral.file?.name}>
+              <div className="flex items-center justify-between text-xs text-[#5e4b75] px-1 font-mono">
+                <span className="truncate max-w-[240px] font-medium text-[#1a082e]" title={lateral.file?.name}>
                   {lateral.file?.name}
                 </span>
                 <span>
@@ -807,8 +807,8 @@ export const DualViewXRayPage: React.FC = () => {
             </div>
           )}
           {lateral.error && (
-            <div className="mt-2 text-xs text-rose-400 flex items-center gap-1.5">
-              <AlertCircle className="w-3.5 h-3.5 shrink-0" />
+            <div className="mt-2 text-xs text-rose-700 font-semibold flex items-center gap-1.5">
+              <AlertCircle className="w-3.5 h-3.5 shrink-0 text-rose-600" />
               <span>{lateral.error}</span>
             </div>
           )}
@@ -1156,7 +1156,7 @@ export const DualViewXRayPage: React.FC = () => {
 
           {!frontalResult ? (
             <div className="py-12 text-center text-[#5e4b75] text-xs border border-dashed border-[#e2e8f0] rounded-xl p-6 bg-slate-50/40">
-              <FileImage className="w-10 h-10 text-slate-400 mx-auto mb-2" />
+              <FileImage className="w-10 h-10 text-[#5e4b75] mx-auto mb-2" />
               <p className="font-semibold text-[#1a082e]">No Dual-View Analysis Executed</p>
               <p className="mt-1 max-w-sm mx-auto">
                 Upload at least the Frontal radiograph above and click "Screen Pathology" to screen for 6 thoracic conditions.

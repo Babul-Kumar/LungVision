@@ -287,7 +287,7 @@ export const ModelsPage: React.FC = () => {
                               <td className="py-2.5 px-3 text-amber-800 font-bold">
                                 {typeof threshold === 'number' ? threshold.toFixed(4) : threshold}
                               </td>
-                              <td className="py-2.5 px-3 text-[#7e6c96]">
+                              <td className="py-2.5 px-3 text-[#5e4b75] font-medium">
                                 {defaultThreshold}
                               </td>
                               <td className="py-2.5 px-3 text-[#5e4b75] font-sans text-[11px]">
@@ -312,7 +312,7 @@ export const ModelsPage: React.FC = () => {
                 </div>
 
                 {/* Verification Assurance Tag */}
-                <div className="mt-6 pt-4 border-t border-[#e2e8f0] flex items-center justify-between text-xs text-[#7e6c96]">
+                <div className="mt-6 pt-4 border-t border-[#e2e8f0] flex items-center justify-between text-xs text-[#5e4b75] font-medium">
                   <span>Audited under Gravitas Engineering Runtime</span>
                   <span className="font-mono text-[10px]">PyTorch CPU / CUDA Compatible</span>
                 </div>
