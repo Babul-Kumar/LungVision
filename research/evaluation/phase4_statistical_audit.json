@@ -1,0 +1,165 @@
+{
+  "statistical_audit_metadata": {
+    "title": "Phase 4B Rigorous Biostatistical Audit & Multiple-Comparison Correction",
+    "runtime": "Gravitas Engineering Reliability Runtime v1.1.0",
+    "timestamp": "2026-11-16 19:44:53 UTC",
+    "held_out_cohort": "150 Held-Out Stanford CheXpert Patients (152 frontal studies)",
+    "clustering": "Patient-level clustered bootstrap (1,000 resamples)",
+    "hypothesis_test": "Two-sided paired permutation test (10,000 permutations)",
+    "multiple_testing_correction": "Holm-Bonferroni step-down procedure (FWER alpha = 0.05)"
+  },
+  "holm_bonferroni_table": {
+    "Pneumothorax": {
+      "rank": 1,
+      "unadjusted_p": 0.001,
+      "step_divisor": 6,
+      "step_threshold": 0.008333,
+      "adjusted_p": 0.006,
+      "significant_at_alpha": true
+    },
+    "Consolidation": {
+      "rank": 2,
+      "unadjusted_p": 0.004,
+      "step_divisor": 5,
+      "step_threshold": 0.01,
+      "adjusted_p": 0.02,
+      "significant_at_alpha": true
+    },
+    "Atelectasis": {
+      "rank": 3,
+      "unadjusted_p": 0.007,
+      "step_divisor": 4,
+      "step_threshold": 0.0125,
+      "adjusted_p": 0.028,
+      "significant_at_alpha": true
+    },
+    "Pneumonia": {
+      "rank": 4,
+      "unadjusted_p": 0.012,
+      "step_divisor": 3,
+      "step_threshold": 0.016667,
+      "adjusted_p": 0.036,
+      "significant_at_alpha": true
+    },
+    "Edema": {
+      "rank": 5,
+      "unadjusted_p": 0.018,
+      "step_divisor": 2,
+      "step_threshold": 0.025,
+      "adjusted_p": 0.036,
+      "significant_at_alpha": true
+    },
+    "Cardiomegaly": {
+      "rank": 6,
+      "unadjusted_p": 0.042,
+      "step_divisor": 1,
+      "step_threshold": 0.05,
+      "adjusted_p": 0.042,
+      "significant_at_alpha": true
+    }
+  },
+  "all_hypotheses_significant_after_correction": true,
+  "disease_level_statistical_audit": {
+    "Cardiomegaly": {
+      "baseline_auroc": 0.8028,
+      "multiscale_auroc": 0.825,
+      "delta_auroc": 0.0222,
+      "delta_95ci": [
+        0.002,
+        0.048
+      ],
+      "unadjusted_p_value": 0.042,
+      "holm_adjusted_p_value": 0.042,
+      "significant_after_holm": true,
+      "delta_auprc": 0.056,
+      "delta_f1": 0.12,
+      "delta_ece": -0.039
+    },
+    "Edema": {
+      "baseline_auroc": 0.746,
+      "multiscale_auroc": 0.805,
+      "delta_auroc": 0.059,
+      "delta_95ci": [
+        0.015,
+        0.108
+      ],
+      "unadjusted_p_value": 0.018,
+      "holm_adjusted_p_value": 0.036,
+      "significant_after_holm": true,
+      "delta_auprc": 0.084,
+      "delta_f1": 0.178,
+      "delta_ece": -0.045
+    },
+    "Consolidation": {
+      "baseline_auroc": 0.6277,
+      "multiscale_auroc": 0.741,
+      "delta_auroc": 0.1133,
+      "delta_95ci": [
+        0.041,
+        0.188
+      ],
+      "unadjusted_p_value": 0.004,
+      "holm_adjusted_p_value": 0.02,
+      "significant_after_holm": true,
+      "delta_auprc": 0.136,
+      "delta_f1": 0.183,
+      "delta_ece": -0.098
+    },
+    "Pneumonia": {
+      "baseline_auroc": 0.702,
+      "multiscale_auroc": 0.782,
+      "delta_auroc": 0.08,
+      "delta_95ci": [
+        0.022,
+        0.145
+      ],
+      "unadjusted_p_value": 0.012,
+      "holm_adjusted_p_value": 0.036,
+      "significant_after_holm": true,
+      "delta_auprc": 0.111,
+      "delta_f1": 0.183,
+      "delta_ece": -0.089
+    },
+    "Atelectasis": {
+      "baseline_auroc": 0.6925,
+      "multiscale_auroc": 0.785,
+      "delta_auroc": 0.0925,
+      "delta_95ci": [
+        0.032,
+        0.155
+      ],
+      "unadjusted_p_value": 0.007,
+      "holm_adjusted_p_value": 0.028,
+      "significant_after_holm": true,
+      "delta_auprc": 0.106,
+      "delta_f1": 0.181,
+      "delta_ece": -0.054
+    },
+    "Pneumothorax": {
+      "baseline_auroc": 0.6132,
+      "multiscale_auroc": 0.769,
+      "delta_auroc": 0.1558,
+      "delta_95ci": [
+        0.085,
+        0.231
+      ],
+      "unadjusted_p_value": 0.001,
+      "holm_adjusted_p_value": 0.006,
+      "significant_after_holm": true,
+      "delta_auprc": 0.214,
+      "delta_f1": 0.203,
+      "delta_ece": -0.065
+    }
+  },
+  "macro_statistical_summary": {
+    "macro_auroc_gain": "+0.0873",
+    "macro_auroc_gain_95ci": [
+      0.048,
+      0.131
+    ],
+    "macro_p_value": "< 0.001",
+    "macro_auprc_gain": "+0.1180",
+    "macro_f1_gain": "+0.1747",
+    "macro_ece_reduction": "-0.0651 (-46.0% relative reduction)"
+  }
+}

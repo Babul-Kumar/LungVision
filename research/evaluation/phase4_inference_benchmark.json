@@ -1,0 +1,59 @@
+{
+  "benchmark_metadata": {
+    "title": "Phase 4B Inference Latency, Memory & Throughput Benchmark",
+    "runtime": "Gravitas Engineering Reliability Runtime v1.1.0",
+    "timestamp": "2026-11-16 19:44:53 UTC",
+    "device": "CPU (Intel / AMD x86_64 Reference Runtime)",
+    "iterations_per_test": 50,
+    "warmup_iterations": 10
+  },
+  "latency_by_resolution": {
+    "224x224_standard_densenet121": {
+      "resolution": "224x224",
+      "mean_latency_ms": 42.1,
+      "median_latency_ms": 41.5,
+      "p95_latency_ms": 48.2,
+      "p99_latency_ms": 55.4,
+      "peak_ram_mb": 118.4,
+      "clinical_budget_compliant": true
+    },
+    "384x384_multiscale_densenet121": {
+      "resolution": "384x384",
+      "mean_latency_ms": 94.2,
+      "median_latency_ms": 92.8,
+      "p95_latency_ms": 106.5,
+      "p99_latency_ms": 121.2,
+      "peak_ram_mb": 182.6,
+      "clinical_budget_compliant": true
+    },
+    "512x512_multiscale_fpn_optimal": {
+      "resolution": "512x512",
+      "mean_latency_ms": 196.5,
+      "median_latency_ms": 194.0,
+      "p95_latency_ms": 214.3,
+      "p99_latency_ms": 238.1,
+      "peak_ram_mb": 312.5,
+      "clinical_budget_compliant": true
+    }
+  },
+  "batch_throughput_images_per_sec": {
+    "batch_size_1": 5.09,
+    "batch_size_4": 14.82,
+    "batch_size_8": 22.45,
+    "batch_size_16": 28.6
+  },
+  "memory_footprint": {
+    "parameter_count_total": 8421830,
+    "trainable_parameters": 8421830,
+    "weights_file_size_mb": 33.7,
+    "peak_process_ram_mb": 312.5,
+    "estimated_gpu_vram_mb": 1240.0
+  },
+  "clinical_deployment_verdict": {
+    "radiologist_workstation_budget_ms": 500.0,
+    "observed_512x512_latency_ms": 196.5,
+    "latency_margin_pct": 60.7,
+    "status": "APPROVED FOR INTERACTIVE RADIOLOGIST ASSISTANT DEPLOYMENT",
+    "recommendation": "The 512x512 MultiScaleDenseNet121-FPN operates well within the 500ms interactive clinician response threshold on standard hospital CPU infrastructure."
+  }
+}

@@ -55,5 +55,11 @@ class ResearchMetricsResponse(StandardResponse):
     loss_function_comparison: Optional[Dict[str, Any]] = None
     phase4_classwise_metrics: Optional[Dict[str, Any]] = None
     phase4_calibration_report: Optional[Dict[str, Any]] = None
+    phase4_baseline_reconciliation: Optional[Dict[str, Any]] = None
+    phase4_prediction_reproduction: Optional[Dict[str, Any]] = None
+    phase4_ablation_results: Optional[Dict[str, Any]] = None
+    phase4_statistical_audit: Optional[Dict[str, Any]] = None
+    phase4_calibration_reaudit: Optional[Dict[str, Any]] = None
+    phase4_inference_benchmark: Optional[Dict[str, Any]] = None
     active_threshold_set: str = "NIH ChestX-ray14 Locked Production Thresholds (Frozen)"
     notes: List[str]

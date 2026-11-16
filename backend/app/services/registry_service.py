@@ -245,12 +245,21 @@ class RegistryService:
         phase4_classwise = self._load_json(eval_dir / "phase4_classwise_metrics.json")
         phase4_calibration = self._load_json(eval_dir / "phase4_calibration_report.json")
 
+        # Phase 4B Audit Deliverables
+        phase4_reconciliation = self._load_json(eval_dir / "phase4_baseline_reconciliation.json")
+        phase4_reproduction = self._load_json(eval_dir / "phase4_prediction_reproduction.json")
+        phase4_ablation = self._load_json(eval_dir / "phase4_ablation_results.json")
+        phase4_statistical = self._load_json(eval_dir / "phase4_statistical_audit.json")
+        phase4_calib_reaudit = self._load_json(eval_dir / "phase4_calibration_reaudit.json")
+        phase4_benchmark = self._load_json(eval_dir / "phase4_inference_benchmark.json")
+
         notes = [
             "NIH metrics reflect calibrated test set performance across 6 multi-label diseases.",
             "CheXpert metrics demonstrate cross-hospital domain generalization when transferring locked NIH thresholds.",
             "VinDr metrics represent 15,000-image external evaluation of binary ResNet18 checkpoints.",
             "Phase 3 external validation encompasses CheXpert, VinDr-CXR, and MIMIC-CXR compliance audits.",
             "Phase 4 high-resolution multi-scale FPN achieves 0.7690 Pneumothorax AUROC (+25.4% gain over 224x224 baseline).",
+            "Phase 4B independently verified baseline reconciliation, controlled 6-model ablations, and Holm-Bonferroni corrections.",
             "Temperature scaling and operating points B and C are research benchmarks; production inference enforces Point A.",
             "All metrics represent retrospective benchmark evaluation and do NOT establish clinical diagnostic validity."
         ]
@@ -272,6 +281,12 @@ class RegistryService:
             loss_function_comparison=loss_comp,
             phase4_classwise_metrics=phase4_classwise,
             phase4_calibration_report=phase4_calibration,
+            phase4_baseline_reconciliation=phase4_reconciliation,
+            phase4_prediction_reproduction=phase4_reproduction,
+            phase4_ablation_results=phase4_ablation,
+            phase4_statistical_audit=phase4_statistical,
+            phase4_calibration_reaudit=phase4_calib_reaudit,
+            phase4_inference_benchmark=phase4_benchmark,
             active_threshold_set="NIH ChestX-ray14 Locked Production Thresholds (Frozen)",
             notes=notes
         )

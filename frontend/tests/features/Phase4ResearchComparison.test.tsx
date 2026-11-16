@@ -103,4 +103,32 @@ describe('Phase 4 Research Comparison Feature Tests', () => {
     expect(screen.getByText('Multi-Scale Experimental Model')).toBeInTheDocument();
     expect(screen.getByText('Research Only — Non-Diagnostic Warning')).toBeInTheDocument();
   });
+
+  it('renders Phase 4B Scientific Reproducibility, Statistical Audit & Controlled Ablation panel', async () => {
+    render(<ResearchPage />);
+
+    await waitFor(() => {
+      expect(screen.getByText('Phase 4: Multi-Scale Model')).toBeInTheDocument();
+    });
+
+    fireEvent.click(screen.getByText('Phase 4: Multi-Scale Model'));
+
+    // Check Phase 4B Audit Banner and Reproducibility Verdict
+    expect(screen.getByText(/PHASE 4B COMPLETE — REPRODUCIBILITY INDEPENDENTLY VERIFIED/i)).toBeInTheDocument();
+    expect(screen.getByText(/Gravitas Phase 4B Audit Verified/i)).toBeInTheDocument();
+
+    // Check Baseline Reconciliation
+    expect(screen.getByText(/Forensic Baseline Reconciliation Audit/i)).toBeInTheDocument();
+    expect(screen.getByText(/Support-Device Transferability Floor/i)).toBeInTheDocument();
+
+    // Check 6-Model Ablation Study
+    expect(screen.getByText(/Controlled 6-Model Architectural Ablation Series/i)).toBeInTheDocument();
+    expect(screen.getAllByText(/Model A/i).length).toBeGreaterThanOrEqual(1);
+    expect(screen.getByText(/Model E \(Ablate GMP\)/i)).toBeInTheDocument();
+    expect(screen.getByText(/Model F \(Ablate SE\)/i)).toBeInTheDocument();
+
+    // Check Holm-Bonferroni Correction Table
+    expect(screen.getByText(/Holm-Bonferroni Family-Wise Error Rate/i)).toBeInTheDocument();
+    expect(screen.getByText(/All 6 Targets Significant \(p_adj < 0.05\)/i)).toBeInTheDocument();
+  });
 });

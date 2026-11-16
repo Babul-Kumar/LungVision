@@ -56,17 +56,27 @@ class MultiScaleDenseNet121(nn.Module):
     Multi-Scale DenseNet121 with Feature Pyramid Network and Decoupled Pathology Heads.
     Preserves fine spatial detail for apical pneumothorax and linear atelectasis while
     maintaining macroscopic thoracic context for cardiomegaly and pulmonary edema.
+
+    Supports controlled ablation flags:
+    - use_gmp: Whether to use Global Max Pooling alongside GAP (default True).
+               If False (Model E), uses Global Average Pooling only.
+    - use_se: Whether to apply Squeeze-and-Excitation channel attention (default True).
+              If False (Model F), uses identity shortcut without SE recalibration.
     """
     def __init__(
         self,
         num_classes: int = 6,
         fpn_channels: int = 256,
         pretrained: bool = False,
-        dropout_rate: float = 0.2
+        dropout_rate: float = 0.2,
+        use_gmp: bool = True,
+        use_se: bool = True
     ):
         super().__init__()
         self.num_classes = num_classes
         self.fpn_channels = fpn_channels
+        self.use_gmp = use_gmp
+        self.use_se = use_se
 
         # Base DenseNet121 backbone
         weights = DenseNet121_Weights.DEFAULT if pretrained else None
@@ -123,13 +133,19 @@ class MultiScaleDenseNet121(nn.Module):
             nn.ReLU(inplace=True)
         )
 
-        # Channel attention on multi-scale pyramid levels
-        self.att_p2 = ChannelAttention(fpn_channels)
-        self.att_p3 = ChannelAttention(fpn_channels)
-        self.att_p4 = ChannelAttention(fpn_channels)
+        # Channel attention on multi-scale pyramid levels (or Identity if ablated)
+        if use_se:
+            self.att_p2 = ChannelAttention(fpn_channels)
+            self.att_p3 = ChannelAttention(fpn_channels)
+            self.att_p4 = ChannelAttention(fpn_channels)
+        else:
+            self.att_p2 = nn.Identity()
+            self.att_p3 = nn.Identity()
+            self.att_p4 = nn.Identity()
 
-        # Dual pooling: GAP + GMP -> 2 * fpn_channels per level = 512
-        pool_dim = fpn_channels * 2
+        # Pooling dimension: GAP + GMP -> 2 * fpn_channels = 512, or GAP only -> fpn_channels = 256
+        pool_dim = fpn_channels * 2 if use_gmp else fpn_channels
+        self.pool_dim = pool_dim
 
         # Decoupled Pathology Heads:
         # 1. Fine-scale head (from P2): Atelectasis (idx 4) & Pneumothorax (idx 5)
@@ -156,7 +172,7 @@ class MultiScaleDenseNet121(nn.Module):
             nn.Linear(128, 2)  # [Cardiomegaly, Edema]
         )
 
-        # 4. Holistic Global Head (from concatenated P2 + P3 + P4 = 3 * pool_dim = 1536)
+        # 4. Holistic Global Head (from concatenated P2 + P3 + P4 = 3 * pool_dim)
         self.head_holistic = nn.Sequential(
             nn.Linear(pool_dim * 3, 256),
             nn.ReLU(inplace=True),
@@ -169,10 +185,12 @@ class MultiScaleDenseNet121(nn.Module):
         self.holistic_weight = nn.Parameter(torch.tensor(0.4))
 
     def _pool_features(self, p: torch.Tensor) -> torch.Tensor:
-        """Applies dual Global Average Pooling (GAP) and Global Max Pooling (GMP)."""
+        """Applies pooling: dual GAP + GMP if use_gmp is True; GAP only if False."""
         gap = F.adaptive_avg_pool2d(p, (1, 1)).flatten(1)
-        gmp = F.adaptive_max_pool2d(p, (1, 1)).flatten(1)
-        return torch.cat([gap, gmp], dim=1)
+        if self.use_gmp:
+            gmp = F.adaptive_max_pool2d(p, (1, 1)).flatten(1)
+            return torch.cat([gap, gmp], dim=1)
+        return gap
 
     def extract_multiscale_features(
         self, x: torch.Tensor

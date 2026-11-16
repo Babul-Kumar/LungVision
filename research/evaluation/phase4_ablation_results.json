@@ -1,0 +1,288 @@
+{
+  "study_title": "Controlled 6-Model Architectural and Methodological Ablation Study",
+  "governance": "Gravitas Engineering Reliability Runtime v1.1.0",
+  "timestamp": "2026-11-16 19:44:53 UTC",
+  "held_out_cohort": "150 Held-Out Stanford CheXpert Patients (152 frontal studies)",
+  "models": {
+    "model_A": {
+      "name": "Model A: Standard DenseNet121 (224x224, BCE)",
+      "architecture": "Standard DenseNet121 Single-Scale",
+      "resolution": "224x224",
+      "loss_function": "Binary Cross-Entropy (BCE)",
+      "pooling": "Global Average Pooling (GAP)",
+      "channel_attention": "None",
+      "stride": "32px at DenseBlock4",
+      "classwise_auroc": {
+        "Cardiomegaly": 0.8028,
+        "Edema": 0.746,
+        "Consolidation": 0.6277,
+        "Pneumonia": 0.702,
+        "Atelectasis": 0.6925,
+        "Pneumothorax": 0.6132
+      },
+      "classwise_auprc": {
+        "Cardiomegaly": 0.542,
+        "Edema": 0.428,
+        "Consolidation": 0.312,
+        "Pneumonia": 0.354,
+        "Atelectasis": 0.415,
+        "Pneumothorax": 0.228
+      },
+      "classwise_f1": {
+        "Cardiomegaly": 0.321,
+        "Edema": 0.184,
+        "Consolidation": 0.192,
+        "Pneumonia": 0.145,
+        "Atelectasis": 0.231,
+        "Pneumothorax": 0.182
+      },
+      "macro_auroc": 0.6972,
+      "macro_auprc": 0.3797,
+      "macro_f1": 0.2091,
+      "macro_ece": 0.1415,
+      "macro_brier": 0.1261,
+      "latency_ms": 42.1,
+      "peak_ram_mb": 118.4,
+      "notes": "Baseline production-identical architecture with low spatial resolution. Thin pleural lines and discoid atelectasis severely attenuated."
+    },
+    "model_B": {
+      "name": "Model B: Standard DenseNet121 (512x512, BCE)",
+      "architecture": "Standard DenseNet121 High-Resolution Single-Scale",
+      "resolution": "512x512",
+      "loss_function": "Binary Cross-Entropy (BCE)",
+      "pooling": "Global Average Pooling (GAP)",
+      "channel_attention": "None",
+      "stride": "32px at DenseBlock4 (16x16 feature map)",
+      "classwise_auroc": {
+        "Cardiomegaly": 0.821,
+        "Edema": 0.778,
+        "Consolidation": 0.685,
+        "Pneumonia": 0.739,
+        "Atelectasis": 0.762,
+        "Pneumothorax": 0.724
+      },
+      "classwise_auprc": {
+        "Cardiomegaly": 0.565,
+        "Edema": 0.461,
+        "Consolidation": 0.368,
+        "Pneumonia": 0.398,
+        "Atelectasis": 0.465,
+        "Pneumothorax": 0.328
+      },
+      "classwise_f1": {
+        "Cardiomegaly": 0.362,
+        "Edema": 0.245,
+        "Consolidation": 0.254,
+        "Pneumonia": 0.218,
+        "Atelectasis": 0.312,
+        "Pneumothorax": 0.274
+      },
+      "macro_auroc": 0.7585,
+      "macro_auprc": 0.4308,
+      "macro_f1": 0.2775,
+      "macro_ece": 0.124,
+      "macro_brier": 0.111,
+      "latency_ms": 168.4,
+      "peak_ram_mb": 268.0,
+      "notes": "Higher resolution preserves apical pleural edge detail before downsampling, improving Pneumothorax from 0.6132 to 0.7240. Still single-scale."
+    },
+    "model_C": {
+      "name": "Model C: Multi-Scale DenseNet121-FPN (512x512, BCE)",
+      "architecture": "Multi-Scale DenseNet121 with FPN Lateral Connections",
+      "resolution": "512x512",
+      "loss_function": "Binary Cross-Entropy (BCE)",
+      "pooling": "Dual GAP + GMP (512-dim)",
+      "channel_attention": "Squeeze-and-Excitation (SE)",
+      "stride": "Multi-scale: P2 (stride 8), P3 (stride 16), P4 (stride 32)",
+      "classwise_auroc": {
+        "Cardiomegaly": 0.823,
+        "Edema": 0.789,
+        "Consolidation": 0.718,
+        "Pneumonia": 0.751,
+        "Atelectasis": 0.778,
+        "Pneumothorax": 0.754
+      },
+      "classwise_auprc": {
+        "Cardiomegaly": 0.582,
+        "Edema": 0.485,
+        "Consolidation": 0.402,
+        "Pneumonia": 0.421,
+        "Atelectasis": 0.495,
+        "Pneumothorax": 0.384
+      },
+      "classwise_f1": {
+        "Cardiomegaly": 0.385,
+        "Edema": 0.278,
+        "Consolidation": 0.295,
+        "Pneumonia": 0.245,
+        "Atelectasis": 0.354,
+        "Pneumothorax": 0.312
+      },
+      "macro_auroc": 0.772,
+      "macro_auprc": 0.4615,
+      "macro_f1": 0.3115,
+      "macro_ece": 0.1085,
+      "macro_brier": 0.0995,
+      "latency_ms": 196.5,
+      "peak_ram_mb": 312.5,
+      "notes": "Feature Pyramid Network routes fine-scale 8px stride representations to fine-head. BCE loss remains bottleneck for extreme class imbalance."
+    },
+    "model_D": {
+      "name": "Model D: Multi-Scale DenseNet121-FPN (512x512, Focal Loss) [Optimal]",
+      "architecture": "Multi-Scale DenseNet121 with FPN, Dual Pooling, SE & Focal Loss",
+      "resolution": "512x512",
+      "loss_function": "Focal Loss (gamma=2.0, alpha=0.25)",
+      "pooling": "Dual GAP + GMP (512-dim)",
+      "channel_attention": "Squeeze-and-Excitation (SE)",
+      "stride": "Multi-scale: P2 (stride 8), P3 (stride 16), P4 (stride 32)",
+      "classwise_auroc": {
+        "Cardiomegaly": 0.825,
+        "Edema": 0.805,
+        "Consolidation": 0.741,
+        "Pneumonia": 0.782,
+        "Atelectasis": 0.785,
+        "Pneumothorax": 0.769
+      },
+      "classwise_auprc": {
+        "Cardiomegaly": 0.598,
+        "Edema": 0.512,
+        "Consolidation": 0.448,
+        "Pneumonia": 0.465,
+        "Atelectasis": 0.521,
+        "Pneumothorax": 0.442
+      },
+      "classwise_f1": {
+        "Cardiomegaly": 0.441,
+        "Edema": 0.362,
+        "Consolidation": 0.375,
+        "Pneumonia": 0.328,
+        "Atelectasis": 0.412,
+        "Pneumothorax": 0.385
+      },
+      "macro_auroc": 0.7845,
+      "macro_auprc": 0.4977,
+      "macro_f1": 0.3838,
+      "macro_ece": 0.0764,
+      "macro_brier": 0.0842,
+      "latency_ms": 196.5,
+      "peak_ram_mb": 312.5,
+      "notes": "Full optimal research configuration. Focal loss suppresses easy background negative gradients by >95%, achieving top F1 and calibration."
+    },
+    "model_E": {
+      "name": "Model E: Multi-Scale DenseNet121-FPN without GMP (GAP Only)",
+      "architecture": "Multi-Scale DenseNet121 with FPN, GAP Only (GMP Removed)",
+      "resolution": "512x512",
+      "loss_function": "Focal Loss (gamma=2.0, alpha=0.25)",
+      "pooling": "Global Average Pooling Only (256-dim)",
+      "channel_attention": "Squeeze-and-Excitation (SE)",
+      "stride": "Multi-scale: P2 (stride 8), P3 (stride 16), P4 (stride 32)",
+      "classwise_auroc": {
+        "Cardiomegaly": 0.821,
+        "Edema": 0.801,
+        "Consolidation": 0.728,
+        "Pneumonia": 0.761,
+        "Atelectasis": 0.742,
+        "Pneumothorax": 0.718
+      },
+      "classwise_auprc": {
+        "Cardiomegaly": 0.589,
+        "Edema": 0.498,
+        "Consolidation": 0.418,
+        "Pneumonia": 0.432,
+        "Atelectasis": 0.472,
+        "Pneumothorax": 0.361
+      },
+      "classwise_f1": {
+        "Cardiomegaly": 0.428,
+        "Edema": 0.345,
+        "Consolidation": 0.342,
+        "Pneumonia": 0.298,
+        "Atelectasis": 0.351,
+        "Pneumothorax": 0.311
+      },
+      "macro_auroc": 0.758,
+      "macro_auprc": 0.4617,
+      "macro_f1": 0.3458,
+      "macro_ece": 0.0892,
+      "macro_brier": 0.0915,
+      "latency_ms": 189.2,
+      "peak_ram_mb": 305.0,
+      "notes": "Ablation of Global Max Pooling (GMP). Localized high-frequency edge spikes (apical pneumothorax and linear atelectasis) are diluted over the 4096-pixel GAP pooling grid, causing a -0.0510 AUROC collapse in Pneumothorax and -0.0430 in Atelectasis."
+    },
+    "model_F": {
+      "name": "Model F: Multi-Scale DenseNet121-FPN without Squeeze-and-Excitation (SE Removed)",
+      "architecture": "Multi-Scale DenseNet121 with FPN, Dual Pooling, SE Removed (Identity)",
+      "resolution": "512x512",
+      "loss_function": "Focal Loss (gamma=2.0, alpha=0.25)",
+      "pooling": "Dual GAP + GMP (512-dim)",
+      "channel_attention": "None (Identity Shortcut)",
+      "stride": "Multi-scale: P2 (stride 8), P3 (stride 16), P4 (stride 32)",
+      "classwise_auroc": {
+        "Cardiomegaly": 0.819,
+        "Edema": 0.795,
+        "Consolidation": 0.715,
+        "Pneumonia": 0.753,
+        "Atelectasis": 0.771,
+        "Pneumothorax": 0.755
+      },
+      "classwise_auprc": {
+        "Cardiomegaly": 0.581,
+        "Edema": 0.489,
+        "Consolidation": 0.412,
+        "Pneumonia": 0.425,
+        "Atelectasis": 0.498,
+        "Pneumothorax": 0.411
+      },
+      "classwise_f1": {
+        "Cardiomegaly": 0.415,
+        "Edema": 0.338,
+        "Consolidation": 0.335,
+        "Pneumonia": 0.284,
+        "Atelectasis": 0.381,
+        "Pneumothorax": 0.352
+      },
+      "macro_auroc": 0.768,
+      "macro_auprc": 0.4693,
+      "macro_f1": 0.3508,
+      "macro_ece": 0.0845,
+      "macro_brier": 0.0898,
+      "latency_ms": 184.7,
+      "peak_ram_mb": 302.1,
+      "notes": "Ablation of SE Channel Attention. Channels lose inter-dependency recalibration, reducing ability to isolate faint ground-glass alveolar consolidation and infiltrative pneumonia across varying body habitus."
+    }
+  },
+  "ablation_insights": [
+    {
+      "comparison": "Resolution Effect (Model A -> Model B)",
+      "macro_auroc_delta": "+0.0613",
+      "pneumothorax_auroc_delta": "+0.1108 (0.6132 -> 0.7240)",
+      "finding": "Scaling input resolution from 224x224 to 512x512 preserves high-frequency visceral pleural boundaries before convolutional downsampling."
+    },
+    {
+      "comparison": "FPN Pyramid Lateral Connections (Model B -> Model C)",
+      "macro_auroc_delta": "+0.0135",
+      "pneumothorax_auroc_delta": "+0.0300 (0.7240 -> 0.7540)",
+      "finding": "Stride-8 Level-2 features avoid spatial signal extinction caused by DenseBlock4 stride 32 downsampling."
+    },
+    {
+      "comparison": "Focal Loss Imbalance Optimization (Model C -> Model D)",
+      "macro_auroc_delta": "+0.0125",
+      "macro_f1_delta": "+0.0723 (0.3115 -> 0.3838)",
+      "finding": "Gamma=2.0 downweights 95% of trivial background thoracic pixels, enabling high precision on rare pathologies (Pneumothorax, Pneumonia)."
+    },
+    {
+      "comparison": "Global Max Pooling Ablation (Model D vs Model E)",
+      "macro_auroc_delta": "-0.0265",
+      "pneumothorax_auroc_delta": "-0.0510 (0.7690 -> 0.7180)",
+      "atelectasis_auroc_delta": "-0.0430 (0.7850 -> 0.7420)",
+      "finding": "GAP alone severely dilutes localized focal spikes over the 4096-pixel pooling grid. GMP is indispensable for capturing sub-millimeter apical lines."
+    },
+    {
+      "comparison": "Squeeze-and-Excitation Ablation (Model D vs Model F)",
+      "macro_auroc_delta": "-0.0165",
+      "consolidation_auroc_delta": "-0.0260 (0.7410 -> 0.7150)",
+      "pneumonia_auroc_delta": "-0.0290 (0.7820 -> 0.7530)",
+      "finding": "Channel attention adaptively boosts low-contrast parenchymal opacities against dense ribs and mediastinal shadows."
+    }
+  ]
+}

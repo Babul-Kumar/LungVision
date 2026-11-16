@@ -185,6 +185,12 @@ export interface ResearchMetricsResponse {
   loss_function_comparison?: Record<string, any> | null;
   phase4_classwise_metrics?: Phase4ClasswiseMetrics | null;
   phase4_calibration_report?: Record<string, any> | null;
+  phase4_baseline_reconciliation?: Record<string, any> | null;
+  phase4_prediction_reproduction?: Record<string, any> | null;
+  phase4_ablation_results?: Record<string, any> | null;
+  phase4_statistical_audit?: Record<string, any> | null;
+  phase4_calibration_reaudit?: Record<string, any> | null;
+  phase4_inference_benchmark?: Record<string, any> | null;
   active_threshold_set?: string;
   notes: string[];
   disclaimer?: string;

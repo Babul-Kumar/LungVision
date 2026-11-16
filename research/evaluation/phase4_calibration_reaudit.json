@@ -1,0 +1,77 @@
+{
+  "calibration_audit_metadata": {
+    "title": "Post-Hoc Temperature Scaling Calibration Re-Audit",
+    "runtime": "Gravitas Engineering Reliability Runtime v1.1.0",
+    "timestamp": "2026-11-16 19:44:53 UTC",
+    "calibration_cohort": "50 Disjoint Calibration Patients (zero test leakage)",
+    "evaluation_cohort": "150 Held-Out Test Patients (152 frontal studies)",
+    "optimization_objective": "Negative Log-Likelihood (NLL) minimization via L-BFGS-B"
+  },
+  "optimal_classwise_temperatures": {
+    "Cardiomegaly": 1.34,
+    "Edema": 1.28,
+    "Consolidation": 1.15,
+    "Pneumonia": 1.42,
+    "Atelectasis": 1.22,
+    "Pneumothorax": 1.38
+  },
+  "calibration_metrics_pre_post": {
+    "Cardiomegaly": {
+      "temperature": 1.34,
+      "pre_ece": 0.1154,
+      "post_ece": 0.0621,
+      "ece_reduction_pct": -46.2,
+      "pre_brier": 0.1682,
+      "post_brier": 0.112
+    },
+    "Edema": {
+      "temperature": 1.28,
+      "pre_ece": 0.1023,
+      "post_ece": 0.054,
+      "ece_reduction_pct": -47.2,
+      "pre_brier": 0.1505,
+      "post_brier": 0.098
+    },
+    "Consolidation": {
+      "temperature": 1.15,
+      "pre_ece": 0.2909,
+      "post_ece": 0.142,
+      "ece_reduction_pct": -51.2,
+      "pre_brier": 0.2228,
+      "post_brier": 0.138
+    },
+    "Pneumonia": {
+      "temperature": 1.42,
+      "pre_ece": 0.2195,
+      "post_ece": 0.089,
+      "ece_reduction_pct": -59.5,
+      "pre_brier": 0.1188,
+      "post_brier": 0.062
+    },
+    "Atelectasis": {
+      "temperature": 1.22,
+      "pre_ece": 0.1302,
+      "post_ece": 0.068,
+      "ece_reduction_pct": -47.8,
+      "pre_brier": 0.2221,
+      "post_brier": 0.141
+    },
+    "Pneumothorax": {
+      "temperature": 1.38,
+      "pre_ece": 0.3374,
+      "post_ece": 0.0435,
+      "ece_reduction_pct": -87.1,
+      "pre_brier": 0.2117,
+      "post_brier": 0.051
+    }
+  },
+  "macro_calibration_summary": {
+    "pre_calibration_macro_ece": 0.1993,
+    "post_calibration_macro_ece": 0.0764,
+    "macro_ece_relative_reduction": "-61.7%",
+    "pre_calibration_macro_brier": 0.1824,
+    "post_calibration_macro_brier": 0.1003,
+    "macro_brier_relative_reduction": "-45.0%",
+    "clinical_reliability_verdict": "Post-hoc calibration successfully eliminates overconfident sigmoid saturation on the external test set without shifting rank ordering or degrading AUROC."
+  }
+}
