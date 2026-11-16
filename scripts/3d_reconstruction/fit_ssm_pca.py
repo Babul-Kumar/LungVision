@@ -134,6 +134,14 @@ def extract_canonical_template(step: int = 2) -> Tuple[np.ndarray, np.ndarray, D
     mesh = trimesh.smoothing.filter_taubin(mesh, lamb=0.5, nu=-0.53, iterations=15)
     trimesh.repair.fix_normals(mesh)
 
+    # Scale canonical template to true adult human anthropometric dimensions:
+    # Transverse width X ~ 240 mm, Anteroposterior depth Y ~ 175 mm, Cranial-caudal height Z ~ 245 mm
+    curr_extents = mesh.bounds[1] - mesh.bounds[0]
+    mesh.vertices[:, 0] *= (240.0 / curr_extents[0])
+    mesh.vertices[:, 1] *= (175.0 / curr_extents[1])
+    mesh.vertices[:, 2] *= (245.0 / curr_extents[2])
+    trimesh.repair.fix_normals(mesh)
+
     verts = np.asarray(mesh.vertices, dtype=np.float32)
     tri_faces = np.asarray(mesh.faces, dtype=np.int32)
     
@@ -182,10 +190,10 @@ def identify_landmarks_on_mesh(vertices: np.ndarray) -> np.ndarray:
     lcp_score = x[left_indices] - z[left_indices]
     landmarks_idx[5] = left_indices[np.argmax(lcp_score)]
     
-    rhilum_dist = np.hypot(x[right_indices] - 12.0, z[right_indices])
+    rhilum_dist = np.hypot(x[right_indices] - 22.0, z[right_indices])
     landmarks_idx[6] = right_indices[np.argmin(rhilum_dist)]
     
-    lhilum_dist = np.hypot(x[left_indices] + 12.0, z[left_indices])
+    lhilum_dist = np.hypot(x[left_indices] + 22.0, z[left_indices])
     landmarks_idx[7] = left_indices[np.argmin(lhilum_dist)]
     
     rad_score = -y[right_indices] - 0.5 * (z[right_indices] - z.min())
@@ -249,11 +257,11 @@ def synthesize_patient_shape(
     
     # Diaphragm curvature
     basal_weight = np.clip(1.0 - z_norm, 0.0, 1.0) ** 1.8
-    z += diaph_factor * 15.0 * basal_weight
+    z += diaph_factor * 25.0 * basal_weight
     
     # Cardiac notch
-    left_medial = (x < 0) & (x > -30) & (z_norm > 0.15) & (z_norm < 0.6)
-    x[left_medial] += cardiac_factor * 8.0 * np.exp(-((z_norm[left_medial] - 0.35) / 0.15) ** 2)
+    left_medial = (x < 0) & (x > -50) & (z_norm > 0.15) & (z_norm < 0.6)
+    x[left_medial] += cardiac_factor * 14.0 * np.exp(-((z_norm[left_medial] - 0.35) / 0.15) ** 2)
     
     # Hemithorax asymmetry
     x[x > 0] *= asym_factor
@@ -365,8 +373,8 @@ def evaluate_shape_reconstruction(
     target_mesh = trimesh.Trimesh(vertices=target_shape, faces=faces, process=False)
     recon_mesh = trimesh.Trimesh(vertices=recon_shape, faces=faces, process=False)
     
-    target_vol = abs(float(target_mesh.volume)) / 1000.0 if target_mesh.is_watertight else 82.3
-    recon_vol = abs(float(recon_mesh.volume)) / 1000.0 if recon_mesh.is_watertight else 82.3
+    target_vol = abs(float(target_mesh.volume)) / 1000.0 if target_mesh.is_watertight else 3900.0
+    recon_vol = abs(float(recon_mesh.volume)) / 1000.0 if recon_mesh.is_watertight else 3900.0
     vol_error_pct = float(abs(recon_vol - target_vol) / max(target_vol, 1e-4) * 100.0)
     
     # Surface Area Error

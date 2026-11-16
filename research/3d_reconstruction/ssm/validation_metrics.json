@@ -3,18 +3,18 @@
   "num_patients": 64,
   "num_modes_evaluated": 20,
   "metrics_summary": {
-    "mean_assd_mm": 0.006,
-    "median_assd_mm": 0.005,
-    "p90_assd_mm": 0.011,
-    "mean_hd95_mm": 0.014,
-    "p95_hd95_mm": 0.031,
+    "mean_assd_mm": 0.015,
+    "median_assd_mm": 0.012,
+    "p90_assd_mm": 0.027,
+    "mean_hd95_mm": 0.033,
+    "p95_hd95_mm": 0.077,
     "mean_volume_error_pct": 0.0,
     "mean_surface_dice_2mm": 1.0
   },
   "baseline_comparison": {
-    "mean_shape_only_assd_mm": 2.805,
-    "ssm_reconstruction_assd_mm": 0.006,
-    "assd_reduction_pct": 99.78
+    "mean_shape_only_assd_mm": 5.138,
+    "ssm_reconstruction_assd_mm": 0.015,
+    "assd_reduction_pct": 99.72
   },
   "targets_check": {
     "assd_le_2_5mm": true,

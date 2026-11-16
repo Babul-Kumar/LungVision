@@ -65,6 +65,18 @@ class OrganVolumetry(BaseModel):
     left_lung_ml: float
     right_lung_ml: float
     symmetry_ratio: float
+    cardiac_volume_ml: Optional[float] = None
+    cardiothoracic_ratio: Optional[float] = None
+    cardiac_notch_depth_mm: Optional[float] = None
+
+
+class CardiacMeshDescriptor(BaseModel):
+    vertex_count: int
+    face_count: int
+    volume_ml: float
+    cardiothoracic_ratio: float
+    vertices: Optional[List[List[float]]] = None
+    faces: Optional[List[List[int]]] = None
 
 
 class MeshDescriptor(BaseModel):
@@ -84,6 +96,7 @@ class SSMReconstructionResponse(StandardResponse):
     metrics: ReconstructionMetrics
     volumetry: OrganVolumetry
     surface_mesh: MeshDescriptor
+    cardiac_mesh: Optional[CardiacMeshDescriptor] = None
 
 
 class SSMDeformRequest(BaseModel):

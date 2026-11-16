@@ -75,6 +75,7 @@ async def fit_ssm_from_projections(
             metrics=result["metrics"],
             volumetry=result["volumetry"],
             surface_mesh=result["surface_mesh"],
+            cardiac_mesh=result.get("cardiac_mesh"),
             disclaimer=result["disclaimer"]
         )
     except Exception as e:
@@ -148,7 +149,7 @@ async def export_reconstructed_obj(
     try:
         coeffs = request.shape_coefficients if request and request.shape_coefficients else []
         verts = await run_in_threadpool(ssm_service.synthesize_shape, coeffs)
-        obj_text = await run_in_threadpool(ssm_service.export_reconstructed_obj, verts)
+        obj_text = await run_in_threadpool(ssm_service.export_reconstructed_obj, verts, coeffs)
         return PlainTextResponse(
             content=obj_text,
             media_type="text/plain",

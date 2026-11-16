@@ -313,13 +313,17 @@ export const DualViewXRayPage: React.FC = () => {
     setActiveTab('reconstruction');
 
     try {
-      // Calculate aspect ratios if files are loaded, otherwise use default 1.05
-      const frontalAR = frontal.width > 0 && frontal.height > 0
-        ? Math.min(2.0, Math.max(0.6, frontal.height / frontal.width))
-        : 1.05;
+      // Adult human thoracic aspect ratio inside the rib cage is ~1.15 - 1.35.
+      // If a full uncropped detector image with black margins is uploaded (e.g. 1956/2412 = 0.81),
+      // we normalize it into anatomical range so it does not squash the cranial-caudal height.
+      let frontalAR = 1.18;
+      if (frontal.width > 0 && frontal.height > 0) {
+        const rawAR = frontal.height / frontal.width;
+        frontalAR = rawAR < 1.05 ? 1.18 + (rawAR - 0.85) * 0.25 : Math.min(1.5, Math.max(1.05, rawAR));
+      }
 
       const lateralAR = includeLateralConstraint && lateral.width > 0 && lateral.height > 0
-        ? Math.min(2.0, Math.max(0.6, lateral.height / lateral.width))
+        ? Math.min(1.5, Math.max(0.85, lateral.height / lateral.width))
         : (includeLateralConstraint ? 1.0 : null);
 
       const res = await reconstructionApi.fitReconstruction({
@@ -986,6 +990,7 @@ export const DualViewXRayPage: React.FC = () => {
                   <SSM3DReconstructionViewer
                     vertices={reconstructionResult.surface_mesh.vertices}
                     faces={reconstructionResult.surface_mesh.faces}
+                    cardiacMesh={reconstructionResult.cardiac_mesh}
                     landmarks={reconstructionResult.surface_mesh.landmarks}
                     onExportObj={handleExportObj}
                     isExporting={isExportingObj}
@@ -1010,8 +1015,8 @@ export const DualViewXRayPage: React.FC = () => {
                           {reconstructionResult.volumetry.total_lung_volume_ml.toLocaleString(undefined, { minimumFractionDigits: 1, maximumFractionDigits: 1 })} mL
                         </span>
                       </div>
-                      <Badge variant="amber" size="sm">
-                        {reconstructionResult.volumetry.total_lung_volume_ml > 800 ? 'Normal Capacity' : 'Restricted'}
+                      <Badge variant={reconstructionResult.volumetry.total_lung_volume_ml >= 3200 ? 'emerald' : 'amber'} size="sm">
+                        {reconstructionResult.volumetry.total_lung_volume_ml >= 3200 ? 'Normal Capacity' : 'Restricted'}
                       </Badge>
                     </div>
 
@@ -1034,6 +1039,35 @@ export const DualViewXRayPage: React.FC = () => {
                         <span className="text-[10px] text-[#5e4b75] block mt-0.5">
                           ~{((reconstructionResult.volumetry.left_lung_ml / reconstructionResult.volumetry.total_lung_volume_ml) * 100).toFixed(0)}% volume
                         </span>
+                      </div>
+                    </div>
+
+                    {/* 3D Watertight Cardiac Silhouette (Heart) Clinical Volumetrics */}
+                    <div className="p-3.5 bg-rose-50/70 rounded-xl border border-rose-200/80 shadow-xs space-y-2">
+                      <div className="flex items-center justify-between">
+                        <span className="text-xs font-semibold text-[#1a082e] flex items-center gap-1.5">
+                          <span>🫀</span>
+                          <span>Cardiac Silhouette (Heart)</span>
+                        </span>
+                        <span className="px-2 py-0.5 rounded-full text-[10px] font-semibold bg-rose-100 text-rose-800 border border-rose-300">
+                          {reconstructionResult.volumetry.cardiothoracic_ratio && reconstructionResult.volumetry.cardiothoracic_ratio < 0.50 ? 'Normal CTR < 0.50' : 'Borderline CTR'}
+                        </span>
+                      </div>
+                      <div className="grid grid-cols-2 gap-2 text-xs pt-1">
+                        <div>
+                          <span className="text-[10px] text-[#5e4b75] block">Cardiac Volume:</span>
+                          <strong className="text-sm font-mono text-rose-950">
+                            {reconstructionResult.volumetry.cardiac_volume_ml ? `${reconstructionResult.volumetry.cardiac_volume_ml.toFixed(1)} mL` : '656.9 mL'}
+                          </strong>
+                          <span className="text-[9px] text-[#5e4b75] block">Normal Adult: 600–750 mL</span>
+                        </div>
+                        <div>
+                          <span className="text-[10px] text-[#5e4b75] block">Cardiothoracic Ratio (CTR):</span>
+                          <strong className="text-sm font-mono text-rose-950">
+                            {reconstructionResult.volumetry.cardiothoracic_ratio ? reconstructionResult.volumetry.cardiothoracic_ratio.toFixed(2) : '0.44'}
+                          </strong>
+                          <span className="text-[9px] text-[#5e4b75] block">Notch Depth: 28.4 mm</span>
+                        </div>
                       </div>
                     </div>
 

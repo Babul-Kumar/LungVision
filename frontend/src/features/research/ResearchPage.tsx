@@ -114,41 +114,37 @@ export const ResearchPage: React.FC = () => {
         <div className="flex items-center gap-1.5 bg-white p-1 rounded-xl border border-[#e2e8f0] shadow-xs">
           <button
             onClick={() => setActiveTab('nih')}
-            className={`px-3.5 py-1.5 rounded-lg text-xs font-medium transition-all ${
-              activeTab === 'nih'
-                ? 'bg-gradient-to-r from-amber-500 to-amber-600 text-white font-bold shadow-xs border border-amber-600'
-                : 'text-[#5e4b75] hover:text-[#1a082e]'
-            }`}
+            className={`px-3.5 py-1.5 rounded-lg text-xs font-medium transition-all ${activeTab === 'nih'
+              ? 'bg-gradient-to-r from-amber-500 to-amber-600 text-white font-bold shadow-xs border border-amber-600'
+              : 'text-[#5e4b75] hover:text-[#1a082e]'
+              }`}
           >
             NIH ChestX-ray14
           </button>
           <button
             onClick={() => setActiveTab('chexpert')}
-            className={`px-3.5 py-1.5 rounded-lg text-xs font-medium transition-all ${
-              activeTab === 'chexpert'
-                ? 'bg-gradient-to-r from-amber-500 to-amber-600 text-white font-bold shadow-xs border border-amber-600'
-                : 'text-[#5e4b75] hover:text-[#1a082e]'
-            }`}
+            className={`px-3.5 py-1.5 rounded-lg text-xs font-medium transition-all ${activeTab === 'chexpert'
+              ? 'bg-gradient-to-r from-amber-500 to-amber-600 text-white font-bold shadow-xs border border-amber-600'
+              : 'text-[#5e4b75] hover:text-[#1a082e]'
+              }`}
           >
             CheXpert External
           </button>
           <button
             onClick={() => setActiveTab('vindr')}
-            className={`px-3.5 py-1.5 rounded-lg text-xs font-medium transition-all ${
-              activeTab === 'vindr'
-                ? 'bg-gradient-to-r from-amber-500 to-amber-600 text-white font-bold shadow-xs border border-amber-600'
-                : 'text-[#5e4b75] hover:text-[#1a082e]'
-            }`}
+            className={`px-3.5 py-1.5 rounded-lg text-xs font-medium transition-all ${activeTab === 'vindr'
+              ? 'bg-gradient-to-r from-amber-500 to-amber-600 text-white font-bold shadow-xs border border-amber-600'
+              : 'text-[#5e4b75] hover:text-[#1a082e]'
+              }`}
           >
             VinDr-CXR (15k)
           </button>
           <button
             onClick={() => setActiveTab('ssm')}
-            className={`px-3.5 py-1.5 rounded-lg text-xs font-medium transition-all ${
-              activeTab === 'ssm'
-                ? 'bg-gradient-to-r from-amber-500 to-amber-600 text-white font-bold shadow-xs border border-amber-600'
-                : 'text-[#5e4b75] hover:text-[#1a082e]'
-            }`}
+            className={`px-3.5 py-1.5 rounded-lg text-xs font-medium transition-all ${activeTab === 'ssm'
+              ? 'bg-gradient-to-r from-amber-500 to-amber-600 text-white font-bold shadow-xs border border-amber-600'
+              : 'text-[#5e4b75] hover:text-[#1a082e]'
+              }`}
           >
             3D SSM Geometry
           </button>

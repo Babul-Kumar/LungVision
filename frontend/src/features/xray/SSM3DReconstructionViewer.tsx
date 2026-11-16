@@ -20,6 +20,14 @@ interface SSM3DReconstructionViewerProps {
   objData?: string | null;
   vertices?: number[][] | null;
   faces?: number[][] | null;
+  cardiacMesh?: {
+    vertex_count?: number;
+    face_count?: number;
+    volume_ml?: number;
+    cardiothoracic_ratio?: number;
+    vertices?: number[][];
+    faces?: number[][];
+  } | null;
   landmarks?: Record<string, [number, number, number]>;
   onExportObj?: () => void;
   isExporting?: boolean;
@@ -36,6 +44,7 @@ export const SSM3DReconstructionViewer: React.FC<SSM3DReconstructionViewerProps>
   objData,
   vertices,
   faces,
+  cardiacMesh,
   landmarks,
   onExportObj,
   isExporting = false,
@@ -43,6 +52,7 @@ export const SSM3DReconstructionViewer: React.FC<SSM3DReconstructionViewerProps>
   const mountRef = useRef<HTMLDivElement>(null);
   const [wireframe, setWireframe] = useState<boolean>(false);
   const [showLandmarks, setShowLandmarks] = useState<boolean>(true);
+  const [showHeart, setShowHeart] = useState<boolean>(true);
   const [colorMode, setColorMode] = useState<'pleura' | 'bilateral' | 'platinum'>('pleura');
   const [isAutoRotating, setIsAutoRotating] = useState<boolean>(false);
   const [activeViewName, setActiveViewName] = useState<string>('Oblique 3D');
@@ -55,6 +65,7 @@ export const SSM3DReconstructionViewer: React.FC<SSM3DReconstructionViewerProps>
   const cameraRef = useRef<THREE.PerspectiveCamera | null>(null);
   const controlsRef = useRef<OrbitControls | null>(null);
   const meshGroupRef = useRef<THREE.Group | null>(null);
+  const cardiacGroupRef = useRef<THREE.Group | null>(null);
   const landmarkGroupRef = useRef<THREE.Group | null>(null);
   const animFrameIdRef = useRef<number | null>(null);
   const isAutoRotatingRef = useRef(false);
@@ -95,8 +106,9 @@ export const SSM3DReconstructionViewer: React.FC<SSM3DReconstructionViewerProps>
     scene.background = new THREE.Color(0x160a28);
     sceneRef.current = scene;
 
+    // Adult thorax spans ~245 mm in Z and ~240 mm in X; distance 520 mm frames the full anatomy comfortably
     const camera = new THREE.PerspectiveCamera(45, width / height, 1, 4000);
-    camera.position.set(0, -320, 60);
+    camera.position.set(0, -520, 50);
     camera.up.set(0, 0, 1); // Z-up craniocaudal
     cameraRef.current = camera;
 
@@ -116,9 +128,9 @@ export const SSM3DReconstructionViewer: React.FC<SSM3DReconstructionViewerProps>
     const controls = new OrbitControls(camera, renderer.domElement);
     controls.enableDamping = true;
     controls.dampingFactor = 0.05;
-    controls.maxDistance = 1500;
-    controls.minDistance = 40;
-    controls.target.set(0, 0, 12);
+    controls.maxDistance = 2500;
+    controls.minDistance = 60;
+    controls.target.set(0, 0, 0);
     controls.addEventListener('change', updateViewLabel);
     controlsRef.current = controls;
 
@@ -146,6 +158,10 @@ export const SSM3DReconstructionViewer: React.FC<SSM3DReconstructionViewerProps>
     scene.add(meshGroup);
     meshGroupRef.current = meshGroup;
 
+    const cardiacGroup = new THREE.Group();
+    scene.add(cardiacGroup);
+    cardiacGroupRef.current = cardiacGroup;
+
     const landmarkGroup = new THREE.Group();
     scene.add(landmarkGroup);
     landmarkGroupRef.current = landmarkGroup;
@@ -155,6 +171,9 @@ export const SSM3DReconstructionViewer: React.FC<SSM3DReconstructionViewerProps>
       animFrameIdRef.current = requestAnimationFrame(animate);
       if (isAutoRotatingRef.current && meshGroupRef.current) {
         meshGroupRef.current.rotation.z += 0.006;
+        if (cardiacGroupRef.current) {
+          cardiacGroupRef.current.rotation.z = meshGroupRef.current.rotation.z;
+        }
         if (landmarkGroupRef.current) {
           landmarkGroupRef.current.rotation.z = meshGroupRef.current.rotation.z;
         }
@@ -227,7 +246,7 @@ export const SSM3DReconstructionViewer: React.FC<SSM3DReconstructionViewerProps>
   useEffect(() => {
     if (!meshGroupRef.current) return;
 
-    // Clear previous mesh
+    // Clear previous meshes
     while (meshGroupRef.current.children.length > 0) {
       const child = meshGroupRef.current.children[0] as THREE.Mesh;
       meshGroupRef.current.remove(child);
@@ -236,6 +255,19 @@ export const SSM3DReconstructionViewer: React.FC<SSM3DReconstructionViewerProps>
         child.material.forEach((m) => m.dispose());
       } else if (child.material) {
         child.material.dispose();
+      }
+    }
+
+    if (cardiacGroupRef.current) {
+      while (cardiacGroupRef.current.children.length > 0) {
+        const child = cardiacGroupRef.current.children[0] as THREE.Mesh;
+        cardiacGroupRef.current.remove(child);
+        if (child.geometry) child.geometry.dispose();
+        if (Array.isArray(child.material)) {
+          child.material.forEach((m) => m.dispose());
+        } else if (child.material) {
+          child.material.dispose();
+        }
       }
     }
 
@@ -289,6 +321,21 @@ export const SSM3DReconstructionViewer: React.FC<SSM3DReconstructionViewerProps>
       }
     };
 
+    // Authentic cardiac silhouette material: deep garnet myocardium with serous pericardial clearcoat
+    const cardiacMaterial = new THREE.MeshPhysicalMaterial({
+      color: 0x991b1b, // Deep anatomical garnet/cardiac crimson
+      roughness: 0.28,
+      metalness: 0.03,
+      clearcoat: 0.82, // Moist pericardial serous fluid reflection
+      clearcoatRoughness: 0.08,
+      sheen: 0.35,
+      sheenColor: new THREE.Color(0xf87171),
+      transparent: true,
+      opacity: wireframe ? 0.9 : 0.96,
+      wireframe: wireframe,
+      side: THREE.DoubleSide,
+    });
+
     const material = createMaterial();
 
     if (objData) {
@@ -300,7 +347,8 @@ export const SSM3DReconstructionViewer: React.FC<SSM3DReconstructionViewerProps>
         obj.traverse((child) => {
           if ((child as THREE.Mesh).isMesh) {
             const mesh = child as THREE.Mesh;
-            mesh.material = material;
+            const isCardiac = mesh.name.toLowerCase().includes('cardiac');
+            mesh.material = isCardiac ? cardiacMaterial : material;
             mesh.geometry.computeVertexNormals();
             totalVerts += mesh.geometry.attributes.position.count;
             if (mesh.geometry.index) {
@@ -310,13 +358,18 @@ export const SSM3DReconstructionViewer: React.FC<SSM3DReconstructionViewerProps>
         });
         meshGroupRef.current.add(obj);
         setVertexCount(totalVerts);
-        setFaceCount(totalFaces || 13478);
+        setFaceCount(totalFaces || 14758);
 
         // Center mesh
         const box = new THREE.Box3().setFromObject(obj);
         const center = box.getCenter(new THREE.Vector3());
         meshGroupRef.current.position.sub(center);
         meshGroupRef.current.rotation.z = 0;
+        if (cardiacGroupRef.current) {
+          cardiacGroupRef.current.position.copy(meshGroupRef.current.position);
+          cardiacGroupRef.current.rotation.z = 0;
+          cardiacGroupRef.current.visible = showHeart;
+        }
         if (landmarkGroupRef.current) {
           landmarkGroupRef.current.position.copy(meshGroupRef.current.position);
           landmarkGroupRef.current.rotation.z = 0;
@@ -363,19 +416,55 @@ export const SSM3DReconstructionViewer: React.FC<SSM3DReconstructionViewerProps>
 
       const mesh = new THREE.Mesh(geometry, material);
       meshGroupRef.current.add(mesh);
-      setVertexCount(vertices.length);
-      setFaceCount(faces.length);
+
+      // Build 3D Watertight Cardiac Silhouette (Heart)
+      let cVertCount = 0;
+      let cFaceCount = 0;
+      if (cardiacMesh?.vertices && cardiacMesh?.faces && cardiacGroupRef.current) {
+        const cGeo = new THREE.BufferGeometry();
+        const cPos = new Float32Array(cardiacMesh.vertices.length * 3);
+        for (let i = 0; i < cardiacMesh.vertices.length; i++) {
+          cPos[i * 3] = cardiacMesh.vertices[i][0];
+          cPos[i * 3 + 1] = cardiacMesh.vertices[i][1];
+          cPos[i * 3 + 2] = cardiacMesh.vertices[i][2];
+        }
+        cGeo.setAttribute('position', new THREE.BufferAttribute(cPos, 3));
+        const cIdx: number[] = [];
+        for (let f = 0; f < cardiacMesh.faces.length; f++) {
+          cIdx.push(cardiacMesh.faces[f][0], cardiacMesh.faces[f][1], cardiacMesh.faces[f][2]);
+        }
+        cGeo.setIndex(cIdx);
+        cGeo.computeVertexNormals();
+        const cMesh = new THREE.Mesh(cGeo, cardiacMaterial);
+        cardiacGroupRef.current.add(cMesh);
+        cVertCount = cardiacMesh.vertices.length;
+        cFaceCount = cardiacMesh.faces.length;
+      }
+
+      setVertexCount(vertices.length + cVertCount);
+      setFaceCount(faces.length + cFaceCount);
 
       const box = new THREE.Box3().setFromObject(mesh);
       const center = box.getCenter(new THREE.Vector3());
       meshGroupRef.current.position.sub(center);
       meshGroupRef.current.rotation.z = 0;
+      if (cardiacGroupRef.current) {
+        cardiacGroupRef.current.position.copy(meshGroupRef.current.position);
+        cardiacGroupRef.current.rotation.z = 0;
+        cardiacGroupRef.current.visible = showHeart;
+      }
       if (landmarkGroupRef.current) {
         landmarkGroupRef.current.position.copy(meshGroupRef.current.position);
         landmarkGroupRef.current.rotation.z = 0;
       }
     }
-  }, [objData, vertices, faces, wireframe, colorMode]);
+  }, [objData, vertices, faces, cardiacMesh, wireframe, colorMode, showHeart]);
+
+  useEffect(() => {
+    if (cardiacGroupRef.current) {
+      cardiacGroupRef.current.visible = showHeart;
+    }
+  }, [showHeart]);
 
   // 3. Render Landmark Markers
   useEffect(() => {
@@ -418,32 +507,32 @@ export const SSM3DReconstructionViewer: React.FC<SSM3DReconstructionViewerProps>
     const camera = cameraRef.current;
     const controls = controlsRef.current;
 
-    controls.target.set(0, 0, 12);
+    controls.target.set(0, 0, 0);
 
     switch (view) {
       case 'AP':
-        camera.position.set(0, -340, 12);
+        camera.position.set(0, -540, 10);
         camera.up.set(0, 0, 1);
         break;
       case 'PA':
-        camera.position.set(0, 340, 12);
+        camera.position.set(0, 540, 10);
         camera.up.set(0, 0, 1);
         break;
       case 'RL':
-        camera.position.set(340, 0, 12);
+        camera.position.set(540, 0, 10);
         camera.up.set(0, 0, 1);
         break;
       case 'LL':
-        camera.position.set(-340, 0, 12);
+        camera.position.set(-540, 0, 10);
         camera.up.set(0, 0, 1);
         break;
       case 'SI':
-        camera.position.set(0, 0, 340);
+        camera.position.set(0, 0, 540);
         camera.up.set(0, 1, 0);
         break;
       case 'OBLIQUE':
       default:
-        camera.position.set(0, -320, 60);
+        camera.position.set(0, -520, 50);
         camera.up.set(0, 0, 1);
         break;
     }
@@ -540,6 +629,18 @@ export const SSM3DReconstructionViewer: React.FC<SSM3DReconstructionViewerProps>
           >
             {showLandmarks ? <Eye className="w-3.5 h-3.5" /> : <EyeOff className="w-3.5 h-3.5" />}
             <span className="hidden sm:inline">Landmarks</span>
+          </button>
+
+          <button
+            onClick={() => setShowHeart((h) => !h)}
+            className={`px-2 py-1 rounded text-xs font-medium flex items-center gap-1 transition-colors ${showHeart
+              ? 'bg-rose-100 text-rose-950 font-semibold border border-rose-300'
+              : 'text-[#5e4b75] hover:text-[#1a082e] hover:bg-slate-100'
+              }`}
+            title="Toggle 3D Watertight Cardiac Silhouette (Heart)"
+          >
+            <span className="text-xs">🫀</span>
+            <span className="hidden sm:inline">Cardiac Silhouette</span>
           </button>
 
           <button

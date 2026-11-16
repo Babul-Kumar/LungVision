@@ -49,6 +49,18 @@ export interface OrganVolumetry {
   left_lung_ml: number;
   right_lung_ml: number;
   symmetry_ratio: number;
+  cardiac_volume_ml?: number;
+  cardiothoracic_ratio?: number;
+  cardiac_notch_depth_mm?: number;
+}
+
+export interface CardiacMeshDescriptor {
+  vertex_count: number;
+  face_count: number;
+  volume_ml: number;
+  cardiothoracic_ratio: number;
+  vertices?: number[][];
+  faces?: number[][];
 }
 
 export interface MeshDescriptor {
@@ -68,6 +80,7 @@ export interface SSMReconstructionResponse {
   metrics: ReconstructionMetrics;
   volumetry: OrganVolumetry;
   surface_mesh: MeshDescriptor;
+  cardiac_mesh?: CardiacMeshDescriptor;
   disclaimer?: string;
 }
 

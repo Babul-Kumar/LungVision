@@ -1,10 +1,10 @@
 {
-  "timestamp_utc": "2026-11-16T08:20:01Z",
+  "timestamp_utc": "2026-11-16T09:09:21Z",
   "method": "Generalized Procrustes Analysis + Coherent Rigid/Non-Rigid Alignment",
   "cohort_size": 301,
   "num_vertices": 6737,
   "registration_success_rate_pct": 100.0,
-  "mean_residual_gpa_distance_mm": 3.852,
+  "mean_residual_gpa_distance_mm": 7.233,
   "folded_triangles_detected": 0,
   "self_intersections_detected": 0,
   "inverted_normals_detected": 0,
