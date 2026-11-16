@@ -45,5 +45,10 @@ class ResearchMetricsResponse(StandardResponse):
     external_validation_metrics: Optional[Dict[str, Any]] = None
     threshold_comparison: Optional[Dict[str, Any]] = None
     manual_tests_audit: Optional[List[Dict[str, Any]]] = None
+    expanded_cohort_comparison: Optional[Dict[str, Any]] = None
+    threshold_optimization_report: Optional[Dict[str, Any]] = None
+    uncertain_label_sensitivity: Optional[Dict[str, Any]] = None
+    calibration_analysis: Optional[Dict[str, Any]] = None
+    resolution_ablation: Optional[Dict[str, Any]] = None
     active_threshold_set: str = "NIH ChestX-ray14 Locked Production Thresholds (Frozen)"
     notes: List[str]

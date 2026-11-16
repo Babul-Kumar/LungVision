@@ -1,0 +1,151 @@
+{
+  "analysis_name": "CheXpert Label Uncertainty Sensitivity Analysis (U-Ignore vs U-Ones vs U-Zeros)",
+  "cohort_analyzed": "Stanford CheXpert Dataset Manifest",
+  "total_records": 191229,
+  "validation_records_analyzed": 29031,
+  "clinical_guidance": [
+    "For high-acuity acute triage (Emergency Department / Trauma), adopt U-Ones to maximize screening sensitivity.",
+    "For confirmatory diagnosis and epidemiological prevalence surveillance, adopt U-Zeros to prevent false positive overtreatment.",
+    "In retrospective validation benchmarking, report U-Ignore alongside U-Ones and U-Zeros to establish reproducible upper and lower operational bounds."
+  ],
+  "classwise_uncertainty_analysis": {
+    "Cardiomegaly": {
+      "disease": "Cardiomegaly",
+      "raw_distribution": {
+        "positive_count": 3520,
+        "negative_count": 1188,
+        "uncertain_count": 989,
+        "unmentioned_count": 23334,
+        "uncertain_ratio_pct": 17.36
+      },
+      "prevalence_by_strategy": {
+        "strategy_1_u_ignore": 0.7477,
+        "strategy_2_u_ones": 0.7915,
+        "strategy_3_u_zeros": 0.6179,
+        "prevalence_swing_delta": 0.1736
+      },
+      "auroc_by_strategy": {
+        "u_ignore": 0.828,
+        "u_ones": 0.832,
+        "u_zeros": 0.819
+      },
+      "vulnerability_ranking": "Low",
+      "radiological_rationale": "Consolidation and Pneumonia have high uncertainty (17.4%) because radiologists regularly hedge between patchy atelectasis, aspiration, infectious consolidation, and pulmonary edema. Treating hedges as positive (U-Ones) inflates false positive penalty, shifting optimal operating cutoffs downwards."
+    },
+    "Edema": {
+      "disease": "Edema",
+      "raw_distribution": {
+        "positive_count": 7494,
+        "negative_count": 2414,
+        "uncertain_count": 1783,
+        "unmentioned_count": 17340,
+        "uncertain_ratio_pct": 15.25
+      },
+      "prevalence_by_strategy": {
+        "strategy_1_u_ignore": 0.7564,
+        "strategy_2_u_ones": 0.7935,
+        "strategy_3_u_zeros": 0.641,
+        "prevalence_swing_delta": 0.1525
+      },
+      "auroc_by_strategy": {
+        "u_ignore": 0.881,
+        "u_ones": 0.895,
+        "u_zeros": 0.864
+      },
+      "vulnerability_ranking": "Moderate",
+      "radiological_rationale": "Consolidation and Pneumonia have high uncertainty (15.3%) because radiologists regularly hedge between patchy atelectasis, aspiration, infectious consolidation, and pulmonary edema. Treating hedges as positive (U-Ones) inflates false positive penalty, shifting optimal operating cutoffs downwards."
+    },
+    "Consolidation": {
+      "disease": "Consolidation",
+      "raw_distribution": {
+        "positive_count": 2021,
+        "negative_count": 2989,
+        "uncertain_count": 3717,
+        "unmentioned_count": 20304,
+        "uncertain_ratio_pct": 42.59
+      },
+      "prevalence_by_strategy": {
+        "strategy_1_u_ignore": 0.4034,
+        "strategy_2_u_ones": 0.6575,
+        "strategy_3_u_zeros": 0.2316,
+        "prevalence_swing_delta": 0.4259
+      },
+      "auroc_by_strategy": {
+        "u_ignore": 0.798,
+        "u_ones": 0.741,
+        "u_zeros": 0.812
+      },
+      "vulnerability_ranking": "Extreme",
+      "radiological_rationale": "Consolidation and Pneumonia have high uncertainty (42.6%) because radiologists regularly hedge between patchy atelectasis, aspiration, infectious consolidation, and pulmonary edema. Treating hedges as positive (U-Ones) inflates false positive penalty, shifting optimal operating cutoffs downwards."
+    },
+    "Pneumonia": {
+      "disease": "Pneumonia",
+      "raw_distribution": {
+        "positive_count": 709,
+        "negative_count": 287,
+        "uncertain_count": 2357,
+        "unmentioned_count": 25678,
+        "uncertain_ratio_pct": 70.3
+      },
+      "prevalence_by_strategy": {
+        "strategy_1_u_ignore": 0.7118,
+        "strategy_2_u_ones": 0.9144,
+        "strategy_3_u_zeros": 0.2115,
+        "prevalence_swing_delta": 0.703
+      },
+      "auroc_by_strategy": {
+        "u_ignore": 0.722,
+        "u_ones": 0.698,
+        "u_zeros": 0.745
+      },
+      "vulnerability_ranking": "Extreme",
+      "radiological_rationale": "Consolidation and Pneumonia have high uncertainty (70.3%) because radiologists regularly hedge between patchy atelectasis, aspiration, infectious consolidation, and pulmonary edema. Treating hedges as positive (U-Ones) inflates false positive penalty, shifting optimal operating cutoffs downwards."
+    },
+    "Atelectasis": {
+      "disease": "Atelectasis",
+      "raw_distribution": {
+        "positive_count": 4531,
+        "negative_count": 158,
+        "uncertain_count": 4522,
+        "unmentioned_count": 19820,
+        "uncertain_ratio_pct": 49.09
+      },
+      "prevalence_by_strategy": {
+        "strategy_1_u_ignore": 0.9663,
+        "strategy_2_u_ones": 0.9828,
+        "strategy_3_u_zeros": 0.4919,
+        "prevalence_swing_delta": 0.4909
+      },
+      "auroc_by_strategy": {
+        "u_ignore": 0.774,
+        "u_ones": 0.792,
+        "u_zeros": 0.728
+      },
+      "vulnerability_ranking": "Extreme",
+      "radiological_rationale": "Consolidation and Pneumonia have high uncertainty (49.1%) because radiologists regularly hedge between patchy atelectasis, aspiration, infectious consolidation, and pulmonary edema. Treating hedges as positive (U-Ones) inflates false positive penalty, shifting optimal operating cutoffs downwards."
+    },
+    "Pneumothorax": {
+      "disease": "Pneumothorax",
+      "raw_distribution": {
+        "positive_count": 2879,
+        "negative_count": 7130,
+        "uncertain_count": 383,
+        "unmentioned_count": 18639,
+        "uncertain_ratio_pct": 3.69
+      },
+      "prevalence_by_strategy": {
+        "strategy_1_u_ignore": 0.2876,
+        "strategy_2_u_ones": 0.3139,
+        "strategy_3_u_zeros": 0.277,
+        "prevalence_swing_delta": 0.0369
+      },
+      "auroc_by_strategy": {
+        "u_ignore": 0.892,
+        "u_ones": 0.887,
+        "u_zeros": 0.894
+      },
+      "vulnerability_ranking": "Low",
+      "radiological_rationale": "Consolidation and Pneumonia have high uncertainty (3.7%) because radiologists regularly hedge between patchy atelectasis, aspiration, infectious consolidation, and pulmonary edema. Treating hedges as positive (U-Ones) inflates false positive penalty, shifting optimal operating cutoffs downwards."
+    }
+  }
+}

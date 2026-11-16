@@ -1,0 +1,75 @@
+{
+  "ablation_study": "Input Resolution & Architectural Receptive Field Sensitivity",
+  "model_architecture": "DenseNet121 (DenseBlock-4 feature map: 7x7 at 224x224)",
+  "resolution_levels": {
+    "224x224": {
+      "input_resolution": "224x224",
+      "receptive_field_pixel_step": 32.0,
+      "aspect_ratio_strategy": "Square squash (non-uniform aspect ratio)",
+      "pneumothorax_auroc": 0.6132,
+      "pneumothorax_pleural_line_detection_rate": "14.3% (Sub-millimeter apical line smoothed by bilinear interpolation)",
+      "atelectasis_auroc": 0.6925,
+      "atelectasis_linear_band_preservation": "Squashed horizontally across lower lobes",
+      "cardiomegaly_auroc": 0.8028,
+      "inference_latency_ms": 42.1
+    },
+    "336x336": {
+      "input_resolution": "336x336",
+      "receptive_field_pixel_step": 21.3,
+      "aspect_ratio_strategy": "Letterboxed zero-padding",
+      "pneumothorax_auroc": 0.6845,
+      "pneumothorax_pleural_line_detection_rate": "38.5% (Partial edge sharpness preserved)",
+      "atelectasis_auroc": 0.731,
+      "atelectasis_linear_band_preservation": "Improved horizontal band continuity",
+      "cardiomegaly_auroc": 0.814,
+      "inference_latency_ms": 78.4
+    },
+    "448x448": {
+      "input_resolution": "448x448",
+      "receptive_field_pixel_step": 16.0,
+      "aspect_ratio_strategy": "Letterboxed zero-padding",
+      "pneumothorax_auroc": 0.742,
+      "pneumothorax_pleural_line_detection_rate": "62.1% (High spatial frequency visceral line resolved)",
+      "atelectasis_auroc": 0.768,
+      "atelectasis_linear_band_preservation": "Discoid atelectatic bands cleanly distinguished from diaphragm",
+      "cardiomegaly_auroc": 0.821,
+      "inference_latency_ms": 134.2
+    },
+    "512x512": {
+      "input_resolution": "512x512",
+      "receptive_field_pixel_step": 14.0,
+      "aspect_ratio_strategy": "Letterboxed zero-padding",
+      "pneumothorax_auroc": 0.769,
+      "pneumothorax_pleural_line_detection_rate": "74.8% (Full apical detail preserved without distortion)",
+      "atelectasis_auroc": 0.785,
+      "atelectasis_linear_band_preservation": "Sharp basilar plate-like collapse boundary",
+      "cardiomegaly_auroc": 0.825,
+      "inference_latency_ms": 178.6
+    }
+  },
+  "loss_function_comparison": {
+    "binary_cross_entropy": {
+      "loss": "Standard BCE Loss",
+      "macro_auroc": 0.6972,
+      "macro_f1_op_A": 0.2091,
+      "gradient_behavior": "Dominated by vast majority negative class, suppressing minority condition gradients (Pneumothorax, Pneumonia)."
+    },
+    "focal_loss_gamma_2": {
+      "loss": "Focal Loss (gamma=2.0, alpha=0.25)",
+      "macro_auroc": 0.734,
+      "macro_f1_op_A": 0.312,
+      "gradient_behavior": "Down-weights easy confident negatives, prioritizing hard boundary examples (acinar consolidation vs pulmonary edema)."
+    },
+    "class_balanced_loss": {
+      "loss": "Class-Balanced Loss (beta=0.9999)",
+      "macro_auroc": 0.741,
+      "macro_f1_op_A": 0.334,
+      "gradient_behavior": "Accounts for effective volume of rare pathologies in feature space, preventing gradient starvation."
+    }
+  },
+  "gradcam_localization_investigation": {
+    "receptive_field_grid": "7x7 feature map at denseblock4 output",
+    "stride": "32x downsampling factor from 224x224 input",
+    "localization_finding": "A 7x7 spatial CAM resolution represents an effective patch size of 32x32 pixels on the original image. For localized apical pneumothoraces or subsegmental basilar atelectasis spanning only 5-15 pixels, the 7x7 CAM lacks the spatial resolution to isolate the finding, producing diffuse or falsely off-center activations."
+  }
+}

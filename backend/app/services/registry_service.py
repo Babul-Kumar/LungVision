@@ -196,10 +196,19 @@ class RegistryService:
         manual_audit_data = self._load_json(eval_dir / "manual_test_reproduction.json")
         manual_audit = manual_audit_data.get("manual_tests_audit") if manual_audit_data else None
 
+        # Phase 3 Deliverables
+        cohort_comparison = self._load_json(eval_dir / "external_cohort_comparison.json")
+        thresh_opt_report = self._load_json(eval_dir / "threshold_optimization_report.json")
+        uncertainty_analysis = self._load_json(eval_dir / "uncertain_label_sensitivity_analysis.json")
+        calibration_analysis = self._load_json(eval_dir / "calibration_analysis.json")
+        resolution_ablation = self._load_json(eval_dir / "resolution_ablation_results.json")
+
         notes = [
             "NIH metrics reflect calibrated test set performance across 6 multi-label diseases.",
             "CheXpert metrics demonstrate cross-hospital domain generalization when transferring locked NIH thresholds.",
             "VinDr metrics represent 15,000-image external evaluation of binary ResNet18 checkpoints.",
+            "Phase 3 external validation encompasses CheXpert, VinDr-CXR, and MIMIC-CXR compliance audits.",
+            "Temperature scaling and operating points B and C are research benchmarks; production inference enforces Point A.",
             "All metrics represent retrospective benchmark evaluation and do NOT establish clinical diagnostic validity."
         ]
 
@@ -210,6 +219,11 @@ class RegistryService:
             external_validation_metrics=ext_metrics,
             threshold_comparison=thresh_comp,
             manual_tests_audit=manual_audit,
+            expanded_cohort_comparison=cohort_comparison,
+            threshold_optimization_report=thresh_opt_report,
+            uncertain_label_sensitivity=uncertainty_analysis,
+            calibration_analysis=calibration_analysis,
+            resolution_ablation=resolution_ablation,
             active_threshold_set="NIH ChestX-ray14 Locked Production Thresholds (Frozen)",
             notes=notes
         )

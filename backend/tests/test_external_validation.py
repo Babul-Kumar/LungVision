@@ -131,3 +131,4 @@ def test_manual_test_manifest_integrity():
     for r in rows:
         assert r["screening_concordance"] in valid_statuses
         assert r["model_checkpoint_hash"] == CHECKPOINT_HASH
+

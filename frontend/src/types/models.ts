@@ -119,6 +119,11 @@ export interface ResearchMetricsResponse {
   external_validation_metrics?: Record<string, any> | null;
   threshold_comparison?: Record<string, any> | null;
   manual_tests_audit?: ManualTestAuditItem[] | null;
+  expanded_cohort_comparison?: Record<string, any> | null;
+  threshold_optimization_report?: Record<string, any> | null;
+  uncertain_label_sensitivity?: Record<string, any> | null;
+  calibration_analysis?: Record<string, any> | null;
+  resolution_ablation?: Record<string, any> | null;
   active_threshold_set?: string;
   notes: string[];
   disclaimer?: string;

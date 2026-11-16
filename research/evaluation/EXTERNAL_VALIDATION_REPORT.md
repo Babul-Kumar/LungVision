@@ -172,3 +172,4 @@ Three operating points were evaluated:
 - [x] **Production Checkpoint Integrity:** `densenet121_nih_best.pth` hash verified (`8d3690cd...`), unchanged.
 - [x] **Production Threshold Integrity:** `DEFAULT_NIH_THRESHOLDS` preserved unchanged in `backend/app/services/xray_service.py`.
 - [x] **Automated Tests:** Comprehensive backend and frontend test suites validating zero-leakage, metric bounds, and UI display.
+

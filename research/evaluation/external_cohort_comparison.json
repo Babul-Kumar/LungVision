@@ -1,0 +1,124 @@
+{
+  "audit_title": "Cross-Cohort Demographic, Methodological & Generalization Audit",
+  "governance": "Gravitas Medical ML Evaluation Framework",
+  "cohorts": {
+    "nih_chestxray14": {
+      "name": "NIH ChestX-ray14",
+      "role": "Model Development & Primary Training Cohort",
+      "institution": "National Institutes of Health Clinical Center (Bethesda, MD, USA)",
+      "sample_size_total": 112120,
+      "patient_count_total": 30805,
+      "evaluated_test_size": 25596,
+      "clinical_environment": "Specialized clinical research hospital (oncology, rare diseases, ambulatory & inpatient)",
+      "projections": {
+        "PA_pct": 60.1,
+        "AP_pct": 39.9
+      },
+      "labeling_method": "Automated NLP report mining (NegBio + CheXpert labeler)",
+      "label_reliability": "Moderate (~90% rule-based report accuracy, susceptible to mention-without-presence)",
+      "target_prevalence_pct": {
+        "Cardiomegaly": 2.5,
+        "Edema": 2.1,
+        "Consolidation": 4.2,
+        "Pneumonia": 1.3,
+        "Atelectasis": 10.4,
+        "Pneumothorax": 4.7
+      },
+      "model_performance": {
+        "macro_auroc": 0.8206,
+        "macro_auprc": 0.167,
+        "brier_score": 0.0381
+      }
+    },
+    "stanford_chexpert": {
+      "name": "Stanford CheXpert",
+      "role": "External Acute Inpatient Validation Cohort",
+      "institution": "Stanford University Medical Center (Palo Alto, CA, USA)",
+      "sample_size_total": 224316,
+      "patient_count_total": 65240,
+      "evaluated_test_size": 202,
+      "evaluated_patients_count": 200,
+      "clinical_environment": "High-acuity tertiary academic medical center (ICU, Emergency Department, Inpatient)",
+      "projections": {
+        "AP_portable_pct": 68.3,
+        "PA_pct": 31.7
+      },
+      "labeling_method": "3 board-certified radiologists consensus on validation set; NLP uncertainty labels on full cohort",
+      "label_reliability": "Very High on consensus validation cohort; explicit uncertainty (-1) on full cohort",
+      "target_prevalence_pct": {
+        "Cardiomegaly": 32.7,
+        "Edema": 20.8,
+        "Consolidation": 15.8,
+        "Pneumonia": 4.0,
+        "Atelectasis": 37.1,
+        "Pneumothorax": 3.5
+      },
+      "model_performance": {
+        "macro_auroc": 0.6972,
+        "macro_auprc": 0.3797,
+        "macro_f1_locked_nih": 0.2091,
+        "macro_f1_external_youden": 0.3708,
+        "brier_score": 0.1261
+      },
+      "domain_shift_factors": [
+        "High proportion of AP portable supine/semi-erect ICU radiographs",
+        "Magnification of cardiothoracic ratio (CTR) on AP portable beam geometry",
+        "Severe fluid overload and pulmonary multi-morbidity in ICU patients",
+        "Foreign body artifacts (endotracheal tubes, central venous catheters, pacemakers, chest drains)"
+      ]
+    },
+    "vindr_cxr": {
+      "name": "VinDr-CXR",
+      "role": "External Multi-Center Gold-Standard Validation Cohort",
+      "institution": "Hospital 108 and Hanoi Medical University Hospital (Hanoi, Vietnam)",
+      "sample_size_total": 15000,
+      "patient_count_total": 15000,
+      "evaluated_test_size": 14577,
+      "clinical_environment": "Major regional tertiary referral and teaching hospitals in Southeast Asia",
+      "projections": {
+        "PA_pct": 82.4,
+        "AP_pct": 17.6
+      },
+      "labeling_method": "17 board-certified radiologists annotating local bounding boxes; 3-reader consensus decisions",
+      "label_reliability": "Gold Standard (Verified 3-reader agreement on 14 thoracic findings)",
+      "aligned_findings_counts": {
+        "Cardiomegaly": 1297,
+        "Aortic_enlargement": 1744,
+        "Consolidation": 31,
+        "Atelectasis": 18,
+        "Pneumothorax": 45,
+        "Pleural_effusion": 439,
+        "Infiltration": 91
+      },
+      "model_performance": {
+        "binary_resnet18_baseline_auc": 0.6015,
+        "binary_resnet18_windowed_clahe_auc": 0.6231,
+        "cardiomegaly_miss_rate_3readers": 81.26
+      },
+      "domain_shift_factors": [
+        "Southeast Asian demographic distribution (lower average BMI, smaller thoracic cage)",
+        "Endemic pulmonary conditions (post-tuberculosis scarring, bronchiectasis, apical fibrosis)",
+        "Native DICOM 16-bit dynamic range requiring specific VOI LUT windowing"
+      ]
+    },
+    "mimic_cxr": {
+      "name": "MIMIC-CXR",
+      "role": "Accessibility & Credentialing Comparative Audit",
+      "institution": "Beth Israel Deaconess Medical Center (Boston, MA, USA)",
+      "sample_size_total": 377110,
+      "patient_count_total": 65379,
+      "clinical_environment": "Large urban academic hospital ICU and Emergency Department",
+      "projections": {
+        "AP_portable_pct": 65.0,
+        "PA_pct": 35.0
+      },
+      "compliance_requirements": [
+        "PhysioNet Credentialed User status required",
+        "Completion of CITI Data or Specimens Only Research human subjects training",
+        "Signed PhysioNet Data Use Agreement (DUA) prohibiting re-distribution or de-anonymization",
+        "Access restricted to authenticated researchers; cannot be embedded directly in open repository"
+      ],
+      "taxonomic_compatibility": "Fully compatible (Uses identical 14-disease CheXpert NLP labeler)"
+    }
+  }
+}

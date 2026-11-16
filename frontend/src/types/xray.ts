@@ -15,10 +15,12 @@ export type DiseaseName = (typeof EXPECTED_6_DISEASES)[number];
 
 export interface ModelDescriptor {
   id: string;
+  name?: string;
   architecture: string;
   task: string;
   training_dataset: string;
   checkpoint_epoch: number;
+  input_dimensions?: number[];
 }
 
 export interface DiseasePrediction {

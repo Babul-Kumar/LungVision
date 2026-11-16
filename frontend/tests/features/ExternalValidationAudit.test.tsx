@@ -21,6 +21,9 @@ vi.mock('@/services/api/researchApi', () => ({
 }));
 
 const mockMultiLabelResult: XRayPredictionResponse = {
+  success: true,
+  timestamp: '2026-11-16T00:00:00Z',
+  disclaimer: 'For research and educational use only.',
   model: {
     id: 'densenet121_nih_6disease',
     name: 'DenseNet121 NIH 6-Disease Multi-Label Classifier',
