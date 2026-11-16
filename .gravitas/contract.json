@@ -1,22 +1,22 @@
 {
   "mode": "implementation",
-  "objective": "LungVision AI — Phase 6B Classification Performance Improvement & Controlled Architecture Experiments.",
+  "objective": "LungVision AI — Phase 6C Independent Research Model Reproduction & Generalization Audit.",
   "acceptance_criteria": [
-    "Gate A: Baseline Reproduction (Reproduce existing model performance on NIH held-out test cohort; AUROC, AUPRC, Sensitivity, Specificity, Precision, F1, Brier score, ECE, confusion matrices, latency; export phase6b_baseline_reproduction.json).",
-    "Gate B: Aspect-Ratio-Preserving Preprocessing (Compare direct 224x224 resize vs letterboxed padding vs higher resolution; measure cardiac silhouette, lung boundary, distortion, landmark displacement; export phase6b_preprocessing_comparison.json).",
-    "Gate C: Resolution Experiments (Compare 224x224, 320x320, 384x384, 448x448, 512x512; compute memory consumption, training/eval time, latency, performance; export phase6b_resolution_ablation.json).",
-    "Gate D: Multi-Scale Architecture (Ablate FPN, multi-scale fusion, GAP vs GAP+GMP, SE attention, loss functions; export phase6b_multiscale_ablation.json).",
-    "Gate E: Class Imbalance & Label Quality (Analyze NIH distributions, missing labels, co-occurrence, label noise, BCE vs weighted BCE vs focal loss vs asymmetric loss; export phase6b_class_imbalance_analysis.json).",
-    "Gate F: Calibration & Threshold Evaluation (Compare frozen NIH thresholds, Youden thresholds, high-sensitivity operating points using validation data; export phase6b_calibration_threshold_report.json).",
-    "Gate G: Error-Specific Evaluation (Evaluate the 6 Phase 6 test images; measure probability changes with letterboxing and multi-scale features; export phase6b_six_image_comparison.json).",
-    "Gate H: Model Selection & Final Report (Multi-criteria validation selection; export phase6b_model_selection_report.json and author authoritative PHASE_6B_CLASSIFICATION_IMPROVEMENT_REPORT.md)."
+    "Gate A: Checkpoint & Experiment Reproduction (Identify exact Model D checkpoint, verify SHA-256, config, manifest; declare PARTIAL if 512x512 dedicated checkpoint missing; export phase6c_checkpoint_reproduction.json).",
+    "Gate B: Controlled Preprocessing Comparison (Compare direct resize vs aspect-ratio letterbox; train/eval matched configs without domain mismatch; export phase6c_preprocessing_reproduction.json).",
+    "Gate C: Resolution Reproduction (Audit 224 to 512 resolutions; verify trained checkpoints exist; correct AUROC vs sensitivity confusion; export phase6c_resolution_validation.json).",
+    "Gate D: Statistical Validation (Patient-cluster bootstrap CIs resampling patients rather than images; paired comparisons with effect sizes and multiple-testing correction; export phase6c_patient_cluster_statistics.json).",
+    "Gate E: Calibration Evaluation (Per-class Brier score, ECE, reliability diagrams, slope/intercept, precision-recall curves; fitted strictly on validation data; export phase6c_calibration_report.json).",
+    "Gate F: Operating Point Validation (Evaluate Frozen NIH, Youden J, and High-Sensitivity Triage with patient-cluster CIs; non-diagnostic disclaimer; export phase6c_operating_point_validation.json).",
+    "Gate G: Error Analysis (Audit false negatives for Pneumothorax, Cardiomegaly, Edema, Atelectasis and Pneumonia/Consolidation confusion with Grad-CAM and metadata; export phase6c_error_analysis.json).",
+    "Gate H: External Evaluation & Final Report (Evaluate on independent CheXpert cohort; document label differences; export phase6c_external_evaluation.json and author authoritative PHASE_6C_INDEPENDENT_REPRODUCTION_REPORT.md declaring COMPLETE/PARTIAL status)."
   ],
   "non_goals": [
     "Do not overwrite or modify production DenseNet121 weights (SHA-256: 8d3690cd0438587a94afb8fd2ad84c0b30f9c1cc2727ee0eb03662a02ea020af)",
     "Do not alter frozen NIH production classification thresholds",
-    "Do not overwrite Phase 5B, 5C, 5D, or Phase 6 artifacts or delete checkpoints",
-    "Do not tune thresholds or select models using the final test cohort (prevent post-hoc data leakage)",
-    "Do not claim clinical diagnostic capability without external clinical trial validation"
+    "Do not overwrite Phase 5B through Phase 6B artifacts",
+    "Do not use test data for calibration or threshold tuning",
+    "Do not claim clinical diagnostic validity or external 3D reconstruction validation from CXR datasets"
   ],
   "risk": "medium",
   "budget": "deep",
@@ -37,14 +37,14 @@
     "verification_depth": "impact",
     "delegation": "none",
     "reason_codes": [
-      "baseline-reproduction",
-      "aspect-ratio-preprocessing-ablation",
-      "resolution-experiments",
-      "multiscale-fpn-architecture-ablation",
-      "class-imbalance-loss-comparison",
-      "calibration-threshold-operating-points",
-      "six-image-comparative-evaluation",
-      "multicriteria-model-selection-reporting"
+      "checkpoint-reproduction-audit",
+      "controlled-preprocessing-matched-audit",
+      "resolution-progression-audit",
+      "patient-cluster-bootstrap-statistics",
+      "multiclass-calibration-validation",
+      "operating-points-bootstrap-evaluation",
+      "forensic-error-analysis-gradcam",
+      "external-chexpert-generalization-audit"
     ]
   },
   "status": "completed"

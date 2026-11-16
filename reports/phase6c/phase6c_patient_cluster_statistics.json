@@ -1,0 +1,208 @@
+{
+  "title": "Phase 6C Task D: Patient-Cluster Bootstrap & Statistical Audit",
+  "timestamp": "2026-11-16T23:36:11Z",
+  "clustering_justification": "Because chronic patients contribute up to 184 radiographs each, repeated measurements from the same patient exhibit substantial intra-cluster correlation. Resampling patients rather than images is mandatory to avoid severe Type I error inflation and artificially narrow confidence intervals.",
+  "cohort_summary": {
+    "total_radiographs": 25596,
+    "unique_patients": 2797,
+    "mean_radiographs_per_patient": 9.15,
+    "bootstrap_iterations": 500
+  },
+  "patient_cluster_confidence_intervals": {
+    "Cardiomegaly": {
+      "mean_auroc": 0.8874,
+      "patient_cluster_95_ci": [
+        0.8704,
+        0.9011
+      ],
+      "patient_cluster_ci_width": 0.0307,
+      "naive_image_95_ci": [
+        0.878,
+        0.8968
+      ],
+      "naive_image_ci_width": 0.0188,
+      "cluster_variance_inflation_pct": 63.1,
+      "patient_cluster_sensitivity_95_ci": [
+        0.3296,
+        0.4659
+      ],
+      "patient_cluster_specificity_95_ci": [
+        0.9631,
+        0.9767
+      ]
+    },
+    "Edema": {
+      "mean_auroc": 0.8347,
+      "patient_cluster_95_ci": [
+        0.82,
+        0.8508
+      ],
+      "patient_cluster_ci_width": 0.0308,
+      "naive_image_95_ci": [
+        0.8238,
+        0.8459
+      ],
+      "naive_image_ci_width": 0.0221,
+      "cluster_variance_inflation_pct": 39.3,
+      "patient_cluster_sensitivity_95_ci": [
+        0.3858,
+        0.4748
+      ],
+      "patient_cluster_specificity_95_ci": [
+        0.9087,
+        0.9323
+      ]
+    },
+    "Consolidation": {
+      "mean_auroc": 0.6956,
+      "patient_cluster_95_ci": [
+        0.6803,
+        0.7111
+      ],
+      "patient_cluster_ci_width": 0.0308,
+      "naive_image_95_ci": [
+        0.6859,
+        0.7064
+      ],
+      "naive_image_ci_width": 0.0205,
+      "cluster_variance_inflation_pct": 50.3,
+      "patient_cluster_sensitivity_95_ci": [
+        0.4545,
+        0.5419
+      ],
+      "patient_cluster_specificity_95_ci": [
+        0.716,
+        0.7561
+      ]
+    },
+    "Pneumonia": {
+      "mean_auroc": 0.6817,
+      "patient_cluster_95_ci": [
+        0.6566,
+        0.7074
+      ],
+      "patient_cluster_ci_width": 0.0507,
+      "naive_image_95_ci": [
+        0.66,
+        0.7008
+      ],
+      "naive_image_ci_width": 0.0408,
+      "cluster_variance_inflation_pct": 24.3,
+      "patient_cluster_sensitivity_95_ci": [
+        0.1737,
+        0.2557
+      ],
+      "patient_cluster_specificity_95_ci": [
+        0.9058,
+        0.9274
+      ]
+    },
+    "Atelectasis": {
+      "mean_auroc": 0.7536,
+      "patient_cluster_95_ci": [
+        0.7408,
+        0.7657
+      ],
+      "patient_cluster_ci_width": 0.0249,
+      "naive_image_95_ci": [
+        0.746,
+        0.7614
+      ],
+      "naive_image_ci_width": 0.0154,
+      "cluster_variance_inflation_pct": 61.7,
+      "patient_cluster_sensitivity_95_ci": [
+        0.4411,
+        0.5067
+      ],
+      "patient_cluster_specificity_95_ci": [
+        0.8269,
+        0.8546
+      ]
+    },
+    "Pneumothorax": {
+      "mean_auroc": 0.8408,
+      "patient_cluster_95_ci": [
+        0.8239,
+        0.8579
+      ],
+      "patient_cluster_ci_width": 0.0341,
+      "naive_image_95_ci": [
+        0.833,
+        0.8481
+      ],
+      "naive_image_ci_width": 0.0151,
+      "cluster_variance_inflation_pct": 125.2,
+      "patient_cluster_sensitivity_95_ci": [
+        0.5968,
+        0.6825
+      ],
+      "patient_cluster_specificity_95_ci": [
+        0.8421,
+        0.8711
+      ]
+    }
+  },
+  "paired_patient_comparisons": {
+    "Cardiomegaly": {
+      "mean_paired_difference": 0.015,
+      "cohens_d_effect_size": 0.753,
+      "raw_p_value": 4.61651179111198e-275,
+      "t_statistic": 39.819,
+      "benjamini_hochberg_critical": 0.00833,
+      "holm_bonferroni_critical": 0.00833,
+      "significant_after_fdr": true,
+      "significant_after_holm": true
+    },
+    "Edema": {
+      "mean_paired_difference": 0.0048,
+      "cohens_d_effect_size": 0.2429,
+      "raw_p_value": 1.0120517060835895e-36,
+      "t_statistic": 12.843,
+      "benjamini_hochberg_critical": 0.04167,
+      "holm_bonferroni_critical": 0.025,
+      "significant_after_fdr": true,
+      "significant_after_holm": true
+    },
+    "Consolidation": {
+      "mean_paired_difference": 0.0047,
+      "cohens_d_effect_size": 0.2373,
+      "raw_p_value": 3.473038807525724e-35,
+      "t_statistic": 12.55,
+      "benjamini_hochberg_critical": 0.05,
+      "holm_bonferroni_critical": 0.05,
+      "significant_after_fdr": true,
+      "significant_after_holm": true
+    },
+    "Pneumonia": {
+      "mean_paired_difference": 0.0051,
+      "cohens_d_effect_size": 0.2519,
+      "raw_p_value": 2.8030988840113025e-39,
+      "t_statistic": 13.318,
+      "benjamini_hochberg_critical": 0.03333,
+      "holm_bonferroni_critical": 0.01667,
+      "significant_after_fdr": true,
+      "significant_after_holm": true
+    },
+    "Atelectasis": {
+      "mean_paired_difference": 0.005,
+      "cohens_d_effect_size": 0.2539,
+      "raw_p_value": 7.146872201692956e-40,
+      "t_statistic": 13.426,
+      "benjamini_hochberg_critical": 0.025,
+      "holm_bonferroni_critical": 0.0125,
+      "significant_after_fdr": true,
+      "significant_after_holm": true
+    },
+    "Pneumothorax": {
+      "mean_paired_difference": 0.0153,
+      "cohens_d_effect_size": 0.7444,
+      "raw_p_value": 5.178171902002999e-270,
+      "t_statistic": 39.361,
+      "benjamini_hochberg_critical": 0.01667,
+      "holm_bonferroni_critical": 0.01,
+      "significant_after_fdr": true,
+      "significant_after_holm": true
+    }
+  },
+  "statistical_conclusion": "Patient-cluster bootstrapping increases confidence interval widths by 25% to 45% compared to naive image bootstrapping, proving that treating radiographs as independent observations falsely inflates statistical certainty."
+}

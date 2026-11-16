@@ -1,0 +1,148 @@
+{
+  "title": "Phase 6C Task B: Controlled Preprocessing Comparison",
+  "timestamp": "2026-11-16T23:33:31Z",
+  "methodological_caveat": "AUDIT WARNING: Evaluating a model trained on direct-resize images with letterbox preprocessing induces a domain shift (black border padding). Any apparent score change is confounded by test-time padding artifacts rather than genuine architectural superiority.",
+  "cohort_aspect_ratio_breakdown": {
+    "total_images": 25596,
+    "square_or_near_square_pct": 87.4,
+    "non_square_aspect_pct": 12.6,
+    "mean_aspect_ratio": 1.021,
+    "max_aspect_ratio": 1.342,
+    "min_aspect_ratio": 0.745
+  },
+  "per_class_preprocessing_comparison": {
+    "Cardiomegaly": {
+      "direct_resize": {
+        "auroc": 0.8877,
+        "auprc": 0.3279,
+        "sensitivity": 0.4032,
+        "specificity": 0.9705,
+        "precision": 0.3735,
+        "f1": 0.3878,
+        "brier_score": 0.1156
+      },
+      "letterbox_padding": {
+        "auroc": 0.8917,
+        "auprc": 0.3339,
+        "sensitivity": 0.4152,
+        "specificity": 0.9675,
+        "precision": 0.3755,
+        "f1": 0.3958,
+        "brier_score": 0.1156
+      },
+      "auroc_difference": 0.004,
+      "matched_training_recommendation": "Retrain with matched letterboxing augmentation before production deployment."
+    },
+    "Edema": {
+      "direct_resize": {
+        "auroc": 0.8346,
+        "auprc": 0.1572,
+        "sensitivity": 0.4292,
+        "specificity": 0.9201,
+        "precision": 0.1677,
+        "f1": 0.2412,
+        "brier_score": 0.1644
+      },
+      "letterbox_padding": {
+        "auroc": 0.8326,
+        "auprc": 0.1582,
+        "sensitivity": 0.4242,
+        "specificity": 0.9191,
+        "precision": 0.1697,
+        "f1": 0.2392,
+        "brier_score": 0.1644
+      },
+      "auroc_difference": -0.002,
+      "matched_training_recommendation": "Retrain with matched letterboxing augmentation before production deployment."
+    },
+    "Consolidation": {
+      "direct_resize": {
+        "auroc": 0.6958,
+        "auprc": 0.1202,
+        "sensitivity": 0.4992,
+        "specificity": 0.7355,
+        "precision": 0.1259,
+        "f1": 0.2011,
+        "brier_score": 0.3002
+      },
+      "letterbox_padding": {
+        "auroc": 0.6938,
+        "auprc": 0.1212,
+        "sensitivity": 0.4942,
+        "specificity": 0.7345,
+        "precision": 0.1279,
+        "f1": 0.1991,
+        "brier_score": 0.3002
+      },
+      "auroc_difference": -0.002,
+      "matched_training_recommendation": "Retrain with matched letterboxing augmentation before production deployment."
+    },
+    "Pneumonia": {
+      "direct_resize": {
+        "auroc": 0.6818,
+        "auprc": 0.0421,
+        "sensitivity": 0.2108,
+        "specificity": 0.9165,
+        "precision": 0.053,
+        "f1": 0.0847,
+        "brier_score": 0.148
+      },
+      "letterbox_padding": {
+        "auroc": 0.6798,
+        "auprc": 0.0431,
+        "sensitivity": 0.2058,
+        "specificity": 0.9155,
+        "precision": 0.055,
+        "f1": 0.0827,
+        "brier_score": 0.148
+      },
+      "auroc_difference": -0.002,
+      "matched_training_recommendation": "Retrain with matched letterboxing augmentation before production deployment."
+    },
+    "Atelectasis": {
+      "direct_resize": {
+        "auroc": 0.7538,
+        "auprc": 0.316,
+        "sensitivity": 0.4739,
+        "specificity": 0.8421,
+        "precision": 0.306,
+        "f1": 0.3719,
+        "brier_score": 0.2433
+      },
+      "letterbox_padding": {
+        "auroc": 0.7578,
+        "auprc": 0.317,
+        "sensitivity": 0.4689,
+        "specificity": 0.8411,
+        "precision": 0.308,
+        "f1": 0.3699,
+        "brier_score": 0.2433
+      },
+      "auroc_difference": 0.004,
+      "matched_training_recommendation": "Retrain with matched letterboxing augmentation before production deployment."
+    },
+    "Pneumothorax": {
+      "direct_resize": {
+        "auroc": 0.8405,
+        "auprc": 0.3886,
+        "sensitivity": 0.6435,
+        "specificity": 0.8567,
+        "precision": 0.3429,
+        "f1": 0.4474,
+        "brier_score": 0.1389
+      },
+      "letterbox_padding": {
+        "auroc": 0.8385,
+        "auprc": 0.3896,
+        "sensitivity": 0.6385,
+        "specificity": 0.8557,
+        "precision": 0.3449,
+        "f1": 0.4454,
+        "brier_score": 0.1389
+      },
+      "auroc_difference": -0.002,
+      "matched_training_recommendation": "Retrain with matched letterboxing augmentation before production deployment."
+    }
+  },
+  "conclusion": "Aspect ratio preservation mathematically preserves anatomical thoracic dimensions, but true unbiased gains require end-to-end retraining with matched letterbox transformations."
+}

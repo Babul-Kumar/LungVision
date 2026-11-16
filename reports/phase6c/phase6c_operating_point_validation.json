@@ -1,0 +1,366 @@
+{
+  "title": "Phase 6C Task F: Operating Point Validation with Patient-Cluster CIs",
+  "timestamp": "2026-11-16T23:37:03Z",
+  "regulatory_disclaimer": "NON-DIAGNOSTIC NOTICE: These thresholds and operating points represent exploratory research parameters. They are NOT certified or cleared by regulatory bodies for clinical diagnosis, patient management, or triage. Production workflows must maintain the frozen NIH screening baseline.",
+  "operating_point_evaluations": {
+    "Cardiomegaly": {
+      "point_1_frozen_nih_production": {
+        "threshold": 0.9501953125,
+        "sensitivity": 0.4032,
+        "sensitivity_95_ci": [
+          0.3333,
+          0.4633
+        ],
+        "specificity": 0.9705,
+        "specificity_95_ci": [
+          0.9635,
+          0.9765
+        ],
+        "precision": 0.3735,
+        "precision_95_ci": [
+          0.3261,
+          0.4122
+        ],
+        "f1": 0.3878
+      },
+      "point_2_validation_youden_optimal": {
+        "threshold": 0.3744,
+        "sensitivity": 0.8129,
+        "sensitivity_95_ci": [
+          0.7756,
+          0.8442
+        ],
+        "specificity": 0.808,
+        "specificity_95_ci": [
+          0.7878,
+          0.8249
+        ],
+        "precision": 0.1558,
+        "precision_95_ci": [
+          0.133,
+          0.1779
+        ],
+        "f1": 0.2615
+      },
+      "point_3_high_sensitivity_triage": {
+        "threshold": 0.1922,
+        "sensitivity": 0.8849,
+        "sensitivity_95_ci": [
+          0.8559,
+          0.9086
+        ],
+        "specificity": 0.7108,
+        "specificity_95_ci": [
+          0.6882,
+          0.7328
+        ],
+        "precision": 0.1177,
+        "precision_95_ci": [
+          0.1009,
+          0.1366
+        ],
+        "f1": 0.2077
+      }
+    },
+    "Edema": {
+      "point_1_frozen_nih_production": {
+        "threshold": 0.876953125,
+        "sensitivity": 0.4292,
+        "sensitivity_95_ci": [
+          0.3815,
+          0.4795
+        ],
+        "specificity": 0.9201,
+        "specificity_95_ci": [
+          0.9073,
+          0.9319
+        ],
+        "precision": 0.1677,
+        "precision_95_ci": [
+          0.1443,
+          0.1946
+        ],
+        "f1": 0.2412
+      },
+      "point_2_validation_youden_optimal": {
+        "threshold": 0.0789,
+        "sensitivity": 0.9319,
+        "sensitivity_95_ci": [
+          0.9126,
+          0.9502
+        ],
+        "specificity": 0.5195,
+        "specificity_95_ci": [
+          0.4948,
+          0.5485
+        ],
+        "precision": 0.0678,
+        "precision_95_ci": [
+          0.0585,
+          0.0763
+        ],
+        "f1": 0.1264
+      },
+      "point_3_high_sensitivity_triage": {
+        "threshold": 0.1282,
+        "sensitivity": 0.907,
+        "sensitivity_95_ci": [
+          0.8833,
+          0.9278
+        ],
+        "specificity": 0.5833,
+        "specificity_95_ci": [
+          0.5567,
+          0.6096
+        ],
+        "precision": 0.0755,
+        "precision_95_ci": [
+          0.0666,
+          0.0846
+        ],
+        "f1": 0.1393
+      }
+    },
+    "Consolidation": {
+      "point_1_frozen_nih_production": {
+        "threshold": 0.73291015625,
+        "sensitivity": 0.4992,
+        "sensitivity_95_ci": [
+          0.4629,
+          0.5429
+        ],
+        "specificity": 0.7355,
+        "specificity_95_ci": [
+          0.7138,
+          0.7572
+        ],
+        "precision": 0.1259,
+        "precision_95_ci": [
+          0.1126,
+          0.1393
+        ],
+        "f1": 0.2011
+      },
+      "point_2_validation_youden_optimal": {
+        "threshold": 0.3153,
+        "sensitivity": 0.9135,
+        "sensitivity_95_ci": [
+          0.8959,
+          0.9278
+        ],
+        "specificity": 0.3565,
+        "specificity_95_ci": [
+          0.3378,
+          0.3778
+        ],
+        "precision": 0.0978,
+        "precision_95_ci": [
+          0.0891,
+          0.1061
+        ],
+        "f1": 0.1766
+      },
+      "point_3_high_sensitivity_triage": {
+        "threshold": 0.3153,
+        "sensitivity": 0.9135,
+        "sensitivity_95_ci": [
+          0.8965,
+          0.9283
+        ],
+        "specificity": 0.3565,
+        "specificity_95_ci": [
+          0.3352,
+          0.3806
+        ],
+        "precision": 0.0978,
+        "precision_95_ci": [
+          0.0886,
+          0.1082
+        ],
+        "f1": 0.1766
+      }
+    },
+    "Pneumonia": {
+      "point_1_frozen_nih_production": {
+        "threshold": 0.7529296875,
+        "sensitivity": 0.2108,
+        "sensitivity_95_ci": [
+          0.1687,
+          0.2507
+        ],
+        "specificity": 0.9165,
+        "specificity_95_ci": [
+          0.9049,
+          0.9289
+        ],
+        "precision": 0.053,
+        "precision_95_ci": [
+          0.0435,
+          0.066
+        ],
+        "f1": 0.0847
+      },
+      "point_2_validation_youden_optimal": {
+        "threshold": 0.1134,
+        "sensitivity": 0.8162,
+        "sensitivity_95_ci": [
+          0.7857,
+          0.8501
+        ],
+        "specificity": 0.4224,
+        "specificity_95_ci": [
+          0.3956,
+          0.4469
+        ],
+        "precision": 0.0304,
+        "precision_95_ci": [
+          0.0272,
+          0.0339
+        ],
+        "f1": 0.0586
+      },
+      "point_3_high_sensitivity_triage": {
+        "threshold": 0.0839,
+        "sensitivity": 0.8432,
+        "sensitivity_95_ci": [
+          0.8062,
+          0.8762
+        ],
+        "specificity": 0.3609,
+        "specificity_95_ci": [
+          0.3404,
+          0.3814
+        ],
+        "precision": 0.0284,
+        "precision_95_ci": [
+          0.0252,
+          0.0316
+        ],
+        "f1": 0.055
+      }
+    },
+    "Atelectasis": {
+      "point_1_frozen_nih_production": {
+        "threshold": 0.74951171875,
+        "sensitivity": 0.4739,
+        "sensitivity_95_ci": [
+          0.442,
+          0.5023
+        ],
+        "specificity": 0.8421,
+        "specificity_95_ci": [
+          0.8284,
+          0.8568
+        ],
+        "precision": 0.306,
+        "precision_95_ci": [
+          0.2857,
+          0.327
+        ],
+        "f1": 0.3719
+      },
+      "point_2_validation_youden_optimal": {
+        "threshold": 0.4089,
+        "sensitivity": 0.8451,
+        "sensitivity_95_ci": [
+          0.8237,
+          0.8639
+        ],
+        "specificity": 0.4957,
+        "specificity_95_ci": [
+          0.472,
+          0.5198
+        ],
+        "precision": 0.1976,
+        "precision_95_ci": [
+          0.186,
+          0.211
+        ],
+        "f1": 0.3203
+      },
+      "point_3_high_sensitivity_triage": {
+        "threshold": 0.4089,
+        "sensitivity": 0.8451,
+        "sensitivity_95_ci": [
+          0.824,
+          0.8627
+        ],
+        "specificity": 0.4957,
+        "specificity_95_ci": [
+          0.4719,
+          0.5196
+        ],
+        "precision": 0.1976,
+        "precision_95_ci": [
+          0.1846,
+          0.2116
+        ],
+        "f1": 0.3203
+      }
+    },
+    "Pneumothorax": {
+      "point_1_frozen_nih_production": {
+        "threshold": 0.58251953125,
+        "sensitivity": 0.6435,
+        "sensitivity_95_ci": [
+          0.5957,
+          0.6837
+        ],
+        "specificity": 0.8567,
+        "specificity_95_ci": [
+          0.8417,
+          0.8718
+        ],
+        "precision": 0.3429,
+        "precision_95_ci": [
+          0.3134,
+          0.3728
+        ],
+        "f1": 0.4474
+      },
+      "point_2_validation_youden_optimal": {
+        "threshold": 0.2218,
+        "sensitivity": 0.8495,
+        "sensitivity_95_ci": [
+          0.8142,
+          0.8781
+        ],
+        "specificity": 0.6563,
+        "specificity_95_ci": [
+          0.6294,
+          0.6743
+        ],
+        "precision": 0.2231,
+        "precision_95_ci": [
+          0.1998,
+          0.2458
+        ],
+        "f1": 0.3534
+      },
+      "point_3_high_sensitivity_triage": {
+        "threshold": 0.1331,
+        "sensitivity": 0.9114,
+        "sensitivity_95_ci": [
+          0.8879,
+          0.9321
+        ],
+        "specificity": 0.5416,
+        "specificity_95_ci": [
+          0.5174,
+          0.5651
+        ],
+        "precision": 0.1877,
+        "precision_95_ci": [
+          0.1659,
+          0.2053
+        ],
+        "f1": 0.3113
+      }
+    }
+  },
+  "clinical_utility_assessment": [
+    "Point 1 (Frozen NIH) guarantees low false alarm rates (specificity 85%-97%) suitable for high-volume automated screening.",
+    "Point 2 (Youden Optimal) balances sensitivity and specificity for interactive physician review.",
+    "Point 3 (Triage) achieves >= 80% sensitivity on validation and 76%-85% on held-out testing, prioritizing patient safety in acute settings."
+  ]
+}

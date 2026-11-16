@@ -1,0 +1,662 @@
+{
+  "title": "Phase 6C Task E: Multiclass Probability Calibration & Reliability Report",
+  "timestamp": "2026-11-16T23:36:11Z",
+  "validation_fitting_policy": "Calibration parameters and scaling evaluated strictly on held-out data after derivation on validation set.",
+  "disease_calibration_metrics": {
+    "Cardiomegaly": {
+      "brier_score": 0.1156,
+      "expected_calibration_error": 0.1703,
+      "calibration_slope": 0.0791,
+      "calibration_intercept": -0.4026,
+      "overconfidence_assessment": "Overconfident in high-probability bins",
+      "reliability_diagram_10_bins": [
+        {
+          "bin_range": [
+            0.0,
+            0.1
+          ],
+          "sample_count": 15143,
+          "mean_confidence": 0.0231,
+          "empirical_accuracy": 0.0048,
+          "calibration_gap": -0.0182
+        },
+        {
+          "bin_range": [
+            0.1,
+            0.2
+          ],
+          "sample_count": 2556,
+          "mean_confidence": 0.1438,
+          "empirical_accuracy": 0.0215,
+          "calibration_gap": -0.1222
+        },
+        {
+          "bin_range": [
+            0.2,
+            0.3
+          ],
+          "sample_count": 1521,
+          "mean_confidence": 0.2474,
+          "empirical_accuracy": 0.025,
+          "calibration_gap": -0.2225
+        },
+        {
+          "bin_range": [
+            0.3,
+            0.4
+          ],
+          "sample_count": 1048,
+          "mean_confidence": 0.3487,
+          "empirical_accuracy": 0.0439,
+          "calibration_gap": -0.3048
+        },
+        {
+          "bin_range": [
+            0.4,
+            0.5
+          ],
+          "sample_count": 855,
+          "mean_confidence": 0.4479,
+          "empirical_accuracy": 0.0503,
+          "calibration_gap": -0.3976
+        },
+        {
+          "bin_range": [
+            0.5,
+            0.6
+          ],
+          "sample_count": 699,
+          "mean_confidence": 0.5491,
+          "empirical_accuracy": 0.0615,
+          "calibration_gap": -0.4876
+        },
+        {
+          "bin_range": [
+            0.6,
+            0.7
+          ],
+          "sample_count": 681,
+          "mean_confidence": 0.6515,
+          "empirical_accuracy": 0.0984,
+          "calibration_gap": -0.5532
+        },
+        {
+          "bin_range": [
+            0.7,
+            0.8
+          ],
+          "sample_count": 670,
+          "mean_confidence": 0.7507,
+          "empirical_accuracy": 0.1149,
+          "calibration_gap": -0.6358
+        },
+        {
+          "bin_range": [
+            0.8,
+            0.9
+          ],
+          "sample_count": 752,
+          "mean_confidence": 0.853,
+          "empirical_accuracy": 0.125,
+          "calibration_gap": -0.728
+        },
+        {
+          "bin_range": [
+            0.9,
+            1.0
+          ],
+          "sample_count": 1671,
+          "mean_confidence": 0.9656,
+          "empirical_accuracy": 0.319,
+          "calibration_gap": -0.6466
+        }
+      ]
+    },
+    "Edema": {
+      "brier_score": 0.1644,
+      "expected_calibration_error": 0.2276,
+      "calibration_slope": 0.0513,
+      "calibration_intercept": -0.4325,
+      "overconfidence_assessment": "Overconfident in high-probability bins",
+      "reliability_diagram_10_bins": [
+        {
+          "bin_range": [
+            0.0,
+            0.1
+          ],
+          "sample_count": 13667,
+          "mean_confidence": 0.0226,
+          "empirical_accuracy": 0.0054,
+          "calibration_gap": -0.0171
+        },
+        {
+          "bin_range": [
+            0.1,
+            0.2
+          ],
+          "sample_count": 2229,
+          "mean_confidence": 0.1437,
+          "empirical_accuracy": 0.0188,
+          "calibration_gap": -0.1248
+        },
+        {
+          "bin_range": [
+            0.2,
+            0.3
+          ],
+          "sample_count": 1376,
+          "mean_confidence": 0.2462,
+          "empirical_accuracy": 0.0305,
+          "calibration_gap": -0.2157
+        },
+        {
+          "bin_range": [
+            0.3,
+            0.4
+          ],
+          "sample_count": 1076,
+          "mean_confidence": 0.3478,
+          "empirical_accuracy": 0.0362,
+          "calibration_gap": -0.3116
+        },
+        {
+          "bin_range": [
+            0.4,
+            0.5
+          ],
+          "sample_count": 956,
+          "mean_confidence": 0.4483,
+          "empirical_accuracy": 0.046,
+          "calibration_gap": -0.4023
+        },
+        {
+          "bin_range": [
+            0.5,
+            0.6
+          ],
+          "sample_count": 946,
+          "mean_confidence": 0.5506,
+          "empirical_accuracy": 0.0645,
+          "calibration_gap": -0.4861
+        },
+        {
+          "bin_range": [
+            0.6,
+            0.7
+          ],
+          "sample_count": 907,
+          "mean_confidence": 0.6485,
+          "empirical_accuracy": 0.0728,
+          "calibration_gap": -0.5758
+        },
+        {
+          "bin_range": [
+            0.7,
+            0.8
+          ],
+          "sample_count": 1046,
+          "mean_confidence": 0.7512,
+          "empirical_accuracy": 0.0698,
+          "calibration_gap": -0.6814
+        },
+        {
+          "bin_range": [
+            0.8,
+            0.9
+          ],
+          "sample_count": 1408,
+          "mean_confidence": 0.8534,
+          "empirical_accuracy": 0.0959,
+          "calibration_gap": -0.7575
+        },
+        {
+          "bin_range": [
+            0.9,
+            1.0
+          ],
+          "sample_count": 1985,
+          "mean_confidence": 0.9498,
+          "empirical_accuracy": 0.1758,
+          "calibration_gap": -0.774
+        }
+      ]
+    },
+    "Consolidation": {
+      "brier_score": 0.3002,
+      "expected_calibration_error": 0.4135,
+      "calibration_slope": 0.0906,
+      "calibration_intercept": -0.423,
+      "overconfidence_assessment": "Overconfident in high-probability bins",
+      "reliability_diagram_10_bins": [
+        {
+          "bin_range": [
+            0.0,
+            0.1
+          ],
+          "sample_count": 4443,
+          "mean_confidence": 0.0424,
+          "empirical_accuracy": 0.0088,
+          "calibration_gap": -0.0336
+        },
+        {
+          "bin_range": [
+            0.1,
+            0.2
+          ],
+          "sample_count": 2128,
+          "mean_confidence": 0.1488,
+          "empirical_accuracy": 0.0202,
+          "calibration_gap": -0.1286
+        },
+        {
+          "bin_range": [
+            0.2,
+            0.3
+          ],
+          "sample_count": 1793,
+          "mean_confidence": 0.2502,
+          "empirical_accuracy": 0.0351,
+          "calibration_gap": -0.2151
+        },
+        {
+          "bin_range": [
+            0.3,
+            0.4
+          ],
+          "sample_count": 1850,
+          "mean_confidence": 0.3509,
+          "empirical_accuracy": 0.0497,
+          "calibration_gap": -0.3012
+        },
+        {
+          "bin_range": [
+            0.4,
+            0.5
+          ],
+          "sample_count": 1907,
+          "mean_confidence": 0.4517,
+          "empirical_accuracy": 0.053,
+          "calibration_gap": -0.3987
+        },
+        {
+          "bin_range": [
+            0.5,
+            0.6
+          ],
+          "sample_count": 2273,
+          "mean_confidence": 0.5517,
+          "empirical_accuracy": 0.0752,
+          "calibration_gap": -0.4765
+        },
+        {
+          "bin_range": [
+            0.6,
+            0.7
+          ],
+          "sample_count": 2884,
+          "mean_confidence": 0.6514,
+          "empirical_accuracy": 0.0929,
+          "calibration_gap": -0.5584
+        },
+        {
+          "bin_range": [
+            0.7,
+            0.8
+          ],
+          "sample_count": 3635,
+          "mean_confidence": 0.7518,
+          "empirical_accuracy": 0.1166,
+          "calibration_gap": -0.6352
+        },
+        {
+          "bin_range": [
+            0.8,
+            0.9
+          ],
+          "sample_count": 3450,
+          "mean_confidence": 0.8466,
+          "empirical_accuracy": 0.1319,
+          "calibration_gap": -0.7147
+        },
+        {
+          "bin_range": [
+            0.9,
+            1.0
+          ],
+          "sample_count": 1233,
+          "mean_confidence": 0.9306,
+          "empirical_accuracy": 0.129,
+          "calibration_gap": -0.8016
+        }
+      ]
+    },
+    "Pneumonia": {
+      "brier_score": 0.148,
+      "expected_calibration_error": 0.2486,
+      "calibration_slope": 0.0266,
+      "calibration_intercept": -0.4673,
+      "overconfidence_assessment": "Overconfident in high-probability bins",
+      "reliability_diagram_10_bins": [
+        {
+          "bin_range": [
+            0.0,
+            0.1
+          ],
+          "sample_count": 10020,
+          "mean_confidence": 0.0379,
+          "empirical_accuracy": 0.0096,
+          "calibration_gap": -0.0283
+        },
+        {
+          "bin_range": [
+            0.1,
+            0.2
+          ],
+          "sample_count": 3960,
+          "mean_confidence": 0.1449,
+          "empirical_accuracy": 0.0154,
+          "calibration_gap": -0.1295
+        },
+        {
+          "bin_range": [
+            0.2,
+            0.3
+          ],
+          "sample_count": 2542,
+          "mean_confidence": 0.2475,
+          "empirical_accuracy": 0.0197,
+          "calibration_gap": -0.2278
+        },
+        {
+          "bin_range": [
+            0.3,
+            0.4
+          ],
+          "sample_count": 1946,
+          "mean_confidence": 0.348,
+          "empirical_accuracy": 0.0242,
+          "calibration_gap": -0.3239
+        },
+        {
+          "bin_range": [
+            0.4,
+            0.5
+          ],
+          "sample_count": 1568,
+          "mean_confidence": 0.4473,
+          "empirical_accuracy": 0.0351,
+          "calibration_gap": -0.4122
+        },
+        {
+          "bin_range": [
+            0.5,
+            0.6
+          ],
+          "sample_count": 1412,
+          "mean_confidence": 0.5487,
+          "empirical_accuracy": 0.034,
+          "calibration_gap": -0.5147
+        },
+        {
+          "bin_range": [
+            0.6,
+            0.7
+          ],
+          "sample_count": 1289,
+          "mean_confidence": 0.6493,
+          "empirical_accuracy": 0.0427,
+          "calibration_gap": -0.6066
+        },
+        {
+          "bin_range": [
+            0.7,
+            0.8
+          ],
+          "sample_count": 1252,
+          "mean_confidence": 0.7505,
+          "empirical_accuracy": 0.0431,
+          "calibration_gap": -0.7074
+        },
+        {
+          "bin_range": [
+            0.8,
+            0.9
+          ],
+          "sample_count": 1102,
+          "mean_confidence": 0.849,
+          "empirical_accuracy": 0.0599,
+          "calibration_gap": -0.7891
+        },
+        {
+          "bin_range": [
+            0.9,
+            1.0
+          ],
+          "sample_count": 505,
+          "mean_confidence": 0.9296,
+          "empirical_accuracy": 0.0455,
+          "calibration_gap": -0.884
+        }
+      ]
+    },
+    "Atelectasis": {
+      "brier_score": 0.2433,
+      "expected_calibration_error": 0.3304,
+      "calibration_slope": 0.2389,
+      "calibration_intercept": -0.3538,
+      "overconfidence_assessment": "Overconfident in high-probability bins",
+      "reliability_diagram_10_bins": [
+        {
+          "bin_range": [
+            0.0,
+            0.1
+          ],
+          "sample_count": 3248,
+          "mean_confidence": 0.05,
+          "empirical_accuracy": 0.0169,
+          "calibration_gap": -0.0331
+        },
+        {
+          "bin_range": [
+            0.1,
+            0.2
+          ],
+          "sample_count": 2944,
+          "mean_confidence": 0.1501,
+          "empirical_accuracy": 0.0353,
+          "calibration_gap": -0.1148
+        },
+        {
+          "bin_range": [
+            0.2,
+            0.3
+          ],
+          "sample_count": 2600,
+          "mean_confidence": 0.2494,
+          "empirical_accuracy": 0.0523,
+          "calibration_gap": -0.1971
+        },
+        {
+          "bin_range": [
+            0.3,
+            0.4
+          ],
+          "sample_count": 2538,
+          "mean_confidence": 0.3502,
+          "empirical_accuracy": 0.0729,
+          "calibration_gap": -0.2773
+        },
+        {
+          "bin_range": [
+            0.4,
+            0.5
+          ],
+          "sample_count": 2600,
+          "mean_confidence": 0.4499,
+          "empirical_accuracy": 0.1,
+          "calibration_gap": -0.3499
+        },
+        {
+          "bin_range": [
+            0.5,
+            0.6
+          ],
+          "sample_count": 2631,
+          "mean_confidence": 0.5503,
+          "empirical_accuracy": 0.1247,
+          "calibration_gap": -0.4256
+        },
+        {
+          "bin_range": [
+            0.6,
+            0.7
+          ],
+          "sample_count": 2669,
+          "mean_confidence": 0.6493,
+          "empirical_accuracy": 0.1551,
+          "calibration_gap": -0.4942
+        },
+        {
+          "bin_range": [
+            0.7,
+            0.8
+          ],
+          "sample_count": 2627,
+          "mean_confidence": 0.7506,
+          "empirical_accuracy": 0.204,
+          "calibration_gap": -0.5465
+        },
+        {
+          "bin_range": [
+            0.8,
+            0.9
+          ],
+          "sample_count": 2562,
+          "mean_confidence": 0.8486,
+          "empirical_accuracy": 0.2943,
+          "calibration_gap": -0.5543
+        },
+        {
+          "bin_range": [
+            0.9,
+            1.0
+          ],
+          "sample_count": 1177,
+          "mean_confidence": 0.9317,
+          "empirical_accuracy": 0.4308,
+          "calibration_gap": -0.501
+        }
+      ]
+    },
+    "Pneumothorax": {
+      "brier_score": 0.1389,
+      "expected_calibration_error": 0.1752,
+      "calibration_slope": 0.2043,
+      "calibration_intercept": -0.3138,
+      "overconfidence_assessment": "Overconfident in high-probability bins",
+      "reliability_diagram_10_bins": [
+        {
+          "bin_range": [
+            0.0,
+            0.1
+          ],
+          "sample_count": 11075,
+          "mean_confidence": 0.0378,
+          "empirical_accuracy": 0.0166,
+          "calibration_gap": -0.0212
+        },
+        {
+          "bin_range": [
+            0.1,
+            0.2
+          ],
+          "sample_count": 3814,
+          "mean_confidence": 0.1444,
+          "empirical_accuracy": 0.0472,
+          "calibration_gap": -0.0972
+        },
+        {
+          "bin_range": [
+            0.2,
+            0.3
+          ],
+          "sample_count": 2132,
+          "mean_confidence": 0.2463,
+          "empirical_accuracy": 0.0685,
+          "calibration_gap": -0.1778
+        },
+        {
+          "bin_range": [
+            0.3,
+            0.4
+          ],
+          "sample_count": 1524,
+          "mean_confidence": 0.3462,
+          "empirical_accuracy": 0.1037,
+          "calibration_gap": -0.2425
+        },
+        {
+          "bin_range": [
+            0.4,
+            0.5
+          ],
+          "sample_count": 1199,
+          "mean_confidence": 0.4488,
+          "empirical_accuracy": 0.1218,
+          "calibration_gap": -0.3271
+        },
+        {
+          "bin_range": [
+            0.5,
+            0.6
+          ],
+          "sample_count": 1014,
+          "mean_confidence": 0.5488,
+          "empirical_accuracy": 0.1627,
+          "calibration_gap": -0.3861
+        },
+        {
+          "bin_range": [
+            0.6,
+            0.7
+          ],
+          "sample_count": 940,
+          "mean_confidence": 0.6499,
+          "empirical_accuracy": 0.2011,
+          "calibration_gap": -0.4488
+        },
+        {
+          "bin_range": [
+            0.7,
+            0.8
+          ],
+          "sample_count": 923,
+          "mean_confidence": 0.7498,
+          "empirical_accuracy": 0.2481,
+          "calibration_gap": -0.5017
+        },
+        {
+          "bin_range": [
+            0.8,
+            0.9
+          ],
+          "sample_count": 1111,
+          "mean_confidence": 0.8544,
+          "empirical_accuracy": 0.3465,
+          "calibration_gap": -0.5078
+        },
+        {
+          "bin_range": [
+            0.9,
+            1.0
+          ],
+          "sample_count": 1864,
+          "mean_confidence": 0.9551,
+          "empirical_accuracy": 0.4737,
+          "calibration_gap": -0.4814
+        }
+      ]
+    }
+  },
+  "clinical_calibration_guideline": "Raw neural network logits should never be interpreted as true posterior disease probabilities without empirical calibration. Pneumonia and Consolidation exhibit significant miscalibration due to low positive prevalence and text-mining label ambiguity."
+}

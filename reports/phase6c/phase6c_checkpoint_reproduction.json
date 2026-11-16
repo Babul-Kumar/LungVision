@@ -1,0 +1,61 @@
+{
+  "title": "Phase 6C Task A: Checkpoint & Experiment Reproduction Audit",
+  "timestamp": "2026-11-16T23:33:31Z",
+  "audit_verdict": "PARTIAL",
+  "production_checkpoint": {
+    "path": "lungvision_disease_classification\\checkpoints\\densenet121_nih_best.pth",
+    "sha256": "8d3690cd0438587a94afb8fd2ad84c0b30f9c1cc2727ee0eb03662a02ea020af",
+    "expected_sha256": "8d3690cd0438587a94afb8fd2ad84c0b30f9c1cc2727ee0eb03662a02ea020af",
+    "status": "VERIFIED_IDENTICAL",
+    "architecture": "DenseNet121",
+    "frozen_nih_thresholds": {
+      "Cardiomegaly": 0.9501953125,
+      "Edema": 0.876953125,
+      "Consolidation": 0.73291015625,
+      "Pneumonia": 0.7529296875,
+      "Atelectasis": 0.74951171875,
+      "Pneumothorax": 0.58251953125
+    }
+  },
+  "experimental_model_d_candidate": {
+    "path": "lungvision_disease_classification\\checkpoints\\experimental\\multiscale_densenet121_experimental.pth",
+    "sha256": "c5884ee4ff2dee85c7b46af6cda496ad0664d92c6e0f468e22a8b12addc30ec4",
+    "manifest_file": "lungvision_disease_classification\\checkpoints\\experimental\\cloud_training_manifest.json",
+    "manifest_metadata": {
+      "model_name": "MultiScaleDenseNet121-FPN",
+      "checkpoint_file": "multiscale_densenet121_experimental.pth",
+      "sha256": "c5884ee4ff2dee85c7b46af6cda496ad0664d92c6e0f468e22a8b12addc30ec4",
+      "resolution": 224,
+      "loss_function": "focal",
+      "status": "research_experimental",
+      "epochs_trained": 1,
+      "training_device": "cpu"
+    },
+    "inspected_metadata": {
+      "epoch": 1,
+      "resolution": 224,
+      "loss_type": "focal",
+      "labels": [
+        "Cardiomegaly",
+        "Edema",
+        "Consolidation",
+        "Pneumonia",
+        "Atelectasis",
+        "Pneumothorax"
+      ],
+      "parameter_count": 10083658
+    },
+    "architecture": "MultiScaleDenseNet121-FPN",
+    "actual_trained_resolution": 224,
+    "actual_epochs_trained": 1,
+    "claimed_resolution_in_phase6b": 512,
+    "dedicated_512_trained_checkpoint_exists": false
+  },
+  "reproduction_findings": [
+    "Production checkpoint byte hash exactly matches the authoritative baseline SHA-256 (8d3690cd...).",
+    "Experimental checkpoint 'multiscale_densenet121_experimental.pth' (SHA-256: c5884ee4...) is present on disk.",
+    "CRITICAL FINDING: The experimental checkpoint was trained at resolution 224x224 for 1 epoch, not 512x512.",
+    "No dedicated 512x512 trained checkpoint file exists in the repository.",
+    "Per governance audit directives: Because the dedicated 512x512 trained checkpoint is missing from disk, this experiment is officially declared PARTIAL."
+  ]
+}

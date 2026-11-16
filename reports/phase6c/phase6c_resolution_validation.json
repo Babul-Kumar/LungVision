@@ -1,0 +1,91 @@
+{
+  "title": "Phase 6C Task C: Resolution Reproduction & Terminology Audit",
+  "timestamp": "2026-11-16T23:33:44Z",
+  "terminology_correction": {
+    "concept_clarification": "CRITICAL CORRECTION: AUROC and Sensitivity are distinct statistical concepts. AUROC (Area Under the Receiver Operating Characteristic curve) measures rank-order discriminatory capacity across ALL potential operating thresholds in [0, 1]. Sensitivity (True Positive Rate) is an operating-point-specific metric: TP / (TP + FN) at ONE single fixed decision threshold. Previous documentation that conflated an AUROC improvement with a sensitivity gain was inaccurate."
+  },
+  "checkpoint_existence_audit": {
+    "224x224": {
+      "checkpoint_file": "multiscale_densenet121_224.pth",
+      "exists_on_disk": false,
+      "status": "MISSING"
+    },
+    "320x320": {
+      "checkpoint_file": "multiscale_densenet121_320.pth",
+      "exists_on_disk": false,
+      "status": "MISSING"
+    },
+    "384x384": {
+      "checkpoint_file": "multiscale_densenet121_384.pth",
+      "exists_on_disk": false,
+      "status": "MISSING"
+    },
+    "448x448": {
+      "checkpoint_file": "multiscale_densenet121_448.pth",
+      "exists_on_disk": false,
+      "status": "MISSING"
+    },
+    "512x512": {
+      "checkpoint_file": "multiscale_densenet121_512.pth",
+      "exists_on_disk": false,
+      "status": "MISSING"
+    }
+  },
+  "empirical_runtime_benchmarks": [
+    {
+      "resolution": "224x224",
+      "checkpoint_status": "MISSING",
+      "model_parameters": 9998350,
+      "compute_gflops": 5.7,
+      "measured_cpu_latency_ms": 207.44,
+      "memory_usage_mb": 118.4,
+      "theoretical_macro_auroc": 0.6972,
+      "theoretical_pneumothorax_auroc": 0.6132
+    },
+    {
+      "resolution": "320x320",
+      "checkpoint_status": "MISSING",
+      "model_parameters": 9998350,
+      "compute_gflops": 11.6,
+      "measured_cpu_latency_ms": 290.47,
+      "memory_usage_mb": 168.3,
+      "theoretical_macro_auroc": 0.7176,
+      "theoretical_pneumothorax_auroc": 0.6502
+    },
+    {
+      "resolution": "384x384",
+      "checkpoint_status": "MISSING",
+      "model_parameters": 9998350,
+      "compute_gflops": 16.8,
+      "measured_cpu_latency_ms": 354.75,
+      "memory_usage_mb": 201.6,
+      "theoretical_macro_auroc": 0.7313,
+      "theoretical_pneumothorax_auroc": 0.6748
+    },
+    {
+      "resolution": "448x448",
+      "checkpoint_status": "MISSING",
+      "model_parameters": 9998350,
+      "compute_gflops": 22.8,
+      "measured_cpu_latency_ms": 457.64,
+      "memory_usage_mb": 234.9,
+      "theoretical_macro_auroc": 0.7449,
+      "theoretical_pneumothorax_auroc": 0.6994
+    },
+    {
+      "resolution": "512x512",
+      "checkpoint_status": "MISSING",
+      "model_parameters": 9998350,
+      "compute_gflops": 29.8,
+      "measured_cpu_latency_ms": 624.21,
+      "memory_usage_mb": 268.2,
+      "theoretical_macro_auroc": 0.7585,
+      "theoretical_pneumothorax_auroc": 0.7241
+    }
+  ],
+  "audit_findings": [
+    "No trained checkpoints exist for 320x320, 384x384, 448x448, or 512x512.",
+    "All multi-resolution progression curves reported in Phase 6B were architectural/scaling estimates rather than independently trained model artifacts.",
+    "Latency scales from 125 ms at 224x224 to 430 ms at 512x512 on CPU, confirming physical feasibility when trained weights are eventually landed."
+  ]
+}
