@@ -99,55 +99,55 @@ export const ResearchPage: React.FC = () => {
   return (
     <div className="space-y-8">
       {/* Page Header */}
-      <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 pb-6 border-b border-medical-border">
+      <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 pb-6 border-b border-white/[0.08]">
         <div>
           <h2 className="text-2xl font-bold tracking-tight text-white flex items-center gap-2.5">
-            <LineChart className="w-6 h-6 text-medical-cyan" />
+            <LineChart className="w-6 h-6 text-amber-400" />
             Research Evidence & Benchmark Registry
           </h2>
-          <p className="text-sm text-medical-muted mt-1">
+          <p className="text-sm text-slate-400 mt-1">
             Audited retrospective benchmarks across NIH ChestX-ray14, Stanford CheXpert, and VinDr-CXR cohorts.
           </p>
         </div>
 
         {/* Tab Controls */}
-        <div className="flex items-center gap-2 bg-medical-surface p-1 rounded-lg border border-medical-border">
+        <div className="flex items-center gap-1.5 bg-[#150a22] p-1 rounded-xl border border-white/10 shadow-inner">
           <button
             onClick={() => setActiveTab('nih')}
-            className={`px-3.5 py-1.5 rounded-md text-xs font-medium transition-all ${
+            className={`px-3.5 py-1.5 rounded-lg text-xs font-medium transition-all ${
               activeTab === 'nih'
-                ? 'bg-medical-cyan text-slate-950 font-semibold shadow'
-                : 'text-medical-muted hover:text-white'
+                ? 'bg-gradient-to-r from-amber-400 via-amber-500 to-amber-600 text-slate-950 font-bold shadow-md shadow-amber-950/40 border border-amber-300/40'
+                : 'text-slate-400 hover:text-white'
             }`}
           >
             NIH ChestX-ray14
           </button>
           <button
             onClick={() => setActiveTab('chexpert')}
-            className={`px-3.5 py-1.5 rounded-md text-xs font-medium transition-all ${
+            className={`px-3.5 py-1.5 rounded-lg text-xs font-medium transition-all ${
               activeTab === 'chexpert'
-                ? 'bg-medical-cyan text-slate-950 font-semibold shadow'
-                : 'text-medical-muted hover:text-white'
+                ? 'bg-gradient-to-r from-amber-400 via-amber-500 to-amber-600 text-slate-950 font-bold shadow-md shadow-amber-950/40 border border-amber-300/40'
+                : 'text-slate-400 hover:text-white'
             }`}
           >
             CheXpert External
           </button>
           <button
             onClick={() => setActiveTab('vindr')}
-            className={`px-3.5 py-1.5 rounded-md text-xs font-medium transition-all ${
+            className={`px-3.5 py-1.5 rounded-lg text-xs font-medium transition-all ${
               activeTab === 'vindr'
-                ? 'bg-medical-cyan text-slate-950 font-semibold shadow'
-                : 'text-medical-muted hover:text-white'
+                ? 'bg-gradient-to-r from-amber-400 via-amber-500 to-amber-600 text-slate-950 font-bold shadow-md shadow-amber-950/40 border border-amber-300/40'
+                : 'text-slate-400 hover:text-white'
             }`}
           >
             VinDr-CXR (15k)
           </button>
           <button
             onClick={() => setActiveTab('ssm')}
-            className={`px-3.5 py-1.5 rounded-md text-xs font-medium transition-all ${
+            className={`px-3.5 py-1.5 rounded-lg text-xs font-medium transition-all ${
               activeTab === 'ssm'
-                ? 'bg-medical-cyan text-slate-950 font-semibold shadow'
-                : 'text-medical-muted hover:text-white'
+                ? 'bg-gradient-to-r from-amber-400 via-amber-500 to-amber-600 text-slate-950 font-bold shadow-md shadow-amber-950/40 border border-amber-300/40'
+                : 'text-slate-400 hover:text-white'
             }`}
           >
             3D SSM Geometry
@@ -158,9 +158,9 @@ export const ResearchPage: React.FC = () => {
       <DisclaimerBanner />
 
       {loading ? (
-        <div className="h-64 flex flex-col items-center justify-center border border-medical-border rounded-xl bg-medical-surface/40 space-y-3">
-          <div className="w-8 h-8 border-2 border-medical-cyan border-t-transparent rounded-full animate-spin" />
-          <span className="text-sm text-medical-muted">Loading research metrics from backend...</span>
+        <div className="h-64 flex flex-col items-center justify-center border border-white/10 rounded-xl bg-medical-surface/40 space-y-3">
+          <div className="w-8 h-8 border-2 border-amber-400 border-t-transparent rounded-full animate-spin" />
+          <span className="text-sm text-slate-400">Loading research metrics from backend...</span>
         </div>
       ) : error ? (
         <div className="p-6 border border-rose-500/40 bg-rose-950/20 rounded-xl text-rose-300 text-sm flex items-start gap-3">
@@ -181,7 +181,7 @@ export const ResearchPage: React.FC = () => {
                     NIH ChestX-ray14 Held-Out Test Set (DenseNet121)
                     <Badge variant="emerald" size="sm">Calibrated Epoch 4</Badge>
                   </h3>
-                  <p className="text-xs text-medical-muted mt-0.5">
+                  <p className="text-xs text-slate-400 mt-0.5">
                     Multi-label evaluation on held-out test split. Thresholds calibrated for high-sensitivity triage.
                   </p>
                 </div>
@@ -205,7 +205,7 @@ export const ResearchPage: React.FC = () => {
                         data={data.nih_test_metrics}
                         margin={{ top: 10, right: 20, left: 0, bottom: 20 }}
                       >
-                        <CartesianGrid strokeDasharray="3 3" stroke="#1f293d" vertical={false} />
+                        <CartesianGrid strokeDasharray="3 3" stroke="#25163a" vertical={false} />
                         <XAxis
                           dataKey="Disease"
                           stroke="#64748b"
@@ -219,16 +219,16 @@ export const ResearchPage: React.FC = () => {
                         />
                         <Tooltip
                           contentStyle={{
-                            backgroundColor: '#070b14',
-                            borderColor: '#1e293b',
-                            borderRadius: '8px',
+                            backgroundColor: '#140a22',
+                            borderColor: 'rgba(255,255,255,0.1)',
+                            borderRadius: '12px',
                             fontSize: '12px',
                           }}
                         />
                         <Legend wrapperStyle={{ fontSize: '12px', paddingTop: '10px' }} />
-                        <Bar dataKey="AUROC" fill="#06b6d4" name="AUROC" radius={[4, 4, 0, 0]} />
-                        <Bar dataKey="AUPRC" fill="#14b8a6" name="AUPRC" radius={[4, 4, 0, 0]} />
-                        <Bar dataKey="Sensitivity" fill="#3b82f6" name="Sensitivity" radius={[4, 4, 0, 0]} />
+                        <Bar dataKey="AUROC" fill="#f59e0b" name="AUROC" radius={[4, 4, 0, 0]} />
+                        <Bar dataKey="AUPRC" fill="#f1f5f9" name="AUPRC" radius={[4, 4, 0, 0]} />
+                        <Bar dataKey="Sensitivity" fill="#d97706" name="Sensitivity" radius={[4, 4, 0, 0]} />
                       </BarChart>
                     </ResponsiveContainer>
                   </div>
@@ -246,21 +246,21 @@ export const ResearchPage: React.FC = () => {
                           Specificity: m.Specificity,
                         }))}
                       >
-                        <PolarGrid stroke="#1f293d" />
+                        <PolarGrid stroke="#25163a" />
                         <PolarAngleAxis dataKey="disease" stroke="#94a3b8" tick={{ fontSize: 11 }} />
-                        <PolarRadiusAxis angle={30} domain={[0, 1]} stroke="#475569" tick={{ fontSize: 10 }} />
+                        <PolarRadiusAxis angle={30} domain={[0, 1]} stroke="#64748b" tick={{ fontSize: 10 }} />
                         <Radar
                           name="Sensitivity"
                           dataKey="Sensitivity"
-                          stroke="#06b6d4"
-                          fill="#06b6d4"
+                          stroke="#f59e0b"
+                          fill="#f59e0b"
                           fillOpacity={0.4}
                         />
                         <Radar
                           name="Specificity"
                           dataKey="Specificity"
-                          stroke="#3b82f6"
-                          fill="#3b82f6"
+                          stroke="#e2e8f0"
+                          fill="#e2e8f0"
                           fillOpacity={0.2}
                         />
                         <Legend wrapperStyle={{ fontSize: '11px' }} />
@@ -275,7 +275,7 @@ export const ResearchPage: React.FC = () => {
                 <div className="overflow-x-auto">
                   <table className="w-full text-left text-xs border-collapse">
                     <thead>
-                      <tr className="border-b border-medical-border text-medical-subtle font-semibold uppercase tracking-wider">
+                      <tr className="border-b border-white/10 text-slate-400 font-semibold uppercase tracking-wider">
                         <th className="py-2.5 px-3">Disease Label</th>
                         <th className="py-2.5 px-3">Threshold</th>
                         <th className="py-2.5 px-3">AUROC</th>
@@ -287,14 +287,14 @@ export const ResearchPage: React.FC = () => {
                         <th className="py-2.5 px-3">TP / FP / FN</th>
                       </tr>
                     </thead>
-                    <tbody className="divide-y divide-medical-border/50 text-slate-200">
+                    <tbody className="divide-y divide-white/[0.08] text-slate-200">
                       {data.nih_test_metrics.map((row) => (
-                        <tr key={row.Disease} className="hover:bg-medical-surface/40 transition-colors">
+                        <tr key={row.Disease} className="hover:bg-white/5 transition-colors">
                           <td className="py-2.5 px-3 font-semibold text-white">{row.Disease}</td>
-                          <td className="py-2.5 px-3 font-mono text-medical-cyan">{row.Threshold.toFixed(4)}</td>
+                          <td className="py-2.5 px-3 font-mono text-amber-400">{row.Threshold.toFixed(4)}</td>
                           <td className="py-2.5 px-3 font-mono text-emerald-400 font-bold">{row.AUROC.toFixed(4)}</td>
-                          <td className="py-2.5 px-3 font-mono text-teal-400">{row.AUPRC.toFixed(4)}</td>
-                          <td className="py-2.5 px-3 font-mono text-blue-400">{(row.Sensitivity * 100).toFixed(1)}%</td>
+                          <td className="py-2.5 px-3 font-mono text-slate-200">{row.AUPRC.toFixed(4)}</td>
+                          <td className="py-2.5 px-3 font-mono text-amber-300">{(row.Sensitivity * 100).toFixed(1)}%</td>
                           <td className="py-2.5 px-3 font-mono text-slate-300">{(row.Specificity * 100).toFixed(1)}%</td>
                           <td className="py-2.5 px-3 font-mono text-slate-300">{(row.Precision * 100).toFixed(1)}%</td>
                           <td className="py-2.5 px-3 font-mono text-amber-400">{row.F1.toFixed(3)}</td>
@@ -317,7 +317,7 @@ export const ResearchPage: React.FC = () => {
                 <div>
                   <h3 className="text-lg font-bold text-white flex items-center gap-2">
                     Stanford CheXpert External Generalization
-                    <Badge variant="blue" size="sm">Cross-Hospital Validation</Badge>
+                    <Badge variant="silver" size="sm">Cross-Hospital Validation</Badge>
                   </h3>
                   <p className="text-xs text-medical-muted mt-0.5">
                     Testing domain transferability of NIH-calibrated thresholds against the Stanford CheXpert validation cohort.
@@ -342,7 +342,7 @@ export const ResearchPage: React.FC = () => {
                       data={data.chexpert_external_metrics}
                       margin={{ top: 10, right: 20, left: 0, bottom: 20 }}
                     >
-                      <CartesianGrid strokeDasharray="3 3" stroke="#1f293d" vertical={false} />
+                      <CartesianGrid strokeDasharray="3 3" stroke="#25163a" vertical={false} />
                       <XAxis
                         dataKey="Disease"
                         stroke="#64748b"
@@ -355,16 +355,16 @@ export const ResearchPage: React.FC = () => {
                       />
                       <Tooltip
                         contentStyle={{
-                          backgroundColor: '#070b14',
-                          borderColor: '#1e293b',
-                          borderRadius: '8px',
+                          backgroundColor: '#140a22',
+                          borderColor: 'rgba(255,255,255,0.1)',
+                          borderRadius: '12px',
                           fontSize: '12px',
                         }}
                       />
                       <Legend wrapperStyle={{ fontSize: '12px', paddingTop: '10px' }} />
-                      <Bar dataKey="AUROC" fill="#3b82f6" name="CheXpert AUROC" radius={[4, 4, 0, 0]} />
-                      <Bar dataKey="AUPRC" fill="#06b6d4" name="CheXpert AUPRC" radius={[4, 4, 0, 0]} />
-                      <Bar dataKey="Sensitivity" fill="#10b981" name="Sensitivity" radius={[4, 4, 0, 0]} />
+                      <Bar dataKey="AUROC" fill="#f59e0b" name="CheXpert AUROC" radius={[4, 4, 0, 0]} />
+                      <Bar dataKey="AUPRC" fill="#f1f5f9" name="CheXpert AUPRC" radius={[4, 4, 0, 0]} />
+                      <Bar dataKey="Sensitivity" fill="#d97706" name="Sensitivity" radius={[4, 4, 0, 0]} />
                     </BarChart>
                   </ResponsiveContainer>
                 </div>
@@ -375,7 +375,7 @@ export const ResearchPage: React.FC = () => {
                 <div className="overflow-x-auto">
                   <table className="w-full text-left text-xs border-collapse">
                     <thead>
-                      <tr className="border-b border-medical-border text-medical-subtle font-semibold uppercase tracking-wider">
+                      <tr className="border-b border-white/10 text-slate-400 font-semibold uppercase tracking-wider">
                         <th className="py-2.5 px-3">Disease</th>
                         <th className="py-2.5 px-3">Threshold</th>
                         <th className="py-2.5 px-3">Cases (+ / -)</th>
@@ -386,17 +386,17 @@ export const ResearchPage: React.FC = () => {
                         <th className="py-2.5 px-3">F1 Score</th>
                       </tr>
                     </thead>
-                    <tbody className="divide-y divide-medical-border/50 text-slate-200">
+                    <tbody className="divide-y divide-white/[0.08] text-slate-200">
                       {data.chexpert_external_metrics.map((row) => (
-                        <tr key={row.Disease} className="hover:bg-medical-surface/40 transition-colors">
+                        <tr key={row.Disease} className="hover:bg-white/5 transition-colors">
                           <td className="py-2.5 px-3 font-semibold text-white">{row.Disease}</td>
-                          <td className="py-2.5 px-3 font-mono text-medical-cyan">{row.Threshold.toFixed(4)}</td>
+                          <td className="py-2.5 px-3 font-mono text-amber-400">{row.Threshold.toFixed(4)}</td>
                           <td className="py-2.5 px-3 font-mono text-medical-muted">
                             {row.Positive} / {row.Negative} ({row.Evaluable} total)
                           </td>
                           <td className="py-2.5 px-3 font-mono text-emerald-400 font-bold">{row.AUROC.toFixed(4)}</td>
-                          <td className="py-2.5 px-3 font-mono text-teal-400">{row.AUPRC.toFixed(4)}</td>
-                          <td className="py-2.5 px-3 font-mono text-blue-400">{(row.Sensitivity * 100).toFixed(1)}%</td>
+                          <td className="py-2.5 px-3 font-mono text-slate-200">{row.AUPRC.toFixed(4)}</td>
+                          <td className="py-2.5 px-3 font-mono text-amber-300">{(row.Sensitivity * 100).toFixed(1)}%</td>
                           <td className="py-2.5 px-3 font-mono text-slate-300">{(row.Specificity * 100).toFixed(1)}%</td>
                           <td className="py-2.5 px-3 font-mono text-amber-400">{row.F1.toFixed(3)}</td>
                         </tr>
@@ -415,7 +415,7 @@ export const ResearchPage: React.FC = () => {
                 <div>
                   <h3 className="text-lg font-bold text-white flex items-center gap-2">
                     VinDr-CXR 15,000-Image External Validation (ResNet18)
-                    <Badge variant="cyan" size="sm">Binary Normal/Abnormal</Badge>
+                    <Badge variant="amber" size="sm">Binary Normal/Abnormal</Badge>
                   </h3>
                   <p className="text-xs text-medical-muted mt-0.5">
                     Rigorous external verification comparing Baseline vs Blur-Augmented ResNet18 across real Vietnamese hospital radiographs.
@@ -437,10 +437,10 @@ export const ResearchPage: React.FC = () => {
                 {data.vindr_external_metrics.slice(0, 2).map((m, idx) => (
                   <Card key={idx} className="bg-medical-surface/70">
                     <div className="flex items-center justify-between">
-                      <span className="text-xs font-semibold text-medical-cyan uppercase">
+                      <span className="text-xs font-semibold text-amber-400 uppercase">
                         {m.model || (idx === 0 ? 'Original ResNet18' : 'Blur-Augmented ResNet18')}
                       </span>
-                      <Badge variant={idx === 1 ? 'emerald' : 'blue'} size="sm">
+                      <Badge variant={idx === 1 ? 'emerald' : 'silver'} size="sm">
                         {m.cohort || 'Full Cohort'}
                       </Badge>
                     </div>
@@ -453,7 +453,7 @@ export const ResearchPage: React.FC = () => {
                       </div>
                       <div className="flex justify-between text-xs">
                         <span className="text-medical-muted">Avg Precision:</span>
-                        <span className="font-mono text-cyan-300">
+                        <span className="font-mono text-slate-200">
                           {m.Average_Precision.toFixed(4)}
                         </span>
                       </div>
@@ -479,7 +479,7 @@ export const ResearchPage: React.FC = () => {
                 <div className="overflow-x-auto">
                   <table className="w-full text-left text-xs border-collapse">
                     <thead>
-                      <tr className="border-b border-medical-border text-medical-subtle font-semibold uppercase tracking-wider">
+                      <tr className="border-b border-white/10 text-slate-400 font-semibold uppercase tracking-wider">
                         <th className="py-2.5 px-3">Model</th>
                         <th className="py-2.5 px-3">Cohort</th>
                         <th className="py-2.5 px-3">ROC AUC</th>
@@ -491,15 +491,15 @@ export const ResearchPage: React.FC = () => {
                         <th className="py-2.5 px-3">ECE (10 bins)</th>
                       </tr>
                     </thead>
-                    <tbody className="divide-y divide-medical-border/50 text-slate-200">
+                    <tbody className="divide-y divide-white/[0.08] text-slate-200">
                       {data.vindr_external_metrics.map((row, idx) => (
-                        <tr key={idx} className="hover:bg-medical-surface/40 transition-colors">
+                        <tr key={idx} className="hover:bg-white/5 transition-colors">
                           <td className="py-2.5 px-3 font-semibold text-white">{row.model}</td>
-                          <td className="py-2.5 px-3 text-medical-muted">{row.cohort}</td>
+                          <td className="py-2.5 px-3 text-slate-400">{row.cohort}</td>
                           <td className="py-2.5 px-3 font-mono text-emerald-400 font-bold">{row.ROC_AUC.toFixed(4)}</td>
-                          <td className="py-2.5 px-3 font-mono text-teal-400">{row.Average_Precision.toFixed(4)}</td>
+                          <td className="py-2.5 px-3 font-mono text-slate-200">{row.Average_Precision.toFixed(4)}</td>
                           <td className="py-2.5 px-3 font-mono text-slate-300">{(row.Accuracy * 100).toFixed(1)}%</td>
-                          <td className="py-2.5 px-3 font-mono text-blue-400">{(row.Sensitivity * 100).toFixed(1)}%</td>
+                          <td className="py-2.5 px-3 font-mono text-amber-300">{(row.Sensitivity * 100).toFixed(1)}%</td>
                           <td className="py-2.5 px-3 font-mono text-slate-300">{(row.Specificity * 100).toFixed(1)}%</td>
                           <td className="py-2.5 px-3 font-mono text-amber-300">{row.Brier_Score?.toFixed(4) ?? 'N/A'}</td>
                           <td className="py-2.5 px-3 font-mono text-amber-400">{row.ECE_10_bins?.toFixed(4) ?? 'N/A'}</td>
@@ -519,7 +519,7 @@ export const ResearchPage: React.FC = () => {
                 <div>
                   <h3 className="text-lg font-bold text-white flex items-center gap-2">
                     Phase 2B: Multi-Patient 3D Statistical Shape Model (SSM)
-                    <Badge variant="cyan" size="sm">N=430 CT Cohort</Badge>
+                    <Badge variant="amber" size="sm">N=430 CT Cohort</Badge>
                     <Badge variant="emerald" size="sm">Zero Leakage Split</Badge>
                   </h3>
                   <p className="text-xs text-medical-muted mt-0.5">
@@ -540,9 +540,9 @@ export const ResearchPage: React.FC = () => {
               {/* Generalization Benchmark Cards */}
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
                 {SSM_GENERALIZATION_METRICS.map((item, idx) => (
-                  <Card key={idx} className="hud-corner-bracket relative overflow-hidden bg-slate-900/60">
+                  <Card key={idx} className="relative overflow-hidden bg-[#160c26]/80 border border-white/10 shadow-xl">
                     <div className="flex items-center justify-between mb-2">
-                      <span className="text-[10px] font-mono text-cyan-400 font-bold uppercase tracking-wider">
+                      <span className="text-[10px] font-mono text-amber-400 font-bold uppercase tracking-wider">
                         Validation Metric
                       </span>
                       <Badge variant="emerald" size="sm">
@@ -553,10 +553,10 @@ export const ResearchPage: React.FC = () => {
                     <div className="text-xs font-semibold text-white mb-2 leading-snug">
                       {item.metric}
                     </div>
-                    <div className="text-2xl font-bold font-mono text-cyan-300">
+                    <div className="text-2xl font-bold font-mono text-amber-300">
                       {item.ssm_value}
                     </div>
-                    <div className="mt-2 text-[11px] text-slate-400 flex items-center justify-between pt-2 border-t border-slate-800">
+                    <div className="mt-2 text-[11px] text-slate-400 flex items-center justify-between pt-2 border-t border-white/10">
                       <span>Baseline: <strong className="text-slate-300">{item.baseline_value}</strong></span>
                       <span className="text-emerald-400 font-semibold">{item.gain}</span>
                     </div>
@@ -570,20 +570,20 @@ export const ResearchPage: React.FC = () => {
                   <div className="h-72 w-full pt-4">
                     <ResponsiveContainer width="100%" height="100%" minWidth={100} minHeight={100}>
                       <BarChart data={SSM_MODE_METRICS} margin={{ top: 10, right: 20, left: 0, bottom: 20 }}>
-                        <CartesianGrid strokeDasharray="3 3" stroke="#1f293d" vertical={false} />
+                        <CartesianGrid strokeDasharray="3 3" stroke="#25163a" vertical={false} />
                         <XAxis dataKey="mode" stroke="#64748b" tick={{ fill: '#94a3b8', fontSize: 11 }} />
                         <YAxis domain={[0, 60]} stroke="#64748b" tick={{ fill: '#94a3b8', fontSize: 11 }} tickFormatter={(v) => `${v}%`} />
                         <Tooltip
                           contentStyle={{
-                            backgroundColor: '#070b14',
-                            borderColor: '#1e293b',
-                            borderRadius: '8px',
+                            backgroundColor: '#140a22',
+                            borderColor: 'rgba(255,255,255,0.1)',
+                            borderRadius: '12px',
                             fontSize: '12px',
                           }}
                           formatter={(val: any) => [`${val}%`, 'Explained Variance']}
                         />
                         <Legend wrapperStyle={{ fontSize: '12px', paddingTop: '10px' }} />
-                        <Bar dataKey="variance_pct" fill="#06b6d4" name="Explained Variance (%)" radius={[4, 4, 0, 0]} />
+                        <Bar dataKey="variance_pct" fill="#f59e0b" name="Explained Variance (%)" radius={[4, 4, 0, 0]} />
                       </BarChart>
                     </ResponsiveContainer>
                   </div>
@@ -592,28 +592,28 @@ export const ResearchPage: React.FC = () => {
                 {/* Cohort & Eigenspace Telemetry Card */}
                 <Card title="Model Specifications & Data Governance">
                   <div className="space-y-3.5 text-xs">
-                    <div className="p-2.5 rounded-lg bg-medical-bg/80 border border-medical-border/60">
-                      <div className="text-[10px] text-medical-muted uppercase font-semibold">Cohort Split (Zero Leakage)</div>
+                    <div className="p-2.5 rounded-lg bg-medical-bg/80 border border-white/10">
+                      <div className="text-[10px] text-slate-400 uppercase font-semibold">Cohort Split (Zero Leakage)</div>
                       <div className="text-white font-mono font-bold mt-1">430 Verified Patients</div>
-                      <div className="text-[11px] text-medical-subtle mt-0.5">301 Train · 64 Val · 65 Held-Out Test</div>
+                      <div className="text-[11px] text-slate-400 mt-0.5">301 Train · 64 Val · 65 Held-Out Test</div>
                     </div>
 
-                    <div className="p-2.5 rounded-lg bg-medical-bg/80 border border-medical-border/60">
-                      <div className="text-[10px] text-medical-muted uppercase font-semibold">Mesh Parameterization</div>
-                      <div className="text-cyan-400 font-mono font-bold mt-1">6,737 Vertices · 13,478 Triangles</div>
-                      <div className="text-[11px] text-medical-subtle mt-0.5">16 3D Anatomical Landmarks</div>
+                    <div className="p-2.5 rounded-lg bg-medical-bg/80 border border-white/10">
+                      <div className="text-[10px] text-slate-400 uppercase font-semibold">Mesh Parameterization</div>
+                      <div className="text-amber-400 font-mono font-bold mt-1">6,737 Vertices · 13,478 Triangles</div>
+                      <div className="text-[11px] text-slate-400 mt-0.5">16 3D Anatomical Landmarks</div>
                     </div>
 
-                    <div className="p-2.5 rounded-lg bg-medical-bg/80 border border-medical-border/60">
-                      <div className="text-[10px] text-medical-muted uppercase font-semibold">Variance Coverage</div>
+                    <div className="p-2.5 rounded-lg bg-medical-bg/80 border border-white/10">
+                      <div className="text-[10px] text-slate-400 uppercase font-semibold">Variance Coverage</div>
                       <div className="text-emerald-400 font-mono font-bold mt-1">100.0% Variance across 20 Modes</div>
-                      <div className="text-[11px] text-medical-subtle mt-0.5">Top 5 modes capture 90.38%</div>
+                      <div className="text-[11px] text-slate-400 mt-0.5">Top 5 modes capture 90.38%</div>
                     </div>
 
-                    <div className="p-2.5 rounded-lg bg-medical-bg/80 border border-medical-border/60">
-                      <div className="text-[10px] text-medical-muted uppercase font-semibold">Model Artifact Footprint</div>
+                    <div className="p-2.5 rounded-lg bg-medical-bg/80 border border-white/10">
+                      <div className="text-[10px] text-slate-400 uppercase font-semibold">Model Artifact Footprint</div>
                       <div className="text-amber-400 font-mono font-bold mt-1">4.36 MB JSON (Lightweight)</div>
-                      <div className="text-[11px] text-medical-subtle mt-0.5">Zero external binary weights needed</div>
+                      <div className="text-[11px] text-slate-400 mt-0.5">Zero external binary weights needed</div>
                     </div>
                   </div>
                 </Card>
@@ -624,17 +624,17 @@ export const ResearchPage: React.FC = () => {
                 <div className="overflow-x-auto">
                   <table className="w-full text-left text-xs border-collapse">
                     <thead>
-                      <tr className="border-b border-medical-border text-medical-subtle font-semibold uppercase tracking-wider font-mono text-[10px]">
+                      <tr className="border-b border-white/10 text-slate-400 font-semibold uppercase tracking-wider font-mono text-[10px]">
                         <th className="py-2.5 px-3">Eigenmode</th>
                         <th className="py-2.5 px-3">Variance (%)</th>
                         <th className="py-2.5 px-3">Cumulative (%)</th>
                         <th className="py-2.5 px-3 font-sans">Anatomical / Physiological Interpretation</th>
                       </tr>
                     </thead>
-                    <tbody className="divide-y divide-medical-border/50 text-slate-200 font-mono">
+                    <tbody className="divide-y divide-white/[0.08] text-slate-200 font-mono">
                       {SSM_MODE_METRICS.map((row, idx) => (
-                        <tr key={idx} className="hover:bg-medical-surface/40 transition-colors">
-                          <td className="py-2.5 px-3 font-semibold text-cyan-300">{row.mode}</td>
+                        <tr key={idx} className="hover:bg-white/5 transition-colors">
+                          <td className="py-2.5 px-3 font-semibold text-amber-400">{row.mode}</td>
                           <td className="py-2.5 px-3 text-white font-bold">{row.variance_pct.toFixed(2)}%</td>
                           <td className="py-2.5 px-3 text-emerald-400">{row.cumulative_pct.toFixed(2)}%</td>
                           <td className="py-2.5 px-3 font-sans text-slate-300 text-[11px]">{row.interpretation}</td>
@@ -646,9 +646,9 @@ export const ResearchPage: React.FC = () => {
               </Card>
             </div>
           )}
-          <Card className="bg-medical-surface/50 border-medical-border/70">
-            <h4 className="text-xs font-semibold text-medical-subtle tracking-wider uppercase mb-3 flex items-center gap-2">
-              <Info className="w-4 h-4 text-medical-cyan" />
+          <Card className="bg-medical-surface/50 border-white/10">
+            <h4 className="text-xs font-semibold text-slate-400 tracking-wider uppercase mb-3 flex items-center gap-2">
+              <Info className="w-4 h-4 text-amber-400" />
               Audited Benchmark Notes & Methodology
             </h4>
             <ul className="space-y-2 text-xs text-medical-muted list-disc list-inside">

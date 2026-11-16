@@ -43,12 +43,12 @@ export const AppLayout: React.FC = () => {
       </div>
 
       {/* Mobile Bottom Navigation Bar */}
-      <div className="md:hidden border-t border-medical-border bg-medical-surface flex items-center justify-around py-2 px-3 sticky bottom-0 z-40">
+      <div className="md:hidden border-t border-white/[0.08] bg-[#0e0719]/95 backdrop-blur-xl flex items-center justify-around py-2 px-3 sticky bottom-0 z-40">
         <NavLink
           to="/dashboard"
           className={({ isActive }) =>
             `flex flex-col items-center gap-1 text-[10px] ${
-              isActive ? 'text-medical-cyan font-semibold' : 'text-medical-muted'
+              isActive ? 'text-amber-400 font-semibold' : 'text-slate-400'
             }`
           }
         >
@@ -59,7 +59,7 @@ export const AppLayout: React.FC = () => {
           to="/xray"
           className={({ isActive }) =>
             `flex flex-col items-center gap-1 text-[10px] ${
-              isActive ? 'text-medical-cyan font-semibold' : 'text-medical-muted'
+              isActive ? 'text-amber-400 font-semibold' : 'text-slate-400'
             }`
           }
         >
@@ -70,7 +70,7 @@ export const AppLayout: React.FC = () => {
           to="/ct-explorer"
           className={({ isActive }) =>
             `flex flex-col items-center gap-1 text-[10px] ${
-              isActive ? 'text-medical-cyan font-semibold' : 'text-medical-muted'
+              isActive ? 'text-amber-400 font-semibold' : 'text-slate-400'
             }`
           }
         >
@@ -81,7 +81,7 @@ export const AppLayout: React.FC = () => {
           to="/research"
           className={({ isActive }) =>
             `flex flex-col items-center gap-1 text-[10px] ${
-              isActive ? 'text-medical-cyan font-semibold' : 'text-medical-muted'
+              isActive ? 'text-amber-400 font-semibold' : 'text-slate-400'
             }`
           }
         >
@@ -92,7 +92,7 @@ export const AppLayout: React.FC = () => {
           to="/models"
           className={({ isActive }) =>
             `flex flex-col items-center gap-1 text-[10px] ${
-              isActive ? 'text-medical-cyan font-semibold' : 'text-medical-muted'
+              isActive ? 'text-amber-400 font-semibold' : 'text-slate-400'
             }`
           }
         >

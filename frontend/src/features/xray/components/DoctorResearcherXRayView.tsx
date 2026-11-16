@@ -80,9 +80,9 @@ export const DoctorResearcherXRayView: React.FC<DoctorResearcherXRayViewProps> =
   return (
     <div className="space-y-5 animate-in fade-in duration-300">
       {/* Top Telemetry & Export Bar */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 p-4 rounded-xl bg-medical-surface border border-medical-border">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 p-4 rounded-xl bg-medical-surface border border-white/10">
         <div className="flex items-center gap-3">
-          <Badge variant="cyan" size="md">
+          <Badge variant="amber" size="md">
             Doctor / Researcher Telemetry
           </Badge>
           <span className="text-xs font-mono text-medical-muted">
@@ -94,7 +94,7 @@ export const DoctorResearcherXRayView: React.FC<DoctorResearcherXRayViewProps> =
         <div className="flex items-center gap-2">
           <button
             onClick={handleExportJson}
-            className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium bg-medical-card border border-medical-border hover:border-medical-cyan text-white hover:text-medical-cyan transition-all"
+            className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium bg-medical-card border border-white/10 hover:border-amber-400 text-slate-200 hover:text-amber-300 transition-all"
             title="Download Raw Output JSON"
           >
             <Download className="w-3.5 h-3.5" />
@@ -102,7 +102,7 @@ export const DoctorResearcherXRayView: React.FC<DoctorResearcherXRayViewProps> =
           </button>
           <button
             onClick={handlePrint}
-            className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium bg-medical-card border border-medical-border hover:border-medical-teal text-white hover:text-medical-teal transition-all"
+            className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium bg-medical-card border border-white/10 hover:border-white/30 text-slate-200 hover:text-white transition-all"
             title="Print or Save as PDF"
           >
             <Printer className="w-3.5 h-3.5" />
@@ -110,7 +110,7 @@ export const DoctorResearcherXRayView: React.FC<DoctorResearcherXRayViewProps> =
           </button>
           <button
             onClick={onOpenGlossary}
-            className="p-1.5 rounded-lg text-medical-muted hover:text-white bg-medical-card border border-medical-border"
+            className="p-1.5 rounded-lg text-medical-muted hover:text-white bg-medical-card border border-white/10"
             title="Terminology Glossary"
           >
             <HelpCircle className="w-4 h-4" />
@@ -121,39 +121,39 @@ export const DoctorResearcherXRayView: React.FC<DoctorResearcherXRayViewProps> =
       {activeModelType === 'multilabel' && multiLabelResult && (
         <div className="space-y-4">
           {/* Scientific Specification Card */}
-          <div className="p-4 rounded-xl bg-medical-card border border-medical-border/80 space-y-3">
-            <div className="text-[11px] font-mono uppercase tracking-wider text-medical-cyan font-semibold">
+          <div className="p-4 rounded-xl bg-medical-card border border-white/10 space-y-3">
+            <div className="text-[11px] font-mono uppercase tracking-wider text-amber-400 font-semibold">
               Deep Learning Model Provenance
             </div>
             <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 text-xs">
-              <div className="p-2.5 rounded-lg bg-medical-surface border border-medical-border/60">
+              <div className="p-2.5 rounded-lg bg-medical-surface border border-white/[0.08]">
                 <span className="text-[10px] text-medical-muted block uppercase">Architecture</span>
                 <span className="font-mono font-semibold text-white block mt-0.5">
                   {multiLabelResult.model.architecture}
                 </span>
               </div>
-              <div className="p-2.5 rounded-lg bg-medical-surface border border-medical-border/60">
+              <div className="p-2.5 rounded-lg bg-medical-surface border border-white/[0.08]">
                 <span className="text-[10px] text-medical-muted block uppercase">Training Corpus</span>
                 <span className="font-mono font-semibold text-white block mt-0.5">
                   {multiLabelResult.model.training_dataset}
                 </span>
               </div>
-              <div className="p-2.5 rounded-lg bg-medical-surface border border-medical-border/60">
+              <div className="p-2.5 rounded-lg bg-medical-surface border border-white/[0.08]">
                 <span className="text-[10px] text-medical-muted block uppercase">Checkpoint State</span>
                 <span className="font-mono font-semibold text-white block mt-0.5">
                   Epoch {multiLabelResult.model.checkpoint_epoch} (Best Val AUC)
                 </span>
               </div>
-              <div className="p-2.5 rounded-lg bg-medical-surface border border-medical-border/60">
+              <div className="p-2.5 rounded-lg bg-medical-surface border border-white/[0.08]">
                 <span className="text-[10px] text-medical-muted block uppercase">Inference Latency</span>
-                <span className="font-mono font-semibold text-medical-cyan block mt-0.5 flex items-center gap-1">
+                <span className="font-mono font-semibold text-amber-400 block mt-0.5 flex items-center gap-1">
                   <Clock className="w-3 h-3" />
                   {multiLabelResult.inference_time_ms.toFixed(1)} ms
                 </span>
               </div>
             </div>
 
-            <div className="text-[11px] font-mono text-medical-muted bg-medical-surface px-3 py-2 rounded-lg border border-medical-border/60 space-y-0.5">
+            <div className="text-[11px] font-mono text-medical-muted bg-medical-surface px-3 py-2 rounded-lg border border-white/[0.08] space-y-0.5">
               <div>
                 <strong>Checkpoint Identifier:</strong> <code>densenet121_nih_best.pth</code> (SHA-256: <code>8d3690cd...</code>)
               </div>
@@ -191,7 +191,7 @@ export const DoctorResearcherXRayView: React.FC<DoctorResearcherXRayViewProps> =
                       </span>
                       <button
                         onClick={() => onOpenExplainability(disease)}
-                        className="text-medical-cyan hover:underline text-[10px]"
+                        className="text-amber-400 hover:text-amber-300 hover:underline text-[10px]"
                       >
                         Clinical Details & Signs →
                       </button>
@@ -220,32 +220,32 @@ export const DoctorResearcherXRayView: React.FC<DoctorResearcherXRayViewProps> =
 
       {activeModelType === 'binary' && binaryResult && (
         <div className="space-y-4">
-          <div className="p-4 rounded-xl bg-medical-card border border-medical-border/80 space-y-3">
-            <div className="text-[11px] font-mono uppercase tracking-wider text-medical-teal font-semibold">
+          <div className="p-4 rounded-xl bg-medical-card border border-white/10 space-y-3">
+            <div className="text-[11px] font-mono uppercase tracking-wider text-slate-200 font-semibold">
               Binary ResNet18 Architecture Telemetry
             </div>
             <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 text-xs">
-              <div className="p-2.5 rounded-lg bg-medical-surface border border-medical-border/60">
+              <div className="p-2.5 rounded-lg bg-medical-surface border border-white/[0.08]">
                 <span className="text-[10px] text-medical-muted block uppercase">Model Variant</span>
                 <span className="font-mono font-semibold text-white block mt-0.5">
                   {binaryResult.model.id}
                 </span>
               </div>
-              <div className="p-2.5 rounded-lg bg-medical-surface border border-medical-border/60">
+              <div className="p-2.5 rounded-lg bg-medical-surface border border-white/[0.08]">
                 <span className="text-[10px] text-medical-muted block uppercase">Training Corpus</span>
                 <span className="font-mono font-semibold text-white block mt-0.5">
                   {binaryResult.model.training_dataset}
                 </span>
               </div>
-              <div className="p-2.5 rounded-lg bg-medical-surface border border-medical-border/60">
+              <div className="p-2.5 rounded-lg bg-medical-surface border border-white/[0.08]">
                 <span className="text-[10px] text-medical-muted block uppercase">Target Sensitivity</span>
-                <span className="font-mono font-semibold text-medical-teal block mt-0.5">
+                <span className="font-mono font-semibold text-slate-200 block mt-0.5">
                   90.0% Calibrated
                 </span>
               </div>
-              <div className="p-2.5 rounded-lg bg-medical-surface border border-medical-border/60">
+              <div className="p-2.5 rounded-lg bg-medical-surface border border-white/[0.08]">
                 <span className="text-[10px] text-medical-muted block uppercase">Inference Latency</span>
-                <span className="font-mono font-semibold text-medical-cyan block mt-0.5 flex items-center gap-1">
+                <span className="font-mono font-semibold text-amber-400 block mt-0.5 flex items-center gap-1">
                   <Clock className="w-3 h-3" />
                   {binaryResult.inference_time_ms.toFixed(1)} ms
                 </span>
@@ -253,7 +253,7 @@ export const DoctorResearcherXRayView: React.FC<DoctorResearcherXRayViewProps> =
             </div>
           </div>
 
-          <div className="p-5 rounded-xl bg-medical-surface border border-medical-border flex flex-col items-center justify-center text-center">
+          <div className="p-5 rounded-xl bg-medical-surface border border-white/10 flex flex-col items-center justify-center text-center">
             <span className="text-xs text-medical-muted uppercase tracking-wider font-semibold">
               Binary Classification State
             </span>
@@ -291,13 +291,13 @@ export const DoctorResearcherXRayView: React.FC<DoctorResearcherXRayViewProps> =
       )}
 
       {/* Raw JSON Accordion for Technical Verification */}
-      <div className="border border-medical-border/80 rounded-xl overflow-hidden bg-medical-surface/40">
+      <div className="border border-white/10 rounded-xl overflow-hidden bg-medical-surface/40">
         <button
           onClick={() => setShowRawJson(!showRawJson)}
           className="w-full px-4 py-3 flex items-center justify-between text-xs text-medical-muted hover:text-white transition-colors"
         >
           <span className="flex items-center gap-2 font-mono font-medium">
-            <FileCode className="w-4 h-4 text-medical-cyan" />
+            <FileCode className="w-4 h-4 text-amber-400" />
             {showRawJson ? 'Hide Raw Backend JSON Payload' : 'Inspect Raw Backend JSON Payload'}
           </span>
           {showRawJson ? <ChevronUp className="w-4 h-4" /> : <ChevronDown className="w-4 h-4" />}

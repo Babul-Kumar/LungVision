@@ -92,7 +92,7 @@ export const SSM3DReconstructionViewer: React.FC<SSM3DReconstructionViewerProps>
     const height = container.clientHeight || 450;
 
     const scene = new THREE.Scene();
-    scene.background = new THREE.Color(0x070b14);
+    scene.background = new THREE.Color(0x0c0614);
     sceneRef.current = scene;
 
     const camera = new THREE.PerspectiveCamera(45, width / height, 1, 4000);
@@ -121,19 +121,19 @@ export const SSM3DReconstructionViewer: React.FC<SSM3DReconstructionViewerProps>
     controls.addEventListener('change', updateViewLabel);
     controlsRef.current = controls;
 
-    // Lighting
+    // Lighting with warm amber key and platinum rim
     const ambientLight = new THREE.AmbientLight(0xffffff, 0.75);
     scene.add(ambientLight);
 
-    const dirLight1 = new THREE.DirectionalLight(0x00f2fe, 1.3);
+    const dirLight1 = new THREE.DirectionalLight(0xfffbeb, 1.25);
     dirLight1.position.set(150, -250, 300);
     scene.add(dirLight1);
 
-    const dirLight2 = new THREE.DirectionalLight(0x38bdf8, 0.9);
+    const dirLight2 = new THREE.DirectionalLight(0xe2e8f0, 0.9);
     dirLight2.position.set(-150, 250, -150);
     scene.add(dirLight2);
 
-    const backLight = new THREE.DirectionalLight(0x0ea5e9, 0.6);
+    const backLight = new THREE.DirectionalLight(0xf59e0b, 0.55);
     backLight.position.set(0, 350, 200);
     scene.add(backLight);
 
@@ -236,11 +236,11 @@ export const SSM3DReconstructionViewer: React.FC<SSM3DReconstructionViewerProps>
     }
 
     const material = new THREE.MeshStandardMaterial({
-      color: colorMode === 'bilateral' ? 0x06b6d4 : 0x0ea5e9,
-      roughness: 0.35,
-      metalness: 0.18,
+      color: 0xf1f5f9,
+      roughness: 0.28,
+      metalness: 0.22,
       transparent: true,
-      opacity: wireframe ? 0.9 : 0.84,
+      opacity: wireframe ? 0.9 : 0.88,
       wireframe: wireframe,
       side: THREE.DoubleSide,
     });
@@ -288,21 +288,21 @@ export const SSM3DReconstructionViewer: React.FC<SSM3DReconstructionViewerProps>
       }
       geometry.setAttribute('position', new THREE.BufferAttribute(posArray, 3));
 
-      // Optional vertex color assignment for bilateral split mode
+      // Optional vertex color assignment for bilateral split mode (Ice Silver / Champagne Gold)
       if (colorMode === 'bilateral') {
         const colors = new Float32Array(vertices.length * 3);
         for (let i = 0; i < vertices.length; i++) {
           const x = vertices[i][0];
           if (x < 0) {
-            // Left lung (Sky blue: 0.22, 0.74, 0.97)
-            colors[i * 3] = 0.22;
-            colors[i * 3 + 1] = 0.74;
-            colors[i * 3 + 2] = 0.97;
+            // Left lung (Ice Silver Platinum: 0.95, 0.98, 1.0)
+            colors[i * 3] = 0.95;
+            colors[i * 3 + 1] = 0.98;
+            colors[i * 3 + 2] = 1.0;
           } else {
-            // Right lung (Teal: 0.18, 0.83, 0.75)
-            colors[i * 3] = 0.18;
-            colors[i * 3 + 1] = 0.83;
-            colors[i * 3 + 2] = 0.75;
+            // Right lung (Warm Champagne Gold: 0.99, 0.88, 0.54)
+            colors[i * 3] = 0.99;
+            colors[i * 3 + 1] = 0.88;
+            colors[i * 3 + 2] = 0.54;
           }
         }
         geometry.setAttribute('color', new THREE.BufferAttribute(colors, 3));
@@ -417,56 +417,56 @@ export const SSM3DReconstructionViewer: React.FC<SSM3DReconstructionViewerProps>
   };
 
   return (
-    <div className="relative w-full h-[460px] rounded-xl overflow-hidden bg-slate-950 border border-medical-border flex flex-col">
+    <div className="relative w-full h-[460px] rounded-xl overflow-hidden bg-[#0c0614] border border-white/10 flex flex-col">
       {/* 3D Canvas Mount Point */}
       <div ref={mountRef} className="w-full h-full cursor-grab active:cursor-grabbing" />
 
       {/* Viewport Overlay HUD Header */}
       <div className="absolute top-3 left-3 right-3 flex items-center justify-between pointer-events-none z-20">
-        <div className="flex items-center gap-2 pointer-events-auto bg-slate-900/85 backdrop-blur-md px-3 py-1.5 rounded-lg border border-medical-border text-xs shadow-lg">
-          <span className="w-2 h-2 rounded-full bg-cyan-400 animate-pulse" />
+        <div className="flex items-center gap-2 pointer-events-auto bg-[#140a22]/85 backdrop-blur-md px-3 py-1.5 rounded-lg border border-white/10 text-xs shadow-xl">
+          <span className="w-2 h-2 rounded-full bg-amber-400 animate-pulse" />
           <span className="font-semibold text-white font-mono">SSM 3D Surface</span>
-          <span className="text-medical-subtle">|</span>
-          <span className="text-medical-muted">{vertexCount.toLocaleString()} Vertices</span>
-          <span className="text-medical-subtle">·</span>
-          <span className="text-medical-muted">{faceCount.toLocaleString()} Triangles</span>
+          <span className="text-white/20">|</span>
+          <span className="text-slate-300">{vertexCount.toLocaleString()} Vertices</span>
+          <span className="text-white/20">·</span>
+          <span className="text-slate-300">{faceCount.toLocaleString()} Triangles</span>
         </div>
 
         {/* Viewport Action Controls */}
-        <div className="flex items-center gap-1.5 pointer-events-auto bg-slate-900/85 backdrop-blur-md p-1.5 rounded-lg border border-medical-border shadow-lg">
+        <div className="flex items-center gap-1.5 pointer-events-auto bg-[#140a22]/85 backdrop-blur-md p-1.5 rounded-lg border border-white/10 shadow-xl">
           {/* Quick Camera Presets */}
           <div className="flex items-center gap-1 mr-1 border-r border-white/10 pr-1.5 text-[10px] font-mono">
             <button
               onClick={() => setAnatomicalView('AP')}
-              className="px-1.5 py-1 rounded hover:bg-white/10 text-slate-300 hover:text-cyan-300 transition-colors"
+              className="px-1.5 py-1 rounded hover:bg-white/10 text-slate-300 hover:text-amber-300 transition-colors"
               title="Anterior (Frontal AP View)"
             >
               AP
             </button>
             <button
               onClick={() => setAnatomicalView('PA')}
-              className="px-1.5 py-1 rounded hover:bg-white/10 text-slate-300 hover:text-cyan-300 transition-colors"
+              className="px-1.5 py-1 rounded hover:bg-white/10 text-slate-300 hover:text-amber-300 transition-colors"
               title="Posterior (Dorsal PA View)"
             >
               PA
             </button>
             <button
               onClick={() => setAnatomicalView('RL')}
-              className="px-1.5 py-1 rounded hover:bg-white/10 text-slate-300 hover:text-cyan-300 transition-colors"
+              className="px-1.5 py-1 rounded hover:bg-white/10 text-slate-300 hover:text-amber-300 transition-colors"
               title="Right Lateral View"
             >
               RL
             </button>
             <button
               onClick={() => setAnatomicalView('LL')}
-              className="px-1.5 py-1 rounded hover:bg-white/10 text-slate-300 hover:text-cyan-300 transition-colors"
+              className="px-1.5 py-1 rounded hover:bg-white/10 text-slate-300 hover:text-amber-300 transition-colors"
               title="Left Lateral View"
             >
               LL
             </button>
             <button
               onClick={() => setAnatomicalView('SI')}
-              className="px-1.5 py-1 rounded hover:bg-white/10 text-slate-300 hover:text-cyan-300 transition-colors"
+              className="px-1.5 py-1 rounded hover:bg-white/10 text-slate-300 hover:text-amber-300 transition-colors"
               title="Superior (Top-Down View)"
             >
               SI
@@ -475,11 +475,10 @@ export const SSM3DReconstructionViewer: React.FC<SSM3DReconstructionViewerProps>
 
           <button
             onClick={() => setWireframe((w) => !w)}
-            className={`px-2 py-1 rounded text-xs font-medium flex items-center gap-1 transition-colors ${
-              wireframe
-                ? 'bg-cyan-500/20 text-cyan-300 font-semibold'
-                : 'text-medical-muted hover:text-white'
-            }`}
+            className={`px-2 py-1 rounded text-xs font-medium flex items-center gap-1 transition-colors ${wireframe
+              ? 'bg-amber-500/20 text-amber-300 font-semibold'
+              : 'text-slate-400 hover:text-white'
+              }`}
             title="Toggle Wireframe Mesh"
           >
             <Layers className="w-3.5 h-3.5" />
@@ -488,11 +487,10 @@ export const SSM3DReconstructionViewer: React.FC<SSM3DReconstructionViewerProps>
 
           <button
             onClick={() => setShowLandmarks((s) => !s)}
-            className={`px-2 py-1 rounded text-xs font-medium flex items-center gap-1 transition-colors ${
-              showLandmarks
-                ? 'bg-amber-500/20 text-amber-300 font-semibold'
-                : 'text-medical-muted hover:text-white'
-            }`}
+            className={`px-2 py-1 rounded text-xs font-medium flex items-center gap-1 transition-colors ${showLandmarks
+              ? 'bg-amber-500/20 text-amber-300 font-semibold'
+              : 'text-slate-400 hover:text-white'
+              }`}
             title="Toggle Anatomical Landmarks"
           >
             {showLandmarks ? <Eye className="w-3.5 h-3.5" /> : <EyeOff className="w-3.5 h-3.5" />}
@@ -501,9 +499,8 @@ export const SSM3DReconstructionViewer: React.FC<SSM3DReconstructionViewerProps>
 
           <button
             onClick={() => setColorMode((c) => (c === 'cyan' ? 'bilateral' : 'cyan'))}
-            className={`p-1.5 rounded hover:bg-white/10 text-xs transition-colors ${
-              colorMode === 'bilateral' ? 'text-teal-300 font-semibold' : 'text-slate-400 hover:text-white'
-            }`}
+            className={`p-1.5 rounded hover:bg-white/10 text-xs transition-colors ${colorMode === 'bilateral' ? 'text-amber-300 font-semibold' : 'text-slate-400 hover:text-white'
+              }`}
             title={colorMode === 'bilateral' ? 'Bilateral Color Partition' : 'Single Shaded Color'}
           >
             <Palette className="w-3.5 h-3.5" />
@@ -511,9 +508,8 @@ export const SSM3DReconstructionViewer: React.FC<SSM3DReconstructionViewerProps>
 
           <button
             onClick={() => setIsAutoRotating((prev) => !prev)}
-            className={`p-1.5 rounded hover:bg-white/10 text-xs transition-colors ${
-              isAutoRotating ? 'text-cyan-400' : 'text-slate-400 hover:text-white'
-            }`}
+            className={`p-1.5 rounded hover:bg-white/10 text-xs transition-colors ${isAutoRotating ? 'text-amber-400' : 'text-slate-400 hover:text-white'
+              }`}
             title={isAutoRotating ? 'Pause 360° Rotation' : 'Start 360° Rotation'}
           >
             {isAutoRotating ? <Pause className="w-3.5 h-3.5" /> : <Play className="w-3.5 h-3.5" />}
@@ -521,7 +517,7 @@ export const SSM3DReconstructionViewer: React.FC<SSM3DReconstructionViewerProps>
 
           <button
             onClick={handleExportSnapshot}
-            className="p-1.5 rounded hover:bg-white/10 text-slate-400 hover:text-cyan-300 transition-colors"
+            className="p-1.5 rounded hover:bg-white/10 text-slate-400 hover:text-amber-300 transition-colors"
             title="Export High-Res Snapshot (PNG)"
           >
             <Camera className="w-3.5 h-3.5" />
@@ -571,12 +567,12 @@ export const SSM3DReconstructionViewer: React.FC<SSM3DReconstructionViewerProps>
 
       {/* Orbit Controls Guide Bottom Pill & Active View Indicator */}
       <div className="absolute bottom-3 left-3 right-3 flex items-center justify-between pointer-events-none z-20">
-        <div className="bg-slate-900/80 backdrop-blur-md px-2.5 py-1 rounded text-[10px] text-medical-subtle border border-medical-border/60 font-mono">
+        <div className="bg-black/70 backdrop-blur-md px-2.5 py-1 rounded text-[10px] text-slate-400 border border-white/10 font-mono">
           Left click: Rotate · Right click: Pan · Scroll: Zoom
         </div>
 
-        <div className="text-[10px] font-mono text-cyan-300 bg-cyan-950/70 backdrop-blur-md px-2.5 py-1 rounded border border-cyan-800/40 flex items-center gap-1.5">
-          <span className="w-1.5 h-1.5 rounded-full bg-cyan-400 animate-pulse" />
+        <div className="text-[10px] font-mono text-amber-300 bg-amber-950/70 backdrop-blur-md px-2.5 py-1 rounded border border-amber-800/40 flex items-center gap-1.5">
+          <span className="w-1.5 h-1.5 rounded-full bg-amber-400 animate-pulse" />
           <span>VIEW: {activeViewName.toUpperCase()}</span>
         </div>
       </div>

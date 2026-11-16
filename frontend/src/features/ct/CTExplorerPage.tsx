@@ -427,19 +427,19 @@ export const CTExplorerPage: React.FC = () => {
       <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4 pb-4 border-b border-medical-border">
         <div>
           <div className="flex items-center gap-2 mb-1">
-            <span className="text-[11px] font-mono uppercase tracking-wider text-medical-teal bg-teal-950/40 px-2 py-0.5 rounded border border-teal-800/40">
+            <span className="text-[11px] font-mono uppercase tracking-wider text-amber-400 bg-amber-950/40 px-2 py-0.5 rounded border border-amber-800/40">
               Workstation Module
             </span>
-            <span className="text-xs text-medical-subtle">·</span>
-            <span className="text-xs text-medical-muted">Volumetric Computed Tomography</span>
+            <span className="text-xs text-white/20">·</span>
+            <span className="text-xs text-slate-400">Volumetric Computed Tomography</span>
           </div>
-          <h2 className="text-2xl font-bold tracking-tight text-white flex items-center gap-2.5">
+          <h2 className="text-2xl font-bold tracking-tight text-slate-100 flex items-center gap-2.5">
             3D Computed Tomography Explorer
-            <Badge variant="teal" size="sm">
+            <Badge variant="silver" size="sm">
               SimpleITK & Three.js
             </Badge>
           </h2>
-          <p className="text-xs text-medical-muted mt-1">
+          <p className="text-xs text-slate-400 mt-1">
             Volumetric MPR slicing, watertight marching cubes meshes, LUNA16 nodule mapping, and quantitative lung volumetry.
           </p>
         </div>
@@ -460,7 +460,7 @@ export const CTExplorerPage: React.FC = () => {
               setActiveScanId(e.target.value);
               setSelectedNoduleId(null);
             }}
-            className="bg-medical-surface border border-medical-border rounded-lg px-3 py-1.5 text-xs font-mono text-medical-text focus:outline-none focus:border-medical-cyan shadow-sm"
+            className="bg-[#150a22] border border-white/10 rounded-lg px-3 py-1.5 text-xs font-mono text-slate-100 focus:outline-none focus:border-amber-400 shadow-sm"
           >
             <option value="demo_thoracic_scan">Reference Thoracic Scan (LUNA16 12-Nodule Series)</option>
             {activeScanId !== 'demo_thoracic_scan' && (
@@ -474,7 +474,7 @@ export const CTExplorerPage: React.FC = () => {
             onClick={() => fileInputRef.current?.click()}
             disabled={isUploading}
             isLoading={isUploading}
-            className="border-medical-border hover:border-medical-cyan shadow-sm"
+            className="border-white/10 hover:border-amber-400 text-slate-200 shadow-sm"
           >
             <UploadCloud className="w-3.5 h-3.5 mr-1" />
             <span>Upload CT (.zip)</span>
@@ -494,57 +494,57 @@ export const CTExplorerPage: React.FC = () => {
       {/* Spatial Metadata Strip */}
       {metadata && (
         <div className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-6 gap-3">
-          <div className="bg-medical-card border border-medical-border/60 rounded-lg p-3">
-            <span className="text-[10px] text-medical-muted uppercase font-semibold block">Dimensions (X, Y, Z)</span>
-            <span className="text-xs font-mono text-white mt-1 block">
+          <div className="bg-[#160c26]/80 border border-white/10 rounded-lg p-3 shadow-md shadow-black/20">
+            <span className="text-[10px] text-slate-400 uppercase font-semibold block">Dimensions (X, Y, Z)</span>
+            <span className="text-xs font-mono text-slate-100 mt-1 block">
               {metadata.dimensions.x} × {metadata.dimensions.y} × {metadata.dimensions.z}
             </span>
           </div>
 
-          <div className="bg-medical-card border border-medical-border/60 rounded-lg p-3">
-            <span className="text-[10px] text-medical-muted uppercase font-semibold block">Voxel Spacing (mm)</span>
-            <span className="text-xs font-mono text-medical-cyan mt-1 block">
+          <div className="bg-[#160c26]/80 border border-white/10 rounded-lg p-3 shadow-md shadow-black/20">
+            <span className="text-[10px] text-slate-400 uppercase font-semibold block">Voxel Spacing (mm)</span>
+            <span className="text-xs font-mono text-slate-100 mt-1 block">
               {(metadata.spacing_mm ?? []).map((s) => (typeof s === 'number' ? s.toFixed(3) : String(s))).join(', ')}
             </span>
           </div>
 
-          <div className="bg-medical-card border border-medical-border/60 rounded-lg p-3">
-            <span className="text-[10px] text-medical-muted uppercase font-semibold block">LUNA16 Annotations</span>
+          <div className="bg-[#160c26]/80 border border-white/10 rounded-lg p-3 shadow-md shadow-black/20">
+            <span className="text-[10px] text-slate-400 uppercase font-semibold block">LUNA16 Annotations</span>
             <span className="text-xs font-mono text-amber-400 mt-1 block">
               {metadata.annotation_count} Mapped Nodules
             </span>
           </div>
 
-          <div className="bg-medical-card border border-medical-border/60 rounded-lg p-3">
-            <span className="text-[10px] text-medical-muted uppercase font-semibold block">Geometry Status</span>
+          <div className="bg-[#160c26]/80 border border-white/10 rounded-lg p-3 shadow-md shadow-black/20">
+            <span className="text-[10px] text-slate-400 uppercase font-semibold block">Geometry Status</span>
             <Badge variant={metadata.geometry_validation.status === 'PASSED' ? 'emerald' : 'rose'} size="sm" className="mt-1">
               <CheckCircle2 className="w-3 h-3 mr-1" />
               {metadata.geometry_validation.status} (atol=1e-3)
             </Badge>
           </div>
 
-          <div className="bg-medical-card border border-medical-border/60 rounded-lg p-3">
-            <span className="text-[10px] text-medical-muted uppercase font-semibold block">Segmented Labels</span>
+          <div className="bg-[#160c26]/80 border border-white/10 rounded-lg p-3 shadow-md shadow-black/20">
+            <span className="text-[10px] text-slate-400 uppercase font-semibold block">Segmented Labels</span>
             <span className="text-xs font-mono text-slate-300 mt-1 block">
               {metadata.labels_present.join(', ')} (Left/Right/Airway)
             </span>
           </div>
 
-          <div className="bg-medical-card border border-medical-border/60 rounded-lg p-3">
-            <span className="text-[10px] text-medical-muted uppercase font-semibold block">Volumetric Engine</span>
-            <span className="text-xs font-mono text-medical-teal mt-1 block">SimpleITK 2.5</span>
+          <div className="bg-[#160c26]/80 border border-white/10 rounded-lg p-3 shadow-md shadow-black/20">
+            <span className="text-[10px] text-slate-400 uppercase font-semibold block">Volumetric Engine</span>
+            <span className="text-xs font-mono text-slate-300 mt-1 block">SimpleITK 2.5</span>
           </div>
         </div>
       )}
 
       {/* Main Exploration Tabs */}
-      <div className="glass-panel p-1.5 rounded-xl border border-slate-700/60 flex flex-wrap items-center gap-1.5">
+      <div className="p-1.5 rounded-xl border border-white/10 bg-[#12071f]/80 backdrop-blur-xl flex flex-wrap items-center gap-1.5">
         <button
           onClick={() => setActiveTab('3d')}
           className={`flex items-center gap-2 px-4 py-2 rounded-lg text-xs font-medium transition-all ${
             activeTab === '3d'
-              ? 'bg-gradient-to-r from-cyan-500 to-teal-400 text-slate-950 font-bold shadow-md shadow-cyan-500/30'
-              : 'text-slate-400 hover:text-white hover:bg-slate-800/60'
+              ? 'bg-gradient-to-r from-amber-400 via-amber-500 to-amber-600 text-slate-950 font-bold shadow-lg shadow-amber-950/40 border border-amber-300/40'
+              : 'text-slate-300 hover:text-white hover:bg-white/[0.04]'
           }`}
         >
           <Box className="w-4 h-4" />
@@ -555,8 +555,8 @@ export const CTExplorerPage: React.FC = () => {
           onClick={() => setActiveTab('mpr')}
           className={`flex items-center gap-2 px-4 py-2 rounded-lg text-xs font-medium transition-all ${
             activeTab === 'mpr'
-              ? 'bg-gradient-to-r from-cyan-500 to-teal-400 text-slate-950 font-bold shadow-md shadow-cyan-500/30'
-              : 'text-slate-400 hover:text-white hover:bg-slate-800/60'
+              ? 'bg-gradient-to-r from-amber-400 via-amber-500 to-amber-600 text-slate-950 font-bold shadow-lg shadow-amber-950/40 border border-amber-300/40'
+              : 'text-slate-300 hover:text-white hover:bg-white/[0.04]'
           }`}
         >
           <Layers className="w-4 h-4" />
@@ -567,8 +567,8 @@ export const CTExplorerPage: React.FC = () => {
           onClick={() => setActiveTab('annotations')}
           className={`flex items-center gap-2 px-4 py-2 rounded-lg text-xs font-medium transition-all ${
             activeTab === 'annotations'
-              ? 'bg-gradient-to-r from-cyan-500 to-teal-400 text-slate-950 font-bold shadow-md shadow-cyan-500/30'
-              : 'text-slate-400 hover:text-white hover:bg-slate-800/60'
+              ? 'bg-gradient-to-r from-amber-400 via-amber-500 to-amber-600 text-slate-950 font-bold shadow-lg shadow-amber-950/40 border border-amber-300/40'
+              : 'text-slate-300 hover:text-white hover:bg-white/[0.04]'
           }`}
         >
           <Crosshair className="w-4 h-4" />
@@ -579,8 +579,8 @@ export const CTExplorerPage: React.FC = () => {
           onClick={() => setActiveTab('drr')}
           className={`flex items-center gap-2 px-4 py-2 rounded-lg text-xs font-medium transition-all ${
             activeTab === 'drr'
-              ? 'bg-gradient-to-r from-cyan-500 to-teal-400 text-slate-950 font-bold shadow-md shadow-cyan-500/30'
-              : 'text-slate-400 hover:text-white hover:bg-slate-800/60'
+              ? 'bg-gradient-to-r from-amber-400 via-amber-500 to-amber-600 text-slate-950 font-bold shadow-lg shadow-amber-950/40 border border-amber-300/40'
+              : 'text-slate-300 hover:text-white hover:bg-white/[0.04]'
           }`}
         >
           <Film className="w-4 h-4" />
@@ -591,8 +591,8 @@ export const CTExplorerPage: React.FC = () => {
           onClick={() => setActiveTab('ssm')}
           className={`flex items-center gap-2 px-4 py-2 rounded-lg text-xs font-medium transition-all ${
             activeTab === 'ssm'
-              ? 'bg-gradient-to-r from-cyan-500 to-teal-400 text-slate-950 font-bold shadow-md shadow-cyan-500/30'
-              : 'text-slate-400 hover:text-white hover:bg-slate-800/60'
+              ? 'bg-gradient-to-r from-amber-400 via-amber-500 to-amber-600 text-slate-950 font-bold shadow-lg shadow-amber-950/40 border border-amber-300/40'
+              : 'text-slate-300 hover:text-white hover:bg-white/[0.04]'
           }`}
         >
           <Sliders className="w-4 h-4" />
@@ -634,10 +634,10 @@ export const CTExplorerPage: React.FC = () => {
                           selectedStructure === item.id
                             ? item.id === 'heart'
                               ? 'bg-rose-600 text-white font-semibold shadow-xs'
-                              : 'bg-medical-cyan text-medical-bg font-semibold shadow-xs'
+                              : 'bg-gradient-to-r from-amber-400 via-amber-500 to-amber-600 text-slate-950 font-bold shadow-md shadow-amber-950/40 border border-amber-300/40'
                             : isPresent
-                            ? 'bg-medical-surface text-medical-muted hover:text-white'
-                            : 'bg-medical-surface/40 text-slate-500 border border-slate-800 line-through opacity-70'
+                            ? 'bg-[#1e1033] text-slate-300 hover:text-white border border-white/10'
+                            : 'bg-black/30 text-slate-600 border border-white/5 line-through opacity-70'
                         }`}
                         title={isPresent ? `Segmented label ${item.tag}` : `Structure label ${item.tag} outside scan subvolume`}
                       >
@@ -674,20 +674,20 @@ export const CTExplorerPage: React.FC = () => {
               )}
 
               {selectedNoduleId && activeNodule && (
-                <div className="mt-3 p-2.5 rounded-lg bg-medical-surface border border-cyan-800/60 flex items-center justify-between text-xs font-mono">
+                <div className="mt-3 p-2.5 rounded-lg bg-[#180d28] border border-amber-500/40 flex items-center justify-between text-xs font-mono shadow-md shadow-black/30">
                   <div className="flex items-center gap-2">
-                    <Crosshair className="w-4 h-4 text-medical-cyan animate-pulse" />
+                    <Crosshair className="w-4 h-4 text-amber-400 animate-pulse" />
                     <span>Selected Nodule: <strong className="text-white">{activeNodule.nodule_id}</strong></span>
-                    <span className="text-medical-subtle">|</span>
+                    <span className="text-white/20">|</span>
                     <span className="text-amber-300 font-semibold">{typeof activeNodule.diameter_mm === 'number' ? activeNodule.diameter_mm.toFixed(1) : (activeNodule.diameter_mm ?? 'N/A')} mm</span>
-                    <span className="text-medical-subtle">|</span>
+                    <span className="text-white/20">|</span>
                     <span className="text-slate-300">Voxel: ({activeNodule.voxel_x}, {activeNodule.voxel_y}, {activeNodule.voxel_z})</span>
                   </div>
                   <Button
                     variant="ghost"
                     size="sm"
                     onClick={() => jumpToNodule(activeNodule)}
-                    className="text-medical-cyan text-xs py-0.5 px-2"
+                    className="text-amber-300 hover:text-amber-200 text-xs py-0.5 px-2"
                   >
                     View in MPR Slice
                   </Button>
@@ -702,24 +702,24 @@ export const CTExplorerPage: React.FC = () => {
             <Card title="Quantitative Lung Volumetry" subtitle="Computed from verified voxel segmentation counts">
               {measurements ? (
                 <div className="space-y-3.5 text-xs">
-                  <div className="p-3 bg-medical-surface rounded-lg border border-medical-border flex items-center justify-between">
-                    <span className="text-medical-muted">Total Segmented Volume:</span>
+                  <div className="p-3 bg-[#150a22] rounded-lg border border-white/10 flex items-center justify-between">
+                    <span className="text-slate-400">Total Segmented Volume:</span>
                     <strong className="text-sm font-mono text-white">
                       {(measurements.lungs?.total_lung_volume_ml ?? 0).toFixed(1)} mL
                     </strong>
                   </div>
 
                   <div className="grid grid-cols-2 gap-2.5">
-                    <div className="p-3 bg-cyan-950/20 border border-cyan-800/40 rounded-lg">
-                      <span className="text-[10px] text-medical-cyan uppercase font-semibold block">Left Lung</span>
-                      <strong className="text-sm font-mono text-cyan-200 mt-1 block">
+                    <div className="p-3 bg-[#180e29] border border-white/10 rounded-lg">
+                      <span className="text-[10px] text-slate-400 uppercase font-semibold block">Left Lung</span>
+                      <strong className="text-sm font-mono text-slate-100 mt-1 block">
                         {(measurements.lungs?.left_lung_ml ?? 0).toFixed(1)} mL
                       </strong>
                     </div>
 
-                    <div className="p-3 bg-teal-950/20 border border-teal-800/40 rounded-lg">
-                      <span className="text-[10px] text-medical-teal uppercase font-semibold block">Right Lung</span>
-                      <strong className="text-sm font-mono text-teal-200 mt-1 block">
+                    <div className="p-3 bg-amber-950/30 border border-amber-500/30 rounded-lg">
+                      <span className="text-[10px] text-amber-300 uppercase font-semibold block">Right Lung</span>
+                      <strong className="text-sm font-mono text-amber-200 mt-1 block">
                         {(measurements.lungs?.right_lung_ml ?? 0).toFixed(1)} mL
                       </strong>
                     </div>
@@ -811,9 +811,9 @@ export const CTExplorerPage: React.FC = () => {
                     </span>
                   </div>
 
-                  <div className="flex items-center justify-between py-1 border-b border-medical-border/60">
-                    <span className="text-medical-muted">Surface Area:</span>
-                    <span className="font-mono text-medical-cyan">
+                  <div className="flex items-center justify-between py-1 border-b border-white/[0.08]">
+                    <span className="text-slate-400">Surface Area:</span>
+                    <span className="font-mono text-slate-100">
                       {(meshQuality.surface_area_mm2 ?? 0).toLocaleString()} mm²
                     </span>
                   </div>
@@ -894,8 +894,8 @@ export const CTExplorerPage: React.FC = () => {
                         }}
                         className={`p-2 rounded-lg border text-center capitalize transition-all ${
                           mprView === view
-                            ? 'bg-medical-cyan text-medical-bg border-medical-cyan font-semibold shadow-xs'
-                            : 'bg-medical-surface text-medical-muted border-medical-border hover:text-white'
+                            ? 'bg-gradient-to-r from-amber-400 via-amber-500 to-amber-600 text-slate-950 font-bold shadow-md shadow-amber-950/40 border border-amber-300/40'
+                            : 'bg-[#150a22] text-slate-300 border border-white/10 hover:text-white'
                         }`}
                       >
                         {view}
@@ -907,10 +907,10 @@ export const CTExplorerPage: React.FC = () => {
                 {/* Slice Slider with Step Buttons */}
                 <div>
                   <div className="flex items-center justify-between mb-1.5">
-                    <label className="text-[11px] font-semibold text-medical-subtle uppercase tracking-wider">
+                    <label className="text-[11px] font-semibold text-slate-400 uppercase tracking-wider">
                       Slice Navigation:
                     </label>
-                    <span className="font-mono text-medical-cyan font-bold text-sm">
+                    <span className="font-mono text-amber-300 font-bold text-sm">
                       {sliceIndex} / {maxIndex}
                     </span>
                   </div>
@@ -921,23 +921,23 @@ export const CTExplorerPage: React.FC = () => {
                     max={maxIndex}
                     value={sliceIndex}
                     onChange={(e) => setSliceIndex(parseInt(e.target.value, 10))}
-                    className="w-full accent-medical-cyan bg-medical-surface cursor-pointer"
+                    className="w-full accent-amber-500 bg-[#140a22] cursor-pointer"
                   />
 
                   {/* Step Buttons */}
-                  <div className="flex items-center justify-between mt-2 pt-1 border-t border-medical-border/40 text-[11px]">
+                  <div className="flex items-center justify-between mt-2 pt-1 border-t border-white/[0.08] text-[11px]">
                     <div className="flex items-center gap-1">
                       <button
                         onClick={() => stepSlice(-5)}
                         disabled={sliceIndex <= 0}
-                        className="px-2 py-0.5 rounded bg-medical-surface border border-medical-border hover:text-white disabled:opacity-30"
+                        className="px-2 py-0.5 rounded bg-[#180e28] border border-white/10 text-slate-300 hover:text-white disabled:opacity-30"
                       >
                         -5
                       </button>
                       <button
                         onClick={() => stepSlice(-1)}
                         disabled={sliceIndex <= 0}
-                        className="px-2 py-0.5 rounded bg-medical-surface border border-medical-border hover:text-white disabled:opacity-30 flex items-center"
+                        className="px-2 py-0.5 rounded bg-[#180e28] border border-white/10 text-slate-300 hover:text-white disabled:opacity-30 flex items-center"
                       >
                         <ChevronLeft className="w-3 h-3" />
                       </button>
@@ -954,8 +954,8 @@ export const CTExplorerPage: React.FC = () => {
                         ) : null
                       );
                       return phys != null ? (
-                        <span className="text-[10px] text-medical-subtle font-mono">
-                          Coord: <strong className="text-slate-300">{Number(phys).toFixed(2)} mm</strong>
+                        <span className="text-[10px] text-slate-400 font-mono">
+                          Coord: <strong className="text-slate-200">{Number(phys).toFixed(2)} mm</strong>
                         </span>
                       ) : null;
                     })()}
@@ -964,14 +964,14 @@ export const CTExplorerPage: React.FC = () => {
                       <button
                         onClick={() => stepSlice(1)}
                         disabled={sliceIndex >= maxIndex}
-                        className="px-2 py-0.5 rounded bg-medical-surface border border-medical-border hover:text-white disabled:opacity-30 flex items-center"
+                        className="px-2 py-0.5 rounded bg-[#180e28] border border-white/10 text-slate-300 hover:text-white disabled:opacity-30 flex items-center"
                       >
                         <ChevronRight className="w-3 h-3" />
                       </button>
                       <button
                         onClick={() => stepSlice(5)}
                         disabled={sliceIndex >= maxIndex}
-                        className="px-2 py-0.5 rounded bg-medical-surface border border-medical-border hover:text-white disabled:opacity-30"
+                        className="px-2 py-0.5 rounded bg-[#180e28] border border-white/10 text-slate-300 hover:text-white disabled:opacity-30"
                       >
                         +5
                       </button>
@@ -981,13 +981,13 @@ export const CTExplorerPage: React.FC = () => {
 
                 {/* Window Presets */}
                 <div>
-                  <label className="text-[11px] font-semibold text-medical-subtle uppercase tracking-wider block mb-1.5">
+                  <label className="text-[11px] font-semibold text-slate-400 uppercase tracking-wider block mb-1.5">
                     Clinical Windowing Preset:
                   </label>
                   <select
                     value={windowPreset}
                     onChange={(e) => setWindowPreset(e.target.value)}
-                    className="w-full bg-medical-surface border border-medical-border rounded-lg p-2 text-xs font-mono text-white focus:outline-none focus:border-medical-cyan shadow-sm"
+                    className="w-full bg-[#150a22] border border-white/10 rounded-lg p-2 text-xs font-mono text-white focus:outline-none focus:border-amber-400 shadow-sm"
                   >
                     <option value="lung">Lung Window (-600 HU Center / 1500 HU Width)</option>
                     <option value="mediastinum">Mediastinum Window (50 HU Center / 350 HU Width)</option>
@@ -997,8 +997,8 @@ export const CTExplorerPage: React.FC = () => {
                 </div>
 
                 {/* Overlays */}
-                <div className="pt-3 border-t border-medical-border/60 space-y-2">
-                  <label className="text-[11px] font-semibold text-medical-subtle uppercase tracking-wider block">
+                <div className="pt-3 border-t border-white/[0.08] space-y-2">
+                  <label className="text-[11px] font-semibold text-slate-400 uppercase tracking-wider block">
                     Diagnostic Overlays:
                   </label>
                   <label className="flex items-center gap-2.5 cursor-pointer">
@@ -1006,7 +1006,7 @@ export const CTExplorerPage: React.FC = () => {
                       type="checkbox"
                       checked={overlayMask}
                       onChange={(e) => setOverlayMask(e.target.checked)}
-                      className="accent-medical-cyan rounded"
+                      className="accent-amber-500 rounded"
                     />
                     <span className="text-slate-300">Segmentation Mask (Labels 3, 4, 5)</span>
                   </label>
@@ -1015,7 +1015,7 @@ export const CTExplorerPage: React.FC = () => {
                       type="checkbox"
                       checked={showNodules}
                       onChange={(e) => setShowNodules(e.target.checked)}
-                      className="accent-medical-cyan rounded"
+                      className="accent-amber-500 rounded"
                     />
                     <span className="text-slate-300">LUNA16 Nodule Crosshairs</span>
                   </label>
@@ -1023,22 +1023,22 @@ export const CTExplorerPage: React.FC = () => {
 
                 {/* Active Nodule Jumper if selected */}
                 {selectedNoduleId && activeNodule && (
-                  <div className="pt-3 border-t border-medical-border/60">
-                    <span className="text-[10px] text-medical-subtle uppercase tracking-wider block mb-1">
+                  <div className="pt-3 border-t border-white/[0.08]">
+                    <span className="text-[10px] text-slate-400 uppercase tracking-wider block mb-1">
                       Targeted Nodule Focus:
                     </span>
-                    <div className="p-2.5 bg-cyan-950/30 border border-cyan-800/60 rounded-lg space-y-1 text-[11px]">
+                    <div className="p-2.5 bg-amber-950/30 border border-amber-600/40 rounded-lg space-y-1 text-[11px]">
                       <div className="flex justify-between">
-                        <span className="text-medical-muted">Nodule ID:</span>
+                        <span className="text-slate-400">Nodule ID:</span>
                         <span className="font-mono font-bold text-white">{activeNodule.nodule_id}</span>
                       </div>
                       <div className="flex justify-between">
-                        <span className="text-medical-muted">Diameter:</span>
+                        <span className="text-slate-400">Diameter:</span>
                         <span className="font-mono text-amber-300 font-semibold">{typeof activeNodule.diameter_mm === 'number' ? activeNodule.diameter_mm.toFixed(1) : (activeNodule.diameter_mm ?? 'N/A')} mm</span>
                       </div>
                       <div className="flex justify-between">
-                        <span className="text-medical-muted">Location:</span>
-                        <span className="font-mono text-medical-cyan">({activeNodule.voxel_x}, {activeNodule.voxel_y}, {activeNodule.voxel_z})</span>
+                        <span className="text-slate-400">Location:</span>
+                        <span className="font-mono text-amber-300">({activeNodule.voxel_x}, {activeNodule.voxel_y}, {activeNodule.voxel_z})</span>
                       </div>
                     </div>
                   </div>
@@ -1060,11 +1060,11 @@ export const CTExplorerPage: React.FC = () => {
                     size="sm"
                     onClick={() => setIsCinePlaying((p) => !p)}
                     className={`text-xs py-1 px-2.5 transition-colors ${
-                      isCinePlaying ? 'border-cyan-500 bg-cyan-950/60 text-cyan-300' : 'text-slate-300'
+                      isCinePlaying ? 'border-amber-500 bg-amber-950/60 text-amber-300' : 'text-slate-300'
                     }`}
                     title={isCinePlaying ? 'Pause Cine Playback' : 'Start Auto Cine Loop'}
                   >
-                    {isCinePlaying ? <Pause className="w-3.5 h-3.5 mr-1 text-cyan-400" /> : <Play className="w-3.5 h-3.5 mr-1" />}
+                    {isCinePlaying ? <Pause className="w-3.5 h-3.5 mr-1 text-amber-400" /> : <Play className="w-3.5 h-3.5 mr-1" />}
                     <span>{isCinePlaying ? 'Pause Cine' : 'Cine Loop'}</span>
                   </Button>
 
@@ -1091,7 +1091,7 @@ export const CTExplorerPage: React.FC = () => {
                     >
                       <ZoomOut className="w-3.5 h-3.5" />
                     </button>
-                    <span className="text-[10px] font-mono text-cyan-400 px-1 min-w-[28px] text-center font-bold">
+                    <span className="text-[10px] font-mono text-amber-300 px-1 min-w-[28px] text-center font-bold">
                       {Math.round(mprZoom * 100)}%
                     </span>
                     <button
@@ -1115,7 +1115,7 @@ export const CTExplorerPage: React.FC = () => {
             >
               <div
                 onWheel={handleMprWheel}
-                className="relative min-h-[460px] bg-black rounded-xl border border-medical-border flex items-center justify-center overflow-hidden select-none cursor-ns-resize group"
+                className="relative min-h-[460px] bg-black rounded-xl border border-white/10 flex items-center justify-center overflow-hidden select-none cursor-ns-resize group"
                 title="Scroll mouse wheel over image to scrub CT slices"
               >
                 {/* Cardinal Anatomical Compass Orientation Labels */}
@@ -1134,7 +1134,7 @@ export const CTExplorerPage: React.FC = () => {
 
                 {loadingSlice && !currentSlice && (
                   <div className="absolute inset-0 bg-black/70 flex items-center justify-center z-30">
-                    <span className="text-xs font-mono text-medical-cyan animate-pulse">Streaming orthogonal slice...</span>
+                    <span className="text-xs font-mono text-amber-300 animate-pulse">Streaming orthogonal slice...</span>
                   </div>
                 )}
 
@@ -1154,12 +1154,12 @@ export const CTExplorerPage: React.FC = () => {
                     />
                   </div>
                 ) : (
-                  <div className="text-xs text-medical-muted">Loading orthogonal slice...</div>
+                  <div className="text-xs text-slate-400">Loading orthogonal slice...</div>
                 )}
 
                 {/* Top Left Metadata Tag */}
-                <div className="absolute top-2.5 left-2.5 text-[10px] font-mono text-medical-cyan bg-black/75 px-2 py-1 rounded border border-white/10 z-20 flex items-center gap-1.5">
-                  <span className={`w-1.5 h-1.5 rounded-full ${loadingSlice ? 'bg-amber-400 animate-ping' : 'bg-cyan-400 animate-pulse'}`} />
+                <div className="absolute top-2.5 left-2.5 text-[10px] font-mono text-amber-300 bg-black/80 px-2 py-1 rounded border border-white/10 z-20 flex items-center gap-1.5">
+                  <span className={`w-1.5 h-1.5 rounded-full ${loadingSlice ? 'bg-amber-400 animate-ping' : 'bg-amber-400 animate-pulse'}`} />
                   <span>{mprView.toUpperCase()} [{sliceIndex}/{maxIndex}]</span>
                   {loadingSlice && <span className="text-amber-300 ml-1 font-sans text-[9px]">syncing</span>}
                 </div>
@@ -1200,15 +1200,15 @@ export const CTExplorerPage: React.FC = () => {
                 {annotations.map((nodule) => (
                   <tr
                     key={nodule.nodule_id}
-                    className={`hover:bg-medical-hover/50 transition-colors ${
-                      selectedNoduleId === nodule.nodule_id ? 'bg-cyan-950/30' : ''
+                    className={`hover:bg-white/[0.04] transition-colors ${
+                      selectedNoduleId === nodule.nodule_id ? 'bg-amber-950/30' : ''
                     }`}
                   >
                     <td className="p-3 font-semibold text-white">{nodule.nodule_id}</td>
                     <td className="p-3 text-slate-300">{typeof nodule.coordX_mm === 'number' ? nodule.coordX_mm.toFixed(2) : (nodule.coordX_mm ?? '0.00')}</td>
                     <td className="p-3 text-slate-300">{typeof nodule.coordY_mm === 'number' ? nodule.coordY_mm.toFixed(2) : (nodule.coordY_mm ?? '0.00')}</td>
                     <td className="p-3 text-slate-300">{typeof nodule.coordZ_mm === 'number' ? nodule.coordZ_mm.toFixed(2) : (nodule.coordZ_mm ?? '0.00')}</td>
-                    <td className="p-3 text-medical-cyan">
+                    <td className="p-3 text-slate-200 font-mono">
                       ({nodule.voxel_x}, {nodule.voxel_y}, {nodule.voxel_z})
                     </td>
                     <td className="p-3 text-amber-400 font-semibold">{typeof nodule.diameter_mm === 'number' ? nodule.diameter_mm.toFixed(1) : (nodule.diameter_mm ?? '0.0')} mm</td>
@@ -1222,9 +1222,9 @@ export const CTExplorerPage: React.FC = () => {
                         variant="outline"
                         size="sm"
                         onClick={() => jumpToNodule(nodule)}
-                        className="text-cyan-300 border-cyan-500/40 bg-cyan-950/30 hover:bg-cyan-900/60 text-xs py-1 px-2.5 flex items-center gap-1.5 transition-all shadow-xs"
+                        className="text-amber-300 border-amber-500/40 bg-amber-950/30 hover:bg-amber-900/60 text-xs py-1 px-2.5 flex items-center gap-1.5 transition-all shadow-xs"
                       >
-                        <Crosshair className="w-3.5 h-3.5 text-cyan-400" />
+                        <Crosshair className="w-3.5 h-3.5 text-amber-400" />
                         <span>Jump to Slice</span>
                       </Button>
                     </td>
@@ -1240,9 +1240,9 @@ export const CTExplorerPage: React.FC = () => {
       {activeTab === 'drr' && (
         <div className="space-y-6">
           {/* Top Banner explaining the CT-to-DRR synthesis */}
-          <div className="bg-medical-card border border-medical-border/80 rounded-xl p-4 flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
+          <div className="bg-[#160c26]/80 border border-white/10 rounded-xl p-4 flex flex-col md:flex-row items-start md:items-center justify-between gap-4 shadow-xl">
             <div className="flex items-start gap-3">
-              <div className="p-2.5 rounded-lg bg-cyan-950/40 border border-cyan-800/60 text-medical-cyan mt-0.5">
+              <div className="p-2.5 rounded-lg bg-amber-950/40 border border-amber-800/60 text-amber-400 mt-0.5">
                 <Film className="w-5 h-5" />
               </div>
               <div>
@@ -1250,11 +1250,11 @@ export const CTExplorerPage: React.FC = () => {
                   <h3 className="text-sm font-semibold text-white">
                     CT-to-DRR Radiographic Synthesis & Dual-View 3D Bridge
                   </h3>
-                  <Badge variant="cyan" size="sm">
+                  <Badge variant="amber" size="sm">
                     Beer-Lambert Attenuation
                   </Badge>
                 </div>
-                <p className="text-xs text-medical-muted mt-1 max-w-2xl">
+                <p className="text-xs text-slate-400 mt-1 max-w-2xl">
                   Simulates physical clinical X-ray projections directly from 3D CT attenuation coefficients (μ = μ_water · (1 + HU/1000)). Synthesizes calibrated Frontal (PA) and Lateral (LL) radiographs to feed the bi-planar 3D reconstruction pipeline.
                 </p>
               </div>
@@ -1266,7 +1266,7 @@ export const CTExplorerPage: React.FC = () => {
                 size="sm"
                 onClick={handleDownloadDRR}
                 disabled={!drrData}
-                className="border-medical-border hover:border-medical-cyan text-xs"
+                className="border-white/10 hover:border-amber-400 text-xs text-slate-200"
               >
                 <Download className="w-3.5 h-3.5 mr-1" />
                 <span>Save Radiograph</span>
@@ -1277,7 +1277,7 @@ export const CTExplorerPage: React.FC = () => {
                 onClick={handleExportToDualView}
                 disabled={loadingDRR || isExportingToDualView}
                 isLoading={isExportingToDualView}
-                className="bg-medical-cyan text-medical-bg hover:bg-cyan-400 font-semibold text-xs shadow-md shadow-cyan-950/50"
+                className="bg-gradient-to-r from-amber-400 via-amber-500 to-amber-600 text-slate-950 hover:from-amber-300 hover:to-amber-500 font-semibold text-xs shadow-md shadow-amber-950/50 border border-amber-300/40"
               >
                 <span>Export to Dual-View Lab</span>
                 <ArrowRight className="w-3.5 h-3.5 ml-1" />
@@ -1295,7 +1295,7 @@ export const CTExplorerPage: React.FC = () => {
                 <div className="space-y-4 text-xs">
                   {/* Projection View Selector */}
                   <div>
-                    <label className="text-[11px] font-semibold text-medical-subtle uppercase tracking-wider block mb-1.5">
+                    <label className="text-[11px] font-semibold text-slate-400 uppercase tracking-wider block mb-1.5">
                       Radiographic Projection View:
                     </label>
                     <div className="grid grid-cols-2 gap-2">
@@ -1303,8 +1303,8 @@ export const CTExplorerPage: React.FC = () => {
                         onClick={() => setDrrView('frontal')}
                         className={`p-2.5 rounded-lg border text-center transition-all ${
                           drrView === 'frontal'
-                            ? 'bg-medical-cyan text-medical-bg border-medical-cyan font-semibold shadow-xs'
-                            : 'bg-medical-surface text-medical-muted border-medical-border hover:text-white'
+                            ? 'bg-gradient-to-r from-amber-400 via-amber-500 to-amber-600 text-slate-950 font-bold shadow-md shadow-amber-950/40 border border-amber-300/40'
+                            : 'bg-[#150a22] text-slate-300 border border-white/10 hover:text-white'
                         }`}
                       >
                         <div className="text-xs font-bold">Frontal (PA)</div>
@@ -1315,8 +1315,8 @@ export const CTExplorerPage: React.FC = () => {
                         onClick={() => setDrrView('lateral')}
                         className={`p-2.5 rounded-lg border text-center transition-all ${
                           drrView === 'lateral'
-                            ? 'bg-medical-cyan text-medical-bg border-medical-cyan font-semibold shadow-xs'
-                            : 'bg-medical-surface text-medical-muted border-medical-border hover:text-white'
+                            ? 'bg-gradient-to-r from-amber-400 via-amber-500 to-amber-600 text-slate-950 font-bold shadow-md shadow-amber-950/40 border border-amber-300/40'
+                            : 'bg-[#150a22] text-slate-300 border border-white/10 hover:text-white'
                         }`}
                       >
                         <div className="text-xs font-bold">Lateral (LL)</div>
@@ -1328,10 +1328,10 @@ export const CTExplorerPage: React.FC = () => {
                   {/* SDD Slider */}
                   <div>
                     <div className="flex items-center justify-between mb-1.5">
-                      <label className="text-[11px] font-semibold text-medical-subtle uppercase tracking-wider">
+                      <label className="text-[11px] font-semibold text-slate-400 uppercase tracking-wider">
                         Source-to-Detector Distance (SDD):
                       </label>
-                      <span className="font-mono text-medical-cyan font-bold text-xs">
+                      <span className="font-mono text-amber-300 font-bold text-xs">
                         {drrSdd.toFixed(0)} mm
                       </span>
                     </div>
@@ -1342,9 +1342,9 @@ export const CTExplorerPage: React.FC = () => {
                       step={50}
                       value={drrSdd}
                       onChange={(e) => setDrrSdd(parseFloat(e.target.value))}
-                      className="w-full accent-medical-cyan bg-medical-surface cursor-pointer"
+                      className="w-full accent-amber-500 bg-[#140a22] cursor-pointer"
                     />
-                    <div className="flex justify-between text-[10px] text-medical-muted mt-1 font-mono">
+                    <div className="flex justify-between text-[10px] text-slate-400 mt-1 font-mono">
                       <span>1200 mm</span>
                       <span>Standard: 1800 mm</span>
                       <span>2200 mm</span>
@@ -1354,10 +1354,10 @@ export const CTExplorerPage: React.FC = () => {
                   {/* SOD Slider */}
                   <div>
                     <div className="flex items-center justify-between mb-1.5">
-                      <label className="text-[11px] font-semibold text-medical-subtle uppercase tracking-wider">
+                      <label className="text-[11px] font-semibold text-slate-400 uppercase tracking-wider">
                         Source-to-Object Distance (SOD):
                       </label>
-                      <span className="font-mono text-medical-cyan font-bold text-xs">
+                      <span className="font-mono text-amber-300 font-bold text-xs">
                         {drrSod.toFixed(0)} mm
                       </span>
                     </div>
@@ -1368,9 +1368,9 @@ export const CTExplorerPage: React.FC = () => {
                       step={50}
                       value={drrSod}
                       onChange={(e) => setDrrSod(parseFloat(e.target.value))}
-                      className="w-full accent-medical-cyan bg-medical-surface cursor-pointer"
+                      className="w-full accent-amber-500 bg-[#140a22] cursor-pointer"
                     />
-                    <div className="flex justify-between text-[10px] text-medical-muted mt-1 font-mono">
+                    <div className="flex justify-between text-[10px] text-slate-400 mt-1 font-mono">
                       <span>1000 mm</span>
                       <span>Standard: 1450 mm</span>
                       <span>1800 mm</span>
@@ -1399,11 +1399,11 @@ export const CTExplorerPage: React.FC = () => {
                         type="checkbox"
                         checked={drrOverlaySilhouette}
                         onChange={(e) => setDrrOverlaySilhouette(e.target.checked)}
-                        className="accent-medical-cyan rounded"
+                        className="accent-amber-500 rounded"
                       />
                       <div>
                         <span className="text-slate-300 block">Lung Boundary Silhouette</span>
-                        <span className="text-[10px] text-medical-muted block">Project 2D anatomical contours from ground-truth mask</span>
+                        <span className="text-[10px] text-slate-400 block">Project 2D anatomical contours from ground-truth mask</span>
                       </div>
                     </label>
 
@@ -1412,37 +1412,37 @@ export const CTExplorerPage: React.FC = () => {
                         type="checkbox"
                         checked={drrAddNoise}
                         onChange={(e) => setDrrAddNoise(e.target.checked)}
-                        className="accent-medical-cyan rounded"
+                        className="accent-amber-500 rounded"
                       />
                       <div>
                         <span className="text-slate-300 block">Quantum Photon Poisson Noise</span>
-                        <span className="text-[10px] text-medical-muted block">Simulate physical quantum detector photon mottle</span>
+                        <span className="text-[10px] text-slate-400 block">Simulate physical quantum detector photon mottle</span>
                       </div>
                     </label>
                   </div>
 
                   {/* Projection Matrix & Attenuation Stats */}
                   {drrData && (
-                    <div className="pt-3 border-t border-medical-border/60 space-y-2">
-                      <label className="text-[11px] font-semibold text-medical-subtle uppercase tracking-wider block">
+                    <div className="pt-3 border-t border-white/[0.08] space-y-2">
+                      <label className="text-[11px] font-semibold text-slate-400 uppercase tracking-wider block">
                         Projection Radiometry:
                       </label>
                       <div className="grid grid-cols-2 gap-2 text-[11px] font-mono">
                         <div className="p-2 bg-black/40 rounded border border-white/5">
-                          <span className="text-medical-muted text-[10px] block">Mean Attenuation:</span>
+                          <span className="text-slate-400 text-[10px] block">Mean Attenuation:</span>
                           <span className="text-slate-200">{drrData.attenuation_stats.mean_line_integral.toFixed(3)}</span>
                         </div>
                         <div className="p-2 bg-black/40 rounded border border-white/5">
-                          <span className="text-medical-muted text-[10px] block">Max Line Integral:</span>
+                          <span className="text-slate-400 text-[10px] block">Max Line Integral:</span>
                           <span className="text-slate-200">{drrData.attenuation_stats.max_line_integral.toFixed(2)}</span>
                         </div>
                         <div className="p-2 bg-black/40 rounded border border-white/5">
-                          <span className="text-medical-muted text-[10px] block">Matrix Resolution:</span>
+                          <span className="text-slate-400 text-[10px] block">Matrix Resolution:</span>
                           <span className="text-slate-200">{drrData.dimensions.width} × {drrData.dimensions.height}</span>
                         </div>
                         <div className="p-2 bg-black/40 rounded border border-white/5">
-                          <span className="text-medical-muted text-[10px] block">Forward Runtime:</span>
-                          <span className="text-medical-teal">{drrData.computation_latency_ms.toFixed(1)} ms</span>
+                          <span className="text-slate-400 text-[10px] block">Forward Runtime:</span>
+                          <span className="text-slate-100">{drrData.computation_latency_ms.toFixed(1)} ms</span>
                         </div>
                       </div>
                     </div>
@@ -1458,13 +1458,13 @@ export const CTExplorerPage: React.FC = () => {
                 subtitle="Simulated forward projection through 3D attenuation volume"
                 headerAction={
                   drrData && (
-                    <Badge variant="teal" size="sm">
+                    <Badge variant="silver" size="sm">
                       FOV: {drrData.physical_fov_mm.width_mm.toFixed(1)} × {drrData.physical_fov_mm.height_mm.toFixed(1)} mm
                     </Badge>
                   )
                 }
               >
-                <div className="relative min-h-[500px] bg-black rounded-xl border border-medical-border flex items-center justify-center overflow-hidden select-none">
+                <div className="relative min-h-[500px] bg-black rounded-xl border border-white/10 flex items-center justify-center overflow-hidden select-none">
                   {/* Orientation tags */}
                   <div className="absolute top-3 left-1/2 -translate-x-1/2 z-20 px-2.5 py-0.5 rounded bg-black/80 border border-white/10 text-[10px] font-mono font-bold text-slate-300">
                     S (Superior)
@@ -1481,8 +1481,8 @@ export const CTExplorerPage: React.FC = () => {
 
                   {loadingDRR && (
                     <div className="absolute inset-0 bg-black/70 backdrop-blur-xs flex flex-col items-center justify-center z-30 gap-2">
-                      <Film className="w-8 h-8 text-medical-cyan animate-pulse" />
-                      <span className="text-xs font-mono text-medical-cyan animate-pulse">
+                      <Film className="w-8 h-8 text-amber-400 animate-pulse" />
+                      <span className="text-xs font-mono text-amber-300 animate-pulse">
                         Ray-casting Beer-Lambert attenuation integral...
                       </span>
                     </div>
@@ -1506,7 +1506,7 @@ export const CTExplorerPage: React.FC = () => {
                   ) : null}
 
                   {/* Top-Left View Tag */}
-                  <div className="absolute top-3 left-3 text-[10px] font-mono text-medical-cyan bg-black/80 px-2.5 py-1 rounded border border-white/10 z-20">
+                  <div className="absolute top-3 left-3 text-[10px] font-mono text-amber-300 bg-black/80 px-2.5 py-1 rounded border border-white/10 z-20">
                     {drrView.toUpperCase()} · DRR SYNTHESIS
                   </div>
 
@@ -1551,10 +1551,10 @@ export const CTExplorerPage: React.FC = () => {
               </div>
             </div>
             <div className="flex items-center gap-2 shrink-0">
-              <Badge variant="teal" size="sm">
+              <Badge variant="silver" size="sm">
                 Cohort: 430 Scans
               </Badge>
-              <Badge variant="cyan" size="sm">
+              <Badge variant="amber" size="sm">
                 Zero Patient Leakage
               </Badge>
             </div>
@@ -1570,15 +1570,15 @@ export const CTExplorerPage: React.FC = () => {
                 headerAction={
                   <div className="flex items-center gap-2">
                     {/* Structure Selector */}
-                    <div className="flex items-center bg-medical-surface p-1 rounded-lg border border-medical-border">
+                    <div className="flex items-center bg-[#150a22] p-1 rounded-lg border border-white/10">
                       {(['bilateral', 'left_lung', 'right_lung'] as const).map((struct) => (
                         <button
                           key={struct}
                           onClick={() => setSsmStructure(struct)}
                           className={`px-2.5 py-1 rounded text-[11px] font-mono capitalize transition-all ${
                             ssmStructure === struct
-                              ? 'bg-medical-cyan text-medical-bg font-semibold shadow-xs'
-                              : 'text-medical-muted hover:text-white'
+                              ? 'bg-gradient-to-r from-amber-400 via-amber-500 to-amber-600 text-slate-950 font-bold shadow-md shadow-amber-950/40 border border-amber-300/40'
+                              : 'text-slate-400 hover:text-white'
                           }`}
                         >
                           {struct === 'bilateral' ? 'Bilateral Lungs' : struct.replace('_', ' ')}
@@ -1600,15 +1600,15 @@ export const CTExplorerPage: React.FC = () => {
                 }
               >
                 {/* Presets Bar */}
-                <div className="mb-3 p-2 bg-slate-900/60 rounded-lg border border-slate-800 flex flex-wrap items-center justify-between gap-2">
+                <div className="mb-3 p-2 bg-[#180e28]/80 rounded-lg border border-white/10 flex flex-wrap items-center justify-between gap-2">
                   <div className="flex items-center gap-1.5">
-                    <span className="text-[11px] font-mono text-medical-muted mr-1">Geometry Mode:</span>
+                    <span className="text-[11px] font-mono text-slate-400 mr-1">Geometry Mode:</span>
                     <button
                       onClick={() => applySSMPreset('mean')}
                       className={`px-2 py-0.5 rounded text-[11px] font-mono transition-all ${
                         ssmGeometryPreset === 'mean'
-                          ? 'bg-cyan-500 text-slate-950 font-bold'
-                          : 'bg-slate-800 text-slate-300 hover:text-white'
+                          ? 'bg-gradient-to-r from-amber-400 via-amber-500 to-amber-600 text-slate-950 font-bold'
+                          : 'bg-[#150a22] text-slate-300 hover:text-white border border-white/10'
                       }`}
                     >
                       Mean Shape (b=0)
@@ -1617,8 +1617,8 @@ export const CTExplorerPage: React.FC = () => {
                       onClick={() => applySSMPreset('held_out_val')}
                       className={`px-2 py-0.5 rounded text-[11px] font-mono transition-all ${
                         ssmGeometryPreset === 'held_out_val'
-                          ? 'bg-cyan-500 text-slate-950 font-bold'
-                          : 'bg-slate-800 text-slate-300 hover:text-white'
+                          ? 'bg-gradient-to-r from-amber-400 via-amber-500 to-amber-600 text-slate-950 font-bold'
+                          : 'bg-[#150a22] text-slate-300 hover:text-white border border-white/10'
                       }`}
                     >
                       Held-Out Val (LIDC-0004)
@@ -1627,8 +1627,8 @@ export const CTExplorerPage: React.FC = () => {
                       onClick={() => applySSMPreset('reference')}
                       className={`px-2 py-0.5 rounded text-[11px] font-mono transition-all ${
                         ssmGeometryPreset === 'reference'
-                          ? 'bg-cyan-500 text-slate-950 font-bold'
-                          : 'bg-slate-800 text-slate-300 hover:text-white'
+                          ? 'bg-gradient-to-r from-amber-400 via-amber-500 to-amber-600 text-slate-950 font-bold'
+                          : 'bg-[#150a22] text-slate-300 hover:text-white border border-white/10'
                       }`}
                     >
                       Reference CT Fit
@@ -1641,18 +1641,18 @@ export const CTExplorerPage: React.FC = () => {
                   </div>
 
                   {ssmDeformResult && (
-                    <div className="text-[11px] font-mono text-cyan-300">
+                    <div className="text-[11px] font-mono text-amber-300">
                       {ssmDeformResult.num_vertices.toLocaleString()} Vertices · {ssmDeformResult.num_faces.toLocaleString()} Faces
                     </div>
                   )}
                 </div>
 
                 {/* 3D Canvas Viewport */}
-                <div className="h-[420px] relative rounded-xl overflow-hidden border border-medical-border bg-slate-950">
+                <div className="h-[420px] relative rounded-xl overflow-hidden border border-white/10 bg-[#0c0614]">
                   {loadingSSM && (
-                    <div className="absolute inset-0 bg-slate-950/60 backdrop-blur-xs flex items-center justify-center z-30">
-                      <div className="flex items-center gap-2 px-4 py-2 rounded-lg bg-slate-900 border border-cyan-500/40 text-cyan-400 font-mono text-xs">
-                        <Activity className="w-4 h-4 animate-spin" />
+                    <div className="absolute inset-0 bg-[#0c0614]/80 backdrop-blur-xs flex items-center justify-center z-30">
+                      <div className="flex items-center gap-2 px-4 py-2 rounded-lg bg-[#180e28] border border-amber-500/40 text-amber-300 font-mono text-xs">
+                        <Activity className="w-4 h-4 animate-spin text-amber-400" />
                         <span>Deforming SSM Eigenspace...</span>
                       </div>
                     </div>
@@ -1675,13 +1675,13 @@ export const CTExplorerPage: React.FC = () => {
                 </div>
 
                 {/* Mode Deformation Sliders */}
-                <div className="mt-4 space-y-3 pt-3 border-t border-medical-border">
+                <div className="mt-4 space-y-3 pt-3 border-t border-white/[0.08]">
                   <div className="flex items-center justify-between">
-                    <h5 className="text-xs font-semibold uppercase tracking-wider text-medical-teal font-mono flex items-center gap-1.5">
+                    <h5 className="text-xs font-semibold uppercase tracking-wider text-amber-400 font-mono flex items-center gap-1.5">
                       <Sliders className="w-3.5 h-3.5" />
                       Top 5 Physiological Shape Modes (±3.0 Standard Deviations)
                     </h5>
-                    <span className="text-[11px] font-mono text-medical-muted">
+                    <span className="text-[11px] font-mono text-slate-400">
                       Cumulative Variance: 90.38% (Modes 1–5)
                     </span>
                   </div>
@@ -1698,25 +1698,25 @@ export const CTExplorerPage: React.FC = () => {
                       return (
                         <div
                           key={mode.modeNum}
-                          className="p-2.5 rounded-lg bg-medical-surface border border-medical-border hover:border-slate-700 transition-colors"
+                          className="p-2.5 rounded-lg bg-[#180e28]/80 border border-white/10 hover:border-amber-400/30 transition-colors"
                         >
                           <div className="flex items-center justify-between mb-1.5">
                             <div>
                               <span className="text-xs font-semibold text-white">
                                 Mode {mode.modeNum}: {mode.name}
                               </span>
-                              <span className="text-[10px] text-cyan-400 font-mono ml-2">
+                              <span className="text-[10px] text-amber-400 font-mono ml-2">
                                 ({mode.varPct}% variance)
                               </span>
-                              <p className="text-[10px] text-medical-muted mt-0.5">{mode.desc}</p>
+                              <p className="text-[10px] text-slate-400 mt-0.5">{mode.desc}</p>
                             </div>
                             <span
                               className={`text-xs font-mono font-bold px-2 py-0.5 rounded ${
                                 Math.abs(weight) > 0.05
                                   ? weight > 0
-                                    ? 'bg-cyan-950 text-cyan-300 border border-cyan-800'
-                                    : 'bg-indigo-950 text-indigo-300 border border-indigo-800'
-                                  : 'bg-slate-800 text-slate-400'
+                                    ? 'bg-amber-950 text-amber-300 border border-amber-800'
+                                    : 'bg-purple-950 text-purple-300 border border-purple-800'
+                                  : 'bg-black/40 text-slate-400 border border-white/10'
                               }`}
                             >
                               {weight >= 0 ? `+${weight.toFixed(2)}` : weight.toFixed(2)} σ
@@ -1731,7 +1731,7 @@ export const CTExplorerPage: React.FC = () => {
                               step="0.05"
                               value={weight}
                               onChange={(e) => handleModeWeightChange(mode.index, parseFloat(e.target.value))}
-                              className="w-full accent-cyan-400 h-1.5 bg-slate-800 rounded-lg cursor-pointer"
+                              className="w-full accent-amber-400 h-1.5 bg-[#12071f] rounded-lg cursor-pointer"
                             />
                             <span className="text-[10px] font-mono text-slate-500">+3.0σ</span>
                           </div>
@@ -1752,10 +1752,10 @@ export const CTExplorerPage: React.FC = () => {
               >
                 {ssmDeformResult ? (
                   <div className="space-y-3.5">
-                    <div className="p-3.5 bg-medical-surface rounded-xl border border-medical-border flex items-center justify-between">
+                    <div className="p-3.5 bg-[#150a22] rounded-xl border border-white/10 flex items-center justify-between">
                       <div>
-                        <span className="text-xs text-medical-muted block">Total Segmented Volume (TLV):</span>
-                        <span className="text-2xl font-bold font-mono text-cyan-400">
+                        <span className="text-xs text-slate-400 block">Total Segmented Volume (TLV):</span>
+                        <span className="text-2xl font-bold font-mono text-slate-100">
                           {ssmDeformResult.volumetry.total_lung_volume_ml.toLocaleString(undefined, {
                             minimumFractionDigits: 1,
                             maximumFractionDigits: 1,
@@ -1763,40 +1763,40 @@ export const CTExplorerPage: React.FC = () => {
                           mL
                         </span>
                       </div>
-                      <Badge variant="cyan" size="sm">
+                      <Badge variant="amber" size="sm">
                         {ssmDeformResult.volumetry.total_lung_volume_ml > 750 ? 'Physiological Range' : 'Sub-Capacity'}
                       </Badge>
                     </div>
 
                     <div className="grid grid-cols-2 gap-3">
-                      <div className="p-3 rounded-xl bg-medical-card border border-medical-border">
-                        <span className="text-[11px] text-medical-muted block">Right Lung (3 Lobes)</span>
-                        <strong className="text-base font-mono text-white">
+                      <div className="p-3 rounded-xl bg-[#180e28]/80 border border-white/10">
+                        <span className="text-[11px] text-slate-400 block">Right Lung (3 Lobes)</span>
+                        <strong className="text-base font-mono text-amber-300">
                           {ssmDeformResult.volumetry.right_lung_ml.toFixed(1)} mL
                         </strong>
-                        <span className="text-[10px] text-cyan-300 block mt-0.5">
+                        <span className="text-[10px] text-slate-400 block mt-0.5">
                           ~{((ssmDeformResult.volumetry.right_lung_ml / Math.max(ssmDeformResult.volumetry.total_lung_volume_ml, 1)) * 100).toFixed(0)}% volume
                         </span>
                       </div>
 
-                      <div className="p-3 rounded-xl bg-medical-card border border-medical-border">
-                        <span className="text-[11px] text-medical-muted block">Left Lung (2 Lobes)</span>
-                        <strong className="text-base font-mono text-white">
+                      <div className="p-3 rounded-xl bg-[#180e28]/80 border border-white/10">
+                        <span className="text-[11px] text-slate-400 block">Left Lung (2 Lobes)</span>
+                        <strong className="text-base font-mono text-slate-100">
                           {ssmDeformResult.volumetry.left_lung_ml.toFixed(1)} mL
                         </strong>
-                        <span className="text-[10px] text-teal-300 block mt-0.5">
+                        <span className="text-[10px] text-slate-400 block mt-0.5">
                           ~{((ssmDeformResult.volumetry.left_lung_ml / Math.max(ssmDeformResult.volumetry.total_lung_volume_ml, 1)) * 100).toFixed(0)}% volume
                         </span>
                       </div>
                     </div>
 
-                    <div className="p-2.5 rounded-lg bg-medical-card/60 border border-medical-border flex items-center justify-between text-xs font-mono">
-                      <span className="text-medical-muted">Bilateral Symmetry (R/L):</span>
+                    <div className="p-2.5 rounded-lg bg-black/40 border border-white/10 flex items-center justify-between text-xs font-mono">
+                      <span className="text-slate-400">Bilateral Symmetry (R/L):</span>
                       <span className="text-white font-semibold">{ssmDeformResult.volumetry.symmetry_ratio.toFixed(3)}</span>
                     </div>
                   </div>
                 ) : (
-                  <div className="p-6 text-center text-xs text-medical-muted">Computing volumetrics...</div>
+                  <div className="p-6 text-center text-xs text-slate-400">Computing volumetrics...</div>
                 )}
               </Card>
 
@@ -1808,50 +1808,50 @@ export const CTExplorerPage: React.FC = () => {
                 {ssmDeformResult ? (
                   <div className="space-y-3">
                     <div className="grid grid-cols-2 gap-2.5">
-                      <div className="p-2.5 rounded-lg bg-medical-surface border border-medical-border">
-                        <span className="text-[10px] text-medical-muted block uppercase">Mean ASSD</span>
+                      <div className="p-2.5 rounded-lg bg-[#150a22] border border-white/10">
+                        <span className="text-[10px] text-slate-400 block uppercase">Mean ASSD</span>
                         <strong className="text-sm font-mono text-emerald-400">
                           {ssmDeformResult.metrics.assd_mm.toFixed(3)} mm
                         </strong>
-                        <span className="text-[9px] text-slate-400 block mt-0.5">Validation Cohort: ≤ 2.50 mm</span>
+                        <span className="text-[9px] text-slate-500 block mt-0.5">Validation Cohort: ≤ 2.50 mm</span>
                       </div>
 
-                      <div className="p-2.5 rounded-lg bg-medical-surface border border-medical-border">
-                        <span className="text-[10px] text-medical-muted block uppercase">Hausdorff 95 (HD95)</span>
+                      <div className="p-2.5 rounded-lg bg-[#150a22] border border-white/10">
+                        <span className="text-[10px] text-slate-400 block uppercase">Hausdorff 95 (HD95)</span>
                         <strong className="text-sm font-mono text-emerald-400">
                           {ssmDeformResult.metrics.hd95_mm.toFixed(3)} mm
                         </strong>
-                        <span className="text-[9px] text-slate-400 block mt-0.5">Validation Cohort: ≤ 7.00 mm</span>
+                        <span className="text-[9px] text-slate-500 block mt-0.5">Validation Cohort: ≤ 7.00 mm</span>
                       </div>
 
-                      <div className="p-2.5 rounded-lg bg-medical-surface border border-medical-border">
-                        <span className="text-[10px] text-medical-muted block uppercase">Relative Vol Error</span>
-                        <strong className="text-sm font-mono text-cyan-400">
+                      <div className="p-2.5 rounded-lg bg-[#150a22] border border-white/10">
+                        <span className="text-[10px] text-slate-400 block uppercase">Relative Vol Error</span>
+                        <strong className="text-sm font-mono text-slate-100">
                           {ssmDeformResult.metrics.volume_error_pct.toFixed(2)}%
                         </strong>
-                        <span className="text-[9px] text-slate-400 block mt-0.5">Validation Cohort: ≤ 7.50%</span>
+                        <span className="text-[9px] text-slate-500 block mt-0.5">Validation Cohort: ≤ 7.50%</span>
                       </div>
 
-                      <div className="p-2.5 rounded-lg bg-medical-surface border border-medical-border">
-                        <span className="text-[10px] text-medical-muted block uppercase">Surface Dice @ 2mm</span>
-                        <strong className="text-sm font-mono text-cyan-400">
+                      <div className="p-2.5 rounded-lg bg-[#150a22] border border-white/10">
+                        <span className="text-[10px] text-slate-400 block uppercase">Surface Dice @ 2mm</span>
+                        <strong className="text-sm font-mono text-amber-300">
                           {ssmDeformResult.metrics.surface_dice.toFixed(3)}
                         </strong>
-                        <span className="text-[9px] text-slate-400 block mt-0.5">Acceptance: ≥ 0.850</span>
+                        <span className="text-[9px] text-slate-500 block mt-0.5">Acceptance: ≥ 0.850</span>
                       </div>
                     </div>
 
-                    <div className="p-2.5 rounded-lg bg-medical-card/80 border border-medical-border space-y-1.5 text-xs font-mono">
+                    <div className="p-2.5 rounded-lg bg-black/40 border border-white/10 space-y-1.5 text-xs font-mono">
                       <div className="flex items-center justify-between">
-                        <span className="text-medical-muted">Cumulative Variance (5 Modes):</span>
-                        <span className="text-cyan-300 font-semibold">90.38%</span>
+                        <span className="text-slate-400">Cumulative Variance (5 Modes):</span>
+                        <span className="text-amber-300 font-semibold">90.38%</span>
                       </div>
                       <div className="flex items-center justify-between">
-                        <span className="text-medical-muted">Full Model (20 Modes):</span>
+                        <span className="text-slate-400">Full Model (20 Modes):</span>
                         <span className="text-emerald-300 font-semibold">100.0%</span>
                       </div>
                       <div className="flex items-center justify-between">
-                        <span className="text-medical-muted">Mahalanobis Distance (DM):</span>
+                        <span className="text-slate-400">Mahalanobis Distance (DM):</span>
                         <span className={`font-semibold ${ssmDeformResult.metrics.mahalanobis_distance <= 3.0 ? 'text-emerald-400' : 'text-amber-400'}`}>
                           {ssmDeformResult.metrics.mahalanobis_distance.toFixed(2)} σ
                         </span>
@@ -1859,7 +1859,7 @@ export const CTExplorerPage: React.FC = () => {
                     </div>
                   </div>
                 ) : (
-                  <div className="p-6 text-center text-xs text-medical-muted">Evaluating metrics...</div>
+                  <div className="p-6 text-center text-xs text-slate-400">Evaluating metrics...</div>
                 )}
               </Card>
 
@@ -1869,16 +1869,16 @@ export const CTExplorerPage: React.FC = () => {
                 subtitle="Standardized Wavefront OBJ stream with 16 anatomical landmarks"
               >
                 <div className="space-y-3">
-                  <div className="p-3 rounded-lg bg-medical-surface border border-medical-border space-y-2 text-xs">
-                    <div className="flex items-center justify-between text-medical-muted font-mono text-[11px]">
+                  <div className="p-3 rounded-lg bg-[#150a22] border border-white/10 space-y-2 text-xs">
+                    <div className="flex items-center justify-between text-slate-400 font-mono text-[11px]">
                       <span>Model Architecture:</span>
                       <span className="text-white font-semibold">
                         {ssmModelInfo?.architecture || 'Point Distribution Model (PDM)'}
                       </span>
                     </div>
-                    <div className="flex items-center justify-between text-medical-muted font-mono text-[11px]">
+                    <div className="flex items-center justify-between text-slate-400 font-mono text-[11px]">
                       <span>Model Artifact:</span>
-                      <span className="text-cyan-300 font-semibold">
+                      <span className="text-amber-300 font-semibold">
                         ssm_lung_pca_v1.json ({ssmModelInfo?.num_modes || 20} Modes)
                       </span>
                     </div>

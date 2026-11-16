@@ -366,27 +366,27 @@ export const DualViewXRayPage: React.FC = () => {
   return (
     <div className="space-y-6">
       {/* Module Header */}
-      <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 pb-6 border-b border-medical-border">
+      <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 pb-6 border-b border-white/[0.08]">
         <div>
           <div className="flex items-center gap-2 mb-1">
-            <span className="text-[11px] font-mono uppercase tracking-wider text-medical-cyan bg-cyan-950/40 px-2 py-0.5 rounded border border-cyan-800/40">
+            <span className="text-[11px] font-mono uppercase tracking-wider text-amber-400 bg-amber-950/40 px-2 py-0.5 rounded border border-amber-800/40">
               Research Workstation
             </span>
-            <span className="text-xs text-medical-subtle">·</span>
-            <Badge variant="cyan" size="sm">
+            <span className="text-xs text-white/20">·</span>
+            <Badge variant="amber" size="sm">
               Dual-View CXR Lab
             </Badge>
-            <Badge variant="teal" size="sm">
+            <Badge variant="silver" size="sm">
               Bi-Planar Ingestion
             </Badge>
-            <Badge variant="cyan" size="sm">
+            <Badge variant="amber" size="sm">
               Phase 2B: 3D SSM Engine
             </Badge>
           </div>
-          <h2 className="text-2xl font-bold tracking-tight text-white flex items-center gap-2.5">
+          <h2 className="text-2xl font-bold tracking-tight text-slate-100 flex items-center gap-2.5">
             Dual-View X-Ray Research Lab & 3D Reconstruction
           </h2>
-          <p className="text-sm text-medical-muted mt-1">
+          <p className="text-sm text-slate-400 mt-1">
             Bi-planar thoracic inspection comparing paired Frontal (PA/AP) and Lateral chest radiographs with patient-specific 3D lung surface reconstruction and organ volumetry.
           </p>
         </div>
@@ -399,10 +399,10 @@ export const DualViewXRayPage: React.FC = () => {
               size="md"
               onClick={loadSamplePair}
               disabled={loadingSamplePair}
-              className="text-cyan-300 border-cyan-500/40 bg-cyan-950/40 hover:bg-cyan-900/60 transition-all"
+              className="text-amber-300 border-amber-500/40 bg-amber-950/40 hover:bg-amber-900/60 transition-all"
               title="Load demo bi-planar paired radiograph"
             >
-              <Sparkles className="w-4 h-4 mr-1.5 text-cyan-400" />
+              <Sparkles className="w-4 h-4 mr-1.5 text-amber-400" />
               <span>{loadingSamplePair ? 'Loading Pair...' : 'Try Demo Pair'}</span>
             </Button>
           )}
@@ -413,8 +413,9 @@ export const DualViewXRayPage: React.FC = () => {
             onClick={executeAnalysis}
             disabled={!frontal.file || isAnalyzing}
             isLoading={isAnalyzing}
+            className="text-slate-200 border-white/20 hover:border-amber-400/50"
           >
-            <Sparkles className="w-4 h-4 mr-1.5 text-medical-cyan" />
+            <Sparkles className="w-4 h-4 mr-1.5 text-amber-400" />
             <span>{isAnalyzing ? 'Analyzing...' : 'Screen Pathology'}</span>
           </Button>
 
@@ -434,12 +435,12 @@ export const DualViewXRayPage: React.FC = () => {
       <DisclaimerBanner />
 
       {/* Synchronized Viewport Controls Header */}
-      <div className="p-3.5 rounded-xl bg-medical-surface border border-medical-border flex flex-wrap items-center justify-between gap-3 text-xs">
-        <div className="flex items-center gap-2 text-medical-muted">
-          <Sliders className="w-4 h-4 text-medical-cyan" />
-          <span className="font-semibold text-white">Comparative Viewport Controls</span>
-          <span className="text-medical-subtle">|</span>
-          <span>Zoom: Frontal <strong>{Math.round(frontalZoom * 100)}%</strong> · Lateral <strong>{Math.round(lateralZoom * 100)}%</strong></span>
+      <div className="p-3.5 rounded-xl bg-[#150a22]/80 border border-white/10 flex flex-wrap items-center justify-between gap-3 text-xs shadow-inner">
+        <div className="flex items-center gap-2 text-slate-400">
+          <Sliders className="w-4 h-4 text-amber-400" />
+          <span className="font-semibold text-slate-100">Comparative Viewport Controls</span>
+          <span className="text-white/20">|</span>
+          <span>Zoom: Frontal <strong className="text-slate-100">{Math.round(frontalZoom * 100)}%</strong> · Lateral <strong className="text-slate-100">{Math.round(lateralZoom * 100)}%</strong></span>
         </div>
 
         <div className="flex items-center gap-2">
@@ -447,8 +448,8 @@ export const DualViewXRayPage: React.FC = () => {
             onClick={() => setSyncZoom(!syncZoom)}
             className={`px-3 py-1.5 rounded-lg border font-medium transition-all ${
               syncZoom
-                ? 'bg-cyan-950/60 border-cyan-800/80 text-medical-cyan'
-                : 'bg-medical-card border-medical-border text-medical-muted hover:text-white'
+                ? 'bg-amber-950/60 border-amber-500/50 text-amber-300 font-semibold'
+                : 'bg-medical-card border-white/10 text-slate-400 hover:text-white'
             }`}
           >
             {syncZoom ? '✓ Synchronized Zoom' : 'Independent Zoom'}
@@ -458,8 +459,8 @@ export const DualViewXRayPage: React.FC = () => {
             onClick={() => setIsInverted(!isInverted)}
             className={`px-3 py-1.5 rounded-lg border font-medium transition-all ${
               isInverted
-                ? 'bg-teal-950/60 border-teal-800/80 text-medical-teal'
-                : 'bg-medical-card border-medical-border text-medical-muted hover:text-white'
+                ? 'bg-white/10 border-white/30 text-slate-100 font-semibold'
+                : 'bg-medical-card border-white/10 text-slate-400 hover:text-white'
             }`}
           >
             {isInverted ? 'Inverted (Bone White)' : 'Standard X-Ray'}
@@ -467,7 +468,7 @@ export const DualViewXRayPage: React.FC = () => {
 
           <button
             onClick={handleZoomReset}
-            className="px-2.5 py-1.5 rounded-lg bg-medical-card border border-medical-border text-medical-muted hover:text-white"
+            className="px-2.5 py-1.5 rounded-lg bg-medical-card border border-white/10 text-slate-400 hover:text-white"
             title="Reset Zoom to 100%"
           >
             <Maximize2 className="w-3.5 h-3.5" />
@@ -484,12 +485,12 @@ export const DualViewXRayPage: React.FC = () => {
           headerAction={
             frontal.file && (
               <div className="flex items-center gap-2">
-                <Badge variant="cyan" size="sm">
+                <Badge variant="amber" size="sm">
                   {frontal.width} × {frontal.height} px
                 </Badge>
                 <button
                   onClick={() => setFrontal(initialViewState)}
-                  className="text-xs text-medical-rose hover:underline"
+                  className="text-xs text-rose-400 hover:underline"
                 >
                   Clear
                 </button>
@@ -524,21 +525,21 @@ export const DualViewXRayPage: React.FC = () => {
                 }
               }}
               onClick={() => frontalInputRef.current?.click()}
-              className={`h-96 border-2 border-dashed rounded-xl flex flex-col items-center justify-center p-6 text-center cursor-pointer transition-all hud-corner-bracket relative overflow-hidden group ${
+              className={`h-96 border-2 border-dashed rounded-xl flex flex-col items-center justify-center p-6 text-center cursor-pointer transition-all relative overflow-hidden group ${
                 frontal.isDragOver
-                  ? 'border-cyan-400 bg-cyan-950/30 glow-cyan-sm'
-                  : 'border-slate-700/80 hover:border-cyan-400/60 hover:bg-slate-900/40'
+                  ? 'border-amber-400 bg-amber-950/30'
+                  : 'border-white/10 hover:border-amber-400/50 hover:bg-[#180e28]/50'
               }`}
             >
-              <div className="absolute inset-0 medical-grid opacity-30 pointer-events-none" />
-              <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-cyan-950 to-slate-900 border border-cyan-500/30 flex items-center justify-center text-cyan-400 mb-3 shadow-lg shadow-cyan-950/50 group-hover:scale-110 group-hover:border-cyan-400 transition-all z-10">
+              <div className="absolute inset-0 medical-grid opacity-20 pointer-events-none" />
+              <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-[#28133d] to-[#150a22] border border-amber-500/30 flex items-center justify-center text-amber-400 mb-3 shadow-xl shadow-amber-950/40 group-hover:scale-110 group-hover:border-amber-400 transition-all z-10">
                 <UploadCloud className="w-7 h-7" />
               </div>
-              <p className="text-sm font-semibold text-white z-10 group-hover:text-cyan-300 transition-colors">Upload Frontal (PA / AP) View</p>
-              <p className="text-xs text-medical-muted mt-1.5 max-w-xs z-10">
+              <p className="text-sm font-semibold text-white z-10 group-hover:text-amber-300 transition-colors">Upload Frontal (PA / AP) View</p>
+              <p className="text-xs text-slate-400 mt-1.5 max-w-xs z-10">
                 Drag and drop posteroanterior or anteroposterior chest radiograph
               </p>
-              <span className="mt-3 text-[10px] font-mono px-2 py-0.5 rounded bg-slate-900/90 border border-cyan-500/30 text-cyan-400 font-semibold z-10 shadow-sm">
+              <span className="mt-3 text-[10px] font-mono px-2 py-0.5 rounded bg-[#0e0719]/90 border border-amber-500/30 text-amber-400 font-semibold z-10 shadow-sm">
                 Slot A: Frontal View
               </span>
               <button
@@ -548,9 +549,9 @@ export const DualViewXRayPage: React.FC = () => {
                   loadSampleSlot('frontal');
                 }}
                 disabled={loadingSampleSlot === 'frontal'}
-                className="mt-3 px-3 py-1.5 text-[11px] font-mono rounded-lg bg-cyan-950/80 hover:bg-cyan-900 border border-cyan-500/50 text-cyan-300 flex items-center gap-1.5 shadow-md z-20 hover:scale-105 transition-all"
+                className="mt-3 px-3 py-1.5 text-[11px] font-mono rounded-lg bg-amber-950/80 hover:bg-amber-900 border border-amber-500/50 text-amber-300 flex items-center gap-1.5 shadow-md z-20 hover:scale-105 transition-all"
               >
-                <Sparkles className="w-3.5 h-3.5 text-cyan-400" />
+                <Sparkles className="w-3.5 h-3.5 text-amber-400" />
                 <span>{loadingSampleSlot === 'frontal' ? 'Loading Frontal...' : 'Try Demo Frontal'}</span>
               </button>
             </div>
@@ -558,7 +559,7 @@ export const DualViewXRayPage: React.FC = () => {
             <div className="space-y-3">
               <div
                 onWheel={(e) => handleZoomWheel(e, 'frontal')}
-                className="relative rounded-xl overflow-hidden border border-medical-border bg-black h-96 flex items-center justify-center select-none cursor-ns-resize"
+                className="relative rounded-xl overflow-hidden border border-white/10 bg-[#0a0512] h-96 flex items-center justify-center select-none cursor-ns-resize"
                 title="Scroll mouse wheel to zoom frontal radiograph"
               >
                 <div
@@ -577,18 +578,18 @@ export const DualViewXRayPage: React.FC = () => {
                 </div>
 
                 {/* Orientation & Anatomical Markers */}
-                <div className="absolute top-3 left-3 bg-black/75 backdrop-blur-md px-2.5 py-1 rounded text-[11px] font-mono text-cyan-300 border border-cyan-800/40">
+                <div className="absolute top-3 left-3 bg-[#0e0719]/90 backdrop-blur-md px-2.5 py-1 rounded text-[11px] font-mono text-amber-300 border border-amber-500/30">
                   PA / AP Frontal Projection
                 </div>
 
                 {/* Laser Scanning Overlay during Reconstruction / Screening */}
                 {(isAnalyzing || isReconstructing) && (
                   <div className="absolute inset-0 z-30 pointer-events-none overflow-hidden rounded-xl">
-                    <div className="absolute inset-0 bg-cyan-950/25 backdrop-blur-[1px]" />
-                    <div className="absolute left-0 right-0 h-1 bg-gradient-to-r from-transparent via-cyan-400 to-transparent shadow-[0_0_15px_#06b6d4] animate-laser-sweep" />
+                    <div className="absolute inset-0 bg-[#0c0614]/40 backdrop-blur-[1px]" />
+                    <div className="absolute left-0 right-0 h-1 bg-gradient-to-r from-transparent via-amber-400 to-transparent shadow-[0_0_15px_#f59e0b] animate-laser-sweep" />
                     <div className="absolute inset-x-0 bottom-12 flex justify-center px-4">
-                      <div className="bg-black/90 backdrop-blur-md px-3 py-1 rounded-lg border border-cyan-500/50 text-[11px] font-mono text-cyan-300 flex items-center gap-2 shadow-2xl">
-                        <span className="w-2 h-2 rounded-full bg-cyan-400 animate-ping" />
+                      <div className="bg-[#0e0719]/95 backdrop-blur-md px-3 py-1 rounded-lg border border-amber-500/50 text-[11px] font-mono text-amber-300 flex items-center gap-2 shadow-2xl">
+                        <span className="w-2 h-2 rounded-full bg-amber-400 animate-ping" />
                         <span>{isReconstructing ? 'Calibrating Frontal Contour Silhouette...' : 'Analyzing NIH Pathologies...'}</span>
                       </div>
                     </div>
@@ -606,19 +607,19 @@ export const DualViewXRayPage: React.FC = () => {
                 </div>
 
                 {/* Local Viewport Zoom Controls */}
-                <div className="absolute bottom-3 right-3 flex items-center gap-1 bg-medical-bg/85 backdrop-blur-md px-2 py-1 rounded-lg border border-medical-border/80">
+                <div className="absolute bottom-3 right-3 flex items-center gap-1 bg-[#0e0719]/90 backdrop-blur-md px-2 py-1 rounded-lg border border-white/10">
                   <button
                     onClick={() => handleZoomOut('frontal')}
-                    className="p-1 text-medical-muted hover:text-white"
+                    className="p-1 text-slate-400 hover:text-white"
                   >
                     <ZoomOut className="w-3.5 h-3.5" />
                   </button>
-                  <span className="text-[10px] font-mono text-medical-cyan px-1">
+                  <span className="text-[10px] font-mono text-amber-400 px-1 font-bold">
                     {Math.round(frontalZoom * 100)}%
                   </span>
                   <button
                     onClick={() => handleZoomIn('frontal')}
-                    className="p-1 text-medical-muted hover:text-white"
+                    className="p-1 text-slate-400 hover:text-white"
                   >
                     <ZoomIn className="w-3.5 h-3.5" />
                   </button>
@@ -652,12 +653,12 @@ export const DualViewXRayPage: React.FC = () => {
           headerAction={
             lateral.file && (
               <div className="flex items-center gap-2">
-                <Badge variant="teal" size="sm">
+                <Badge variant="silver" size="sm">
                   {lateral.width} × {lateral.height} px
                 </Badge>
                 <button
                   onClick={() => setLateral(initialViewState)}
-                  className="text-xs text-medical-rose hover:underline"
+                  className="text-xs text-rose-400 hover:underline"
                 >
                   Clear
                 </button>
@@ -692,21 +693,21 @@ export const DualViewXRayPage: React.FC = () => {
                 }
               }}
               onClick={() => lateralInputRef.current?.click()}
-              className={`h-96 border-2 border-dashed rounded-xl flex flex-col items-center justify-center p-6 text-center cursor-pointer transition-all hud-corner-bracket relative overflow-hidden group ${
+              className={`h-96 border-2 border-dashed rounded-xl flex flex-col items-center justify-center p-6 text-center cursor-pointer transition-all relative overflow-hidden group ${
                 lateral.isDragOver
-                  ? 'border-teal-400 bg-teal-950/30 glow-cyan-sm'
-                  : 'border-slate-700/80 hover:border-teal-400/60 hover:bg-slate-900/40'
+                  ? 'border-slate-300 bg-white/10'
+                  : 'border-white/10 hover:border-white/30 hover:bg-[#180e28]/50'
               }`}
             >
-              <div className="absolute inset-0 medical-grid opacity-30 pointer-events-none" />
-              <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-teal-950 to-slate-900 border border-teal-500/30 flex items-center justify-center text-teal-400 mb-3 shadow-lg shadow-teal-950/50 group-hover:scale-110 group-hover:border-teal-400 transition-all z-10">
+              <div className="absolute inset-0 medical-grid opacity-20 pointer-events-none" />
+              <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-[#201235] to-[#12081d] border border-white/20 flex items-center justify-center text-slate-200 mb-3 shadow-xl shadow-black/40 group-hover:scale-110 group-hover:border-white/40 transition-all z-10">
                 <UploadCloud className="w-7 h-7" />
               </div>
-              <p className="text-sm font-semibold text-white z-10 group-hover:text-teal-300 transition-colors">Upload Lateral View</p>
-              <p className="text-xs text-medical-muted mt-1.5 max-w-xs z-10">
+              <p className="text-sm font-semibold text-white z-10 group-hover:text-slate-100 transition-colors">Upload Lateral View</p>
+              <p className="text-xs text-slate-400 mt-1.5 max-w-xs z-10">
                 Drag and drop left or right lateral thoracic radiograph
               </p>
-              <span className="mt-3 text-[10px] font-mono px-2 py-0.5 rounded bg-slate-900/90 border border-teal-500/30 text-teal-400 font-semibold z-10 shadow-sm">
+              <span className="mt-3 text-[10px] font-mono px-2 py-0.5 rounded bg-[#0e0719]/90 border border-white/20 text-slate-200 font-semibold z-10 shadow-sm">
                 Slot B: Lateral View
               </span>
               <button
@@ -716,9 +717,9 @@ export const DualViewXRayPage: React.FC = () => {
                   loadSampleSlot('lateral');
                 }}
                 disabled={loadingSampleSlot === 'lateral'}
-                className="mt-3 px-3 py-1.5 text-[11px] font-mono rounded-lg bg-teal-950/80 hover:bg-teal-900 border border-teal-500/50 text-teal-300 flex items-center gap-1.5 shadow-md z-20 hover:scale-105 transition-all"
+                className="mt-3 px-3 py-1.5 text-[11px] font-mono rounded-lg bg-[#24133b] hover:bg-[#2d184a] border border-white/20 text-slate-200 flex items-center gap-1.5 shadow-md z-20 hover:scale-105 transition-all"
               >
-                <Sparkles className="w-3.5 h-3.5 text-teal-400" />
+                <Sparkles className="w-3.5 h-3.5 text-slate-300" />
                 <span>{loadingSampleSlot === 'lateral' ? 'Loading Lateral...' : 'Try Demo Lateral'}</span>
               </button>
             </div>
@@ -726,7 +727,7 @@ export const DualViewXRayPage: React.FC = () => {
             <div className="space-y-3">
               <div
                 onWheel={(e) => handleZoomWheel(e, 'lateral')}
-                className="relative rounded-xl overflow-hidden border border-medical-border bg-black h-96 flex items-center justify-center select-none cursor-ns-resize"
+                className="relative rounded-xl overflow-hidden border border-white/10 bg-[#0a0512] h-96 flex items-center justify-center select-none cursor-ns-resize"
                 title="Scroll mouse wheel to zoom lateral radiograph"
               >
                 <div
@@ -745,18 +746,18 @@ export const DualViewXRayPage: React.FC = () => {
                 </div>
 
                 {/* Lateral Orientation Labels */}
-                <div className="absolute top-3 left-3 bg-black/75 backdrop-blur-md px-2.5 py-1 rounded text-[11px] font-mono text-teal-300 border border-teal-800/40">
+                <div className="absolute top-3 left-3 bg-[#0e0719]/90 backdrop-blur-md px-2.5 py-1 rounded text-[11px] font-mono text-slate-200 border border-white/20">
                   Lateral Projection (Sagittal Plane)
                 </div>
 
                 {/* Laser Scanning Overlay during Reconstruction / Screening */}
                 {isReconstructing && (
                   <div className="absolute inset-0 z-30 pointer-events-none overflow-hidden rounded-xl">
-                    <div className="absolute inset-0 bg-teal-950/25 backdrop-blur-[1px]" />
-                    <div className="absolute left-0 right-0 h-1 bg-gradient-to-r from-transparent via-teal-400 to-transparent shadow-[0_0_15px_#14b8a6] animate-laser-sweep" />
+                    <div className="absolute inset-0 bg-[#0c0614]/40 backdrop-blur-[1px]" />
+                    <div className="absolute left-0 right-0 h-1 bg-gradient-to-r from-transparent via-amber-400 to-transparent shadow-[0_0_15px_#f59e0b] animate-laser-sweep" />
                     <div className="absolute inset-x-0 bottom-12 flex justify-center px-4">
-                      <div className="bg-black/90 backdrop-blur-md px-3 py-1 rounded-lg border border-teal-500/50 text-[11px] font-mono text-teal-300 flex items-center gap-2 shadow-2xl">
-                        <span className="w-2 h-2 rounded-full bg-teal-400 animate-ping" />
+                      <div className="bg-[#0e0719]/95 backdrop-blur-md px-3 py-1 rounded-lg border border-amber-500/50 text-[11px] font-mono text-amber-300 flex items-center gap-2 shadow-2xl">
+                        <span className="w-2 h-2 rounded-full bg-amber-400 animate-ping" />
                         <span>Optimizing Lateral Depth Silhouette...</span>
                       </div>
                     </div>
@@ -774,19 +775,19 @@ export const DualViewXRayPage: React.FC = () => {
                 </div>
 
                 {/* Local Zoom Controls */}
-                <div className="absolute bottom-3 right-3 flex items-center gap-1 bg-medical-bg/85 backdrop-blur-md px-2 py-1 rounded-lg border border-medical-border/80">
+                <div className="absolute bottom-3 right-3 flex items-center gap-1 bg-[#0e0719]/90 backdrop-blur-md px-2 py-1 rounded-lg border border-white/10">
                   <button
                     onClick={() => handleZoomOut('lateral')}
-                    className="p-1 text-medical-muted hover:text-white"
+                    className="p-1 text-slate-400 hover:text-white"
                   >
                     <ZoomOut className="w-3.5 h-3.5" />
                   </button>
-                  <span className="text-[10px] font-mono text-medical-teal px-1">
+                  <span className="text-[10px] font-mono text-slate-200 px-1 font-bold">
                     {Math.round(lateralZoom * 100)}%
                   </span>
                   <button
                     onClick={() => handleZoomIn('lateral')}
-                    className="p-1 text-medical-muted hover:text-white"
+                    className="p-1 text-slate-400 hover:text-white"
                   >
                     <ZoomIn className="w-3.5 h-3.5" />
                   </button>
@@ -815,19 +816,19 @@ export const DualViewXRayPage: React.FC = () => {
       </div>
 
       {/* Workflow Navigation Tabs */}
-      <div className="flex items-center gap-2 border-b border-medical-border pb-2 text-sm font-medium">
+      <div className="flex items-center gap-2 border-b border-white/[0.08] pb-2 text-sm font-medium">
         <button
           onClick={() => setActiveTab('reconstruction')}
           className={`flex items-center gap-2 px-4 py-2 rounded-lg transition-all ${
             activeTab === 'reconstruction'
-              ? 'bg-cyan-950/60 text-medical-cyan border border-cyan-800/80 shadow-sm'
-              : 'text-medical-muted hover:text-white hover:bg-medical-surface'
+              ? 'bg-gradient-to-r from-amber-400 via-amber-500 to-amber-600 text-slate-950 font-bold shadow-md shadow-amber-950/40 border border-amber-300/40'
+              : 'text-slate-400 hover:text-white hover:bg-white/5'
           }`}
         >
-          <Box className="w-4 h-4 text-medical-cyan" />
+          <Box className="w-4 h-4 text-inherit" />
           <span>3D Lung Reconstruction (Phase 2B SSM)</span>
           {reconstructionResult && (
-            <span className="w-2 h-2 rounded-full bg-cyan-400" />
+            <span className="w-2 h-2 rounded-full bg-slate-950" />
           )}
         </button>
 
@@ -835,14 +836,14 @@ export const DualViewXRayPage: React.FC = () => {
           onClick={() => setActiveTab('screening')}
           className={`flex items-center gap-2 px-4 py-2 rounded-lg transition-all ${
             activeTab === 'screening'
-              ? 'bg-cyan-950/60 text-medical-cyan border border-cyan-800/80 shadow-sm'
-              : 'text-medical-muted hover:text-white hover:bg-medical-surface'
+              ? 'bg-gradient-to-r from-amber-400 via-amber-500 to-amber-600 text-slate-950 font-bold shadow-md shadow-amber-950/40 border border-amber-300/40'
+              : 'text-slate-400 hover:text-white hover:bg-white/5'
           }`}
         >
-          <Activity className="w-4 h-4 text-medical-cyan" />
+          <Activity className="w-4 h-4 text-inherit" />
           <span>2D Pathology Screening (DenseNet-121)</span>
           {frontalResult && (
-            <span className="w-2 h-2 rounded-full bg-cyan-400" />
+            <span className="w-2 h-2 rounded-full bg-slate-950" />
           )}
         </button>
 
@@ -850,11 +851,11 @@ export const DualViewXRayPage: React.FC = () => {
           onClick={() => setActiveTab('roadmap')}
           className={`flex items-center gap-2 px-4 py-2 rounded-lg transition-all ${
             activeTab === 'roadmap'
-              ? 'bg-cyan-950/60 text-medical-cyan border border-cyan-800/80 shadow-sm'
-              : 'text-medical-muted hover:text-white hover:bg-medical-surface'
+              ? 'bg-gradient-to-r from-amber-400 via-amber-500 to-amber-600 text-slate-950 font-bold shadow-md shadow-amber-950/40 border border-amber-300/40'
+              : 'text-slate-400 hover:text-white hover:bg-white/5'
           }`}
         >
-          <Info className="w-4 h-4 text-medical-cyan" />
+          <Info className="w-4 h-4 text-inherit" />
           <span>Scientific Architecture & Roadmap</span>
         </button>
       </div>
@@ -870,9 +871,9 @@ export const DualViewXRayPage: React.FC = () => {
           )}
 
           {/* SSM Parameter Control Bar */}
-          <div className="p-4 rounded-xl bg-medical-surface border border-medical-border grid grid-cols-1 md:grid-cols-4 gap-4 text-xs">
+          <div className="p-4 rounded-xl bg-[#150a22]/80 border border-white/10 grid grid-cols-1 md:grid-cols-4 gap-4 text-xs shadow-inner">
             <div>
-              <label className="text-medical-muted block font-medium mb-1">
+              <label className="text-slate-400 block font-medium mb-1">
                 Inspiratory Effort: <strong className="text-white font-mono">{inspiratoryEffort > 0 ? `+${inspiratoryEffort}` : inspiratoryEffort}</strong>
               </label>
               <input
@@ -882,16 +883,16 @@ export const DualViewXRayPage: React.FC = () => {
                 step="0.1"
                 value={inspiratoryEffort}
                 onChange={(e) => setInspiratoryEffort(parseFloat(e.target.value))}
-                className="w-full accent-cyan-400 cursor-pointer"
+                className="w-full accent-amber-400 cursor-pointer"
               />
-              <span className="text-[10px] text-medical-subtle flex justify-between">
+              <span className="text-[10px] text-slate-400 flex justify-between">
                 <span>Expiration (-2.0)</span>
                 <span>Deep Insp (+2.0)</span>
               </span>
             </div>
 
             <div>
-              <label className="text-medical-muted block font-medium mb-1">
+              <label className="text-slate-400 block font-medium mb-1">
                 Anatomical Scale Factor: <strong className="text-white font-mono">{silhouetteScale.toFixed(2)}×</strong>
               </label>
               <input
@@ -901,16 +902,16 @@ export const DualViewXRayPage: React.FC = () => {
                 step="0.05"
                 value={silhouetteScale}
                 onChange={(e) => setSilhouetteScale(parseFloat(e.target.value))}
-                className="w-full accent-cyan-400 cursor-pointer"
+                className="w-full accent-amber-400 cursor-pointer"
               />
-              <span className="text-[10px] text-medical-subtle flex justify-between">
+              <span className="text-[10px] text-slate-400 flex justify-between">
                 <span>0.75×</span>
                 <span>1.35×</span>
               </span>
             </div>
 
             <div>
-              <label className="text-medical-muted block font-medium mb-1">
+              <label className="text-slate-400 block font-medium mb-1">
                 Optimization Iterations: <strong className="text-white font-mono">{optimizationIterations}</strong>
               </label>
               <input
@@ -920,16 +921,16 @@ export const DualViewXRayPage: React.FC = () => {
                 step="5"
                 value={optimizationIterations}
                 onChange={(e) => setOptimizationIterations(parseInt(e.target.value))}
-                className="w-full accent-cyan-400 cursor-pointer"
+                className="w-full accent-amber-400 cursor-pointer"
               />
-              <span className="text-[10px] text-medical-subtle flex justify-between">
+              <span className="text-[10px] text-slate-400 flex justify-between">
                 <span>Fast (10)</span>
                 <span>Refined (80)</span>
               </span>
             </div>
 
             <div className="flex flex-col justify-between">
-              <label className="text-medical-muted block font-medium mb-1">
+              <label className="text-slate-400 block font-medium mb-1">
                 Dual-View Constraints:
               </label>
               <label className="flex items-center gap-2 cursor-pointer mt-1">
@@ -937,11 +938,11 @@ export const DualViewXRayPage: React.FC = () => {
                   type="checkbox"
                   checked={includeLateralConstraint}
                   onChange={(e) => setIncludeLateralConstraint(e.target.checked)}
-                  className="rounded border-medical-border text-cyan-500 focus:ring-0"
+                  className="rounded border-white/20 text-amber-500 focus:ring-0"
                 />
                 <span className="text-white font-medium">Use Lateral Projection (Mode 5 AP)</span>
               </label>
-              <span className="text-[10px] text-medical-subtle mt-1">
+              <span className="text-[10px] text-slate-400 mt-1">
                 {lateral.file ? 'Paired lateral study loaded' : 'Synthesized lateral prior active'}
               </span>
             </div>
@@ -956,17 +957,17 @@ export const DualViewXRayPage: React.FC = () => {
                 subtitle="Continuous 3D organ boundary synthesized via Statistical Shape Model (SSM) deformation"
                 headerAction={
                   reconstructionResult && (
-                    <Badge variant="cyan" size="sm">
+                    <Badge variant="amber" size="sm">
                       {reconstructionResult.surface_mesh.vertex_count.toLocaleString()} Vertices · {reconstructionResult.surface_mesh.face_count.toLocaleString()} Faces
                     </Badge>
                   )
                 }
               >
                 {!reconstructionResult ? (
-                  <div className="h-[460px] border border-dashed border-medical-border/80 rounded-xl flex flex-col items-center justify-center p-8 text-center bg-medical-surface/20">
-                    <Box className="w-12 h-12 text-medical-subtle mb-3 animate-pulse" />
+                  <div className="h-[460px] border border-dashed border-white/10 rounded-xl flex flex-col items-center justify-center p-8 text-center bg-[#160c26]/40">
+                    <Box className="w-12 h-12 text-slate-500 mb-3 animate-pulse" />
                     <p className="font-semibold text-white text-sm">3D Surface Reconstruction Ready</p>
-                    <p className="text-xs text-medical-muted mt-1.5 max-w-sm">
+                    <p className="text-xs text-slate-400 mt-1.5 max-w-sm">
                       Click the "Reconstruct 3D Lung Surface" button above to optimize the Statistical Shape Model against frontal and lateral radiographic silhouettes.
                     </p>
                     <Button
@@ -1002,49 +1003,49 @@ export const DualViewXRayPage: React.FC = () => {
               >
                 {reconstructionResult ? (
                   <div className="space-y-3.5">
-                    <div className="p-3.5 bg-medical-surface rounded-xl border border-medical-border flex items-center justify-between">
+                    <div className="p-3.5 bg-medical-surface rounded-xl border border-white/10 flex items-center justify-between">
                       <div>
-                        <span className="text-xs text-medical-muted block">Total Lung Volume (TLV):</span>
-                        <span className="text-xl font-bold font-mono text-cyan-400">
+                        <span className="text-xs text-slate-400 block">Total Lung Volume (TLV):</span>
+                        <span className="text-xl font-bold font-mono text-amber-400">
                           {reconstructionResult.volumetry.total_lung_volume_ml.toLocaleString(undefined, { minimumFractionDigits: 1, maximumFractionDigits: 1 })} mL
                         </span>
                       </div>
-                      <Badge variant="cyan" size="sm">
+                      <Badge variant="amber" size="sm">
                         {reconstructionResult.volumetry.total_lung_volume_ml > 800 ? 'Normal Capacity' : 'Restricted'}
                       </Badge>
                     </div>
 
                     <div className="grid grid-cols-2 gap-3">
-                      <div className="p-3 rounded-xl bg-medical-card border border-medical-border">
-                        <span className="text-[11px] text-medical-muted block">Right Lung (3 Lobes)</span>
+                      <div className="p-3 rounded-xl bg-medical-card border border-white/10">
+                        <span className="text-[11px] text-slate-400 block">Right Lung (3 Lobes)</span>
                         <strong className="text-base font-mono text-white">
                           {reconstructionResult.volumetry.right_lung_ml.toFixed(1)} mL
                         </strong>
-                        <span className="text-[10px] text-cyan-300 block mt-0.5">
+                        <span className="text-[10px] text-amber-300 block mt-0.5">
                           ~{((reconstructionResult.volumetry.right_lung_ml / reconstructionResult.volumetry.total_lung_volume_ml) * 100).toFixed(0)}% volume
                         </span>
                       </div>
 
-                      <div className="p-3 rounded-xl bg-medical-card border border-medical-border">
-                        <span className="text-[11px] text-medical-muted block">Left Lung (2 Lobes)</span>
+                      <div className="p-3 rounded-xl bg-medical-card border border-white/10">
+                        <span className="text-[11px] text-slate-400 block">Left Lung (2 Lobes)</span>
                         <strong className="text-base font-mono text-white">
                           {reconstructionResult.volumetry.left_lung_ml.toFixed(1)} mL
                         </strong>
-                        <span className="text-[10px] text-cyan-300 block mt-0.5">
+                        <span className="text-[10px] text-slate-300 block mt-0.5">
                           ~{((reconstructionResult.volumetry.left_lung_ml / reconstructionResult.volumetry.total_lung_volume_ml) * 100).toFixed(0)}% volume
                         </span>
                       </div>
                     </div>
 
-                    <div className="p-3 rounded-xl bg-medical-surface border border-medical-border flex items-center justify-between text-xs">
-                      <span className="text-medical-muted">Bilateral Symmetry Ratio (R/L):</span>
+                    <div className="p-3 rounded-xl bg-medical-surface border border-white/10 flex items-center justify-between text-xs">
+                      <span className="text-slate-400">Bilateral Symmetry Ratio (R/L):</span>
                       <span className="font-mono font-bold text-white">
                         {reconstructionResult.volumetry.symmetry_ratio.toFixed(2)}
                       </span>
                     </div>
                   </div>
                 ) : (
-                  <div className="py-8 text-center text-xs text-medical-muted">
+                  <div className="py-8 text-center text-xs text-slate-400">
                     No volume computed yet. Run 3D reconstruction to calculate organ volumetry.
                   </div>
                 )}
@@ -1058,43 +1059,43 @@ export const DualViewXRayPage: React.FC = () => {
                 {reconstructionResult ? (
                   <div className="space-y-3 text-xs">
                     <div className="grid grid-cols-2 gap-3">
-                      <div className="p-2.5 rounded-lg bg-medical-surface border border-medical-border">
-                        <span className="text-medical-muted block text-[11px]">Estimated Dice Score:</span>
-                        <strong className="text-sm font-mono text-medical-cyan">
+                      <div className="p-2.5 rounded-lg bg-medical-surface border border-white/10">
+                        <span className="text-slate-400 block text-[11px]">Estimated Dice Score:</span>
+                        <strong className="text-sm font-mono text-amber-400">
                           {(reconstructionResult.metrics.estimated_dice_score * 100).toFixed(1)}%
                         </strong>
                       </div>
 
-                      <div className="p-2.5 rounded-lg bg-medical-surface border border-medical-border">
-                        <span className="text-medical-muted block text-[11px]">Surface Proximity (ASSD):</span>
+                      <div className="p-2.5 rounded-lg bg-medical-surface border border-white/10">
+                        <span className="text-slate-400 block text-[11px]">Surface Proximity (ASSD):</span>
                         <strong className="text-sm font-mono text-white">
                           {reconstructionResult.metrics.estimated_assd_mm.toFixed(2)} mm
                         </strong>
                       </div>
 
-                      <div className="p-2.5 rounded-lg bg-medical-surface border border-medical-border">
-                        <span className="text-medical-muted block text-[11px]">Mean Vertex Uncertainty:</span>
+                      <div className="p-2.5 rounded-lg bg-medical-surface border border-white/10">
+                        <span className="text-slate-400 block text-[11px]">Mean Vertex Uncertainty:</span>
                         <strong className="text-sm font-mono text-white">
                           ±{reconstructionResult.metrics.mean_vertex_uncertainty_mm.toFixed(2)} mm
                         </strong>
                       </div>
 
-                      <div className="p-2.5 rounded-lg bg-medical-surface border border-medical-border">
-                        <span className="text-medical-muted block text-[11px]">Convergence Latency:</span>
-                        <strong className="text-sm font-mono text-teal-300">
+                      <div className="p-2.5 rounded-lg bg-medical-surface border border-white/10">
+                        <span className="text-slate-400 block text-[11px]">Convergence Latency:</span>
+                        <strong className="text-sm font-mono text-slate-200">
                           {reconstructionResult.optimization_latency_ms.toFixed(1)} ms
                         </strong>
                       </div>
                     </div>
 
-                    <div className="p-2.5 rounded-lg bg-slate-900/60 border border-medical-border text-[11px] text-medical-muted flex items-center justify-between">
+                    <div className="p-2.5 rounded-lg bg-[#0e0719]/90 border border-white/10 text-[11px] text-slate-400 flex items-center justify-between">
                       <span>Status: <strong className="text-emerald-400 uppercase">{reconstructionResult.status}</strong></span>
                       <span>Iterations: <strong className="text-white font-mono">{reconstructionResult.iterations_computed}</strong></span>
-                      <span>Confidence Margin: <strong className="text-cyan-300">{reconstructionResult.metrics.confidence_margin_pct}%</strong></span>
+                      <span>Confidence Margin: <strong className="text-amber-300">{reconstructionResult.metrics.confidence_margin_pct}%</strong></span>
                     </div>
                   </div>
                 ) : (
-                  <div className="py-8 text-center text-xs text-medical-muted">
+                  <div className="py-8 text-center text-xs text-slate-400">
                     Execute reconstruction to inspect mathematical convergence metrics.
                   </div>
                 )}
@@ -1110,13 +1111,13 @@ export const DualViewXRayPage: React.FC = () => {
                     {ssmModelInfo.modes.slice(0, 5).map((mode) => (
                       <div
                         key={mode.mode_index}
-                        className="p-2 rounded-lg bg-medical-surface border border-medical-border flex items-center justify-between"
+                        className="p-2 rounded-lg bg-medical-surface border border-white/10 flex items-center justify-between"
                       >
                         <div className="flex items-center gap-2">
-                          <span className="font-mono text-cyan-400 font-bold">M{mode.mode_index}</span>
+                          <span className="font-mono text-amber-400 font-bold">M{mode.mode_index}</span>
                           <span className="text-white text-[11px]">{mode.description}</span>
                         </div>
-                        <span className="font-mono text-medical-muted text-[11px]">
+                        <span className="font-mono text-slate-400 text-[11px]">
                           {mode.explained_variance_pct.toFixed(1)}% var (±{mode.standard_deviation_mm} mm)
                         </span>
                       </div>
@@ -1143,8 +1144,8 @@ export const DualViewXRayPage: React.FC = () => {
           )}
 
           {/* Workflow Transparency Disclosure */}
-          <div className="p-3 bg-cyan-950/20 border border-cyan-800/40 rounded-xl text-xs text-slate-300 mb-3 flex items-start gap-2.5">
-            <Sliders className="w-4 h-4 text-medical-cyan shrink-0 mt-0.5" />
+          <div className="p-3 bg-amber-950/20 border border-amber-800/40 rounded-xl text-xs text-slate-300 mb-3 flex items-start gap-2.5">
+            <Sliders className="w-4 h-4 text-amber-400 shrink-0 mt-0.5" />
             <div>
               <span className="font-semibold text-white block">Bi-Planar Clinical Workflow Transparency:</span>
               <p className="text-[11px] text-slate-300 leading-relaxed mt-0.5">
@@ -1154,8 +1155,8 @@ export const DualViewXRayPage: React.FC = () => {
           </div>
 
           {!frontalResult ? (
-            <div className="py-12 text-center text-medical-muted text-xs border border-dashed border-medical-border/60 rounded-xl p-6">
-              <FileImage className="w-10 h-10 text-medical-subtle mx-auto mb-2" />
+            <div className="py-12 text-center text-slate-400 text-xs border border-dashed border-white/10 rounded-xl p-6">
+              <FileImage className="w-10 h-10 text-slate-500 mx-auto mb-2" />
               <p className="font-semibold text-white">No Dual-View Analysis Executed</p>
               <p className="mt-1 max-w-sm mx-auto">
                 Upload at least the Frontal radiograph above and click "Screen Pathology" to screen for 6 thoracic conditions.
@@ -1163,16 +1164,16 @@ export const DualViewXRayPage: React.FC = () => {
             </div>
           ) : (
             <div className="space-y-4">
-              <div className="p-3.5 bg-medical-surface rounded-xl border border-medical-border flex items-center justify-between text-xs">
+              <div className="p-3.5 bg-medical-surface rounded-xl border border-white/10 flex items-center justify-between text-xs">
                 <div>
-                  <span className="text-medical-muted block">Frontal Projection Findings:</span>
+                  <span className="text-slate-400 block">Frontal Projection Findings:</span>
                   <strong className="text-white text-sm font-mono">
                     {frontalResult.summary.flagged_conditions_count} of 6 Conditions Above Threshold
                   </strong>
                 </div>
                 <div className="text-right">
-                  <span className="text-medical-muted block">Inference Latency:</span>
-                  <span className="font-mono text-medical-cyan font-bold">
+                  <span className="text-slate-400 block">Inference Latency:</span>
+                  <span className="font-mono text-amber-400 font-bold">
                     {frontalResult.inference_time_ms.toFixed(1)} ms
                   </span>
                 </div>
@@ -1204,34 +1205,34 @@ export const DualViewXRayPage: React.FC = () => {
           subtitle="Advancing from 2D dual projections to patient-specific volumetric anatomical synthesis"
         >
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4 text-xs">
-            <div className="p-3.5 rounded-xl bg-cyan-950/20 border border-cyan-800/40 space-y-2">
-              <div className="flex items-center gap-1.5 text-medical-cyan font-semibold">
-                <CheckCircle2 className="w-4 h-4 text-medical-cyan" />
+            <div className="p-3.5 rounded-xl bg-[#1c102f] border border-white/10 space-y-2">
+              <div className="flex items-center gap-1.5 text-slate-200 font-semibold">
+                <CheckCircle2 className="w-4 h-4 text-amber-400" />
                 <span>Phase 1: Dual-View Review</span>
               </div>
               <p className="text-[11px] text-slate-300 leading-relaxed">
                 Simultaneous paired review of frontal and lateral radiographs with independent pan, zoom, and orientation labeling.
               </p>
-              <Badge variant="cyan" size="sm">Completed</Badge>
+              <Badge variant="silver" size="sm">Completed</Badge>
             </div>
 
-            <div className="p-3.5 rounded-xl bg-cyan-950/30 border border-cyan-500/50 space-y-2">
-              <div className="flex items-center gap-1.5 text-cyan-300 font-semibold">
-                <span className="w-2 h-2 rounded-full bg-cyan-400 animate-pulse" />
+            <div className="p-3.5 rounded-xl bg-amber-950/20 border border-amber-500/40 space-y-2">
+              <div className="flex items-center gap-1.5 text-amber-300 font-semibold">
+                <span className="w-2 h-2 rounded-full bg-amber-400 animate-pulse" />
                 <span>Phase 2: Morphable Shape Models</span>
               </div>
               <p className="text-[11px] text-slate-200 leading-relaxed">
                 Point Distribution Model with 15 PCA eigenvectors deforming 7,652 canonical vertices against frontal & lateral silhouettes.
               </p>
-              <Badge variant="teal" size="sm">Implemented & Active</Badge>
+              <Badge variant="amber" size="sm">Implemented & Active</Badge>
             </div>
 
-            <div className="p-3.5 rounded-xl bg-medical-surface border border-medical-border/80 space-y-2">
-              <div className="flex items-center gap-1.5 text-medical-muted font-semibold">
-                <span className="w-2 h-2 rounded-full bg-medical-border" />
+            <div className="p-3.5 rounded-xl bg-[#150a22] border border-white/10 space-y-2">
+              <div className="flex items-center gap-1.5 text-slate-400 font-semibold">
+                <span className="w-2 h-2 rounded-full bg-white/20" />
                 <span>Phase 3: Differentiable DRR & NeRF</span>
               </div>
-              <p className="text-[11px] text-medical-muted leading-relaxed">
+              <p className="text-[11px] text-slate-400 leading-relaxed">
                 Continuous 3D attenuation volume synthesis directly from orthogonal 2D rays without CT radiation dose.
               </p>
               <Badge variant="slate" size="sm">Future Milestone</Badge>

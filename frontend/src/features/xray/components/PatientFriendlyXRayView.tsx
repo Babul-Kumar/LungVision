@@ -67,7 +67,7 @@ export const PatientFriendlyXRayView: React.FC<PatientFriendlyXRayViewProps> = (
           className={`p-5 rounded-2xl border ${
             hasFlagged
               ? 'bg-amber-950/20 border-amber-800/40'
-              : 'bg-teal-950/20 border-teal-800/40'
+              : 'bg-[#160c26]/80 border-white/10'
           }`}
         >
           <div className="flex items-start gap-3.5">
@@ -75,17 +75,17 @@ export const PatientFriendlyXRayView: React.FC<PatientFriendlyXRayViewProps> = (
               className={`w-9 h-9 rounded-xl flex items-center justify-center shrink-0 ${
                 hasFlagged
                   ? 'bg-amber-950/60 text-amber-400 border border-amber-800/60'
-                  : 'bg-teal-950/60 text-medical-teal border border-teal-800/60'
+                  : 'bg-white/10 text-slate-200 border border-white/20'
               }`}
             >
               {hasFlagged ? <AlertTriangle className="w-5 h-5" /> : <CheckCircle2 className="w-5 h-5" />}
             </div>
             <div className="flex-1">
               <div className="flex items-center gap-2">
-                <span className="text-xs font-mono uppercase tracking-wider text-medical-teal">
+                <span className="text-xs font-mono uppercase tracking-wider text-amber-400">
                   Plain-Language Summary
                 </span>
-                <Badge variant={hasFlagged ? 'amber' : 'teal'} size="sm">
+                <Badge variant={hasFlagged ? 'amber' : 'silver'} size="sm">
                   {hasFlagged ? `${summary.flagged_conditions_count} of 6 Above Threshold` : 'All Below Experimental Thresholds'}
                 </Badge>
               </div>
@@ -105,9 +105,9 @@ export const PatientFriendlyXRayView: React.FC<PatientFriendlyXRayViewProps> = (
         {/* The 6 Core Plain-Language Patient Questions */}
         <div className="space-y-4">
           {/* Question 1: What image was analyzed? */}
-          <div className="p-4 rounded-xl bg-medical-surface border border-medical-border space-y-1.5">
-            <h4 className="text-xs font-bold text-white flex items-center gap-2 uppercase tracking-wider text-medical-cyan">
-              <span className="w-5 h-5 rounded-full bg-medical-cyan/20 text-medical-cyan flex items-center justify-center text-[11px] font-bold">1</span>
+          <div className="p-4 rounded-xl bg-medical-surface border border-white/10 space-y-1.5">
+            <h4 className="text-xs font-bold text-white flex items-center gap-2 uppercase tracking-wider text-amber-400">
+              <span className="w-5 h-5 rounded-full bg-amber-500/20 text-amber-400 flex items-center justify-center text-[11px] font-bold">1</span>
               What image was analyzed?
             </h4>
             <p className="text-xs text-medical-muted leading-relaxed pl-7">
@@ -118,15 +118,15 @@ export const PatientFriendlyXRayView: React.FC<PatientFriendlyXRayViewProps> = (
           </div>
 
           {/* Question 2: What did the AI evaluate? */}
-          <div className="p-4 rounded-xl bg-medical-surface border border-medical-border space-y-2">
+          <div className="p-4 rounded-xl bg-medical-surface border border-white/10 space-y-2">
             <div className="flex items-center justify-between">
-              <h4 className="text-xs font-bold text-white flex items-center gap-2 uppercase tracking-wider text-medical-teal">
-                <span className="w-5 h-5 rounded-full bg-medical-teal/20 text-medical-teal flex items-center justify-center text-[11px] font-bold">2</span>
+              <h4 className="text-xs font-bold text-white flex items-center gap-2 uppercase tracking-wider text-slate-200">
+                <span className="w-5 h-5 rounded-full bg-white/10 text-slate-200 flex items-center justify-center text-[11px] font-bold">2</span>
                 What did the AI evaluate?
               </h4>
               <button
                 onClick={onOpenGlossary}
-                className="text-[11px] text-medical-cyan hover:underline flex items-center gap-1"
+                className="text-[11px] text-amber-400 hover:underline flex items-center gap-1"
               >
                 <HelpCircle className="w-3.5 h-3.5" /> Medical Glossary
               </button>
@@ -139,7 +139,7 @@ export const PatientFriendlyXRayView: React.FC<PatientFriendlyXRayViewProps> = (
                 <button
                   key={d}
                   onClick={() => onOpenExplainability(d)}
-                  className="p-2 rounded-lg bg-medical-card border border-medical-border/60 text-left hover:border-medical-cyan/50 transition-colors"
+                  className="p-2 rounded-lg bg-medical-card border border-white/10 text-left hover:border-amber-400/40 transition-colors"
                 >
                   <span className="text-xs font-semibold text-white block">{d}</span>
                   <span className="text-[10px] text-medical-muted block truncate">
@@ -151,7 +151,7 @@ export const PatientFriendlyXRayView: React.FC<PatientFriendlyXRayViewProps> = (
           </div>
 
           {/* Question 3: What did the model return? */}
-          <div className="p-4 rounded-xl bg-medical-surface border border-medical-border space-y-1.5">
+          <div className="p-4 rounded-xl bg-medical-surface border border-white/10 space-y-1.5">
             <h4 className="text-xs font-bold text-white flex items-center gap-2 uppercase tracking-wider text-slate-200">
               <span className="w-5 h-5 rounded-full bg-slate-700 text-slate-200 flex items-center justify-center text-[11px] font-bold">3</span>
               What did the model return?
@@ -161,12 +161,12 @@ export const PatientFriendlyXRayView: React.FC<PatientFriendlyXRayViewProps> = (
                 The model calculated a continuous mathematical activation (between 0% and 100%) for each of the six conditions.
               </p>
               {/* Callout: Highest Model Score */}
-              <div className="p-3.5 rounded-xl bg-medical-card border border-medical-border/80 space-y-1">
+              <div className="p-3.5 rounded-xl bg-medical-card border border-white/10 space-y-1">
                 <div className="flex items-center justify-between">
                   <span className="text-xs font-bold text-white">
-                    Highest Model Score: <span className="text-medical-cyan">{highestDisease}</span>
+                    Highest Model Score: <span className="text-amber-400">{highestDisease}</span>
                   </span>
-                  <span className="font-mono text-xs font-bold text-medical-cyan">
+                  <span className="font-mono text-xs font-bold text-amber-400">
                     {(highestScore * 100).toFixed(2)}%
                   </span>
                 </div>
@@ -181,7 +181,7 @@ export const PatientFriendlyXRayView: React.FC<PatientFriendlyXRayViewProps> = (
                     <span className="text-emerald-400">not flagged</span>
                   )}.
                 </div>
-                <p className="text-[10px] text-medical-subtle pt-1 border-t border-medical-border/40 italic">
+                <p className="text-[10px] text-medical-subtle pt-1 border-t border-white/[0.08] italic">
                   * Note: "Highest model score" means this was simply the highest mathematical score among the 6 tested conditions. It is NOT a confirmed diagnosis, suspicion, or certainty.
                 </p>
               </div>
@@ -189,8 +189,8 @@ export const PatientFriendlyXRayView: React.FC<PatientFriendlyXRayViewProps> = (
           </div>
 
           {/* Question 4: What do these results mean? (Strictly No "All Clear" or "Normal") */}
-          <div className="p-4 rounded-xl bg-medical-surface border border-medical-border space-y-2">
-            <h4 className="text-xs font-bold text-white flex items-center gap-2 uppercase tracking-wider text-medical-amber">
+          <div className="p-4 rounded-xl bg-medical-surface border border-white/10 space-y-2">
+            <h4 className="text-xs font-bold text-white flex items-center gap-2 uppercase tracking-wider text-amber-400">
               <span className="w-5 h-5 rounded-full bg-amber-950/60 text-amber-400 border border-amber-800/60 flex items-center justify-center text-[11px] font-bold">4</span>
               What do these results mean?
             </h4>
@@ -221,7 +221,7 @@ export const PatientFriendlyXRayView: React.FC<PatientFriendlyXRayViewProps> = (
           </div>
 
           {/* Question 5: What are the limitations? */}
-          <div className="p-4 rounded-xl bg-medical-surface border border-medical-border space-y-1.5">
+          <div className="p-4 rounded-xl bg-medical-surface border border-white/10 space-y-1.5">
             <h4 className="text-xs font-bold text-white flex items-center gap-2 uppercase tracking-wider text-slate-300">
               <span className="w-5 h-5 rounded-full bg-slate-800 text-slate-300 flex items-center justify-center text-[11px] font-bold">5</span>
               What are the limitations of this analysis?
@@ -234,9 +234,9 @@ export const PatientFriendlyXRayView: React.FC<PatientFriendlyXRayViewProps> = (
           </div>
 
           {/* Question 6: What should the user understand next? */}
-          <div className="p-4 rounded-xl bg-teal-950/25 border border-teal-800/50 space-y-2">
-            <h4 className="text-xs font-bold text-teal-300 flex items-center gap-2 uppercase tracking-wider">
-              <Stethoscope className="w-4 h-4 text-teal-400" />
+          <div className="p-4 rounded-xl bg-[#1c102f] border border-amber-500/30 space-y-2">
+            <h4 className="text-xs font-bold text-amber-300 flex items-center gap-2 uppercase tracking-wider">
+              <Stethoscope className="w-4 h-4 text-amber-400" />
               What should you do next?
             </h4>
             <div className="text-xs text-slate-200 space-y-1.5 leading-relaxed pl-6">
@@ -251,27 +251,27 @@ export const PatientFriendlyXRayView: React.FC<PatientFriendlyXRayViewProps> = (
         </div>
 
         {/* Expandable Technical Details for Inquisitive Patients */}
-        <div className="border border-medical-border/80 rounded-xl overflow-hidden bg-medical-surface/40">
+        <div className="border border-white/10 rounded-xl overflow-hidden bg-medical-surface/40">
           <button
             onClick={() => setShowDetailedScores(!showDetailedScores)}
             className="w-full px-4 py-3 flex items-center justify-between text-xs text-medical-muted hover:text-white transition-colors"
           >
             <span className="flex items-center gap-2 font-medium">
-              <Info className="w-4 h-4 text-medical-cyan" />
+              <Info className="w-4 h-4 text-amber-400" />
               {showDetailedScores ? 'Hide Detailed Numbers' : 'View Detailed Numbers for All 6 Conditions'}
             </span>
             {showDetailedScores ? <ChevronUp className="w-4 h-4" /> : <ChevronDown className="w-4 h-4" />}
           </button>
 
           {showDetailedScores && (
-            <div className="p-4 border-t border-medical-border space-y-2.5 bg-medical-card/30">
+            <div className="p-4 border-t border-white/10 space-y-2.5 bg-medical-card/30">
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs">
                 {EXPECTED_6_DISEASES.map((disease) => {
                   const pred = multiLabelResult.predictions[disease];
                   return (
                     <div
                       key={disease}
-                      className="p-3 rounded-lg bg-medical-surface border border-medical-border flex items-center justify-between"
+                      className="p-3 rounded-lg bg-medical-surface border border-white/10 flex items-center justify-between"
                     >
                       <div>
                         <span className="font-semibold text-white block">{disease}</span>
@@ -309,7 +309,7 @@ export const PatientFriendlyXRayView: React.FC<PatientFriendlyXRayViewProps> = (
       <div className="space-y-5 animate-in fade-in duration-300">
         <div
           className={`p-5 rounded-2xl border ${
-            isAbnormal ? 'bg-amber-950/20 border-amber-800/40' : 'bg-teal-950/20 border-teal-800/40'
+            isAbnormal ? 'bg-amber-950/20 border-amber-800/40' : 'bg-[#160c26]/80 border-white/10'
           }`}
         >
           <div className="flex items-start gap-3.5">
@@ -317,13 +317,13 @@ export const PatientFriendlyXRayView: React.FC<PatientFriendlyXRayViewProps> = (
               className={`w-9 h-9 rounded-xl flex items-center justify-center shrink-0 ${
                 isAbnormal
                   ? 'bg-amber-950/60 text-amber-400 border border-amber-800/60'
-                  : 'bg-teal-950/60 text-medical-teal border border-teal-800/60'
+                  : 'bg-white/10 text-slate-200 border border-white/20'
               }`}
             >
               {isAbnormal ? <AlertTriangle className="w-5 h-5" /> : <CheckCircle2 className="w-5 h-5" />}
             </div>
             <div className="flex-1">
-              <span className="text-xs font-mono uppercase tracking-wider text-medical-teal">
+              <span className="text-xs font-mono uppercase tracking-wider text-amber-400">
                 Plain-Language Triage Summary
               </span>
               <h3 className="text-lg font-bold text-white mt-1">
@@ -339,8 +339,8 @@ export const PatientFriendlyXRayView: React.FC<PatientFriendlyXRayViewProps> = (
         </div>
 
         {/* Plain Language Interpretation */}
-        <div className="p-4 rounded-xl bg-medical-surface border border-medical-border space-y-2 text-xs">
-          <h4 className="font-bold text-white uppercase tracking-wider text-medical-cyan">
+        <div className="p-4 rounded-xl bg-medical-surface border border-white/10 space-y-2 text-xs">
+          <h4 className="font-bold text-white uppercase tracking-wider text-amber-400">
             What this binary score means
           </h4>
           <p className="text-slate-300 leading-relaxed">
@@ -350,7 +350,7 @@ export const PatientFriendlyXRayView: React.FC<PatientFriendlyXRayViewProps> = (
             compared to the calibrated decision cutoff of{' '}
             <strong className="text-slate-300">{(binaryResult.prediction.calibrated_threshold * 100).toFixed(2)}%</strong>.
           </p>
-          <p className="text-medical-muted text-[11px] pt-1 border-t border-medical-border/40">
+          <p className="text-medical-muted text-[11px] pt-1 border-t border-white/[0.08]">
             A "Normal" result from a binary AI model does not exclude subtle or non-pulmonary abnormalities. A qualified radiologist must evaluate the complete chest examination.
           </p>
         </div>

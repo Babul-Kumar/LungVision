@@ -37,21 +37,21 @@ export const Navbar: React.FC = () => {
   };
 
   return (
-    <header className="h-16 border-b border-medical-border bg-medical-surface/90 backdrop-blur-md px-6 flex items-center justify-between sticky top-0 z-40">
+    <header className="h-16 border-b border-white/[0.08] bg-[#0e0719]/90 backdrop-blur-xl px-6 flex items-center justify-between sticky top-0 z-40">
       {/* Brand & Logo */}
       <div className="flex items-center gap-3">
         <Link to="/" className="flex items-center gap-2.5 group">
-          <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-medical-cyan to-medical-teal flex items-center justify-center text-medical-bg font-bold shadow-md shadow-cyan-950/40 group-hover:scale-105 group-hover:shadow-cyan-500/20 transition-all">
+          <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-amber-400 via-amber-500 to-amber-600 flex items-center justify-center text-slate-950 font-bold shadow-md shadow-amber-950/40 group-hover:scale-105 group-hover:shadow-amber-500/20 transition-all">
             LV
           </div>
           <div>
-            <h1 className="text-base font-bold tracking-tight text-medical-text group-hover:text-medical-cyan transition-colors flex items-center">
+            <h1 className="text-base font-bold tracking-tight text-slate-100 group-hover:text-amber-300 transition-colors flex items-center">
               LUNGVISION
-              <span className="text-medical-cyan font-normal text-xs uppercase ml-1.5 px-1.5 py-0.5 rounded bg-medical-card border border-medical-border font-mono">
+              <span className="text-amber-300 font-normal text-xs uppercase ml-1.5 px-1.5 py-0.5 rounded bg-[#201037] border border-amber-500/30 font-mono">
                 AI
               </span>
             </h1>
-            <p className="text-[10px] text-medical-muted tracking-wider uppercase font-mono">
+            <p className="text-[10px] text-slate-400 tracking-wider uppercase font-mono">
               Thoracic Imaging Intelligence
             </p>
           </div>
@@ -59,8 +59,8 @@ export const Navbar: React.FC = () => {
       </div>
 
       {/* Middle: Live Workstation Clock */}
-      <div className="hidden lg:flex items-center gap-2 bg-black/40 px-3 py-1 rounded-full border border-white/5 text-[11px] font-mono text-slate-400">
-        <Clock className="w-3.5 h-3.5 text-cyan-400" />
+      <div className="hidden lg:flex items-center gap-2 bg-[#150a22]/80 px-3 py-1 rounded-full border border-white/10 text-[11px] font-mono text-slate-300">
+        <Clock className="w-3.5 h-3.5 text-amber-400" />
         <span>{timeString || '00:00:00 UTC'}</span>
         <span className="text-white/20">|</span>
         <span className="text-emerald-400 flex items-center gap-1">
@@ -76,14 +76,14 @@ export const Navbar: React.FC = () => {
           onClick={togglePersonaMode}
           className={`flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg border text-xs font-medium transition-all ${
             userExperienceMode === 'doctor'
-              ? 'bg-cyan-950/60 border-cyan-500/40 text-cyan-300 shadow-sm shadow-cyan-950/50'
+              ? 'bg-amber-950/60 border-amber-500/40 text-amber-300 shadow-sm shadow-amber-950/50'
               : 'bg-emerald-950/50 border-emerald-500/30 text-emerald-300'
           }`}
           title="Toggle between Doctor/Researcher Technical Mode and Patient-Friendly Mode"
         >
           {userExperienceMode === 'doctor' ? (
             <>
-              <Stethoscope className="w-3.5 h-3.5 text-cyan-400" />
+              <Stethoscope className="w-3.5 h-3.5 text-amber-400" />
               <span className="hidden sm:inline">Clinician View</span>
             </>
           ) : (
@@ -95,13 +95,13 @@ export const Navbar: React.FC = () => {
         </button>
 
         {/* Backend Health Indicator */}
-        <div className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-medical-bg border border-medical-border text-xs">
+        <div className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-[#150a22] border border-white/10 text-xs">
           <div
             className={`w-2 h-2 rounded-full ${
-              isBackendOnline ? 'bg-medical-emerald animate-pulse' : 'bg-medical-rose'
+              isBackendOnline ? 'bg-emerald-400 animate-pulse' : 'bg-rose-500'
             }`}
           />
-          <span className="text-medical-muted text-[11px] font-mono">
+          <span className="text-slate-400 text-[11px] font-mono">
             {isBackendOnline ? (
               <span className="text-emerald-400">API v{health?.version || '1.0.0'} Online</span>
             ) : (
@@ -115,7 +115,7 @@ export const Navbar: React.FC = () => {
           href="http://localhost:8000/docs"
           target="_blank"
           rel="noreferrer"
-          className="hidden sm:flex items-center gap-1.5 text-xs text-medical-muted hover:text-medical-cyan transition-colors px-2.5 py-1.5 rounded-lg hover:bg-medical-card"
+          className="hidden sm:flex items-center gap-1.5 text-xs text-slate-400 hover:text-amber-300 transition-colors px-2.5 py-1.5 rounded-lg hover:bg-white/[0.04]"
         >
           <ExternalLink className="w-3.5 h-3.5" />
           <span>Docs</span>
@@ -124,7 +124,7 @@ export const Navbar: React.FC = () => {
         {/* Settings Icon */}
         <Link
           to="/settings"
-          className="p-2 rounded-lg text-medical-muted hover:text-medical-text hover:bg-medical-card transition-colors"
+          className="p-2 rounded-lg text-slate-400 hover:text-slate-100 hover:bg-white/[0.04] transition-colors"
           title="System Settings"
         >
           <SettingsIcon className="w-4 h-4" />

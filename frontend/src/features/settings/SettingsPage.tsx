@@ -69,19 +69,19 @@ export const SettingsPage: React.FC = () => {
   return (
     <div className="space-y-6">
       {/* Page Header */}
-      <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 pb-6 border-b border-medical-border">
+      <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 pb-6 border-b border-white/[0.08]">
         <div>
           <div className="flex items-center gap-2 mb-1">
-            <span className="text-[11px] font-mono uppercase tracking-wider text-medical-cyan bg-cyan-950/40 px-2 py-0.5 rounded border border-cyan-800/40">
+            <span className="text-[11px] font-mono uppercase tracking-wider text-amber-400 bg-amber-950/40 px-2 py-0.5 rounded border border-amber-800/40">
               System Control
             </span>
-            <span className="text-xs text-medical-subtle">·</span>
-            <span className="text-xs text-medical-muted">Infrastructure & Hardware</span>
+            <span className="text-xs text-white/20">·</span>
+            <span className="text-xs text-slate-400">Infrastructure & Hardware</span>
           </div>
           <h2 className="text-2xl font-bold tracking-tight text-white flex items-center gap-2.5">
             System Configuration & Diagnostics
           </h2>
-          <p className="text-sm text-medical-muted mt-1">
+          <p className="text-sm text-slate-400 mt-1">
             Backend gateway telemetry, GPU/CPU runtime verification, client WebGL capabilities & research parameters.
           </p>
         </div>
@@ -91,7 +91,7 @@ export const SettingsPage: React.FC = () => {
           size="sm"
           onClick={testConnection}
           isLoading={testingConnection}
-          className="gap-2 border-medical-border hover:border-medical-cyan"
+          className="gap-2 border-white/10 hover:border-amber-400 text-slate-200 hover:text-amber-300"
         >
           <RefreshCw className="w-4 h-4" />
           <span>Test Connection</span>
@@ -104,7 +104,7 @@ export const SettingsPage: React.FC = () => {
         {/* Backend Connectivity & Telemetry */}
         <Card title="Backend API Gateway Status" subtitle="FastAPI Uvicorn REST Service (Port 8000)">
           <div className="space-y-4 text-xs">
-            <div className="flex items-center justify-between p-3.5 rounded-xl bg-medical-surface border border-medical-border">
+            <div className="flex items-center justify-between p-3.5 rounded-xl bg-medical-surface border border-white/10">
               <div className="flex items-center gap-3">
                 <div
                   className={`w-3 h-3 rounded-full ${
@@ -139,14 +139,14 @@ export const SettingsPage: React.FC = () => {
                 </p>
               </div>
             ) : healthData ? (
-              <div className="space-y-2 border-t border-medical-border/60 pt-3 font-mono">
+              <div className="space-y-2 border-t border-white/10 pt-3 font-mono">
                 <div className="flex justify-between py-1">
                   <span className="text-medical-muted">Service Title:</span>
                   <span className="text-white font-medium">{(healthData as any).service || 'LungVision FastAPI Gateway'}</span>
                 </div>
                 <div className="flex justify-between py-1">
                   <span className="text-medical-muted">Gateway API Version:</span>
-                  <span className="text-medical-cyan">v{healthData.version}</span>
+                  <span className="text-amber-400">v{healthData.version}</span>
                 </div>
                 <div className="flex justify-between py-1">
                   <span className="text-medical-muted">Liveness Probe:</span>
@@ -172,7 +172,7 @@ export const SettingsPage: React.FC = () => {
                 href="http://localhost:8000/docs"
                 target="_blank"
                 rel="noreferrer"
-                className="text-xs text-medical-cyan hover:underline flex items-center gap-1 font-medium"
+                className="text-xs text-amber-400 hover:text-amber-300 hover:underline flex items-center gap-1 font-medium"
               >
                 <span>Interactive Swagger UI Documentation</span>
                 <ExternalLink className="w-3.5 h-3.5" />
@@ -193,9 +193,9 @@ export const SettingsPage: React.FC = () => {
         {/* Client Hardware & WebGL Telemetry */}
         <Card title="Client Hardware & 3D Acceleration" subtitle="Browser GPU graphics driver status for Three.js volumetric rendering">
           <div className="space-y-4 text-xs font-mono">
-            <div className="flex items-center justify-between p-3.5 rounded-xl bg-medical-surface border border-medical-border">
+            <div className="flex items-center justify-between p-3.5 rounded-xl bg-medical-surface border border-white/10">
               <div className="flex items-center gap-3">
-                <Monitor className="w-5 h-5 text-medical-cyan shrink-0" />
+                <Monitor className="w-5 h-5 text-amber-400 shrink-0" />
                 <div>
                   <span className="font-semibold text-white text-sm block">WebGL 2.0 Engine</span>
                   <span className="text-medical-muted text-[11px]">Hardware Acceleration</span>
@@ -207,7 +207,7 @@ export const SettingsPage: React.FC = () => {
               </Badge>
             </div>
 
-            <div className="space-y-2 border-t border-medical-border/60 pt-3">
+            <div className="space-y-2 border-t border-white/10 pt-3">
               <div className="flex justify-between py-1">
                 <span className="text-medical-muted font-sans">GPU Renderer:</span>
                 <span className="text-slate-200 text-right truncate max-w-xs" title={webglInfo.renderer}>
@@ -220,16 +220,16 @@ export const SettingsPage: React.FC = () => {
               </div>
               <div className="flex justify-between py-1">
                 <span className="text-medical-muted font-sans">Three.js Version:</span>
-                <span className="text-medical-teal font-semibold">r170.0</span>
+                <span className="text-slate-200 font-semibold">r170.0</span>
               </div>
               <div className="flex justify-between py-1">
                 <span className="text-medical-muted font-sans">Recharts Engine:</span>
-                <span className="text-medical-cyan font-semibold">v2.15.0</span>
+                <span className="text-amber-400 font-semibold">v2.15.0</span>
               </div>
             </div>
 
             {/* Privacy & Governance Notice */}
-            <div className="mt-4 p-3 rounded-xl bg-medical-card/60 border border-medical-border/60 font-sans text-[11px] text-medical-muted space-y-1">
+            <div className="mt-4 p-3 rounded-xl bg-medical-card/60 border border-white/10 font-sans text-[11px] text-medical-muted space-y-1">
               <div className="flex items-center gap-1.5 font-semibold text-slate-200">
                 <ShieldCheck className="w-3.5 h-3.5 text-emerald-400" />
                 <span>Zero Server-Side PHI Retention Policy</span>

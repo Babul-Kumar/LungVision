@@ -82,7 +82,7 @@ export const ThreeMeshCanvas: React.FC<ThreeMeshCanvasProps> = ({
 
     // Scene
     const scene = new THREE.Scene();
-    scene.background = new THREE.Color(0x070b14);
+    scene.background = new THREE.Color(0x0c0614);
     sceneRef.current = scene;
 
     // Camera
@@ -114,19 +114,19 @@ export const ThreeMeshCanvas: React.FC<ThreeMeshCanvasProps> = ({
     controls.addEventListener('change', updateViewLabel);
     controlsRef.current = controls;
 
-    // Lights: balanced 3-point clinical lighting
+    // Lights: balanced 3-point clinical lighting with warm amber key & platinum rim
     const ambientLight = new THREE.AmbientLight(0xffffff, 0.75);
     scene.add(ambientLight);
 
-    const dirLight1 = new THREE.DirectionalLight(0x38bdf8, 1.3);
+    const dirLight1 = new THREE.DirectionalLight(0xfffbeb, 1.25);
     dirLight1.position.set(200, -350, 400);
     scene.add(dirLight1);
 
-    const dirLight2 = new THREE.DirectionalLight(0x14b8a6, 0.9);
+    const dirLight2 = new THREE.DirectionalLight(0xe2e8f0, 0.9);
     dirLight2.position.set(-200, 350, -200);
     scene.add(dirLight2);
 
-    const rimLight = new THREE.DirectionalLight(0x0ea5e9, 0.6);
+    const rimLight = new THREE.DirectionalLight(0xf59e0b, 0.55);
     rimLight.position.set(0, 400, 250);
     scene.add(rimLight);
 
@@ -262,24 +262,24 @@ export const ThreeMeshCanvas: React.FC<ThreeMeshCanvasProps> = ({
           }
 
           let totalVerts = 0;
-          let meshColor = 0x06b6d4; // Cyan for bilateral lungs
-          let opacity = 0.86;
+          let meshColor = 0xf1f5f9; // Classic Ice Silver / Platinum for bilateral lungs
+          let opacity = 0.88;
           if (structure.includes('heart')) {
-            meshColor = 0xf43f5e; // Crimson rose for heart
+            meshColor = 0xe11d48; // Crimson burgundy rose for heart
             opacity = 0.92;
           } else if (structure.includes('airway') || structure.includes('trachea')) {
-            meshColor = 0xf59e0b; // Amber for airways
-            opacity = 0.90;
+            meshColor = 0xf59e0b; // Rich Marigold amber for airways
+            opacity = 0.92;
           } else if (structure.includes('left_lung')) {
-            meshColor = 0x38bdf8; // Sky blue for left lung
+            meshColor = 0xf8fafc; // Ice silver left lung
           } else if (structure.includes('right_lung')) {
-            meshColor = 0x2dd4bf; // Teal for right lung
+            meshColor = 0xfde68a; // Warm champagne gold right lung
           }
 
           const material = new THREE.MeshStandardMaterial({
             color: meshColor,
-            roughness: 0.35,
-            metalness: 0.15,
+            roughness: 0.28,
+            metalness: 0.22,
             transparent: true,
             opacity: opacity,
             side: THREE.DoubleSide,
@@ -414,51 +414,51 @@ export const ThreeMeshCanvas: React.FC<ThreeMeshCanvasProps> = ({
   };
 
   return (
-    <div className="relative w-full h-full min-h-[440px] rounded-xl overflow-hidden border border-medical-border bg-medical-bg">
+    <div className="relative w-full h-full min-h-[440px] rounded-xl overflow-hidden border border-white/10 bg-[#0c0614]">
       <div ref={mountRef} className="w-full h-full three-canvas-container" />
 
       {/* Top Left Floating Status Card */}
-      <div className="absolute top-3 left-3 flex items-center gap-2 bg-black/75 backdrop-blur-md px-3 py-1.5 rounded-lg border border-white/10 text-xs font-mono text-slate-300 shadow-lg">
-        <span className="w-2 h-2 rounded-full bg-medical-cyan animate-pulse" />
+      <div className="absolute top-3 left-3 flex items-center gap-2 bg-[#140a22]/85 backdrop-blur-md px-3 py-1.5 rounded-lg border border-white/10 text-xs font-mono text-slate-200 shadow-xl">
+        <span className="w-2 h-2 rounded-full bg-amber-400 animate-pulse" />
         <span className="font-semibold text-white">Three.js Engine</span>
-        <span className="text-medical-subtle">|</span>
+        <span className="text-white/20">|</span>
         <span>{vertexCount.toLocaleString()} Vertices</span>
       </div>
 
       {/* Top Right Floating Toolbar: Camera Presets & Actions */}
-      <div className="absolute top-3 right-3 flex items-center gap-1.5 bg-black/75 backdrop-blur-md p-1.5 rounded-lg border border-white/10 shadow-lg z-20">
+      <div className="absolute top-3 right-3 flex items-center gap-1.5 bg-[#140a22]/85 backdrop-blur-md p-1.5 rounded-lg border border-white/10 shadow-xl z-20">
         <div className="flex items-center gap-1 mr-1 border-r border-white/10 pr-1.5 text-[10px] font-mono">
           <button
             onClick={() => setAnatomicalView('AP')}
-            className="px-1.5 py-1 rounded hover:bg-white/10 text-slate-300 hover:text-cyan-300 transition-colors"
+            className="px-1.5 py-1 rounded hover:bg-white/10 text-slate-300 hover:text-amber-300 transition-colors"
             title="Anterior (Frontal AP View)"
           >
             AP
           </button>
           <button
             onClick={() => setAnatomicalView('PA')}
-            className="px-1.5 py-1 rounded hover:bg-white/10 text-slate-300 hover:text-cyan-300 transition-colors"
+            className="px-1.5 py-1 rounded hover:bg-white/10 text-slate-300 hover:text-amber-300 transition-colors"
             title="Posterior (Dorsal PA View)"
           >
             PA
           </button>
           <button
             onClick={() => setAnatomicalView('RL')}
-            className="px-1.5 py-1 rounded hover:bg-white/10 text-slate-300 hover:text-cyan-300 transition-colors"
+            className="px-1.5 py-1 rounded hover:bg-white/10 text-slate-300 hover:text-amber-300 transition-colors"
             title="Right Lateral View"
           >
             RL
           </button>
           <button
             onClick={() => setAnatomicalView('LL')}
-            className="px-1.5 py-1 rounded hover:bg-white/10 text-slate-300 hover:text-cyan-300 transition-colors"
+            className="px-1.5 py-1 rounded hover:bg-white/10 text-slate-300 hover:text-amber-300 transition-colors"
             title="Left Lateral View"
           >
             LL
           </button>
           <button
             onClick={() => setAnatomicalView('SI')}
-            className="px-1.5 py-1 rounded hover:bg-white/10 text-slate-300 hover:text-cyan-300 transition-colors"
+            className="px-1.5 py-1 rounded hover:bg-white/10 text-slate-300 hover:text-amber-300 transition-colors"
             title="Superior (Top-Down View)"
           >
             SI
@@ -470,7 +470,7 @@ export const ThreeMeshCanvas: React.FC<ThreeMeshCanvasProps> = ({
           variant="ghost"
           size="sm"
           className={`p-1.5 h-auto transition-colors ${
-            isAutoRotating ? 'text-cyan-400 bg-cyan-950/60' : 'text-slate-400 hover:text-white'
+            isAutoRotating ? 'text-amber-400 bg-amber-950/60' : 'text-slate-300 hover:text-white'
           }`}
           onClick={() => setIsAutoRotating((prev) => !prev)}
           title={isAutoRotating ? 'Pause 360° Rotation' : 'Start 360° Rotation'}
@@ -482,7 +482,7 @@ export const ThreeMeshCanvas: React.FC<ThreeMeshCanvasProps> = ({
         <Button
           variant="ghost"
           size="sm"
-          className="text-slate-400 hover:text-cyan-300 p-1.5 h-auto transition-colors"
+          className="text-slate-300 hover:text-amber-300 p-1.5 h-auto transition-colors"
           onClick={handleExportSnapshot}
           title="Export High-Res Snapshot (PNG)"
         >
@@ -493,7 +493,7 @@ export const ThreeMeshCanvas: React.FC<ThreeMeshCanvasProps> = ({
         <Button
           variant="ghost"
           size="sm"
-          className="text-white hover:text-medical-cyan p-1.5 h-auto transition-colors"
+          className="text-slate-300 hover:text-amber-300 p-1.5 h-auto transition-colors"
           onClick={() => setAnatomicalView('OBLIQUE')}
           title="Reset Camera View"
         >
@@ -504,7 +504,7 @@ export const ThreeMeshCanvas: React.FC<ThreeMeshCanvasProps> = ({
       {/* Interactive Nodule Hover Tooltip */}
       {hoveredNodule && (
         <div
-          className="absolute z-30 pointer-events-none bg-slate-950/90 backdrop-blur-md p-2.5 rounded-lg border border-amber-500/40 text-xs shadow-2xl font-mono text-slate-200"
+          className="absolute z-30 pointer-events-none bg-slate-950/95 backdrop-blur-md p-2.5 rounded-lg border border-amber-500/40 text-xs shadow-2xl font-mono text-slate-200"
           style={{
             left: `${Math.min(hoveredNodule.x + 12, 340)}px`,
             top: `${Math.min(hoveredNodule.y + 12, 300)}px`,
@@ -524,9 +524,9 @@ export const ThreeMeshCanvas: React.FC<ThreeMeshCanvasProps> = ({
 
       {/* Loading Overlay */}
       {isLoading && (
-        <div className="absolute inset-0 bg-medical-bg/80 backdrop-blur-sm flex flex-col items-center justify-center gap-3 z-30">
-          <RefreshCw className="w-8 h-8 text-medical-cyan animate-spin" />
-          <p className="text-xs font-mono text-medical-cyan">
+        <div className="absolute inset-0 bg-[#0c0614]/85 backdrop-blur-sm flex flex-col items-center justify-center gap-3 z-30">
+          <RefreshCw className="w-8 h-8 text-amber-400 animate-spin" />
+          <p className="text-xs font-mono text-amber-300">
             Streaming Watertight Marching Cubes Mesh...
           </p>
         </div>
@@ -534,20 +534,20 @@ export const ThreeMeshCanvas: React.FC<ThreeMeshCanvasProps> = ({
 
       {/* Error Overlay */}
       {error && (
-        <div className="absolute inset-0 bg-medical-bg/90 p-6 flex flex-col items-center justify-center text-center z-30">
+        <div className="absolute inset-0 bg-[#0c0614]/90 p-6 flex flex-col items-center justify-center text-center z-30">
           <p className="text-sm font-semibold text-rose-400 mb-1">Mesh Stream Error</p>
-          <p className="text-xs text-medical-muted max-w-md">{error}</p>
+          <p className="text-xs text-slate-400 max-w-md">{error}</p>
         </div>
       )}
 
       {/* Bottom HUD Bar: Active View Pill & Mouse Controls */}
       <div className="absolute bottom-3 left-3 right-3 flex items-center justify-between pointer-events-none z-20">
-        <div className="text-[10px] text-medical-subtle font-mono bg-black/60 backdrop-blur-sm px-2.5 py-1 rounded-md border border-white/10">
+        <div className="text-[10px] text-slate-400 font-mono bg-black/70 backdrop-blur-sm px-2.5 py-1 rounded-md border border-white/10">
           Left Click: Rotate · Right Click: Pan · Scroll: Zoom
         </div>
 
-        <div className="text-[10px] font-mono text-cyan-300 bg-cyan-950/60 backdrop-blur-sm px-2.5 py-1 rounded-md border border-cyan-800/40 flex items-center gap-1.5">
-          <span className="w-1.5 h-1.5 rounded-full bg-cyan-400 animate-pulse" />
+        <div className="text-[10px] font-mono text-amber-300 bg-amber-950/70 backdrop-blur-sm px-2.5 py-1 rounded-md border border-amber-800/50 flex items-center gap-1.5">
+          <span className="w-1.5 h-1.5 rounded-full bg-amber-400 animate-pulse" />
           <span>VIEW: {activeViewName.toUpperCase()}</span>
         </div>
       </div>

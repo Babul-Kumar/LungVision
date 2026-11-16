@@ -53,13 +53,13 @@ export const Sidebar: React.FC = () => {
   }, [navigate]);
 
   return (
-    <aside className="w-64 border-r border-medical-border bg-medical-surface/50 p-4 flex flex-col justify-between shrink-0 hidden md:flex">
+    <aside className="w-64 border-r border-white/[0.08] bg-[#0c0517]/80 backdrop-blur-xl p-4 flex flex-col justify-between shrink-0 hidden md:flex">
       <nav className="space-y-1.5">
         <div className="flex items-center justify-between px-3 py-2">
-          <span className="text-[11px] font-semibold text-medical-subtle tracking-wider uppercase">
+          <span className="text-[11px] font-semibold text-slate-400 tracking-wider uppercase">
             Diagnostic Modules
           </span>
-          <span className="text-[10px] font-mono text-slate-500 bg-slate-900 px-1.5 py-0.5 rounded border border-slate-800">
+          <span className="text-[10px] font-mono text-slate-400 bg-black/40 px-1.5 py-0.5 rounded border border-white/10">
             Alt+1..8
           </span>
         </div>
@@ -73,23 +73,23 @@ export const Sidebar: React.FC = () => {
               className={({ isActive }) =>
                 `flex items-center justify-between px-3.5 py-2.5 rounded-lg text-sm font-medium transition-all group ${
                   isActive
-                    ? 'bg-cyan-950/40 text-cyan-300 border border-cyan-500/40 shadow-sm shadow-cyan-950/40 font-semibold ring-1 ring-cyan-500/20'
-                    : 'text-medical-muted hover:text-medical-text hover:bg-medical-hover/60 border border-transparent'
+                    ? 'bg-gradient-to-r from-amber-500/15 via-amber-500/8 to-transparent text-amber-300 border-l-2 border-l-amber-400 border-t border-b border-r border-amber-500/20 shadow-md shadow-amber-950/20 font-semibold'
+                    : 'text-slate-300 hover:text-white hover:bg-white/[0.04] border border-transparent'
                 }`
               }
             >
               <div className="flex items-center gap-3">
-                <Icon className="w-4 h-4 shrink-0 group-hover:text-cyan-400 transition-colors" />
+                <Icon className="w-4 h-4 shrink-0 group-hover:text-amber-400 transition-colors" />
                 <span>{item.label}</span>
               </div>
 
               <div className="flex items-center gap-1.5">
                 {item.badge && (
-                  <span className="text-[10px] font-mono font-medium px-1.5 py-0.5 rounded bg-cyan-950/80 text-cyan-400 border border-cyan-800/60">
+                  <span className="text-[10px] font-mono font-medium px-1.5 py-0.5 rounded bg-amber-950/70 text-amber-300 border border-amber-600/40">
                     {item.badge}
                   </span>
                 )}
-                <span className="hidden group-hover:inline text-[9px] font-mono text-slate-500 bg-black/40 px-1 py-0.5 rounded">
+                <span className="hidden group-hover:inline text-[9px] font-mono text-slate-400 bg-black/40 px-1 py-0.5 rounded">
                   {item.shortcut}
                 </span>
               </div>
@@ -99,13 +99,13 @@ export const Sidebar: React.FC = () => {
       </nav>
 
       {/* Sidebar Footer Info */}
-      <div className="p-3 rounded-xl bg-medical-card/60 border border-medical-border/40 text-[11px] text-medical-subtle hud-corner-bracket">
+      <div className="p-3.5 rounded-xl bg-[#170b28]/80 border border-white/10 text-[11px]">
         <div className="flex items-center justify-between mb-1">
-          <span className="font-semibold text-slate-300">Model Runtime</span>
+          <span className="font-semibold text-slate-200">Model Runtime</span>
           <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
         </div>
-        <p className="text-[10px] font-mono text-cyan-400">PyTorch 2.14.1 · SimpleITK 2.5</p>
-        <p className="mt-1 text-[10px] text-medical-muted leading-tight">
+        <p className="text-[10px] font-mono text-amber-400">PyTorch 2.14.1 · SimpleITK 2.5</p>
+        <p className="mt-1 text-[10px] text-slate-400 leading-tight">
           4 Locked Checkpoints: DenseNet121, 2x ResNet18, SSM Lung PCA (20 Modes)
         </p>
       </div>
