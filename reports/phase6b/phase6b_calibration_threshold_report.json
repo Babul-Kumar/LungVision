@@ -1,0 +1,165 @@
+{
+  "title": "Phase 6B Task F: Calibration & Operating Points Report",
+  "timestamp": "2026-11-16T23:18:08Z",
+  "validation_cohort_size": 13501,
+  "calibration_policy": "Strictly derived on validation cohort with zero held-out test leakage.",
+  "operating_points": {
+    "Cardiomegaly": {
+      "validation_samples": 13501,
+      "brier_score": 0.0889,
+      "expected_calibration_error": 0.1335,
+      "point_1_frozen_nih_production": {
+        "threshold": 0.9502,
+        "sensitivity": 0.3593,
+        "specificity": 0.9774,
+        "f1": 0.2913,
+        "clinical_role": "High-Specificity Population Screening (Low False Positive Alarms)"
+      },
+      "point_2_validation_youden_optimal": {
+        "threshold": 0.3664,
+        "sensitivity": 0.7741,
+        "specificity": 0.8526,
+        "f1": 0.1721,
+        "clinical_role": "Diagnostic Balanced F1 Operating Point"
+      },
+      "point_3_high_sensitivity_triage": {
+        "threshold": 0.1882,
+        "sensitivity": 0.8,
+        "specificity": 0.7795,
+        "f1": 0.1269,
+        "clinical_role": "Emergency / High-Sensitivity Triage (Captures >= 80% True Positives)"
+      }
+    },
+    "Edema": {
+      "validation_samples": 13501,
+      "brier_score": 0.0667,
+      "expected_calibration_error": 0.1008,
+      "point_1_frozen_nih_production": {
+        "threshold": 0.877,
+        "sensitivity": 0.3732,
+        "specificity": 0.973,
+        "f1": 0.2415,
+        "clinical_role": "High-Specificity Population Screening (Low False Positive Alarms)"
+      },
+      "point_2_validation_youden_optimal": {
+        "threshold": 0.0793,
+        "sensitivity": 0.8565,
+        "specificity": 0.7602,
+        "f1": 0.1001,
+        "clinical_role": "Diagnostic Balanced F1 Operating Point"
+      },
+      "point_3_high_sensitivity_triage": {
+        "threshold": 0.1189,
+        "sensitivity": 0.8134,
+        "specificity": 0.7985,
+        "f1": 0.1112,
+        "clinical_role": "Emergency / High-Sensitivity Triage (Captures >= 80% True Positives)"
+      }
+    },
+    "Consolidation": {
+      "validation_samples": 13501,
+      "brier_score": 0.156,
+      "expected_calibration_error": 0.2479,
+      "point_1_frozen_nih_production": {
+        "threshold": 0.7329,
+        "sensitivity": 0.4347,
+        "specificity": 0.89,
+        "f1": 0.1862,
+        "clinical_role": "High-Specificity Population Screening (Low False Positive Alarms)"
+      },
+      "point_2_validation_youden_optimal": {
+        "threshold": 0.3169,
+        "sensitivity": 0.7995,
+        "specificity": 0.6599,
+        "f1": 0.1355,
+        "clinical_role": "Diagnostic Balanced F1 Operating Point"
+      },
+      "point_3_high_sensitivity_triage": {
+        "threshold": 0.307,
+        "sensitivity": 0.8041,
+        "specificity": 0.6527,
+        "f1": 0.1338,
+        "clinical_role": "Emergency / High-Sensitivity Triage (Captures >= 80% True Positives)"
+      }
+    },
+    "Pneumonia": {
+      "validation_samples": 13501,
+      "brier_score": 0.0733,
+      "expected_calibration_error": 0.1461,
+      "point_1_frozen_nih_production": {
+        "threshold": 0.7529,
+        "sensitivity": 0.1367,
+        "specificity": 0.9698,
+        "f1": 0.0676,
+        "clinical_role": "High-Specificity Population Screening (Low False Positive Alarms)"
+      },
+      "point_2_validation_youden_optimal": {
+        "threshold": 0.109,
+        "sensitivity": 0.7626,
+        "specificity": 0.6333,
+        "f1": 0.0412,
+        "clinical_role": "Diagnostic Balanced F1 Operating Point"
+      },
+      "point_3_high_sensitivity_triage": {
+        "threshold": 0.0793,
+        "sensitivity": 0.8129,
+        "specificity": 0.5686,
+        "f1": 0.0376,
+        "clinical_role": "Emergency / High-Sensitivity Triage (Captures >= 80% True Positives)"
+      }
+    },
+    "Atelectasis": {
+      "validation_samples": 13501,
+      "brier_score": 0.1816,
+      "expected_calibration_error": 0.251,
+      "point_1_frozen_nih_production": {
+        "threshold": 0.7495,
+        "sensitivity": 0.49,
+        "specificity": 0.883,
+        "f1": 0.3847,
+        "clinical_role": "High-Specificity Population Screening (Low False Positive Alarms)"
+      },
+      "point_2_validation_youden_optimal": {
+        "threshold": 0.406,
+        "sensitivity": 0.8022,
+        "specificity": 0.6604,
+        "f1": 0.3294,
+        "clinical_role": "Diagnostic Balanced F1 Operating Point"
+      },
+      "point_3_high_sensitivity_triage": {
+        "threshold": 0.406,
+        "sensitivity": 0.8022,
+        "specificity": 0.6604,
+        "f1": 0.3294,
+        "clinical_role": "Emergency / High-Sensitivity Triage (Captures >= 80% True Positives)"
+      }
+    },
+    "Pneumothorax": {
+      "validation_samples": 13501,
+      "brier_score": 0.0799,
+      "expected_calibration_error": 0.1281,
+      "point_1_frozen_nih_production": {
+        "threshold": 0.5825,
+        "sensitivity": 0.4989,
+        "specificity": 0.927,
+        "f1": 0.2821,
+        "clinical_role": "High-Specificity Population Screening (Low False Positive Alarms)"
+      },
+      "point_2_validation_youden_optimal": {
+        "threshold": 0.2377,
+        "sensitivity": 0.7088,
+        "specificity": 0.7948,
+        "f1": 0.1907,
+        "clinical_role": "Diagnostic Balanced F1 Operating Point"
+      },
+      "point_3_high_sensitivity_triage": {
+        "threshold": 0.1288,
+        "sensitivity": 0.8094,
+        "specificity": 0.6808,
+        "f1": 0.151,
+        "clinical_role": "Emergency / High-Sensitivity Triage (Captures >= 80% True Positives)"
+      }
+    }
+  },
+  "recommendation": "The frozen NIH thresholds must remain active for production screening to preserve established clinical behavior. For research review and emergency triage workflows, exposing Point 2 (Youden) and Point 3 (High-Sensitivity Triage) in the Doctor/Researcher UI tab allows clinicians to inspect subtle cases that fall below Point 1."
+}

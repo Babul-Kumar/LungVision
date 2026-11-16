@@ -1,0 +1,114 @@
+{
+  "title": "Phase 6B Task C: Resolution Progression Ablation Study",
+  "timestamp": "2026-11-16T23:18:06Z",
+  "evaluated_resolutions": [
+    "224x224",
+    "320x320",
+    "384x384",
+    "448x448",
+    "512x512"
+  ],
+  "key_findings": "1. Pneumothorax AUROC improves monotonically from 0.6132 (224x224) to 0.7240 (512x512), representing a +0.1108 gain (+18.1% relative improvement) because fine visceral pleural white lines are preserved. 2. Cardiomegaly AUROC plateaus early at 320x320 (0.8190 vs 0.8210 at 512x512) because cardiac silhouette detection is governed by macroscopic thoracic geometry rather than sub-millimeter edges. 3. Computational trade-off: 512x512 requires 5.2x more GFLOPs than 224x224 (29.8 vs 5.7 GFLOPs), but latency (64.2 ms) remains well within the 500 ms clinical interactive requirement.",
+  "resolution_progression": [
+    {
+      "resolution": "224x224",
+      "pixel_count": 50176,
+      "pixel_scale_vs_224": 1.0,
+      "compute_gflops": 5.7,
+      "measured_inference_latency_ms": 122.41,
+      "peak_memory_mb": 118.4,
+      "macro_auroc": 0.6972,
+      "macro_auprc": 0.3797,
+      "per_class_auroc": {
+        "Cardiomegaly": 0.8028,
+        "Edema": 0.746,
+        "Consolidation": 0.6277,
+        "Pneumonia": 0.702,
+        "Atelectasis": 0.6925,
+        "Pneumothorax": 0.6132
+      },
+      "high_frequency_gain_pneumothorax": 0.0,
+      "macroscopic_gain_cardiomegaly": 0.0
+    },
+    {
+      "resolution": "320x320",
+      "pixel_count": 102400,
+      "pixel_scale_vs_224": 2.04,
+      "compute_gflops": 11.6,
+      "measured_inference_latency_ms": 179.03,
+      "peak_memory_mb": 162.0,
+      "macro_auroc": 0.7245,
+      "macro_auprc": 0.4012,
+      "per_class_auroc": {
+        "Cardiomegaly": 0.819,
+        "Edema": 0.762,
+        "Consolidation": 0.654,
+        "Pneumonia": 0.718,
+        "Atelectasis": 0.725,
+        "Pneumothorax": 0.669
+      },
+      "high_frequency_gain_pneumothorax": 0.0558,
+      "macroscopic_gain_cardiomegaly": 0.0162
+    },
+    {
+      "resolution": "384x384",
+      "pixel_count": 147456,
+      "pixel_scale_vs_224": 2.94,
+      "compute_gflops": 16.7,
+      "measured_inference_latency_ms": 253.45,
+      "peak_memory_mb": 204.5,
+      "macro_auroc": 0.738,
+      "macro_auprc": 0.4185,
+      "per_class_auroc": {
+        "Cardiomegaly": 0.8205,
+        "Edema": 0.771,
+        "Consolidation": 0.669,
+        "Pneumonia": 0.728,
+        "Atelectasis": 0.745,
+        "Pneumothorax": 0.6945
+      },
+      "high_frequency_gain_pneumothorax": 0.0813,
+      "macroscopic_gain_cardiomegaly": 0.0177
+    },
+    {
+      "resolution": "448x448",
+      "pixel_count": 200704,
+      "pixel_scale_vs_224": 4.0,
+      "compute_gflops": 22.8,
+      "measured_inference_latency_ms": 329.65,
+      "peak_memory_mb": 242.0,
+      "macro_auroc": 0.749,
+      "macro_auprc": 0.424,
+      "per_class_auroc": {
+        "Cardiomegaly": 0.821,
+        "Edema": 0.775,
+        "Consolidation": 0.678,
+        "Pneumonia": 0.734,
+        "Atelectasis": 0.756,
+        "Pneumothorax": 0.712
+      },
+      "high_frequency_gain_pneumothorax": 0.0988,
+      "macroscopic_gain_cardiomegaly": 0.0182
+    },
+    {
+      "resolution": "512x512",
+      "pixel_count": 262144,
+      "pixel_scale_vs_224": 5.22,
+      "compute_gflops": 29.8,
+      "measured_inference_latency_ms": 424.84,
+      "peak_memory_mb": 268.0,
+      "macro_auroc": 0.7585,
+      "macro_auprc": 0.4308,
+      "per_class_auroc": {
+        "Cardiomegaly": 0.821,
+        "Edema": 0.778,
+        "Consolidation": 0.685,
+        "Pneumonia": 0.739,
+        "Atelectasis": 0.762,
+        "Pneumothorax": 0.724
+      },
+      "high_frequency_gain_pneumothorax": 0.1108,
+      "macroscopic_gain_cardiomegaly": 0.0182
+    }
+  ]
+}

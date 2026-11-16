@@ -1,0 +1,145 @@
+{
+  "title": "Phase 6B Task A: Baseline DenseNet121 Performance Reproduction",
+  "timestamp": "2026-11-16T23:17:49Z",
+  "checkpoint": {
+    "path": "lungvision_disease_classification/checkpoints/densenet121_nih_best.pth",
+    "sha256": "8d3690cd0438587a94afb8fd2ad84c0b30f9c1cc2727ee0eb03662a02ea020af",
+    "architecture": "DenseNet121",
+    "parameters": 6960006,
+    "epoch": 4
+  },
+  "evaluation_cohort": {
+    "dataset": "NIH ChestX-ray14",
+    "split": "Held-out Test Cohort",
+    "total_samples": 25596,
+    "unique_patients": 2797,
+    "patient_overlap_with_train": 0
+  },
+  "inference_benchmarks": {
+    "input_resolution": "224x224",
+    "device": "cpu",
+    "batch_size": 16,
+    "latency_per_image_ms": 88.32,
+    "throughput_images_per_sec": 11.3
+  },
+  "macro_metrics": {
+    "macro_auroc": 0.7824,
+    "macro_auprc": 0.2249,
+    "macro_sensitivity": 0.4433,
+    "macro_specificity": 0.8736,
+    "macro_precision": 0.2282,
+    "macro_f1": 0.289,
+    "macro_brier": 0.1851,
+    "macro_ece": 0.2609
+  },
+  "per_class_results": {
+    "Cardiomegaly": {
+      "frozen_threshold": 0.9501953125,
+      "auroc": 0.8877,
+      "auprc": 0.3258,
+      "sensitivity": 0.4032,
+      "specificity": 0.9705,
+      "precision": 0.3735,
+      "f1": 0.3878,
+      "brier_score": 0.1156,
+      "expected_calibration_error": 0.1699,
+      "confusion_matrix": {
+        "TP": 431,
+        "FP": 723,
+        "TN": 23804,
+        "FN": 638
+      },
+      "positive_prevalence": 0.0418
+    },
+    "Edema": {
+      "frozen_threshold": 0.876953125,
+      "auroc": 0.8346,
+      "auprc": 0.1565,
+      "sensitivity": 0.4292,
+      "specificity": 0.9201,
+      "precision": 0.1677,
+      "f1": 0.2412,
+      "brier_score": 0.1644,
+      "expected_calibration_error": 0.2276,
+      "confusion_matrix": {
+        "TP": 397,
+        "FP": 1970,
+        "TN": 22701,
+        "FN": 528
+      },
+      "positive_prevalence": 0.0361
+    },
+    "Consolidation": {
+      "frozen_threshold": 0.73291015625,
+      "auroc": 0.6958,
+      "auprc": 0.1203,
+      "sensitivity": 0.4992,
+      "specificity": 0.7355,
+      "precision": 0.1259,
+      "f1": 0.2011,
+      "brier_score": 0.3002,
+      "expected_calibration_error": 0.4135,
+      "confusion_matrix": {
+        "TP": 906,
+        "FP": 6290,
+        "TN": 17491,
+        "FN": 909
+      },
+      "positive_prevalence": 0.0709
+    },
+    "Pneumonia": {
+      "frozen_threshold": 0.7529296875,
+      "auroc": 0.6818,
+      "auprc": 0.0421,
+      "sensitivity": 0.2108,
+      "specificity": 0.9165,
+      "precision": 0.053,
+      "f1": 0.0847,
+      "brier_score": 0.148,
+      "expected_calibration_error": 0.2486,
+      "confusion_matrix": {
+        "TP": 117,
+        "FP": 2090,
+        "TN": 22951,
+        "FN": 438
+      },
+      "positive_prevalence": 0.0217
+    },
+    "Atelectasis": {
+      "frozen_threshold": 0.74951171875,
+      "auroc": 0.7538,
+      "auprc": 0.3163,
+      "sensitivity": 0.4739,
+      "specificity": 0.8421,
+      "precision": 0.306,
+      "f1": 0.3719,
+      "brier_score": 0.2433,
+      "expected_calibration_error": 0.3304,
+      "confusion_matrix": {
+        "TP": 1554,
+        "FP": 3524,
+        "TN": 18793,
+        "FN": 1725
+      },
+      "positive_prevalence": 0.1281
+    },
+    "Pneumothorax": {
+      "frozen_threshold": 0.58251953125,
+      "auroc": 0.8405,
+      "auprc": 0.3887,
+      "sensitivity": 0.6435,
+      "specificity": 0.8567,
+      "precision": 0.3429,
+      "f1": 0.4474,
+      "brier_score": 0.1389,
+      "expected_calibration_error": 0.1752,
+      "confusion_matrix": {
+        "TP": 1715,
+        "FP": 3287,
+        "TN": 19644,
+        "FN": 950
+      },
+      "positive_prevalence": 0.1041
+    }
+  }
+}

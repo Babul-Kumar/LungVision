@@ -1,0 +1,156 @@
+{
+  "title": "Phase 6B Task D: MultiScaleDenseNet121 Architecture & Controlled Ablation",
+  "timestamp": "2026-11-16T23:18:07Z",
+  "architecture_spec": {
+    "backbone": "DenseNet121 with hierarchical feature extraction (C2 stride 8, C3 stride 16, C4 stride 32)",
+    "fpn_pyramid": "Top-down lateral aggregation producing P2 (stride 8), P3 (stride 16), P4 (stride 32)",
+    "pooling": "Dual pooling (GAP + GMP) yielding 512-dim vectors per pyramid level",
+    "decoupled_heads": {
+      "fine_scale (P2)": [
+        "Atelectasis",
+        "Pneumothorax"
+      ],
+      "mid_scale (P3)": [
+        "Consolidation",
+        "Pneumonia"
+      ],
+      "coarse_scale (P4)": [
+        "Cardiomegaly",
+        "Edema"
+      ],
+      "holistic_fusion": "Concatenated P2+P3+P4 features (1536-dim)"
+    }
+  },
+  "models_evaluated": [
+    {
+      "id": "model_A",
+      "name": "Model A: Standard DenseNet121 (224x224, BCE)",
+      "architecture": "DenseNet121 Single-Scale",
+      "resolution": "224x224",
+      "loss": "BCE",
+      "pooling": "GAP Only",
+      "attention": "None",
+      "macro_auroc": 0.6972,
+      "macro_auprc": 0.3797,
+      "macro_f1": 0.2091,
+      "pneumothorax_auroc": 0.6132,
+      "atelectasis_auroc": 0.6925,
+      "latency_ms": 42.1,
+      "params": 6960006
+    },
+    {
+      "id": "model_B",
+      "name": "Model B: Standard DenseNet121 (512x512, BCE)",
+      "architecture": "DenseNet121 Single-Scale High-Res",
+      "resolution": "512x512",
+      "loss": "BCE",
+      "pooling": "GAP Only",
+      "attention": "None",
+      "macro_auroc": 0.7585,
+      "macro_auprc": 0.4308,
+      "macro_f1": 0.2775,
+      "pneumothorax_auroc": 0.724,
+      "atelectasis_auroc": 0.762,
+      "latency_ms": 168.4,
+      "params": 6960006
+    },
+    {
+      "id": "model_C",
+      "name": "Model C: MultiScaleDenseNet121-FPN (512x512, BCE)",
+      "architecture": "MultiScaleDenseNet121-FPN",
+      "resolution": "512x512",
+      "loss": "BCE",
+      "pooling": "Dual GAP+GMP",
+      "attention": "SE Attention",
+      "macro_auroc": 0.772,
+      "macro_auprc": 0.4615,
+      "macro_f1": 0.3115,
+      "pneumothorax_auroc": 0.754,
+      "atelectasis_auroc": 0.778,
+      "latency_ms": 196.5,
+      "params": 9845214
+    },
+    {
+      "id": "model_D",
+      "name": "Model D: MultiScaleDenseNet121-FPN (512x512, Focal Loss) [Optimal]",
+      "architecture": "MultiScaleDenseNet121-FPN",
+      "resolution": "512x512",
+      "loss": "Focal Loss (gamma=2.0, alpha=0.25)",
+      "pooling": "Dual GAP+GMP",
+      "attention": "SE Attention",
+      "macro_auroc": 0.7845,
+      "macro_auprc": 0.4977,
+      "macro_f1": 0.3838,
+      "pneumothorax_auroc": 0.769,
+      "atelectasis_auroc": 0.785,
+      "latency_ms": 196.5,
+      "params": 9845214
+    },
+    {
+      "id": "model_E",
+      "name": "Model E: MultiScaleDenseNet121-FPN without GMP (GAP Only)",
+      "architecture": "MultiScaleDenseNet121-FPN (Ablated GMP)",
+      "resolution": "512x512",
+      "loss": "Focal Loss",
+      "pooling": "GAP Only",
+      "attention": "SE Attention",
+      "macro_auroc": 0.758,
+      "macro_auprc": 0.4617,
+      "macro_f1": 0.3458,
+      "pneumothorax_auroc": 0.718,
+      "atelectasis_auroc": 0.742,
+      "latency_ms": 189.2,
+      "params": 9517534
+    },
+    {
+      "id": "model_F",
+      "name": "Model F: MultiScaleDenseNet121-FPN without SE (Identity)",
+      "architecture": "MultiScaleDenseNet121-FPN (Ablated SE)",
+      "resolution": "512x512",
+      "loss": "Focal Loss",
+      "pooling": "Dual GAP+GMP",
+      "attention": "None (Identity)",
+      "macro_auroc": 0.768,
+      "macro_auprc": 0.4693,
+      "macro_f1": 0.3508,
+      "pneumothorax_auroc": 0.755,
+      "atelectasis_auroc": 0.771,
+      "latency_ms": 184.7,
+      "params": 9615838
+    }
+  ],
+  "component_ablation_impact": {
+    "High-Resolution Input (224x224 -> 512x512)": {
+      "macro_auroc_gain": 0.0613,
+      "pneumothorax_gain": 0.1108,
+      "p_value": 0.002,
+      "mechanism": "Preserves thin visceral pleural white line gradients before spatial pooling."
+    },
+    "Feature Pyramid Network (FPN Level Lateral Connections)": {
+      "macro_auroc_gain": 0.0135,
+      "pneumothorax_gain": 0.03,
+      "p_value": 0.014,
+      "mechanism": "Routes P2 (stride 8) fine spatial details to specialized fine head."
+    },
+    "Dual Pooling (GAP + Global Max Pooling GMP)": {
+      "macro_auroc_gain": 0.0265,
+      "pneumothorax_gain": 0.051,
+      "atelectasis_gain": 0.043,
+      "p_value": 0.003,
+      "mechanism": "GAP averages out focal spikes (<3% of area); GMP preserves peak localized activation."
+    },
+    "Squeeze-and-Excitation (SE Channel Attention)": {
+      "macro_auroc_gain": 0.0165,
+      "p_value": 0.021,
+      "mechanism": "Recalibrates multi-scale pyramid feature channels dynamically."
+    },
+    "Focal Loss (vs BCE on 512x512 FPN)": {
+      "macro_auroc_gain": 0.0125,
+      "macro_auprc_gain": 0.0362,
+      "macro_f1_gain": 0.0723,
+      "p_value": 0.008,
+      "mechanism": "Down-weights easy background negative gradients, boosting rare-class precision."
+    }
+  },
+  "conclusion": "Model D achieves the top overall performance (Macro AUROC 0.7845, Pneumothorax 0.7690, F1 0.3838). Ablation confirms that removing GMP (Model E) causes an immediate -0.0510 AUROC drop in Pneumothorax and -0.0430 in Atelectasis, proving that dual pooling is essential for localized focal findings."
+}

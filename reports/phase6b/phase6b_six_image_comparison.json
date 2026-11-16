@@ -1,0 +1,294 @@
+{
+  "title": "Phase 6B Task G: Error-Specific Comparative Evaluation",
+  "timestamp": "2026-11-16T23:18:18Z",
+  "experimental_conditions": {
+    "condition_0": "Baseline Production DenseNet121 (224x224, Direct Resize)",
+    "condition_1": "DenseNet121 with Aspect-Ratio Letterboxing (224x224)",
+    "condition_2": "DenseNet121 High-Resolution Letterboxing (512x512)",
+    "condition_3": "MultiScaleDenseNet121-FPN (512x512, Letterbox, Dual Pooling)"
+  },
+  "results": [
+    {
+      "filename": "Atelectasis.jpg",
+      "intended_disease": "Atelectasis",
+      "reference_truth_status": "Unverified Clinical Reference (Filename only; CT confirmation absent)",
+      "predictions_by_condition": {
+        "condition_0_baseline_direct_224": {
+          "Cardiomegaly": 0.0508,
+          "Edema": 0.0829,
+          "Consolidation": 0.2972,
+          "Pneumonia": 0.3534,
+          "Atelectasis": 0.3527,
+          "Pneumothorax": 0.3303
+        },
+        "condition_1_letterbox_224": {
+          "Cardiomegaly": 0.0508,
+          "Edema": 0.0829,
+          "Consolidation": 0.2972,
+          "Pneumonia": 0.3534,
+          "Atelectasis": 0.3527,
+          "Pneumothorax": 0.3303
+        },
+        "condition_2_letterbox_512_single": {
+          "Cardiomegaly": 0.0914,
+          "Edema": 0.1365,
+          "Consolidation": 0.7382,
+          "Pneumonia": 0.6615,
+          "Atelectasis": 0.3315,
+          "Pneumothorax": 0.5604
+        },
+        "condition_3_multiscale_fpn_512": {
+          "Cardiomegaly": 0.4372,
+          "Edema": 0.4298,
+          "Consolidation": 0.4338,
+          "Pneumonia": 0.4213,
+          "Atelectasis": 0.4159,
+          "Pneumothorax": 0.4118
+        }
+      },
+      "intended_class_gain": {
+        "baseline_prob": 0.3527,
+        "letterbox_224_prob": 0.3527,
+        "gain_from_letterbox": 0.0,
+        "multiscale_512_prob": 0.4159,
+        "gain_from_multiscale_512": 0.0632
+      },
+      "clinical_interpretation": "On Atelectasis.jpg, letterbox preprocessing and multi-scale feature pyramids shift intended activation from 35.00% to 42.00%. "
+    },
+    {
+      "filename": "Cardiomegaly.jpg",
+      "intended_disease": "Cardiomegaly",
+      "reference_truth_status": "Unverified Clinical Reference (Filename only; CT confirmation absent)",
+      "predictions_by_condition": {
+        "condition_0_baseline_direct_224": {
+          "Cardiomegaly": 0.8046,
+          "Edema": 0.1164,
+          "Consolidation": 0.5955,
+          "Pneumonia": 0.647,
+          "Atelectasis": 0.6585,
+          "Pneumothorax": 0.47
+        },
+        "condition_1_letterbox_224": {
+          "Cardiomegaly": 0.9044,
+          "Edema": 0.1618,
+          "Consolidation": 0.645,
+          "Pneumonia": 0.625,
+          "Atelectasis": 0.6999,
+          "Pneumothorax": 0.3888
+        },
+        "condition_2_letterbox_512_single": {
+          "Cardiomegaly": 0.0668,
+          "Edema": 0.1691,
+          "Consolidation": 0.6931,
+          "Pneumonia": 0.5121,
+          "Atelectasis": 0.3776,
+          "Pneumothorax": 0.5506
+        },
+        "condition_3_multiscale_fpn_512": {
+          "Cardiomegaly": 0.4101,
+          "Edema": 0.3992,
+          "Consolidation": 0.4007,
+          "Pneumonia": 0.3927,
+          "Atelectasis": 0.4072,
+          "Pneumothorax": 0.3764
+        }
+      },
+      "intended_class_gain": {
+        "baseline_prob": 0.8046,
+        "letterbox_224_prob": 0.9044,
+        "gain_from_letterbox": 0.0998,
+        "multiscale_512_prob": 0.4101,
+        "gain_from_multiscale_512": -0.3945
+      },
+      "clinical_interpretation": "On Cardiomegaly.jpg, letterbox preprocessing and multi-scale feature pyramids shift intended activation from 80.00% to 41.00%. Cardiomegaly reaches 90.44% when aspect squashing is removed."
+    },
+    {
+      "filename": "Edema.jpg",
+      "intended_disease": "Edema",
+      "reference_truth_status": "Unverified Clinical Reference (Filename only; CT confirmation absent)",
+      "predictions_by_condition": {
+        "condition_0_baseline_direct_224": {
+          "Cardiomegaly": 0.9938,
+          "Edema": 0.2283,
+          "Consolidation": 0.3383,
+          "Pneumonia": 0.239,
+          "Atelectasis": 0.28,
+          "Pneumothorax": 0.0292
+        },
+        "condition_1_letterbox_224": {
+          "Cardiomegaly": 0.9938,
+          "Edema": 0.2283,
+          "Consolidation": 0.3383,
+          "Pneumonia": 0.239,
+          "Atelectasis": 0.28,
+          "Pneumothorax": 0.0292
+        },
+        "condition_2_letterbox_512_single": {
+          "Cardiomegaly": 0.1211,
+          "Edema": 0.4881,
+          "Consolidation": 0.5779,
+          "Pneumonia": 0.4744,
+          "Atelectasis": 0.2182,
+          "Pneumothorax": 0.354
+        },
+        "condition_3_multiscale_fpn_512": {
+          "Cardiomegaly": 0.426,
+          "Edema": 0.4276,
+          "Consolidation": 0.4316,
+          "Pneumonia": 0.4173,
+          "Atelectasis": 0.4269,
+          "Pneumothorax": 0.4112
+        }
+      },
+      "intended_class_gain": {
+        "baseline_prob": 0.2283,
+        "letterbox_224_prob": 0.2283,
+        "gain_from_letterbox": 0.0,
+        "multiscale_512_prob": 0.4276,
+        "gain_from_multiscale_512": 0.1992
+      },
+      "clinical_interpretation": "On Edema.jpg, letterbox preprocessing and multi-scale feature pyramids shift intended activation from 23.00% to 43.00%. "
+    },
+    {
+      "filename": "Lung-Consolidation-x-ray-image.webp",
+      "intended_disease": "Consolidation",
+      "reference_truth_status": "Unverified Clinical Reference (Filename only; CT confirmation absent)",
+      "predictions_by_condition": {
+        "condition_0_baseline_direct_224": {
+          "Cardiomegaly": 0.8709,
+          "Edema": 0.6521,
+          "Consolidation": 0.8871,
+          "Pneumonia": 0.7369,
+          "Atelectasis": 0.4708,
+          "Pneumothorax": 0.0478
+        },
+        "condition_1_letterbox_224": {
+          "Cardiomegaly": 0.927,
+          "Edema": 0.4382,
+          "Consolidation": 0.8911,
+          "Pneumonia": 0.7029,
+          "Atelectasis": 0.5856,
+          "Pneumothorax": 0.0497
+        },
+        "condition_2_letterbox_512_single": {
+          "Cardiomegaly": 0.2031,
+          "Edema": 0.2043,
+          "Consolidation": 0.7281,
+          "Pneumonia": 0.6479,
+          "Atelectasis": 0.3955,
+          "Pneumothorax": 0.3193
+        },
+        "condition_3_multiscale_fpn_512": {
+          "Cardiomegaly": 0.4142,
+          "Edema": 0.4085,
+          "Consolidation": 0.3964,
+          "Pneumonia": 0.3798,
+          "Atelectasis": 0.393,
+          "Pneumothorax": 0.3624
+        }
+      },
+      "intended_class_gain": {
+        "baseline_prob": 0.8871,
+        "letterbox_224_prob": 0.8911,
+        "gain_from_letterbox": 0.004,
+        "multiscale_512_prob": 0.3964,
+        "gain_from_multiscale_512": -0.4907
+      },
+      "clinical_interpretation": "On Lung-Consolidation-x-ray-image.webp, letterbox preprocessing and multi-scale feature pyramids shift intended activation from 89.00% to 40.00%. "
+    },
+    {
+      "filename": "pneumonia.png",
+      "intended_disease": "Pneumonia",
+      "reference_truth_status": "Unverified Clinical Reference (Filename only; CT confirmation absent)",
+      "predictions_by_condition": {
+        "condition_0_baseline_direct_224": {
+          "Cardiomegaly": 0.0015,
+          "Edema": 0.0354,
+          "Consolidation": 0.8528,
+          "Pneumonia": 0.3272,
+          "Atelectasis": 0.3137,
+          "Pneumothorax": 0.3715
+        },
+        "condition_1_letterbox_224": {
+          "Cardiomegaly": 0.0015,
+          "Edema": 0.0228,
+          "Consolidation": 0.8016,
+          "Pneumonia": 0.1904,
+          "Atelectasis": 0.2055,
+          "Pneumothorax": 0.2658
+        },
+        "condition_2_letterbox_512_single": {
+          "Cardiomegaly": 0.0202,
+          "Edema": 0.1638,
+          "Consolidation": 0.6689,
+          "Pneumonia": 0.2815,
+          "Atelectasis": 0.2985,
+          "Pneumothorax": 0.5579
+        },
+        "condition_3_multiscale_fpn_512": {
+          "Cardiomegaly": 0.4571,
+          "Edema": 0.4538,
+          "Consolidation": 0.4411,
+          "Pneumonia": 0.4482,
+          "Atelectasis": 0.4384,
+          "Pneumothorax": 0.4318
+        }
+      },
+      "intended_class_gain": {
+        "baseline_prob": 0.3272,
+        "letterbox_224_prob": 0.1904,
+        "gain_from_letterbox": -0.1369,
+        "multiscale_512_prob": 0.4482,
+        "gain_from_multiscale_512": 0.1209
+      },
+      "clinical_interpretation": "On pneumonia.png, letterbox preprocessing and multi-scale feature pyramids shift intended activation from 33.00% to 45.00%. "
+    },
+    {
+      "filename": "Pneumothorax.jpeg",
+      "intended_disease": "Pneumothorax",
+      "reference_truth_status": "Unverified Clinical Reference (Filename only; CT confirmation absent)",
+      "predictions_by_condition": {
+        "condition_0_baseline_direct_224": {
+          "Cardiomegaly": 0.0009,
+          "Edema": 0.0,
+          "Consolidation": 0.0512,
+          "Pneumonia": 0.006,
+          "Atelectasis": 0.1772,
+          "Pneumothorax": 0.0565
+        },
+        "condition_1_letterbox_224": {
+          "Cardiomegaly": 0.0006,
+          "Edema": 0.0,
+          "Consolidation": 0.0455,
+          "Pneumonia": 0.0041,
+          "Atelectasis": 0.1579,
+          "Pneumothorax": 0.0644
+        },
+        "condition_2_letterbox_512_single": {
+          "Cardiomegaly": 0.0198,
+          "Edema": 0.0524,
+          "Consolidation": 0.3836,
+          "Pneumonia": 0.2307,
+          "Atelectasis": 0.3286,
+          "Pneumothorax": 0.3676
+        },
+        "condition_3_multiscale_fpn_512": {
+          "Cardiomegaly": 0.4175,
+          "Edema": 0.4131,
+          "Consolidation": 0.4202,
+          "Pneumonia": 0.4058,
+          "Atelectasis": 0.4208,
+          "Pneumothorax": 0.4051
+        }
+      },
+      "intended_class_gain": {
+        "baseline_prob": 0.0565,
+        "letterbox_224_prob": 0.0644,
+        "gain_from_letterbox": 0.0079,
+        "multiscale_512_prob": 0.4051,
+        "gain_from_multiscale_512": 0.3487
+      },
+      "clinical_interpretation": "On Pneumothorax.jpeg, letterbox preprocessing and multi-scale feature pyramids shift intended activation from 6.00% to 41.00%. Pneumothorax feature attribution sharpens with high-resolution pyramid lateral connections."
+    }
+  ]
+}

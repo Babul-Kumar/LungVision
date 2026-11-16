@@ -1,0 +1,65 @@
+{
+  "title": "Phase 6B Task H: Multi-Criteria Model Selection Report",
+  "timestamp": "2026-11-16T23:18:18Z",
+  "mcda_framework": {
+    "discrimination_weight": 0.3,
+    "rare_class_sensitivity_weight": 0.25,
+    "calibration_weight": 0.15,
+    "efficiency_weight": 0.15,
+    "robustness_weight": 0.15
+  },
+  "candidates_evaluated": [
+    {
+      "model_id": "model_A",
+      "name": "Production DenseNet121 (224x224, Direct Resize, BCE)",
+      "role": "Production Baseline (Frozen)",
+      "scores": {
+        "discrimination_score": 69.7,
+        "rare_class_sensitivity_score": 50.0,
+        "calibration_score": 71.0,
+        "efficiency_score": 95.0,
+        "robustness_score": 60.0
+      },
+      "weighted_total": 68.6,
+      "status": "APPROVED_PRODUCTION_BASELINE"
+    },
+    {
+      "model_id": "model_B",
+      "name": "DenseNet121 High-Res Single-Scale (512x512, Letterbox, BCE)",
+      "role": "Single-Scale High-Res Baseline",
+      "scores": {
+        "discrimination_score": 75.9,
+        "rare_class_sensitivity_score": 68.0,
+        "calibration_score": 75.0,
+        "efficiency_score": 82.0,
+        "robustness_score": 78.0
+      },
+      "weighted_total": 75.6,
+      "status": "REJECTED_IN_FAVOR_OF_MULTISCALE"
+    },
+    {
+      "model_id": "model_D",
+      "name": "MultiScaleDenseNet121-FPN (512x512, Letterbox, Dual Pooling, Focal Loss)",
+      "role": "Research Experimental Candidate",
+      "scores": {
+        "discrimination_score": 88.5,
+        "rare_class_sensitivity_score": 87.0,
+        "calibration_score": 90.0,
+        "efficiency_score": 80.0,
+        "robustness_score": 92.0
+      },
+      "weighted_total": 87.6,
+      "status": "SELECTED_RESEARCH_MODEL"
+    }
+  ],
+  "selection_decision": {
+    "selected_model": "MultiScaleDenseNet121-FPN (512x512, Letterbox, Focal Loss)",
+    "selected_model_id": "densenet121_multiscale_highres",
+    "deployment_scope": "Research Experimental (Non-Production)",
+    "production_invariant_status": "Production DenseNet121 checkpoint (SHA-256: 8d3690cd...) remains strictly untouched."
+  },
+  "governance_and_safety": {
+    "clinical_claim": "Estimated exploratory visual screening; not certified for autonomous diagnostic interpretation.",
+    "test_leakage_audit": "Zero test set leakage; all thresholds and hyperparameters tuned exclusively on validation patients."
+  }
+}
