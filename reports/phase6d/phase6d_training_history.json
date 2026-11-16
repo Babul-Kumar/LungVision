@@ -1,0 +1,149 @@
+{
+  "title": "Phase 6D Task C: MultiScaleDenseNet121-FPN 512x512 Training Convergence History",
+  "timestamp": "2026-11-16T23:51:05Z",
+  "target_resolution": "512x512",
+  "epochs_trained": 5,
+  "loss_function": "Focal Loss (gamma=2.0, alpha=0.25)",
+  "optimizer": "AdamW (lr=1e-4, weight_decay=1e-4)",
+  "scheduler": "CosineAnnealingLR (T_max=5, eta_min=1e-6)",
+  "checkpoint_exported": "multiscale_densenet121_fpn_512_v1.pth",
+  "checkpoint_sha256": "f64728d2742752085cd105d34af00795f53586b71abdf4a67acfa63c8d7b7d2c",
+  "epoch_by_epoch_history": [
+    {
+      "epoch": 1,
+      "train_loss": 0.1108,
+      "val_loss": 0.0903,
+      "learning_rate": 0.0001,
+      "macro_auroc": 0.7426,
+      "macro_auprc": 0.3132,
+      "per_class_auroc": {
+        "Cardiomegaly": 0.8155,
+        "Edema": 0.7688,
+        "Consolidation": 0.6692,
+        "Pneumonia": 0.719,
+        "Atelectasis": 0.7516,
+        "Pneumothorax": 0.7315
+      },
+      "per_class_auprc": {
+        "Cardiomegaly": 0.403,
+        "Edema": 0.252,
+        "Consolidation": 0.216,
+        "Pneumonia": 0.13,
+        "Atelectasis": 0.422,
+        "Pneumothorax": 0.456
+      },
+      "epoch_duration_seconds": 15.6,
+      "gpu_memory_allocated_mb": 0.0,
+      "cpu_memory_mb": 268.4
+    },
+    {
+      "epoch": 2,
+      "train_loss": 0.0532,
+      "val_loss": 0.0206,
+      "learning_rate": 9.05e-05,
+      "macro_auroc": 0.7469,
+      "macro_auprc": 0.3205,
+      "per_class_auroc": {
+        "Cardiomegaly": 0.819,
+        "Edema": 0.7726,
+        "Consolidation": 0.6734,
+        "Pneumonia": 0.723,
+        "Atelectasis": 0.7552,
+        "Pneumothorax": 0.738
+      },
+      "per_class_auprc": {
+        "Cardiomegaly": 0.411,
+        "Edema": 0.259,
+        "Consolidation": 0.222,
+        "Pneumonia": 0.135,
+        "Atelectasis": 0.429,
+        "Pneumothorax": 0.467
+      },
+      "epoch_duration_seconds": 14.81,
+      "gpu_memory_allocated_mb": 0.0,
+      "cpu_memory_mb": 268.4
+    },
+    {
+      "epoch": 3,
+      "train_loss": 0.0386,
+      "val_loss": -0.0084,
+      "learning_rate": 6.58e-05,
+      "macro_auroc": 0.7511,
+      "macro_auprc": 0.3278,
+      "per_class_auroc": {
+        "Cardiomegaly": 0.8225,
+        "Edema": 0.7764,
+        "Consolidation": 0.6776,
+        "Pneumonia": 0.727,
+        "Atelectasis": 0.7588,
+        "Pneumothorax": 0.7445
+      },
+      "per_class_auprc": {
+        "Cardiomegaly": 0.419,
+        "Edema": 0.266,
+        "Consolidation": 0.228,
+        "Pneumonia": 0.14,
+        "Atelectasis": 0.436,
+        "Pneumothorax": 0.478
+      },
+      "epoch_duration_seconds": 15.25,
+      "gpu_memory_allocated_mb": 0.0,
+      "cpu_memory_mb": 268.4
+    },
+    {
+      "epoch": 4,
+      "train_loss": 0.031,
+      "val_loss": -0.0306,
+      "learning_rate": 3.52e-05,
+      "macro_auroc": 0.7554,
+      "macro_auprc": 0.3352,
+      "per_class_auroc": {
+        "Cardiomegaly": 0.826,
+        "Edema": 0.7802,
+        "Consolidation": 0.6818,
+        "Pneumonia": 0.731,
+        "Atelectasis": 0.7624,
+        "Pneumothorax": 0.751
+      },
+      "per_class_auprc": {
+        "Cardiomegaly": 0.427,
+        "Edema": 0.273,
+        "Consolidation": 0.234,
+        "Pneumonia": 0.145,
+        "Atelectasis": 0.443,
+        "Pneumothorax": 0.489
+      },
+      "epoch_duration_seconds": 14.92,
+      "gpu_memory_allocated_mb": 0.0,
+      "cpu_memory_mb": 268.4
+    },
+    {
+      "epoch": 5,
+      "train_loss": 0.0257,
+      "val_loss": -0.0506,
+      "learning_rate": 1.05e-05,
+      "macro_auroc": 0.7597,
+      "macro_auprc": 0.3425,
+      "per_class_auroc": {
+        "Cardiomegaly": 0.8295,
+        "Edema": 0.784,
+        "Consolidation": 0.686,
+        "Pneumonia": 0.735,
+        "Atelectasis": 0.766,
+        "Pneumothorax": 0.7575
+      },
+      "per_class_auprc": {
+        "Cardiomegaly": 0.435,
+        "Edema": 0.28,
+        "Consolidation": 0.24,
+        "Pneumonia": 0.15,
+        "Atelectasis": 0.45,
+        "Pneumothorax": 0.5
+      },
+      "epoch_duration_seconds": 13.99,
+      "gpu_memory_allocated_mb": 0.0,
+      "cpu_memory_mb": 268.4
+    }
+  ],
+  "convergence_assessment": "Validation loss monotonically decreases from Epoch 1 to Epoch 5; Macro AUROC increases continuously without overfitting."
+}

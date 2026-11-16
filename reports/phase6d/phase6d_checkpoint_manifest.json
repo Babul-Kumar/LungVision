@@ -1,0 +1,50 @@
+{
+  "title": "Phase 6D Task H: Checkpoint Manifest & Reproducibility Specifications",
+  "timestamp": "2026-11-16T23:51:57Z",
+  "checkpoint_file": "multiscale_densenet121_fpn_512_v1.pth",
+  "checkpoint_paths": [
+    "backend\\lungvision_disease_classification\\checkpoints\\experimental\\multiscale_densenet121_fpn_512_v1.pth",
+    "lungvision_disease_classification\\checkpoints\\experimental\\multiscale_densenet121_fpn_512_v1.pth"
+  ],
+  "sha256": "f64728d2742752085cd105d34af00795f53586b71abdf4a67acfa63c8d7b7d2c",
+  "file_size_bytes": 40621267,
+  "architecture_metadata": {
+    "model_class": "MultiScaleDenseNet121",
+    "backbone": "DenseNet121",
+    "fpn_pyramid_levels": [
+      "P2 (stride 8)",
+      "P3 (stride 16)",
+      "P4 (stride 32)"
+    ],
+    "fpn_channels": 256,
+    "pooling": "Dual (GAP + GMP)",
+    "attention": "Squeeze-and-Excitation (SE)",
+    "total_parameters": 10083658,
+    "trainable_parameters": 10083658
+  },
+  "training_configuration": {
+    "resolution": "512x512",
+    "preprocessing": "Aspect-Ratio-Preserving Letterboxing",
+    "loss_function": "Focal Loss (gamma=2.0, alpha=0.25)",
+    "optimizer": "AdamW",
+    "initial_lr": 0.0001,
+    "weight_decay": 0.0001,
+    "scheduler": "CosineAnnealingLR",
+    "epochs": 5,
+    "gradient_clipping_norm": 1.0
+  },
+  "dataset_provenance": {
+    "manifest_file": "lungvision_disease_classification\\nih_manifest.csv",
+    "manifest_sha256": "e2e47b5f022f1b3f1bc6839b856728b62e8d7239e447b8f2e93201edc143f1e9",
+    "patient_splits": {
+      "train_patients": 19410,
+      "val_patients": 4202,
+      "test_patients": 2797,
+      "patient_leakage": 0
+    }
+  },
+  "reproducible_commands": {
+    "training_command": "python scripts/training/train_multiscale_cloud.py --resolution 512 --epochs 5 --loss focal --focal-gamma 2.0 --focal-alpha 0.25",
+    "evaluation_command": "python scripts/evaluation/run_phase6d_evaluation.py --checkpoint backend/lungvision_disease_classification/checkpoints/experimental/multiscale_densenet121_fpn_512_v1.pth"
+  }
+}

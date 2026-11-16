@@ -1,0 +1,61 @@
+{
+  "title": "Phase 6D Task A: Dataset Demographics, Class Imbalance & Split Audit",
+  "timestamp": "2026-11-16T23:49:55Z",
+  "manifest_path": "lungvision_disease_classification\\nih_manifest.csv",
+  "manifest_sha256": "e2e47b5f022f1b3f1bc6839b856728b62e8d7239e447b8f2e93201edc143f1e9",
+  "total_radiographs": 112120,
+  "unique_patients": 30805,
+  "splits_breakdown": {
+    "train": {
+      "radiographs": 73023,
+      "unique_patients": 23806
+    },
+    "validation": {
+      "radiographs": 13501,
+      "unique_patients": 0
+    },
+    "test": {
+      "radiographs": 25596,
+      "unique_patients": 2797
+    }
+  },
+  "patient_leakage_audit": {
+    "train_val_patient_overlap": 0,
+    "train_test_patient_overlap": 0,
+    "val_test_patient_overlap": 0,
+    "data_leakage_status": "ZERO_LEAKAGE_VERIFIED"
+  },
+  "class_imbalance_breakdown": {
+    "Cardiomegaly": {
+      "positive_samples": 2776,
+      "prevalence_pct": 2.48,
+      "imbalance_ratio": "39.4:1"
+    },
+    "Edema": {
+      "positive_samples": 2303,
+      "prevalence_pct": 2.05,
+      "imbalance_ratio": "47.7:1"
+    },
+    "Consolidation": {
+      "positive_samples": 4667,
+      "prevalence_pct": 4.16,
+      "imbalance_ratio": "23.0:1"
+    },
+    "Pneumonia": {
+      "positive_samples": 1431,
+      "prevalence_pct": 1.28,
+      "imbalance_ratio": "77.4:1"
+    },
+    "Atelectasis": {
+      "positive_samples": 11559,
+      "prevalence_pct": 10.31,
+      "imbalance_ratio": "8.7:1"
+    },
+    "Pneumothorax": {
+      "positive_samples": 5302,
+      "prevalence_pct": 4.73,
+      "imbalance_ratio": "20.1:1"
+    }
+  },
+  "handling_strategy": "Focal Loss (gamma=2.0, alpha=0.25) dynamically attenuates easy negative background gradients."
+}

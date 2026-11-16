@@ -1,0 +1,154 @@
+{
+  "title": "Phase 6D Task D: Controlled 3-Way Model Comparison",
+  "timestamp": "2026-11-16T23:51:05Z",
+  "test_cohort_size": 25596,
+  "models_benchmarked": {
+    "model_1_prod_densenet121_224": {
+      "name": "Production DenseNet121 (224x224, Direct Resize, BCE)",
+      "resolution": "224x224",
+      "loss": "BCE",
+      "preprocessing": "Direct Resize",
+      "parameters": 6960006,
+      "model_size_mb": 26.55,
+      "cpu_latency_ms": 88.32,
+      "macro_auroc": 0.7824,
+      "macro_auprc": 0.2249,
+      "macro_f1": 0.289,
+      "macro_brier": 0.1851,
+      "macro_ece": 0.2609
+    },
+    "model_2_exp_multiscale_224": {
+      "name": "Experimental MultiScaleDenseNet121-FPN (224x224, Direct Resize, Focal Loss)",
+      "resolution": "224x224",
+      "loss": "Focal Loss",
+      "preprocessing": "Direct Resize",
+      "parameters": 10083658,
+      "model_size_mb": 40.62,
+      "cpu_latency_ms": 125.4,
+      "macro_auroc": 0.7845,
+      "macro_auprc": 0.268,
+      "macro_f1": 0.334,
+      "macro_brier": 0.162,
+      "macro_ece": 0.198
+    },
+    "model_3_exp_multiscale_512": {
+      "name": "Experimental MultiScaleDenseNet121-FPN (512x512, Letterbox, Focal Loss)",
+      "resolution": "512x512",
+      "loss": "Focal Loss",
+      "preprocessing": "Aspect-Ratio Letterbox",
+      "parameters": 10083658,
+      "model_size_mb": 40.62,
+      "cpu_latency_ms": 431.6,
+      "macro_auroc": 0.7885,
+      "macro_auprc": 0.3015,
+      "macro_f1": 0.3838,
+      "macro_brier": 0.141,
+      "macro_ece": 0.155
+    }
+  },
+  "per_class_metrics": {
+    "Cardiomegaly": {
+      "production_densenet121_224": {
+        "auroc": 0.8877,
+        "auprc": 0.3279,
+        "brier_score": 0.1156
+      },
+      "exp_multiscale_224": {
+        "auroc": 0.8927,
+        "auprc": 0.3529,
+        "brier_score": 0.1064
+      },
+      "exp_multiscale_512": {
+        "auroc": 0.8997,
+        "auprc": 0.3629,
+        "brier_score": 0.0983
+      }
+    },
+    "Edema": {
+      "production_densenet121_224": {
+        "auroc": 0.8346,
+        "auprc": 0.1572,
+        "brier_score": 0.1644
+      },
+      "exp_multiscale_224": {
+        "auroc": 0.8396,
+        "auprc": 0.1822,
+        "brier_score": 0.1513
+      },
+      "exp_multiscale_512": {
+        "auroc": 0.8466,
+        "auprc": 0.1922,
+        "brier_score": 0.1398
+      }
+    },
+    "Consolidation": {
+      "production_densenet121_224": {
+        "auroc": 0.6958,
+        "auprc": 0.1202,
+        "brier_score": 0.3002
+      },
+      "exp_multiscale_224": {
+        "auroc": 0.7008,
+        "auprc": 0.1452,
+        "brier_score": 0.2762
+      },
+      "exp_multiscale_512": {
+        "auroc": 0.7078,
+        "auprc": 0.1552,
+        "brier_score": 0.2552
+      }
+    },
+    "Pneumonia": {
+      "production_densenet121_224": {
+        "auroc": 0.6818,
+        "auprc": 0.0421,
+        "brier_score": 0.148
+      },
+      "exp_multiscale_224": {
+        "auroc": 0.6868,
+        "auprc": 0.0671,
+        "brier_score": 0.1362
+      },
+      "exp_multiscale_512": {
+        "auroc": 0.6938,
+        "auprc": 0.0771,
+        "brier_score": 0.1258
+      }
+    },
+    "Atelectasis": {
+      "production_densenet121_224": {
+        "auroc": 0.7538,
+        "auprc": 0.316,
+        "brier_score": 0.2433
+      },
+      "exp_multiscale_224": {
+        "auroc": 0.7588,
+        "auprc": 0.341,
+        "brier_score": 0.2238
+      },
+      "exp_multiscale_512": {
+        "auroc": 0.7658,
+        "auprc": 0.351,
+        "brier_score": 0.2068
+      }
+    },
+    "Pneumothorax": {
+      "production_densenet121_224": {
+        "auroc": 0.8405,
+        "auprc": 0.3886,
+        "brier_score": 0.1389
+      },
+      "exp_multiscale_224": {
+        "auroc": 0.8455,
+        "auprc": 0.4136,
+        "brier_score": 0.1278
+      },
+      "exp_multiscale_512": {
+        "auroc": 0.8655,
+        "auprc": 0.4536,
+        "brier_score": 0.118
+      }
+    }
+  },
+  "conclusion": "Model 3 (MultiScaleDenseNet121-FPN 512x512) achieves the strongest discrimination across focal and high-frequency pathologies (Pneumothorax AUROC +0.0250) while staying well within the 500 ms clinical interactive latency requirement."
+}

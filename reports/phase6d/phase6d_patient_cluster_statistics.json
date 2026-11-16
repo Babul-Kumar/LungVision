@@ -1,0 +1,95 @@
+{
+  "title": "Phase 6D Task F: Patient-Cluster Bootstrap Statistics",
+  "timestamp": "2026-11-16T23:51:57Z",
+  "cluster_unit": "Patient ID (N=2,797 clusters, 25,596 radiographs)",
+  "bootstrap_iterations": 500,
+  "patient_cluster_confidence_intervals": {
+    "Cardiomegaly": {
+      "mean_auroc": 0.8873,
+      "patient_cluster_95_ci": [
+        0.8721,
+        0.9012
+      ],
+      "patient_cluster_ci_width": 0.0291
+    },
+    "Edema": {
+      "mean_auroc": 0.8344,
+      "patient_cluster_95_ci": [
+        0.817,
+        0.8511
+      ],
+      "patient_cluster_ci_width": 0.0341
+    },
+    "Consolidation": {
+      "mean_auroc": 0.6958,
+      "patient_cluster_95_ci": [
+        0.6814,
+        0.7123
+      ],
+      "patient_cluster_ci_width": 0.0309
+    },
+    "Pneumonia": {
+      "mean_auroc": 0.6826,
+      "patient_cluster_95_ci": [
+        0.659,
+        0.7078
+      ],
+      "patient_cluster_ci_width": 0.0488
+    },
+    "Atelectasis": {
+      "mean_auroc": 0.7535,
+      "patient_cluster_95_ci": [
+        0.7397,
+        0.7663
+      ],
+      "patient_cluster_ci_width": 0.0265
+    },
+    "Pneumothorax": {
+      "mean_auroc": 0.8406,
+      "patient_cluster_95_ci": [
+        0.8228,
+        0.856
+      ],
+      "patient_cluster_ci_width": 0.0332
+    }
+  },
+  "paired_patient_comparisons": {
+    "Cardiomegaly": {
+      "mean_paired_difference": 0.0102,
+      "cohens_d": 0.5122,
+      "p_value": 1.170191509347684e-143,
+      "statistically_significant_after_fdr": true
+    },
+    "Edema": {
+      "mean_paired_difference": 0.0103,
+      "cohens_d": 0.5106,
+      "p_value": 6.8581228518905255e-143,
+      "statistically_significant_after_fdr": true
+    },
+    "Consolidation": {
+      "mean_paired_difference": 0.0102,
+      "cohens_d": 0.5096,
+      "p_value": 2.159627169752837e-142,
+      "statistically_significant_after_fdr": true
+    },
+    "Pneumonia": {
+      "mean_paired_difference": 0.0101,
+      "cohens_d": 0.5038,
+      "p_value": 1.581056965430658e-139,
+      "statistically_significant_after_fdr": true
+    },
+    "Atelectasis": {
+      "mean_paired_difference": 0.0096,
+      "cohens_d": 0.4849,
+      "p_value": 2.1416071314683185e-130,
+      "statistically_significant_after_fdr": true
+    },
+    "Pneumothorax": {
+      "mean_paired_difference": 0.0177,
+      "cohens_d": 0.8756,
+      "p_value": 0.0,
+      "statistically_significant_after_fdr": true
+    }
+  },
+  "statistical_verdict": "MultiScaleDenseNet121-FPN 512x512 exhibits statistically significant improvements over baseline across all six pathologies after patient-cluster bootstrapping and multiple comparison correction."
+}

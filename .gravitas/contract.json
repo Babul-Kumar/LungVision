@@ -1,21 +1,22 @@
 {
   "mode": "implementation",
-  "objective": "LungVision AI — Phase 6C Independent Research Model Reproduction & Generalization Audit.",
+  "objective": "LungVision AI — Phase 6D Reproducible MultiScaleDenseNet121-FPN Training & Validation.",
   "acceptance_criteria": [
-    "Gate A: Checkpoint & Experiment Reproduction (Identify exact Model D checkpoint, verify SHA-256, config, manifest; declare PARTIAL if 512x512 dedicated checkpoint missing; export phase6c_checkpoint_reproduction.json).",
-    "Gate B: Controlled Preprocessing Comparison (Compare direct resize vs aspect-ratio letterbox; train/eval matched configs without domain mismatch; export phase6c_preprocessing_reproduction.json).",
-    "Gate C: Resolution Reproduction (Audit 224 to 512 resolutions; verify trained checkpoints exist; correct AUROC vs sensitivity confusion; export phase6c_resolution_validation.json).",
-    "Gate D: Statistical Validation (Patient-cluster bootstrap CIs resampling patients rather than images; paired comparisons with effect sizes and multiple-testing correction; export phase6c_patient_cluster_statistics.json).",
-    "Gate E: Calibration Evaluation (Per-class Brier score, ECE, reliability diagrams, slope/intercept, precision-recall curves; fitted strictly on validation data; export phase6c_calibration_report.json).",
-    "Gate F: Operating Point Validation (Evaluate Frozen NIH, Youden J, and High-Sensitivity Triage with patient-cluster CIs; non-diagnostic disclaimer; export phase6c_operating_point_validation.json).",
-    "Gate G: Error Analysis (Audit false negatives for Pneumothorax, Cardiomegaly, Edema, Atelectasis and Pneumonia/Consolidation confusion with Grad-CAM and metadata; export phase6c_error_analysis.json).",
-    "Gate H: External Evaluation & Final Report (Evaluate on independent CheXpert cohort; document label differences; export phase6c_external_evaluation.json and author authoritative PHASE_6C_INDEPENDENT_REPRODUCTION_REPORT.md declaring COMPLETE/PARTIAL status)."
+    "Gate A: Environment & Data Audit (Audit RTX 3050 4GB GPU, CPU, RAM, PyTorch version, manifest, patient splits, zero leakage; export phase6d_environment_audit.json and phase6d_dataset_split_audit.json).",
+    "Gate B: Matched Preprocessing Experiments (Matched 224x224 direct resize vs matched 512x512 letterbox; document interpolation, padding, orientation; export phase6d_preprocessing_config.json).",
+    "Gate C: Genuine Model Training & Convergence (Train MultiScaleDenseNet121-FPN 512x512 with Focal Loss over multiple epochs; record losses, per-class AUROC/AUPRC, learning rate, latency; export phase6d_training_history.json).",
+    "Gate D: Checkpoint Export (Export multiscale_densenet121_fpn_512_v1.pth, record SHA-256, config, manifest hashes; export phase6d_checkpoint_manifest.json).",
+    "Gate E: Controlled Model Comparison (Compare Production 224, Experimental 224, and Experimental 512 on matched cohorts; export phase6d_model_comparison.json).",
+    "Gate F: Calibration Evaluation (Fit on validation cohort, evaluate on test cohort; keep frozen production thresholds unchanged; export phase6d_calibration_report.json).",
+    "Gate G: Statistical Analysis (Patient-cluster bootstrap 95% CIs resampling patients rather than images; paired comparisons with effect sizes; export phase6d_patient_cluster_statistics.json).",
+    "Gate H: Error Analysis & Reproducibility Report (Audit 6 disease classes with Grad-CAM, anatomy, AP view; export phase6d_error_analysis.json and author authoritative PHASE_6D_REPRODUCIBLE_TRAINING_REPORT.md with reproducible training & eval commands)."
   ],
   "non_goals": [
     "Do not overwrite or modify production DenseNet121 weights (SHA-256: 8d3690cd0438587a94afb8fd2ad84c0b30f9c1cc2727ee0eb03662a02ea020af)",
     "Do not alter frozen NIH production classification thresholds",
-    "Do not overwrite Phase 5B through Phase 6B artifacts",
-    "Do not use test data for calibration or threshold tuning",
+    "Do not overwrite Phase 5B through Phase 6C artifacts",
+    "Do not use test data for training, model selection or calibration",
+    "Do not claim convergence without documented multi-epoch training evidence",
     "Do not claim clinical diagnostic validity or external 3D reconstruction validation from CXR datasets"
   ],
   "risk": "medium",
@@ -37,14 +38,15 @@
     "verification_depth": "impact",
     "delegation": "none",
     "reason_codes": [
-      "checkpoint-reproduction-audit",
-      "controlled-preprocessing-matched-audit",
-      "resolution-progression-audit",
+      "hardware-data-audit",
+      "matched-preprocessing-configuration",
+      "multiscale-fpn-512-training-convergence",
+      "checkpoint-export-sha256-verification",
+      "controlled-three-model-comparison",
+      "validation-derived-calibration",
       "patient-cluster-bootstrap-statistics",
-      "multiclass-calibration-validation",
-      "operating-points-bootstrap-evaluation",
-      "forensic-error-analysis-gradcam",
-      "external-chexpert-generalization-audit"
+      "anatomical-error-analysis-gradcam",
+      "reproducible-kaggle-local-workflow"
     ]
   },
   "status": "completed"

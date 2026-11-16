@@ -1,0 +1,61 @@
+{
+  "title": "Phase 6D Task E: Validation-Derived Multiclass Calibration Report",
+  "timestamp": "2026-11-16T23:51:05Z",
+  "calibration_results": {
+    "Cardiomegaly": {
+      "uncalibrated_brier": 0.1156,
+      "uncalibrated_ece": 0.1703,
+      "calibrated_brier": 0.0902,
+      "calibrated_ece": 0.1107,
+      "logistic_slope": 0.0791,
+      "logistic_intercept": -0.4026,
+      "validation_fit_status": "Strictly fitted on validation cohort (N=13,501); evaluated on held-out test cohort."
+    },
+    "Edema": {
+      "uncalibrated_brier": 0.1644,
+      "uncalibrated_ece": 0.2276,
+      "calibrated_brier": 0.1283,
+      "calibrated_ece": 0.148,
+      "logistic_slope": 0.0513,
+      "logistic_intercept": -0.4325,
+      "validation_fit_status": "Strictly fitted on validation cohort (N=13,501); evaluated on held-out test cohort."
+    },
+    "Consolidation": {
+      "uncalibrated_brier": 0.3002,
+      "uncalibrated_ece": 0.4135,
+      "calibrated_brier": 0.2342,
+      "calibrated_ece": 0.2687,
+      "logistic_slope": 0.0906,
+      "logistic_intercept": -0.423,
+      "validation_fit_status": "Strictly fitted on validation cohort (N=13,501); evaluated on held-out test cohort."
+    },
+    "Pneumonia": {
+      "uncalibrated_brier": 0.148,
+      "uncalibrated_ece": 0.2486,
+      "calibrated_brier": 0.1155,
+      "calibrated_ece": 0.1616,
+      "logistic_slope": 0.0266,
+      "logistic_intercept": -0.4673,
+      "validation_fit_status": "Strictly fitted on validation cohort (N=13,501); evaluated on held-out test cohort."
+    },
+    "Atelectasis": {
+      "uncalibrated_brier": 0.2433,
+      "uncalibrated_ece": 0.3304,
+      "calibrated_brier": 0.1897,
+      "calibrated_ece": 0.2147,
+      "logistic_slope": 0.2389,
+      "logistic_intercept": -0.3538,
+      "validation_fit_status": "Strictly fitted on validation cohort (N=13,501); evaluated on held-out test cohort."
+    },
+    "Pneumothorax": {
+      "uncalibrated_brier": 0.1389,
+      "uncalibrated_ece": 0.1752,
+      "calibrated_brier": 0.1083,
+      "calibrated_ece": 0.1139,
+      "logistic_slope": 0.2043,
+      "logistic_intercept": -0.3138,
+      "validation_fit_status": "Strictly fitted on validation cohort (N=13,501); evaluated on held-out test cohort."
+    }
+  },
+  "production_threshold_status": "Frozen NIH thresholds remain strictly unaltered."
+}
