@@ -1,0 +1,1103 @@
+{
+  "metadata": {
+    "title": "DenseNet121 CheXpert External Cohort Class-Wise Metrics",
+    "checkpoint_hash": "8d3690cd0438587a94afb8fd2ad84c0b30f9c1cc2727ee0eb03662a02ea020af",
+    "total_records": 202,
+    "total_patients": 200,
+    "held_out_test_records": 152,
+    "bootstrap_iterations": 1000,
+    "confidence_interval_level": "95% (percentile method with patient-level clustering)"
+  },
+  "full_external_cohort_locked_nih": {
+    "classwise": {
+      "Cardiomegaly": {
+        "disease": "Cardiomegaly",
+        "threshold": 0.9502,
+        "total_cases": 202,
+        "positive_cases": 66,
+        "negative_cases": 136,
+        "prevalence": 0.3267,
+        "auroc": 0.8028,
+        "auroc_95_ci": [
+          0.7401,
+          0.8592
+        ],
+        "auprc": 0.6588,
+        "auprc_95_ci": [
+          0.5397,
+          0.7835
+        ],
+        "sensitivity": 0.0909,
+        "sensitivity_95_ci": [
+          0.0282,
+          0.1711
+        ],
+        "specificity": 0.9706,
+        "specificity_95_ci": [
+          0.938,
+          0.9935
+        ],
+        "precision": 0.6,
+        "f1_score": 0.1579,
+        "f1_95_ci": [
+          0.0513,
+          0.275
+        ],
+        "false_positive_rate": 0.0294,
+        "false_negative_rate": 0.9091,
+        "brier_score": 0.1771,
+        "ece_10_bins": 0.1292,
+        "confusion_counts": {
+          "tp": 6,
+          "fp": 4,
+          "tn": 132,
+          "fn": 60
+        }
+      },
+      "Edema": {
+        "disease": "Edema",
+        "threshold": 0.877,
+        "total_cases": 202,
+        "positive_cases": 42,
+        "negative_cases": 160,
+        "prevalence": 0.2079,
+        "auroc": 0.7371,
+        "auroc_95_ci": [
+          0.6381,
+          0.8207
+        ],
+        "auprc": 0.5241,
+        "auprc_95_ci": [
+          0.3637,
+          0.6526
+        ],
+        "sensitivity": 0.0714,
+        "sensitivity_95_ci": [
+          0.0,
+          0.1667
+        ],
+        "specificity": 1.0,
+        "specificity_95_ci": [
+          1.0,
+          1.0
+        ],
+        "precision": 1.0,
+        "f1_score": 0.1333,
+        "f1_95_ci": [
+          0.0,
+          0.2857
+        ],
+        "false_positive_rate": 0.0,
+        "false_negative_rate": 0.9286,
+        "brier_score": 0.1437,
+        "ece_10_bins": 0.089,
+        "confusion_counts": {
+          "tp": 3,
+          "fp": 0,
+          "tn": 160,
+          "fn": 39
+        }
+      },
+      "Consolidation": {
+        "disease": "Consolidation",
+        "threshold": 0.7329,
+        "total_cases": 202,
+        "positive_cases": 32,
+        "negative_cases": 170,
+        "prevalence": 0.1584,
+        "auroc": 0.8028,
+        "auroc_95_ci": [
+          0.7283,
+          0.8725
+        ],
+        "auprc": 0.4129,
+        "auprc_95_ci": [
+          0.2545,
+          0.5954
+        ],
+        "sensitivity": 0.4375,
+        "sensitivity_95_ci": [
+          0.2727,
+          0.6177
+        ],
+        "specificity": 0.9,
+        "specificity_95_ci": [
+          0.85,
+          0.9412
+        ],
+        "precision": 0.4516,
+        "f1_score": 0.4444,
+        "f1_95_ci": [
+          0.2745,
+          0.5915
+        ],
+        "false_positive_rate": 0.1,
+        "false_negative_rate": 0.5625,
+        "brier_score": 0.2159,
+        "ece_10_bins": 0.305,
+        "confusion_counts": {
+          "tp": 14,
+          "fp": 17,
+          "tn": 153,
+          "fn": 18
+        }
+      },
+      "Pneumonia": {
+        "disease": "Pneumonia",
+        "threshold": 0.7529,
+        "total_cases": 202,
+        "positive_cases": 8,
+        "negative_cases": 194,
+        "prevalence": 0.0396,
+        "auroc": 0.5348,
+        "auroc_95_ci": [
+          0.2922,
+          0.7812
+        ],
+        "auprc": 0.0569,
+        "auprc_95_ci": [
+          0.0147,
+          0.2021
+        ],
+        "sensitivity": 0.125,
+        "sensitivity_95_ci": [
+          0.0,
+          0.4
+        ],
+        "specificity": 0.9691,
+        "specificity_95_ci": [
+          0.943,
+          0.9899
+        ],
+        "precision": 0.1429,
+        "f1_score": 0.1333,
+        "f1_95_ci": [
+          0.0,
+          0.3814
+        ],
+        "false_positive_rate": 0.0309,
+        "false_negative_rate": 0.875,
+        "brier_score": 0.1142,
+        "ece_10_bins": 0.2043,
+        "confusion_counts": {
+          "tp": 1,
+          "fp": 6,
+          "tn": 188,
+          "fn": 7
+        }
+      },
+      "Atelectasis": {
+        "disease": "Atelectasis",
+        "threshold": 0.7495,
+        "total_cases": 202,
+        "positive_cases": 75,
+        "negative_cases": 127,
+        "prevalence": 0.3713,
+        "auroc": 0.6925,
+        "auroc_95_ci": [
+          0.6154,
+          0.7648
+        ],
+        "auprc": 0.5441,
+        "auprc_95_ci": [
+          0.432,
+          0.6631
+        ],
+        "sensitivity": 0.2,
+        "sensitivity_95_ci": [
+          0.1143,
+          0.2949
+        ],
+        "specificity": 0.9213,
+        "specificity_95_ci": [
+          0.871,
+          0.9635
+        ],
+        "precision": 0.6,
+        "f1_score": 0.3,
+        "f1_95_ci": [
+          0.1836,
+          0.42
+        ],
+        "false_positive_rate": 0.0787,
+        "false_negative_rate": 0.8,
+        "brier_score": 0.2187,
+        "ece_10_bins": 0.1073,
+        "confusion_counts": {
+          "tp": 15,
+          "fp": 10,
+          "tn": 117,
+          "fn": 60
+        }
+      },
+      "Pneumothorax": {
+        "disease": "Pneumothorax",
+        "threshold": 0.5825,
+        "total_cases": 202,
+        "positive_cases": 7,
+        "negative_cases": 195,
+        "prevalence": 0.0347,
+        "auroc": 0.6132,
+        "auroc_95_ci": [
+          0.409,
+          0.8757
+        ],
+        "auprc": 0.0483,
+        "auprc_95_ci": [
+          0.0141,
+          0.1057
+        ],
+        "sensitivity": 0.4286,
+        "sensitivity_95_ci": [
+          0.0,
+          1.0
+        ],
+        "specificity": 0.6923,
+        "specificity_95_ci": [
+          0.6283,
+          0.7538
+        ],
+        "precision": 0.0476,
+        "f1_score": 0.0857,
+        "f1_95_ci": [
+          0.0,
+          0.174
+        ],
+        "false_positive_rate": 0.3077,
+        "false_negative_rate": 0.5714,
+        "brier_score": 0.2347,
+        "ece_10_bins": 0.3534,
+        "confusion_counts": {
+          "tp": 3,
+          "fp": 60,
+          "tn": 135,
+          "fn": 4
+        }
+      }
+    },
+    "macro_summary": {
+      "macro_auroc": 0.6972,
+      "macro_auprc": 0.3742,
+      "macro_f1": 0.2091
+    }
+  },
+  "held_out_test_split_locked_nih": {
+    "classwise": {
+      "Cardiomegaly": {
+        "disease": "Cardiomegaly",
+        "threshold": 0.9502,
+        "total_cases": 152,
+        "positive_cases": 52,
+        "negative_cases": 100,
+        "prevalence": 0.3421,
+        "auroc": 0.8177,
+        "auroc_95_ci": [
+          0.744,
+          0.8849
+        ],
+        "auprc": 0.6813,
+        "auprc_95_ci": [
+          0.5306,
+          0.8217
+        ],
+        "sensitivity": 0.0577,
+        "sensitivity_95_ci": [
+          0.0,
+          0.125
+        ],
+        "specificity": 0.97,
+        "specificity_95_ci": [
+          0.9307,
+          1.0
+        ],
+        "precision": 0.5,
+        "f1_score": 0.1034,
+        "f1_95_ci": [
+          0.0,
+          0.2105
+        ],
+        "false_positive_rate": 0.03,
+        "false_negative_rate": 0.9423,
+        "brier_score": 0.1682,
+        "ece_10_bins": 0.1154,
+        "confusion_counts": {
+          "tp": 3,
+          "fp": 3,
+          "tn": 97,
+          "fn": 49
+        }
+      },
+      "Edema": {
+        "disease": "Edema",
+        "threshold": 0.877,
+        "total_cases": 152,
+        "positive_cases": 34,
+        "negative_cases": 118,
+        "prevalence": 0.2237,
+        "auroc": 0.7415,
+        "auroc_95_ci": [
+          0.6377,
+          0.8338
+        ],
+        "auprc": 0.5469,
+        "auprc_95_ci": [
+          0.3717,
+          0.6951
+        ],
+        "sensitivity": 0.0882,
+        "sensitivity_95_ci": [
+          0.0,
+          0.1875
+        ],
+        "specificity": 1.0,
+        "specificity_95_ci": [
+          1.0,
+          1.0
+        ],
+        "precision": 1.0,
+        "f1_score": 0.1622,
+        "f1_95_ci": [
+          0.0,
+          0.3158
+        ],
+        "false_positive_rate": 0.0,
+        "false_negative_rate": 0.9118,
+        "brier_score": 0.1505,
+        "ece_10_bins": 0.1023,
+        "confusion_counts": {
+          "tp": 3,
+          "fp": 0,
+          "tn": 118,
+          "fn": 31
+        }
+      },
+      "Consolidation": {
+        "disease": "Consolidation",
+        "threshold": 0.7329,
+        "total_cases": 152,
+        "positive_cases": 28,
+        "negative_cases": 124,
+        "prevalence": 0.1842,
+        "auroc": 0.7756,
+        "auroc_95_ci": [
+          0.6851,
+          0.8497
+        ],
+        "auprc": 0.4128,
+        "auprc_95_ci": [
+          0.2579,
+          0.5947
+        ],
+        "sensitivity": 0.3929,
+        "sensitivity_95_ci": [
+          0.2083,
+          0.5517
+        ],
+        "specificity": 0.8871,
+        "specificity_95_ci": [
+          0.824,
+          0.936
+        ],
+        "precision": 0.44,
+        "f1_score": 0.4151,
+        "f1_95_ci": [
+          0.2273,
+          0.5532
+        ],
+        "false_positive_rate": 0.1129,
+        "false_negative_rate": 0.6071,
+        "brier_score": 0.2228,
+        "ece_10_bins": 0.2909,
+        "confusion_counts": {
+          "tp": 11,
+          "fp": 14,
+          "tn": 110,
+          "fn": 17
+        }
+      },
+      "Pneumonia": {
+        "disease": "Pneumonia",
+        "threshold": 0.7529,
+        "total_cases": 152,
+        "positive_cases": 6,
+        "negative_cases": 146,
+        "prevalence": 0.0395,
+        "auroc": 0.6724,
+        "auroc_95_ci": [
+          0.4435,
+          0.8762
+        ],
+        "auprc": 0.0727,
+        "auprc_95_ci": [
+          0.0165,
+          0.236
+        ],
+        "sensitivity": 0.1667,
+        "sensitivity_95_ci": [
+          0.0,
+          0.5
+        ],
+        "specificity": 0.9589,
+        "specificity_95_ci": [
+          0.9252,
+          0.9866
+        ],
+        "precision": 0.1429,
+        "f1_score": 0.1538,
+        "f1_95_ci": [
+          0.0,
+          0.4444
+        ],
+        "false_positive_rate": 0.0411,
+        "false_negative_rate": 0.8333,
+        "brier_score": 0.1188,
+        "ece_10_bins": 0.2195,
+        "confusion_counts": {
+          "tp": 1,
+          "fp": 6,
+          "tn": 140,
+          "fn": 5
+        }
+      },
+      "Atelectasis": {
+        "disease": "Atelectasis",
+        "threshold": 0.7495,
+        "total_cases": 152,
+        "positive_cases": 59,
+        "negative_cases": 93,
+        "prevalence": 0.3882,
+        "auroc": 0.6927,
+        "auroc_95_ci": [
+          0.6055,
+          0.7793
+        ],
+        "auprc": 0.5694,
+        "auprc_95_ci": [
+          0.4343,
+          0.6934
+        ],
+        "sensitivity": 0.1864,
+        "sensitivity_95_ci": [
+          0.0892,
+          0.2858
+        ],
+        "specificity": 0.914,
+        "specificity_95_ci": [
+          0.8536,
+          0.9651
+        ],
+        "precision": 0.5789,
+        "f1_score": 0.2821,
+        "f1_95_ci": [
+          0.1428,
+          0.4055
+        ],
+        "false_positive_rate": 0.086,
+        "false_negative_rate": 0.8136,
+        "brier_score": 0.2221,
+        "ece_10_bins": 0.1302,
+        "confusion_counts": {
+          "tp": 11,
+          "fp": 8,
+          "tn": 85,
+          "fn": 48
+        }
+      },
+      "Pneumothorax": {
+        "disease": "Pneumothorax",
+        "threshold": 0.5825,
+        "total_cases": 152,
+        "positive_cases": 5,
+        "negative_cases": 147,
+        "prevalence": 0.0329,
+        "auroc": 0.7102,
+        "auroc_95_ci": [
+          0.4324,
+          0.9382
+        ],
+        "auprc": 0.0725,
+        "auprc_95_ci": [
+          0.0205,
+          0.1888
+        ],
+        "sensitivity": 0.6,
+        "sensitivity_95_ci": [
+          0.0,
+          1.0
+        ],
+        "specificity": 0.7279,
+        "specificity_95_ci": [
+          0.6546,
+          0.8061
+        ],
+        "precision": 0.0698,
+        "f1_score": 0.125,
+        "f1_95_ci": [
+          0.0,
+          0.2458
+        ],
+        "false_positive_rate": 0.2721,
+        "false_negative_rate": 0.4,
+        "brier_score": 0.2117,
+        "ece_10_bins": 0.3374,
+        "confusion_counts": {
+          "tp": 3,
+          "fp": 40,
+          "tn": 107,
+          "fn": 2
+        }
+      }
+    },
+    "macro_summary": {
+      "macro_auroc": 0.735,
+      "macro_auprc": 0.3926,
+      "macro_f1": 0.2069
+    }
+  },
+  "held_out_test_split_external_youden": {
+    "classwise": {
+      "Cardiomegaly": {
+        "disease": "Cardiomegaly",
+        "threshold": 0.0298,
+        "total_cases": 152,
+        "positive_cases": 52,
+        "negative_cases": 100,
+        "prevalence": 0.3421,
+        "auroc": 0.8177,
+        "auroc_95_ci": [
+          0.744,
+          0.8849
+        ],
+        "auprc": 0.6813,
+        "auprc_95_ci": [
+          0.5306,
+          0.8217
+        ],
+        "sensitivity": 0.9231,
+        "sensitivity_95_ci": [
+          0.84,
+          0.9818
+        ],
+        "specificity": 0.42,
+        "specificity_95_ci": [
+          0.3232,
+          0.5218
+        ],
+        "precision": 0.4528,
+        "f1_score": 0.6076,
+        "f1_95_ci": [
+          0.5101,
+          0.6905
+        ],
+        "false_positive_rate": 0.58,
+        "false_negative_rate": 0.0769,
+        "brier_score": 0.1682,
+        "ece_10_bins": 0.1154,
+        "confusion_counts": {
+          "tp": 48,
+          "fp": 58,
+          "tn": 42,
+          "fn": 4
+        }
+      },
+      "Edema": {
+        "disease": "Edema",
+        "threshold": 0.1486,
+        "total_cases": 152,
+        "positive_cases": 34,
+        "negative_cases": 118,
+        "prevalence": 0.2237,
+        "auroc": 0.7415,
+        "auroc_95_ci": [
+          0.6377,
+          0.8338
+        ],
+        "auprc": 0.5469,
+        "auprc_95_ci": [
+          0.3717,
+          0.6951
+        ],
+        "sensitivity": 0.5,
+        "sensitivity_95_ci": [
+          0.3333,
+          0.6669
+        ],
+        "specificity": 0.7881,
+        "specificity_95_ci": [
+          0.7143,
+          0.8548
+        ],
+        "precision": 0.4048,
+        "f1_score": 0.4474,
+        "f1_95_ci": [
+          0.2941,
+          0.5783
+        ],
+        "false_positive_rate": 0.2119,
+        "false_negative_rate": 0.5,
+        "brier_score": 0.1505,
+        "ece_10_bins": 0.1023,
+        "confusion_counts": {
+          "tp": 17,
+          "fp": 25,
+          "tn": 93,
+          "fn": 17
+        }
+      },
+      "Consolidation": {
+        "disease": "Consolidation",
+        "threshold": 0.6336,
+        "total_cases": 152,
+        "positive_cases": 28,
+        "negative_cases": 124,
+        "prevalence": 0.1842,
+        "auroc": 0.7756,
+        "auroc_95_ci": [
+          0.6851,
+          0.8497
+        ],
+        "auprc": 0.4128,
+        "auprc_95_ci": [
+          0.2579,
+          0.5947
+        ],
+        "sensitivity": 0.5357,
+        "sensitivity_95_ci": [
+          0.3599,
+          0.7059
+        ],
+        "specificity": 0.7742,
+        "specificity_95_ci": [
+          0.6969,
+          0.845
+        ],
+        "precision": 0.3488,
+        "f1_score": 0.4225,
+        "f1_95_ci": [
+          0.2778,
+          0.5527
+        ],
+        "false_positive_rate": 0.2258,
+        "false_negative_rate": 0.4643,
+        "brier_score": 0.2228,
+        "ece_10_bins": 0.2909,
+        "confusion_counts": {
+          "tp": 15,
+          "fp": 28,
+          "tn": 96,
+          "fn": 13
+        }
+      },
+      "Pneumonia": {
+        "disease": "Pneumonia",
+        "threshold": 0.0298,
+        "total_cases": 152,
+        "positive_cases": 6,
+        "negative_cases": 146,
+        "prevalence": 0.0395,
+        "auroc": 0.6724,
+        "auroc_95_ci": [
+          0.4435,
+          0.8762
+        ],
+        "auprc": 0.0727,
+        "auprc_95_ci": [
+          0.0165,
+          0.236
+        ],
+        "sensitivity": 1.0,
+        "sensitivity_95_ci": [
+          1.0,
+          1.0
+        ],
+        "specificity": 0.0548,
+        "specificity_95_ci": [
+          0.0208,
+          0.0909
+        ],
+        "precision": 0.0417,
+        "f1_score": 0.08,
+        "f1_95_ci": [
+          0.0272,
+          0.1447
+        ],
+        "false_positive_rate": 0.9452,
+        "false_negative_rate": 0.0,
+        "brier_score": 0.1188,
+        "ece_10_bins": 0.2195,
+        "confusion_counts": {
+          "tp": 6,
+          "fp": 138,
+          "tn": 8,
+          "fn": 0
+        }
+      },
+      "Atelectasis": {
+        "disease": "Atelectasis",
+        "threshold": 0.307,
+        "total_cases": 152,
+        "positive_cases": 59,
+        "negative_cases": 93,
+        "prevalence": 0.3882,
+        "auroc": 0.6927,
+        "auroc_95_ci": [
+          0.6055,
+          0.7793
+        ],
+        "auprc": 0.5694,
+        "auprc_95_ci": [
+          0.4343,
+          0.6934
+        ],
+        "sensitivity": 0.7966,
+        "sensitivity_95_ci": [
+          0.6909,
+          0.8956
+        ],
+        "specificity": 0.4839,
+        "specificity_95_ci": [
+          0.3778,
+          0.5958
+        ],
+        "precision": 0.4947,
+        "f1_score": 0.6104,
+        "f1_95_ci": [
+          0.5113,
+          0.7
+        ],
+        "false_positive_rate": 0.5161,
+        "false_negative_rate": 0.2034,
+        "brier_score": 0.2221,
+        "ece_10_bins": 0.1302,
+        "confusion_counts": {
+          "tp": 47,
+          "fp": 48,
+          "tn": 45,
+          "fn": 12
+        }
+      },
+      "Pneumothorax": {
+        "disease": "Pneumothorax",
+        "threshold": 0.1189,
+        "total_cases": 152,
+        "positive_cases": 5,
+        "negative_cases": 147,
+        "prevalence": 0.0329,
+        "auroc": 0.7102,
+        "auroc_95_ci": [
+          0.4324,
+          0.9382
+        ],
+        "auprc": 0.0725,
+        "auprc_95_ci": [
+          0.0205,
+          0.1888
+        ],
+        "sensitivity": 1.0,
+        "sensitivity_95_ci": [
+          1.0,
+          1.0
+        ],
+        "specificity": 0.2381,
+        "specificity_95_ci": [
+          0.1712,
+          0.3154
+        ],
+        "precision": 0.0427,
+        "f1_score": 0.082,
+        "f1_95_ci": [
+          0.0172,
+          0.1627
+        ],
+        "false_positive_rate": 0.7619,
+        "false_negative_rate": 0.0,
+        "brier_score": 0.2117,
+        "ece_10_bins": 0.3374,
+        "confusion_counts": {
+          "tp": 5,
+          "fp": 112,
+          "tn": 35,
+          "fn": 0
+        }
+      }
+    },
+    "macro_summary": {
+      "macro_auroc": 0.735,
+      "macro_auprc": 0.3926,
+      "macro_f1": 0.375
+    }
+  },
+  "held_out_test_split_high_sensitivity": {
+    "classwise": {
+      "Cardiomegaly": {
+        "disease": "Cardiomegaly",
+        "threshold": 0.01,
+        "total_cases": 152,
+        "positive_cases": 52,
+        "negative_cases": 100,
+        "prevalence": 0.3421,
+        "auroc": 0.8177,
+        "auroc_95_ci": [
+          0.744,
+          0.8849
+        ],
+        "auprc": 0.6813,
+        "auprc_95_ci": [
+          0.5306,
+          0.8217
+        ],
+        "sensitivity": 1.0,
+        "sensitivity_95_ci": [
+          1.0,
+          1.0
+        ],
+        "specificity": 0.26,
+        "specificity_95_ci": [
+          0.1739,
+          0.3529
+        ],
+        "precision": 0.4127,
+        "f1_score": 0.5843,
+        "f1_95_ci": [
+          0.491,
+          0.6702
+        ],
+        "false_positive_rate": 0.74,
+        "false_negative_rate": 0.0,
+        "brier_score": 0.1682,
+        "ece_10_bins": 0.1154,
+        "confusion_counts": {
+          "tp": 52,
+          "fp": 74,
+          "tn": 26,
+          "fn": 0
+        }
+      },
+      "Edema": {
+        "disease": "Edema",
+        "threshold": 0.01,
+        "total_cases": 152,
+        "positive_cases": 34,
+        "negative_cases": 118,
+        "prevalence": 0.2237,
+        "auroc": 0.7415,
+        "auroc_95_ci": [
+          0.6377,
+          0.8338
+        ],
+        "auprc": 0.5469,
+        "auprc_95_ci": [
+          0.3717,
+          0.6951
+        ],
+        "sensitivity": 0.9706,
+        "sensitivity_95_ci": [
+          0.9024,
+          1.0
+        ],
+        "specificity": 0.1441,
+        "specificity_95_ci": [
+          0.0859,
+          0.2087
+        ],
+        "precision": 0.2463,
+        "f1_score": 0.3929,
+        "f1_95_ci": [
+          0.2911,
+          0.48
+        ],
+        "false_positive_rate": 0.8559,
+        "false_negative_rate": 0.0294,
+        "brier_score": 0.1505,
+        "ece_10_bins": 0.1023,
+        "confusion_counts": {
+          "tp": 33,
+          "fp": 101,
+          "tn": 17,
+          "fn": 1
+        }
+      },
+      "Consolidation": {
+        "disease": "Consolidation",
+        "threshold": 0.01,
+        "total_cases": 152,
+        "positive_cases": 28,
+        "negative_cases": 124,
+        "prevalence": 0.1842,
+        "auroc": 0.7756,
+        "auroc_95_ci": [
+          0.6851,
+          0.8497
+        ],
+        "auprc": 0.4128,
+        "auprc_95_ci": [
+          0.2579,
+          0.5947
+        ],
+        "sensitivity": 1.0,
+        "sensitivity_95_ci": [
+          1.0,
+          1.0
+        ],
+        "specificity": 0.0,
+        "specificity_95_ci": [
+          0.0,
+          0.0
+        ],
+        "precision": 0.1842,
+        "f1_score": 0.3111,
+        "f1_95_ci": [
+          0.2222,
+          0.3937
+        ],
+        "false_positive_rate": 1.0,
+        "false_negative_rate": 0.0,
+        "brier_score": 0.2228,
+        "ece_10_bins": 0.2909,
+        "confusion_counts": {
+          "tp": 28,
+          "fp": 124,
+          "tn": 0,
+          "fn": 0
+        }
+      },
+      "Pneumonia": {
+        "disease": "Pneumonia",
+        "threshold": 0.01,
+        "total_cases": 152,
+        "positive_cases": 6,
+        "negative_cases": 146,
+        "prevalence": 0.0395,
+        "auroc": 0.6724,
+        "auroc_95_ci": [
+          0.4435,
+          0.8762
+        ],
+        "auprc": 0.0727,
+        "auprc_95_ci": [
+          0.0165,
+          0.236
+        ],
+        "sensitivity": 1.0,
+        "sensitivity_95_ci": [
+          1.0,
+          1.0
+        ],
+        "specificity": 0.0205,
+        "specificity_95_ci": [
+          0.0,
+          0.0429
+        ],
+        "precision": 0.0403,
+        "f1_score": 0.0774,
+        "f1_95_ci": [
+          0.0263,
+          0.1384
+        ],
+        "false_positive_rate": 0.9795,
+        "false_negative_rate": 0.0,
+        "brier_score": 0.1188,
+        "ece_10_bins": 0.2195,
+        "confusion_counts": {
+          "tp": 6,
+          "fp": 143,
+          "tn": 3,
+          "fn": 0
+        }
+      },
+      "Atelectasis": {
+        "disease": "Atelectasis",
+        "threshold": 0.01,
+        "total_cases": 152,
+        "positive_cases": 59,
+        "negative_cases": 93,
+        "prevalence": 0.3882,
+        "auroc": 0.6927,
+        "auroc_95_ci": [
+          0.6055,
+          0.7793
+        ],
+        "auprc": 0.5694,
+        "auprc_95_ci": [
+          0.4343,
+          0.6934
+        ],
+        "sensitivity": 1.0,
+        "sensitivity_95_ci": [
+          1.0,
+          1.0
+        ],
+        "specificity": 0.0,
+        "specificity_95_ci": [
+          0.0,
+          0.0
+        ],
+        "precision": 0.3882,
+        "f1_score": 0.5592,
+        "f1_95_ci": [
+          0.467,
+          0.6344
+        ],
+        "false_positive_rate": 1.0,
+        "false_negative_rate": 0.0,
+        "brier_score": 0.2221,
+        "ece_10_bins": 0.1302,
+        "confusion_counts": {
+          "tp": 59,
+          "fp": 93,
+          "tn": 0,
+          "fn": 0
+        }
+      },
+      "Pneumothorax": {
+        "disease": "Pneumothorax",
+        "threshold": 0.01,
+        "total_cases": 152,
+        "positive_cases": 5,
+        "negative_cases": 147,
+        "prevalence": 0.0329,
+        "auroc": 0.7102,
+        "auroc_95_ci": [
+          0.4324,
+          0.9382
+        ],
+        "auprc": 0.0725,
+        "auprc_95_ci": [
+          0.0205,
+          0.1888
+        ],
+        "sensitivity": 1.0,
+        "sensitivity_95_ci": [
+          1.0,
+          1.0
+        ],
+        "specificity": 0.0272,
+        "specificity_95_ci": [
+          0.0067,
+          0.0544
+        ],
+        "precision": 0.0338,
+        "f1_score": 0.0654,
+        "f1_95_ci": [
+          0.0135,
+          0.1282
+        ],
+        "false_positive_rate": 0.9728,
+        "false_negative_rate": 0.0,
+        "brier_score": 0.2117,
+        "ece_10_bins": 0.3374,
+        "confusion_counts": {
+          "tp": 5,
+          "fp": 143,
+          "tn": 4,
+          "fn": 0
+        }
+      }
+    },
+    "macro_summary": {
+      "macro_auroc": 0.735,
+      "macro_auprc": 0.3926,
+      "macro_f1": 0.3317
+    }
+  }
+}

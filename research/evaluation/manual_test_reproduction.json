@@ -1,0 +1,454 @@
+{
+  "metadata": {
+    "title": "DenseNet121 Inference Protocol Verification & Pipeline Reproducibility",
+    "model_checkpoint": "lungvision_disease_classification/checkpoints/densenet121_nih_best.pth",
+    "checkpoint_sha256": "8d3690cd0438587a94afb8fd2ad84c0b30f9c1cc2727ee0eb03662a02ea020af",
+    "architecture": "DenseNet121",
+    "num_classes": 6,
+    "verified_label_ordering": [
+      "Cardiomegaly",
+      "Edema",
+      "Consolidation",
+      "Pneumonia",
+      "Atelectasis",
+      "Pneumothorax"
+    ],
+    "locked_production_thresholds": {
+      "Cardiomegaly": 0.9502,
+      "Edema": 0.877,
+      "Consolidation": 0.7329,
+      "Pneumonia": 0.7529,
+      "Atelectasis": 0.7495,
+      "Pneumothorax": 0.5825
+    },
+    "inference_environment": {
+      "input_tensor_shape": [
+        1,
+        3,
+        224,
+        224
+      ],
+      "channel_ordering": "RGB (Channel 0: Red, Channel 1: Green, Channel 2: Blue)",
+      "input_pixel_value_range": "[0.0, 1.0] before z-score normalization",
+      "resize_interpolation": "Bilinear (torchvision.transforms.InterpolationMode.BILINEAR)",
+      "normalization_parameters": {
+        "mean": [
+          0.485,
+          0.456,
+          0.406
+        ],
+        "std": [
+          0.229,
+          0.224,
+          0.225
+        ]
+      },
+      "activation_function": "torch.sigmoid(logits)",
+      "decision_rule": "experimental_flag = bool(probability >= locked_threshold)",
+      "backend_frontend_consistency": {
+        "backend_service": "backend/app/services/xray_service.py:XRayService.predict_multilabel",
+        "frontend_component": "frontend/src/features/xray/components/DoctorResearcherXRayView.tsx",
+        "value_formatting": "Exact float serialized via Pydantic; displayed with toFixed(6) in UI telemetry",
+        "consistency_verified": true
+      }
+    }
+  },
+  "manual_tests_audit": [
+    {
+      "test_id": 1,
+      "intended_category": "Normal",
+      "image_filename": "manual_test_01_normal.png",
+      "dataset_source": "NIH ChestX-ray14 / Healthy Volunteer Verification Cohort",
+      "patient_study_id": "PT_NIH_00000001_000",
+      "image_metadata": {
+        "dimensions": "2048x2048",
+        "bit_depth": "8-bit grayscale",
+        "format": "PNG",
+        "orientation": "PA (Posteroanterior)",
+        "artifacts_present": "None (No radiopaque markers, clips or leads)"
+      },
+      "model_inference": {
+        "reproduced_probabilities": {
+          "Cardiomegaly": 0.0757,
+          "Edema": 0.0539,
+          "Consolidation": 0.52,
+          "Pneumonia": 0.5479,
+          "Atelectasis": 0.4734,
+          "Pneumothorax": 0.3681
+        },
+        "per_disease_evaluation": {
+          "Cardiomegaly": {
+            "raw_probability": 0.0757,
+            "locked_threshold": 0.9502,
+            "flagged_positive": false,
+            "delta_to_threshold": -0.8745
+          },
+          "Edema": {
+            "raw_probability": 0.0539,
+            "locked_threshold": 0.877,
+            "flagged_positive": false,
+            "delta_to_threshold": -0.8231
+          },
+          "Consolidation": {
+            "raw_probability": 0.52,
+            "locked_threshold": 0.7329,
+            "flagged_positive": false,
+            "delta_to_threshold": -0.2129
+          },
+          "Pneumonia": {
+            "raw_probability": 0.5479,
+            "locked_threshold": 0.7529,
+            "flagged_positive": false,
+            "delta_to_threshold": -0.205
+          },
+          "Atelectasis": {
+            "raw_probability": 0.4734,
+            "locked_threshold": 0.7495,
+            "flagged_positive": false,
+            "delta_to_threshold": -0.2761
+          },
+          "Pneumothorax": {
+            "raw_probability": 0.3681,
+            "locked_threshold": 0.5825,
+            "flagged_positive": false,
+            "delta_to_threshold": -0.2144
+          }
+        },
+        "observed_ui_summary": "No positive flags",
+        "final_prediction_flag": "None (Negative)",
+        "screening_status": "Concordant (Correct Negative)"
+      },
+      "radiological_investigation": "Bilateral clear lung fields, normal cardiothoracic ratio (<0.50), sharp costophrenic angles. All 6 disease activations comfortably below locked triage thresholds."
+    },
+    {
+      "test_id": 2,
+      "intended_category": "Cardiomegaly",
+      "image_filename": "manual_test_02_cardiomegaly.jpg",
+      "dataset_source": "Clinical Screening Cohort (High Cardiothoracic Ratio)",
+      "patient_study_id": "PT_CARDIO_9921_01",
+      "image_metadata": {
+        "dimensions": "2412x1956",
+        "bit_depth": "8-bit RGB JPEG",
+        "format": "JPEG",
+        "orientation": "PA (Posteroanterior)",
+        "artifacts_present": "Anatomical orientation marker 'L' in left upper thoracic field; sternotomy wire sutures"
+      },
+      "model_inference": {
+        "reproduced_probabilities": {
+          "Cardiomegaly": 0.9998,
+          "Edema": 0.0412,
+          "Consolidation": 0.1285,
+          "Pneumonia": 0.0934,
+          "Atelectasis": 0.1872,
+          "Pneumothorax": 0.0156
+        },
+        "per_disease_evaluation": {
+          "Cardiomegaly": {
+            "raw_probability": 0.9998,
+            "locked_threshold": 0.9502,
+            "flagged_positive": true,
+            "delta_to_threshold": 0.0496
+          },
+          "Edema": {
+            "raw_probability": 0.0412,
+            "locked_threshold": 0.877,
+            "flagged_positive": false,
+            "delta_to_threshold": -0.8358
+          },
+          "Consolidation": {
+            "raw_probability": 0.1285,
+            "locked_threshold": 0.7329,
+            "flagged_positive": false,
+            "delta_to_threshold": -0.6044
+          },
+          "Pneumonia": {
+            "raw_probability": 0.0934,
+            "locked_threshold": 0.7529,
+            "flagged_positive": false,
+            "delta_to_threshold": -0.6595
+          },
+          "Atelectasis": {
+            "raw_probability": 0.1872,
+            "locked_threshold": 0.7495,
+            "flagged_positive": false,
+            "delta_to_threshold": -0.5623
+          },
+          "Pneumothorax": {
+            "raw_probability": 0.0156,
+            "locked_threshold": 0.5825,
+            "flagged_positive": false,
+            "delta_to_threshold": -0.5669
+          }
+        },
+        "observed_ui_summary": "Cardiomegaly 99.98%",
+        "final_prediction_flag": "Cardiomegaly (Flagged)",
+        "screening_status": "Concordant (Correct Positive)"
+      },
+      "radiological_investigation": "Grossly enlarged transverse cardiac diameter with cardiothoracic ratio CTR > 0.62, left ventricular prominence. Probability 0.9998 exceeds locked threshold 0.9502."
+    },
+    {
+      "test_id": 3,
+      "intended_category": "Pneumothorax",
+      "image_filename": "manual_test_03_pneumothorax.png",
+      "dataset_source": "Chest X-Ray Trauma / Pleural Pathology Library",
+      "patient_study_id": "PT_PTX_00481_03",
+      "image_metadata": {
+        "dimensions": "2500x2048",
+        "bit_depth": "8-bit grayscale",
+        "format": "PNG",
+        "orientation": "PA (Posteroanterior)",
+        "artifacts_present": "Radiopaque right apical marker 'R'; mild subcutaneous emphysema"
+      },
+      "model_inference": {
+        "reproduced_probabilities": {
+          "Cardiomegaly": 0.0182,
+          "Edema": 0.0094,
+          "Consolidation": 0.142,
+          "Pneumonia": 0.0652,
+          "Atelectasis": 0.1189,
+          "Pneumothorax": 0.2341
+        },
+        "per_disease_evaluation": {
+          "Cardiomegaly": {
+            "raw_probability": 0.0182,
+            "locked_threshold": 0.9502,
+            "flagged_positive": false,
+            "delta_to_threshold": -0.932
+          },
+          "Edema": {
+            "raw_probability": 0.0094,
+            "locked_threshold": 0.877,
+            "flagged_positive": false,
+            "delta_to_threshold": -0.8676
+          },
+          "Consolidation": {
+            "raw_probability": 0.142,
+            "locked_threshold": 0.7329,
+            "flagged_positive": false,
+            "delta_to_threshold": -0.5909
+          },
+          "Pneumonia": {
+            "raw_probability": 0.0652,
+            "locked_threshold": 0.7529,
+            "flagged_positive": false,
+            "delta_to_threshold": -0.6877
+          },
+          "Atelectasis": {
+            "raw_probability": 0.1189,
+            "locked_threshold": 0.7495,
+            "flagged_positive": false,
+            "delta_to_threshold": -0.6306
+          },
+          "Pneumothorax": {
+            "raw_probability": 0.2341,
+            "locked_threshold": 0.5825,
+            "flagged_positive": false,
+            "delta_to_threshold": -0.3484
+          }
+        },
+        "observed_ui_summary": "Pneumothorax 23.41%, negative",
+        "final_prediction_flag": "None (Negative)",
+        "screening_status": "Discordant (False Negative / Missed Pneumothorax)"
+      },
+      "radiological_investigation": "Apical thin visceral pleural white line with absent peripheral lung markings (<15% volume collapse). 224x224 downsampling smooths subtle edge gradients, failing to trigger the locked 0.5825 threshold."
+    },
+    {
+      "test_id": 4,
+      "intended_category": "Edema",
+      "image_filename": "manual_test_04_edema.jpg",
+      "dataset_source": "Critical Care Inpatient Radiograph Repository",
+      "patient_study_id": "PT_EDEMA_5102_02",
+      "image_metadata": {
+        "dimensions": "2048x2500",
+        "bit_depth": "8-bit grayscale",
+        "format": "JPEG",
+        "orientation": "AP (Anteroposterior Portable)",
+        "artifacts_present": "Endotracheal tube and telemetry ECG lead overlays"
+      },
+      "model_inference": {
+        "reproduced_probabilities": {
+          "Cardiomegaly": 0.412,
+          "Edema": 0.1542,
+          "Consolidation": 0.8553,
+          "Pneumonia": 0.312,
+          "Atelectasis": 0.4281,
+          "Pneumothorax": 0.0382
+        },
+        "per_disease_evaluation": {
+          "Cardiomegaly": {
+            "raw_probability": 0.412,
+            "locked_threshold": 0.9502,
+            "flagged_positive": false,
+            "delta_to_threshold": -0.5382
+          },
+          "Edema": {
+            "raw_probability": 0.1542,
+            "locked_threshold": 0.877,
+            "flagged_positive": false,
+            "delta_to_threshold": -0.7228
+          },
+          "Consolidation": {
+            "raw_probability": 0.8553,
+            "locked_threshold": 0.7329,
+            "flagged_positive": true,
+            "delta_to_threshold": 0.1224
+          },
+          "Pneumonia": {
+            "raw_probability": 0.312,
+            "locked_threshold": 0.7529,
+            "flagged_positive": false,
+            "delta_to_threshold": -0.4409
+          },
+          "Atelectasis": {
+            "raw_probability": 0.4281,
+            "locked_threshold": 0.7495,
+            "flagged_positive": false,
+            "delta_to_threshold": -0.3214
+          },
+          "Pneumothorax": {
+            "raw_probability": 0.0382,
+            "locked_threshold": 0.5825,
+            "flagged_positive": false,
+            "delta_to_threshold": -0.5443
+          }
+        },
+        "observed_ui_summary": "Consolidation 85.53%, positive; Edema 15.42%, negative",
+        "final_prediction_flag": "Consolidation (Flagged)",
+        "screening_status": "Discordant (False Negative for Edema, False Positive for Consolidation)"
+      },
+      "radiological_investigation": "Acute cardiogenic pulmonary alveolar edema showing bilateral perihilar bat-wing opacities. Both edema and consolidation cause alveolar airspace fluid attenuation; model feature representations co-activate Consolidation (0.8553 >= 0.7329) while Edema (0.1542) falls below conservative 0.8770 threshold."
+    },
+    {
+      "test_id": 5,
+      "intended_category": "Consolidation",
+      "image_filename": "manual_test_05_consolidation.png",
+      "dataset_source": "Inpatient Pulmonary Disease Teaching File",
+      "patient_study_id": "PT_CONS_1048_01",
+      "image_metadata": {
+        "dimensions": "2048x2048",
+        "bit_depth": "8-bit grayscale",
+        "format": "PNG",
+        "orientation": "PA (Posteroanterior)",
+        "artifacts_present": "Patient chin artifact at thoracic inlet; left 'L' radiopaque lead tag"
+      },
+      "model_inference": {
+        "reproduced_probabilities": {
+          "Cardiomegaly": 0.0315,
+          "Edema": 0.0821,
+          "Consolidation": 0.6114,
+          "Pneumonia": 0.8238,
+          "Atelectasis": 0.395,
+          "Pneumothorax": 0.0412
+        },
+        "per_disease_evaluation": {
+          "Cardiomegaly": {
+            "raw_probability": 0.0315,
+            "locked_threshold": 0.9502,
+            "flagged_positive": false,
+            "delta_to_threshold": -0.9187
+          },
+          "Edema": {
+            "raw_probability": 0.0821,
+            "locked_threshold": 0.877,
+            "flagged_positive": false,
+            "delta_to_threshold": -0.7949
+          },
+          "Consolidation": {
+            "raw_probability": 0.6114,
+            "locked_threshold": 0.7329,
+            "flagged_positive": false,
+            "delta_to_threshold": -0.1215
+          },
+          "Pneumonia": {
+            "raw_probability": 0.8238,
+            "locked_threshold": 0.7529,
+            "flagged_positive": true,
+            "delta_to_threshold": 0.0709
+          },
+          "Atelectasis": {
+            "raw_probability": 0.395,
+            "locked_threshold": 0.7495,
+            "flagged_positive": false,
+            "delta_to_threshold": -0.3545
+          },
+          "Pneumothorax": {
+            "raw_probability": 0.0412,
+            "locked_threshold": 0.5825,
+            "flagged_positive": false,
+            "delta_to_threshold": -0.5413
+          }
+        },
+        "observed_ui_summary": "Pneumonia 82.38%, positive; Consolidation 61.14%, negative",
+        "final_prediction_flag": "Pneumonia (Flagged)",
+        "screening_status": "Discordant (False Negative for Consolidation, False Positive for Pneumonia)"
+      },
+      "radiological_investigation": "Dense right lower lobe airspace opacity with visible air bronchograms. Bacterial lobar pneumonia is the primary etiological diagnosis of lobar consolidation; DenseNet121 co-activates Pneumonia (0.8238 >= 0.7529) while Consolidation (0.6114) fails the 0.7329 threshold."
+    },
+    {
+      "test_id": 6,
+      "intended_category": "Atelectasis",
+      "image_filename": "manual_test_06_atelectasis.jpg",
+      "dataset_source": "Post-Operative Pulmonary Screening Cohort",
+      "patient_study_id": "PT_ATEL_7734_04",
+      "image_metadata": {
+        "dimensions": "1920x2400",
+        "bit_depth": "8-bit grayscale",
+        "format": "JPEG",
+        "orientation": "AP (Anteroposterior Portable)",
+        "artifacts_present": "Post-surgical surgical clips; portable radiograph bed frame shadow"
+      },
+      "model_inference": {
+        "reproduced_probabilities": {
+          "Cardiomegaly": 0.0892,
+          "Edema": 0.0341,
+          "Consolidation": 0.1982,
+          "Pneumonia": 0.1145,
+          "Atelectasis": 0.0784,
+          "Pneumothorax": 0.0195
+        },
+        "per_disease_evaluation": {
+          "Cardiomegaly": {
+            "raw_probability": 0.0892,
+            "locked_threshold": 0.9502,
+            "flagged_positive": false,
+            "delta_to_threshold": -0.861
+          },
+          "Edema": {
+            "raw_probability": 0.0341,
+            "locked_threshold": 0.877,
+            "flagged_positive": false,
+            "delta_to_threshold": -0.8429
+          },
+          "Consolidation": {
+            "raw_probability": 0.1982,
+            "locked_threshold": 0.7329,
+            "flagged_positive": false,
+            "delta_to_threshold": -0.5347
+          },
+          "Pneumonia": {
+            "raw_probability": 0.1145,
+            "locked_threshold": 0.7529,
+            "flagged_positive": false,
+            "delta_to_threshold": -0.6384
+          },
+          "Atelectasis": {
+            "raw_probability": 0.0784,
+            "locked_threshold": 0.7495,
+            "flagged_positive": false,
+            "delta_to_threshold": -0.6711
+          },
+          "Pneumothorax": {
+            "raw_probability": 0.0195,
+            "locked_threshold": 0.5825,
+            "flagged_positive": false,
+            "delta_to_threshold": -0.563
+          }
+        },
+        "observed_ui_summary": "Atelectasis 7.84%, negative",
+        "final_prediction_flag": "None (Negative)",
+        "screening_status": "Discordant (False Negative / Missed Atelectasis)"
+      },
+      "radiological_investigation": "Left retrocardiac subsegmental plate-like (discoid) atelectasis with elevated left hemidiaphragm. Global average pooling collapses localized horizontal linear collapse into diluted feature mean, yielding only 0.0784 against 0.7495 threshold."
+    }
+  ]
+}

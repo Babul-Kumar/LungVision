@@ -14,6 +14,7 @@ class ModelRegistryEntry(BaseModel):
     input_size: List[int] = [224, 224, 3]
     labels: List[str]
     status: str
+    active_threshold_set: str = "NIH ChestX-ray14 Locked Production Thresholds (Frozen)"
     metrics: Dict[str, Any] = {}
     calibration: Dict[str, Any] = {}
 
@@ -41,5 +42,8 @@ class ResearchMetricsResponse(StandardResponse):
     nih_test_metrics: List[Dict[str, Any]]
     chexpert_external_metrics: List[Dict[str, Any]]
     vindr_external_metrics: List[Dict[str, Any]]
+    external_validation_metrics: Optional[Dict[str, Any]] = None
+    threshold_comparison: Optional[Dict[str, Any]] = None
+    manual_tests_audit: Optional[List[Dict[str, Any]]] = None
+    active_threshold_set: str = "NIH ChestX-ray14 Locked Production Thresholds (Frozen)"
     notes: List[str]
-

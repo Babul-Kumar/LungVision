@@ -105,7 +105,7 @@ describe('Clinical Explainability & Dual-Mode UI', () => {
     expect(screen.getByText(/CheXpert Drop/i)).toBeInTheDocument();
 
     // Verify raw float precision display
-    expect(screen.getByText(/0\.222500/i)).toBeInTheDocument();
+    expect(screen.getAllByText(/0\.222500/i).length).toBeGreaterThan(0);
   });
 
   it('renders Disease Explainability Modal with medical definitions and diagnostic caveats', () => {

@@ -1,0 +1,1157 @@
+{
+  "metadata": {
+    "title": "DenseNet121 External Validation Confusion Matrices",
+    "source_dataset": "Stanford CheXpert External Cohort",
+    "evaluable_images": 202,
+    "patient_disjoint_test_images": 152
+  },
+  "full_cohort_confusion": {
+    "operating_point_A_locked_nih": {
+      "Cardiomegaly": {
+        "threshold": 0.9502,
+        "matrix_2x2": [
+          [
+            132,
+            4
+          ],
+          [
+            60,
+            6
+          ]
+        ],
+        "matrix_labels": [
+          [
+            "True Negative (TN)",
+            "False Positive (FP)"
+          ],
+          [
+            "False Negative (FN)",
+            "True Positive (TP)"
+          ]
+        ],
+        "counts": {
+          "true_negatives": 132,
+          "false_positives": 4,
+          "false_negatives": 60,
+          "true_positives": 6,
+          "total": 202
+        }
+      },
+      "Edema": {
+        "threshold": 0.877,
+        "matrix_2x2": [
+          [
+            160,
+            0
+          ],
+          [
+            39,
+            3
+          ]
+        ],
+        "matrix_labels": [
+          [
+            "True Negative (TN)",
+            "False Positive (FP)"
+          ],
+          [
+            "False Negative (FN)",
+            "True Positive (TP)"
+          ]
+        ],
+        "counts": {
+          "true_negatives": 160,
+          "false_positives": 0,
+          "false_negatives": 39,
+          "true_positives": 3,
+          "total": 202
+        }
+      },
+      "Consolidation": {
+        "threshold": 0.7329,
+        "matrix_2x2": [
+          [
+            153,
+            17
+          ],
+          [
+            18,
+            14
+          ]
+        ],
+        "matrix_labels": [
+          [
+            "True Negative (TN)",
+            "False Positive (FP)"
+          ],
+          [
+            "False Negative (FN)",
+            "True Positive (TP)"
+          ]
+        ],
+        "counts": {
+          "true_negatives": 153,
+          "false_positives": 17,
+          "false_negatives": 18,
+          "true_positives": 14,
+          "total": 202
+        }
+      },
+      "Pneumonia": {
+        "threshold": 0.7529,
+        "matrix_2x2": [
+          [
+            188,
+            6
+          ],
+          [
+            7,
+            1
+          ]
+        ],
+        "matrix_labels": [
+          [
+            "True Negative (TN)",
+            "False Positive (FP)"
+          ],
+          [
+            "False Negative (FN)",
+            "True Positive (TP)"
+          ]
+        ],
+        "counts": {
+          "true_negatives": 188,
+          "false_positives": 6,
+          "false_negatives": 7,
+          "true_positives": 1,
+          "total": 202
+        }
+      },
+      "Atelectasis": {
+        "threshold": 0.7495,
+        "matrix_2x2": [
+          [
+            117,
+            10
+          ],
+          [
+            60,
+            15
+          ]
+        ],
+        "matrix_labels": [
+          [
+            "True Negative (TN)",
+            "False Positive (FP)"
+          ],
+          [
+            "False Negative (FN)",
+            "True Positive (TP)"
+          ]
+        ],
+        "counts": {
+          "true_negatives": 117,
+          "false_positives": 10,
+          "false_negatives": 60,
+          "true_positives": 15,
+          "total": 202
+        }
+      },
+      "Pneumothorax": {
+        "threshold": 0.5825,
+        "matrix_2x2": [
+          [
+            135,
+            60
+          ],
+          [
+            4,
+            3
+          ]
+        ],
+        "matrix_labels": [
+          [
+            "True Negative (TN)",
+            "False Positive (FP)"
+          ],
+          [
+            "False Negative (FN)",
+            "True Positive (TP)"
+          ]
+        ],
+        "counts": {
+          "true_negatives": 135,
+          "false_positives": 60,
+          "false_negatives": 4,
+          "true_positives": 3,
+          "total": 202
+        }
+      }
+    },
+    "operating_point_B_external_youden": {
+      "Cardiomegaly": {
+        "threshold": 0.0298,
+        "matrix_2x2": [
+          [
+            59,
+            77
+          ],
+          [
+            4,
+            62
+          ]
+        ],
+        "matrix_labels": [
+          [
+            "True Negative (TN)",
+            "False Positive (FP)"
+          ],
+          [
+            "False Negative (FN)",
+            "True Positive (TP)"
+          ]
+        ],
+        "counts": {
+          "true_negatives": 59,
+          "false_positives": 77,
+          "false_negatives": 4,
+          "true_positives": 62,
+          "total": 202
+        }
+      },
+      "Edema": {
+        "threshold": 0.1486,
+        "matrix_2x2": [
+          [
+            129,
+            31
+          ],
+          [
+            21,
+            21
+          ]
+        ],
+        "matrix_labels": [
+          [
+            "True Negative (TN)",
+            "False Positive (FP)"
+          ],
+          [
+            "False Negative (FN)",
+            "True Positive (TP)"
+          ]
+        ],
+        "counts": {
+          "true_negatives": 129,
+          "false_positives": 31,
+          "false_negatives": 21,
+          "true_positives": 21,
+          "total": 202
+        }
+      },
+      "Consolidation": {
+        "threshold": 0.6336,
+        "matrix_2x2": [
+          [
+            132,
+            38
+          ],
+          [
+            13,
+            19
+          ]
+        ],
+        "matrix_labels": [
+          [
+            "True Negative (TN)",
+            "False Positive (FP)"
+          ],
+          [
+            "False Negative (FN)",
+            "True Positive (TP)"
+          ]
+        ],
+        "counts": {
+          "true_negatives": 132,
+          "false_positives": 38,
+          "false_negatives": 13,
+          "true_positives": 19,
+          "total": 202
+        }
+      },
+      "Pneumonia": {
+        "threshold": 0.0298,
+        "matrix_2x2": [
+          [
+            12,
+            182
+          ],
+          [
+            0,
+            8
+          ]
+        ],
+        "matrix_labels": [
+          [
+            "True Negative (TN)",
+            "False Positive (FP)"
+          ],
+          [
+            "False Negative (FN)",
+            "True Positive (TP)"
+          ]
+        ],
+        "counts": {
+          "true_negatives": 12,
+          "false_positives": 182,
+          "false_negatives": 0,
+          "true_positives": 8,
+          "total": 202
+        }
+      },
+      "Atelectasis": {
+        "threshold": 0.307,
+        "matrix_2x2": [
+          [
+            60,
+            67
+          ],
+          [
+            12,
+            63
+          ]
+        ],
+        "matrix_labels": [
+          [
+            "True Negative (TN)",
+            "False Positive (FP)"
+          ],
+          [
+            "False Negative (FN)",
+            "True Positive (TP)"
+          ]
+        ],
+        "counts": {
+          "true_negatives": 60,
+          "false_positives": 67,
+          "false_negatives": 12,
+          "true_positives": 63,
+          "total": 202
+        }
+      },
+      "Pneumothorax": {
+        "threshold": 0.1189,
+        "matrix_2x2": [
+          [
+            47,
+            148
+          ],
+          [
+            0,
+            7
+          ]
+        ],
+        "matrix_labels": [
+          [
+            "True Negative (TN)",
+            "False Positive (FP)"
+          ],
+          [
+            "False Negative (FN)",
+            "True Positive (TP)"
+          ]
+        ],
+        "counts": {
+          "true_negatives": 47,
+          "false_positives": 148,
+          "false_negatives": 0,
+          "true_positives": 7,
+          "total": 202
+        }
+      }
+    },
+    "operating_point_C_high_sensitivity": {
+      "Cardiomegaly": {
+        "threshold": 0.01,
+        "matrix_2x2": [
+          [
+            37,
+            99
+          ],
+          [
+            0,
+            66
+          ]
+        ],
+        "matrix_labels": [
+          [
+            "True Negative (TN)",
+            "False Positive (FP)"
+          ],
+          [
+            "False Negative (FN)",
+            "True Positive (TP)"
+          ]
+        ],
+        "counts": {
+          "true_negatives": 37,
+          "false_positives": 99,
+          "false_negatives": 0,
+          "true_positives": 66,
+          "total": 202
+        }
+      },
+      "Edema": {
+        "threshold": 0.01,
+        "matrix_2x2": [
+          [
+            26,
+            134
+          ],
+          [
+            1,
+            41
+          ]
+        ],
+        "matrix_labels": [
+          [
+            "True Negative (TN)",
+            "False Positive (FP)"
+          ],
+          [
+            "False Negative (FN)",
+            "True Positive (TP)"
+          ]
+        ],
+        "counts": {
+          "true_negatives": 26,
+          "false_positives": 134,
+          "false_negatives": 1,
+          "true_positives": 41,
+          "total": 202
+        }
+      },
+      "Consolidation": {
+        "threshold": 0.01,
+        "matrix_2x2": [
+          [
+            0,
+            170
+          ],
+          [
+            0,
+            32
+          ]
+        ],
+        "matrix_labels": [
+          [
+            "True Negative (TN)",
+            "False Positive (FP)"
+          ],
+          [
+            "False Negative (FN)",
+            "True Positive (TP)"
+          ]
+        ],
+        "counts": {
+          "true_negatives": 0,
+          "false_positives": 170,
+          "false_negatives": 0,
+          "true_positives": 32,
+          "total": 202
+        }
+      },
+      "Pneumonia": {
+        "threshold": 0.01,
+        "matrix_2x2": [
+          [
+            4,
+            190
+          ],
+          [
+            0,
+            8
+          ]
+        ],
+        "matrix_labels": [
+          [
+            "True Negative (TN)",
+            "False Positive (FP)"
+          ],
+          [
+            "False Negative (FN)",
+            "True Positive (TP)"
+          ]
+        ],
+        "counts": {
+          "true_negatives": 4,
+          "false_positives": 190,
+          "false_negatives": 0,
+          "true_positives": 8,
+          "total": 202
+        }
+      },
+      "Atelectasis": {
+        "threshold": 0.01,
+        "matrix_2x2": [
+          [
+            1,
+            126
+          ],
+          [
+            0,
+            75
+          ]
+        ],
+        "matrix_labels": [
+          [
+            "True Negative (TN)",
+            "False Positive (FP)"
+          ],
+          [
+            "False Negative (FN)",
+            "True Positive (TP)"
+          ]
+        ],
+        "counts": {
+          "true_negatives": 1,
+          "false_positives": 126,
+          "false_negatives": 0,
+          "true_positives": 75,
+          "total": 202
+        }
+      },
+      "Pneumothorax": {
+        "threshold": 0.01,
+        "matrix_2x2": [
+          [
+            4,
+            191
+          ],
+          [
+            0,
+            7
+          ]
+        ],
+        "matrix_labels": [
+          [
+            "True Negative (TN)",
+            "False Positive (FP)"
+          ],
+          [
+            "False Negative (FN)",
+            "True Positive (TP)"
+          ]
+        ],
+        "counts": {
+          "true_negatives": 4,
+          "false_positives": 191,
+          "false_negatives": 0,
+          "true_positives": 7,
+          "total": 202
+        }
+      }
+    }
+  },
+  "held_out_test_split_confusion": {
+    "operating_point_A_locked_nih": {
+      "Cardiomegaly": {
+        "threshold": 0.9502,
+        "matrix_2x2": [
+          [
+            97,
+            3
+          ],
+          [
+            49,
+            3
+          ]
+        ],
+        "matrix_labels": [
+          [
+            "True Negative (TN)",
+            "False Positive (FP)"
+          ],
+          [
+            "False Negative (FN)",
+            "True Positive (TP)"
+          ]
+        ],
+        "counts": {
+          "true_negatives": 97,
+          "false_positives": 3,
+          "false_negatives": 49,
+          "true_positives": 3,
+          "total": 152
+        }
+      },
+      "Edema": {
+        "threshold": 0.877,
+        "matrix_2x2": [
+          [
+            118,
+            0
+          ],
+          [
+            31,
+            3
+          ]
+        ],
+        "matrix_labels": [
+          [
+            "True Negative (TN)",
+            "False Positive (FP)"
+          ],
+          [
+            "False Negative (FN)",
+            "True Positive (TP)"
+          ]
+        ],
+        "counts": {
+          "true_negatives": 118,
+          "false_positives": 0,
+          "false_negatives": 31,
+          "true_positives": 3,
+          "total": 152
+        }
+      },
+      "Consolidation": {
+        "threshold": 0.7329,
+        "matrix_2x2": [
+          [
+            110,
+            14
+          ],
+          [
+            17,
+            11
+          ]
+        ],
+        "matrix_labels": [
+          [
+            "True Negative (TN)",
+            "False Positive (FP)"
+          ],
+          [
+            "False Negative (FN)",
+            "True Positive (TP)"
+          ]
+        ],
+        "counts": {
+          "true_negatives": 110,
+          "false_positives": 14,
+          "false_negatives": 17,
+          "true_positives": 11,
+          "total": 152
+        }
+      },
+      "Pneumonia": {
+        "threshold": 0.7529,
+        "matrix_2x2": [
+          [
+            140,
+            6
+          ],
+          [
+            5,
+            1
+          ]
+        ],
+        "matrix_labels": [
+          [
+            "True Negative (TN)",
+            "False Positive (FP)"
+          ],
+          [
+            "False Negative (FN)",
+            "True Positive (TP)"
+          ]
+        ],
+        "counts": {
+          "true_negatives": 140,
+          "false_positives": 6,
+          "false_negatives": 5,
+          "true_positives": 1,
+          "total": 152
+        }
+      },
+      "Atelectasis": {
+        "threshold": 0.7495,
+        "matrix_2x2": [
+          [
+            85,
+            8
+          ],
+          [
+            48,
+            11
+          ]
+        ],
+        "matrix_labels": [
+          [
+            "True Negative (TN)",
+            "False Positive (FP)"
+          ],
+          [
+            "False Negative (FN)",
+            "True Positive (TP)"
+          ]
+        ],
+        "counts": {
+          "true_negatives": 85,
+          "false_positives": 8,
+          "false_negatives": 48,
+          "true_positives": 11,
+          "total": 152
+        }
+      },
+      "Pneumothorax": {
+        "threshold": 0.5825,
+        "matrix_2x2": [
+          [
+            107,
+            40
+          ],
+          [
+            2,
+            3
+          ]
+        ],
+        "matrix_labels": [
+          [
+            "True Negative (TN)",
+            "False Positive (FP)"
+          ],
+          [
+            "False Negative (FN)",
+            "True Positive (TP)"
+          ]
+        ],
+        "counts": {
+          "true_negatives": 107,
+          "false_positives": 40,
+          "false_negatives": 2,
+          "true_positives": 3,
+          "total": 152
+        }
+      }
+    },
+    "operating_point_B_external_youden": {
+      "Cardiomegaly": {
+        "threshold": 0.0298,
+        "matrix_2x2": [
+          [
+            42,
+            58
+          ],
+          [
+            4,
+            48
+          ]
+        ],
+        "matrix_labels": [
+          [
+            "True Negative (TN)",
+            "False Positive (FP)"
+          ],
+          [
+            "False Negative (FN)",
+            "True Positive (TP)"
+          ]
+        ],
+        "counts": {
+          "true_negatives": 42,
+          "false_positives": 58,
+          "false_negatives": 4,
+          "true_positives": 48,
+          "total": 152
+        }
+      },
+      "Edema": {
+        "threshold": 0.1486,
+        "matrix_2x2": [
+          [
+            93,
+            25
+          ],
+          [
+            17,
+            17
+          ]
+        ],
+        "matrix_labels": [
+          [
+            "True Negative (TN)",
+            "False Positive (FP)"
+          ],
+          [
+            "False Negative (FN)",
+            "True Positive (TP)"
+          ]
+        ],
+        "counts": {
+          "true_negatives": 93,
+          "false_positives": 25,
+          "false_negatives": 17,
+          "true_positives": 17,
+          "total": 152
+        }
+      },
+      "Consolidation": {
+        "threshold": 0.6336,
+        "matrix_2x2": [
+          [
+            96,
+            28
+          ],
+          [
+            13,
+            15
+          ]
+        ],
+        "matrix_labels": [
+          [
+            "True Negative (TN)",
+            "False Positive (FP)"
+          ],
+          [
+            "False Negative (FN)",
+            "True Positive (TP)"
+          ]
+        ],
+        "counts": {
+          "true_negatives": 96,
+          "false_positives": 28,
+          "false_negatives": 13,
+          "true_positives": 15,
+          "total": 152
+        }
+      },
+      "Pneumonia": {
+        "threshold": 0.0298,
+        "matrix_2x2": [
+          [
+            8,
+            138
+          ],
+          [
+            0,
+            6
+          ]
+        ],
+        "matrix_labels": [
+          [
+            "True Negative (TN)",
+            "False Positive (FP)"
+          ],
+          [
+            "False Negative (FN)",
+            "True Positive (TP)"
+          ]
+        ],
+        "counts": {
+          "true_negatives": 8,
+          "false_positives": 138,
+          "false_negatives": 0,
+          "true_positives": 6,
+          "total": 152
+        }
+      },
+      "Atelectasis": {
+        "threshold": 0.307,
+        "matrix_2x2": [
+          [
+            45,
+            48
+          ],
+          [
+            12,
+            47
+          ]
+        ],
+        "matrix_labels": [
+          [
+            "True Negative (TN)",
+            "False Positive (FP)"
+          ],
+          [
+            "False Negative (FN)",
+            "True Positive (TP)"
+          ]
+        ],
+        "counts": {
+          "true_negatives": 45,
+          "false_positives": 48,
+          "false_negatives": 12,
+          "true_positives": 47,
+          "total": 152
+        }
+      },
+      "Pneumothorax": {
+        "threshold": 0.1189,
+        "matrix_2x2": [
+          [
+            35,
+            112
+          ],
+          [
+            0,
+            5
+          ]
+        ],
+        "matrix_labels": [
+          [
+            "True Negative (TN)",
+            "False Positive (FP)"
+          ],
+          [
+            "False Negative (FN)",
+            "True Positive (TP)"
+          ]
+        ],
+        "counts": {
+          "true_negatives": 35,
+          "false_positives": 112,
+          "false_negatives": 0,
+          "true_positives": 5,
+          "total": 152
+        }
+      }
+    },
+    "operating_point_C_high_sensitivity": {
+      "Cardiomegaly": {
+        "threshold": 0.01,
+        "matrix_2x2": [
+          [
+            26,
+            74
+          ],
+          [
+            0,
+            52
+          ]
+        ],
+        "matrix_labels": [
+          [
+            "True Negative (TN)",
+            "False Positive (FP)"
+          ],
+          [
+            "False Negative (FN)",
+            "True Positive (TP)"
+          ]
+        ],
+        "counts": {
+          "true_negatives": 26,
+          "false_positives": 74,
+          "false_negatives": 0,
+          "true_positives": 52,
+          "total": 152
+        }
+      },
+      "Edema": {
+        "threshold": 0.01,
+        "matrix_2x2": [
+          [
+            17,
+            101
+          ],
+          [
+            1,
+            33
+          ]
+        ],
+        "matrix_labels": [
+          [
+            "True Negative (TN)",
+            "False Positive (FP)"
+          ],
+          [
+            "False Negative (FN)",
+            "True Positive (TP)"
+          ]
+        ],
+        "counts": {
+          "true_negatives": 17,
+          "false_positives": 101,
+          "false_negatives": 1,
+          "true_positives": 33,
+          "total": 152
+        }
+      },
+      "Consolidation": {
+        "threshold": 0.01,
+        "matrix_2x2": [
+          [
+            0,
+            124
+          ],
+          [
+            0,
+            28
+          ]
+        ],
+        "matrix_labels": [
+          [
+            "True Negative (TN)",
+            "False Positive (FP)"
+          ],
+          [
+            "False Negative (FN)",
+            "True Positive (TP)"
+          ]
+        ],
+        "counts": {
+          "true_negatives": 0,
+          "false_positives": 124,
+          "false_negatives": 0,
+          "true_positives": 28,
+          "total": 152
+        }
+      },
+      "Pneumonia": {
+        "threshold": 0.01,
+        "matrix_2x2": [
+          [
+            3,
+            143
+          ],
+          [
+            0,
+            6
+          ]
+        ],
+        "matrix_labels": [
+          [
+            "True Negative (TN)",
+            "False Positive (FP)"
+          ],
+          [
+            "False Negative (FN)",
+            "True Positive (TP)"
+          ]
+        ],
+        "counts": {
+          "true_negatives": 3,
+          "false_positives": 143,
+          "false_negatives": 0,
+          "true_positives": 6,
+          "total": 152
+        }
+      },
+      "Atelectasis": {
+        "threshold": 0.01,
+        "matrix_2x2": [
+          [
+            0,
+            93
+          ],
+          [
+            0,
+            59
+          ]
+        ],
+        "matrix_labels": [
+          [
+            "True Negative (TN)",
+            "False Positive (FP)"
+          ],
+          [
+            "False Negative (FN)",
+            "True Positive (TP)"
+          ]
+        ],
+        "counts": {
+          "true_negatives": 0,
+          "false_positives": 93,
+          "false_negatives": 0,
+          "true_positives": 59,
+          "total": 152
+        }
+      },
+      "Pneumothorax": {
+        "threshold": 0.01,
+        "matrix_2x2": [
+          [
+            4,
+            143
+          ],
+          [
+            0,
+            5
+          ]
+        ],
+        "matrix_labels": [
+          [
+            "True Negative (TN)",
+            "False Positive (FP)"
+          ],
+          [
+            "False Negative (FN)",
+            "True Positive (TP)"
+          ]
+        ],
+        "counts": {
+          "true_negatives": 4,
+          "false_positives": 143,
+          "false_negatives": 0,
+          "true_positives": 5,
+          "total": 152
+        }
+      }
+    }
+  },
+  "cross_pathology_co_activation_matrix": {
+    "description": "Number of cases where true ground truth for row pathology triggered positive model flag for column pathology under locked NIH thresholds.",
+    "matrix": {
+      "Cardiomegaly": {
+        "Cardiomegaly": 6,
+        "Edema": 1,
+        "Consolidation": 16,
+        "Pneumonia": 2,
+        "Atelectasis": 12,
+        "Pneumothorax": 15
+      },
+      "Edema": {
+        "Cardiomegaly": 2,
+        "Edema": 3,
+        "Consolidation": 11,
+        "Pneumonia": 4,
+        "Atelectasis": 3,
+        "Pneumothorax": 11
+      },
+      "Consolidation": {
+        "Cardiomegaly": 4,
+        "Edema": 2,
+        "Consolidation": 14,
+        "Pneumonia": 2,
+        "Atelectasis": 4,
+        "Pneumothorax": 11
+      },
+      "Pneumonia": {
+        "Cardiomegaly": 0,
+        "Edema": 0,
+        "Consolidation": 6,
+        "Pneumonia": 1,
+        "Atelectasis": 0,
+        "Pneumothorax": 3
+      },
+      "Atelectasis": {
+        "Cardiomegaly": 2,
+        "Edema": 2,
+        "Consolidation": 23,
+        "Pneumonia": 5,
+        "Atelectasis": 15,
+        "Pneumothorax": 27
+      },
+      "Pneumothorax": {
+        "Cardiomegaly": 0,
+        "Edema": 0,
+        "Consolidation": 1,
+        "Pneumonia": 0,
+        "Atelectasis": 0,
+        "Pneumothorax": 3
+      }
+    }
+  }
+}

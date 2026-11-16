@@ -1,0 +1,693 @@
+{
+  "metadata": {
+    "title": "Operating Point Threshold Sensitivity & Specificity Comparison",
+    "description": "Comparison between Locked NIH Production Thresholds, Independent External Calibrated Thresholds, and High-Sensitivity Screening Thresholds.",
+    "calibration_protocol": "Calibrated strictly on patient-disjoint calibration split (50 patients, 51 images). Evaluated on held-out test split (150 patients, 151 images) and full external cohort (200 patients, 202 images).",
+    "active_production_thresholds": "Locked NIH ChestX-ray14 Validation Thresholds (Preserved Unchanged in Production)",
+    "operating_points": {
+      "A": "Original NIH-calibrated thresholds (Frozen Production)",
+      "B": "External Calibrated thresholds (Youden J optimal on calibration split)",
+      "C": "Documented High-Sensitivity screening operating point (target >= 80% sensitivity)"
+    }
+  },
+  "diseases": {
+    "Cardiomegaly": {
+      "operating_point_A_locked_nih": {
+        "threshold": 0.9502,
+        "description": "Original NIH validation threshold calibrated on single-institution cohort",
+        "calibration_cohort_result": {
+          "threshold": 0.9502,
+          "sensitivity": 0.2143,
+          "specificity": 0.9722,
+          "precision": 0.75,
+          "f1_score": 0.3333,
+          "true_positives": 3,
+          "false_positives": 1,
+          "true_negatives": 35,
+          "false_negatives": 11
+        },
+        "held_out_test_result": {
+          "threshold": 0.9502,
+          "sensitivity": 0.0577,
+          "specificity": 0.97,
+          "precision": 0.5,
+          "f1_score": 0.1034,
+          "true_positives": 3,
+          "false_positives": 3,
+          "true_negatives": 97,
+          "false_negatives": 49
+        },
+        "full_external_cohort_result": {
+          "threshold": 0.9502,
+          "sensitivity": 0.0909,
+          "specificity": 0.9706,
+          "precision": 0.6,
+          "f1_score": 0.1579,
+          "true_positives": 6,
+          "false_positives": 4,
+          "true_negatives": 132,
+          "false_negatives": 60
+        }
+      },
+      "operating_point_B_external_youden": {
+        "threshold": 0.0298,
+        "description": "Balanced Youden's J optimal threshold derived on independent calibration split",
+        "calibration_cohort_result": {
+          "threshold": 0.0298,
+          "sensitivity": 1.0,
+          "specificity": 0.4722,
+          "precision": 0.4242,
+          "f1_score": 0.5957,
+          "true_positives": 14,
+          "false_positives": 19,
+          "true_negatives": 17,
+          "false_negatives": 0
+        },
+        "held_out_test_result": {
+          "threshold": 0.0298,
+          "sensitivity": 0.9231,
+          "specificity": 0.42,
+          "precision": 0.4528,
+          "f1_score": 0.6076,
+          "true_positives": 48,
+          "false_positives": 58,
+          "true_negatives": 42,
+          "false_negatives": 4
+        },
+        "full_external_cohort_result": {
+          "threshold": 0.0298,
+          "sensitivity": 0.9394,
+          "specificity": 0.4338,
+          "precision": 0.446,
+          "f1_score": 0.6049,
+          "true_positives": 62,
+          "false_positives": 77,
+          "true_negatives": 59,
+          "false_negatives": 4
+        }
+      },
+      "operating_point_C_high_sensitivity": {
+        "threshold": 0.01,
+        "description": "Sensitivity-oriented operating point targeting >= 80% sensitivity for triage screening",
+        "calibration_cohort_result": {
+          "threshold": 0.01,
+          "sensitivity": 1.0,
+          "specificity": 0.3056,
+          "precision": 0.359,
+          "f1_score": 0.5283,
+          "true_positives": 14,
+          "false_positives": 25,
+          "true_negatives": 11,
+          "false_negatives": 0
+        },
+        "held_out_test_result": {
+          "threshold": 0.01,
+          "sensitivity": 1.0,
+          "specificity": 0.26,
+          "precision": 0.4127,
+          "f1_score": 0.5843,
+          "true_positives": 52,
+          "false_positives": 74,
+          "true_negatives": 26,
+          "false_negatives": 0
+        },
+        "full_external_cohort_result": {
+          "threshold": 0.01,
+          "sensitivity": 1.0,
+          "specificity": 0.2721,
+          "precision": 0.4,
+          "f1_score": 0.5714,
+          "true_positives": 66,
+          "false_positives": 99,
+          "true_negatives": 37,
+          "false_negatives": 0
+        }
+      }
+    },
+    "Edema": {
+      "operating_point_A_locked_nih": {
+        "threshold": 0.877,
+        "description": "Original NIH validation threshold calibrated on single-institution cohort",
+        "calibration_cohort_result": {
+          "threshold": 0.877,
+          "sensitivity": 0.0,
+          "specificity": 1.0,
+          "precision": 0.0,
+          "f1_score": 0.0,
+          "true_positives": 0,
+          "false_positives": 0,
+          "true_negatives": 42,
+          "false_negatives": 8
+        },
+        "held_out_test_result": {
+          "threshold": 0.877,
+          "sensitivity": 0.0882,
+          "specificity": 1.0,
+          "precision": 1.0,
+          "f1_score": 0.1622,
+          "true_positives": 3,
+          "false_positives": 0,
+          "true_negatives": 118,
+          "false_negatives": 31
+        },
+        "full_external_cohort_result": {
+          "threshold": 0.877,
+          "sensitivity": 0.0714,
+          "specificity": 1.0,
+          "precision": 1.0,
+          "f1_score": 0.1333,
+          "true_positives": 3,
+          "false_positives": 0,
+          "true_negatives": 160,
+          "false_negatives": 39
+        }
+      },
+      "operating_point_B_external_youden": {
+        "threshold": 0.1486,
+        "description": "Balanced Youden's J optimal threshold derived on independent calibration split",
+        "calibration_cohort_result": {
+          "threshold": 0.1486,
+          "sensitivity": 0.5,
+          "specificity": 0.8571,
+          "precision": 0.4,
+          "f1_score": 0.4444,
+          "true_positives": 4,
+          "false_positives": 6,
+          "true_negatives": 36,
+          "false_negatives": 4
+        },
+        "held_out_test_result": {
+          "threshold": 0.1486,
+          "sensitivity": 0.5,
+          "specificity": 0.7881,
+          "precision": 0.4048,
+          "f1_score": 0.4474,
+          "true_positives": 17,
+          "false_positives": 25,
+          "true_negatives": 93,
+          "false_negatives": 17
+        },
+        "full_external_cohort_result": {
+          "threshold": 0.1486,
+          "sensitivity": 0.5,
+          "specificity": 0.8063,
+          "precision": 0.4038,
+          "f1_score": 0.4468,
+          "true_positives": 21,
+          "false_positives": 31,
+          "true_negatives": 129,
+          "false_negatives": 21
+        }
+      },
+      "operating_point_C_high_sensitivity": {
+        "threshold": 0.01,
+        "description": "Sensitivity-oriented operating point targeting >= 80% sensitivity for triage screening",
+        "calibration_cohort_result": {
+          "threshold": 0.01,
+          "sensitivity": 1.0,
+          "specificity": 0.2143,
+          "precision": 0.1951,
+          "f1_score": 0.3265,
+          "true_positives": 8,
+          "false_positives": 33,
+          "true_negatives": 9,
+          "false_negatives": 0
+        },
+        "held_out_test_result": {
+          "threshold": 0.01,
+          "sensitivity": 0.9706,
+          "specificity": 0.1441,
+          "precision": 0.2463,
+          "f1_score": 0.3929,
+          "true_positives": 33,
+          "false_positives": 101,
+          "true_negatives": 17,
+          "false_negatives": 1
+        },
+        "full_external_cohort_result": {
+          "threshold": 0.01,
+          "sensitivity": 0.9762,
+          "specificity": 0.1625,
+          "precision": 0.2343,
+          "f1_score": 0.3779,
+          "true_positives": 41,
+          "false_positives": 134,
+          "true_negatives": 26,
+          "false_negatives": 1
+        }
+      }
+    },
+    "Consolidation": {
+      "operating_point_A_locked_nih": {
+        "threshold": 0.7329,
+        "description": "Original NIH validation threshold calibrated on single-institution cohort",
+        "calibration_cohort_result": {
+          "threshold": 0.7329,
+          "sensitivity": 0.75,
+          "specificity": 0.9348,
+          "precision": 0.5,
+          "f1_score": 0.6,
+          "true_positives": 3,
+          "false_positives": 3,
+          "true_negatives": 43,
+          "false_negatives": 1
+        },
+        "held_out_test_result": {
+          "threshold": 0.7329,
+          "sensitivity": 0.3929,
+          "specificity": 0.8871,
+          "precision": 0.44,
+          "f1_score": 0.4151,
+          "true_positives": 11,
+          "false_positives": 14,
+          "true_negatives": 110,
+          "false_negatives": 17
+        },
+        "full_external_cohort_result": {
+          "threshold": 0.7329,
+          "sensitivity": 0.4375,
+          "specificity": 0.9,
+          "precision": 0.4516,
+          "f1_score": 0.4444,
+          "true_positives": 14,
+          "false_positives": 17,
+          "true_negatives": 153,
+          "false_negatives": 18
+        }
+      },
+      "operating_point_B_external_youden": {
+        "threshold": 0.6336,
+        "description": "Balanced Youden's J optimal threshold derived on independent calibration split",
+        "calibration_cohort_result": {
+          "threshold": 0.6336,
+          "sensitivity": 1.0,
+          "specificity": 0.7826,
+          "precision": 0.2857,
+          "f1_score": 0.4444,
+          "true_positives": 4,
+          "false_positives": 10,
+          "true_negatives": 36,
+          "false_negatives": 0
+        },
+        "held_out_test_result": {
+          "threshold": 0.6336,
+          "sensitivity": 0.5357,
+          "specificity": 0.7742,
+          "precision": 0.3488,
+          "f1_score": 0.4225,
+          "true_positives": 15,
+          "false_positives": 28,
+          "true_negatives": 96,
+          "false_negatives": 13
+        },
+        "full_external_cohort_result": {
+          "threshold": 0.6336,
+          "sensitivity": 0.5938,
+          "specificity": 0.7765,
+          "precision": 0.3333,
+          "f1_score": 0.427,
+          "true_positives": 19,
+          "false_positives": 38,
+          "true_negatives": 132,
+          "false_negatives": 13
+        }
+      },
+      "operating_point_C_high_sensitivity": {
+        "threshold": 0.01,
+        "description": "Sensitivity-oriented operating point targeting >= 80% sensitivity for triage screening",
+        "calibration_cohort_result": {
+          "threshold": 0.01,
+          "sensitivity": 1.0,
+          "specificity": 0.0,
+          "precision": 0.08,
+          "f1_score": 0.1481,
+          "true_positives": 4,
+          "false_positives": 46,
+          "true_negatives": 0,
+          "false_negatives": 0
+        },
+        "held_out_test_result": {
+          "threshold": 0.01,
+          "sensitivity": 1.0,
+          "specificity": 0.0,
+          "precision": 0.1842,
+          "f1_score": 0.3111,
+          "true_positives": 28,
+          "false_positives": 124,
+          "true_negatives": 0,
+          "false_negatives": 0
+        },
+        "full_external_cohort_result": {
+          "threshold": 0.01,
+          "sensitivity": 1.0,
+          "specificity": 0.0,
+          "precision": 0.1584,
+          "f1_score": 0.2735,
+          "true_positives": 32,
+          "false_positives": 170,
+          "true_negatives": 0,
+          "false_negatives": 0
+        }
+      }
+    },
+    "Pneumonia": {
+      "operating_point_A_locked_nih": {
+        "threshold": 0.7529,
+        "description": "Original NIH validation threshold calibrated on single-institution cohort",
+        "calibration_cohort_result": {
+          "threshold": 0.7529,
+          "sensitivity": 0.0,
+          "specificity": 1.0,
+          "precision": 0.0,
+          "f1_score": 0.0,
+          "true_positives": 0,
+          "false_positives": 0,
+          "true_negatives": 48,
+          "false_negatives": 2
+        },
+        "held_out_test_result": {
+          "threshold": 0.7529,
+          "sensitivity": 0.1667,
+          "specificity": 0.9589,
+          "precision": 0.1429,
+          "f1_score": 0.1538,
+          "true_positives": 1,
+          "false_positives": 6,
+          "true_negatives": 140,
+          "false_negatives": 5
+        },
+        "full_external_cohort_result": {
+          "threshold": 0.7529,
+          "sensitivity": 0.125,
+          "specificity": 0.9691,
+          "precision": 0.1429,
+          "f1_score": 0.1333,
+          "true_positives": 1,
+          "false_positives": 6,
+          "true_negatives": 188,
+          "false_negatives": 7
+        }
+      },
+      "operating_point_B_external_youden": {
+        "threshold": 0.0298,
+        "description": "Balanced Youden's J optimal threshold derived on independent calibration split",
+        "calibration_cohort_result": {
+          "threshold": 0.0298,
+          "sensitivity": 1.0,
+          "specificity": 0.0833,
+          "precision": 0.0435,
+          "f1_score": 0.0833,
+          "true_positives": 2,
+          "false_positives": 44,
+          "true_negatives": 4,
+          "false_negatives": 0
+        },
+        "held_out_test_result": {
+          "threshold": 0.0298,
+          "sensitivity": 1.0,
+          "specificity": 0.0548,
+          "precision": 0.0417,
+          "f1_score": 0.08,
+          "true_positives": 6,
+          "false_positives": 138,
+          "true_negatives": 8,
+          "false_negatives": 0
+        },
+        "full_external_cohort_result": {
+          "threshold": 0.0298,
+          "sensitivity": 1.0,
+          "specificity": 0.0619,
+          "precision": 0.0421,
+          "f1_score": 0.0808,
+          "true_positives": 8,
+          "false_positives": 182,
+          "true_negatives": 12,
+          "false_negatives": 0
+        }
+      },
+      "operating_point_C_high_sensitivity": {
+        "threshold": 0.01,
+        "description": "Sensitivity-oriented operating point targeting >= 80% sensitivity for triage screening",
+        "calibration_cohort_result": {
+          "threshold": 0.01,
+          "sensitivity": 1.0,
+          "specificity": 0.0208,
+          "precision": 0.0408,
+          "f1_score": 0.0784,
+          "true_positives": 2,
+          "false_positives": 47,
+          "true_negatives": 1,
+          "false_negatives": 0
+        },
+        "held_out_test_result": {
+          "threshold": 0.01,
+          "sensitivity": 1.0,
+          "specificity": 0.0205,
+          "precision": 0.0403,
+          "f1_score": 0.0774,
+          "true_positives": 6,
+          "false_positives": 143,
+          "true_negatives": 3,
+          "false_negatives": 0
+        },
+        "full_external_cohort_result": {
+          "threshold": 0.01,
+          "sensitivity": 1.0,
+          "specificity": 0.0206,
+          "precision": 0.0404,
+          "f1_score": 0.0777,
+          "true_positives": 8,
+          "false_positives": 190,
+          "true_negatives": 4,
+          "false_negatives": 0
+        }
+      }
+    },
+    "Atelectasis": {
+      "operating_point_A_locked_nih": {
+        "threshold": 0.7495,
+        "description": "Original NIH validation threshold calibrated on single-institution cohort",
+        "calibration_cohort_result": {
+          "threshold": 0.7495,
+          "sensitivity": 0.25,
+          "specificity": 0.9412,
+          "precision": 0.6667,
+          "f1_score": 0.3636,
+          "true_positives": 4,
+          "false_positives": 2,
+          "true_negatives": 32,
+          "false_negatives": 12
+        },
+        "held_out_test_result": {
+          "threshold": 0.7495,
+          "sensitivity": 0.1864,
+          "specificity": 0.914,
+          "precision": 0.5789,
+          "f1_score": 0.2821,
+          "true_positives": 11,
+          "false_positives": 8,
+          "true_negatives": 85,
+          "false_negatives": 48
+        },
+        "full_external_cohort_result": {
+          "threshold": 0.7495,
+          "sensitivity": 0.2,
+          "specificity": 0.9213,
+          "precision": 0.6,
+          "f1_score": 0.3,
+          "true_positives": 15,
+          "false_positives": 10,
+          "true_negatives": 117,
+          "false_negatives": 60
+        }
+      },
+      "operating_point_B_external_youden": {
+        "threshold": 0.307,
+        "description": "Balanced Youden's J optimal threshold derived on independent calibration split",
+        "calibration_cohort_result": {
+          "threshold": 0.307,
+          "sensitivity": 1.0,
+          "specificity": 0.4412,
+          "precision": 0.4571,
+          "f1_score": 0.6275,
+          "true_positives": 16,
+          "false_positives": 19,
+          "true_negatives": 15,
+          "false_negatives": 0
+        },
+        "held_out_test_result": {
+          "threshold": 0.307,
+          "sensitivity": 0.7966,
+          "specificity": 0.4839,
+          "precision": 0.4947,
+          "f1_score": 0.6104,
+          "true_positives": 47,
+          "false_positives": 48,
+          "true_negatives": 45,
+          "false_negatives": 12
+        },
+        "full_external_cohort_result": {
+          "threshold": 0.307,
+          "sensitivity": 0.84,
+          "specificity": 0.4724,
+          "precision": 0.4846,
+          "f1_score": 0.6146,
+          "true_positives": 63,
+          "false_positives": 67,
+          "true_negatives": 60,
+          "false_negatives": 12
+        }
+      },
+      "operating_point_C_high_sensitivity": {
+        "threshold": 0.01,
+        "description": "Sensitivity-oriented operating point targeting >= 80% sensitivity for triage screening",
+        "calibration_cohort_result": {
+          "threshold": 0.01,
+          "sensitivity": 1.0,
+          "specificity": 0.0294,
+          "precision": 0.3265,
+          "f1_score": 0.4923,
+          "true_positives": 16,
+          "false_positives": 33,
+          "true_negatives": 1,
+          "false_negatives": 0
+        },
+        "held_out_test_result": {
+          "threshold": 0.01,
+          "sensitivity": 1.0,
+          "specificity": 0.0,
+          "precision": 0.3882,
+          "f1_score": 0.5592,
+          "true_positives": 59,
+          "false_positives": 93,
+          "true_negatives": 0,
+          "false_negatives": 0
+        },
+        "full_external_cohort_result": {
+          "threshold": 0.01,
+          "sensitivity": 1.0,
+          "specificity": 0.0079,
+          "precision": 0.3731,
+          "f1_score": 0.5435,
+          "true_positives": 75,
+          "false_positives": 126,
+          "true_negatives": 1,
+          "false_negatives": 0
+        }
+      }
+    },
+    "Pneumothorax": {
+      "operating_point_A_locked_nih": {
+        "threshold": 0.5825,
+        "description": "Original NIH validation threshold calibrated on single-institution cohort",
+        "calibration_cohort_result": {
+          "threshold": 0.5825,
+          "sensitivity": 0.0,
+          "specificity": 0.5833,
+          "precision": 0.0,
+          "f1_score": 0.0,
+          "true_positives": 0,
+          "false_positives": 20,
+          "true_negatives": 28,
+          "false_negatives": 2
+        },
+        "held_out_test_result": {
+          "threshold": 0.5825,
+          "sensitivity": 0.6,
+          "specificity": 0.7279,
+          "precision": 0.0698,
+          "f1_score": 0.125,
+          "true_positives": 3,
+          "false_positives": 40,
+          "true_negatives": 107,
+          "false_negatives": 2
+        },
+        "full_external_cohort_result": {
+          "threshold": 0.5825,
+          "sensitivity": 0.4286,
+          "specificity": 0.6923,
+          "precision": 0.0476,
+          "f1_score": 0.0857,
+          "true_positives": 3,
+          "false_positives": 60,
+          "true_negatives": 135,
+          "false_negatives": 4
+        }
+      },
+      "operating_point_B_external_youden": {
+        "threshold": 0.1189,
+        "description": "Balanced Youden's J optimal threshold derived on independent calibration split",
+        "calibration_cohort_result": {
+          "threshold": 0.1189,
+          "sensitivity": 1.0,
+          "specificity": 0.25,
+          "precision": 0.0526,
+          "f1_score": 0.1,
+          "true_positives": 2,
+          "false_positives": 36,
+          "true_negatives": 12,
+          "false_negatives": 0
+        },
+        "held_out_test_result": {
+          "threshold": 0.1189,
+          "sensitivity": 1.0,
+          "specificity": 0.2381,
+          "precision": 0.0427,
+          "f1_score": 0.082,
+          "true_positives": 5,
+          "false_positives": 112,
+          "true_negatives": 35,
+          "false_negatives": 0
+        },
+        "full_external_cohort_result": {
+          "threshold": 0.1189,
+          "sensitivity": 1.0,
+          "specificity": 0.241,
+          "precision": 0.0452,
+          "f1_score": 0.0864,
+          "true_positives": 7,
+          "false_positives": 148,
+          "true_negatives": 47,
+          "false_negatives": 0
+        }
+      },
+      "operating_point_C_high_sensitivity": {
+        "threshold": 0.01,
+        "description": "Sensitivity-oriented operating point targeting >= 80% sensitivity for triage screening",
+        "calibration_cohort_result": {
+          "threshold": 0.01,
+          "sensitivity": 1.0,
+          "specificity": 0.0,
+          "precision": 0.04,
+          "f1_score": 0.0769,
+          "true_positives": 2,
+          "false_positives": 48,
+          "true_negatives": 0,
+          "false_negatives": 0
+        },
+        "held_out_test_result": {
+          "threshold": 0.01,
+          "sensitivity": 1.0,
+          "specificity": 0.0272,
+          "precision": 0.0338,
+          "f1_score": 0.0654,
+          "true_positives": 5,
+          "false_positives": 143,
+          "true_negatives": 4,
+          "false_negatives": 0
+        },
+        "full_external_cohort_result": {
+          "threshold": 0.01,
+          "sensitivity": 1.0,
+          "specificity": 0.0205,
+          "precision": 0.0354,
+          "f1_score": 0.0683,
+          "true_positives": 7,
+          "false_positives": 191,
+          "true_negatives": 4,
+          "false_negatives": 0
+        }
+      }
+    }
+  }
+}

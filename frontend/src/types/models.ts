@@ -12,8 +12,9 @@ export interface ModelInfo {
   input_size?: number[];
   labels: string[];
   status?: string;
+  active_threshold_set?: string;
   metrics?: Record<string, any>;
-  calibration?: Record<string, number>;
+  calibration?: Record<string, any>;
   training_dataset?: string | null;
   validation_auc?: number | null;
   parameters_count?: number | null;
@@ -80,6 +81,34 @@ export interface VindrMetricRow {
   positive_prevalence?: number;
 }
 
+export interface ManualTestAuditItem {
+  test_id: number;
+  intended_category: string;
+  image_filename: string;
+  dataset_source: string;
+  patient_study_id: string;
+  image_metadata: {
+    dimensions: string;
+    bit_depth: string;
+    format: string;
+    orientation: string;
+    artifacts_present: string;
+  };
+  model_inference: {
+    reproduced_probabilities: Record<string, number>;
+    per_disease_evaluation: Record<string, {
+      raw_probability: number;
+      locked_threshold: number;
+      flagged_positive: boolean;
+      delta_to_threshold: number;
+    }>;
+    observed_ui_summary: string;
+    final_prediction_flag: string;
+    screening_status: string;
+  };
+  radiological_investigation: string;
+}
+
 export interface ResearchMetricsResponse {
   success: boolean;
   message?: string;
@@ -87,6 +116,10 @@ export interface ResearchMetricsResponse {
   nih_test_metrics: NihMetricRow[];
   chexpert_external_metrics: ChexpertMetricRow[];
   vindr_external_metrics: VindrMetricRow[];
+  external_validation_metrics?: Record<string, any> | null;
+  threshold_comparison?: Record<string, any> | null;
+  manual_tests_audit?: ManualTestAuditItem[] | null;
+  active_threshold_set?: string;
   notes: string[];
   disclaimer?: string;
 }

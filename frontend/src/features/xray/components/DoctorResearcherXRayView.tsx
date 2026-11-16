@@ -41,6 +41,87 @@ export const DoctorResearcherXRayView: React.FC<DoctorResearcherXRayViewProps> =
   onOpenGlossary,
 }) => {
   const [showRawJson, setShowRawJson] = useState(false);
+  const [referenceCaseId, setReferenceCaseId] = useState<string>('unverified');
+
+  const REFERENCE_CASES: Record<string, { name: string; labels: Record<DiseaseName, 0 | 1> }> = {
+    unverified: {
+      name: 'Unverified Reference / Ad-hoc Upload',
+      labels: {
+        Cardiomegaly: 0,
+        Edema: 0,
+        Consolidation: 0,
+        Pneumonia: 0,
+        Atelectasis: 0,
+        Pneumothorax: 0,
+      },
+    },
+    test1_normal: {
+      name: 'Test 1: Normal (Healthy Thoracic Baseline)',
+      labels: {
+        Cardiomegaly: 0,
+        Edema: 0,
+        Consolidation: 0,
+        Pneumonia: 0,
+        Atelectasis: 0,
+        Pneumothorax: 0,
+      },
+    },
+    test2_cardiomegaly: {
+      name: 'Test 2: Cardiomegaly (CTR > 0.62)',
+      labels: {
+        Cardiomegaly: 1,
+        Edema: 0,
+        Consolidation: 0,
+        Pneumonia: 0,
+        Atelectasis: 0,
+        Pneumothorax: 0,
+      },
+    },
+    test3_pneumothorax: {
+      name: 'Test 3: Pneumothorax (Apical Pleural Line)',
+      labels: {
+        Cardiomegaly: 0,
+        Edema: 0,
+        Consolidation: 0,
+        Pneumonia: 0,
+        Atelectasis: 0,
+        Pneumothorax: 1,
+      },
+    },
+    test4_edema: {
+      name: 'Test 4: Edema (Perihilar Bat-Wing Infiltrate)',
+      labels: {
+        Cardiomegaly: 0,
+        Edema: 1,
+        Consolidation: 0,
+        Pneumonia: 0,
+        Atelectasis: 0,
+        Pneumothorax: 0,
+      },
+    },
+    test5_consolidation: {
+      name: 'Test 5: Consolidation (Dense Lobar Opacity)',
+      labels: {
+        Cardiomegaly: 0,
+        Edema: 0,
+        Consolidation: 1,
+        Pneumonia: 0,
+        Atelectasis: 0,
+        Pneumothorax: 0,
+      },
+    },
+    test6_atelectasis: {
+      name: 'Test 6: Atelectasis (Discoid Basilar Collapse)',
+      labels: {
+        Cardiomegaly: 0,
+        Edema: 0,
+        Consolidation: 0,
+        Pneumonia: 0,
+        Atelectasis: 1,
+        Pneumothorax: 0,
+      },
+    },
+  };
 
   // If no analysis executed
   if (!multiLabelResult && !binaryResult) {
@@ -199,6 +280,131 @@ export const DoctorResearcherXRayView: React.FC<DoctorResearcherXRayViewProps> =
                   </div>
                 );
               })}
+            </div>
+          </div>
+
+          {/* Research Evaluation Panel */}
+          <div className="p-4 rounded-xl bg-white border border-[#e2e8f0] space-y-3.5 shadow-xs">
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-[#e2e8f0] pb-3">
+              <div>
+                <h4 className="text-xs font-bold uppercase tracking-wider text-[#1a082e] flex items-center gap-1.5">
+                  <ShieldAlert className="w-4 h-4 text-amber-600" />
+                  Research Evaluation & Clinical Concordance Panel
+                </h4>
+                <p className="text-[11px] text-[#5e4b75] mt-0.5">
+                  Separates continuous model activation scores from locked experimental thresholds and reference dataset labels.
+                </p>
+              </div>
+
+              {/* Reference Dataset Case Selector */}
+              <div className="flex items-center gap-2">
+                <label className="text-[11px] font-semibold text-[#5e4b75]">Reference Case:</label>
+                <select
+                  value={referenceCaseId}
+                  onChange={(e) => setReferenceCaseId(e.target.value)}
+                  className="text-xs font-mono bg-[#f8fafc] border border-[#cbd5e1] rounded-lg px-2.5 py-1 text-[#1a082e] focus:outline-none focus:ring-1 focus:ring-amber-500"
+                >
+                  {Object.entries(REFERENCE_CASES).map(([key, item]) => (
+                    <option key={key} value={key}>
+                      {item.name}
+                    </option>
+                  ))}
+                </select>
+              </div>
+            </div>
+
+            <div className="overflow-x-auto">
+              <table className="w-full text-left text-xs border-collapse font-mono">
+                <thead>
+                  <tr className="border-b border-[#e2e8f0] text-[#5e4b75] bg-slate-50 font-semibold uppercase text-[10px] tracking-wider">
+                    <th className="py-2.5 px-3">Pathology</th>
+                    <th className="py-2.5 px-3">Model Activation Score</th>
+                    <th className="py-2.5 px-3">Locked Threshold</th>
+                    <th className="py-2.5 px-3">Predicted Flag</th>
+                    <th className="py-2.5 px-3">Reference Label</th>
+                    <th className="py-2.5 px-3 font-sans">Evaluation Status</th>
+                  </tr>
+                </thead>
+                <tbody className="divide-y divide-[#e2e8f0] text-[#1a082e]">
+                  {EXPECTED_6_DISEASES.map((disease) => {
+                    const pred = multiLabelResult.predictions[disease];
+                    const rawScore = pred.probability;
+                    const threshold = pred.threshold;
+                    const flag = pred.experimental_flag;
+
+                    const hasRef = referenceCaseId !== 'unverified';
+                    const refLabel = hasRef ? REFERENCE_CASES[referenceCaseId].labels[disease] : null;
+
+                    let status = 'Unverified reference';
+                    let statusBadgeClass = 'bg-slate-100 text-slate-700 border-slate-300';
+
+                    if (hasRef && refLabel !== null) {
+                      if (refLabel === 1 && flag) {
+                        status = 'Correct positive';
+                        statusBadgeClass = 'bg-emerald-100 text-emerald-800 border-emerald-300 font-bold';
+                      } else if (refLabel === 0 && !flag) {
+                        status = 'Correct negative';
+                        statusBadgeClass = 'bg-slate-100 text-slate-700 border-slate-300';
+                      } else if (refLabel === 0 && flag) {
+                        status = 'False positive';
+                        statusBadgeClass = 'bg-amber-100 text-amber-900 border-amber-300 font-bold';
+                      } else if (refLabel === 1 && !flag) {
+                        status = 'False negative';
+                        statusBadgeClass = 'bg-rose-100 text-rose-900 border-rose-300 font-bold';
+                      }
+                    }
+
+                    return (
+                      <tr key={disease} className="hover:bg-amber-50/40 transition-colors">
+                        <td className="py-2.5 px-3 font-semibold text-[#1a082e]">{disease}</td>
+                        <td className="py-2.5 px-3 font-bold text-amber-900">
+                          {rawScore.toFixed(6)}
+                          <span className="text-[10px] text-[#5e4b75] block font-sans font-normal">
+                            Uncalibrated Scalar
+                          </span>
+                        </td>
+                        <td className="py-2.5 px-3 text-[#5e4b75]">
+                          {threshold.toFixed(6)}
+                          <span className="text-[10px] text-[#5e4b75] block font-sans font-normal">
+                            NIH Locked
+                          </span>
+                        </td>
+                        <td className="py-2.5 px-3">
+                          <span
+                            className={`inline-block px-2 py-0.5 rounded text-[11px] font-semibold border ${
+                              flag
+                                ? 'bg-amber-100 text-amber-900 border-amber-300'
+                                : 'bg-slate-100 text-[#5e4b75] border-[#cbd5e1]'
+                            }`}
+                          >
+                            {flag ? 'Flagged (Positive)' : 'Below Threshold (Negative)'}
+                          </span>
+                        </td>
+                        <td className="py-2.5 px-3 text-[#5e4b75]">
+                          {hasRef ? (
+                            refLabel === 1 ? (
+                              <span className="text-amber-800 font-bold">Positive (1)</span>
+                            ) : (
+                              <span>Negative (0)</span>
+                            )
+                          ) : (
+                            <span className="text-slate-400 italic">Unspecified</span>
+                          )}
+                        </td>
+                        <td className="py-2.5 px-3 font-sans">
+                          <span className={`inline-block px-2 py-0.5 rounded text-[11px] border ${statusBadgeClass}`}>
+                            {status}
+                          </span>
+                        </td>
+                      </tr>
+                    );
+                  })}
+                </tbody>
+              </table>
+            </div>
+
+            <div className="p-3 bg-amber-50/70 border border-amber-200/80 rounded-lg text-[11px] text-[#5e4b75] leading-relaxed">
+              <strong className="text-amber-950">Scientific Integrity Notice:</strong> Model activation scores are raw continuous mathematical values $[0.0, 1.0]$ derived from deep convolutional feature representations on retrospective data. They do <strong>NOT</strong> represent clinical diagnostic probabilities, disease likelihood percentages, or prognostic risks.
             </div>
           </div>
 

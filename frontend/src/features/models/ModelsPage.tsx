@@ -40,6 +40,56 @@ export const ModelsPage: React.FC = () => {
       .finally(() => setLoading(false));
   }, [fetchHealth]);
 
+  const [activeThresholdTab, setActiveThresholdTab] = useState<'A' | 'B' | 'C'>('A');
+
+  const OPERATING_POINTS = {
+    A: {
+      name: 'Operating Point A: NIH ChestX-ray14 Locked Production Thresholds',
+      status: 'Active (Enforced by Backend)',
+      isActive: true,
+      badgeVariant: 'emerald' as const,
+      description: 'Locked production thresholds calibrated on NIH ChestX-ray14 validation set. Enforced across all live inference endpoints.',
+      thresholds: {
+        Cardiomegaly: 0.9502,
+        Edema: 0.8770,
+        Consolidation: 0.7329,
+        Pneumonia: 0.7529,
+        Atelectasis: 0.7495,
+        Pneumothorax: 0.5825,
+      },
+    },
+    B: {
+      name: 'Operating Point B: Stanford CheXpert External Calibrated Thresholds',
+      status: 'Research Comparison Only',
+      isActive: false,
+      badgeVariant: 'amber' as const,
+      description: 'Balanced Youden J optimal operating point calibrated on independent CheXpert calibration cohort (50 patients). Offsets AP projection and institutional bias.',
+      thresholds: {
+        Cardiomegaly: 0.0298,
+        Edema: 0.1486,
+        Consolidation: 0.6336,
+        Pneumonia: 0.0298,
+        Atelectasis: 0.3070,
+        Pneumothorax: 0.1189,
+      },
+    },
+    C: {
+      name: 'Operating Point C: High-Sensitivity Screening Triage Operating Point',
+      status: 'Research Comparison Only',
+      isActive: false,
+      badgeVariant: 'silver' as const,
+      description: 'Screening operating point targeting ≥ 80% sensitivity for rapid clinical rule-out of acute thoracic findings on external cohorts.',
+      thresholds: {
+        Cardiomegaly: 0.0100,
+        Edema: 0.0100,
+        Consolidation: 0.0100,
+        Pneumonia: 0.0100,
+        Atelectasis: 0.0100,
+        Pneumothorax: 0.0100,
+      },
+    },
+  };
+
   const selectedModel = models.find((m) => m.id === selectedModelId) || models[0];
 
   // Sanitize path to never expose absolute local user paths
@@ -234,13 +284,61 @@ export const ModelsPage: React.FC = () => {
                 </div>
 
                 {/* Target Output Labels & Calibrated Operating Thresholds */}
-                <div className="space-y-3">
-                  <h4 className="text-xs font-semibold text-[#5e4b75] uppercase tracking-wider flex items-center gap-1.5">
-                    <Sliders className="w-3.5 h-3.5 text-amber-600" />
-                    {selectedModel.id.includes('ssm')
-                      ? 'Target Anatomical Partitions & Parameterization Constraints'
-                      : 'Target Output Labels & Calibrated Decision Thresholds'}
-                  </h4>
+                <div className="space-y-4">
+                  <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+                    <h4 className="text-xs font-semibold text-[#5e4b75] uppercase tracking-wider flex items-center gap-1.5">
+                      <Sliders className="w-3.5 h-3.5 text-amber-600" />
+                      {selectedModel.id.includes('ssm')
+                        ? 'Target Anatomical Partitions & Parameterization Constraints'
+                        : 'Target Output Labels & Decision Operating Points'}
+                    </h4>
+
+                    {selectedModel.id === 'densenet121_nih_6disease' && (
+                      <Badge variant="emerald" size="sm">
+                        Active: NIH Locked Production Set
+                      </Badge>
+                    )}
+                  </div>
+
+                  {/* Active Operating Set Banner for DenseNet121 */}
+                  {selectedModel.id === 'densenet121_nih_6disease' && (
+                    <div className="p-3.5 rounded-xl border border-amber-200/80 bg-gradient-to-r from-amber-50/60 to-white space-y-2.5">
+                      <div className="flex items-center justify-between text-xs">
+                        <span className="font-semibold text-[#1a082e] flex items-center gap-1.5">
+                          <CheckCircle2 className="w-4 h-4 text-emerald-600" />
+                          Threshold Operating Point Governance
+                        </span>
+                        <span className="text-[11px] font-mono font-medium text-emerald-800 bg-emerald-100/80 px-2 py-0.5 rounded border border-emerald-300">
+                          {OPERATING_POINTS[activeThresholdTab].status}
+                        </span>
+                      </div>
+
+                      <div className="flex items-center gap-1.5 p-1 bg-slate-100/80 rounded-lg w-fit text-xs">
+                        {(['A', 'B', 'C'] as const).map((tabKey) => {
+                          const op = OPERATING_POINTS[tabKey];
+                          const isCurrent = activeThresholdTab === tabKey;
+                          return (
+                            <button
+                              key={tabKey}
+                              onClick={() => setActiveThresholdTab(tabKey)}
+                              className={`px-3 py-1 rounded-md text-xs font-medium transition-all ${
+                                isCurrent
+                                  ? 'bg-white text-[#1a082e] font-bold shadow-xs border border-[#cbd5e1]'
+                                  : 'text-[#5e4b75] hover:text-[#1a082e]'
+                              }`}
+                            >
+                              Point {tabKey} {op.isActive ? '(Active)' : '(Research)'}
+                            </button>
+                          );
+                        })}
+                      </div>
+
+                      <p className="text-[11px] text-[#5e4b75] leading-relaxed">
+                        <strong className="text-[#1a082e]">{OPERATING_POINTS[activeThresholdTab].name}:</strong>{' '}
+                        {OPERATING_POINTS[activeThresholdTab].description}
+                      </p>
+                    </div>
+                  )}
 
                   <div className="overflow-x-auto">
                     <table className="w-full text-left text-xs border-collapse font-mono">
@@ -249,16 +347,19 @@ export const ModelsPage: React.FC = () => {
                           <th className="py-2.5 px-3">Index</th>
                           <th className="py-2.5 px-3">{selectedModel.id.includes('ssm') ? 'Anatomical Structure' : 'Class Label'}</th>
                           <th className="py-2.5 px-3">{selectedModel.id.includes('ssm') ? 'Vertex Partition' : 'Operating Threshold'}</th>
-                          <th className="py-2.5 px-3">{selectedModel.id.includes('ssm') ? 'Bounding Constraint' : 'Uncalibrated Default'}</th>
-                          <th className="py-2.5 px-3 font-sans">{selectedModel.id.includes('ssm') ? 'Physiological Eigenspace Rationale' : 'Calibration Rationale & Operating Target'}</th>
+                          <th className="py-2.5 px-3">{selectedModel.id.includes('ssm') ? 'Bounding Constraint' : 'Operating Status'}</th>
+                          <th className="py-2.5 px-3 font-sans">{selectedModel.id.includes('ssm') ? 'Physiological Eigenspace Rationale' : 'Calibration Rationale & Clinical Operating Target'}</th>
                         </tr>
                       </thead>
                       <tbody className="divide-y divide-[#e2e8f0] text-[#1a082e]">
                         {selectedModel.labels.map((label, idx) => {
                           const isResNet18 = selectedModel.id.includes('resnet18');
                           const isSSM = selectedModel.id.includes('ssm');
+                          const isDenseNet = selectedModel.id === 'densenet121_nih_6disease';
 
                           let threshold: number | string = 0.5;
+                          let statusLabel = 'Locked Production';
+
                           if (isSSM) {
                             if (label.includes('Left')) {
                               threshold = '3,377 Vertices';
@@ -267,6 +368,7 @@ export const ModelsPage: React.FC = () => {
                             } else {
                               threshold = '6,737 Vertices';
                             }
+                            statusLabel = '±3.0σ (99.7%)';
                           } else if (isResNet18) {
                             if (label === 'Abnormal') {
                               threshold =
@@ -276,10 +378,14 @@ export const ModelsPage: React.FC = () => {
                             } else {
                               threshold = 'Reference (1 - P)';
                             }
+                            statusLabel = '90% Sens Target';
+                          } else if (isDenseNet) {
+                            threshold = OPERATING_POINTS[activeThresholdTab].thresholds[label as keyof typeof OPERATING_POINTS['A']['thresholds']] ?? 0.5;
+                            statusLabel = activeThresholdTab === 'A' ? 'Active Production' : 'Research Comparison';
                           } else {
                             threshold = selectedModel.calibration?.[label] ?? 0.5;
                           }
-                          const defaultThreshold = isSSM ? '±3.0σ (99.7%)' : (0.5).toFixed(4);
+
                           return (
                             <tr key={label} className="hover:bg-amber-50/40 transition-colors">
                               <td className="py-2.5 px-3 text-[#5e4b75]">{idx}</td>
@@ -287,8 +393,10 @@ export const ModelsPage: React.FC = () => {
                               <td className="py-2.5 px-3 text-amber-800 font-bold">
                                 {typeof threshold === 'number' ? threshold.toFixed(4) : threshold}
                               </td>
-                              <td className="py-2.5 px-3 text-[#5e4b75] font-medium">
-                                {defaultThreshold}
+                              <td className="py-2.5 px-3 text-[#5e4b75] font-medium text-[11px]">
+                                <span className={activeThresholdTab === 'A' && isDenseNet ? 'text-emerald-700 font-semibold' : ''}>
+                                  {statusLabel}
+                                </span>
                               </td>
                               <td className="py-2.5 px-3 text-[#5e4b75] font-sans text-[11px]">
                                 {isSSM
@@ -301,7 +409,11 @@ export const ModelsPage: React.FC = () => {
                                   ? label === 'Abnormal'
                                     ? `Calibrated at 90.0% Target Sensitivity on IN-CXR validation split (Spec: ${((selectedModel.calibration?.achieved_specificity ?? (selectedModel.id.includes('augmented') ? 0.8222 : 0.7952)) * 100).toFixed(1)}%)`
                                     : 'Negative triage class assigned when P(Abnormal) < operating threshold'
-                                  : 'NIH validation set empirical Youden J / F1 optimization'}
+                                  : activeThresholdTab === 'A'
+                                  ? 'NIH validation set empirical Youden J optimization (Locked in Live Backend)'
+                                  : activeThresholdTab === 'B'
+                                  ? 'Stanford CheXpert independent calibration split balanced operating point'
+                                  : 'Emergency triage operating point targeting ≥ 80% sensitivity for clinical rule-out'}
                               </td>
                             </tr>
                           );

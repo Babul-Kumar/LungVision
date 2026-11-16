@@ -36,6 +36,7 @@ class RegistryService:
                 "Cardiomegaly", "Edema", "Consolidation", "Pneumonia", "Atelectasis", "Pneumothorax"
             ],
             status="production_frozen",
+            active_threshold_set="NIH ChestX-ray14 Locked Production Thresholds (Frozen)",
             metrics={
                 "training_dataset": "NIH ChestX-ray14 (112,120 images)",
                 "checkpoint_epoch": 4,
@@ -50,7 +51,34 @@ class RegistryService:
                 "Pneumonia": 0.752930,
                 "Atelectasis": 0.749512,
                 "Pneumothorax": 0.582520,
-                "default_threshold": 0.5000
+                "default_threshold": 0.5000,
+                "active_threshold_set": "Operating Point A: NIH ChestX-ray14 Locked Production Thresholds (Frozen)",
+                "alternative_operating_points": {
+                    "operating_point_A_locked_nih": {
+                        "Cardiomegaly": 0.9502,
+                        "Edema": 0.8770,
+                        "Consolidation": 0.7329,
+                        "Pneumonia": 0.7529,
+                        "Atelectasis": 0.7495,
+                        "Pneumothorax": 0.5825
+                    },
+                    "operating_point_B_external_youden": {
+                        "Cardiomegaly": 0.0298,
+                        "Edema": 0.1486,
+                        "Consolidation": 0.6336,
+                        "Pneumonia": 0.0298,
+                        "Atelectasis": 0.3070,
+                        "Pneumothorax": 0.1189
+                    },
+                    "operating_point_C_high_sensitivity": {
+                        "Cardiomegaly": 0.0100,
+                        "Edema": 0.0100,
+                        "Consolidation": 0.0100,
+                        "Pneumonia": 0.0100,
+                        "Atelectasis": 0.0100,
+                        "Pneumothorax": 0.0100
+                    }
+                }
             }
         )
 
@@ -65,6 +93,7 @@ class RegistryService:
             input_size=[224, 224, 3],
             labels=["Normal", "Abnormal"],
             status="production_frozen",
+            active_threshold_set="Validation Set 90% Sensitivity Point (Frozen)",
             metrics={
                 "training_dataset": "IN-CXR (12,600 images)",
                 "checkpoint_epoch": 4,
@@ -94,6 +123,7 @@ class RegistryService:
             input_size=[224, 224, 3],
             labels=["Normal", "Abnormal"],
             status="production_frozen",
+            active_threshold_set="Validation Set 90% Sensitivity Point (Frozen)",
             metrics={
                 "training_dataset": "IN-CXR (Gaussian blur + rotation augmented)",
                 "checkpoint_epoch": 1,
@@ -123,6 +153,7 @@ class RegistryService:
             input_size=[16, 3],
             labels=["Left Lung", "Right Lung", "Bilateral Lungs"],
             status="production_frozen",
+            active_threshold_set="Mahalanobis ±3.0σ (99.7% Gaussian Mass)",
             metrics={
                 "training_dataset": "LUNA16 / LIDC-IDRI (430 verified scans, 301 train / 64 val / 65 test)",
                 "modes": 20,
@@ -153,10 +184,17 @@ class RegistryService:
         return self.cached_models[model_id]
 
     def get_research_metrics(self) -> ResearchMetricsResponse:
-        """Aggregates verified historical evaluation metrics directly from saved CSVs."""
+        """Aggregates verified historical evaluation metrics directly from saved CSVs and JSON artifacts."""
         nih_metrics = self._read_csv_dicts(settings.NIH_TEST_METRICS_PATH)
         chexpert_metrics = self._read_csv_dicts(settings.CHEXPERT_METRICS_PATH)
         vindr_metrics = self._read_csv_dicts(settings.VINDR_METRICS_PATH)
+
+        # Load modern research evaluation artifacts if generated
+        eval_dir = BASE_DIR / "research" / "evaluation"
+        ext_metrics = self._load_json(eval_dir / "classwise_metrics.json")
+        thresh_comp = self._load_json(eval_dir / "threshold_comparison.json")
+        manual_audit_data = self._load_json(eval_dir / "manual_test_reproduction.json")
+        manual_audit = manual_audit_data.get("manual_tests_audit") if manual_audit_data else None
 
         notes = [
             "NIH metrics reflect calibrated test set performance across 6 multi-label diseases.",
@@ -169,8 +207,24 @@ class RegistryService:
             nih_test_metrics=nih_metrics,
             chexpert_external_metrics=chexpert_metrics,
             vindr_external_metrics=vindr_metrics,
+            external_validation_metrics=ext_metrics,
+            threshold_comparison=thresh_comp,
+            manual_tests_audit=manual_audit,
+            active_threshold_set="NIH ChestX-ray14 Locked Production Thresholds (Frozen)",
             notes=notes
         )
+
+    @staticmethod
+    def _load_json(path: Path) -> Optional[Dict[str, Any]]:
+        """Safely loads a JSON file dictionary if present."""
+        if not path.exists():
+            return None
+        try:
+            with open(path, mode="r", encoding="utf-8") as f:
+                return json.load(f)
+        except Exception as e:
+            logger.warning(f"Error loading JSON from {path}: {e}")
+            return None
 
     @staticmethod
     def _read_csv_dicts(path: Path) -> List[Dict[str, Any]]:
@@ -184,7 +238,6 @@ class RegistryService:
             with open(path, mode="r", encoding="utf-8") as f:
                 reader = csv.DictReader(f)
                 for row in reader:
-                    # Clean numeric values
                     clean_row = {}
                     for k, v in row.items():
                         if k is None:
@@ -201,4 +254,3 @@ class RegistryService:
 
 
 registry_service = RegistryService()
-
