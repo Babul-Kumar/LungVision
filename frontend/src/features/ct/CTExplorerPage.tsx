@@ -1179,7 +1179,7 @@ export const CTExplorerPage: React.FC = () => {
         </div>
       )}
 
-      {/* TAB 3: LUNA16 Nodule Registry */}
+      {/* TAB 3: LUNA16 Nodule Registry (Ground-truth Coordinates) */}
       {activeTab === 'annotations' && (
         <Card title="Mapped LUNA16 Nodule Coordinates" subtitle="Ground-truth spatial annotations mapped to voxel grid">
           <div className="overflow-x-auto">
