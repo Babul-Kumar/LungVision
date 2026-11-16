@@ -1,0 +1,61 @@
+{
+  "report_version": "5.3.0",
+  "timestamp_utc": "2026-11-16T21:35:06Z",
+  "task": "Task E: Generalization and Data Leakage Audit",
+  "patient_overlap_audit": {
+    "total_manifest_patients": 430,
+    "unique_patient_ids_count": 430,
+    "unique_scan_ids_count": 430,
+    "train_patients_count": 301,
+    "validation_patients_count": 64,
+    "test_patients_count": 65,
+    "train_validation_overlap": [],
+    "train_test_overlap": [],
+    "validation_test_overlap": [],
+    "zero_patient_leakage_verified": true
+  },
+  "duplicate_scans_audit": {
+    "duplicate_scan_ids_found": [],
+    "duplicate_patient_ids_found": [],
+    "status": "NO_DUPLICATE_SCANS_DETECTED"
+  },
+  "pca_leakage_audit": {
+    "num_training_samples_in_pca": 301,
+    "expected_training_samples": 301,
+    "samples_match": true,
+    "pca_fitting_code_inspected": "scripts/3d_reconstruction/fit_multi_patient_ssm.py",
+    "pca_input_split_filter": "Only patients from split_manifest['train_patients'] ingested",
+    "test_shape_leakage": "NONE (Test patients were strictly excluded prior to covariance matrix formation)",
+    "canonical_template_derivation": "Template derived from reference CT volume without test subject deformation"
+  },
+  "preprocessing_audit": {
+    "radiograph_normalization": "PER_IMAGE_MIN_MAX (Normalized strictly inside synthesize_radiograph_pair per instance)",
+    "cohort_statistics_in_inference": false,
+    "centering_method": "PER_PATIENT_CENTROID (ref_centered = ref - ref.mean(axis=0))",
+    "leakage_via_preprocessing": "NONE (Zero shared normalization parameters or global stats)"
+  },
+  "checkpoint_selection_audit": {
+    "checkpoint_file": "dual_view_shape_predictor_v2_best.pth",
+    "selection_metric": "val_loss (Validation Set MSE + Mahalanobis Regularization)",
+    "best_val_loss": 3293.36728,
+    "val_loss_epochs_evaluated": 25,
+    "test_set_used_during_training": false,
+    "test_set_used_for_early_stopping": false,
+    "status": "UNCONTAMINATED_CHECKPOINT_SELECTION"
+  },
+  "external_generalization_assessment": {
+    "training_dataset_origin": "LUNA16 / LIDC-IDRI (Synthetic Calibrated Bi-planar Radiographs from CT Meshes)",
+    "evaluation_cohort_origin": "Held-Out LIDC-IDRI Test Split (Internal Validation)",
+    "external_paired_datasets_available": [
+      "CheXpert (2D Only - No paired 3D CT segmentations available)",
+      "NIH ChestX-ray14 (2D Only - No paired 3D CT segmentations available)",
+      "PadChest (2D Only - No paired 3D CT segmentations available)"
+    ],
+    "prospective_external_testing_status": "UNTESTED",
+    "scientific_integrity_declaration": "No public or institutional chest X-ray dataset currently provides simultaneous true paired dual-view radiographs (PA + Lateral) and volumetric 3D lung segmentations for external validation. Therefore, all reported metrics (ASSD 4.705 mm, HD95 9.212 mm) represent internal held-out test split performance. True multi-center external clinical generalization remains UNTESTED. Claims of clinical readiness or universal cross-site generalization are scientifically unsupported."
+  },
+  "verdict": {
+    "internal_data_leakage": "ZERO_LEAKAGE_VERIFIED (Strict patient-disjoint splits, clean preprocessing, uncorrupted checkpoint selection)",
+    "external_generalization_status": "EXPLICITLY_UNTESTED (No external paired CXR-CT cohort exists in repo; clinical claims disallowed)"
+  }
+}

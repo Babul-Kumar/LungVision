@@ -1,0 +1,142 @@
+{
+  "report_version": "5.3.0",
+  "timestamp_utc": "2026-11-16T21:33:06Z",
+  "task": "Task C: Oracle and SSM Analysis",
+  "training_isolation_audit": {
+    "train_patients_count": 301,
+    "test_patients_count": 65,
+    "patient_overlap_count": 0,
+    "pca_fitted_strictly_on_train": true,
+    "test_patients_in_svd": false,
+    "isolation_status": "VERIFIED_ZERO_LEAKAGE"
+  },
+  "eigenvector_orthogonality_verified": true,
+  "coordinate_consistency_audit": {
+    "reference_centering": "CENTROID_AT_ORIGIN (mean x,y,z = [0, 0, 0])",
+    "ssm_mean_centering": "CENTROID_AT_ORIGIN (mean x,y,z = [0, 0, 0])",
+    "vertex_correspondence": "STRICT_1_TO_1 (N = 6,737 across reference, mean, and deformed meshes)",
+    "mesh_topology": "F = 13,478 triangular faces across all synthesized surfaces",
+    "physical_units": "Physical Millimeters (mm)",
+    "orthogonality_error": 6.556510925292969e-07,
+    "coordinate_system_matches": true
+  },
+  "oracle_mode_truncation_sweep": {
+    "1": {
+      "num_modes": 1,
+      "cumulative_explained_variance_pct": 55.9744,
+      "assd_mm_mean": 3.6318,
+      "assd_mm_std": 1.7616,
+      "hd95_mm_mean": 7.2417,
+      "surface_dice_2mm_mean": 0.3213,
+      "volume_error_pct_mean": 10.5704
+    },
+    "3": {
+      "num_modes": 3,
+      "cumulative_explained_variance_pct": 99.156,
+      "assd_mm_mean": 0.6431,
+      "assd_mm_std": 0.3007,
+      "hd95_mm_mean": 1.374,
+      "surface_dice_2mm_mean": 0.9707,
+      "volume_error_pct_mean": 0.4511
+    },
+    "5": {
+      "num_modes": 5,
+      "cumulative_explained_variance_pct": 99.8068,
+      "assd_mm_mean": 0.3296,
+      "assd_mm_std": 0.1415,
+      "hd95_mm_mean": 0.5247,
+      "surface_dice_2mm_mean": 0.9994,
+      "volume_error_pct_mean": 0.1047
+    },
+    "10": {
+      "num_modes": 10,
+      "cumulative_explained_variance_pct": 99.9876,
+      "assd_mm_mean": 0.0525,
+      "assd_mm_std": 0.0289,
+      "hd95_mm_mean": 0.1221,
+      "surface_dice_2mm_mean": 0.9995,
+      "volume_error_pct_mean": 0.0371
+    },
+    "15": {
+      "num_modes": 15,
+      "cumulative_explained_variance_pct": 99.9967,
+      "assd_mm_mean": 0.0306,
+      "assd_mm_std": 0.0192,
+      "hd95_mm_mean": 0.0679,
+      "surface_dice_2mm_mean": 1.0,
+      "volume_error_pct_mean": 0.0058
+    },
+    "20": {
+      "num_modes": 20,
+      "cumulative_explained_variance_pct": 99.9987,
+      "assd_mm_mean": 0.0165,
+      "assd_mm_std": 0.0122,
+      "hd95_mm_mean": 0.0369,
+      "surface_dice_2mm_mean": 1.0,
+      "volume_error_pct_mean": 0.0022
+    }
+  },
+  "architecture_hierarchy_comparison": [
+    {
+      "tier": 1,
+      "architecture_class": "Theoretical Ceiling (Oracle CT Projection)",
+      "input_modality": "Ground-Truth 3D CT Surface (Direct Orthogonal Subspace Projection)",
+      "weights_status": "Exact Mathematical Least-Squares Linear Projection (b* = E^T Delta_s)",
+      "assd_mm": 0.0165,
+      "hd95_mm": 0.0369,
+      "surface_dice_2mm": 1.0,
+      "volume_error_pct": 0.0022,
+      "clinical_interpretation": "Theoretical minimum geometric error achievable within the 20-mode SSM subspace. Represents infinite radiographic projection fidelity and perfect visual extraction."
+    },
+    {
+      "tier": 2,
+      "architecture_class": "Phase 5B Heteroscedastic Dual-View Cross-Attention V2",
+      "input_modality": "Paired 2D Radiographs (PA + Lateral)",
+      "weights_status": "Trained PyTorch Model (Checkpoint: dual_view_shape_predictor_v2_best.pth)",
+      "assd_mm": 4.7051,
+      "hd95_mm": 9.212,
+      "surface_dice_2mm": 0.168,
+      "volume_error_pct": 10.19,
+      "clinical_interpretation": "Best learned patient-specific surface predictor. Achieves statistically significant improvement over Phase 5 baseline by estimating heteroscedastic uncertainty and bilateral residual shapes."
+    },
+    {
+      "tier": 3,
+      "architecture_class": "Phase 5 Dual-View Cross-Attention",
+      "input_modality": "Paired 2D Radiographs (PA + Lateral)",
+      "weights_status": "Trained PyTorch Model (Checkpoint: dual_view_shape_predictor_best.pth)",
+      "assd_mm": 4.8244,
+      "hd95_mm": 9.4609,
+      "surface_dice_2mm": 0.1594,
+      "volume_error_pct": 11.47,
+      "clinical_interpretation": "Standard bi-planar neural shape regression. Outperforms population mean shape but lacks mode-level uncertainty weighting and bilateral asymmetry decoupling."
+    },
+    {
+      "tier": 4,
+      "architecture_class": "Zero-Information Baseline (Mean Shape Prior)",
+      "input_modality": "None (Null radiograph, b = 0)",
+      "weights_status": "Deterministic Population Mean Geometry (s = s_bar)",
+      "assd_mm": 5.0844,
+      "hd95_mm": 10.0704,
+      "surface_dice_2mm": 0.1429,
+      "volume_error_pct": 12.82,
+      "clinical_interpretation": "Unconditioned statistical shape prior. Evaluates cohort-average anatomy against patient CT scans. Lower bound for any functional neural predictor."
+    },
+    {
+      "tier": 5,
+      "architecture_class": "Untrained Single-View Ablation Baselines (Frontal, Lateral, Concat)",
+      "input_modality": "Single 2D Radiograph (PA or Lateral) / Concat Pair",
+      "weights_status": "Untrained PyTorch Random Weights (Near-Zero Residual Output)",
+      "assd_mm": 5.0838,
+      "hd95_mm": 10.0702,
+      "surface_dice_2mm": 0.143,
+      "volume_error_pct": 12.81,
+      "clinical_interpretation": "Methodological artifact: because these architectures were evaluated without trained checkpoints, they collapsed to the mean shape prior. Not representative of true single-view performance ceilings."
+    }
+  ],
+  "verdict": {
+    "oracle_mathematical_validity": "CONFIRMED (b* = E^T Delta_s is exact orthogonal least-squares projection)",
+    "ssm_training_isolation": "CONFIRMED (Zero test patient leakage into PCA fitting)",
+    "oracle_asymptote_at_20_modes": "ASSD = 0.0165 mm, HD95 = 0.0369 mm, Surface Dice @ 2mm = 100.0%",
+    "hierarchy_clarity": "Five distinct architectural tiers rigorously documented"
+  }
+}

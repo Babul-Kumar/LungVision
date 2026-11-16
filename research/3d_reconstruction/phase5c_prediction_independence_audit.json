@@ -1,0 +1,1697 @@
+{
+  "report_version": "5.3.0",
+  "timestamp_utc": "2026-11-16T21:30:30Z",
+  "task": "Task A: Prediction Independence Audit",
+  "cohort_size": 65,
+  "checkpoint_status": {
+    "dual_view_attention_phase5": {
+      "path": "C:\\Users\\babul\\Desktop\\computer vision\\research\\3d_reconstruction\\checkpoints\\dual_view_shape_predictor_best.pth",
+      "exists": true,
+      "sha256": "44a7ea7f2471131a130288ca95911e7204aaa31e79b264ee06f80423ff92740b",
+      "status": "TRAINED_CHECKPOINT_LOADED"
+    },
+    "dual_view_heteroscedastic_phase5b": {
+      "path": "C:\\Users\\babul\\Desktop\\computer vision\\research\\3d_reconstruction\\checkpoints\\dual_view_shape_predictor_v2_best.pth",
+      "exists": true,
+      "sha256": "dd592d21d3d9f68587a88184b1f9275089fc037dbafff5e9e6c5a0114b5be413",
+      "status": "TRAINED_CHECKPOINT_LOADED"
+    },
+    "frontal_only_baseline": {
+      "path": "NONE (Instantiated with default random PyTorch weights)",
+      "exists": false,
+      "sha256": "N/A",
+      "status": "UNTRAINED_RANDOM_WEIGHTS"
+    },
+    "lateral_only_baseline": {
+      "path": "NONE (Instantiated with default random PyTorch weights)",
+      "exists": false,
+      "sha256": "N/A",
+      "status": "UNTRAINED_RANDOM_WEIGHTS"
+    },
+    "dual_view_concat_baseline": {
+      "path": "NONE (Instantiated with default random PyTorch weights)",
+      "exists": false,
+      "sha256": "N/A",
+      "status": "UNTRAINED_RANDOM_WEIGHTS"
+    }
+  },
+  "cohort_coefficient_statistics": {
+    "mean_shape": {
+      "total_coefficient_variance": 0.0,
+      "mean_l2_norm": 0.0,
+      "unique_mesh_hashes_count": 1,
+      "is_constant_prediction": true,
+      "per_mode_std": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "per_mode_mean": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ]
+    },
+    "frontal_only": {
+      "total_coefficient_variance": 0.000284,
+      "mean_l2_norm": 1.7731,
+      "unique_mesh_hashes_count": 65,
+      "is_constant_prediction": false,
+      "per_mode_std": [
+        0.0032,
+        0.0034,
+        0.003,
+        0.0037,
+        0.0034,
+        0.003,
+        0.0027,
+        0.0084,
+        0.002,
+        0.0015,
+        0.0017,
+        0.0015,
+        0.0026,
+        0.0045,
+        0.0042,
+        0.0063,
+        0.0046,
+        0.0013,
+        0.0025,
+        0.0039
+      ],
+      "per_mode_mean": [
+        -0.3309,
+        -0.0881,
+        -0.3947,
+        -0.4696,
+        0.3327,
+        0.676,
+        -0.1529,
+        -0.5387,
+        0.1865,
+        0.0873,
+        -0.6832,
+        0.4427,
+        -0.435,
+        -0.5809,
+        0.3036,
+        -0.5055,
+        -0.0839,
+        0.2426,
+        0.1713,
+        -0.3065
+      ]
+    },
+    "lateral_only": {
+      "total_coefficient_variance": 0.000544,
+      "mean_l2_norm": 1.4681,
+      "unique_mesh_hashes_count": 65,
+      "is_constant_prediction": false,
+      "per_mode_std": [
+        0.0031,
+        0.0051,
+        0.0085,
+        0.0032,
+        0.0055,
+        0.0054,
+        0.0044,
+        0.0076,
+        0.0024,
+        0.0032,
+        0.0035,
+        0.0085,
+        0.0053,
+        0.0026,
+        0.003,
+        0.0029,
+        0.0087,
+        0.0042,
+        0.0054,
+        0.0036
+      ],
+      "per_mode_mean": [
+        0.2371,
+        0.2489,
+        0.1287,
+        0.2086,
+        0.0761,
+        0.0013,
+        -0.0553,
+        0.5209,
+        -0.1371,
+        0.2369,
+        0.2796,
+        -0.5828,
+        -0.1106,
+        -0.7881,
+        0.2864,
+        0.4113,
+        0.4908,
+        -0.008,
+        0.1736,
+        -0.2194
+      ]
+    },
+    "dual_view_concat": {
+      "total_coefficient_variance": 0.001042,
+      "mean_l2_norm": 1.5515,
+      "unique_mesh_hashes_count": 65,
+      "is_constant_prediction": false,
+      "per_mode_std": [
+        0.0055,
+        0.0047,
+        0.0065,
+        0.0054,
+        0.0094,
+        0.0044,
+        0.0124,
+        0.0093,
+        0.0062,
+        0.0071,
+        0.0033,
+        0.0124,
+        0.0088,
+        0.0079,
+        0.0043,
+        0.0049,
+        0.0043,
+        0.0089,
+        0.0038,
+        0.0047
+      ],
+      "per_mode_mean": [
+        0.4378,
+        -0.3065,
+        -0.0541,
+        -0.54,
+        -0.0326,
+        0.0644,
+        0.1394,
+        -0.2456,
+        0.3609,
+        0.2607,
+        -0.127,
+        0.0535,
+        -0.0429,
+        -0.4492,
+        0.0992,
+        0.5443,
+        -0.3385,
+        -0.6762,
+        -0.3206,
+        -0.5826
+      ]
+    },
+    "dual_view_attention": {
+      "total_coefficient_variance": 1788.514893,
+      "mean_l2_norm": 42.7313,
+      "unique_mesh_hashes_count": 65,
+      "is_constant_prediction": false,
+      "per_mode_std": [
+        31.8694,
+        24.3942,
+        12.9248,
+        2.2521,
+        1.1174,
+        0.7686,
+        1.2582,
+        0.8425,
+        0.8472,
+        0.5782,
+        0.3892,
+        0.1209,
+        0.1727,
+        0.2378,
+        0.1539,
+        0.2778,
+        0.1981,
+        0.1642,
+        0.1376,
+        0.1853
+      ],
+      "per_mode_mean": [
+        2.7568,
+        -5.9944,
+        -0.0856,
+        -0.4945,
+        -0.2357,
+        0.0396,
+        0.1502,
+        0.0848,
+        0.1128,
+        0.0678,
+        -0.0216,
+        0.0125,
+        0.0377,
+        -0.0021,
+        0.1088,
+        0.0219,
+        0.0178,
+        0.0185,
+        0.0243,
+        0.0489
+      ]
+    },
+    "dual_view_v2": {
+      "total_coefficient_variance": 4286.369629,
+      "mean_l2_norm": 66.4527,
+      "unique_mesh_hashes_count": 65,
+      "is_constant_prediction": false,
+      "per_mode_std": [
+        52.3236,
+        37.9203,
+        9.6617,
+        3.7479,
+        0.7732,
+        0.7729,
+        0.5718,
+        0.7299,
+        0.6291,
+        0.6081,
+        0.2683,
+        0.1458,
+        0.2284,
+        0.2736,
+        0.1419,
+        0.1845,
+        0.2927,
+        0.1525,
+        0.1916,
+        0.1522
+      ],
+      "per_mode_mean": [
+        6.0394,
+        -11.699,
+        -1.7841,
+        0.502,
+        -0.1305,
+        0.0332,
+        -0.0315,
+        -0.0184,
+        -0.0583,
+        0.3238,
+        0.1022,
+        0.0482,
+        0.0136,
+        0.128,
+        0.0463,
+        -0.065,
+        0.0855,
+        0.03,
+        0.1207,
+        0.0335
+      ]
+    }
+  },
+  "root_cause_findings": [
+    {
+      "finding_id": "FINDING_UNTRAINED_BASELINES",
+      "severity": "CRITICAL_METHODOLOGICAL_DEFECT",
+      "description": "In scripts/3d_reconstruction/evaluate_phase5b_baselines_oracle.py, FrontalOnlyShapePredictor, LateralOnlyShapePredictor, and DualViewConcatShapePredictor were instantiated with untrained default PyTorch random weights because no trained checkpoints existed for them on disk. Their output projection layers initialized near zero produced coefficient vectors with tiny L2 norms (Frontal: 1.7731, Lateral: 1.4681, Concat: 1.5515) compared to true shape variations (Trained Phase 5 Attention: 42.7313, Trained Phase 5B V2: 66.4527). Consequently, the predicted shapes for all three baseline models remained within <0.02 mm of the population mean shape.",
+      "impact": "Frontal-only, lateral-only, and concat baselines did NOT reflect their true architectural capability. They collapsed to the mean shape prior (ASSD ~5.084 mm) solely due to absent checkpoint weights."
+    },
+    {
+      "finding_id": "FINDING_INDEPENDENCE_VERIFIED_FOR_TRAINED_MODELS",
+      "severity": "INFORMATIONAL_VERIFIED",
+      "description": "Phase 5 Attention and Phase 5B V2 Heteroscedastic models possess genuine trained weights, each producing 65 distinct prediction hashes across the 65 test patients. Pairwise coefficient distance between Phase 5 Attention and Phase 5B V2 is non-zero (mean L2 dist = 28.9319), confirming that predictions are independent and not cached or copied.",
+      "impact": "The Phase 5B V2 architecture produces truly novel, patient-specific 3D lung surfaces distinct from both the mean shape and prior Phase 5 predictions."
+    },
+    {
+      "finding_id": "FINDING_SILENT_MEAN_COLLAPSE_IDENTIFIED",
+      "severity": "CONFIRMED_AUDIT_EXPLANATION",
+      "description": "The reported Phase 5B table showing near-identical metrics (5.0844 vs 5.0836 vs 5.0839 vs 5.0840) was entirely an artifact of evaluating untrained models that defaulted to the zero-coefficient mean shape.",
+      "impact": "Answers Task A conclusively: the nearly identical baseline performance was caused by missing trained checkpoints for the ablation baselines, not by a theoretical ceiling of the frontal or lateral modalities."
+    }
+  ],
+  "sample_patient_audits": [
+    {
+      "patient_id": "LIDC-IDRI-0002",
+      "architectures": {
+        "mean_shape": {
+          "coefficient_norm_l2": 0.0,
+          "coeff_hash": "5b6fb58e61fa4759",
+          "mesh_hash": "581df96b5b1f5703",
+          "mean_shape_distance_mm": 0.0,
+          "first_3_coeffs": [
+            0.0,
+            0.0,
+            0.0
+          ]
+        },
+        "frontal_only": {
+          "coefficient_norm_l2": 1.7683,
+          "coeff_hash": "50c3971fbdcc4e4e",
+          "mesh_hash": "fbf6782f66a178dd",
+          "mean_shape_distance_mm": 0.0181,
+          "first_3_coeffs": [
+            -0.3323,
+            -0.0912,
+            -0.3901
+          ]
+        },
+        "lateral_only": {
+          "coefficient_norm_l2": 1.4638,
+          "coeff_hash": "18a56ea2659f3d41",
+          "mesh_hash": "61275908889c1768",
+          "mean_shape_distance_mm": 0.0152,
+          "first_3_coeffs": [
+            0.239,
+            0.253,
+            0.1257
+          ]
+        },
+        "dual_view_concat": {
+          "coefficient_norm_l2": 1.5481,
+          "coeff_hash": "5ad75c6781dc7718",
+          "mesh_hash": "175647f00beb3b8c",
+          "mean_shape_distance_mm": 0.0151,
+          "first_3_coeffs": [
+            0.438,
+            -0.2997,
+            -0.0484
+          ]
+        },
+        "dual_view_attention": {
+          "coefficient_norm_l2": 38.4719,
+          "coeff_hash": "c0e653e564894d8d",
+          "mesh_hash": "d5213f19620574a1",
+          "mean_shape_distance_mm": 0.4239,
+          "first_3_coeffs": [
+            -12.8078,
+            23.1579,
+            -27.86
+          ]
+        },
+        "dual_view_v2": {
+          "coefficient_norm_l2": 35.0971,
+          "coeff_hash": "20d0bff3d0d6d555",
+          "mesh_hash": "2a6fb1f4f147b92f",
+          "mean_shape_distance_mm": 0.3885,
+          "first_3_coeffs": [
+            -9.0817,
+            30.4224,
+            -14.8469
+          ]
+        }
+      },
+      "pairwise_distances": {
+        "mean_shape_vs_frontal_only": {
+          "coeff_l2_dist": 1.7683,
+          "mesh_assd_dist_mm": 0.0181
+        },
+        "mean_shape_vs_lateral_only": {
+          "coeff_l2_dist": 1.4638,
+          "mesh_assd_dist_mm": 0.0152
+        },
+        "mean_shape_vs_dual_view_concat": {
+          "coeff_l2_dist": 1.5481,
+          "mesh_assd_dist_mm": 0.0151
+        },
+        "mean_shape_vs_dual_view_attention": {
+          "coeff_l2_dist": 38.4719,
+          "mesh_assd_dist_mm": 0.4239
+        },
+        "mean_shape_vs_dual_view_v2": {
+          "coeff_l2_dist": 35.0971,
+          "mesh_assd_dist_mm": 0.3885
+        },
+        "frontal_only_vs_lateral_only": {
+          "coeff_l2_dist": 2.5063,
+          "mesh_assd_dist_mm": 0.0259
+        },
+        "frontal_only_vs_dual_view_concat": {
+          "coeff_l2_dist": 2.1095,
+          "mesh_assd_dist_mm": 0.02
+        },
+        "frontal_only_vs_dual_view_attention": {
+          "coeff_l2_dist": 38.1336,
+          "mesh_assd_dist_mm": 0.4205
+        },
+        "frontal_only_vs_dual_view_v2": {
+          "coeff_l2_dist": 34.9866,
+          "mesh_assd_dist_mm": 0.3882
+        },
+        "lateral_only_vs_dual_view_concat": {
+          "coeff_l2_dist": 2.0147,
+          "mesh_assd_dist_mm": 0.0209
+        },
+        "lateral_only_vs_dual_view_attention": {
+          "coeff_l2_dist": 38.5069,
+          "mesh_assd_dist_mm": 0.4247
+        },
+        "lateral_only_vs_dual_view_v2": {
+          "coeff_l2_dist": 34.9981,
+          "mesh_assd_dist_mm": 0.3871
+        },
+        "dual_view_concat_vs_dual_view_attention": {
+          "coeff_l2_dist": 38.7692,
+          "mesh_assd_dist_mm": 0.4273
+        },
+        "dual_view_concat_vs_dual_view_v2": {
+          "coeff_l2_dist": 35.4586,
+          "mesh_assd_dist_mm": 0.393
+        },
+        "dual_view_attention_vs_dual_view_v2": {
+          "coeff_l2_dist": 15.623,
+          "mesh_assd_dist_mm": 0.1697
+        }
+      }
+    },
+    {
+      "patient_id": "LIDC-IDRI-0005",
+      "architectures": {
+        "mean_shape": {
+          "coefficient_norm_l2": 0.0,
+          "coeff_hash": "5b6fb58e61fa4759",
+          "mesh_hash": "581df96b5b1f5703",
+          "mean_shape_distance_mm": 0.0,
+          "first_3_coeffs": [
+            0.0,
+            0.0,
+            0.0
+          ]
+        },
+        "frontal_only": {
+          "coefficient_norm_l2": 1.769,
+          "coeff_hash": "5f3f15304d45b387",
+          "mesh_hash": "d2a7dc22e96d9917",
+          "mean_shape_distance_mm": 0.0182,
+          "first_3_coeffs": [
+            -0.3329,
+            -0.0877,
+            -0.3923
+          ]
+        },
+        "lateral_only": {
+          "coefficient_norm_l2": 1.468,
+          "coeff_hash": "445845d377429e23",
+          "mesh_hash": "7d55749f788a9c2b",
+          "mean_shape_distance_mm": 0.0153,
+          "first_3_coeffs": [
+            0.239,
+            0.2498,
+            0.1267
+          ]
+        },
+        "dual_view_concat": {
+          "coefficient_norm_l2": 1.5436,
+          "coeff_hash": "d6868e2afe3ef118",
+          "mesh_hash": "429bfdd27c3e367f",
+          "mean_shape_distance_mm": 0.0151,
+          "first_3_coeffs": [
+            0.437,
+            -0.2987,
+            -0.064
+          ]
+        },
+        "dual_view_attention": {
+          "coefficient_norm_l2": 40.7408,
+          "coeff_hash": "b5b405d959589c31",
+          "mesh_hash": "fd6b6fc9c5687170",
+          "mean_shape_distance_mm": 0.4498,
+          "first_3_coeffs": [
+            -20.935,
+            27.1229,
+            -21.8881
+          ]
+        },
+        "dual_view_v2": {
+          "coefficient_norm_l2": 55.8592,
+          "coeff_hash": "8bb0a6ecd89220c9",
+          "mesh_hash": "3e37a064c77b5d47",
+          "mean_shape_distance_mm": 0.6518,
+          "first_3_coeffs": [
+            -38.2436,
+            40.4352,
+            -1.0985
+          ]
+        }
+      },
+      "pairwise_distances": {
+        "mean_shape_vs_frontal_only": {
+          "coeff_l2_dist": 1.769,
+          "mesh_assd_dist_mm": 0.0182
+        },
+        "mean_shape_vs_lateral_only": {
+          "coeff_l2_dist": 1.468,
+          "mesh_assd_dist_mm": 0.0153
+        },
+        "mean_shape_vs_dual_view_concat": {
+          "coeff_l2_dist": 1.5436,
+          "mesh_assd_dist_mm": 0.0151
+        },
+        "mean_shape_vs_dual_view_attention": {
+          "coeff_l2_dist": 40.7408,
+          "mesh_assd_dist_mm": 0.4498
+        },
+        "mean_shape_vs_dual_view_v2": {
+          "coeff_l2_dist": 55.8592,
+          "mesh_assd_dist_mm": 0.6518
+        },
+        "frontal_only_vs_lateral_only": {
+          "coeff_l2_dist": 2.5102,
+          "mesh_assd_dist_mm": 0.0259
+        },
+        "frontal_only_vs_dual_view_concat": {
+          "coeff_l2_dist": 2.1098,
+          "mesh_assd_dist_mm": 0.02
+        },
+        "frontal_only_vs_dual_view_attention": {
+          "coeff_l2_dist": 40.4288,
+          "mesh_assd_dist_mm": 0.4468
+        },
+        "frontal_only_vs_dual_view_v2": {
+          "coeff_l2_dist": 55.7462,
+          "mesh_assd_dist_mm": 0.6516
+        },
+        "lateral_only_vs_dual_view_concat": {
+          "coeff_l2_dist": 2.0146,
+          "mesh_assd_dist_mm": 0.0209
+        },
+        "lateral_only_vs_dual_view_attention": {
+          "coeff_l2_dist": 40.7682,
+          "mesh_assd_dist_mm": 0.4503
+        },
+        "lateral_only_vs_dual_view_v2": {
+          "coeff_l2_dist": 55.8298,
+          "mesh_assd_dist_mm": 0.6511
+        },
+        "dual_view_concat_vs_dual_view_attention": {
+          "coeff_l2_dist": 41.1529,
+          "mesh_assd_dist_mm": 0.4548
+        },
+        "dual_view_concat_vs_dual_view_v2": {
+          "coeff_l2_dist": 56.4231,
+          "mesh_assd_dist_mm": 0.6587
+        },
+        "dual_view_attention_vs_dual_view_v2": {
+          "coeff_l2_dist": 30.4067,
+          "mesh_assd_dist_mm": 0.3557
+        }
+      }
+    },
+    {
+      "patient_id": "LIDC-IDRI-0007",
+      "architectures": {
+        "mean_shape": {
+          "coefficient_norm_l2": 0.0,
+          "coeff_hash": "5b6fb58e61fa4759",
+          "mesh_hash": "581df96b5b1f5703",
+          "mean_shape_distance_mm": 0.0,
+          "first_3_coeffs": [
+            0.0,
+            0.0,
+            0.0
+          ]
+        },
+        "frontal_only": {
+          "coefficient_norm_l2": 1.7747,
+          "coeff_hash": "ace83a185ec562e4",
+          "mesh_hash": "200891e90951c2d5",
+          "mean_shape_distance_mm": 0.0183,
+          "first_3_coeffs": [
+            -0.3326,
+            -0.0902,
+            -0.3916
+          ]
+        },
+        "lateral_only": {
+          "coefficient_norm_l2": 1.4625,
+          "coeff_hash": "36e3acf5d69a62e8",
+          "mesh_hash": "d8415418eb37fc46",
+          "mean_shape_distance_mm": 0.0152,
+          "first_3_coeffs": [
+            0.2377,
+            0.2447,
+            0.1298
+          ]
+        },
+        "dual_view_concat": {
+          "coefficient_norm_l2": 1.5465,
+          "coeff_hash": "4814944b9a6d3c3c",
+          "mesh_hash": "7b963dee3e88855e",
+          "mean_shape_distance_mm": 0.0151,
+          "first_3_coeffs": [
+            0.442,
+            -0.3043,
+            -0.0628
+          ]
+        },
+        "dual_view_attention": {
+          "coefficient_norm_l2": 41.0728,
+          "coeff_hash": "aedc33d282b08c85",
+          "mesh_hash": "3326f87c06acf3ea",
+          "mean_shape_distance_mm": 0.4646,
+          "first_3_coeffs": [
+            17.4104,
+            -35.9722,
+            9.2254
+          ]
+        },
+        "dual_view_v2": {
+          "coefficient_norm_l2": 62.057,
+          "coeff_hash": "1de2a8a7737367d1",
+          "mesh_hash": "d8877a84bf40bd4c",
+          "mean_shape_distance_mm": 0.7265,
+          "first_3_coeffs": [
+            33.2023,
+            -51.6739,
+            -7.425
+          ]
+        }
+      },
+      "pairwise_distances": {
+        "mean_shape_vs_frontal_only": {
+          "coeff_l2_dist": 1.7747,
+          "mesh_assd_dist_mm": 0.0183
+        },
+        "mean_shape_vs_lateral_only": {
+          "coeff_l2_dist": 1.4625,
+          "mesh_assd_dist_mm": 0.0152
+        },
+        "mean_shape_vs_dual_view_concat": {
+          "coeff_l2_dist": 1.5465,
+          "mesh_assd_dist_mm": 0.0151
+        },
+        "mean_shape_vs_dual_view_attention": {
+          "coeff_l2_dist": 41.0728,
+          "mesh_assd_dist_mm": 0.4646
+        },
+        "mean_shape_vs_dual_view_v2": {
+          "coeff_l2_dist": 62.057,
+          "mesh_assd_dist_mm": 0.7265
+        },
+        "frontal_only_vs_lateral_only": {
+          "coeff_l2_dist": 2.5076,
+          "mesh_assd_dist_mm": 0.0259
+        },
+        "frontal_only_vs_dual_view_concat": {
+          "coeff_l2_dist": 2.1192,
+          "mesh_assd_dist_mm": 0.0201
+        },
+        "frontal_only_vs_dual_view_attention": {
+          "coeff_l2_dist": 41.2485,
+          "mesh_assd_dist_mm": 0.4656
+        },
+        "frontal_only_vs_dual_view_v2": {
+          "coeff_l2_dist": 62.1811,
+          "mesh_assd_dist_mm": 0.7274
+        },
+        "lateral_only_vs_dual_view_concat": {
+          "coeff_l2_dist": 2.0106,
+          "mesh_assd_dist_mm": 0.0209
+        },
+        "lateral_only_vs_dual_view_attention": {
+          "coeff_l2_dist": 41.156,
+          "mesh_assd_dist_mm": 0.4657
+        },
+        "lateral_only_vs_dual_view_v2": {
+          "coeff_l2_dist": 62.1452,
+          "mesh_assd_dist_mm": 0.7275
+        },
+        "dual_view_concat_vs_dual_view_attention": {
+          "coeff_l2_dist": 40.6558,
+          "mesh_assd_dist_mm": 0.4593
+        },
+        "dual_view_concat_vs_dual_view_v2": {
+          "coeff_l2_dist": 61.6208,
+          "mesh_assd_dist_mm": 0.7211
+        },
+        "dual_view_attention_vs_dual_view_v2": {
+          "coeff_l2_dist": 28.3627,
+          "mesh_assd_dist_mm": 0.3336
+        }
+      }
+    },
+    {
+      "patient_id": "LIDC-IDRI-0012",
+      "architectures": {
+        "mean_shape": {
+          "coefficient_norm_l2": 0.0,
+          "coeff_hash": "5b6fb58e61fa4759",
+          "mesh_hash": "581df96b5b1f5703",
+          "mean_shape_distance_mm": 0.0,
+          "first_3_coeffs": [
+            0.0,
+            0.0,
+            0.0
+          ]
+        },
+        "frontal_only": {
+          "coefficient_norm_l2": 1.7723,
+          "coeff_hash": "c04b8647ef90d5ab",
+          "mesh_hash": "49517e418a647650",
+          "mean_shape_distance_mm": 0.0183,
+          "first_3_coeffs": [
+            -0.3289,
+            -0.0818,
+            -0.3916
+          ]
+        },
+        "lateral_only": {
+          "coefficient_norm_l2": 1.4645,
+          "coeff_hash": "5b162bb023dcc038",
+          "mesh_hash": "9dd94aec899f789d",
+          "mean_shape_distance_mm": 0.0152,
+          "first_3_coeffs": [
+            0.235,
+            0.2452,
+            0.1434
+          ]
+        },
+        "dual_view_concat": {
+          "coefficient_norm_l2": 1.5614,
+          "coeff_hash": "6494448456a76967",
+          "mesh_hash": "00c103af5b5d7d6d",
+          "mean_shape_distance_mm": 0.0152,
+          "first_3_coeffs": [
+            0.4428,
+            -0.3113,
+            -0.0491
+          ]
+        },
+        "dual_view_attention": {
+          "coefficient_norm_l2": 45.3473,
+          "coeff_hash": "f1b63ec65524eb68",
+          "mesh_hash": "9efe8cf0ffadea65",
+          "mean_shape_distance_mm": 0.504,
+          "first_3_coeffs": [
+            42.924,
+            14.4092,
+            0.1542
+          ]
+        },
+        "dual_view_v2": {
+          "coefficient_norm_l2": 72.4391,
+          "coeff_hash": "a73a7df6f7fdfbf1",
+          "mesh_hash": "8796ce0e5da698e1",
+          "mean_shape_distance_mm": 0.7951,
+          "first_3_coeffs": [
+            67.4356,
+            25.105,
+            -7.6581
+          ]
+        }
+      },
+      "pairwise_distances": {
+        "mean_shape_vs_frontal_only": {
+          "coeff_l2_dist": 1.7723,
+          "mesh_assd_dist_mm": 0.0183
+        },
+        "mean_shape_vs_lateral_only": {
+          "coeff_l2_dist": 1.4645,
+          "mesh_assd_dist_mm": 0.0152
+        },
+        "mean_shape_vs_dual_view_concat": {
+          "coeff_l2_dist": 1.5614,
+          "mesh_assd_dist_mm": 0.0152
+        },
+        "mean_shape_vs_dual_view_attention": {
+          "coeff_l2_dist": 45.3473,
+          "mesh_assd_dist_mm": 0.504
+        },
+        "mean_shape_vs_dual_view_v2": {
+          "coeff_l2_dist": 72.4391,
+          "mesh_assd_dist_mm": 0.7951
+        },
+        "frontal_only_vs_lateral_only": {
+          "coeff_l2_dist": 2.5097,
+          "mesh_assd_dist_mm": 0.026
+        },
+        "frontal_only_vs_dual_view_concat": {
+          "coeff_l2_dist": 2.1358,
+          "mesh_assd_dist_mm": 0.0203
+        },
+        "frontal_only_vs_dual_view_attention": {
+          "coeff_l2_dist": 45.7155,
+          "mesh_assd_dist_mm": 0.5079
+        },
+        "frontal_only_vs_dual_view_v2": {
+          "coeff_l2_dist": 72.7379,
+          "mesh_assd_dist_mm": 0.798
+        },
+        "lateral_only_vs_dual_view_concat": {
+          "coeff_l2_dist": 2.0191,
+          "mesh_assd_dist_mm": 0.0209
+        },
+        "lateral_only_vs_dual_view_attention": {
+          "coeff_l2_dist": 45.0826,
+          "mesh_assd_dist_mm": 0.5017
+        },
+        "lateral_only_vs_dual_view_v2": {
+          "coeff_l2_dist": 72.1815,
+          "mesh_assd_dist_mm": 0.7929
+        },
+        "dual_view_concat_vs_dual_view_attention": {
+          "coeff_l2_dist": 45.0306,
+          "mesh_assd_dist_mm": 0.5006
+        },
+        "dual_view_concat_vs_dual_view_v2": {
+          "coeff_l2_dist": 72.1275,
+          "mesh_assd_dist_mm": 0.7919
+        },
+        "dual_view_attention_vs_dual_view_v2": {
+          "coeff_l2_dist": 27.8909,
+          "mesh_assd_dist_mm": 0.3041
+        }
+      }
+    },
+    {
+      "patient_id": "LIDC-IDRI-0027",
+      "architectures": {
+        "mean_shape": {
+          "coefficient_norm_l2": 0.0,
+          "coeff_hash": "5b6fb58e61fa4759",
+          "mesh_hash": "581df96b5b1f5703",
+          "mean_shape_distance_mm": 0.0,
+          "first_3_coeffs": [
+            0.0,
+            0.0,
+            0.0
+          ]
+        },
+        "frontal_only": {
+          "coefficient_norm_l2": 1.7783,
+          "coeff_hash": "ea0733b580ff6446",
+          "mesh_hash": "4897e55e7d12c2f7",
+          "mean_shape_distance_mm": 0.0183,
+          "first_3_coeffs": [
+            -0.331,
+            -0.0884,
+            -0.3932
+          ]
+        },
+        "lateral_only": {
+          "coefficient_norm_l2": 1.4626,
+          "coeff_hash": "fb31cc9e81c19d87",
+          "mesh_hash": "893fa9796f388d41",
+          "mean_shape_distance_mm": 0.0152,
+          "first_3_coeffs": [
+            0.235,
+            0.2463,
+            0.1386
+          ]
+        },
+        "dual_view_concat": {
+          "coefficient_norm_l2": 1.5525,
+          "coeff_hash": "7fb17dec823e8c86",
+          "mesh_hash": "e409d24c32db6b76",
+          "mean_shape_distance_mm": 0.0152,
+          "first_3_coeffs": [
+            0.4403,
+            -0.3112,
+            -0.0553
+          ]
+        },
+        "dual_view_attention": {
+          "coefficient_norm_l2": 42.5603,
+          "coeff_hash": "6653f0cff57135cf",
+          "mesh_hash": "ddc768bfa97f1622",
+          "mean_shape_distance_mm": 0.4895,
+          "first_3_coeffs": [
+            33.3644,
+            -25.3783,
+            6.958
+          ]
+        },
+        "dual_view_v2": {
+          "coefficient_norm_l2": 66.1052,
+          "coeff_hash": "463ddc86317b4cdd",
+          "mesh_hash": "86255a60c8188b49",
+          "mean_shape_distance_mm": 0.7665,
+          "first_3_coeffs": [
+            56.7048,
+            -32.2809,
+            -9.186
+          ]
+        }
+      },
+      "pairwise_distances": {
+        "mean_shape_vs_frontal_only": {
+          "coeff_l2_dist": 1.7783,
+          "mesh_assd_dist_mm": 0.0183
+        },
+        "mean_shape_vs_lateral_only": {
+          "coeff_l2_dist": 1.4626,
+          "mesh_assd_dist_mm": 0.0152
+        },
+        "mean_shape_vs_dual_view_concat": {
+          "coeff_l2_dist": 1.5525,
+          "mesh_assd_dist_mm": 0.0152
+        },
+        "mean_shape_vs_dual_view_attention": {
+          "coeff_l2_dist": 42.5603,
+          "mesh_assd_dist_mm": 0.4895
+        },
+        "mean_shape_vs_dual_view_v2": {
+          "coeff_l2_dist": 66.1052,
+          "mesh_assd_dist_mm": 0.7665
+        },
+        "frontal_only_vs_lateral_only": {
+          "coeff_l2_dist": 2.5127,
+          "mesh_assd_dist_mm": 0.026
+        },
+        "frontal_only_vs_dual_view_concat": {
+          "coeff_l2_dist": 2.1311,
+          "mesh_assd_dist_mm": 0.0203
+        },
+        "frontal_only_vs_dual_view_attention": {
+          "coeff_l2_dist": 42.8669,
+          "mesh_assd_dist_mm": 0.4916
+        },
+        "frontal_only_vs_dual_view_v2": {
+          "coeff_l2_dist": 66.3577,
+          "mesh_assd_dist_mm": 0.7679
+        },
+        "lateral_only_vs_dual_view_concat": {
+          "coeff_l2_dist": 2.024,
+          "mesh_assd_dist_mm": 0.0211
+        },
+        "lateral_only_vs_dual_view_attention": {
+          "coeff_l2_dist": 42.5014,
+          "mesh_assd_dist_mm": 0.4892
+        },
+        "lateral_only_vs_dual_view_v2": {
+          "coeff_l2_dist": 66.0401,
+          "mesh_assd_dist_mm": 0.7666
+        },
+        "dual_view_concat_vs_dual_view_attention": {
+          "coeff_l2_dist": 42.0804,
+          "mesh_assd_dist_mm": 0.4833
+        },
+        "dual_view_concat_vs_dual_view_v2": {
+          "coeff_l2_dist": 65.6316,
+          "mesh_assd_dist_mm": 0.7606
+        },
+        "dual_view_attention_vs_dual_view_v2": {
+          "coeff_l2_dist": 29.5825,
+          "mesh_assd_dist_mm": 0.3409
+        }
+      }
+    },
+    {
+      "patient_id": "LIDC-IDRI-0033",
+      "architectures": {
+        "mean_shape": {
+          "coefficient_norm_l2": 0.0,
+          "coeff_hash": "5b6fb58e61fa4759",
+          "mesh_hash": "581df96b5b1f5703",
+          "mean_shape_distance_mm": 0.0,
+          "first_3_coeffs": [
+            0.0,
+            0.0,
+            0.0
+          ]
+        },
+        "frontal_only": {
+          "coefficient_norm_l2": 1.7704,
+          "coeff_hash": "35a2a8a797cf60ad",
+          "mesh_hash": "bcfa5977f73ffdf2",
+          "mean_shape_distance_mm": 0.0181,
+          "first_3_coeffs": [
+            -0.3293,
+            -0.0878,
+            -0.3978
+          ]
+        },
+        "lateral_only": {
+          "coefficient_norm_l2": 1.4732,
+          "coeff_hash": "93816a6b1d6f32d3",
+          "mesh_hash": "8be4cbd071d56457",
+          "mean_shape_distance_mm": 0.0153,
+          "first_3_coeffs": [
+            0.2334,
+            0.2583,
+            0.1208
+          ]
+        },
+        "dual_view_concat": {
+          "coefficient_norm_l2": 1.5585,
+          "coeff_hash": "659e95ab5c34d817",
+          "mesh_hash": "04a698c7024ad350",
+          "mean_shape_distance_mm": 0.0153,
+          "first_3_coeffs": [
+            0.4402,
+            -0.3128,
+            -0.0534
+          ]
+        },
+        "dual_view_attention": {
+          "coefficient_norm_l2": 44.1179,
+          "coeff_hash": "0ac253edc113d39b",
+          "mesh_hash": "4f45c86a40373343",
+          "mean_shape_distance_mm": 0.5089,
+          "first_3_coeffs": [
+            -34.6269,
+            -26.8911,
+            -1.7294
+          ]
+        },
+        "dual_view_v2": {
+          "coefficient_norm_l2": 74.3393,
+          "coeff_hash": "162c29730f808702",
+          "mesh_hash": "d657099ffa8990e5",
+          "mean_shape_distance_mm": 0.8489,
+          "first_3_coeffs": [
+            -60.4576,
+            -42.664,
+            5.0156
+          ]
+        }
+      },
+      "pairwise_distances": {
+        "mean_shape_vs_frontal_only": {
+          "coeff_l2_dist": 1.7704,
+          "mesh_assd_dist_mm": 0.0181
+        },
+        "mean_shape_vs_lateral_only": {
+          "coeff_l2_dist": 1.4732,
+          "mesh_assd_dist_mm": 0.0153
+        },
+        "mean_shape_vs_dual_view_concat": {
+          "coeff_l2_dist": 1.5585,
+          "mesh_assd_dist_mm": 0.0153
+        },
+        "mean_shape_vs_dual_view_attention": {
+          "coeff_l2_dist": 44.1179,
+          "mesh_assd_dist_mm": 0.5089
+        },
+        "mean_shape_vs_dual_view_v2": {
+          "coeff_l2_dist": 74.3393,
+          "mesh_assd_dist_mm": 0.8489
+        },
+        "frontal_only_vs_lateral_only": {
+          "coeff_l2_dist": 2.5245,
+          "mesh_assd_dist_mm": 0.0261
+        },
+        "frontal_only_vs_dual_view_concat": {
+          "coeff_l2_dist": 2.1209,
+          "mesh_assd_dist_mm": 0.0201
+        },
+        "frontal_only_vs_dual_view_attention": {
+          "coeff_l2_dist": 43.787,
+          "mesh_assd_dist_mm": 0.5059
+        },
+        "frontal_only_vs_dual_view_v2": {
+          "coeff_l2_dist": 74.0343,
+          "mesh_assd_dist_mm": 0.8459
+        },
+        "lateral_only_vs_dual_view_concat": {
+          "coeff_l2_dist": 2.0392,
+          "mesh_assd_dist_mm": 0.0213
+        },
+        "lateral_only_vs_dual_view_attention": {
+          "coeff_l2_dist": 44.517,
+          "mesh_assd_dist_mm": 0.5127
+        },
+        "lateral_only_vs_dual_view_v2": {
+          "coeff_l2_dist": 74.7011,
+          "mesh_assd_dist_mm": 0.8525
+        },
+        "dual_view_concat_vs_dual_view_attention": {
+          "coeff_l2_dist": 44.2416,
+          "mesh_assd_dist_mm": 0.5099
+        },
+        "dual_view_concat_vs_dual_view_v2": {
+          "coeff_l2_dist": 74.5014,
+          "mesh_assd_dist_mm": 0.8503
+        },
+        "dual_view_attention_vs_dual_view_v2": {
+          "coeff_l2_dist": 31.041,
+          "mesh_assd_dist_mm": 0.3484
+        }
+      }
+    },
+    {
+      "patient_id": "LIDC-IDRI-0038",
+      "architectures": {
+        "mean_shape": {
+          "coefficient_norm_l2": 0.0,
+          "coeff_hash": "5b6fb58e61fa4759",
+          "mesh_hash": "581df96b5b1f5703",
+          "mean_shape_distance_mm": 0.0,
+          "first_3_coeffs": [
+            0.0,
+            0.0,
+            0.0
+          ]
+        },
+        "frontal_only": {
+          "coefficient_norm_l2": 1.7778,
+          "coeff_hash": "07f14db71ab84213",
+          "mesh_hash": "398cf7721b0925ba",
+          "mean_shape_distance_mm": 0.0183,
+          "first_3_coeffs": [
+            -0.3351,
+            -0.0925,
+            -0.397
+          ]
+        },
+        "lateral_only": {
+          "coefficient_norm_l2": 1.4684,
+          "coeff_hash": "0bdbb74d8a5147af",
+          "mesh_hash": "decec4b0e41a46d1",
+          "mean_shape_distance_mm": 0.0153,
+          "first_3_coeffs": [
+            0.2396,
+            0.2506,
+            0.1221
+          ]
+        },
+        "dual_view_concat": {
+          "coefficient_norm_l2": 1.5421,
+          "coeff_hash": "e456e88c0343e2c6",
+          "mesh_hash": "30890be1540f9efc",
+          "mean_shape_distance_mm": 0.0151,
+          "first_3_coeffs": [
+            0.4301,
+            -0.3035,
+            -0.0507
+          ]
+        },
+        "dual_view_attention": {
+          "coefficient_norm_l2": 42.6094,
+          "coeff_hash": "b3f24d4f4a755eab",
+          "mesh_hash": "5010a84e31ea02d1",
+          "mean_shape_distance_mm": 0.5021,
+          "first_3_coeffs": [
+            -15.0887,
+            -39.3887,
+            4.4517
+          ]
+        },
+        "dual_view_v2": {
+          "coefficient_norm_l2": 69.1283,
+          "coeff_hash": "d5cdbdfc2698177a",
+          "mesh_hash": "962314cd465f8cb2",
+          "mean_shape_distance_mm": 0.817,
+          "first_3_coeffs": [
+            -28.5602,
+            -62.856,
+            0.9689
+          ]
+        }
+      },
+      "pairwise_distances": {
+        "mean_shape_vs_frontal_only": {
+          "coeff_l2_dist": 1.7778,
+          "mesh_assd_dist_mm": 0.0183
+        },
+        "mean_shape_vs_lateral_only": {
+          "coeff_l2_dist": 1.4684,
+          "mesh_assd_dist_mm": 0.0153
+        },
+        "mean_shape_vs_dual_view_concat": {
+          "coeff_l2_dist": 1.5421,
+          "mesh_assd_dist_mm": 0.0151
+        },
+        "mean_shape_vs_dual_view_attention": {
+          "coeff_l2_dist": 42.6094,
+          "mesh_assd_dist_mm": 0.5021
+        },
+        "mean_shape_vs_dual_view_v2": {
+          "coeff_l2_dist": 69.1283,
+          "mesh_assd_dist_mm": 0.817
+        },
+        "frontal_only_vs_lateral_only": {
+          "coeff_l2_dist": 2.5164,
+          "mesh_assd_dist_mm": 0.026
+        },
+        "frontal_only_vs_dual_view_concat": {
+          "coeff_l2_dist": 2.1192,
+          "mesh_assd_dist_mm": 0.0201
+        },
+        "frontal_only_vs_dual_view_attention": {
+          "coeff_l2_dist": 42.4556,
+          "mesh_assd_dist_mm": 0.4998
+        },
+        "frontal_only_vs_dual_view_v2": {
+          "coeff_l2_dist": 68.918,
+          "mesh_assd_dist_mm": 0.8144
+        },
+        "lateral_only_vs_dual_view_concat": {
+          "coeff_l2_dist": 2.0196,
+          "mesh_assd_dist_mm": 0.021
+        },
+        "lateral_only_vs_dual_view_attention": {
+          "coeff_l2_dist": 42.9487,
+          "mesh_assd_dist_mm": 0.5059
+        },
+        "lateral_only_vs_dual_view_v2": {
+          "coeff_l2_dist": 69.4793,
+          "mesh_assd_dist_mm": 0.8209
+        },
+        "dual_view_concat_vs_dual_view_attention": {
+          "coeff_l2_dist": 42.4703,
+          "mesh_assd_dist_mm": 0.5007
+        },
+        "dual_view_concat_vs_dual_view_v2": {
+          "coeff_l2_dist": 69.0255,
+          "mesh_assd_dist_mm": 0.816
+        },
+        "dual_view_attention_vs_dual_view_v2": {
+          "coeff_l2_dist": 27.3149,
+          "mesh_assd_dist_mm": 0.3219
+        }
+      }
+    },
+    {
+      "patient_id": "LIDC-IDRI-0039",
+      "architectures": {
+        "mean_shape": {
+          "coefficient_norm_l2": 0.0,
+          "coeff_hash": "5b6fb58e61fa4759",
+          "mesh_hash": "581df96b5b1f5703",
+          "mean_shape_distance_mm": 0.0,
+          "first_3_coeffs": [
+            0.0,
+            0.0,
+            0.0
+          ]
+        },
+        "frontal_only": {
+          "coefficient_norm_l2": 1.7717,
+          "coeff_hash": "14b098da2af474a3",
+          "mesh_hash": "89d1f932c9387ac6",
+          "mean_shape_distance_mm": 0.0182,
+          "first_3_coeffs": [
+            -0.3307,
+            -0.0886,
+            -0.3986
+          ]
+        },
+        "lateral_only": {
+          "coefficient_norm_l2": 1.4789,
+          "coeff_hash": "8a024fc1ecbb4fb9",
+          "mesh_hash": "9be15422280d41ca",
+          "mean_shape_distance_mm": 0.0154,
+          "first_3_coeffs": [
+            0.2412,
+            0.2545,
+            0.1176
+          ]
+        },
+        "dual_view_concat": {
+          "coefficient_norm_l2": 1.5555,
+          "coeff_hash": "7c61b991c4223ca8",
+          "mesh_hash": "7c26aea628d76fc9",
+          "mean_shape_distance_mm": 0.0152,
+          "first_3_coeffs": [
+            0.4297,
+            -0.3058,
+            -0.0474
+          ]
+        },
+        "dual_view_attention": {
+          "coefficient_norm_l2": 43.4717,
+          "coeff_hash": "66665cdbcbb5c01a",
+          "mesh_hash": "706ecdc8e538429c",
+          "mean_shape_distance_mm": 0.4862,
+          "first_3_coeffs": [
+            -42.1577,
+            -9.7174,
+            -3.5478
+          ]
+        },
+        "dual_view_v2": {
+          "coefficient_norm_l2": 73.8,
+          "coeff_hash": "f5c4dd7358423a90",
+          "mesh_hash": "3bd3baee2dbeaaa5",
+          "mean_shape_distance_mm": 0.8096,
+          "first_3_coeffs": [
+            -68.4807,
+            -26.4143,
+            7.262
+          ]
+        }
+      },
+      "pairwise_distances": {
+        "mean_shape_vs_frontal_only": {
+          "coeff_l2_dist": 1.7717,
+          "mesh_assd_dist_mm": 0.0182
+        },
+        "mean_shape_vs_lateral_only": {
+          "coeff_l2_dist": 1.4789,
+          "mesh_assd_dist_mm": 0.0154
+        },
+        "mean_shape_vs_dual_view_concat": {
+          "coeff_l2_dist": 1.5555,
+          "mesh_assd_dist_mm": 0.0152
+        },
+        "mean_shape_vs_dual_view_attention": {
+          "coeff_l2_dist": 43.4717,
+          "mesh_assd_dist_mm": 0.4862
+        },
+        "mean_shape_vs_dual_view_v2": {
+          "coeff_l2_dist": 73.8,
+          "mesh_assd_dist_mm": 0.8096
+        },
+        "frontal_only_vs_lateral_only": {
+          "coeff_l2_dist": 2.5269,
+          "mesh_assd_dist_mm": 0.0261
+        },
+        "frontal_only_vs_dual_view_concat": {
+          "coeff_l2_dist": 2.1159,
+          "mesh_assd_dist_mm": 0.02
+        },
+        "frontal_only_vs_dual_view_attention": {
+          "coeff_l2_dist": 43.1024,
+          "mesh_assd_dist_mm": 0.4825
+        },
+        "frontal_only_vs_dual_view_v2": {
+          "coeff_l2_dist": 73.5003,
+          "mesh_assd_dist_mm": 0.8069
+        },
+        "lateral_only_vs_dual_view_concat": {
+          "coeff_l2_dist": 2.0389,
+          "mesh_assd_dist_mm": 0.0212
+        },
+        "lateral_only_vs_dual_view_attention": {
+          "coeff_l2_dist": 43.8058,
+          "mesh_assd_dist_mm": 0.4894
+        },
+        "lateral_only_vs_dual_view_v2": {
+          "coeff_l2_dist": 74.1252,
+          "mesh_assd_dist_mm": 0.8128
+        },
+        "dual_view_concat_vs_dual_view_attention": {
+          "coeff_l2_dist": 43.8099,
+          "mesh_assd_dist_mm": 0.4901
+        },
+        "dual_view_concat_vs_dual_view_v2": {
+          "coeff_l2_dist": 74.0918,
+          "mesh_assd_dist_mm": 0.8126
+        },
+        "dual_view_attention_vs_dual_view_v2": {
+          "coeff_l2_dist": 33.0067,
+          "mesh_assd_dist_mm": 0.3679
+        }
+      }
+    },
+    {
+      "patient_id": "LIDC-IDRI-0042",
+      "architectures": {
+        "mean_shape": {
+          "coefficient_norm_l2": 0.0,
+          "coeff_hash": "5b6fb58e61fa4759",
+          "mesh_hash": "581df96b5b1f5703",
+          "mean_shape_distance_mm": 0.0,
+          "first_3_coeffs": [
+            0.0,
+            0.0,
+            0.0
+          ]
+        },
+        "frontal_only": {
+          "coefficient_norm_l2": 1.7794,
+          "coeff_hash": "a68563ed3f99af83",
+          "mesh_hash": "6e8dc4df29c165a5",
+          "mean_shape_distance_mm": 0.0183,
+          "first_3_coeffs": [
+            -0.3279,
+            -0.0809,
+            -0.3972
+          ]
+        },
+        "lateral_only": {
+          "coefficient_norm_l2": 1.4635,
+          "coeff_hash": "c2f7acbcb612585c",
+          "mesh_hash": "1fb21226d963f454",
+          "mean_shape_distance_mm": 0.0152,
+          "first_3_coeffs": [
+            0.2324,
+            0.2467,
+            0.1453
+          ]
+        },
+        "dual_view_concat": {
+          "coefficient_norm_l2": 1.5598,
+          "coeff_hash": "584b5ea387f4b422",
+          "mesh_hash": "817cc100240287a3",
+          "mean_shape_distance_mm": 0.0152,
+          "first_3_coeffs": [
+            0.4329,
+            -0.3109,
+            -0.0567
+          ]
+        },
+        "dual_view_attention": {
+          "coefficient_norm_l2": 44.4765,
+          "coeff_hash": "5a97de18f6f26ea0",
+          "mesh_hash": "5641fa6398292195",
+          "mean_shape_distance_mm": 0.4907,
+          "first_3_coeffs": [
+            43.8851,
+            -6.554,
+            -2.7816
+          ]
+        },
+        "dual_view_v2": {
+          "coefficient_norm_l2": 71.1354,
+          "coeff_hash": "06143e9ba2cc5f20",
+          "mesh_hash": "02b70fe1e1742ab5",
+          "mean_shape_distance_mm": 0.7732,
+          "first_3_coeffs": [
+            69.956,
+            -5.3784,
+            -11.5451
+          ]
+        }
+      },
+      "pairwise_distances": {
+        "mean_shape_vs_frontal_only": {
+          "coeff_l2_dist": 1.7794,
+          "mesh_assd_dist_mm": 0.0183
+        },
+        "mean_shape_vs_lateral_only": {
+          "coeff_l2_dist": 1.4635,
+          "mesh_assd_dist_mm": 0.0152
+        },
+        "mean_shape_vs_dual_view_concat": {
+          "coeff_l2_dist": 1.5598,
+          "mesh_assd_dist_mm": 0.0152
+        },
+        "mean_shape_vs_dual_view_attention": {
+          "coeff_l2_dist": 44.4765,
+          "mesh_assd_dist_mm": 0.4907
+        },
+        "mean_shape_vs_dual_view_v2": {
+          "coeff_l2_dist": 71.1354,
+          "mesh_assd_dist_mm": 0.7732
+        },
+        "frontal_only_vs_lateral_only": {
+          "coeff_l2_dist": 2.5172,
+          "mesh_assd_dist_mm": 0.0261
+        },
+        "frontal_only_vs_dual_view_concat": {
+          "coeff_l2_dist": 2.1351,
+          "mesh_assd_dist_mm": 0.0203
+        },
+        "frontal_only_vs_dual_view_attention": {
+          "coeff_l2_dist": 44.8124,
+          "mesh_assd_dist_mm": 0.4932
+        },
+        "frontal_only_vs_dual_view_v2": {
+          "coeff_l2_dist": 71.4289,
+          "mesh_assd_dist_mm": 0.7753
+        },
+        "lateral_only_vs_dual_view_concat": {
+          "coeff_l2_dist": 2.0295,
+          "mesh_assd_dist_mm": 0.0211
+        },
+        "lateral_only_vs_dual_view_attention": {
+          "coeff_l2_dist": 44.3159,
+          "mesh_assd_dist_mm": 0.4899
+        },
+        "lateral_only_vs_dual_view_v2": {
+          "coeff_l2_dist": 70.9631,
+          "mesh_assd_dist_mm": 0.7726
+        },
+        "dual_view_concat_vs_dual_view_attention": {
+          "coeff_l2_dist": 44.0281,
+          "mesh_assd_dist_mm": 0.485
+        },
+        "dual_view_concat_vs_dual_view_v2": {
+          "coeff_l2_dist": 70.7103,
+          "mesh_assd_dist_mm": 0.7677
+        },
+        "dual_view_attention_vs_dual_view_v2": {
+          "coeff_l2_dist": 27.6036,
+          "mesh_assd_dist_mm": 0.2958
+        }
+      }
+    },
+    {
+      "patient_id": "LIDC-IDRI-0048",
+      "architectures": {
+        "mean_shape": {
+          "coefficient_norm_l2": 0.0,
+          "coeff_hash": "5b6fb58e61fa4759",
+          "mesh_hash": "581df96b5b1f5703",
+          "mean_shape_distance_mm": 0.0,
+          "first_3_coeffs": [
+            0.0,
+            0.0,
+            0.0
+          ]
+        },
+        "frontal_only": {
+          "coefficient_norm_l2": 1.7738,
+          "coeff_hash": "157ef85f835d4d8b",
+          "mesh_hash": "c0e7769259819358",
+          "mean_shape_distance_mm": 0.0182,
+          "first_3_coeffs": [
+            -0.3356,
+            -0.0901,
+            -0.3936
+          ]
+        },
+        "lateral_only": {
+          "coefficient_norm_l2": 1.4651,
+          "coeff_hash": "8ddd256ad2856072",
+          "mesh_hash": "7617f1d7bc1136ff",
+          "mean_shape_distance_mm": 0.0153,
+          "first_3_coeffs": [
+            0.2382,
+            0.2457,
+            0.1299
+          ]
+        },
+        "dual_view_concat": {
+          "coefficient_norm_l2": 1.5437,
+          "coeff_hash": "687be8c699ad6816",
+          "mesh_hash": "c902d1915757be29",
+          "mean_shape_distance_mm": 0.0151,
+          "first_3_coeffs": [
+            0.4385,
+            -0.3017,
+            -0.064
+          ]
+        },
+        "dual_view_attention": {
+          "coefficient_norm_l2": 40.9338,
+          "coeff_hash": "c4bdfdf55fce2075",
+          "mesh_hash": "09bf45e45495a057",
+          "mean_shape_distance_mm": 0.4652,
+          "first_3_coeffs": [
+            10.3264,
+            -39.0497,
+            6.3384
+          ]
+        },
+        "dual_view_v2": {
+          "coefficient_norm_l2": 61.864,
+          "coeff_hash": "ab0cf5a56f48068c",
+          "mesh_hash": "d21f4aabcffe4128",
+          "mean_shape_distance_mm": 0.7174,
+          "first_3_coeffs": [
+            24.2091,
+            -56.3587,
+            -6.9961
+          ]
+        }
+      },
+      "pairwise_distances": {
+        "mean_shape_vs_frontal_only": {
+          "coeff_l2_dist": 1.7738,
+          "mesh_assd_dist_mm": 0.0182
+        },
+        "mean_shape_vs_lateral_only": {
+          "coeff_l2_dist": 1.4651,
+          "mesh_assd_dist_mm": 0.0153
+        },
+        "mean_shape_vs_dual_view_concat": {
+          "coeff_l2_dist": 1.5437,
+          "mesh_assd_dist_mm": 0.0151
+        },
+        "mean_shape_vs_dual_view_attention": {
+          "coeff_l2_dist": 40.9338,
+          "mesh_assd_dist_mm": 0.4652
+        },
+        "mean_shape_vs_dual_view_v2": {
+          "coeff_l2_dist": 61.864,
+          "mesh_assd_dist_mm": 0.7174
+        },
+        "frontal_only_vs_lateral_only": {
+          "coeff_l2_dist": 2.5098,
+          "mesh_assd_dist_mm": 0.0259
+        },
+        "frontal_only_vs_dual_view_concat": {
+          "coeff_l2_dist": 2.117,
+          "mesh_assd_dist_mm": 0.0201
+        },
+        "frontal_only_vs_dual_view_attention": {
+          "coeff_l2_dist": 41.0192,
+          "mesh_assd_dist_mm": 0.4651
+        },
+        "frontal_only_vs_dual_view_v2": {
+          "coeff_l2_dist": 61.9316,
+          "mesh_assd_dist_mm": 0.7178
+        },
+        "lateral_only_vs_dual_view_concat": {
+          "coeff_l2_dist": 2.0099,
+          "mesh_assd_dist_mm": 0.0209
+        },
+        "lateral_only_vs_dual_view_attention": {
+          "coeff_l2_dist": 41.098,
+          "mesh_assd_dist_mm": 0.4672
+        },
+        "lateral_only_vs_dual_view_v2": {
+          "coeff_l2_dist": 62.0091,
+          "mesh_assd_dist_mm": 0.7188
+        },
+        "dual_view_concat_vs_dual_view_attention": {
+          "coeff_l2_dist": 40.5595,
+          "mesh_assd_dist_mm": 0.4605
+        },
+        "dual_view_concat_vs_dual_view_v2": {
+          "coeff_l2_dist": 61.4637,
+          "mesh_assd_dist_mm": 0.7123
+        },
+        "dual_view_attention_vs_dual_view_v2": {
+          "coeff_l2_dist": 26.3857,
+          "mesh_assd_dist_mm": 0.3101
+        }
+      }
+    }
+  ],
+  "verdict": {
+    "independence_of_trained_models": "CONFIRMED (Phase 5 vs Phase 5B generate unique, non-trivial coefficients)",
+    "cause_of_identical_baselines": "UNTRAINED_WEIGHTS_COLLAPSE_TO_MEAN_SHAPE",
+    "recommendation": "Document baseline collapse in Phase 5C Report; do not claim frontal/lateral modalities are inherently identical to mean shape."
+  }
+}

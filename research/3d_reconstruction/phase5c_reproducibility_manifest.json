@@ -1,0 +1,93 @@
+{
+  "manifest_version": "5.3.0",
+  "timestamp_utc": "2026-11-16T21:37:21Z",
+  "task": "Task H: Reproducibility Manifest",
+  "git_state": {
+    "commit": "17be0c3bf73b59b24c48c5861a3f6278fe73c514",
+    "branch": "main"
+  },
+  "environment": {
+    "python_version": "3.14.7",
+    "python_executable": "C:\\Python314\\python.exe",
+    "os_platform": "Windows-11-10.0.26300-SP0",
+    "cpu_architecture": "AMD64",
+    "processor": "AMD64 Family 25 Model 80 Stepping 0, AuthenticAMD",
+    "pytorch_version": "2.14.1+cpu",
+    "cuda_available": false,
+    "cuda_device": "None (CPU Inference)",
+    "numpy_version": "2.5.2",
+    "scipy_version": "1.18.1",
+    "trimesh_version": "5.2.0"
+  },
+  "checkpoints_audit": {
+    "production_densenet121": {
+      "path": "lungvision_disease_classification\\checkpoints\\densenet121_nih_best.pth",
+      "sha256": "8d3690cd0438587a94afb8fd2ad84c0b30f9c1cc2727ee0eb03662a02ea020af",
+      "expected_sha256": "8d3690cd0438587a94afb8fd2ad84c0b30f9c1cc2727ee0eb03662a02ea020af",
+      "matches_expected": true,
+      "file_size_bytes": 84457897,
+      "role": "Frozen Production 2D Chest Pathology Classifier (Untouched)"
+    },
+    "phase5_dual_view_attention": {
+      "path": "backend\\data\\checkpoints\\dual_view_shape_predictor_best.pth",
+      "sha256": "44a7ea7f2471131a130288ca95911e7204aaa31e79b264ee06f80423ff92740b",
+      "file_size_bytes": 5930789,
+      "role": "Phase 5 Baseline Shape Predictor"
+    },
+    "phase5b_heteroscedastic_v2": {
+      "path": "backend\\data\\checkpoints\\dual_view_shape_predictor_v2_best.pth",
+      "sha256": "dd592d21d3d9f68587a88184b1f9275089fc037dbafff5e9e6c5a0114b5be413",
+      "file_size_bytes": 8191089,
+      "role": "Current Best 3D Lung Shape Predictor (Phase 5B/5C Focus)"
+    },
+    "ssm_lung_pca_v2": {
+      "path": "backend\\data\\3d_reconstruction\\ssm_lung_pca_v2.json",
+      "sha256": "cec3fe5956ba7d2541e5d1f63d7e6ff386cdaff154c584d09930bd144bcb61f9",
+      "file_size_bytes": 10116804,
+      "role": "Multi-Patient 20-Mode Statistical Shape Model Artifact"
+    }
+  },
+  "data_manifests": {
+    "verified_multi_patient_manifest": {
+      "path": "research\\3d_reconstruction\\verified_multi_patient_manifest.json",
+      "sha256": "0e64ba9954604dca936bfce87fb3b14c048133c2234d84fd54e08c8c00a4647a",
+      "total_patients": 430
+    },
+    "split_manifest": {
+      "path": "research\\3d_reconstruction\\ssm\\split_manifest.json",
+      "sha256": "097d01394a4f5ae2880c4840f8dc6a02d5d8480a43ad239d0108c00728e0a9b3",
+      "train_patients": 301,
+      "validation_patients": 64,
+      "test_patients": 65
+    }
+  },
+  "seeds_policy": {
+    "global_dataset_split_seed": 42,
+    "model_baseline_initialization_seed": 42,
+    "per_patient_radiograph_projection_seed_formula": "2042 + int(sha256(patient_id).hexdigest(), 16) % 1000000",
+    "bootstrap_resampling_seed": 42,
+    "bootstrap_iterations_count": 10000
+  },
+  "tolerances": {
+    "assd_mm": 0.005,
+    "hd95_mm": 0.005,
+    "surface_dice_2mm": 0.005,
+    "volume_error_pct": 0.05,
+    "reproduction_criteria": "Max absolute deviation between independent run and reported metric <= tolerance"
+  },
+  "canonical_reproduction_commands": {
+    "task_a_prediction_independence": "python scripts/evaluation/audit_phase5c_prediction_independence.py",
+    "task_b_full_evaluation_reproduction": "python scripts/evaluation/reproduce_phase5c_evaluations.py",
+    "task_c_oracle_ssm_analysis": "python scripts/evaluation/verify_phase5c_oracle.py",
+    "task_d_statistical_reanalysis": "python scripts/evaluation/run_phase5c_statistical_reanalysis.py",
+    "task_e_data_leakage_audit": "python scripts/evaluation/audit_phase5c_data_leakage.py",
+    "task_f_uncertainty_calibration": "python scripts/evaluation/audit_phase5c_uncertainty_calibration.py",
+    "task_g_anatomical_coordinates": "python scripts/evaluation/audit_phase5c_anatomical_coordinates.py",
+    "full_suite_reproduction": "python scripts/evaluation/run_phase5c_full_audit.py"
+  },
+  "verdict": {
+    "production_checkpoint_preserved": true,
+    "reproducibility_status": "DETERMINISTICALLY_REPRODUCIBLE",
+    "audit_verdict_declaration": "COMPLETE: all required audits independently reproduced."
+  }
+}

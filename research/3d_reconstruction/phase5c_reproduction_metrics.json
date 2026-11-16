@@ -1,0 +1,299 @@
+{
+  "report_version": "5.3.0",
+  "timestamp_utc": "2026-11-16T21:31:47Z",
+  "task": "Task B: Full Evaluation Reproduction",
+  "model_name": "HeteroscedasticDualViewCrossAttentionPredictor",
+  "checkpoint": "research\\3d_reconstruction\\checkpoints\\dual_view_shape_predictor_v2_best.pth",
+  "checkpoint_sha256": "dd592d21d3d9f68587a88184b1f9275089fc037dbafff5e9e6c5a0114b5be413",
+  "cohort_size": 65,
+  "cohort_summary": {
+    "num_patients": 65,
+    "assd_mm": {
+      "mean": 4.7051,
+      "median": 4.3675,
+      "std": 2.0828,
+      "min": 0.8073,
+      "max": 10.1948,
+      "ci_95": [
+        4.189,
+        5.2212
+      ]
+    },
+    "hd95_mm": {
+      "mean": 9.212,
+      "median": 8.5095,
+      "std": 4.8736,
+      "min": 1.3294,
+      "max": 25.1416,
+      "ci_95": [
+        8.0044,
+        10.4197
+      ]
+    },
+    "hd_max_mm": {
+      "mean": 13.1121,
+      "median": 10.6219,
+      "std": 8.2766,
+      "min": 2.0023,
+      "max": 43.2829,
+      "ci_95": [
+        11.0612,
+        15.1629
+      ]
+    },
+    "surface_dice_1mm": {
+      "mean": 0.0386,
+      "median": 0.0122,
+      "std": 0.1021,
+      "min": 0.004,
+      "max": 0.7589,
+      "ci_95": [
+        0.0133,
+        0.0639
+      ]
+    },
+    "surface_dice_2mm": {
+      "mean": 0.168,
+      "median": 0.1002,
+      "std": 0.1736,
+      "min": 0.0284,
+      "max": 0.9999,
+      "ci_95": [
+        0.125,
+        0.211
+      ]
+    },
+    "surface_dice_3mm": {
+      "mean": 0.3774,
+      "median": 0.3068,
+      "std": 0.2303,
+      "min": 0.0744,
+      "max": 1.0,
+      "ci_95": [
+        0.3204,
+        0.4345
+      ]
+    },
+    "surface_dice_5mm": {
+      "mean": 0.6732,
+      "median": 0.6604,
+      "std": 0.2461,
+      "min": 0.1999,
+      "max": 1.0,
+      "ci_95": [
+        0.6122,
+        0.7342
+      ]
+    },
+    "volume_error_ml": {
+      "mean": 373.5665,
+      "median": 249.75,
+      "std": 341.5951,
+      "min": 0.42,
+      "max": 1498.65,
+      "ci_95": [
+        288.9234,
+        458.2096
+      ]
+    },
+    "volume_error_pct": {
+      "mean": 10.1934,
+      "median": 6.87,
+      "std": 10.1486,
+      "min": 0.01,
+      "max": 45.15,
+      "ci_95": [
+        7.6787,
+        12.7081
+      ]
+    },
+    "predicted_volume_ml": {
+      "mean": 3881.7754,
+      "median": 3877.6,
+      "std": 60.5912,
+      "min": 3796.4,
+      "max": 3983.5,
+      "ci_95": [
+        3866.7616,
+        3896.7891
+      ]
+    },
+    "reference_volume_ml": {
+      "mean": 3840.6738,
+      "median": 3784.4,
+      "std": 559.4482,
+      "min": 2621.7,
+      "max": 5477.6,
+      "ci_95": [
+        3702.0494,
+        3979.2983
+      ]
+    },
+    "left_lung_volume_ml": {
+      "mean": 1750.8231,
+      "median": 1753.5,
+      "std": 26.6869,
+      "min": 1709.2,
+      "max": 1791.7,
+      "ci_95": [
+        1744.2104,
+        1757.4358
+      ]
+    },
+    "right_lung_volume_ml": {
+      "mean": 2130.9492,
+      "median": 2124.1,
+      "std": 34.2078,
+      "min": 2086.0,
+      "max": 2192.2,
+      "ci_95": [
+        2122.473,
+        2139.4255
+      ]
+    },
+    "bilateral_volume_ratio": {
+      "mean": 1.2171,
+      "median": 1.217,
+      "std": 0.0039,
+      "min": 1.211,
+      "max": 1.224,
+      "ci_95": [
+        1.2161,
+        1.218
+      ]
+    },
+    "left_volume_error_pct": {
+      "mean": 10.3826,
+      "median": 6.81,
+      "std": 9.8727,
+      "min": 0.18,
+      "max": 43.02,
+      "ci_95": [
+        7.9363,
+        12.829
+      ]
+    },
+    "right_volume_error_pct": {
+      "mean": 10.4962,
+      "median": 6.57,
+      "std": 10.3603,
+      "min": 0.04,
+      "max": 46.93,
+      "ci_95": [
+        7.929,
+        13.0633
+      ]
+    },
+    "left_lung_assd_mm": {
+      "mean": 4.6144,
+      "median": 4.3823,
+      "std": 2.0706,
+      "min": 0.907,
+      "max": 11.3727,
+      "ci_95": [
+        4.1013,
+        5.1275
+      ]
+    },
+    "right_lung_assd_mm": {
+      "mean": 4.7542,
+      "median": 4.4232,
+      "std": 2.1642,
+      "min": 0.707,
+      "max": 11.8602,
+      "ci_95": [
+        4.218,
+        5.2905
+      ]
+    },
+    "left_lung_dice_2mm": {
+      "mean": 0.1732,
+      "median": 0.1013,
+      "std": 0.1869,
+      "min": 0.0299,
+      "max": 0.9997,
+      "ci_95": [
+        0.1269,
+        0.2195
+      ]
+    },
+    "right_lung_dice_2mm": {
+      "mean": 0.1628,
+      "median": 0.1018,
+      "std": 0.1658,
+      "min": 0.0253,
+      "max": 1.0,
+      "ci_95": [
+        0.1218,
+        0.2039
+      ]
+    },
+    "mean_landmark_error_mm": {
+      "mean": 7.4503,
+      "median": 6.32,
+      "std": 4.5722,
+      "min": 0.95,
+      "max": 22.13,
+      "ci_95": [
+        6.3174,
+        8.5832
+      ]
+    },
+    "mean_predicted_uncertainty_mm": {
+      "mean": 0.284,
+      "median": 0.2847,
+      "std": 0.0045,
+      "min": 0.2744,
+      "max": 0.2916,
+      "ci_95": [
+        0.2829,
+        0.2851
+      ]
+    },
+    "mahalanobis_distance": {
+      "mean": 0.4447,
+      "median": 0.4269,
+      "std": 0.1274,
+      "min": 0.2614,
+      "max": 0.7721,
+      "ci_95": [
+        0.4131,
+        0.4763
+      ]
+    },
+    "empirical_error_mean_mm": {
+      "mean": 6.8538,
+      "median": 6.3852,
+      "std": 3.913,
+      "min": 0.808,
+      "max": 19.3029,
+      "ci_95": [
+        5.8842,
+        7.8234
+      ]
+    }
+  },
+  "reproduction_audit": {
+    "phase5b_reported": {
+      "assd_mm": 4.705,
+      "hd95_mm": 9.212,
+      "surface_dice_2mm": 0.168,
+      "volume_error_pct": 10.19
+    },
+    "phase5c_reproduced": {
+      "assd_mm": 4.7051,
+      "hd95_mm": 9.212,
+      "surface_dice_2mm": 0.168,
+      "volume_error_pct": 10.1934
+    },
+    "absolute_deltas": {
+      "assd_mm": 0.0001,
+      "hd95_mm": 0.0,
+      "surface_dice_2mm": 0.0,
+      "volume_error_pct": 0.0034
+    },
+    "tolerance_threshold": 0.005,
+    "reproduction_exact_match": true,
+    "verdict": "INDEPENDENTLY_REPRODUCED_WITHIN_TOLERANCE"
+  }
+}
