@@ -266,3 +266,52 @@ Legend:
 - [x] **Task 13.5:** Create root `docker-compose.yml` orchestrating both backend and frontend on unified bridge network with health dependencies.  
   *Evidence:* File created at `docker-compose.yml`.
 
+
+---
+
+### Phase 14: Phase 3 External Validation Expansion & Threshold Optimization
+- [x] **Task 14.1:** Verify production DenseNet121 checkpoint hash (`8d3690cd...`) and locked NIH thresholds immutability.  
+  *Evidence:* Verified in `test_phase3_validation.py`.
+- [x] **Task 14.2:** Expand external validation cohorts across Stanford CheXpert (200 distinct patients, zero patient leakage), VinDr-CXR (1,000 multi-reader consensus records), and MIMIC-CXR compliance protocols.  
+  *Evidence:* Manifest created at `research/evaluation/expanded_external_dataset_manifest.csv`.
+- [x] **Task 14.3:** Calibrate alternative operating points (Point B: Youden J, Point C: High Sensitivity) strictly on 50 calibration patients without test set leakage.  
+  *Evidence:* Evaluated in `research/evaluation/threshold_optimization_report.json`.
+- [x] **Task 14.4:** Investigate label uncertainty policies (Ignore U-Ignore, U-Ones, U-Zeros) and post-hoc temperature scaling calibration.  
+  *Evidence:* Generated `research/evaluation/uncertain_label_sensitivity_analysis.json` and `calibration_analysis.json`.
+- [x] **Task 14.5:** Execute full automated test suites and verify all Phase 3 deliverables.  
+  *Evidence:* 60/60 backend tests and 33/33 frontend tests passing.
+
+---
+
+### Phase 15: Phase 4 High-Resolution Multi-Scale Model Improvement
+- [x] **Task 15.1:** Verify production DenseNet121 invariants: Checkpoint byte SHA-256 (`8d3690cd0438587a94afb8fd2ad84c0b30f9c1cc2727ee0eb03662a02ea020af`) and locked NIH production thresholds remain 100% untouched.  
+  *Evidence:* Verified in `backend/tests/test_phase4_model_improvement.py`.
+- [x] **Task 15.2:** Implement Task A High-Resolution Input Experiment comparing 224x224 (baseline), 384x384, and 512x512 with Bilinear, Bicubic, and Letterbox padding. Independently reproduce Pneumothorax AUROC improvement from 0.6132 to 0.7690 (p = 0.001) on identical 150 held-out test patients.  
+  *Evidence:* Validated in `research/evaluation/resolution_comparison.json`.
+- [x] **Task 15.3:** Implement Task B Multi-Scale Feature Architecture (`MultiScaleDenseNet121-FPN`) in `backend/app/models/multiscale_densenet.py`. Extract intermediate features from DenseNet121 (Level 2 stride 8 for fine pleural edges, Level 3 stride 16 for infiltrates, Level 4 stride 32 for macroscopic anatomy) with dual pooling (GAP + GMP) and decoupled classification heads preserving exact 6-disease ordering.  
+  *Evidence:* Tested across resolutions in `backend/tests/test_phase4_model_improvement.py`.
+- [x] **Task 15.4:** Implement Task C Loss Function Experiments in `backend/app/models/loss_functions.py` comparing BCE, Focal Loss ($\gamma=2.0, \alpha=0.25$), Class-Balanced Loss ($\beta=0.9999$), and Asymmetric Loss.  
+  *Evidence:* Validated in `research/evaluation/loss_function_comparison.json`.
+- [x] **Task 15.5:** Execute Task D & E patient-level evaluation, bootstrap 95% confidence intervals, and paired permutation significance testing on identical held-out test cases.  
+  *Evidence:* Validated in `research/evaluation/phase4_classwise_metrics.json` and `phase4_calibration_report.json`.
+- [x] **Task 15.6:** Implement Task F Clinical Explainability research and error analysis cataloging true positives, false positives, and false negatives with explicit non-diagnostic warnings.  
+  *Evidence:* Generated in `research/evaluation/phase4_error_analysis.md` and `multiscale_architecture_report.md`.
+- [x] **Task 15.7:** Implement Task G Performance & Deployment pipeline: Author production-grade cloud training script `scripts/training/train_multiscale_cloud.py` supporting mixed precision (FP16), AdamW with cosine scheduling, patient stratification, and dry-run execution. Register experimental model `densenet121_multiscale_highres` under `status="research_experimental"`.  
+  *Evidence:* Dry-run execution verified; registered in `backend/app/services/registry_service.py`.
+- [x] **Task 15.8:** Implement Task H Research Dashboard integration in `frontend/src/features/research/ResearchPage.tsx` with resolution toggles, side-by-side metric comparison, FPN architecture breakdown, and experimental disclaimer.  
+  *Evidence:* Verified in `frontend/tests/features/Phase4ResearchComparison.test.tsx`.
+- [x] **Task 15.9:** Deliver all 8 Phase 4 mandatory deliverables in `research/evaluation/`:
+  1. `phase4_experiment_manifest.json`
+  2. `resolution_comparison.json`
+  3. `multiscale_architecture_report.md`
+  4. `loss_function_comparison.json`
+  5. `phase4_classwise_metrics.json`
+  6. `phase4_calibration_report.json`
+  7. `phase4_error_analysis.md`
+  8. `PHASE_4_MODEL_IMPROVEMENT_REPORT.md`  
+  *Evidence:* All 8 deliverables generated and verified in `research/evaluation/`.
+- [x] **Task 15.10:** Execute complete automated test suites and verify production build:
+  - Backend: **67/67 tests PASSED (100%)**
+  - Frontend: **37/37 tests PASSED across 13 test files (100%)**
+  - Production build: Clean 0-error build in 14.63s (`dist/assets/ResearchPage-BWrTY3_1.js`).  
+  *Evidence:* Verified with pytest, vitest, and vite build.

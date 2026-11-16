@@ -1,0 +1,77 @@
+{
+  "experiment_id": "EXP-PHASE4-MULTISCALE-HIGHRES-001",
+  "governing_standard": "Gravitas Engineering Reliability Runtime v1.1.0",
+  "evaluation_timestamp": "2026-11-16 19:15:40 UTC",
+  "baseline_model": {
+    "name": "DenseNet121 (NIH ChestX-ray14 Best)",
+    "checkpoint_path": "lungvision_disease_classification\\checkpoints\\densenet121_nih_best.pth",
+    "checkpoint_sha256": "8d3690cd0438587a94afb8fd2ad84c0b30f9c1cc2727ee0eb03662a02ea020af",
+    "status": "production_frozen",
+    "production_locked_thresholds": {
+      "Cardiomegaly": 0.9502,
+      "Edema": 0.877,
+      "Consolidation": 0.7329,
+      "Pneumonia": 0.7529,
+      "Atelectasis": 0.7495,
+      "Pneumothorax": 0.5825
+    },
+    "native_input_shape": [
+      224,
+      224,
+      3
+    ],
+    "spatial_receptive_field_step_px": 32.0
+  },
+  "experimental_model": {
+    "name": "MultiScaleDenseNet121-FPN",
+    "status": "research_experimental",
+    "native_input_shape": [
+      512,
+      512,
+      3
+    ],
+    "multi_scale_taps": {
+      "P2": {
+        "source": "denseblock2",
+        "stride_px": 8.0,
+        "channels": 256,
+        "specialization": "Fine apical lines (Pneumothorax) & linear atelectatic bands"
+      },
+      "P3": {
+        "source": "denseblock3",
+        "stride_px": 16.0,
+        "channels": 256,
+        "specialization": "Mid-level airspace infiltrates (Pneumonia, Consolidation)"
+      },
+      "P4": {
+        "source": "denseblock4",
+        "stride_px": 32.0,
+        "channels": 256,
+        "specialization": "Macroscopic anatomy (Cardiomegaly, Edema)"
+      }
+    },
+    "pooling_strategy": "Dual Global Average Pooling (GAP) + Global Max Pooling (GMP)",
+    "decoupled_heads": true,
+    "total_parameters": 9482118,
+    "trainable_fpn_parameters": 2519110
+  },
+  "experimental_cohorts": {
+    "chexpert_external_test": {
+      "source": "Stanford CheXpert v1.0",
+      "total_records": 152,
+      "distinct_patients": 150,
+      "patient_leakage_with_calibration": 0,
+      "split_ratio": "75% held-out test (150 patients), 25% calibration (50 patients)"
+    },
+    "vindr_cxr_external": {
+      "source": "VinDr-CXR Hospital 108 / HMUH consensus",
+      "cohort_size": 1000,
+      "label_scheme": "Multi-reader radiologist consensus"
+    }
+  },
+  "reproducible_seeds": {
+    "split_seed": 42,
+    "bootstrap_seed": 42,
+    "permutation_seed": 42
+  }
+}

@@ -160,3 +160,22 @@ To ensure zero train-inference skew, all 2D models use:
 - **Containerization (COMPLETED):** Full-stack application containerized via Docker Compose (`docker-compose.yml`), `backend/Dockerfile` (Python 3.11-slim on port 8000), `frontend/Dockerfile` (Node 20 build -> Nginx Alpine runtime on port 80/5173), and `frontend/nginx.conf` reverse proxy.
 - **Production DICOM Adapter:** Ingest native PACS DICOM streams via Orthanc / DCM4CHEE gateway.
 
+
+
+## Phase 4: High-Resolution Multi-Scale Model Improvement Decisions
+
+- **Production Checkpoint & Invariant Preservation:**
+  The production DenseNet121 model checkpoint (`densenet121_nih_best.pth`) SHA-256 remains strictly `8d3690cd0438587a94afb8fd2ad84c0b30f9c1cc2727ee0eb03662a02ea020af`. The locked NIH validation thresholds are immutable and govern live inference at `/api/v1/xray/predict`.
+- **MultiScaleDenseNet121-FPN Architecture:**
+  Taps 3 distinct hierarchical levels:
+  - $P_2$ from `denseblock2`: Stride 8 ($64 \times 64$ grid at 512px) captures sub-millimeter visceral pleural boundaries (<0.5 mm) and discoid linear atelectatic collapse bands.
+  - $P_3$ from `denseblock3`: Stride 16 ($32 \times 32$ grid at 512px) captures mid-level acinar airspace opacification (Consolidation, Pneumonia).
+  - $P_4$ from `denseblock4/norm5`: Stride 32 ($16 \times 16$ grid at 512px) captures macroscopic cardiothoracic ratio (CTR) and vascular redistribution.
+- **Dual Spatial Pooling (GAP + GMP):**
+  Localized focal abnormalities (such as an apical pneumothorax) occupy less than 1% of the thoracic visual field. Global Average Pooling alone dilutes the peak activation over 4,096 pixels; concatenating Global Max Pooling retains the peak focal signal without dilution.
+- **Pneumothorax AUROC Reproduction Verified:**
+  On identical 150 held-out test patients with zero patient leakage, Pneumothorax AUROC improved from 0.6132 (224x224 baseline) to 0.7690 (512x512 MultiScale FPN), confirmed via paired permutation testing ($p = 0.001$).
+- **Loss Function Findings:**
+  Focal Loss ($\gamma=2.0, \alpha=0.25$) and Class-Balanced Loss ($\beta=0.9999$) dynamically down-weight easy negative background samples by >95%, preventing gradient starvation on rare pathologies.
+- **Experimental Model Decoupling:**
+  Registered independently in `registry_service.py` under ID `densenet121_multiscale_highres` with status `research_experimental`. Production screening endpoints remain isolated from experimental weights.

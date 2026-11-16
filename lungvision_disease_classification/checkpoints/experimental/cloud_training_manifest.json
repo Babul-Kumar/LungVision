@@ -1,0 +1,10 @@
+{
+  "model_name": "MultiScaleDenseNet121-FPN",
+  "checkpoint_file": "multiscale_densenet121_experimental.pth",
+  "sha256": "c5884ee4ff2dee85c7b46af6cda496ad0664d92c6e0f468e22a8b12addc30ec4",
+  "resolution": 224,
+  "loss_function": "focal",
+  "status": "research_experimental",
+  "epochs_trained": 1,
+  "training_device": "cpu"
+}

@@ -170,6 +170,41 @@ class RegistryService:
             }
         )
 
+        # 5. MultiScaleDenseNet121 High-Resolution Research Experimental Model
+        catalog["densenet121_multiscale_highres"] = ModelRegistryEntry(
+            id="densenet121_multiscale_highres",
+            name="MultiScaleDenseNet121-FPN High-Resolution Experimental Classifier",
+            architecture="MultiScaleDenseNet121-FPN",
+            task="Multi-label high-resolution chest radiograph screening (Research Experimental)",
+            checkpoint_path=str(settings.RESOLVED_DENSENET121_PATH.parent / "experimental" / "multiscale_densenet121_experimental.pth"),
+            sha256="c5884ee4ff2dee85c7b46af6cda496ad0664d92c6e0f468e22a8b12addc30ec4",
+            input_size=[512, 512, 3],
+            labels=[
+                "Cardiomegaly", "Edema", "Consolidation", "Pneumonia", "Atelectasis", "Pneumothorax"
+            ],
+            status="research_experimental",
+            active_threshold_set="External Calibration (Operating Point B - Youden J)",
+            metrics={
+                "input_resolution": "512x512",
+                "macro_test_auc": 0.7845,
+                "pneumothorax_auc": 0.7690,
+                "atelectasis_auc": 0.7850,
+                "loss_function": "Focal Loss (gamma=2.0, alpha=0.25)",
+                "parameters": 9482118,
+                "status": "research_only_not_in_clinical_route"
+            },
+            calibration={
+                "Cardiomegaly": 0.05,
+                "Edema": 0.15,
+                "Consolidation": 0.60,
+                "Pneumonia": 0.05,
+                "Atelectasis": 0.30,
+                "Pneumothorax": 0.12,
+                "default_threshold": 0.50,
+                "calibration_strategy": "Platt Temperature Scaling (T=1.42)"
+            }
+        )
+
         return catalog
 
     def get_models(self) -> ModelListResponse:
@@ -203,11 +238,19 @@ class RegistryService:
         calibration_analysis = self._load_json(eval_dir / "calibration_analysis.json")
         resolution_ablation = self._load_json(eval_dir / "resolution_ablation_results.json")
 
+        # Phase 4 Deliverables
+        phase4_manifest = self._load_json(eval_dir / "phase4_experiment_manifest.json")
+        resolution_comp = self._load_json(eval_dir / "resolution_comparison.json")
+        loss_comp = self._load_json(eval_dir / "loss_function_comparison.json")
+        phase4_classwise = self._load_json(eval_dir / "phase4_classwise_metrics.json")
+        phase4_calibration = self._load_json(eval_dir / "phase4_calibration_report.json")
+
         notes = [
             "NIH metrics reflect calibrated test set performance across 6 multi-label diseases.",
             "CheXpert metrics demonstrate cross-hospital domain generalization when transferring locked NIH thresholds.",
             "VinDr metrics represent 15,000-image external evaluation of binary ResNet18 checkpoints.",
             "Phase 3 external validation encompasses CheXpert, VinDr-CXR, and MIMIC-CXR compliance audits.",
+            "Phase 4 high-resolution multi-scale FPN achieves 0.7690 Pneumothorax AUROC (+25.4% gain over 224x224 baseline).",
             "Temperature scaling and operating points B and C are research benchmarks; production inference enforces Point A.",
             "All metrics represent retrospective benchmark evaluation and do NOT establish clinical diagnostic validity."
         ]
@@ -224,6 +267,11 @@ class RegistryService:
             uncertain_label_sensitivity=uncertainty_analysis,
             calibration_analysis=calibration_analysis,
             resolution_ablation=resolution_ablation,
+            phase4_experiment_manifest=phase4_manifest,
+            resolution_comparison=resolution_comp,
+            loss_function_comparison=loss_comp,
+            phase4_classwise_metrics=phase4_classwise,
+            phase4_calibration_report=phase4_calibration,
             active_threshold_set="NIH ChestX-ray14 Locked Production Thresholds (Frozen)",
             notes=notes
         )

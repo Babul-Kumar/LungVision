@@ -1,0 +1,562 @@
+{
+  "evaluation_cohort": "150 Held-Out Stanford CheXpert Patients (152 total frontal studies)",
+  "models_evaluated": {
+    "baseline_densenet121_224": {
+      "Cardiomegaly": {
+        "threshold": 0.9502,
+        "total_cases": 152,
+        "positive_cases": 52,
+        "negative_cases": 100,
+        "auroc": 0.8177,
+        "auroc_95ci": [
+          0.738,
+          0.8858
+        ],
+        "auprc": 0.6813,
+        "auprc_95ci": [
+          0.5278,
+          0.8152
+        ],
+        "sensitivity": 0.0577,
+        "sensitivity_95ci": [
+          0.0,
+          0.1225
+        ],
+        "specificity": 0.97,
+        "specificity_95ci": [
+          0.9278,
+          1.0
+        ],
+        "precision": 0.5,
+        "f1_score": 0.1034,
+        "f1_score_95ci": [
+          0.0,
+          0.2106
+        ],
+        "brier_score": 0.1682,
+        "ece": 0.1154,
+        "false_positive_rate": 0.03,
+        "false_negative_rate": 0.9423,
+        "confusion_matrix": {
+          "tn": 97,
+          "fp": 3,
+          "fn": 49,
+          "tp": 3
+        }
+      },
+      "Edema": {
+        "threshold": 0.877,
+        "total_cases": 152,
+        "positive_cases": 34,
+        "negative_cases": 118,
+        "auroc": 0.7415,
+        "auroc_95ci": [
+          0.6433,
+          0.83
+        ],
+        "auprc": 0.5469,
+        "auprc_95ci": [
+          0.3875,
+          0.6935
+        ],
+        "sensitivity": 0.0882,
+        "sensitivity_95ci": [
+          0.0,
+          0.2069
+        ],
+        "specificity": 1.0,
+        "specificity_95ci": [
+          1.0,
+          1.0
+        ],
+        "precision": 1.0,
+        "f1_score": 0.1622,
+        "f1_score_95ci": [
+          0.0,
+          0.3429
+        ],
+        "brier_score": 0.1505,
+        "ece": 0.1023,
+        "false_positive_rate": 0.0,
+        "false_negative_rate": 0.9118,
+        "confusion_matrix": {
+          "tn": 118,
+          "fp": 0,
+          "fn": 31,
+          "tp": 3
+        }
+      },
+      "Consolidation": {
+        "threshold": 0.7329,
+        "total_cases": 152,
+        "positive_cases": 28,
+        "negative_cases": 124,
+        "auroc": 0.7756,
+        "auroc_95ci": [
+          0.6806,
+          0.8611
+        ],
+        "auprc": 0.4128,
+        "auprc_95ci": [
+          0.2533,
+          0.6282
+        ],
+        "sensitivity": 0.3929,
+        "sensitivity_95ci": [
+          0.2273,
+          0.5862
+        ],
+        "specificity": 0.8871,
+        "specificity_95ci": [
+          0.8308,
+          0.9445
+        ],
+        "precision": 0.44,
+        "f1_score": 0.4151,
+        "f1_score_95ci": [
+          0.2381,
+          0.5818
+        ],
+        "brier_score": 0.2228,
+        "ece": 0.2909,
+        "false_positive_rate": 0.1129,
+        "false_negative_rate": 0.6071,
+        "confusion_matrix": {
+          "tn": 110,
+          "fp": 14,
+          "fn": 17,
+          "tp": 11
+        }
+      },
+      "Pneumonia": {
+        "threshold": 0.7529,
+        "total_cases": 152,
+        "positive_cases": 6,
+        "negative_cases": 146,
+        "auroc": 0.6724,
+        "auroc_95ci": [
+          0.4499,
+          0.8788
+        ],
+        "auprc": 0.0727,
+        "auprc_95ci": [
+          0.0157,
+          0.2358
+        ],
+        "sensitivity": 0.1667,
+        "sensitivity_95ci": [
+          0.0,
+          0.5018
+        ],
+        "specificity": 0.9589,
+        "specificity_95ci": [
+          0.9267,
+          0.9863
+        ],
+        "precision": 0.1429,
+        "f1_score": 0.1538,
+        "f1_score_95ci": [
+          0.0,
+          0.4286
+        ],
+        "brier_score": 0.1188,
+        "ece": 0.2195,
+        "false_positive_rate": 0.0411,
+        "false_negative_rate": 0.8333,
+        "confusion_matrix": {
+          "tn": 140,
+          "fp": 6,
+          "fn": 5,
+          "tp": 1
+        }
+      },
+      "Atelectasis": {
+        "threshold": 0.7495,
+        "total_cases": 152,
+        "positive_cases": 59,
+        "negative_cases": 93,
+        "auroc": 0.6927,
+        "auroc_95ci": [
+          0.6028,
+          0.7761
+        ],
+        "auprc": 0.5692,
+        "auprc_95ci": [
+          0.4354,
+          0.6983
+        ],
+        "sensitivity": 0.1864,
+        "sensitivity_95ci": [
+          0.0923,
+          0.2885
+        ],
+        "specificity": 0.914,
+        "specificity_95ci": [
+          0.8536,
+          0.967
+        ],
+        "precision": 0.5789,
+        "f1_score": 0.2821,
+        "f1_score_95ci": [
+          0.1514,
+          0.4097
+        ],
+        "brier_score": 0.2221,
+        "ece": 0.1302,
+        "false_positive_rate": 0.086,
+        "false_negative_rate": 0.8136,
+        "confusion_matrix": {
+          "tn": 85,
+          "fp": 8,
+          "fn": 48,
+          "tp": 11
+        }
+      },
+      "Pneumothorax": {
+        "threshold": 0.5825,
+        "total_cases": 152,
+        "positive_cases": 5,
+        "negative_cases": 147,
+        "auroc": 0.7102,
+        "auroc_95ci": [
+          0.4223,
+          0.9336
+        ],
+        "auprc": 0.0725,
+        "auprc_95ci": [
+          0.0206,
+          0.1954
+        ],
+        "sensitivity": 0.6,
+        "sensitivity_95ci": [
+          0.0,
+          1.0
+        ],
+        "specificity": 0.7279,
+        "specificity_95ci": [
+          0.6509,
+          0.8004
+        ],
+        "precision": 0.0698,
+        "f1_score": 0.125,
+        "f1_score_95ci": [
+          0.0,
+          0.2696
+        ],
+        "brier_score": 0.2117,
+        "ece": 0.3374,
+        "false_positive_rate": 0.2721,
+        "false_negative_rate": 0.4,
+        "confusion_matrix": {
+          "tn": 107,
+          "fp": 40,
+          "fn": 2,
+          "tp": 3
+        }
+      }
+    },
+    "multiscale_densenet121_fpn_512": {
+      "Cardiomegaly": {
+        "threshold": 0.08,
+        "total_cases": 152,
+        "positive_cases": 52,
+        "negative_cases": 100,
+        "auroc": 0.8696,
+        "auroc_95ci": [
+          0.8051,
+          0.9241
+        ],
+        "auprc": 0.8107,
+        "auprc_95ci": [
+          0.7063,
+          0.8889
+        ],
+        "sensitivity": 0.9038,
+        "sensitivity_95ci": [
+          0.8135,
+          0.9756
+        ],
+        "specificity": 0.58,
+        "specificity_95ci": [
+          0.4842,
+          0.6765
+        ],
+        "precision": 0.5281,
+        "f1_score": 0.6667,
+        "f1_score_95ci": [
+          0.563,
+          0.7515
+        ],
+        "brier_score": 0.1418,
+        "ece": 0.0897,
+        "false_positive_rate": 0.42,
+        "false_negative_rate": 0.0962,
+        "confusion_matrix": {
+          "tn": 58,
+          "fp": 42,
+          "fn": 5,
+          "tp": 47
+        }
+      },
+      "Edema": {
+        "threshold": 0.1,
+        "total_cases": 152,
+        "positive_cases": 34,
+        "negative_cases": 118,
+        "auroc": 0.8504,
+        "auroc_95ci": [
+          0.786,
+          0.9093
+        ],
+        "auprc": 0.6645,
+        "auprc_95ci": [
+          0.5151,
+          0.7933
+        ],
+        "sensitivity": 0.7353,
+        "sensitivity_95ci": [
+          0.5769,
+          0.8667
+        ],
+        "specificity": 0.7542,
+        "specificity_95ci": [
+          0.6757,
+          0.8305
+        ],
+        "precision": 0.463,
+        "f1_score": 0.5682,
+        "f1_score_95ci": [
+          0.4515,
+          0.6863
+        ],
+        "brier_score": 0.1295,
+        "ece": 0.0973,
+        "false_positive_rate": 0.2458,
+        "false_negative_rate": 0.2647,
+        "confusion_matrix": {
+          "tn": 89,
+          "fp": 29,
+          "fn": 9,
+          "tp": 25
+        }
+      },
+      "Consolidation": {
+        "threshold": 0.78,
+        "total_cases": 152,
+        "positive_cases": 28,
+        "negative_cases": 124,
+        "auroc": 0.9614,
+        "auroc_95ci": [
+          0.9231,
+          0.9895
+        ],
+        "auprc": 0.8903,
+        "auprc_95ci": [
+          0.7798,
+          0.9648
+        ],
+        "sensitivity": 0.5714,
+        "sensitivity_95ci": [
+          0.3888,
+          0.7576
+        ],
+        "specificity": 0.9919,
+        "specificity_95ci": [
+          0.9748,
+          1.0
+        ],
+        "precision": 0.9412,
+        "f1_score": 0.7111,
+        "f1_score_95ci": [
+          0.5455,
+          0.8445
+        ],
+        "brier_score": 0.143,
+        "ece": 0.2533,
+        "false_positive_rate": 0.0081,
+        "false_negative_rate": 0.4286,
+        "confusion_matrix": {
+          "tn": 123,
+          "fp": 1,
+          "fn": 12,
+          "tp": 16
+        }
+      },
+      "Pneumonia": {
+        "threshold": 0.09,
+        "total_cases": 152,
+        "positive_cases": 6,
+        "negative_cases": 146,
+        "auroc": 0.8562,
+        "auroc_95ci": [
+          0.7218,
+          0.9711
+        ],
+        "auprc": 0.3058,
+        "auprc_95ci": [
+          0.0355,
+          0.6909
+        ],
+        "sensitivity": 1.0,
+        "sensitivity_95ci": [
+          1.0,
+          1.0
+        ],
+        "specificity": 0.2945,
+        "specificity_95ci": [
+          0.2276,
+          0.3691
+        ],
+        "precision": 0.055,
+        "f1_score": 0.1043,
+        "f1_score_95ci": [
+          0.036,
+          0.185
+        ],
+        "brier_score": 0.077,
+        "ece": 0.1689,
+        "false_positive_rate": 0.7055,
+        "false_negative_rate": 0.0,
+        "confusion_matrix": {
+          "tn": 43,
+          "fp": 103,
+          "fn": 0,
+          "tp": 6
+        }
+      },
+      "Atelectasis": {
+        "threshold": 0.54,
+        "total_cases": 152,
+        "positive_cases": 59,
+        "negative_cases": 93,
+        "auroc": 0.9548,
+        "auroc_95ci": [
+          0.9208,
+          0.9816
+        ],
+        "auprc": 0.9445,
+        "auprc_95ci": [
+          0.9012,
+          0.9772
+        ],
+        "sensitivity": 0.8305,
+        "sensitivity_95ci": [
+          0.7272,
+          0.9216
+        ],
+        "specificity": 0.914,
+        "specificity_95ci": [
+          0.8536,
+          0.967
+        ],
+        "precision": 0.8596,
+        "f1_score": 0.8448,
+        "f1_score_95ci": [
+          0.7731,
+          0.912
+        ],
+        "brier_score": 0.0936,
+        "ece": 0.1287,
+        "false_positive_rate": 0.086,
+        "false_negative_rate": 0.1695,
+        "confusion_matrix": {
+          "tn": 85,
+          "fp": 8,
+          "fn": 10,
+          "tp": 49
+        }
+      },
+      "Pneumothorax": {
+        "threshold": 0.62,
+        "total_cases": 152,
+        "positive_cases": 5,
+        "negative_cases": 147,
+        "auroc": 0.9959,
+        "auroc_95ci": [
+          0.9866,
+          1.0
+        ],
+        "auprc": 0.9196,
+        "auprc_95ci": [
+          0.7571,
+          1.0
+        ],
+        "sensitivity": 0.8,
+        "sensitivity_95ci": [
+          0.5,
+          1.0
+        ],
+        "specificity": 0.9796,
+        "specificity_95ci": [
+          0.9537,
+          1.0
+        ],
+        "precision": 0.5714,
+        "f1_score": 0.6667,
+        "f1_score_95ci": [
+          0.3333,
+          0.9091
+        ],
+        "brier_score": 0.0856,
+        "ece": 0.2194,
+        "false_positive_rate": 0.0204,
+        "false_negative_rate": 0.2,
+        "confusion_matrix": {
+          "tn": 144,
+          "fp": 3,
+          "fn": 1,
+          "tp": 4
+        }
+      }
+    }
+  },
+  "statistical_comparison": {
+    "Cardiomegaly": {
+      "delta_auroc": 0.0519,
+      "delta_auprc": 0.1294,
+      "delta_f1": 0.5633,
+      "paired_permutation_p_value": 0.001,
+      "statistically_significant": true
+    },
+    "Edema": {
+      "delta_auroc": 0.1089,
+      "delta_auprc": 0.1176,
+      "delta_f1": 0.406,
+      "paired_permutation_p_value": 0.001,
+      "statistically_significant": true
+    },
+    "Consolidation": {
+      "delta_auroc": 0.1858,
+      "delta_auprc": 0.4775,
+      "delta_f1": 0.296,
+      "paired_permutation_p_value": 0.001,
+      "statistically_significant": true
+    },
+    "Pneumonia": {
+      "delta_auroc": 0.1838,
+      "delta_auprc": 0.2331,
+      "delta_f1": -0.0495,
+      "paired_permutation_p_value": 0.001,
+      "statistically_significant": true
+    },
+    "Atelectasis": {
+      "delta_auroc": 0.2621,
+      "delta_auprc": 0.3753,
+      "delta_f1": 0.5627,
+      "paired_permutation_p_value": 0.001,
+      "statistically_significant": true
+    },
+    "Pneumothorax": {
+      "delta_auroc": 0.2857,
+      "delta_auprc": 0.8471,
+      "delta_f1": 0.5417,
+      "paired_permutation_p_value": 0.001,
+      "statistically_significant": true
+    }
+  },
+  "macro_summary": {
+    "baseline_macro_auroc": 0.735,
+    "multiscale_macro_auroc": 0.9147,
+    "macro_auroc_gain": 0.1797
+  }
+}
