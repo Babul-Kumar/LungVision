@@ -72,7 +72,7 @@ export const MedicalGlossaryModal: React.FC<MedicalGlossaryModalProps> = ({ isOp
                 onClick={() => setSelectedCategory(cat)}
                 className={`px-3 py-1.5 rounded-lg capitalize transition-all ${
                   selectedCategory === cat
-                    ? 'bg-gradient-to-r from-amber-400 via-amber-500 to-amber-600 text-slate-950 font-bold shadow-md shadow-amber-950/40 border border-amber-300/40'
+                    ? 'bg-gradient-to-r from-amber-400 via-amber-500 to-amber-600 text-[#0c0614] font-bold shadow-md shadow-amber-950/40 border border-amber-300/40'
                     : 'bg-medical-surface text-slate-400 hover:text-white border border-white/10'
                 }`}
               >

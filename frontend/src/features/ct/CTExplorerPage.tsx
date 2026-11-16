@@ -543,7 +543,7 @@ export const CTExplorerPage: React.FC = () => {
           onClick={() => setActiveTab('3d')}
           className={`flex items-center gap-2 px-4 py-2 rounded-lg text-xs font-medium transition-all ${
             activeTab === '3d'
-              ? 'bg-gradient-to-r from-amber-400 via-amber-500 to-amber-600 text-slate-950 font-bold shadow-lg shadow-amber-950/40 border border-amber-300/40'
+              ? 'bg-gradient-to-r from-amber-400 via-amber-500 to-amber-600 text-[#0c0614] font-bold shadow-lg shadow-amber-950/40 border border-amber-300/40'
               : 'text-slate-300 hover:text-white hover:bg-white/[0.04]'
           }`}
         >
@@ -555,7 +555,7 @@ export const CTExplorerPage: React.FC = () => {
           onClick={() => setActiveTab('mpr')}
           className={`flex items-center gap-2 px-4 py-2 rounded-lg text-xs font-medium transition-all ${
             activeTab === 'mpr'
-              ? 'bg-gradient-to-r from-amber-400 via-amber-500 to-amber-600 text-slate-950 font-bold shadow-lg shadow-amber-950/40 border border-amber-300/40'
+              ? 'bg-gradient-to-r from-amber-400 via-amber-500 to-amber-600 text-[#0c0614] font-bold shadow-lg shadow-amber-950/40 border border-amber-300/40'
               : 'text-slate-300 hover:text-white hover:bg-white/[0.04]'
           }`}
         >
@@ -567,7 +567,7 @@ export const CTExplorerPage: React.FC = () => {
           onClick={() => setActiveTab('annotations')}
           className={`flex items-center gap-2 px-4 py-2 rounded-lg text-xs font-medium transition-all ${
             activeTab === 'annotations'
-              ? 'bg-gradient-to-r from-amber-400 via-amber-500 to-amber-600 text-slate-950 font-bold shadow-lg shadow-amber-950/40 border border-amber-300/40'
+              ? 'bg-gradient-to-r from-amber-400 via-amber-500 to-amber-600 text-[#0c0614] font-bold shadow-lg shadow-amber-950/40 border border-amber-300/40'
               : 'text-slate-300 hover:text-white hover:bg-white/[0.04]'
           }`}
         >
@@ -579,7 +579,7 @@ export const CTExplorerPage: React.FC = () => {
           onClick={() => setActiveTab('drr')}
           className={`flex items-center gap-2 px-4 py-2 rounded-lg text-xs font-medium transition-all ${
             activeTab === 'drr'
-              ? 'bg-gradient-to-r from-amber-400 via-amber-500 to-amber-600 text-slate-950 font-bold shadow-lg shadow-amber-950/40 border border-amber-300/40'
+              ? 'bg-gradient-to-r from-amber-400 via-amber-500 to-amber-600 text-[#0c0614] font-bold shadow-lg shadow-amber-950/40 border border-amber-300/40'
               : 'text-slate-300 hover:text-white hover:bg-white/[0.04]'
           }`}
         >
@@ -591,7 +591,7 @@ export const CTExplorerPage: React.FC = () => {
           onClick={() => setActiveTab('ssm')}
           className={`flex items-center gap-2 px-4 py-2 rounded-lg text-xs font-medium transition-all ${
             activeTab === 'ssm'
-              ? 'bg-gradient-to-r from-amber-400 via-amber-500 to-amber-600 text-slate-950 font-bold shadow-lg shadow-amber-950/40 border border-amber-300/40'
+              ? 'bg-gradient-to-r from-amber-400 via-amber-500 to-amber-600 text-[#0c0614] font-bold shadow-lg shadow-amber-950/40 border border-amber-300/40'
               : 'text-slate-300 hover:text-white hover:bg-white/[0.04]'
           }`}
         >
@@ -634,7 +634,7 @@ export const CTExplorerPage: React.FC = () => {
                           selectedStructure === item.id
                             ? item.id === 'heart'
                               ? 'bg-rose-600 text-white font-semibold shadow-xs'
-                              : 'bg-gradient-to-r from-amber-400 via-amber-500 to-amber-600 text-slate-950 font-bold shadow-md shadow-amber-950/40 border border-amber-300/40'
+                              : 'bg-gradient-to-r from-amber-400 via-amber-500 to-amber-600 text-[#0c0614] font-bold shadow-md shadow-amber-950/40 border border-amber-300/40'
                             : isPresent
                             ? 'bg-[#1e1033] text-slate-300 hover:text-white border border-white/10'
                             : 'bg-black/30 text-slate-600 border border-white/5 line-through opacity-70'
@@ -894,7 +894,7 @@ export const CTExplorerPage: React.FC = () => {
                         }}
                         className={`p-2 rounded-lg border text-center capitalize transition-all ${
                           mprView === view
-                            ? 'bg-gradient-to-r from-amber-400 via-amber-500 to-amber-600 text-slate-950 font-bold shadow-md shadow-amber-950/40 border border-amber-300/40'
+                            ? 'bg-gradient-to-r from-amber-400 via-amber-500 to-amber-600 text-[#0c0614] font-bold shadow-md shadow-amber-950/40 border border-amber-300/40'
                             : 'bg-[#150a22] text-slate-300 border border-white/10 hover:text-white'
                         }`}
                       >
@@ -1277,7 +1277,7 @@ export const CTExplorerPage: React.FC = () => {
                 onClick={handleExportToDualView}
                 disabled={loadingDRR || isExportingToDualView}
                 isLoading={isExportingToDualView}
-                className="bg-gradient-to-r from-amber-400 via-amber-500 to-amber-600 text-slate-950 hover:from-amber-300 hover:to-amber-500 font-semibold text-xs shadow-md shadow-amber-950/50 border border-amber-300/40"
+                className="bg-gradient-to-r from-amber-400 via-amber-500 to-amber-600 text-[#0c0614] hover:from-amber-300 hover:to-amber-500 font-semibold text-xs shadow-md shadow-amber-950/50 border border-amber-300/40"
               >
                 <span>Export to Dual-View Lab</span>
                 <ArrowRight className="w-3.5 h-3.5 ml-1" />
@@ -1303,7 +1303,7 @@ export const CTExplorerPage: React.FC = () => {
                         onClick={() => setDrrView('frontal')}
                         className={`p-2.5 rounded-lg border text-center transition-all ${
                           drrView === 'frontal'
-                            ? 'bg-gradient-to-r from-amber-400 via-amber-500 to-amber-600 text-slate-950 font-bold shadow-md shadow-amber-950/40 border border-amber-300/40'
+                            ? 'bg-gradient-to-r from-amber-400 via-amber-500 to-amber-600 text-[#0c0614] font-bold shadow-md shadow-amber-950/40 border border-amber-300/40'
                             : 'bg-[#150a22] text-slate-300 border border-white/10 hover:text-white'
                         }`}
                       >
@@ -1315,7 +1315,7 @@ export const CTExplorerPage: React.FC = () => {
                         onClick={() => setDrrView('lateral')}
                         className={`p-2.5 rounded-lg border text-center transition-all ${
                           drrView === 'lateral'
-                            ? 'bg-gradient-to-r from-amber-400 via-amber-500 to-amber-600 text-slate-950 font-bold shadow-md shadow-amber-950/40 border border-amber-300/40'
+                            ? 'bg-gradient-to-r from-amber-400 via-amber-500 to-amber-600 text-[#0c0614] font-bold shadow-md shadow-amber-950/40 border border-amber-300/40'
                             : 'bg-[#150a22] text-slate-300 border border-white/10 hover:text-white'
                         }`}
                       >
@@ -1577,7 +1577,7 @@ export const CTExplorerPage: React.FC = () => {
                           onClick={() => setSsmStructure(struct)}
                           className={`px-2.5 py-1 rounded text-[11px] font-mono capitalize transition-all ${
                             ssmStructure === struct
-                              ? 'bg-gradient-to-r from-amber-400 via-amber-500 to-amber-600 text-slate-950 font-bold shadow-md shadow-amber-950/40 border border-amber-300/40'
+                              ? 'bg-gradient-to-r from-amber-400 via-amber-500 to-amber-600 text-[#0c0614] font-bold shadow-md shadow-amber-950/40 border border-amber-300/40'
                               : 'text-slate-400 hover:text-white'
                           }`}
                         >
@@ -1607,7 +1607,7 @@ export const CTExplorerPage: React.FC = () => {
                       onClick={() => applySSMPreset('mean')}
                       className={`px-2 py-0.5 rounded text-[11px] font-mono transition-all ${
                         ssmGeometryPreset === 'mean'
-                          ? 'bg-gradient-to-r from-amber-400 via-amber-500 to-amber-600 text-slate-950 font-bold'
+                          ? 'bg-gradient-to-r from-amber-400 via-amber-500 to-amber-600 text-[#0c0614] font-bold'
                           : 'bg-[#150a22] text-slate-300 hover:text-white border border-white/10'
                       }`}
                     >
@@ -1617,7 +1617,7 @@ export const CTExplorerPage: React.FC = () => {
                       onClick={() => applySSMPreset('held_out_val')}
                       className={`px-2 py-0.5 rounded text-[11px] font-mono transition-all ${
                         ssmGeometryPreset === 'held_out_val'
-                          ? 'bg-gradient-to-r from-amber-400 via-amber-500 to-amber-600 text-slate-950 font-bold'
+                          ? 'bg-gradient-to-r from-amber-400 via-amber-500 to-amber-600 text-[#0c0614] font-bold'
                           : 'bg-[#150a22] text-slate-300 hover:text-white border border-white/10'
                       }`}
                     >
@@ -1627,7 +1627,7 @@ export const CTExplorerPage: React.FC = () => {
                       onClick={() => applySSMPreset('reference')}
                       className={`px-2 py-0.5 rounded text-[11px] font-mono transition-all ${
                         ssmGeometryPreset === 'reference'
-                          ? 'bg-gradient-to-r from-amber-400 via-amber-500 to-amber-600 text-slate-950 font-bold'
+                          ? 'bg-gradient-to-r from-amber-400 via-amber-500 to-amber-600 text-[#0c0614] font-bold'
                           : 'bg-[#150a22] text-slate-300 hover:text-white border border-white/10'
                       }`}
                     >

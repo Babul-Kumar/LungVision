@@ -116,7 +116,7 @@ export const ResearchPage: React.FC = () => {
             onClick={() => setActiveTab('nih')}
             className={`px-3.5 py-1.5 rounded-lg text-xs font-medium transition-all ${
               activeTab === 'nih'
-                ? 'bg-gradient-to-r from-amber-400 via-amber-500 to-amber-600 text-slate-950 font-bold shadow-md shadow-amber-950/40 border border-amber-300/40'
+                ? 'bg-gradient-to-r from-amber-400 via-amber-500 to-amber-600 text-[#0c0614] font-bold shadow-md shadow-amber-950/40 border border-amber-300/40'
                 : 'text-slate-400 hover:text-white'
             }`}
           >
@@ -126,7 +126,7 @@ export const ResearchPage: React.FC = () => {
             onClick={() => setActiveTab('chexpert')}
             className={`px-3.5 py-1.5 rounded-lg text-xs font-medium transition-all ${
               activeTab === 'chexpert'
-                ? 'bg-gradient-to-r from-amber-400 via-amber-500 to-amber-600 text-slate-950 font-bold shadow-md shadow-amber-950/40 border border-amber-300/40'
+                ? 'bg-gradient-to-r from-amber-400 via-amber-500 to-amber-600 text-[#0c0614] font-bold shadow-md shadow-amber-950/40 border border-amber-300/40'
                 : 'text-slate-400 hover:text-white'
             }`}
           >
@@ -136,7 +136,7 @@ export const ResearchPage: React.FC = () => {
             onClick={() => setActiveTab('vindr')}
             className={`px-3.5 py-1.5 rounded-lg text-xs font-medium transition-all ${
               activeTab === 'vindr'
-                ? 'bg-gradient-to-r from-amber-400 via-amber-500 to-amber-600 text-slate-950 font-bold shadow-md shadow-amber-950/40 border border-amber-300/40'
+                ? 'bg-gradient-to-r from-amber-400 via-amber-500 to-amber-600 text-[#0c0614] font-bold shadow-md shadow-amber-950/40 border border-amber-300/40'
                 : 'text-slate-400 hover:text-white'
             }`}
           >
@@ -146,7 +146,7 @@ export const ResearchPage: React.FC = () => {
             onClick={() => setActiveTab('ssm')}
             className={`px-3.5 py-1.5 rounded-lg text-xs font-medium transition-all ${
               activeTab === 'ssm'
-                ? 'bg-gradient-to-r from-amber-400 via-amber-500 to-amber-600 text-slate-950 font-bold shadow-md shadow-amber-950/40 border border-amber-300/40'
+                ? 'bg-gradient-to-r from-amber-400 via-amber-500 to-amber-600 text-[#0c0614] font-bold shadow-md shadow-amber-950/40 border border-amber-300/40'
                 : 'text-slate-400 hover:text-white'
             }`}
           >

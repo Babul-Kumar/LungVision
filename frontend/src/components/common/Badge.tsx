@@ -20,12 +20,12 @@ export const Badge: React.FC<BadgeProps> = ({
     amber: 'bg-amber-950/70 text-amber-300 border-amber-600/50 shadow-[0_0_12px_rgba(245,158,11,0.2)]',
     marigold: 'bg-amber-950/70 text-amber-300 border-amber-600/50 shadow-[0_0_12px_rgba(245,158,11,0.2)]',
     rose: 'bg-rose-950/70 text-rose-300 border-rose-700/50 shadow-xs',
-    cyan: 'bg-amber-950/70 text-amber-300 border-amber-600/50 shadow-[0_0_10px_rgba(245,158,11,0.15)]',
-    blue: 'bg-blue-950/70 text-blue-300 border-blue-700/50 shadow-xs',
-    slate: 'bg-slate-900/80 text-slate-200 border-white/10 shadow-xs',
-    silver: 'bg-slate-800/60 text-slate-100 border-slate-400/30 shadow-xs',
-    teal: 'bg-slate-800/60 text-slate-100 border-slate-400/30 shadow-xs',
-    aubergine: 'bg-[#2b1642]/80 text-[#e9d5ff] border-[#6b359e]/50',
+    cyan: 'bg-[#2a1740]/80 text-amber-300 border-amber-600/40 shadow-[0_0_10px_rgba(245,158,11,0.15)]',
+    blue: 'bg-[#231339]/90 text-amber-200 border-amber-500/30 shadow-xs',
+    slate: 'bg-[#1a0e2b]/90 text-slate-200 border-white/10 shadow-xs',
+    silver: 'bg-[#1f1233]/90 text-slate-100 border-white/15 shadow-xs',
+    teal: 'bg-[#1f1233]/90 text-slate-100 border-white/15 shadow-xs',
+    aubergine: 'bg-[#2b1642]/90 text-[#f5d0fe] border-[#7e22ce]/40',
   };
 
   const sizeStyles = {

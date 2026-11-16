@@ -153,7 +153,7 @@ export const PatientFriendlyXRayView: React.FC<PatientFriendlyXRayViewProps> = (
           {/* Question 3: What did the model return? */}
           <div className="p-4 rounded-xl bg-medical-surface border border-white/10 space-y-1.5">
             <h4 className="text-xs font-bold text-white flex items-center gap-2 uppercase tracking-wider text-slate-200">
-              <span className="w-5 h-5 rounded-full bg-slate-700 text-slate-200 flex items-center justify-center text-[11px] font-bold">3</span>
+              <span className="w-5 h-5 rounded-full bg-[#2a1744] text-amber-300 border border-amber-500/30 flex items-center justify-center text-[11px] font-bold">3</span>
               What did the model return?
             </h4>
             <div className="pl-7 text-xs text-slate-300 space-y-2">
@@ -223,7 +223,7 @@ export const PatientFriendlyXRayView: React.FC<PatientFriendlyXRayViewProps> = (
           {/* Question 5: What are the limitations? */}
           <div className="p-4 rounded-xl bg-medical-surface border border-white/10 space-y-1.5">
             <h4 className="text-xs font-bold text-white flex items-center gap-2 uppercase tracking-wider text-slate-300">
-              <span className="w-5 h-5 rounded-full bg-slate-800 text-slate-300 flex items-center justify-center text-[11px] font-bold">5</span>
+              <span className="w-5 h-5 rounded-full bg-[#2a1744] text-amber-300 border border-amber-500/30 flex items-center justify-center text-[11px] font-bold">5</span>
               What are the limitations of this analysis?
             </h4>
             <ul className="pl-7 space-y-1.5 text-xs text-medical-muted list-disc list-outside">

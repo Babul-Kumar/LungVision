@@ -504,7 +504,7 @@ export const ThreeMeshCanvas: React.FC<ThreeMeshCanvasProps> = ({
       {/* Interactive Nodule Hover Tooltip */}
       {hoveredNodule && (
         <div
-          className="absolute z-30 pointer-events-none bg-slate-950/95 backdrop-blur-md p-2.5 rounded-lg border border-amber-500/40 text-xs shadow-2xl font-mono text-slate-200"
+          className="absolute z-30 pointer-events-none bg-[#0e0719]/95 backdrop-blur-md p-2.5 rounded-lg border border-amber-500/40 text-xs shadow-2xl font-mono text-slate-200"
           style={{
             left: `${Math.min(hoveredNodule.x + 12, 340)}px`,
             top: `${Math.min(hoveredNodule.y + 12, 300)}px`,

@@ -67,7 +67,7 @@ export const DashboardPage: React.FC = () => {
               <Button
                 variant="primary"
                 size="md"
-                className="bg-gradient-to-r from-amber-400 via-amber-500 to-amber-600 text-slate-950 font-bold shadow-lg shadow-amber-950/40 border border-amber-300/40 hover:from-amber-300 hover:to-amber-500"
+                className="bg-gradient-to-r from-amber-400 via-amber-500 to-amber-600 text-[#0c0614] font-bold shadow-lg shadow-amber-950/40 border border-amber-300/40 hover:from-amber-300 hover:to-amber-500"
               >
                 <Scan className="w-4 h-4 mr-2" />
                 <span>Start 2D X-Ray Screening</span>
@@ -257,7 +257,7 @@ export const DashboardPage: React.FC = () => {
         <div className="p-4 rounded-xl border border-white/10 bg-[#160b26]/80 relative overflow-hidden group hover:border-white/20 transition-all shadow-lg shadow-black/30">
           <div className="flex items-center justify-between mb-1.5">
             <span className="text-[10px] font-mono uppercase tracking-wider text-slate-300 font-semibold">FastAPI Event Loop</span>
-            <span className="w-1.5 h-1.5 rounded-full bg-slate-300" />
+            <span className="w-1.5 h-1.5 rounded-full bg-[#e2e8f0]" />
           </div>
           <div className="text-2xl font-bold font-mono tracking-tight text-slate-100 flex items-baseline gap-1.5">
             ~85 ms

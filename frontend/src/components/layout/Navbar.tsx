@@ -41,7 +41,7 @@ export const Navbar: React.FC = () => {
       {/* Brand & Logo */}
       <div className="flex items-center gap-3">
         <Link to="/" className="flex items-center gap-2.5 group">
-          <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-amber-400 via-amber-500 to-amber-600 flex items-center justify-center text-slate-950 font-bold shadow-md shadow-amber-950/40 group-hover:scale-105 group-hover:shadow-amber-500/20 transition-all">
+          <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-amber-400 via-amber-500 to-amber-600 flex items-center justify-center text-[#0c0614] font-bold shadow-md shadow-amber-950/40 group-hover:scale-105 group-hover:shadow-amber-500/20 transition-all">
             LV
           </div>
           <div>

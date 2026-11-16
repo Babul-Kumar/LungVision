@@ -43,7 +43,7 @@ export const SSM3DReconstructionViewer: React.FC<SSM3DReconstructionViewerProps>
   const mountRef = useRef<HTMLDivElement>(null);
   const [wireframe, setWireframe] = useState<boolean>(false);
   const [showLandmarks, setShowLandmarks] = useState<boolean>(true);
-  const [colorMode, setColorMode] = useState<'cyan' | 'bilateral'>('cyan');
+  const [colorMode, setColorMode] = useState<'silver' | 'bilateral'>('silver');
   const [isAutoRotating, setIsAutoRotating] = useState<boolean>(false);
   const [activeViewName, setActiveViewName] = useState<string>('Oblique 3D');
   const [vertexCount, setVertexCount] = useState<number>(0);
@@ -498,7 +498,7 @@ export const SSM3DReconstructionViewer: React.FC<SSM3DReconstructionViewerProps>
           </button>
 
           <button
-            onClick={() => setColorMode((c) => (c === 'cyan' ? 'bilateral' : 'cyan'))}
+            onClick={() => setColorMode((c) => (c === 'silver' ? 'bilateral' : 'silver'))}
             className={`p-1.5 rounded hover:bg-white/10 text-xs transition-colors ${colorMode === 'bilateral' ? 'text-amber-300 font-semibold' : 'text-slate-400 hover:text-white'
               }`}
             title={colorMode === 'bilateral' ? 'Bilateral Color Partition' : 'Single Shaded Color'}
@@ -549,7 +549,7 @@ export const SSM3DReconstructionViewer: React.FC<SSM3DReconstructionViewerProps>
       {/* Interactive Landmark Hover Tooltip */}
       {hoveredLandmark && (
         <div
-          className="absolute z-30 pointer-events-none bg-slate-950/95 backdrop-blur-md p-2.5 rounded-lg border border-amber-500/50 text-xs shadow-2xl font-mono text-slate-200"
+          className="absolute z-30 pointer-events-none bg-[#0e0719]/95 backdrop-blur-md p-2.5 rounded-lg border border-amber-500/50 text-xs shadow-2xl font-mono text-slate-200"
           style={{
             left: `${Math.min(hoveredLandmark.x + 12, 360)}px`,
             top: `${Math.min(hoveredLandmark.y + 12, 320)}px`,

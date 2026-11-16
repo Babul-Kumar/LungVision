@@ -227,7 +227,7 @@ export const XrayPage: React.FC = () => {
               }}
               className={`px-3.5 py-1.5 rounded-lg text-xs font-medium transition-all ${
                 activeModelType === 'multilabel'
-                  ? 'bg-gradient-to-r from-amber-400 via-amber-500 to-amber-600 text-slate-950 font-bold shadow-md shadow-amber-950/40 border border-amber-300/40'
+                  ? 'bg-gradient-to-r from-amber-400 via-amber-500 to-amber-600 text-[#0c0614] font-bold shadow-md shadow-amber-950/40 border border-amber-300/40'
                   : 'text-slate-400 hover:text-white'
               }`}
             >
@@ -240,7 +240,7 @@ export const XrayPage: React.FC = () => {
               }}
               className={`px-3.5 py-1.5 rounded-lg text-xs font-medium transition-all ${
                 activeModelType === 'binary'
-                  ? 'bg-gradient-to-r from-amber-400 via-amber-500 to-amber-600 text-slate-950 font-bold shadow-md shadow-amber-950/40 border border-amber-300/40'
+                  ? 'bg-gradient-to-r from-amber-400 via-amber-500 to-amber-600 text-[#0c0614] font-bold shadow-md shadow-amber-950/40 border border-amber-300/40'
                   : 'text-slate-400 hover:text-white'
               }`}
             >
@@ -480,12 +480,12 @@ export const XrayPage: React.FC = () => {
               <Button
                 variant="primary"
                 size="md"
-                className="w-full bg-gradient-to-r from-amber-400 via-amber-500 to-amber-600 hover:from-amber-300 hover:to-amber-500 text-slate-950 font-bold shadow-lg shadow-amber-950/50 hover:shadow-amber-500/30 hover:scale-[1.01] transition-all border border-amber-300/40"
+                className="w-full bg-gradient-to-r from-amber-400 via-amber-500 to-amber-600 hover:from-amber-300 hover:to-amber-500 text-[#0c0614] font-bold shadow-lg shadow-amber-950/50 hover:shadow-amber-500/30 hover:scale-[1.01] transition-all border border-amber-300/40"
                 onClick={runInference}
                 disabled={!selectedFile || isLoading}
                 isLoading={isLoading}
               >
-                <Sparkles className="w-4 h-4 mr-1.5 text-slate-950" />
+                <Sparkles className="w-4 h-4 mr-1.5 text-[#0c0614]" />
                 <span>
                   {isLoading
                     ? 'Computing Neural Probabilities...'
@@ -566,7 +566,7 @@ export const XrayPage: React.FC = () => {
                     onClick={() => setUserExperienceMode('doctor')}
                     className={`flex items-center gap-1 px-2.5 py-1 rounded-md text-xs font-medium transition-all ${
                       userExperienceMode === 'doctor'
-                        ? 'bg-gradient-to-r from-amber-400 via-amber-500 to-amber-600 text-slate-950 font-semibold shadow-sm'
+                        ? 'bg-gradient-to-r from-amber-400 via-amber-500 to-amber-600 text-[#0c0614] font-semibold shadow-sm'
                         : 'text-medical-muted hover:text-white'
                     }`}
                     title="Switch to Doctor / Researcher View"

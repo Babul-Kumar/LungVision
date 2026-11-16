@@ -69,7 +69,7 @@ export const DiseaseExplainabilityModal: React.FC<DiseaseExplainabilityModalProp
               onClick={() => setSelectedDisease(d)}
               className={`px-3 py-1.5 rounded-lg text-xs font-medium whitespace-nowrap transition-all ${
                 selectedDisease === d
-                  ? 'bg-gradient-to-r from-amber-400 via-amber-500 to-amber-600 text-slate-950 font-bold shadow-md shadow-amber-950/40 border border-amber-300/40'
+                  ? 'bg-gradient-to-r from-amber-400 via-amber-500 to-amber-600 text-[#0c0614] font-bold shadow-md shadow-amber-950/40 border border-amber-300/40'
                   : 'text-slate-400 hover:text-white hover:bg-white/5'
               }`}
             >

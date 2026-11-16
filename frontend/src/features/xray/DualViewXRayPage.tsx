@@ -821,14 +821,14 @@ export const DualViewXRayPage: React.FC = () => {
           onClick={() => setActiveTab('reconstruction')}
           className={`flex items-center gap-2 px-4 py-2 rounded-lg transition-all ${
             activeTab === 'reconstruction'
-              ? 'bg-gradient-to-r from-amber-400 via-amber-500 to-amber-600 text-slate-950 font-bold shadow-md shadow-amber-950/40 border border-amber-300/40'
+              ? 'bg-gradient-to-r from-amber-400 via-amber-500 to-amber-600 text-[#0c0614] font-bold shadow-md shadow-amber-950/40 border border-amber-300/40'
               : 'text-slate-400 hover:text-white hover:bg-white/5'
           }`}
         >
           <Box className="w-4 h-4 text-inherit" />
           <span>3D Lung Reconstruction (Phase 2B SSM)</span>
           {reconstructionResult && (
-            <span className="w-2 h-2 rounded-full bg-slate-950" />
+            <span className="w-2 h-2 rounded-full bg-[#0c0614]" />
           )}
         </button>
 
@@ -836,14 +836,14 @@ export const DualViewXRayPage: React.FC = () => {
           onClick={() => setActiveTab('screening')}
           className={`flex items-center gap-2 px-4 py-2 rounded-lg transition-all ${
             activeTab === 'screening'
-              ? 'bg-gradient-to-r from-amber-400 via-amber-500 to-amber-600 text-slate-950 font-bold shadow-md shadow-amber-950/40 border border-amber-300/40'
+              ? 'bg-gradient-to-r from-amber-400 via-amber-500 to-amber-600 text-[#0c0614] font-bold shadow-md shadow-amber-950/40 border border-amber-300/40'
               : 'text-slate-400 hover:text-white hover:bg-white/5'
           }`}
         >
           <Activity className="w-4 h-4 text-inherit" />
           <span>2D Pathology Screening (DenseNet-121)</span>
           {frontalResult && (
-            <span className="w-2 h-2 rounded-full bg-slate-950" />
+            <span className="w-2 h-2 rounded-full bg-[#0c0614]" />
           )}
         </button>
 
@@ -851,7 +851,7 @@ export const DualViewXRayPage: React.FC = () => {
           onClick={() => setActiveTab('roadmap')}
           className={`flex items-center gap-2 px-4 py-2 rounded-lg transition-all ${
             activeTab === 'roadmap'
-              ? 'bg-gradient-to-r from-amber-400 via-amber-500 to-amber-600 text-slate-950 font-bold shadow-md shadow-amber-950/40 border border-amber-300/40'
+              ? 'bg-gradient-to-r from-amber-400 via-amber-500 to-amber-600 text-[#0c0614] font-bold shadow-md shadow-amber-950/40 border border-amber-300/40'
               : 'text-slate-400 hover:text-white hover:bg-white/5'
           }`}
         >

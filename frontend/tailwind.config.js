@@ -49,7 +49,7 @@ export default {
           marigold: '#f59e0b',
           silver: '#e2e8f0',
           aubergine: '#1a0e2b',
-          blue: '#3b82f6',
+          blue: '#f59e0b',       // Mapped to Marigold Gold
           amber: '#f59e0b',
           rose: '#f43f5e',
           emerald: '#10b981',
