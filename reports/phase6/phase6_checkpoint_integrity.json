@@ -1,0 +1,46 @@
+{
+  "task": "Task A: Checkpoint Integrity & Architecture Audit",
+  "timestamp": "2026-11-16T23:00:15Z",
+  "checkpoint_path": "lungvision_disease_classification/checkpoints/densenet121_nih_best.pth",
+  "authoritative_sha256": "8d3690cd0438587a94afb8fd2ad84c0b30f9c1cc2727ee0eb03662a02ea020af",
+  "computed_sha256": "8d3690cd0438587a94afb8fd2ad84c0b30f9c1cc2727ee0eb03662a02ea020af",
+  "sha256_match": true,
+  "file_size_bytes": 84457897,
+  "architecture": "DenseNet121",
+  "parameter_counts": {
+    "backbone_features": 6953856,
+    "classifier_head": 6150,
+    "total_parameters": 6960006,
+    "trainable_parameters": 6960006
+  },
+  "classifier_head": {
+    "in_features": 1024,
+    "out_features": 6,
+    "has_bias": true
+  },
+  "state_dict_keys_count": 727,
+  "missing_keys": [],
+  "unexpected_keys": [],
+  "checkpoint_metadata": {
+    "epoch": 4,
+    "best_val_auc": 0.8205820182751643,
+    "labels": [
+      "Cardiomegaly",
+      "Edema",
+      "Consolidation",
+      "Pneumonia",
+      "Atelectasis",
+      "Pneumothorax"
+    ],
+    "image_size": 224
+  },
+  "model_loader_service": {
+    "resolved_path": "lungvision_disease_classification/checkpoints/densenet121_nih_best.pth",
+    "device": "cpu",
+    "stale_checkpoint_detected": false,
+    "random_weights_detected": false,
+    "eval_mode_enforced": true,
+    "activation_function": "torch.sigmoid(logits)"
+  },
+  "verdict": "PASS"
+}

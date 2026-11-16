@@ -1,21 +1,25 @@
 {
   "mode": "implementation",
-  "objective": "LungVision AI — Phase 5D External Generalization, Uncertainty Calibration & Independent Anatomical Validation.",
+  "objective": "LungVision AI — Phase 6 Forensic Disease Prediction Failure Audit.",
   "acceptance_criteria": [
-    "Gate A: Final Test Set Independence Audit (Investigate development history of the 65-patient cohort across Phase 5, 5B, 5C; audit whether test metrics influenced architecture, loss, or checkpoint selection; classify cohort status; export phase5d_test_set_independence_audit.json).",
-    "Gate B: External Dataset Feasibility Audit (Audit MIMIC-CXR, CheXpert, PadChest, NIH, RibFrac, BIMCV, LIDC/LUNA16 for simultaneous paired frontal CXR, lateral CXR, 3D CT, and masks; document pairing availability; explicitly mark external validation status; export phase5d_external_dataset_feasibility.json).",
-    "Gate C: Uncertainty Calibration & Split Conformal Prediction (Calibrate heteroscedastic predictor using strictly the 64 validation patients; compare uncalibrated, temperature-scaled, residual-scaled, and split conformal prediction; evaluate 50/80/90/95% coverage, interval widths, patient-cluster bootstrap CIs, and failure detection AUROC; export phase5d_uncertainty_calibration.json and phase5d_patient_level_uncertainty_metrics.csv).",
-    "Gate D: Anatomical Error Stratification & Failure Analysis (Stratify reconstruction accuracy by lung volume, L/R asymmetry, thoracic aspect ratio, AP depth, rotation, and inspiratory scale; analyze top outlier failure cases; export phase5d_anatomical_stratification.json and phase5d_failure_analysis.json).",
-    "Gate E: Missing-View & Acquisition Robustness Audit (Evaluate dual-view, single-view frontal/lateral, missing lateral fallback, AP vs PA, rotation, exposure, resolution, and cropping; record valid trained vs unavailable experiments; export phase5d_missing_view_robustness.json).",
-    "Gate F: Clinical Scope, Reproducibility & Comprehensive Report (Strictly preserve distinction between estimated surfaces and diagnostic CT; generate phase5d_reproducibility_manifest.json and author authoritative PHASE_5D_EXTERNAL_VALIDATION_REPORT.md with unambiguous status declaration)."
+    "Gate A: Checkpoint Integrity and Architecture Audit (Verify DenseNet121 weights SHA-256: 8d3690cd0438587a94afb8fd2ad84c0b30f9c1cc2727ee0eb03662a02ea020af, architecture configuration, state dict keys, classifier head, output dimension, export phase6_checkpoint_integrity.json).",
+    "Gate B: Image Inventory & Preprocessing Audit (Audit 6 test images in test/, metadata, dimensions, bit depth, color mode, aspect ratio, borders, orientation; audit backend preprocessor resize vs crop, normalization, channel replication, tensor statistics, export phase6_image_inventory.json and phase6_preprocessing_audit.json).",
+    "Gate C: Class Order & Output Mapping Audit (Trace class indexing across dataset labels, model head, XRayService LABELS_6_DISEASE, API response schema, and frontend UI components; verify order alignment; export phase6_class_order_audit.json).",
+    "Gate D: Probability & Threshold Audit (Audit logit to sigmoid transform, verify no double-sigmoid or softmax distortion, audit frozen NIH thresholds against calibration set, export phase6_probability_threshold_audit.json).",
+    "Gate E: Six Image Prediction Reproduction (Run reproducible inference on test/ images, record logits, probabilities, thresholds, binary decisions, latency, export phase6_six_image_predictions.json).",
+    "Gate F: Diagnostic Error Analysis (Classify each test image under standardized failure taxonomy: Expected Prediction, Possible False Negative, Possible False Positive, Multi-label Finding, Uncertain Reference, Out-of-Distribution, Preprocessing Failure, Inference Failure; explain physiological, radiological, and resolution-induced mechanisms; export phase6_image_error_analysis.json).",
+    "Gate G: Grad-CAM & Attention Explainability Audit (Compute layer Grad-CAM for all 6 test images across predicted and reference disease classes, evaluate anatomical grounding vs shortcut learning/text/border artifacts, generate overlay PNGs, export phase6_gradcam_analysis.json).",
+    "Gate H: Training Data & Class Imbalance Audit (Audit NIH ChestX-ray14 class distributions, co-occurrence matrix, positive-weight loss handling, label noise, export phase6_training_data_audit.json).",
+    "Gate I: Threshold Performance & Sensitivity/Specificity Analysis (Evaluate calibrated test set under frozen thresholds: AUROC, AUPRC, Sensitivity, Specificity, F1, Brier score, ECE; analyze clinical tradeoffs; export phase6_threshold_performance.json).",
+    "Gate J: Frontend-Backend Trace & End-to-End Pipeline Audit (Trace byte ingestion, base64 encoding/decoding, API transport, React state handling, precision formatting, potential race conditions or rendering bugs; export phase6_frontend_backend_trace.json).",
+    "Gate K: Controlled Fixes, Regression Testing & Authoritative Report (Implement safe minimal fixes if pipeline bugs identified, execute backend & frontend regression test suites, export phase6_regression_test_report.json, author comprehensive PHASE_6_FORENSIC_PREDICTION_FAILURE_REPORT.md)."
   ],
   "non_goals": [
     "Do not modify or retrain frozen DenseNet121 production weights (SHA-256: 8d3690cd0438587a94afb8fd2ad84c0b30f9c1cc2727ee0eb03662a02ea020af)",
     "Do not alter frozen NIH production classification thresholds",
-    "Do not overwrite Phase 5B or Phase 5C artifacts or delete checkpoints",
-    "Do not use final test data for calibration fitting (prevent post-hoc data leakage)",
-    "Do not manufacture or fabricate external paired datasets",
-    "Do not claim clinical diagnostic validity for reconstructed surface meshes"
+    "Do not overwrite Phase 5B, 5C, or 5D artifacts or delete 3D shape reconstruction checkpoints",
+    "Do not treat image filenames as verified clinical ground truth",
+    "Do not hide false positives or false negatives or distort model outputs"
   ],
   "risk": "medium",
   "budget": "deep",
@@ -25,7 +29,8 @@
     "frontend/",
     "research/",
     "scripts/",
-    "data/",
+    "reports/",
+    "test/",
     ".gravitas/"
   ],
   "verification": "impact",
@@ -35,13 +40,17 @@
     "verification_depth": "impact",
     "delegation": "none",
     "reason_codes": [
-      "test-set-independence-audit",
-      "external-dataset-feasibility-audit",
-      "uncertainty-calibration-conformal-prediction",
-      "anatomical-error-stratification-failure-analysis",
-      "missing-view-acquisition-robustness",
-      "reproducibility-manifest-generation",
-      "preservation-of-production-invariants"
+      "checkpoint-integrity-audit",
+      "image-inventory-preprocessing-audit",
+      "class-order-mapping-audit",
+      "probability-threshold-audit",
+      "six-image-prediction-reproduction",
+      "diagnostic-error-analysis",
+      "gradcam-explainability-audit",
+      "training-data-imbalance-audit",
+      "threshold-performance-analysis",
+      "frontend-backend-trace-audit",
+      "regression-testing-authoritative-report"
     ]
   },
   "status": "completed"

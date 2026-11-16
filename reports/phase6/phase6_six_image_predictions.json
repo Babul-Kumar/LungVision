@@ -1,0 +1,657 @@
+{
+  "task": "Task E: Six Image Prediction Reproduction",
+  "timestamp": "2026-11-16T23:00:22Z",
+  "model_checkpoint_sha256": "8d3690cd0438587a94afb8fd2ad84c0b30f9c1cc2727ee0eb03662a02ea020af",
+  "frozen_thresholds": {
+    "Cardiomegaly": 0.9501953125,
+    "Edema": 0.876953125,
+    "Consolidation": 0.73291015625,
+    "Pneumonia": 0.7529296875,
+    "Atelectasis": 0.74951171875,
+    "Pneumothorax": 0.58251953125
+  },
+  "predictions": [
+    {
+      "filename": "Atelectasis.jpg",
+      "intended_disease": "Atelectasis",
+      "sha256": "e2eaa886fcd6f593c11c4218ac53eea59fdb0d431db2d6e64dece3e5b3bbdf7f",
+      "inference_time_ms": 464.21,
+      "probabilities": {
+        "Cardiomegaly": 0.050759,
+        "Edema": 0.082871,
+        "Consolidation": 0.297216,
+        "Pneumonia": 0.353398,
+        "Atelectasis": 0.352717,
+        "Pneumothorax": 0.330304
+      },
+      "thresholds": {
+        "Cardiomegaly": 0.950195,
+        "Edema": 0.876953,
+        "Consolidation": 0.73291,
+        "Pneumonia": 0.75293,
+        "Atelectasis": 0.749512,
+        "Pneumothorax": 0.58252
+      },
+      "positive_flags": [],
+      "highest_probability_disease": "Pneumonia",
+      "highest_probability_value": 0.3534,
+      "concordance_with_intended_label": false,
+      "disease_breakdown": {
+        "Cardiomegaly": {
+          "index": 0,
+          "raw_logit": -2.928572,
+          "exact_sigmoid_probability": 0.050759,
+          "service_rounded_probability": 0.0508,
+          "frozen_threshold": 0.950195,
+          "service_threshold": 0.9502,
+          "flagged_positive": false,
+          "delta_to_threshold": -0.899436,
+          "threshold_comparison_rule": "probability >= frozen_threshold",
+          "double_sigmoid_detected": false,
+          "softmax_distortion_detected": false
+        },
+        "Edema": {
+          "index": 1,
+          "raw_logit": -2.403969,
+          "exact_sigmoid_probability": 0.082871,
+          "service_rounded_probability": 0.0829,
+          "frozen_threshold": 0.876953,
+          "service_threshold": 0.877,
+          "flagged_positive": false,
+          "delta_to_threshold": -0.794083,
+          "threshold_comparison_rule": "probability >= frozen_threshold",
+          "double_sigmoid_detected": false,
+          "softmax_distortion_detected": false
+        },
+        "Consolidation": {
+          "index": 2,
+          "raw_logit": -0.860589,
+          "exact_sigmoid_probability": 0.297216,
+          "service_rounded_probability": 0.2972,
+          "frozen_threshold": 0.73291,
+          "service_threshold": 0.7329,
+          "flagged_positive": false,
+          "delta_to_threshold": -0.435694,
+          "threshold_comparison_rule": "probability >= frozen_threshold",
+          "double_sigmoid_detected": false,
+          "softmax_distortion_detected": false
+        },
+        "Pneumonia": {
+          "index": 3,
+          "raw_logit": -0.604138,
+          "exact_sigmoid_probability": 0.353398,
+          "service_rounded_probability": 0.3534,
+          "frozen_threshold": 0.75293,
+          "service_threshold": 0.7529,
+          "flagged_positive": false,
+          "delta_to_threshold": -0.399532,
+          "threshold_comparison_rule": "probability >= frozen_threshold",
+          "double_sigmoid_detected": false,
+          "softmax_distortion_detected": false
+        },
+        "Atelectasis": {
+          "index": 4,
+          "raw_logit": -0.607117,
+          "exact_sigmoid_probability": 0.352717,
+          "service_rounded_probability": 0.3527,
+          "frozen_threshold": 0.749512,
+          "service_threshold": 0.7495,
+          "flagged_positive": false,
+          "delta_to_threshold": -0.396795,
+          "threshold_comparison_rule": "probability >= frozen_threshold",
+          "double_sigmoid_detected": false,
+          "softmax_distortion_detected": false
+        },
+        "Pneumothorax": {
+          "index": 5,
+          "raw_logit": -0.70681,
+          "exact_sigmoid_probability": 0.330304,
+          "service_rounded_probability": 0.3303,
+          "frozen_threshold": 0.58252,
+          "service_threshold": 0.5825,
+          "flagged_positive": false,
+          "delta_to_threshold": -0.252215,
+          "threshold_comparison_rule": "probability >= frozen_threshold",
+          "double_sigmoid_detected": false,
+          "softmax_distortion_detected": false
+        }
+      }
+    },
+    {
+      "filename": "Cardiomegaly.jpg",
+      "intended_disease": "Cardiomegaly",
+      "sha256": "342e4f1d6bd66b95a147ba8c9fe2c4d1dba419601185044020bf146c039a4e7c",
+      "inference_time_ms": 182.37,
+      "probabilities": {
+        "Cardiomegaly": 0.804614,
+        "Edema": 0.116361,
+        "Consolidation": 0.595495,
+        "Pneumonia": 0.646996,
+        "Atelectasis": 0.658503,
+        "Pneumothorax": 0.469984
+      },
+      "thresholds": {
+        "Cardiomegaly": 0.950195,
+        "Edema": 0.876953,
+        "Consolidation": 0.73291,
+        "Pneumonia": 0.75293,
+        "Atelectasis": 0.749512,
+        "Pneumothorax": 0.58252
+      },
+      "positive_flags": [],
+      "highest_probability_disease": "Cardiomegaly",
+      "highest_probability_value": 0.8046,
+      "concordance_with_intended_label": false,
+      "disease_breakdown": {
+        "Cardiomegaly": {
+          "index": 0,
+          "raw_logit": 1.415386,
+          "exact_sigmoid_probability": 0.804614,
+          "service_rounded_probability": 0.8046,
+          "frozen_threshold": 0.950195,
+          "service_threshold": 0.9502,
+          "flagged_positive": false,
+          "delta_to_threshold": -0.145581,
+          "threshold_comparison_rule": "probability >= frozen_threshold",
+          "double_sigmoid_detected": false,
+          "softmax_distortion_detected": false
+        },
+        "Edema": {
+          "index": 1,
+          "raw_logit": -2.027349,
+          "exact_sigmoid_probability": 0.116361,
+          "service_rounded_probability": 0.1164,
+          "frozen_threshold": 0.876953,
+          "service_threshold": 0.877,
+          "flagged_positive": false,
+          "delta_to_threshold": -0.760592,
+          "threshold_comparison_rule": "probability >= frozen_threshold",
+          "double_sigmoid_detected": false,
+          "softmax_distortion_detected": false
+        },
+        "Consolidation": {
+          "index": 2,
+          "raw_logit": 0.386727,
+          "exact_sigmoid_probability": 0.595495,
+          "service_rounded_probability": 0.5955,
+          "frozen_threshold": 0.73291,
+          "service_threshold": 0.7329,
+          "flagged_positive": false,
+          "delta_to_threshold": -0.137416,
+          "threshold_comparison_rule": "probability >= frozen_threshold",
+          "double_sigmoid_detected": false,
+          "softmax_distortion_detected": false
+        },
+        "Pneumonia": {
+          "index": 3,
+          "raw_logit": 0.605863,
+          "exact_sigmoid_probability": 0.646996,
+          "service_rounded_probability": 0.647,
+          "frozen_threshold": 0.75293,
+          "service_threshold": 0.7529,
+          "flagged_positive": false,
+          "delta_to_threshold": -0.105933,
+          "threshold_comparison_rule": "probability >= frozen_threshold",
+          "double_sigmoid_detected": false,
+          "softmax_distortion_detected": false
+        },
+        "Atelectasis": {
+          "index": 4,
+          "raw_logit": 0.656631,
+          "exact_sigmoid_probability": 0.658503,
+          "service_rounded_probability": 0.6585,
+          "frozen_threshold": 0.749512,
+          "service_threshold": 0.7495,
+          "flagged_positive": false,
+          "delta_to_threshold": -0.091009,
+          "threshold_comparison_rule": "probability >= frozen_threshold",
+          "double_sigmoid_detected": false,
+          "softmax_distortion_detected": false
+        },
+        "Pneumothorax": {
+          "index": 5,
+          "raw_logit": -0.120207,
+          "exact_sigmoid_probability": 0.469984,
+          "service_rounded_probability": 0.47,
+          "frozen_threshold": 0.58252,
+          "service_threshold": 0.5825,
+          "flagged_positive": false,
+          "delta_to_threshold": -0.112535,
+          "threshold_comparison_rule": "probability >= frozen_threshold",
+          "double_sigmoid_detected": false,
+          "softmax_distortion_detected": false
+        }
+      }
+    },
+    {
+      "filename": "Edema.jpg",
+      "intended_disease": "Edema",
+      "sha256": "29cac073df9b6bc643a222fde920f8a4a6f465ef07fb5d299892e39beddcb330",
+      "inference_time_ms": 270.98,
+      "probabilities": {
+        "Cardiomegaly": 0.993839,
+        "Edema": 0.228307,
+        "Consolidation": 0.338338,
+        "Pneumonia": 0.239035,
+        "Atelectasis": 0.279959,
+        "Pneumothorax": 0.029182
+      },
+      "thresholds": {
+        "Cardiomegaly": 0.950195,
+        "Edema": 0.876953,
+        "Consolidation": 0.73291,
+        "Pneumonia": 0.75293,
+        "Atelectasis": 0.749512,
+        "Pneumothorax": 0.58252
+      },
+      "positive_flags": [
+        "Cardiomegaly"
+      ],
+      "highest_probability_disease": "Cardiomegaly",
+      "highest_probability_value": 0.9938,
+      "concordance_with_intended_label": false,
+      "disease_breakdown": {
+        "Cardiomegaly": {
+          "index": 0,
+          "raw_logit": 5.083352,
+          "exact_sigmoid_probability": 0.993839,
+          "service_rounded_probability": 0.9938,
+          "frozen_threshold": 0.950195,
+          "service_threshold": 0.9502,
+          "flagged_positive": true,
+          "delta_to_threshold": 0.043644,
+          "threshold_comparison_rule": "probability >= frozen_threshold",
+          "double_sigmoid_detected": false,
+          "softmax_distortion_detected": false
+        },
+        "Edema": {
+          "index": 1,
+          "raw_logit": -1.217896,
+          "exact_sigmoid_probability": 0.228307,
+          "service_rounded_probability": 0.2283,
+          "frozen_threshold": 0.876953,
+          "service_threshold": 0.877,
+          "flagged_positive": false,
+          "delta_to_threshold": -0.648646,
+          "threshold_comparison_rule": "probability >= frozen_threshold",
+          "double_sigmoid_detected": false,
+          "softmax_distortion_detected": false
+        },
+        "Consolidation": {
+          "index": 2,
+          "raw_logit": -0.67071,
+          "exact_sigmoid_probability": 0.338338,
+          "service_rounded_probability": 0.3383,
+          "frozen_threshold": 0.73291,
+          "service_threshold": 0.7329,
+          "flagged_positive": false,
+          "delta_to_threshold": -0.394572,
+          "threshold_comparison_rule": "probability >= frozen_threshold",
+          "double_sigmoid_detected": false,
+          "softmax_distortion_detected": false
+        },
+        "Pneumonia": {
+          "index": 3,
+          "raw_logit": -1.15798,
+          "exact_sigmoid_probability": 0.239035,
+          "service_rounded_probability": 0.239,
+          "frozen_threshold": 0.75293,
+          "service_threshold": 0.7529,
+          "flagged_positive": false,
+          "delta_to_threshold": -0.513895,
+          "threshold_comparison_rule": "probability >= frozen_threshold",
+          "double_sigmoid_detected": false,
+          "softmax_distortion_detected": false
+        },
+        "Atelectasis": {
+          "index": 4,
+          "raw_logit": -0.944665,
+          "exact_sigmoid_probability": 0.279959,
+          "service_rounded_probability": 0.28,
+          "frozen_threshold": 0.749512,
+          "service_threshold": 0.7495,
+          "flagged_positive": false,
+          "delta_to_threshold": -0.469553,
+          "threshold_comparison_rule": "probability >= frozen_threshold",
+          "double_sigmoid_detected": false,
+          "softmax_distortion_detected": false
+        },
+        "Pneumothorax": {
+          "index": 5,
+          "raw_logit": -3.504595,
+          "exact_sigmoid_probability": 0.029182,
+          "service_rounded_probability": 0.0292,
+          "frozen_threshold": 0.58252,
+          "service_threshold": 0.5825,
+          "flagged_positive": false,
+          "delta_to_threshold": -0.553338,
+          "threshold_comparison_rule": "probability >= frozen_threshold",
+          "double_sigmoid_detected": false,
+          "softmax_distortion_detected": false
+        }
+      }
+    },
+    {
+      "filename": "Lung-Consolidation-x-ray-image.webp",
+      "intended_disease": "Consolidation",
+      "sha256": "60bb1f9a732fe07a0725f7105792745aea9a9d3879739b38ccc47a1b5b063379",
+      "inference_time_ms": 316.45,
+      "probabilities": {
+        "Cardiomegaly": 0.87093,
+        "Edema": 0.652053,
+        "Consolidation": 0.887111,
+        "Pneumonia": 0.736899,
+        "Atelectasis": 0.470771,
+        "Pneumothorax": 0.047836
+      },
+      "thresholds": {
+        "Cardiomegaly": 0.950195,
+        "Edema": 0.876953,
+        "Consolidation": 0.73291,
+        "Pneumonia": 0.75293,
+        "Atelectasis": 0.749512,
+        "Pneumothorax": 0.58252
+      },
+      "positive_flags": [
+        "Consolidation"
+      ],
+      "highest_probability_disease": "Consolidation",
+      "highest_probability_value": 0.8871,
+      "concordance_with_intended_label": true,
+      "disease_breakdown": {
+        "Cardiomegaly": {
+          "index": 0,
+          "raw_logit": 1.909208,
+          "exact_sigmoid_probability": 0.87093,
+          "service_rounded_probability": 0.8709,
+          "frozen_threshold": 0.950195,
+          "service_threshold": 0.9502,
+          "flagged_positive": false,
+          "delta_to_threshold": -0.079265,
+          "threshold_comparison_rule": "probability >= frozen_threshold",
+          "double_sigmoid_detected": false,
+          "softmax_distortion_detected": false
+        },
+        "Edema": {
+          "index": 1,
+          "raw_logit": 0.628076,
+          "exact_sigmoid_probability": 0.652053,
+          "service_rounded_probability": 0.6521,
+          "frozen_threshold": 0.876953,
+          "service_threshold": 0.877,
+          "flagged_positive": false,
+          "delta_to_threshold": -0.2249,
+          "threshold_comparison_rule": "probability >= frozen_threshold",
+          "double_sigmoid_detected": false,
+          "softmax_distortion_detected": false
+        },
+        "Consolidation": {
+          "index": 2,
+          "raw_logit": 2.061561,
+          "exact_sigmoid_probability": 0.887111,
+          "service_rounded_probability": 0.8871,
+          "frozen_threshold": 0.73291,
+          "service_threshold": 0.7329,
+          "flagged_positive": true,
+          "delta_to_threshold": 0.1542,
+          "threshold_comparison_rule": "probability >= frozen_threshold",
+          "double_sigmoid_detected": false,
+          "softmax_distortion_detected": false
+        },
+        "Pneumonia": {
+          "index": 3,
+          "raw_logit": 1.029915,
+          "exact_sigmoid_probability": 0.736899,
+          "service_rounded_probability": 0.7369,
+          "frozen_threshold": 0.75293,
+          "service_threshold": 0.7529,
+          "flagged_positive": false,
+          "delta_to_threshold": -0.01603,
+          "threshold_comparison_rule": "probability >= frozen_threshold",
+          "double_sigmoid_detected": false,
+          "softmax_distortion_detected": false
+        },
+        "Atelectasis": {
+          "index": 4,
+          "raw_logit": -0.117049,
+          "exact_sigmoid_probability": 0.470771,
+          "service_rounded_probability": 0.4708,
+          "frozen_threshold": 0.749512,
+          "service_threshold": 0.7495,
+          "flagged_positive": false,
+          "delta_to_threshold": -0.278741,
+          "threshold_comparison_rule": "probability >= frozen_threshold",
+          "double_sigmoid_detected": false,
+          "softmax_distortion_detected": false
+        },
+        "Pneumothorax": {
+          "index": 5,
+          "raw_logit": -2.990968,
+          "exact_sigmoid_probability": 0.047836,
+          "service_rounded_probability": 0.0478,
+          "frozen_threshold": 0.58252,
+          "service_threshold": 0.5825,
+          "flagged_positive": false,
+          "delta_to_threshold": -0.534684,
+          "threshold_comparison_rule": "probability >= frozen_threshold",
+          "double_sigmoid_detected": false,
+          "softmax_distortion_detected": false
+        }
+      }
+    },
+    {
+      "filename": "pneumonia.png",
+      "intended_disease": "Pneumonia",
+      "sha256": "be5187b9a58aa01b5b2a88d5076be0feacd5edc117dd56513ef30e73730d0d49",
+      "inference_time_ms": 220.82,
+      "probabilities": {
+        "Cardiomegaly": 0.001515,
+        "Edema": 0.035449,
+        "Consolidation": 0.852754,
+        "Pneumonia": 0.327248,
+        "Atelectasis": 0.313657,
+        "Pneumothorax": 0.371503
+      },
+      "thresholds": {
+        "Cardiomegaly": 0.950195,
+        "Edema": 0.876953,
+        "Consolidation": 0.73291,
+        "Pneumonia": 0.75293,
+        "Atelectasis": 0.749512,
+        "Pneumothorax": 0.58252
+      },
+      "positive_flags": [
+        "Consolidation"
+      ],
+      "highest_probability_disease": "Consolidation",
+      "highest_probability_value": 0.8528,
+      "concordance_with_intended_label": false,
+      "disease_breakdown": {
+        "Cardiomegaly": {
+          "index": 0,
+          "raw_logit": -6.490826,
+          "exact_sigmoid_probability": 0.001515,
+          "service_rounded_probability": 0.0015,
+          "frozen_threshold": 0.950195,
+          "service_threshold": 0.9502,
+          "flagged_positive": false,
+          "delta_to_threshold": -0.94868,
+          "threshold_comparison_rule": "probability >= frozen_threshold",
+          "double_sigmoid_detected": false,
+          "softmax_distortion_detected": false
+        },
+        "Edema": {
+          "index": 1,
+          "raw_logit": -3.30356,
+          "exact_sigmoid_probability": 0.035449,
+          "service_rounded_probability": 0.0354,
+          "frozen_threshold": 0.876953,
+          "service_threshold": 0.877,
+          "flagged_positive": false,
+          "delta_to_threshold": -0.841504,
+          "threshold_comparison_rule": "probability >= frozen_threshold",
+          "double_sigmoid_detected": false,
+          "softmax_distortion_detected": false
+        },
+        "Consolidation": {
+          "index": 2,
+          "raw_logit": 1.75637,
+          "exact_sigmoid_probability": 0.852754,
+          "service_rounded_probability": 0.8528,
+          "frozen_threshold": 0.73291,
+          "service_threshold": 0.7329,
+          "flagged_positive": true,
+          "delta_to_threshold": 0.119844,
+          "threshold_comparison_rule": "probability >= frozen_threshold",
+          "double_sigmoid_detected": false,
+          "softmax_distortion_detected": false
+        },
+        "Pneumonia": {
+          "index": 3,
+          "raw_logit": -0.720657,
+          "exact_sigmoid_probability": 0.327248,
+          "service_rounded_probability": 0.3272,
+          "frozen_threshold": 0.75293,
+          "service_threshold": 0.7529,
+          "flagged_positive": false,
+          "delta_to_threshold": -0.425681,
+          "threshold_comparison_rule": "probability >= frozen_threshold",
+          "double_sigmoid_detected": false,
+          "softmax_distortion_detected": false
+        },
+        "Atelectasis": {
+          "index": 4,
+          "raw_logit": -0.783079,
+          "exact_sigmoid_probability": 0.313657,
+          "service_rounded_probability": 0.3137,
+          "frozen_threshold": 0.749512,
+          "service_threshold": 0.7495,
+          "flagged_positive": false,
+          "delta_to_threshold": -0.435855,
+          "threshold_comparison_rule": "probability >= frozen_threshold",
+          "double_sigmoid_detected": false,
+          "softmax_distortion_detected": false
+        },
+        "Pneumothorax": {
+          "index": 5,
+          "raw_logit": -0.525773,
+          "exact_sigmoid_probability": 0.371503,
+          "service_rounded_probability": 0.3715,
+          "frozen_threshold": 0.58252,
+          "service_threshold": 0.5825,
+          "flagged_positive": false,
+          "delta_to_threshold": -0.211016,
+          "threshold_comparison_rule": "probability >= frozen_threshold",
+          "double_sigmoid_detected": false,
+          "softmax_distortion_detected": false
+        }
+      }
+    },
+    {
+      "filename": "Pneumothorax.jpeg",
+      "intended_disease": "Pneumothorax",
+      "sha256": "77792b40afd4ab5571635406d58b4113b2a11c3280cf3e4f3278dd46e0f8b5dd",
+      "inference_time_ms": 149.23,
+      "probabilities": {
+        "Cardiomegaly": 0.000858,
+        "Edema": 4.9e-05,
+        "Consolidation": 0.051223,
+        "Pneumonia": 0.006031,
+        "Atelectasis": 0.177168,
+        "Pneumothorax": 0.056461
+      },
+      "thresholds": {
+        "Cardiomegaly": 0.950195,
+        "Edema": 0.876953,
+        "Consolidation": 0.73291,
+        "Pneumonia": 0.75293,
+        "Atelectasis": 0.749512,
+        "Pneumothorax": 0.58252
+      },
+      "positive_flags": [],
+      "highest_probability_disease": "Atelectasis",
+      "highest_probability_value": 0.1772,
+      "concordance_with_intended_label": false,
+      "disease_breakdown": {
+        "Cardiomegaly": {
+          "index": 0,
+          "raw_logit": -7.060077,
+          "exact_sigmoid_probability": 0.000858,
+          "service_rounded_probability": 0.0009,
+          "frozen_threshold": 0.950195,
+          "service_threshold": 0.9502,
+          "flagged_positive": false,
+          "delta_to_threshold": -0.949337,
+          "threshold_comparison_rule": "probability >= frozen_threshold",
+          "double_sigmoid_detected": false,
+          "softmax_distortion_detected": false
+        },
+        "Edema": {
+          "index": 1,
+          "raw_logit": -9.928583,
+          "exact_sigmoid_probability": 4.9e-05,
+          "service_rounded_probability": 0.0,
+          "frozen_threshold": 0.876953,
+          "service_threshold": 0.877,
+          "flagged_positive": false,
+          "delta_to_threshold": -0.876904,
+          "threshold_comparison_rule": "probability >= frozen_threshold",
+          "double_sigmoid_detected": false,
+          "softmax_distortion_detected": false
+        },
+        "Consolidation": {
+          "index": 2,
+          "raw_logit": -2.918975,
+          "exact_sigmoid_probability": 0.051223,
+          "service_rounded_probability": 0.0512,
+          "frozen_threshold": 0.73291,
+          "service_threshold": 0.7329,
+          "flagged_positive": false,
+          "delta_to_threshold": -0.681687,
+          "threshold_comparison_rule": "probability >= frozen_threshold",
+          "double_sigmoid_detected": false,
+          "softmax_distortion_detected": false
+        },
+        "Pneumonia": {
+          "index": 3,
+          "raw_logit": -5.104833,
+          "exact_sigmoid_probability": 0.006031,
+          "service_rounded_probability": 0.006,
+          "frozen_threshold": 0.75293,
+          "service_threshold": 0.7529,
+          "flagged_positive": false,
+          "delta_to_threshold": -0.746899,
+          "threshold_comparison_rule": "probability >= frozen_threshold",
+          "double_sigmoid_detected": false,
+          "softmax_distortion_detected": false
+        },
+        "Atelectasis": {
+          "index": 4,
+          "raw_logit": -1.535655,
+          "exact_sigmoid_probability": 0.177168,
+          "service_rounded_probability": 0.1772,
+          "frozen_threshold": 0.749512,
+          "service_threshold": 0.7495,
+          "flagged_positive": false,
+          "delta_to_threshold": -0.572344,
+          "threshold_comparison_rule": "probability >= frozen_threshold",
+          "double_sigmoid_detected": false,
+          "softmax_distortion_detected": false
+        },
+        "Pneumothorax": {
+          "index": 5,
+          "raw_logit": -2.816088,
+          "exact_sigmoid_probability": 0.056461,
+          "service_rounded_probability": 0.0565,
+          "frozen_threshold": 0.58252,
+          "service_threshold": 0.5825,
+          "flagged_positive": false,
+          "delta_to_threshold": -0.526059,
+          "threshold_comparison_rule": "probability >= frozen_threshold",
+          "double_sigmoid_detected": false,
+          "softmax_distortion_detected": false
+        }
+      }
+    }
+  ]
+}

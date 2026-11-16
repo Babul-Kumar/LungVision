@@ -1,0 +1,332 @@
+{
+  "title": "Phase 6 Preprocessing Forensic Audit",
+  "timestamp": "2026-11-16T23:00:17Z",
+  "contract": {
+    "expected_shape": [
+      1,
+      3,
+      224,
+      224
+    ],
+    "channel_order": "RGB",
+    "interpolation": "Bilinear",
+    "normalization": {
+      "mean": [
+        0.485,
+        0.456,
+        0.406
+      ],
+      "std": [
+        0.229,
+        0.224,
+        0.225
+      ]
+    }
+  },
+  "training_vs_inference_consistency": {
+    "dimensions_match": true,
+    "interpolation_matches": true,
+    "normalization_matches": true,
+    "discrepancies_identified": [
+      "Aspect ratio squashing: non-square images (e.g. Cardiomegaly.jpg 504x422, ratio 1.194) are resized directly to 224x224 without letterbox padding, squashing anatomy by 19.4%.",
+      "Thumbnail resolution degradation: Atelectasis.jpg is only 222x222 (6 KB), causing severe high-frequency loss and compression blurring prior to inference.",
+      "WebP compression artifacts: Lung-Consolidation-x-ray-image.webp contains chroma sub-sampling artifacts."
+    ]
+  },
+  "per_image_audit": [
+    {
+      "filename": "Atelectasis.jpg",
+      "original_dimensions": [
+        222,
+        222
+      ],
+      "preprocessed_tensor_shape": [
+        1,
+        3,
+        224,
+        224
+      ],
+      "preprocessed_tensor_stats": {
+        "min": -2.1179,
+        "max": 0.9319,
+        "mean": -0.7361,
+        "std": 0.63
+      },
+      "per_channel_means": [
+        -0.8844,
+        -0.7747,
+        -0.5491
+      ],
+      "per_channel_stds": [
+        0.6062,
+        0.6198,
+        0.617
+      ],
+      "aspect_ratio_distortion": {
+        "original_ratio": 1.0,
+        "model_ratio": 1.0,
+        "distortion_pct": 0.0,
+        "clinical_impact": "Negligible"
+      },
+      "interpolation_method": "Bilinear (torchvision.transforms.InterpolationMode.BILINEAR)",
+      "normalization_parameters": {
+        "mean": [
+          0.485,
+          0.456,
+          0.406
+        ],
+        "std": [
+          0.229,
+          0.224,
+          0.225
+        ]
+      },
+      "polarity_verification": "Normal Polarity (Air=black/negative z-score, Bone=white/positive z-score)"
+    },
+    {
+      "filename": "Cardiomegaly.jpg",
+      "original_dimensions": [
+        504,
+        422
+      ],
+      "preprocessed_tensor_shape": [
+        1,
+        3,
+        224,
+        224
+      ],
+      "preprocessed_tensor_stats": {
+        "min": -2.1179,
+        "max": 2.64,
+        "mean": 0.2313,
+        "std": 1.3788
+      },
+      "per_channel_means": [
+        0.0702,
+        0.2012,
+        0.4226
+      ],
+      "per_channel_stds": [
+        1.353,
+        1.3832,
+        1.377
+      ],
+      "aspect_ratio_distortion": {
+        "original_ratio": 1.1943,
+        "model_ratio": 1.0,
+        "distortion_pct": 19.43,
+        "clinical_impact": "Transverse cardiothoracic ratio distorted"
+      },
+      "interpolation_method": "Bilinear (torchvision.transforms.InterpolationMode.BILINEAR)",
+      "normalization_parameters": {
+        "mean": [
+          0.485,
+          0.456,
+          0.406
+        ],
+        "std": [
+          0.229,
+          0.224,
+          0.225
+        ]
+      },
+      "polarity_verification": "Normal Polarity (Air=black/negative z-score, Bone=white/positive z-score)"
+    },
+    {
+      "filename": "Edema.jpg",
+      "original_dimensions": [
+        2048,
+        2048
+      ],
+      "preprocessed_tensor_shape": [
+        1,
+        3,
+        224,
+        224
+      ],
+      "preprocessed_tensor_stats": {
+        "min": -2.1179,
+        "max": 2.64,
+        "mean": 0.7462,
+        "std": 1.119
+      },
+      "per_channel_means": [
+        0.5783,
+        0.7206,
+        0.9396
+      ],
+      "per_channel_stds": [
+        1.0944,
+        1.1188,
+        1.1138
+      ],
+      "aspect_ratio_distortion": {
+        "original_ratio": 1.0,
+        "model_ratio": 1.0,
+        "distortion_pct": 0.0,
+        "clinical_impact": "Negligible"
+      },
+      "interpolation_method": "Bilinear (torchvision.transforms.InterpolationMode.BILINEAR)",
+      "normalization_parameters": {
+        "mean": [
+          0.485,
+          0.456,
+          0.406
+        ],
+        "std": [
+          0.229,
+          0.224,
+          0.225
+        ]
+      },
+      "polarity_verification": "Normal Polarity (Air=black/negative z-score, Bone=white/positive z-score)"
+    },
+    {
+      "filename": "Lung-Consolidation-x-ray-image.webp",
+      "original_dimensions": [
+        860,
+        788
+      ],
+      "preprocessed_tensor_shape": [
+        1,
+        3,
+        224,
+        224
+      ],
+      "preprocessed_tensor_stats": {
+        "min": -2.1179,
+        "max": 2.64,
+        "mean": -0.0623,
+        "std": 0.8917
+      },
+      "per_channel_means": [
+        -0.2195,
+        -0.0951,
+        0.1278
+      ],
+      "per_channel_stds": [
+        0.8684,
+        0.8876,
+        0.8839
+      ],
+      "aspect_ratio_distortion": {
+        "original_ratio": 1.0914,
+        "model_ratio": 1.0,
+        "distortion_pct": 9.14,
+        "clinical_impact": "Negligible"
+      },
+      "interpolation_method": "Bilinear (torchvision.transforms.InterpolationMode.BILINEAR)",
+      "normalization_parameters": {
+        "mean": [
+          0.485,
+          0.456,
+          0.406
+        ],
+        "std": [
+          0.229,
+          0.224,
+          0.225
+        ]
+      },
+      "polarity_verification": "Normal Polarity (Air=black/negative z-score, Bone=white/positive z-score)"
+    },
+    {
+      "filename": "pneumonia.png",
+      "original_dimensions": [
+        968,
+        1006
+      ],
+      "preprocessed_tensor_shape": [
+        1,
+        3,
+        224,
+        224
+      ],
+      "preprocessed_tensor_stats": {
+        "min": -2.1179,
+        "max": 2.1868,
+        "mean": 0.5054,
+        "std": 0.909
+      },
+      "per_channel_means": [
+        0.3406,
+        0.4777,
+        0.6978
+      ],
+      "per_channel_stds": [
+        0.8852,
+        0.9049,
+        0.9009
+      ],
+      "aspect_ratio_distortion": {
+        "original_ratio": 0.9622,
+        "model_ratio": 1.0,
+        "distortion_pct": 3.78,
+        "clinical_impact": "Negligible"
+      },
+      "interpolation_method": "Bilinear (torchvision.transforms.InterpolationMode.BILINEAR)",
+      "normalization_parameters": {
+        "mean": [
+          0.485,
+          0.456,
+          0.406
+        ],
+        "std": [
+          0.229,
+          0.224,
+          0.225
+        ]
+      },
+      "polarity_verification": "Normal Polarity (Air=black/negative z-score, Bone=white/positive z-score)"
+    },
+    {
+      "filename": "Pneumothorax.jpeg",
+      "original_dimensions": [
+        630,
+        624
+      ],
+      "preprocessed_tensor_shape": [
+        1,
+        3,
+        224,
+        224
+      ],
+      "preprocessed_tensor_stats": {
+        "min": -2.0665,
+        "max": 2.4657,
+        "mean": 0.6543,
+        "std": 1.2532
+      },
+      "per_channel_means": [
+        0.4876,
+        0.6279,
+        0.8474
+      ],
+      "per_channel_stds": [
+        1.228,
+        1.2554,
+        1.2498
+      ],
+      "aspect_ratio_distortion": {
+        "original_ratio": 1.0096,
+        "model_ratio": 1.0,
+        "distortion_pct": 0.96,
+        "clinical_impact": "Negligible"
+      },
+      "interpolation_method": "Bilinear (torchvision.transforms.InterpolationMode.BILINEAR)",
+      "normalization_parameters": {
+        "mean": [
+          0.485,
+          0.456,
+          0.406
+        ],
+        "std": [
+          0.229,
+          0.224,
+          0.225
+        ]
+      },
+      "polarity_verification": "Normal Polarity (Air=black/negative z-score, Bone=white/positive z-score)"
+    }
+  ]
+}

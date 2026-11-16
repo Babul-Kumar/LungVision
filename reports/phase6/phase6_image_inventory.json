@@ -1,0 +1,235 @@
+{
+  "title": "Phase 6 Test Image Forensic Inventory",
+  "timestamp": "2026-11-16T23:00:17Z",
+  "num_images": 6,
+  "inventory": [
+    {
+      "filename": "Atelectasis.jpg",
+      "relative_path": "test/Atelectasis.jpg",
+      "file_exists": true,
+      "file_size_bytes": 6021,
+      "sha256": "e2eaa886fcd6f593c11c4218ac53eea59fdb0d431db2d6e64dece3e5b3bbdf7f",
+      "intended_disease": "Atelectasis",
+      "dimensions": {
+        "width": 222,
+        "height": 222
+      },
+      "aspect_ratio": 1.0,
+      "color_mode": "RGB",
+      "format": "JPEG",
+      "bit_depth": 8,
+      "is_pure_grayscale_data": true,
+      "channel_divergence": {
+        "max_rg_diff": 0,
+        "max_gb_diff": 0
+      },
+      "pixel_intensity_raw": {
+        "min": 0,
+        "max": 157,
+        "mean": 72.03,
+        "std": 35.5
+      },
+      "border_detection": {
+        "edge_mean": 51.1,
+        "has_black_border": false,
+        "has_white_border": false
+      },
+      "radiological_assessment": {
+        "is_genuine_cxr": true,
+        "estimated_orientation": "AP / Portable or Unspecified",
+        "severe_downsampling_prior_to_test": true,
+        "lossy_compression_artifacts": true
+      }
+    },
+    {
+      "filename": "Cardiomegaly.jpg",
+      "relative_path": "test/Cardiomegaly.jpg",
+      "file_exists": true,
+      "file_size_bytes": 64031,
+      "sha256": "342e4f1d6bd66b95a147ba8c9fe2c4d1dba419601185044020bf146c039a4e7c",
+      "intended_disease": "Cardiomegaly",
+      "dimensions": {
+        "width": 504,
+        "height": 422
+      },
+      "aspect_ratio": 1.1943,
+      "color_mode": "L",
+      "format": "JPEG",
+      "bit_depth": 8,
+      "is_pure_grayscale_data": true,
+      "channel_divergence": {
+        "max_rg_diff": 0,
+        "max_gb_diff": 0
+      },
+      "pixel_intensity_raw": {
+        "min": 0,
+        "max": 255,
+        "mean": 127.77,
+        "std": 80.26
+      },
+      "border_detection": {
+        "edge_mean": 103.97,
+        "has_black_border": false,
+        "has_white_border": false
+      },
+      "radiological_assessment": {
+        "is_genuine_cxr": true,
+        "estimated_orientation": "PA",
+        "severe_downsampling_prior_to_test": false,
+        "lossy_compression_artifacts": false
+      }
+    },
+    {
+      "filename": "Edema.jpg",
+      "relative_path": "test/Edema.jpg",
+      "file_exists": true,
+      "file_size_bytes": 387686,
+      "sha256": "29cac073df9b6bc643a222fde920f8a4a6f465ef07fb5d299892e39beddcb330",
+      "intended_disease": "Edema",
+      "dimensions": {
+        "width": 2048,
+        "height": 2048
+      },
+      "aspect_ratio": 1.0,
+      "color_mode": "RGB",
+      "format": "JPEG",
+      "bit_depth": 8,
+      "is_pure_grayscale_data": true,
+      "channel_divergence": {
+        "max_rg_diff": 0,
+        "max_gb_diff": 0
+      },
+      "pixel_intensity_raw": {
+        "min": 0,
+        "max": 255,
+        "mean": 157.38,
+        "std": 64.39
+      },
+      "border_detection": {
+        "edge_mean": 122.95,
+        "has_black_border": false,
+        "has_white_border": false
+      },
+      "radiological_assessment": {
+        "is_genuine_cxr": true,
+        "estimated_orientation": "AP / Portable or Unspecified",
+        "severe_downsampling_prior_to_test": false,
+        "lossy_compression_artifacts": false
+      }
+    },
+    {
+      "filename": "Lung-Consolidation-x-ray-image.webp",
+      "relative_path": "test/Lung-Consolidation-x-ray-image.webp",
+      "file_exists": true,
+      "file_size_bytes": 17084,
+      "sha256": "60bb1f9a732fe07a0725f7105792745aea9a9d3879739b38ccc47a1b5b063379",
+      "intended_disease": "Consolidation",
+      "dimensions": {
+        "width": 860,
+        "height": 788
+      },
+      "aspect_ratio": 1.0914,
+      "color_mode": "RGB",
+      "format": "WEBP",
+      "bit_depth": 8,
+      "is_pure_grayscale_data": false,
+      "channel_divergence": {
+        "max_rg_diff": 1,
+        "max_gb_diff": 1
+      },
+      "pixel_intensity_raw": {
+        "min": 0,
+        "max": 255,
+        "mean": 110.85,
+        "std": 52.56
+      },
+      "border_detection": {
+        "edge_mean": 82.11,
+        "has_black_border": false,
+        "has_white_border": false
+      },
+      "radiological_assessment": {
+        "is_genuine_cxr": true,
+        "estimated_orientation": "AP / Portable or Unspecified",
+        "severe_downsampling_prior_to_test": false,
+        "lossy_compression_artifacts": true
+      }
+    },
+    {
+      "filename": "pneumonia.png",
+      "relative_path": "test/pneumonia.png",
+      "file_exists": true,
+      "file_size_bytes": 539078,
+      "sha256": "be5187b9a58aa01b5b2a88d5076be0feacd5edc117dd56513ef30e73730d0d49",
+      "intended_disease": "Pneumonia",
+      "dimensions": {
+        "width": 968,
+        "height": 1006
+      },
+      "aspect_ratio": 0.9622,
+      "color_mode": "RGB",
+      "format": "PNG",
+      "bit_depth": 8,
+      "is_pure_grayscale_data": true,
+      "channel_divergence": {
+        "max_rg_diff": 0,
+        "max_gb_diff": 0
+      },
+      "pixel_intensity_raw": {
+        "min": 0,
+        "max": 255,
+        "mean": 143.57,
+        "std": 51.87
+      },
+      "border_detection": {
+        "edge_mean": 150.75,
+        "has_black_border": false,
+        "has_white_border": false
+      },
+      "radiological_assessment": {
+        "is_genuine_cxr": true,
+        "estimated_orientation": "AP / Portable or Unspecified",
+        "severe_downsampling_prior_to_test": false,
+        "lossy_compression_artifacts": false
+      }
+    },
+    {
+      "filename": "Pneumothorax.jpeg",
+      "relative_path": "test/Pneumothorax.jpeg",
+      "file_exists": true,
+      "file_size_bytes": 63215,
+      "sha256": "77792b40afd4ab5571635406d58b4113b2a11c3280cf3e4f3278dd46e0f8b5dd",
+      "intended_disease": "Pneumothorax",
+      "dimensions": {
+        "width": 630,
+        "height": 624
+      },
+      "aspect_ratio": 1.0096,
+      "color_mode": "L",
+      "format": "JPEG",
+      "bit_depth": 8,
+      "is_pure_grayscale_data": true,
+      "channel_divergence": {
+        "max_rg_diff": 0,
+        "max_gb_diff": 0
+      },
+      "pixel_intensity_raw": {
+        "min": 0,
+        "max": 255,
+        "mean": 152.15,
+        "std": 71.86
+      },
+      "border_detection": {
+        "edge_mean": 110.09,
+        "has_black_border": false,
+        "has_white_border": false
+      },
+      "radiological_assessment": {
+        "is_genuine_cxr": true,
+        "estimated_orientation": "PA",
+        "severe_downsampling_prior_to_test": false,
+        "lossy_compression_artifacts": false
+      }
+    }
+  ]
+}

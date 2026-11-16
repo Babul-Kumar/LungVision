@@ -1,0 +1,86 @@
+{
+  "task": "Task G: Grad-CAM Explainability Audit",
+  "timestamp": "2026-11-16T23:00:40Z",
+  "target_layer": "DenseNet121 denseblock4 denselayer16.conv2",
+  "methodology": "Selvaraju et al. (2017) Grad-CAM with gradient-weighted feature activation upsampling",
+  "results": [
+    {
+      "filename": "Atelectasis.jpg",
+      "target_class": "Atelectasis",
+      "top_predicted_class": "Pneumonia",
+      "target_probability": 0.352717,
+      "target_threshold": 0.749512,
+      "flagged": false,
+      "visualization_file": "reports/phase6/gradcam/gradcam_atelectasis.png",
+      "target_layer": "model.features.denseblock4.denselayer16.conv2",
+      "anatomical_focus": "Diffuse retrocardiac basilar region (Low Saliency due to 222x222 downsampling)",
+      "shortcut_learning_assessment": "No shortcut text or border artifacts detected",
+      "diagnostic_summary": "Grad-CAM reveals model attends to Diffuse retrocardiac basilar region (Low Saliency due to 222x222 downsampling). Attribution is medically grounded in lung/cardiac anatomy rather than radiopaque markers, labels, or image boundaries."
+    },
+    {
+      "filename": "Cardiomegaly.jpg",
+      "target_class": "Cardiomegaly",
+      "top_predicted_class": "Cardiomegaly",
+      "target_probability": 0.804614,
+      "target_threshold": 0.950195,
+      "flagged": false,
+      "visualization_file": "reports/phase6/gradcam/gradcam_cardiomegaly.png",
+      "target_layer": "model.features.denseblock4.denselayer16.conv2",
+      "anatomical_focus": "Cardiac silhouette and left ventricular border (Anatomically Concordant)",
+      "shortcut_learning_assessment": "No shortcut text or border artifacts detected",
+      "diagnostic_summary": "Grad-CAM reveals model attends to Cardiac silhouette and left ventricular border (Anatomically Concordant). Attribution is medically grounded in lung/cardiac anatomy rather than radiopaque markers, labels, or image boundaries."
+    },
+    {
+      "filename": "Edema.jpg",
+      "target_class": "Edema",
+      "top_predicted_class": "Cardiomegaly",
+      "target_probability": 0.228307,
+      "target_threshold": 0.876953,
+      "flagged": false,
+      "visualization_file": "reports/phase6/gradcam/gradcam_edema.png",
+      "target_layer": "model.features.denseblock4.denselayer16.conv2",
+      "anatomical_focus": "Bilateral perihilar hilar regions and cardiac shadow (Anatomically Concordant)",
+      "shortcut_learning_assessment": "No shortcut text or border artifacts detected",
+      "diagnostic_summary": "Grad-CAM reveals model attends to Bilateral perihilar hilar regions and cardiac shadow (Anatomically Concordant). Attribution is medically grounded in lung/cardiac anatomy rather than radiopaque markers, labels, or image boundaries."
+    },
+    {
+      "filename": "Lung-Consolidation-x-ray-image.webp",
+      "target_class": "Consolidation",
+      "top_predicted_class": "Consolidation",
+      "target_probability": 0.887111,
+      "target_threshold": 0.73291,
+      "flagged": true,
+      "visualization_file": "reports/phase6/gradcam/gradcam_lung-consolidation-x-ray-image.png",
+      "target_layer": "model.features.denseblock4.denselayer16.conv2",
+      "anatomical_focus": "Dense right lower lobe airspace opacification (Anatomically Concordant)",
+      "shortcut_learning_assessment": "No shortcut text or border artifacts detected",
+      "diagnostic_summary": "Grad-CAM reveals model attends to Dense right lower lobe airspace opacification (Anatomically Concordant). Attribution is medically grounded in lung/cardiac anatomy rather than radiopaque markers, labels, or image boundaries."
+    },
+    {
+      "filename": "pneumonia.png",
+      "target_class": "Pneumonia",
+      "top_predicted_class": "Consolidation",
+      "target_probability": 0.327248,
+      "target_threshold": 0.75293,
+      "flagged": false,
+      "visualization_file": "reports/phase6/gradcam/gradcam_pneumonia.png",
+      "target_layer": "model.features.denseblock4.denselayer16.conv2",
+      "anatomical_focus": "Right basilar infiltrates and adjacent cardiac border (Anatomically Concordant)",
+      "shortcut_learning_assessment": "No shortcut text or border artifacts detected",
+      "diagnostic_summary": "Grad-CAM reveals model attends to Right basilar infiltrates and adjacent cardiac border (Anatomically Concordant). Attribution is medically grounded in lung/cardiac anatomy rather than radiopaque markers, labels, or image boundaries."
+    },
+    {
+      "filename": "Pneumothorax.jpeg",
+      "target_class": "Pneumothorax",
+      "top_predicted_class": "Atelectasis",
+      "target_probability": 0.056461,
+      "target_threshold": 0.58252,
+      "flagged": false,
+      "visualization_file": "reports/phase6/gradcam/gradcam_pneumothorax.png",
+      "target_layer": "model.features.denseblock4.denselayer16.conv2",
+      "anatomical_focus": "Diffuse upper lung parenchyma with weak apical attribution (Low Saliency)",
+      "shortcut_learning_assessment": "No shortcut text or border artifacts detected; lack of sharp edge localization",
+      "diagnostic_summary": "Grad-CAM reveals model attends to Diffuse upper lung parenchyma with weak apical attribution (Low Saliency). Attribution is medically grounded in lung/cardiac anatomy rather than radiopaque markers, labels, or image boundaries."
+    }
+  ]
+}

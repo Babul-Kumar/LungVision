@@ -1,0 +1,95 @@
+{
+  "task": "Task J: Frontend and Backend Integrity Trace",
+  "timestamp": "2026-11-16T23:00:41Z",
+  "pipeline_stages": [
+    {
+      "stage": "1. User File Ingestion (Frontend)",
+      "component": "frontend/src/features/xray/XrayPage.tsx:handleFileSelection",
+      "verified_behaviors": [
+        "File mime type validation: allowed types PNG, JPEG, WebP",
+        "Max file size check: 20 MB ceiling strictly enforced",
+        "Previous state reset: setMultiLabelResult(null) and setBinaryResult(null) invoked immediately on new file drop",
+        "Object URL cleanup: URL.revokeObjectURL(previewUrl) called to prevent memory leaks"
+      ],
+      "status": "PASS"
+    },
+    {
+      "stage": "2. API Transport (Frontend -> Backend)",
+      "component": "frontend/src/services/api/xrayApi.ts:predictMultiLabel",
+      "verified_behaviors": [
+        "Multipart/form-data packaging via FormData()",
+        "POST endpoint: /api/v1/xray/predict",
+        "Raw binary byte transmission without browser compression or alteration",
+        "Payload integrity: byte count verified identical between browser and backend"
+      ],
+      "status": "PASS"
+    },
+    {
+      "stage": "3. Gateway Ingestion & Validation (Backend API)",
+      "component": "backend/app/api/v1/xray.py:predict_xray_multilabel",
+      "verified_behaviors": [
+        "Asynchronous file.read()",
+        "Security check via validate_image_file() for magic bytes and size",
+        "Starlette run_in_threadpool offload to avoid blocking asyncio event loop"
+      ],
+      "status": "PASS"
+    },
+    {
+      "stage": "4. Preprocessing Pipeline",
+      "component": "backend/app/services/preprocessing.py:XRayPreprocessor",
+      "verified_behaviors": [
+        "PIL Image.open(io.BytesIO(image_bytes)) and image.load() verify complete byte decoding",
+        "Color space standardization: image.convert('RGB') handles grayscale 'L', RGBA, and palette 'P'",
+        "Interpolation: Bilinear resize to exact [1, 3, 224, 224] tensor",
+        "Normalization: exact ImageNet mean=[0.485, 0.456, 0.406] and std=[0.229, 0.224, 0.225]"
+      ],
+      "status": "PASS"
+    },
+    {
+      "stage": "5. Neural Network Inference",
+      "component": "backend/app/services/xray_service.py:XRayService.predict_multilabel",
+      "verified_behaviors": [
+        "Model retrieval: singleton model_loader.get_model('densenet121_nih_6disease')",
+        "No-grad context: torch.no_grad() guarantees no gradient accumulation or memory bloat",
+        "Activation: torch.sigmoid(logits) applied independently across all 6 outputs",
+        "Threshold evaluation: flag = (prob >= threshold) evaluated on full precision float prior to rounding"
+      ],
+      "status": "PASS"
+    },
+    {
+      "stage": "6. Pydantic Response Serialization",
+      "component": "backend/app/schemas/xray.py:XRayMultiLabelResponse",
+      "verified_behaviors": [
+        "Probabilities rounded to 4 decimals (e.g. 0.8046) for JSON payload",
+        "Strict typing and Pydantic validation ensures exact schema match",
+        "Model metadata includes architecture, training corpus, epoch, and dimensions"
+      ],
+      "status": "PASS"
+    },
+    {
+      "stage": "7. Frontend Telemetry & UI Rendering",
+      "component": "frontend/src/features/xray/components/DoctorResearcherXRayView.tsx",
+      "verified_behaviors": [
+        "Exact 6-disease ordering preserved via EXPECTED_6_DISEASES mapping",
+        "Visual progress bar aligns with probability [0, 1] scale",
+        "Threshold marker positioned at exact threshold coordinate",
+        "Export JSON feature exports pristine unmutated backend response payload",
+        "No client-side re-thresholding or mathematical distortion detected"
+      ],
+      "status": "PASS"
+    }
+  ],
+  "edge_case_investigations": {
+    "async_race_conditions": {
+      "risk": "Rapid successive uploads could overwrite state out of order",
+      "mitigation": "UI sets isLoading=true and disables dropzone during active inference execution",
+      "status": "SAFE"
+    },
+    "display_precision_discrepancy": {
+      "observation": "UI displays values with toFixed(6) while backend serializes round(prob, 4). Consequently, values appear as e.g. '0.804600' rather than full float 0.8046123.",
+      "severity": "LOW",
+      "action": "Harmless precision formatting difference; documented in audit."
+    }
+  },
+  "verdict": "PASS"
+}

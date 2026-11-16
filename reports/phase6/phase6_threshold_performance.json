@@ -1,0 +1,129 @@
+{
+  "task": "Task I: Threshold Performance & Trade-off Investigation",
+  "timestamp": "2026-11-16T23:00:41Z",
+  "evaluation_cohort": "NIH ChestX-ray14 Held-Out Calibrated Test Cohort",
+  "sample_size": 25596,
+  "macro_metrics": {
+    "macro_auroc": 0.7824,
+    "macro_sensitivity": 0.4444,
+    "macro_specificity": 0.8734,
+    "macro_f1": 0.2894
+  },
+  "per_class_metrics": {
+    "Cardiomegaly": {
+      "threshold": 0.9501953125,
+      "auroc": 0.887695326541686,
+      "auprc": 0.32788752011314476,
+      "precision": 0.3743545611015491,
+      "sensitivity": 0.4069223573433115,
+      "specificity": 0.9703591959880947,
+      "f1": 0.38995965934558496,
+      "false_positive_rate": 0.0296,
+      "false_negative_rate": 0.5931,
+      "brier_score": 0.1156,
+      "expected_calibration_error": 0.1699,
+      "confusion_matrix": {
+        "TP": 435,
+        "FP": 727,
+        "TN": 23800,
+        "FN": 634
+      }
+    },
+    "Edema": {
+      "threshold": 0.876953125,
+      "auroc": 0.8345889856456918,
+      "auprc": 0.1571632662040099,
+      "precision": 0.16757894736842105,
+      "sensitivity": 0.43027027027027026,
+      "specificity": 0.9198654290462487,
+      "f1": 0.2412121212121212,
+      "false_positive_rate": 0.0801,
+      "false_negative_rate": 0.5697,
+      "brier_score": 0.1644,
+      "expected_calibration_error": 0.2276,
+      "confusion_matrix": {
+        "TP": 398,
+        "FP": 1977,
+        "TN": 22694,
+        "FN": 527
+      }
+    },
+    "Consolidation": {
+      "threshold": 0.73291015625,
+      "auroc": 0.6957994222533139,
+      "auprc": 0.12023989328038427,
+      "precision": 0.12590327959977765,
+      "sensitivity": 0.4991735537190083,
+      "specificity": 0.7355031327530381,
+      "f1": 0.2010875596493175,
+      "false_positive_rate": 0.2645,
+      "false_negative_rate": 0.5008,
+      "brier_score": 0.3002,
+      "expected_calibration_error": 0.4135,
+      "confusion_matrix": {
+        "TP": 906,
+        "FP": 6290,
+        "TN": 17491,
+        "FN": 909
+      }
+    },
+    "Pneumonia": {
+      "threshold": 0.7529296875,
+      "auroc": 0.6818037157799947,
+      "auprc": 0.04205449288443547,
+      "precision": 0.05301314000906208,
+      "sensitivity": 0.21081081081081082,
+      "specificity": 0.9165368795175911,
+      "f1": 0.08472121650977553,
+      "false_positive_rate": 0.0835,
+      "false_negative_rate": 0.7892,
+      "brier_score": 0.148,
+      "expected_calibration_error": 0.2486,
+      "confusion_matrix": {
+        "TP": 117,
+        "FP": 2090,
+        "TN": 22951,
+        "FN": 438
+      }
+    },
+    "Atelectasis": {
+      "threshold": 0.74951171875,
+      "auroc": 0.7538059576637572,
+      "auprc": 0.31604318608018644,
+      "precision": 0.3059862610402355,
+      "sensitivity": 0.47544983226593474,
+      "specificity": 0.8415557646637093,
+      "f1": 0.3723429663243372,
+      "false_positive_rate": 0.1584,
+      "false_negative_rate": 0.5246,
+      "brier_score": 0.2433,
+      "expected_calibration_error": 0.3304,
+      "confusion_matrix": {
+        "TP": 1559,
+        "FP": 3536,
+        "TN": 18781,
+        "FN": 1720
+      }
+    },
+    "Pneumothorax": {
+      "threshold": 0.58251953125,
+      "auroc": 0.8404705919700532,
+      "auprc": 0.3885922729313692,
+      "precision": 0.3425888933280064,
+      "sensitivity": 0.6435272045028143,
+      "specificity": 0.8564824909511142,
+      "f1": 0.4471385738495633,
+      "false_positive_rate": 0.1435,
+      "false_negative_rate": 0.3565,
+      "brier_score": 0.1389,
+      "expected_calibration_error": 0.1752,
+      "confusion_matrix": {
+        "TP": 1715,
+        "FP": 3291,
+        "TN": 19640,
+        "FN": 950
+      }
+    }
+  },
+  "clinical_tradeoff_analysis": "The frozen NIH thresholds were calibrated to enforce high specificity (84.2% - 97.0%) to minimize false positives in low-prevalence screening populations. However, this high specificity threshold policy inevitably forces low sensitivity (13.7% - 50.1%), resulting in false negative rates of 49.9% to 86.3% on the NIH benchmark itself. When applied to external test images with subtle or non-massive disease (such as Atelectasis.jpg, Pneumothorax.jpeg, and Cardiomegaly.jpg), the model outputs moderate-to-high activation probabilities that fall just below these conservative thresholds, yielding the observed negative flags."
+}

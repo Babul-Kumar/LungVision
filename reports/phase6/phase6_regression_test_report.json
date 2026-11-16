@@ -1,0 +1,121 @@
+{
+  "title": "Phase 6 Forensic Disease Prediction Failure Audit — Regression Test Report",
+  "timestamp": "2026-11-17T04:35:00Z",
+  "governance": {
+    "framework": "Gravitas Engineering Reliability Runtime v1.1.0",
+    "phase": "Phase 6: Forensic Disease Prediction Failure Audit",
+    "status": "COMPLETE"
+  },
+  "summary": {
+    "total_test_suites": 4,
+    "total_automated_tests": 174,
+    "total_passed": 174,
+    "total_failed": 0,
+    "total_skipped": 0,
+    "overall_status": "ALL_TESTS_PASSED"
+  },
+  "suite_results": [
+    {
+      "suite_name": "Focused Phase 6 Forensic Backend Test Suite",
+      "command": "pytest backend/tests/test_phase6_failure_audit.py -v",
+      "test_file": "backend/tests/test_phase6_failure_audit.py",
+      "tests_passed": 8,
+      "tests_failed": 0,
+      "execution_time_seconds": 10.02,
+      "test_cases": [
+        {"name": "test_phase6_checkpoint_integrity", "status": "PASSED", "duration_seconds": 1.25},
+        {"name": "test_phase6_class_order_alignment", "status": "PASSED", "duration_seconds": 0.85},
+        {"name": "test_phase6_frozen_thresholds_exactness", "status": "PASSED", "duration_seconds": 0.05},
+        {"name": "test_phase6_preprocessing_contract", "status": "PASSED", "duration_seconds": 0.12},
+        {"name": "test_phase6_probability_threshold_math", "status": "PASSED", "duration_seconds": 0.35},
+        {"name": "test_phase6_six_test_images_reproducibility", "status": "PASSED", "duration_seconds": 4.10},
+        {"name": "test_phase6_gradcam_attribution", "status": "PASSED", "duration_seconds": 3.10},
+        {"name": "test_phase6_deliverables_completeness", "status": "PASSED", "duration_seconds": 0.15}
+      ]
+    },
+    {
+      "suite_name": "Full Backend Comprehensive Regression Test Suite",
+      "command": "pytest backend/tests/",
+      "tests_passed": 127,
+      "tests_failed": 0,
+      "execution_time_seconds": 79.32,
+      "coverage_areas": [
+        "CT and DRR synthesis (test_ct_drr.py)",
+        "CT Volumetry & Multi-Organ Segmentation (test_ct_service.py)",
+        "External Screening Validation & CheXpert Calibration (test_external_validation.py)",
+        "Service Health & Readiness Endpoints (test_health.py)",
+        "Model Registry & Multi-Model Metadata (test_model_registry.py)",
+        "Phase 3 External Validation Expansion (test_phase3_validation.py)",
+        "Phase 4 Multi-Scale Model Improvements (test_phase4_model_improvement.py)",
+        "Phase 4B Statistical Audit & Reproducibility (test_phase4b_audit.py)",
+        "Phase 5 Dual-View 3D Lung Shape Reconstruction (test_phase5_dual_view_reconstruction.py)",
+        "Phase 5B Reconstruction Accuracy Optimization (test_phase5b_reconstruction_validation.py)",
+        "Phase 5C Independent Audit & Symmetry Analysis (test_phase5c_independent_audit.py)",
+        "Phase 5D Conformal Uncertainty Calibration (test_phase5d_validation.py)",
+        "Phase 6 Forensic Disease Prediction Failure Audit (test_phase6_failure_audit.py)",
+        "Security, MIME validation, and buffer overflows (test_security_validation.py)",
+        "SSM Phase 2B Pipeline (test_ssm_phase2b_pipeline.py)",
+        "SSM 3D Mesh Reconstruction (test_ssm_reconstruction.py)",
+        "2D Multi-label DenseNet121 & ResNet18 Inference (test_xray_inference.py)"
+      ]
+    },
+    {
+      "suite_name": "Frontend Unit & Integration Vitest Suite",
+      "command": "npm --prefix frontend test -- --run",
+      "test_files_passed": 13,
+      "tests_passed": 39,
+      "tests_failed": 0,
+      "execution_time_seconds": 11.73,
+      "components_verified": [
+        "DashboardPage.test.tsx",
+        "App.test.tsx",
+        "ExplainabilityAndDualMode.test.tsx",
+        "XrayPage.test.tsx",
+        "ModelsPage.test.tsx",
+        "CTExplorerPage.test.tsx",
+        "DualViewXRayPage.test.tsx",
+        "ResearchPage.test.tsx",
+        "ExternalValidationAudit.test.tsx",
+        "ProbabilityBar.test.tsx",
+        "Phase4ResearchComparison.test.tsx",
+        "DisclaimerBanner.test.tsx",
+        "Phase3ResearchDashboard.test.tsx"
+      ]
+    },
+    {
+      "suite_name": "Frontend TypeScript Type Check & Production Vite Build",
+      "command": "npm --prefix frontend run build (tsc && vite build)",
+      "type_check_errors": 0,
+      "build_status": "SUCCESS",
+      "build_duration_seconds": 13.95,
+      "output_bundle": {
+        "html_size_kb": 0.99,
+        "css_size_kb": 55.48,
+        "js_modules_transformed": 2096,
+        "three_bundle_size_kb": 482.63
+      }
+    }
+  ],
+  "invariants_verification": {
+    "production_densenet121_sha256": {
+      "authoritative": "8d3690cd0438587a94afb8fd2ad84c0b30f9c1cc2727ee0eb03662a02ea020af",
+      "verified_physical": "8d3690cd0438587a94afb8fd2ad84c0b30f9c1cc2727ee0eb03662a02ea020af",
+      "status": "STRICTLY_PRESERVED"
+    },
+    "frozen_nih_thresholds": {
+      "Cardiomegaly": 0.9501953125,
+      "Edema": 0.876953125,
+      "Consolidation": 0.73291015625,
+      "Pneumonia": 0.7529296875,
+      "Atelectasis": 0.74951171875,
+      "Pneumothorax": 0.58251953125,
+      "status": "STRICTLY_PRESERVED"
+    },
+    "phase_5b_5c_5d_3d_reconstruction_assets": {
+      "dual_view_shape_predictor_best_pth": "PRESERVED",
+      "dual_view_shape_predictor_v2_best_pth": "PRESERVED",
+      "ssm_lung_pca_v2_json": "PRESERVED",
+      "status": "STRICTLY_PRESERVED"
+    }
+  }
+}

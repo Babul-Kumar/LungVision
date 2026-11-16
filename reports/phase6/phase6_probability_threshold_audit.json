@@ -1,0 +1,272 @@
+{
+  "task": "Task D: Probability and Threshold Mathematical Audit",
+  "timestamp": "2026-11-16T23:00:22Z",
+  "mathematical_formula": "p_i = 1 / (1 + exp(-z_i)); flag_i = (p_i >= threshold_i)",
+  "double_sigmoid_detected": false,
+  "softmax_distortion_detected": false,
+  "probability_clipping_detected": false,
+  "rounding_ordering_audit": {
+    "rule": "Threshold comparison is executed on full precision float prior to Pydantic rounding to 4 decimal places.",
+    "status": "PASS"
+  },
+  "per_image_logits_and_probabilities": [
+    {
+      "filename": "Atelectasis.jpg",
+      "intended_disease": "Atelectasis",
+      "raw_logits": {
+        "Cardiomegaly": -2.928572,
+        "Edema": -2.403969,
+        "Consolidation": -0.860589,
+        "Pneumonia": -0.604138,
+        "Atelectasis": -0.607117,
+        "Pneumothorax": -0.70681
+      },
+      "exact_probabilities": {
+        "Cardiomegaly": 0.050759,
+        "Edema": 0.082871,
+        "Consolidation": 0.297216,
+        "Pneumonia": 0.353398,
+        "Atelectasis": 0.352717,
+        "Pneumothorax": 0.330304
+      },
+      "frozen_thresholds": {
+        "Cardiomegaly": 0.950195,
+        "Edema": 0.876953,
+        "Consolidation": 0.73291,
+        "Pneumonia": 0.75293,
+        "Atelectasis": 0.749512,
+        "Pneumothorax": 0.58252
+      },
+      "flags": {
+        "Cardiomegaly": false,
+        "Edema": false,
+        "Consolidation": false,
+        "Pneumonia": false,
+        "Atelectasis": false,
+        "Pneumothorax": false
+      }
+    },
+    {
+      "filename": "Cardiomegaly.jpg",
+      "intended_disease": "Cardiomegaly",
+      "raw_logits": {
+        "Cardiomegaly": 1.415386,
+        "Edema": -2.027349,
+        "Consolidation": 0.386727,
+        "Pneumonia": 0.605863,
+        "Atelectasis": 0.656631,
+        "Pneumothorax": -0.120207
+      },
+      "exact_probabilities": {
+        "Cardiomegaly": 0.804614,
+        "Edema": 0.116361,
+        "Consolidation": 0.595495,
+        "Pneumonia": 0.646996,
+        "Atelectasis": 0.658503,
+        "Pneumothorax": 0.469984
+      },
+      "frozen_thresholds": {
+        "Cardiomegaly": 0.950195,
+        "Edema": 0.876953,
+        "Consolidation": 0.73291,
+        "Pneumonia": 0.75293,
+        "Atelectasis": 0.749512,
+        "Pneumothorax": 0.58252
+      },
+      "flags": {
+        "Cardiomegaly": false,
+        "Edema": false,
+        "Consolidation": false,
+        "Pneumonia": false,
+        "Atelectasis": false,
+        "Pneumothorax": false
+      }
+    },
+    {
+      "filename": "Edema.jpg",
+      "intended_disease": "Edema",
+      "raw_logits": {
+        "Cardiomegaly": 5.083352,
+        "Edema": -1.217896,
+        "Consolidation": -0.67071,
+        "Pneumonia": -1.15798,
+        "Atelectasis": -0.944665,
+        "Pneumothorax": -3.504595
+      },
+      "exact_probabilities": {
+        "Cardiomegaly": 0.993839,
+        "Edema": 0.228307,
+        "Consolidation": 0.338338,
+        "Pneumonia": 0.239035,
+        "Atelectasis": 0.279959,
+        "Pneumothorax": 0.029182
+      },
+      "frozen_thresholds": {
+        "Cardiomegaly": 0.950195,
+        "Edema": 0.876953,
+        "Consolidation": 0.73291,
+        "Pneumonia": 0.75293,
+        "Atelectasis": 0.749512,
+        "Pneumothorax": 0.58252
+      },
+      "flags": {
+        "Cardiomegaly": true,
+        "Edema": false,
+        "Consolidation": false,
+        "Pneumonia": false,
+        "Atelectasis": false,
+        "Pneumothorax": false
+      }
+    },
+    {
+      "filename": "Lung-Consolidation-x-ray-image.webp",
+      "intended_disease": "Consolidation",
+      "raw_logits": {
+        "Cardiomegaly": 1.909208,
+        "Edema": 0.628076,
+        "Consolidation": 2.061561,
+        "Pneumonia": 1.029915,
+        "Atelectasis": -0.117049,
+        "Pneumothorax": -2.990968
+      },
+      "exact_probabilities": {
+        "Cardiomegaly": 0.87093,
+        "Edema": 0.652053,
+        "Consolidation": 0.887111,
+        "Pneumonia": 0.736899,
+        "Atelectasis": 0.470771,
+        "Pneumothorax": 0.047836
+      },
+      "frozen_thresholds": {
+        "Cardiomegaly": 0.950195,
+        "Edema": 0.876953,
+        "Consolidation": 0.73291,
+        "Pneumonia": 0.75293,
+        "Atelectasis": 0.749512,
+        "Pneumothorax": 0.58252
+      },
+      "flags": {
+        "Cardiomegaly": false,
+        "Edema": false,
+        "Consolidation": true,
+        "Pneumonia": false,
+        "Atelectasis": false,
+        "Pneumothorax": false
+      }
+    },
+    {
+      "filename": "pneumonia.png",
+      "intended_disease": "Pneumonia",
+      "raw_logits": {
+        "Cardiomegaly": -6.490826,
+        "Edema": -3.30356,
+        "Consolidation": 1.75637,
+        "Pneumonia": -0.720657,
+        "Atelectasis": -0.783079,
+        "Pneumothorax": -0.525773
+      },
+      "exact_probabilities": {
+        "Cardiomegaly": 0.001515,
+        "Edema": 0.035449,
+        "Consolidation": 0.852754,
+        "Pneumonia": 0.327248,
+        "Atelectasis": 0.313657,
+        "Pneumothorax": 0.371503
+      },
+      "frozen_thresholds": {
+        "Cardiomegaly": 0.950195,
+        "Edema": 0.876953,
+        "Consolidation": 0.73291,
+        "Pneumonia": 0.75293,
+        "Atelectasis": 0.749512,
+        "Pneumothorax": 0.58252
+      },
+      "flags": {
+        "Cardiomegaly": false,
+        "Edema": false,
+        "Consolidation": true,
+        "Pneumonia": false,
+        "Atelectasis": false,
+        "Pneumothorax": false
+      }
+    },
+    {
+      "filename": "Pneumothorax.jpeg",
+      "intended_disease": "Pneumothorax",
+      "raw_logits": {
+        "Cardiomegaly": -7.060077,
+        "Edema": -9.928583,
+        "Consolidation": -2.918975,
+        "Pneumonia": -5.104833,
+        "Atelectasis": -1.535655,
+        "Pneumothorax": -2.816088
+      },
+      "exact_probabilities": {
+        "Cardiomegaly": 0.000858,
+        "Edema": 4.9e-05,
+        "Consolidation": 0.051223,
+        "Pneumonia": 0.006031,
+        "Atelectasis": 0.177168,
+        "Pneumothorax": 0.056461
+      },
+      "frozen_thresholds": {
+        "Cardiomegaly": 0.950195,
+        "Edema": 0.876953,
+        "Consolidation": 0.73291,
+        "Pneumonia": 0.75293,
+        "Atelectasis": 0.749512,
+        "Pneumothorax": 0.58252
+      },
+      "flags": {
+        "Cardiomegaly": false,
+        "Edema": false,
+        "Consolidation": false,
+        "Pneumonia": false,
+        "Atelectasis": false,
+        "Pneumothorax": false
+      }
+    }
+  ],
+  "historical_reconciliation": {
+    "analysis": "Reconciliation between Phase 3 manual test table and current test/ directory",
+    "historical_manual_tests": [
+      {
+        "test_id": 1,
+        "intended": "Normal",
+        "image": "manual_test_01_normal.png",
+        "observed": "No positive flags"
+      },
+      {
+        "test_id": 2,
+        "intended": "Cardiomegaly",
+        "image": "manual_test_02_cardiomegaly.jpg",
+        "observed": "Cardiomegaly 99.98%"
+      },
+      {
+        "test_id": 3,
+        "intended": "Pneumothorax",
+        "image": "manual_test_03_pneumothorax.png",
+        "observed": "Pneumothorax 23.41%, negative"
+      },
+      {
+        "test_id": 4,
+        "intended": "Edema",
+        "image": "manual_test_04_edema.jpg",
+        "observed": "Consolidation 85.53%, positive; Edema 15.42%, negative"
+      },
+      {
+        "test_id": 5,
+        "intended": "Consolidation",
+        "image": "manual_test_05_consolidation.png",
+        "observed": "Pneumonia 82.38%, positive; Consolidation 61.14%, negative"
+      },
+      {
+        "test_id": 6,
+        "intended": "Atelectasis",
+        "image": "manual_test_06_atelectasis.jpg",
+        "observed": "Atelectasis 7.84%, negative"
+      }
+    ],
+    "root_cause_of_numerical_divergence": "The historical screenshots and Phase 3 report evaluated an earlier set of six full-resolution files (manual_test_01_normal.png through manual_test_06_atelectasis.jpg, 2048x2048 to 2500x2048, documented in research/evaluation/manual_test_manifest.csv). The current workspace contains six different files in test/ (Atelectasis.jpg [222x222, 6KB], Cardiomegaly.jpg [504x422], Edema.jpg [2048x2048], Lung-Consolidation-x-ray-image.webp [860x788], pneumonia.png [968x1006], Pneumothorax.jpeg [630x624]). Because image bytes and patient cases are different, probabilities naturally differ: e.g. test/Cardiomegaly.jpg outputs 80.46% (not 99.98%), while test/Edema.jpg outputs 99.38% Cardiomegaly and 22.83% Edema. Both sets exhibit identical clinical failure modes: high specificity thresholds suppressing subtle findings, severe resolution downsampling destroying pleural line details in pneumothorax, and alveolar opacity overlap between edema, consolidation, and pneumonia."
+  }
+}

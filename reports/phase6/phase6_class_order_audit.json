@@ -1,0 +1,66 @@
+{
+  "task": "Task C: Class Order & Output Mapping Audit",
+  "timestamp": "2026-11-16T23:00:17Z",
+  "authoritative_order": [
+    {
+      "index": 0,
+      "name": "Cardiomegaly"
+    },
+    {
+      "index": 1,
+      "name": "Edema"
+    },
+    {
+      "index": 2,
+      "name": "Consolidation"
+    },
+    {
+      "index": 3,
+      "name": "Pneumonia"
+    },
+    {
+      "index": 4,
+      "name": "Atelectasis"
+    },
+    {
+      "index": 5,
+      "name": "Pneumothorax"
+    }
+  ],
+  "checkpoint_labels": [
+    "Cardiomegaly",
+    "Edema",
+    "Consolidation",
+    "Pneumonia",
+    "Atelectasis",
+    "Pneumothorax"
+  ],
+  "backend_xray_service_labels": [
+    "Cardiomegaly",
+    "Edema",
+    "Consolidation",
+    "Pneumonia",
+    "Atelectasis",
+    "Pneumothorax"
+  ],
+  "frontend_types_labels": [
+    "Cardiomegaly",
+    "Edema",
+    "Consolidation",
+    "Pneumonia",
+    "Atelectasis",
+    "Pneumothorax"
+  ],
+  "nih_manifest_disease_columns": [
+    "Cardiomegaly",
+    "Edema",
+    "Consolidation",
+    "Pneumonia",
+    "Atelectasis",
+    "Pneumothorax"
+  ],
+  "order_alignment_verified": true,
+  "index_permutation_detected": false,
+  "dictionary_key_sorting_bug_detected": false,
+  "verdict": "PASS"
+}

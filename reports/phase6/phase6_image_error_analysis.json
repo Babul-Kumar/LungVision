@@ -1,0 +1,173 @@
+{
+  "task": "Task F: Image-Level Diagnostic Error Analysis",
+  "timestamp": "2026-11-16T23:00:22Z",
+  "taxonomy": [
+    "EXPECTED_PREDICTION",
+    "POSSIBLE_FALSE_NEGATIVE",
+    "POSSIBLE_FALSE_POSITIVE",
+    "MULTI_LABEL_FINDING",
+    "UNCERTAIN_REFERENCE",
+    "OUT_OF_DISTRIBUTION",
+    "PREPROCESSING_FAILURE",
+    "INFERENCE_FAILURE"
+  ],
+  "image_analyses": [
+    {
+      "filename": "Atelectasis.jpg",
+      "intended_disease": "Atelectasis",
+      "model_probabilities": {
+        "Cardiomegaly": 0.0508,
+        "Edema": 0.0829,
+        "Consolidation": 0.2972,
+        "Pneumonia": 0.3534,
+        "Atelectasis": 0.3527,
+        "Pneumothorax": 0.3303
+      },
+      "positive_flags": [],
+      "classification_category": "POSSIBLE_FALSE_NEGATIVE",
+      "secondary_categories": [
+        "PREPROCESSING_FAILURE",
+        "OUT_OF_DISTRIBUTION"
+      ],
+      "severity": "HIGH",
+      "evidence": {
+        "file_size": "6,021 bytes (Extremely low quality web thumbnail)",
+        "original_dimensions": "222x222 pixels (Smaller than model native input 224x224)",
+        "dynamic_range": "Pixel max is 157 (truncated from 255; dynamic range compressed by 38.4%)",
+        "radiological_mechanism": "Atelectasis manifests as localized volume loss, plate-like discoid horizontal bands, or lobar collapse. In this thumbnail, severe JPEG compression and bilinear upsampling from 222x222 completely smeared the subtle linear basilar opacities. Furthermore, DenseNet121 employs Global Average Pooling (GAP) before classification: localized linear collapsed parenchyma accounts for <3% of the total lung area, so spatial averaging dilutes the localized feature map across the 7x7 spatial grid, yielding a probability of 35.27% which fails the 74.95% threshold.",
+        "threshold_contribution": "Threshold 0.7495 was calibrated on NIH for high precision (88.3% specificity), resulting in 50.9% false negative rate on the NIH benchmark itself."
+      }
+    },
+    {
+      "filename": "Cardiomegaly.jpg",
+      "intended_disease": "Cardiomegaly",
+      "model_probabilities": {
+        "Cardiomegaly": 0.8046,
+        "Edema": 0.1164,
+        "Consolidation": 0.5955,
+        "Pneumonia": 0.647,
+        "Atelectasis": 0.6585,
+        "Pneumothorax": 0.47
+      },
+      "positive_flags": [],
+      "classification_category": "POSSIBLE_FALSE_NEGATIVE",
+      "secondary_categories": [
+        "PREPROCESSING_FAILURE"
+      ],
+      "severity": "HIGH",
+      "evidence": {
+        "file_size": "64,031 bytes",
+        "original_dimensions": "504x422 (Aspect ratio: 1.1943)",
+        "model_output": "Cardiomegaly probability 80.46% (Strongest feature activation in the model)",
+        "radiological_mechanism": "The radiograph shows clear cardiomegaly with enlarged transverse cardiac diameter (CTR ~ 0.56). The model strongly activates Cardiomegaly at 80.46%, vastly higher than the baseline prevalence of 2.5%. However, the frozen NIH threshold for Cardiomegaly is exceptionally strict: 0.9502 (95.02%). Consequently, despite high confidence, the prediction is classified as negative (delta = -0.1456). Additionally, preprocessing direct resize from 504x422 to 224x224 squashed the horizontal axis by 19.4%, visually narrowing the cardiac silhouette and decreasing apparent cardiothoracic ratio.",
+        "threshold_contribution": "Threshold 0.9502 yields 97.7% specificity but only 36.3% sensitivity on NIH validation, deliberately rejecting borderline cases to avoid false positive alarms."
+      }
+    },
+    {
+      "filename": "Edema.jpg",
+      "intended_disease": "Edema",
+      "model_probabilities": {
+        "Cardiomegaly": 0.9938,
+        "Edema": 0.2283,
+        "Consolidation": 0.3383,
+        "Pneumonia": 0.239,
+        "Atelectasis": 0.28,
+        "Pneumothorax": 0.0292
+      },
+      "positive_flags": [
+        "Cardiomegaly"
+      ],
+      "classification_category": "MULTI_LABEL_FINDING",
+      "secondary_categories": [
+        "POSSIBLE_FALSE_NEGATIVE"
+      ],
+      "severity": "HIGH",
+      "evidence": {
+        "file_size": "387,686 bytes",
+        "original_dimensions": "2048x2048 pixels",
+        "model_output": "Cardiomegaly: 99.38% (Flagged, >= 0.9502); Edema: 22.83% (Negative, < 0.8770)",
+        "radiological_mechanism": "Congestive heart failure typically causes both severe cardiomegaly and alveolar pulmonary edema. This patient radiograph exhibits massive cardiomegaly (CTR > 0.65, prominent left ventricular bulge) alongside bilateral vascular fullness and perihilar haze. The model accurately detects the dominant cardiac enlargement with 99.38% confidence. The alveolar edema is present but mild/early, yielding an Edema probability of 22.83% (11x higher than 2.1% prevalence), but falls well short of the highly conservative 0.8770 threshold. The model's positive flag for Cardiomegaly is a completely valid and clinically significant finding.",
+        "threshold_contribution": "Edema threshold 0.8770 has 97.3% specificity and only 37.8% sensitivity on NIH validation."
+      }
+    },
+    {
+      "filename": "Lung-Consolidation-x-ray-image.webp",
+      "intended_disease": "Consolidation",
+      "model_probabilities": {
+        "Cardiomegaly": 0.8709,
+        "Edema": 0.6521,
+        "Consolidation": 0.8871,
+        "Pneumonia": 0.7369,
+        "Atelectasis": 0.4708,
+        "Pneumothorax": 0.0478
+      },
+      "positive_flags": [
+        "Consolidation"
+      ],
+      "classification_category": "EXPECTED_PREDICTION",
+      "secondary_categories": [
+        "MULTI_LABEL_FINDING"
+      ],
+      "severity": "LOW",
+      "evidence": {
+        "file_size": "17,084 bytes (WebP lossy format)",
+        "original_dimensions": "860x788 pixels",
+        "model_output": "Consolidation: 88.71% (Flagged, >= 0.7329); Pneumonia: 73.69% (Near threshold 0.7529)",
+        "radiological_mechanism": "Dense parenchymal airspace opacification is present in the lower right and mid zones. The model correctly flags Consolidation (88.71% vs threshold 0.7329, delta = +0.1542). It also strongly activates Pneumonia (73.69%, delta = -0.0160) and Cardiomegaly (87.09%, delta = -0.0793). Because bacterial pneumonia manifests morphologically as lobar consolidation, their simultaneous activation reflects shared radiological presentation. The model's classification is concordant with the intended class.",
+        "threshold_contribution": "Consolidation threshold 0.7329 correctly identified this finding."
+      }
+    },
+    {
+      "filename": "pneumonia.png",
+      "intended_disease": "Pneumonia",
+      "model_probabilities": {
+        "Cardiomegaly": 0.0015,
+        "Edema": 0.0354,
+        "Consolidation": 0.8528,
+        "Pneumonia": 0.3272,
+        "Atelectasis": 0.3137,
+        "Pneumothorax": 0.3715
+      },
+      "positive_flags": [
+        "Consolidation"
+      ],
+      "classification_category": "MULTI_LABEL_FINDING",
+      "secondary_categories": [
+        "POSSIBLE_FALSE_NEGATIVE"
+      ],
+      "severity": "HIGH",
+      "evidence": {
+        "file_size": "539,078 bytes",
+        "original_dimensions": "968x1006 pixels",
+        "model_output": "Consolidation: 85.28% (Flagged, >= 0.7329); Pneumonia: 32.72% (Negative, < 0.7529)",
+        "radiological_mechanism": "In clinical radiology, 'pneumonia' is an infectious etiology whereas 'consolidation' is the radiological sign (fluid-filled alveoli). On a plain radiograph, pneumonia is seen AS consolidation. DenseNet121 accurately recognizes the dense airspace opacity, flagging Consolidation at 85.28% (threshold 0.7329). However, Pneumonia probability is 32.72%, missing the 0.7529 threshold. In the NIH ChestX-ray14 training set, Pneumonia had only 1.3% prevalence (1,431 images out of 112,120) and suffered from heavy label noise, leading to poor feature separation between consolidation and pneumonia.",
+        "threshold_contribution": "Pneumonia threshold 0.7529 was calibrated with an extreme specificity bias (97.0% specificity), achieving only 13.7% sensitivity on NIH validation."
+      }
+    },
+    {
+      "filename": "Pneumothorax.jpeg",
+      "intended_disease": "Pneumothorax",
+      "model_probabilities": {
+        "Cardiomegaly": 0.0009,
+        "Edema": 0.0,
+        "Consolidation": 0.0512,
+        "Pneumonia": 0.006,
+        "Atelectasis": 0.1772,
+        "Pneumothorax": 0.0565
+      },
+      "positive_flags": [],
+      "classification_category": "POSSIBLE_FALSE_NEGATIVE",
+      "secondary_categories": [
+        "PREPROCESSING_FAILURE"
+      ],
+      "severity": "HIGH",
+      "evidence": {
+        "file_size": "63,215 bytes",
+        "original_dimensions": "630x624 pixels",
+        "model_output": "Pneumothorax: 5.65% (Negative, threshold 0.5825)",
+        "radiological_mechanism": "The diagnostic hallmark of pneumothorax is the visceral pleural white line (thickness ~0.2-0.5 mm) with absent peripheral vascular markings. Downsampling from 630x624 to 224x224 applies a 2.8x linear reduction (7.8x area reduction), obliterating sub-millimeter high-frequency pleural edges through bilinear smoothing. Furthermore, DenseNet121's conv1 stride-2 and maxpool downsamples the input by 4x before dense blocks, rendering subtle apical pneumothoraces radiologically invisible to the convolutional filters.",
+        "threshold_contribution": "Even at threshold 0.5825, the model misses subtle or apical pneumothoraces lacking large-volume lung collapse."
+      }
+    }
+  ]
+}

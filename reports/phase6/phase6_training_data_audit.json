@@ -1,0 +1,114 @@
+{
+  "task": "Task H: Training and Dataset Audit",
+  "timestamp": "2026-11-16T23:00:40Z",
+  "training_corpus": "NIH ChestX-ray14",
+  "total_images": 112120,
+  "unique_patients": 30805,
+  "splits": {
+    "train": 73023,
+    "test": 25596,
+    "validation": 13501
+  },
+  "disease_prevalence": {
+    "Cardiomegaly": {
+      "positive_count": 2776,
+      "negative_count": 109344,
+      "prevalence_pct": 2.48,
+      "imbalance_ratio": 39.4
+    },
+    "Edema": {
+      "positive_count": 2303,
+      "negative_count": 109817,
+      "prevalence_pct": 2.05,
+      "imbalance_ratio": 47.7
+    },
+    "Consolidation": {
+      "positive_count": 4667,
+      "negative_count": 107453,
+      "prevalence_pct": 4.16,
+      "imbalance_ratio": 23.0
+    },
+    "Pneumonia": {
+      "positive_count": 1431,
+      "negative_count": 110689,
+      "prevalence_pct": 1.28,
+      "imbalance_ratio": 77.4
+    },
+    "Atelectasis": {
+      "positive_count": 11559,
+      "negative_count": 100561,
+      "prevalence_pct": 10.31,
+      "imbalance_ratio": 8.7
+    },
+    "Pneumothorax": {
+      "positive_count": 5302,
+      "negative_count": 106818,
+      "prevalence_pct": 4.73,
+      "imbalance_ratio": 20.1
+    }
+  },
+  "co_occurrence_matrix": {
+    "Cardiomegaly": {
+      "Cardiomegaly": 2776,
+      "Edema": 127,
+      "Consolidation": 169,
+      "Pneumonia": 41,
+      "Atelectasis": 370,
+      "Pneumothorax": 49
+    },
+    "Edema": {
+      "Cardiomegaly": 127,
+      "Edema": 2303,
+      "Consolidation": 162,
+      "Pneumonia": 340,
+      "Atelectasis": 221,
+      "Pneumothorax": 33
+    },
+    "Consolidation": {
+      "Cardiomegaly": 169,
+      "Edema": 162,
+      "Consolidation": 4667,
+      "Pneumonia": 123,
+      "Atelectasis": 1223,
+      "Pneumothorax": 223
+    },
+    "Pneumonia": {
+      "Cardiomegaly": 41,
+      "Edema": 340,
+      "Consolidation": 123,
+      "Pneumonia": 1431,
+      "Atelectasis": 262,
+      "Pneumothorax": 41
+    },
+    "Atelectasis": {
+      "Cardiomegaly": 370,
+      "Edema": 221,
+      "Consolidation": 1223,
+      "Pneumonia": 262,
+      "Atelectasis": 11559,
+      "Pneumothorax": 774
+    },
+    "Pneumothorax": {
+      "Cardiomegaly": 49,
+      "Edema": 33,
+      "Consolidation": 223,
+      "Pneumonia": 41,
+      "Atelectasis": 774,
+      "Pneumothorax": 5302
+    }
+  },
+  "loss_function": {
+    "name": "BCEWithLogitsLoss",
+    "pos_weight_applied": false,
+    "impact": "Standard unweighted binary cross-entropy on extreme class imbalances (e.g. Pneumonia at 1.3%, Edema at 2.1%) causes the model to minimize total loss by depressing output probabilities towards 0. Consequently, raw probabilities for positive cases are compressed into low numerical ranges, necessitating aggressive post-hoc threshold calibration."
+  },
+  "label_noise_investigation": {
+    "source": "Wang et al. (2017) automated NLP report mining from PACS text",
+    "reported_nlp_f1": "0.85 - 0.90",
+    "known_artifacts": "Automated text mining frequently misidentifies rule-out statements ('no evidence of consolidation') or conflates clinical diagnoses ('pneumonia') with radiographic signs ('consolidation'), creating intrinsic label noise of 10-15% in ground truth."
+  },
+  "patient_leakage_audit": {
+    "patient_level_splitting": "Verified strictly enforced across train/val/test partitions",
+    "patient_leakage_detected": false
+  }
+}
