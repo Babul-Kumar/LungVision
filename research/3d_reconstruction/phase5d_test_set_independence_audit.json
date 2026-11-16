@@ -1,0 +1,99 @@
+{
+  "audit_version": "5.4.0",
+  "timestamp_utc": "2026-11-16T21:51:11Z",
+  "investigation_scope": "Complete development and evaluation history of the 65-patient test cohort",
+  "split_configuration": {
+    "random_seed": 42,
+    "split_policy": "STRICT_PATIENT_DISJOINT",
+    "training_cohort_size": 301,
+    "validation_cohort_size": 64,
+    "test_cohort_size": 65,
+    "total_dataset_size": 430,
+    "unassigned_patients_in_dataset": 0,
+    "unassigned_patient_ids": []
+  },
+  "training_checkpoint_selection": {
+    "checkpoint_selection_criterion": "Minimum validation loss on 64 validation patients",
+    "uses_val_loss_for_early_stopping": true,
+    "test_leakage_during_backprop": false,
+    "monitored_test_during_gradient_updates": false,
+    "best_validation_loss_recorded": 3293.37
+  },
+  "iterative_evaluation_history": {
+    "phase5_initial_ssm": {
+      "phase": "Phase 5",
+      "evaluated_test_cohort": true,
+      "metric_reported": "ASSD 6.42 mm (SSM v1)",
+      "impact": "Identified need for cross-attention and multi-patient PCA v2"
+    },
+    "phase5b_optimization": {
+      "phase": "Phase 5B",
+      "evaluated_test_cohort": true,
+      "metric_reported": "ASSD 4.705 mm, HD95 9.212 mm (V2 Cross-Attention)",
+      "impact": "Selected Cross-Attention architecture over Concatenation and Mean shape based on test performance"
+    },
+    "phase5c_reproduction": {
+      "phase": "Phase 5C",
+      "evaluated_test_cohort": true,
+      "metric_reported": "ASSD 4.7051 mm, HD95 9.2120 mm (exact reproduction)",
+      "impact": "Audited random baseline flaw and independently confirmed numerical reproducibility"
+    }
+  },
+  "historical_artifacts_evaluated": [
+    {
+      "artifact": "phase5_validation_report.json",
+      "exists": false
+    },
+    {
+      "artifact": "phase5b_baseline_comparison.json",
+      "exists": true,
+      "evaluated_test_patients": 65,
+      "role": "Comparative benchmarking and model selection"
+    },
+    {
+      "artifact": "phase5b_model_ablation.json",
+      "exists": true,
+      "evaluated_test_patients": 65,
+      "role": "Comparative benchmarking and model selection"
+    },
+    {
+      "artifact": "phase5b_statistical_validation.json",
+      "exists": true,
+      "evaluated_test_patients": 65,
+      "role": "Comparative benchmarking and model selection"
+    },
+    {
+      "artifact": "phase5c_patient_level_metrics.csv",
+      "exists": true,
+      "evaluated_test_patients": 65,
+      "role": "Comparative benchmarking and model selection"
+    },
+    {
+      "artifact": "phase5c_reproduction_metrics.json",
+      "exists": true,
+      "evaluated_test_patients": 65,
+      "role": "Comparative benchmarking and model selection"
+    }
+  ],
+  "recent_git_history": [
+    "4ffe431 feat(audit): complete Phase 5C independent reproduction, generalization, and scientific integrity audit",
+    "17be0c3 feat(phase5b): complete 3D lung reconstruction accuracy optimization & anatomical validation",
+    "7dd9c6e feat(phase5): complete patient-specific dual-view 3D lung shape reconstruction pipeline",
+    "a1a9b49 feat(phase4b): scientific reproducibility, statistical audit and controlled ablation study",
+    "a273706 feat(phase4): implement high-resolution multi-scale DenseNet121-FPN architecture and validation pipeline"
+  ],
+  "methodological_classification": {
+    "classification": "ITERATIVE_BENCHMARK_EVALUATION_COHORT",
+    "is_pristine_blind_test_cohort": false,
+    "rationale": "Under formal biostatistical guidelines (TRIPOD+AI, SPIRIT-AI), a cohort that is repeatedly evaluated to compare architectures and benchmark iterative milestones cannot be certified as a pristine blind test set. Architectural decisions in Phase 5B (selecting Cross-Attention over Concatenation) were validated against this cohort. Although gradient descent and early stopping strictly used the 64 validation patients (val_loss), repeated evaluation risks subtle adaptive selection. Therefore, the 65 patients must be transparently classified as an iterative benchmark/evaluation cohort.",
+    "independent_cohort_availability": {
+      "independent_cohort_available_in_repo": false,
+      "unassigned_patients_remaining": 0,
+      "remedy_required_for_pristine_testing": "To achieve pristine blind testing, an entirely new, unpartitioned clinical cohort of paired biplanar radiographs and volumetric CT scans must be acquired from an independent external institution."
+    }
+  },
+  "audit_verdict": {
+    "status": "PASS_WITH_TRANSPARENT_LIMITATION",
+    "summary": "No gradient leakage or weight-fitting on test data occurred; however, the test cohort functioned as an iterative benchmark rather than a pristine blind test cohort."
+  }
+}

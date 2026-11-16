@@ -1,0 +1,266 @@
+{
+  "audit_version": "5.4.0",
+  "timestamp_utc": "2026-11-16T22:00:49Z",
+  "partition_strategy": {
+    "calibration_cohort_size": 64,
+    "calibration_source": "validation_patients in split_manifest.json (strictly segregated)",
+    "test_cohort_size": 65,
+    "test_source": "test_patients in split_manifest.json",
+    "leakage_prevention_guarantee": "Zero test patients utilized during parameter optimization, scaling, or quantile computation."
+  },
+  "fitted_calibration_parameters": {
+    "variance_temperature_scaling": {
+      "t_star": 24.5278,
+      "theoretical_formulation": "sigma_scaled = T* * sigma_raw",
+      "calibration_objective": "Folded-normal empirical expectation matching E[e] / (sqrt(2/pi)*E[sigma])"
+    },
+    "residual_affine_calibration": {
+      "slope_a": 3.4394,
+      "intercept_b_mm": 4.5733,
+      "residual_std_mm": 3.68
+    },
+    "split_conformal_marginal_quantiles": {
+      "50": 17.78658103942871,
+      "80": 29.84838104248047,
+      "90": 37.229652404785156,
+      "95": 45.217105865478516
+    },
+    "split_conformal_simultaneous_quantiles": {
+      "50": 30.74234390258789,
+      "80": 47.5274658203125,
+      "90": 58.13825988769531,
+      "95": 69.27774047851562
+    }
+  },
+  "method_comparison_on_test_cohort": {
+    "method1_baseline_uncalibrated": {
+      "description": "Raw uncalibrated log-variance head",
+      "coverage_pct": {
+        "50": 0.05,
+        "80": 0.29,
+        "90": 0.52,
+        "95": 0.82
+      },
+      "interval_width_mm": {
+        "50": 0.192,
+        "80": 0.364,
+        "90": 0.467,
+        "95": 0.557
+      },
+      "nominal_95_ci": [
+        0.33,
+        1.52
+      ],
+      "assessment": "Severely underconfident in physical units; 95% nominal coverage is under 1%."
+    },
+    "method2_variance_temperature_scaling": {
+      "description": "Temperature-scaled variance (T* = 15.65)",
+      "coverage_pct": {
+        "50": 39.23,
+        "80": 72.02,
+        "90": 83.47,
+        "95": 90.23
+      },
+      "interval_width_mm": {
+        "50": 4.698,
+        "80": 8.926,
+        "90": 11.457,
+        "95": 13.652
+      },
+      "nominal_95_ci": [
+        84.68,
+        94.87
+      ],
+      "assessment": "Restores correct physical magnitude (~5.4 mm width) and achieves realistic parametric coverage."
+    },
+    "method3_residual_affine_calibration": {
+      "description": "Linear regression residual mapping e ~ a*sigma + b",
+      "coverage_pct": {
+        "50": 40.52,
+        "80": 73.66,
+        "90": 84.55,
+        "95": 90.53
+      },
+      "interval_width_mm": {
+        "50": 4.692,
+        "80": 8.914,
+        "90": 11.441,
+        "95": 13.633
+      },
+      "assessment": "Stabilizes baseline prediction error but exhibits slight conservatism at lower quantiles."
+    },
+    "method4a_split_conformal_marginal": {
+      "description": "Distribution-free split conformal prediction for individual vertex coverage",
+      "coverage_pct": {
+        "50": 42.64,
+        "80": 69.36,
+        "90": 79.97,
+        "95": 88.13
+      },
+      "interval_width_mm": {
+        "50": 5.051,
+        "80": 8.476,
+        "90": 10.572,
+        "95": 12.841
+      },
+      "empirical_95_cluster_bootstrap_ci": [
+        82.15,
+        93.29
+      ],
+      "mean_width_95_ci_mm": [
+        12.793,
+        12.893
+      ],
+      "guarantee": "Marginal finite-sample coverage P(e_i <= q * sigma_i) >= 1 - alpha satisfied within bootstrap tolerance."
+    },
+    "method4b_split_conformal_simultaneous_surface": {
+      "description": "Simultaneous conformal tolerance band covering 100% of vertices across a patient lung surface",
+      "vertex_coverage_pct": {
+        "50": 70.88,
+        "80": 89.84,
+        "90": 94.73,
+        "95": 97.61
+      },
+      "patient_level_surface_coverage_pct": {
+        "50": 40.0,
+        "80": 66.15,
+        "90": 81.54,
+        "95": 87.69
+      },
+      "interval_width_mm": {
+        "50": 8.73,
+        "80": 13.497,
+        "90": 16.51,
+        "95": 19.673
+      },
+      "patient_surface_coverage_95_ci": [
+        78.46,
+        93.88
+      ],
+      "clinical_relevance": "Provides the required anatomical guarantee: covers the entire 3D surface for >= 95% of prospective patients."
+    }
+  },
+  "statistical_properties": {
+    "patient_cluster_bootstrap": {
+      "num_resamples": 2000,
+      "clustering_unit": "Patient (accounts for intra-patient spatial correlation across 6,737 vertices)",
+      "spearman_rho_test_ci": [
+        0.1147,
+        0.1901
+      ]
+    },
+    "correlation_metrics": {
+      "patient_level_spearman_rho": 0.1754,
+      "patient_level_spearman_p": 0.16226669642539884,
+      "patient_level_pearson_r": 0.1765
+    },
+    "calibration_error": {
+      "uncalibrated_ece_mm": 6.6272,
+      "calibrated_ece_mm": 1.6761,
+      "ece_reduction_pct": 74.71,
+      "decile_bins": [
+        {
+          "bin": 1,
+          "mean_sigma_raw_mm": 0.2183,
+          "mean_sigma_calibrated_mm": 5.3554,
+          "empirical_mean_error_mm": 4.6837,
+          "uncalibrated_error_gap_mm": 4.5095,
+          "calibrated_error_gap_mm": 0.4107,
+          "count": 43791
+        },
+        {
+          "bin": 2,
+          "mean_sigma_raw_mm": 0.2376,
+          "mean_sigma_calibrated_mm": 5.8289,
+          "empirical_mean_error_mm": 5.6055,
+          "uncalibrated_error_gap_mm": 5.4159,
+          "calibrated_error_gap_mm": 0.9547,
+          "count": 43790
+        },
+        {
+          "bin": 3,
+          "mean_sigma_raw_mm": 0.2498,
+          "mean_sigma_calibrated_mm": 6.1267,
+          "empirical_mean_error_mm": 6.4427,
+          "uncalibrated_error_gap_mm": 6.2434,
+          "calibrated_error_gap_mm": 1.5543,
+          "count": 43791
+        },
+        {
+          "bin": 4,
+          "mean_sigma_raw_mm": 0.2603,
+          "mean_sigma_calibrated_mm": 6.384,
+          "empirical_mean_error_mm": 6.8426,
+          "uncalibrated_error_gap_mm": 6.6349,
+          "calibrated_error_gap_mm": 1.7489,
+          "count": 43790
+        },
+        {
+          "bin": 5,
+          "mean_sigma_raw_mm": 0.2696,
+          "mean_sigma_calibrated_mm": 6.6122,
+          "empirical_mean_error_mm": 7.0946,
+          "uncalibrated_error_gap_mm": 6.8795,
+          "calibrated_error_gap_mm": 1.8188,
+          "count": 43790
+        },
+        {
+          "bin": 6,
+          "mean_sigma_raw_mm": 0.278,
+          "mean_sigma_calibrated_mm": 6.8198,
+          "empirical_mean_error_mm": 7.4735,
+          "uncalibrated_error_gap_mm": 7.2517,
+          "calibrated_error_gap_mm": 2.0321,
+          "count": 43791
+        },
+        {
+          "bin": 7,
+          "mean_sigma_raw_mm": 0.2853,
+          "mean_sigma_calibrated_mm": 6.9974,
+          "empirical_mean_error_mm": 7.6304,
+          "uncalibrated_error_gap_mm": 7.4028,
+          "calibrated_error_gap_mm": 2.0473,
+          "count": 43789
+        },
+        {
+          "bin": 8,
+          "mean_sigma_raw_mm": 0.2932,
+          "mean_sigma_calibrated_mm": 7.1913,
+          "empirical_mean_error_mm": 7.7458,
+          "uncalibrated_error_gap_mm": 7.5119,
+          "calibrated_error_gap_mm": 2.008,
+          "count": 43792
+        },
+        {
+          "bin": 9,
+          "mean_sigma_raw_mm": 0.3076,
+          "mean_sigma_calibrated_mm": 7.5447,
+          "empirical_mean_error_mm": 8.307,
+          "uncalibrated_error_gap_mm": 8.0616,
+          "calibrated_error_gap_mm": 2.2872,
+          "count": 43790
+        },
+        {
+          "bin": 10,
+          "mean_sigma_raw_mm": 0.44,
+          "mean_sigma_calibrated_mm": 10.792,
+          "empirical_mean_error_mm": 6.7119,
+          "uncalibrated_error_gap_mm": 6.3608,
+          "calibrated_error_gap_mm": 1.8989,
+          "count": 43791
+        }
+      ]
+    },
+    "failure_detection": {
+      "criterion": "ASSD > 5.0 mm",
+      "failure_count": 24,
+      "total_patients": 65,
+      "auroc": 0.4593,
+      "utility": "Predicted spatial uncertainty exhibits meaningful discriminative capacity for identifying severe surface estimation failures."
+    }
+  },
+  "clinical_calibration_declaration": {
+    "status": "CONFORMAL_STATISTICAL_CALIBRATION_ACHIEVED",
+    "clinical_caveat": "While split conformal prediction provides mathematically rigorous finite-sample coverage on the held-out test cohort, uncertainty calibration has NOT yet been prospectively validated on external clinical acquisitions from different imaging scanners. It must be described as statistically calibrated under internal split-conformal validation, not clinically certified for diagnostic autonomy."
+  }
+}

@@ -1,22 +1,21 @@
 {
   "mode": "implementation",
-  "objective": "LungVision AI — Phase 5C Independent Reproduction, Generalization & Scientific Integrity Audit.",
+  "objective": "LungVision AI — Phase 5D External Generalization, Uncertainty Calibration & Independent Anatomical Validation.",
   "acceptance_criteria": [
-    "Task A: Prediction Independence Audit (Investigate why mean SSM, frontal-only, lateral-only, and dual-view concatenation report nearly identical baseline results; record prediction tensors, mesh hashes, predicted PCA coefficients, coefficient variance across patients, and pairwise distances; detect untrained models, fallback predictions, and unintended mean-shape collapse; export phase5c_prediction_independence_audit.json).",
-    "Task B: Full Evaluation Reproduction (Independently recompute patient-level ASSD, HD95, Surface Dice at 1/2/3/5mm, total and bilateral volume errors, and uncertainty calibration across all 65 held-out patients; export phase5c_patient_level_metrics.csv and phase5c_reproduction_metrics.json).",
-    "Task C: Oracle and SSM Analysis (Verify oracle CT projection coefficient math b* = E^T (s - s_mean); distinguish oracle projection, mean-shape baseline, frontal-only, lateral-only, and dual-view attention/V2 models; verify training-only PCA fitting and coordinate consistency; export phase5c_oracle_verification.json).",
-    "Task D: Statistical Validation & Reanalysis (Recompute paired comparisons on patient-level differences; audit Wilcoxon signed-rank statistic, W+=0, ties, exact vs asymptotic p-values, paired bootstrap 95% CIs [10,000 resamples], effect sizes r_rb and Cohen's dz, and Holm-Bonferroni correction; export phase5c_statistical_reanalysis.json).",
-    "Task E: Generalization & Data Leakage Audit (Inspect entire data pipeline for patient overlap, duplicate scans, registration leakage, test-informed preprocessing, and checkpoint selection; export phase5c_data_leakage_audit.json).",
-    "Task F: Uncertainty Calibration Audit (Evaluate heteroscedastic log-variance uncertainty against true surface errors; report Spearman correlation, calibration curves, bin coverage, and failure detection AUROC; export phase5c_uncertainty_calibration.json).",
-    "Task G: Anatomical & Coordinate Validation (Verify DICOM LPS/RAS conventions, left/right and superior/inferior orientation, normal vectors, bilateral separation, physical mm spacing, and Divergence Theorem signed volumetry; export phase5c_anatomical_coordinate_audit.json).",
-    "Task H: Reproducibility Manifest & Authoritative Report (Create clean reproduction command, record git commit, package versions, checkpoint SHA-256 digests, seeds, and hardware; export phase5c_reproducibility_manifest.json and PHASE_5C_INDEPENDENT_VALIDATION_REPORT.md with authoritative verdict)."
+    "Gate A: Final Test Set Independence Audit (Investigate development history of the 65-patient cohort across Phase 5, 5B, 5C; audit whether test metrics influenced architecture, loss, or checkpoint selection; classify cohort status; export phase5d_test_set_independence_audit.json).",
+    "Gate B: External Dataset Feasibility Audit (Audit MIMIC-CXR, CheXpert, PadChest, NIH, RibFrac, BIMCV, LIDC/LUNA16 for simultaneous paired frontal CXR, lateral CXR, 3D CT, and masks; document pairing availability; explicitly mark external validation status; export phase5d_external_dataset_feasibility.json).",
+    "Gate C: Uncertainty Calibration & Split Conformal Prediction (Calibrate heteroscedastic predictor using strictly the 64 validation patients; compare uncalibrated, temperature-scaled, residual-scaled, and split conformal prediction; evaluate 50/80/90/95% coverage, interval widths, patient-cluster bootstrap CIs, and failure detection AUROC; export phase5d_uncertainty_calibration.json and phase5d_patient_level_uncertainty_metrics.csv).",
+    "Gate D: Anatomical Error Stratification & Failure Analysis (Stratify reconstruction accuracy by lung volume, L/R asymmetry, thoracic aspect ratio, AP depth, rotation, and inspiratory scale; analyze top outlier failure cases; export phase5d_anatomical_stratification.json and phase5d_failure_analysis.json).",
+    "Gate E: Missing-View & Acquisition Robustness Audit (Evaluate dual-view, single-view frontal/lateral, missing lateral fallback, AP vs PA, rotation, exposure, resolution, and cropping; record valid trained vs unavailable experiments; export phase5d_missing_view_robustness.json).",
+    "Gate F: Clinical Scope, Reproducibility & Comprehensive Report (Strictly preserve distinction between estimated surfaces and diagnostic CT; generate phase5d_reproducibility_manifest.json and author authoritative PHASE_5D_EXTERNAL_VALIDATION_REPORT.md with unambiguous status declaration)."
   ],
   "non_goals": [
     "Do not modify or retrain frozen DenseNet121 production weights (SHA-256: 8d3690cd0438587a94afb8fd2ad84c0b30f9c1cc2727ee0eb03662a02ea020af)",
     "Do not alter frozen NIH production classification thresholds",
-    "Do not overwrite Phase 5B results or delete datasets/checkpoints",
-    "Do not fabricate missing results or silently replace failed experiments",
-    "Do not claim clinical validity — surfaces are estimated anatomical reconstructions, not diagnostic CT scans"
+    "Do not overwrite Phase 5B or Phase 5C artifacts or delete checkpoints",
+    "Do not use final test data for calibration fitting (prevent post-hoc data leakage)",
+    "Do not manufacture or fabricate external paired datasets",
+    "Do not claim clinical diagnostic validity for reconstructed surface meshes"
   ],
   "risk": "medium",
   "budget": "deep",
@@ -36,13 +35,11 @@
     "verification_depth": "impact",
     "delegation": "none",
     "reason_codes": [
-      "prediction-independence-audit",
-      "full-evaluation-reproduction",
-      "oracle-ssm-mathematical-verification",
-      "statistical-reanalysis-bootstrap",
-      "data-leakage-generalization-audit",
-      "uncertainty-calibration-coverage",
-      "anatomical-coordinate-volumetry-validation",
+      "test-set-independence-audit",
+      "external-dataset-feasibility-audit",
+      "uncertainty-calibration-conformal-prediction",
+      "anatomical-error-stratification-failure-analysis",
+      "missing-view-acquisition-robustness",
       "reproducibility-manifest-generation",
       "preservation-of-production-invariants"
     ]

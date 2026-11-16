@@ -1,0 +1,124 @@
+{
+  "audit_version": "5.4.0",
+  "timestamp_utc": "2026-11-16T22:01:19Z",
+  "failure_definition": "Cases exhibiting highest anatomical reconstruction discrepancy (top outlier ASSD and HD95)",
+  "cohort_failure_distribution": {
+    "total_test_cases": 65,
+    "cases_assd_gt_5mm": 24,
+    "cases_assd_gt_6mm": 16,
+    "cases_vol_err_gt_20pct": 9
+  },
+  "top_5_outlier_cases": [
+    {
+      "rank": 1,
+      "patient_id": "LIDC-IDRI-0434",
+      "assd_mm": 10.1948,
+      "hd95_mm": 25.1416,
+      "dice_2mm_pct": 5.06,
+      "volume_error_pct": 16.66,
+      "reference_volume_ml": 3302.0,
+      "predicted_volume_ml": 3852.1,
+      "bilateral_ratio": 1.221,
+      "ap_depth_mm": 183.9,
+      "thoracic_aspect_ratio": 0.634,
+      "mean_landmark_error_mm": 22.13,
+      "anatomical_failure_drivers": [
+        "Restricted/small lung volume causing relative boundary overestimation"
+      ],
+      "failure_severity": "SEVERE"
+    },
+    {
+      "rank": 2,
+      "patient_id": "LIDC-IDRI-0192",
+      "assd_mm": 9.8396,
+      "hd95_mm": 20.6184,
+      "dice_2mm_pct": 3.41,
+      "volume_error_pct": 27.36,
+      "reference_volume_ml": 5477.6,
+      "predicted_volume_ml": 3979.0,
+      "bilateral_ratio": 1.16,
+      "ap_depth_mm": 217.9,
+      "thoracic_aspect_ratio": 1.274,
+      "mean_landmark_error_mm": 18.67,
+      "anatomical_failure_drivers": [
+        "Hyperinflated lung volume exceeding common PCA deformation modes"
+      ],
+      "failure_severity": "SEVERE"
+    },
+    {
+      "rank": 3,
+      "patient_id": "LIDC-IDRI-0429",
+      "assd_mm": 9.4526,
+      "hd95_mm": 18.3477,
+      "dice_2mm_pct": 4.56,
+      "volume_error_pct": 9.21,
+      "reference_volume_ml": 4311.7,
+      "predicted_volume_ml": 3914.7,
+      "bilateral_ratio": 1.291,
+      "ap_depth_mm": 208.7,
+      "thoracic_aspect_ratio": 0.731,
+      "mean_landmark_error_mm": 18.03,
+      "anatomical_failure_drivers": [
+        "Pronounced bilateral asymmetry (ratio 1.29 vs typical 1.22)"
+      ],
+      "failure_severity": "SEVERE"
+    },
+    {
+      "rank": 4,
+      "patient_id": "LIDC-IDRI-0033",
+      "assd_mm": 8.7535,
+      "hd95_mm": 16.9093,
+      "dice_2mm_pct": 2.84,
+      "volume_error_pct": 45.15,
+      "reference_volume_ml": 2621.7,
+      "predicted_volume_ml": 3805.2,
+      "bilateral_ratio": 1.189,
+      "ap_depth_mm": 138.8,
+      "thoracic_aspect_ratio": 0.898,
+      "mean_landmark_error_mm": 13.59,
+      "anatomical_failure_drivers": [
+        "Restricted/small lung volume causing relative boundary overestimation",
+        "Shallow AP thoracic depth (138.8 mm) inducing lateral view projection compression"
+      ],
+      "failure_severity": "SEVERE"
+    },
+    {
+      "rank": 5,
+      "patient_id": "LIDC-IDRI-0326",
+      "assd_mm": 8.6073,
+      "hd95_mm": 14.1531,
+      "dice_2mm_pct": 3.87,
+      "volume_error_pct": 43.08,
+      "reference_volume_ml": 2654.1,
+      "predicted_volume_ml": 3797.6,
+      "bilateral_ratio": 1.208,
+      "ap_depth_mm": 154.1,
+      "thoracic_aspect_ratio": 1.007,
+      "mean_landmark_error_mm": 11.81,
+      "anatomical_failure_drivers": [
+        "Restricted/small lung volume causing relative boundary overestimation",
+        "Shallow AP thoracic depth (154.1 mm) inducing lateral view projection compression"
+      ],
+      "failure_severity": "SEVERE"
+    }
+  ],
+  "systemic_failure_mechanisms": [
+    {
+      "mechanism": "Diaphragmatic Excursion and Basilar Blunting",
+      "description": "Patients with high diaphragmatic domes or blunted posterior costophrenic angles show local Hausdorff discrepancies exceeding 12 mm due to projection overlap with abdominal organs on frontal CXR."
+    },
+    {
+      "mechanism": "Shallow AP Chest Geometry",
+      "description": "Patients with pectus excavatum or narrow anteroposterior thoracic dimensions (<170 mm) suffer from lateral projection occlusion where anterior mediastinal structures compress the projected lung boundary."
+    },
+    {
+      "mechanism": "Bilateral Volume Discordance",
+      "description": "When unilateral pathology, atelectasis, or surgical resection alters the canonical 1.22 right-to-left lung ratio, symmetric PCA coupling forces partial volume compensation onto the contralateral lung."
+    }
+  ],
+  "mitigation_recommendations": [
+    "Incorporate dedicated diaphragmatic boundary loss in Phase 6 training",
+    "Expose calibrated simultaneous confidence bands in the clinical viewer to visually highlight high-uncertainty basilar regions",
+    "Require clinical alert when bilateral asymmetry ratio exceeds [1.05, 1.40]"
+  ]
+}

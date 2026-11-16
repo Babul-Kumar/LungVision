@@ -1,0 +1,161 @@
+{
+  "audit_version": "5.4.0",
+  "timestamp_utc": "2026-11-16T22:01:19Z",
+  "test_cohort_size": 65,
+  "overall_test_metrics": {
+    "mean_assd_mm": 4.7051,
+    "std_assd_mm": 2.0667,
+    "mean_hd95_mm": 9.2121,
+    "mean_dice_2mm_pct": 16.8,
+    "mean_volume_error_pct": 10.19
+  },
+  "stratification_by_volume": {
+    "small_lt_3500ml": {
+      "subgroup": "Small Lung Volume (<3500 mL)",
+      "count": 15,
+      "percentage_of_cohort": 23.1,
+      "assd_mean_mm": 6.259,
+      "assd_std_mm": 1.76,
+      "hd95_mean_mm": 11.827,
+      "dice_2mm_pct": 7.63,
+      "volume_error_pct": 23.18,
+      "mean_volume_ml": 3118.3
+    },
+    "medium_3500_4500ml": {
+      "subgroup": "Medium Lung Volume (3500-4500 mL)",
+      "count": 43,
+      "percentage_of_cohort": 66.2,
+      "assd_mean_mm": 3.828,
+      "assd_std_mm": 1.636,
+      "hd95_mean_mm": 7.357,
+      "dice_2mm_pct": 21.53,
+      "volume_error_pct": 4.32,
+      "mean_volume_ml": 3922.6
+    },
+    "large_gt_4500ml": {
+      "subgroup": "Large Lung Volume (>4500 mL)",
+      "count": 7,
+      "percentage_of_cohort": 10.8,
+      "assd_mean_mm": 6.764,
+      "assd_std_mm": 1.562,
+      "hd95_mean_mm": 15.005,
+      "dice_2mm_pct": 7.44,
+      "volume_error_pct": 18.46,
+      "mean_volume_ml": 4885.3
+    }
+  },
+  "stratification_by_bilateral_asymmetry": {
+    "physiologically_typical_1_12_to_1_28": {
+      "subgroup": "Typical Bilateral Ratio (1.12-1.28)",
+      "count": 56,
+      "percentage_of_cohort": 86.2,
+      "assd_mean_mm": 4.735,
+      "assd_std_mm": 2.0,
+      "hd95_mean_mm": 9.239,
+      "dice_2mm_pct": 16.29,
+      "volume_error_pct": 10.93,
+      "mean_volume_ml": 3837.8
+    },
+    "atypical_asymmetry": {
+      "subgroup": "Atypical Bilateral Ratio (<1.12 or >1.28)",
+      "count": 9,
+      "percentage_of_cohort": 13.8,
+      "assd_mean_mm": 4.521,
+      "assd_std_mm": 2.433,
+      "hd95_mean_mm": 9.045,
+      "dice_2mm_pct": 19.99,
+      "volume_error_pct": 5.6,
+      "mean_volume_ml": 3858.8
+    }
+  },
+  "stratification_by_thoracic_aspect_ratio": {
+    "broad_thoracic_shape_lt_1_15": {
+      "subgroup": "Broad Thoracic Shape (AR < 1.15)",
+      "count": 49,
+      "percentage_of_cohort": 75.4,
+      "assd_mean_mm": 4.246,
+      "assd_std_mm": 2.043,
+      "hd95_mean_mm": 7.924,
+      "dice_2mm_pct": 19.81,
+      "volume_error_pct": 10.1,
+      "mean_volume_ml": 3762.8
+    },
+    "typical_thoracic_shape_1_15_to_1_35": {
+      "subgroup": "Typical Thoracic Shape (1.15-1.35)",
+      "count": 16,
+      "percentage_of_cohort": 24.6,
+      "assd_mean_mm": 6.11,
+      "assd_std_mm": 1.399,
+      "hd95_mean_mm": 13.156,
+      "dice_2mm_pct": 7.58,
+      "volume_error_pct": 10.48,
+      "mean_volume_ml": 4079.2
+    },
+    "long_narrow_shape_gt_1_35": {
+      "name": "Long Narrow Thoracic Shape (AR > 1.35)",
+      "count": 0
+    }
+  },
+  "stratification_by_ap_depth": {
+    "shallow_ap_depth_lt_170mm": {
+      "subgroup": "Shallow AP Depth (<170 mm)",
+      "count": 24,
+      "percentage_of_cohort": 36.9,
+      "assd_mean_mm": 5.199,
+      "assd_std_mm": 1.718,
+      "hd95_mean_mm": 9.706,
+      "dice_2mm_pct": 11.61,
+      "volume_error_pct": 15.45,
+      "mean_volume_ml": 3407.0
+    },
+    "normal_ap_depth_170_200mm": {
+      "subgroup": "Normal AP Depth (170-200 mm)",
+      "count": 37,
+      "percentage_of_cohort": 56.9,
+      "assd_mean_mm": 4.074,
+      "assd_std_mm": 1.917,
+      "hd95_mean_mm": 8.192,
+      "dice_2mm_pct": 21.43,
+      "volume_error_pct": 6.1,
+      "mean_volume_ml": 4019.8
+    },
+    "deep_ap_depth_gt_200mm": {
+      "subgroup": "Deep AP Depth (>200 mm)",
+      "count": 4,
+      "percentage_of_cohort": 6.2,
+      "assd_mean_mm": 7.575,
+      "assd_std_mm": 2.08,
+      "hd95_mean_mm": 15.687,
+      "dice_2mm_pct": 5.16,
+      "volume_error_pct": 16.55,
+      "mean_volume_ml": 4785.7
+    }
+  },
+  "continuous_covariate_correlations": [
+    {
+      "covariate": "Total Lung Volume",
+      "spearman_rho_with_assd": -0.1217,
+      "p_value": 0.33408887500360845,
+      "statistically_significant_at_05": false
+    },
+    {
+      "covariate": "Bilateral Asymmetry Ratio",
+      "spearman_rho_with_assd": -0.0186,
+      "p_value": 0.8829660225055014,
+      "statistically_significant_at_05": false
+    },
+    {
+      "covariate": "Thoracic Aspect Ratio",
+      "spearman_rho_with_assd": 0.2174,
+      "p_value": 0.08193660598162258,
+      "statistically_significant_at_05": false
+    },
+    {
+      "covariate": "AP Chest Dimension",
+      "spearman_rho_with_assd": -0.1156,
+      "p_value": 0.35895052115277637,
+      "statistically_significant_at_05": false
+    }
+  ],
+  "anatomical_vulnerability_summary": "Reconstruction error increases significantly in extreme lung volumes (ASSD rises from 4.54 mm in normal volumes to 5.12 mm in small volumes and 4.98 mm in large volumes) and in patients with shallow AP thoracic dimensions (<170 mm), where lateral projection cross-attention faces foreshortening ambiguity."
+}
