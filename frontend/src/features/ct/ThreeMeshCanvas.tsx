@@ -262,24 +262,44 @@ export const ThreeMeshCanvas: React.FC<ThreeMeshCanvasProps> = ({
           }
 
           let totalVerts = 0;
-          let meshColor = 0xf1f5f9; // Classic Ice Silver / Platinum for bilateral lungs
-          let opacity = 0.88;
+          let meshColor = 0xf4aba6; // Organic visceral pleura living pulmonary pink
+          let opacity = 0.94;
+          let clearcoatVal = 0.65;
+          let roughnessVal = 0.32;
+          let metalnessVal = 0.04;
+          let transmissionVal = 0.16;
+
           if (structure.includes('heart')) {
-            meshColor = 0xe11d48; // Crimson burgundy rose for heart
-            opacity = 0.92;
+            meshColor = 0xbe123c; // Crimson burgundy rose for heart
+            opacity = 0.96;
+            clearcoatVal = 0.6;
+            roughnessVal = 0.25;
+            transmissionVal = 0.05;
           } else if (structure.includes('airway') || structure.includes('trachea')) {
             meshColor = 0xf59e0b; // Rich Marigold amber for airways
-            opacity = 0.92;
+            opacity = 0.95;
+            clearcoatVal = 0.5;
+            roughnessVal = 0.35;
+            transmissionVal = 0.08;
           } else if (structure.includes('left_lung')) {
-            meshColor = 0xf8fafc; // Ice silver left lung
+            meshColor = 0xf1f5f9; // Ice silver platinum left lung
+            opacity = 0.94;
           } else if (structure.includes('right_lung')) {
-            meshColor = 0xfde68a; // Warm champagne gold right lung
+            meshColor = 0xfef3c7; // Warm champagne gold right lung
+            opacity = 0.94;
           }
 
-          const material = new THREE.MeshStandardMaterial({
+          const material = new THREE.MeshPhysicalMaterial({
             color: meshColor,
-            roughness: 0.28,
-            metalness: 0.22,
+            roughness: roughnessVal,
+            metalness: metalnessVal,
+            clearcoat: clearcoatVal,
+            clearcoatRoughness: 0.12,
+            transmission: transmissionVal,
+            ior: 1.34,
+            reflectivity: 0.5,
+            sheen: 0.4,
+            sheenColor: new THREE.Color(0xffccd5),
             transparent: true,
             opacity: opacity,
             side: THREE.DoubleSide,

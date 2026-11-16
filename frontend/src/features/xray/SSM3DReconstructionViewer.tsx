@@ -43,7 +43,7 @@ export const SSM3DReconstructionViewer: React.FC<SSM3DReconstructionViewerProps>
   const mountRef = useRef<HTMLDivElement>(null);
   const [wireframe, setWireframe] = useState<boolean>(false);
   const [showLandmarks, setShowLandmarks] = useState<boolean>(true);
-  const [colorMode, setColorMode] = useState<'silver' | 'bilateral'>('silver');
+  const [colorMode, setColorMode] = useState<'pleura' | 'bilateral' | 'platinum'>('pleura');
   const [isAutoRotating, setIsAutoRotating] = useState<boolean>(false);
   const [activeViewName, setActiveViewName] = useState<string>('Oblique 3D');
   const [vertexCount, setVertexCount] = useState<number>(0);
@@ -96,7 +96,7 @@ export const SSM3DReconstructionViewer: React.FC<SSM3DReconstructionViewerProps>
     sceneRef.current = scene;
 
     const camera = new THREE.PerspectiveCamera(45, width / height, 1, 4000);
-    camera.position.set(0, -380, 160);
+    camera.position.set(0, -320, 60);
     camera.up.set(0, 0, 1); // Z-up craniocaudal
     cameraRef.current = camera;
 
@@ -108,7 +108,7 @@ export const SSM3DReconstructionViewer: React.FC<SSM3DReconstructionViewerProps>
     renderer.setSize(width, height);
     renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
     renderer.toneMapping = THREE.ACESFilmicToneMapping;
-    renderer.toneMappingExposure = 1.1;
+    renderer.toneMappingExposure = 1.15;
     rendererRef.current = renderer;
 
     container.appendChild(renderer.domElement);
@@ -118,24 +118,28 @@ export const SSM3DReconstructionViewer: React.FC<SSM3DReconstructionViewerProps>
     controls.dampingFactor = 0.05;
     controls.maxDistance = 1500;
     controls.minDistance = 40;
+    controls.target.set(0, 0, 12);
     controls.addEventListener('change', updateViewLabel);
     controlsRef.current = controls;
 
-    // Lighting with warm amber key and platinum rim
-    const ambientLight = new THREE.AmbientLight(0xffffff, 0.75);
+    // Studio Lighting: Celestial hemisphere dome, key light, cool fill, and marigold contour rim
+    const hemiLight = new THREE.HemisphereLight(0xfffbeb, 0x160a28, 0.65);
+    scene.add(hemiLight);
+
+    const ambientLight = new THREE.AmbientLight(0xffffff, 0.55);
     scene.add(ambientLight);
 
-    const dirLight1 = new THREE.DirectionalLight(0xfffbeb, 1.25);
-    dirLight1.position.set(150, -250, 300);
-    scene.add(dirLight1);
+    const dirKeyLight = new THREE.DirectionalLight(0xfff7ed, 1.35);
+    dirKeyLight.position.set(160, -280, 240);
+    scene.add(dirKeyLight);
 
-    const dirLight2 = new THREE.DirectionalLight(0xe2e8f0, 0.9);
-    dirLight2.position.set(-150, 250, -150);
-    scene.add(dirLight2);
+    const dirFillLight = new THREE.DirectionalLight(0xe0e7ff, 0.75);
+    dirFillLight.position.set(-200, -180, 100);
+    scene.add(dirFillLight);
 
-    const backLight = new THREE.DirectionalLight(0xf59e0b, 0.55);
-    backLight.position.set(0, 350, 200);
-    scene.add(backLight);
+    const backRimLight = new THREE.DirectionalLight(0xf59e0b, 0.65);
+    backRimLight.position.set(0, 320, 180);
+    scene.add(backRimLight);
 
     // Groups
     const meshGroup = new THREE.Group();
@@ -235,15 +239,57 @@ export const SSM3DReconstructionViewer: React.FC<SSM3DReconstructionViewerProps>
       }
     }
 
-    const material = new THREE.MeshStandardMaterial({
-      color: 0xf1f5f9,
-      roughness: 0.28,
-      metalness: 0.22,
-      transparent: true,
-      opacity: wireframe ? 0.9 : 0.88,
-      wireframe: wireframe,
-      side: THREE.DoubleSide,
-    });
+    // Organic anatomical visceral pleura material with serous clearcoat fluid reflection
+    const createMaterial = () => {
+      if (colorMode === 'pleura') {
+        return new THREE.MeshPhysicalMaterial({
+          color: 0xf4aba6, // Natural visceral pleura living pulmonary pink/rose
+          roughness: 0.32,
+          metalness: 0.04,
+          clearcoat: 0.65, // Moist serous fluid surface reflection
+          clearcoatRoughness: 0.12,
+          transmission: 0.16, // Aerated parenchymal translucency
+          ior: 1.34, // Biological serous fluid index of refraction
+          reflectivity: 0.5,
+          sheen: 0.45,
+          sheenColor: new THREE.Color(0xffccd5),
+          transparent: true,
+          opacity: wireframe ? 0.9 : 0.94,
+          wireframe: wireframe,
+          side: THREE.DoubleSide,
+        });
+      } else if (colorMode === 'bilateral') {
+        return new THREE.MeshPhysicalMaterial({
+          roughness: 0.3,
+          metalness: 0.04,
+          clearcoat: 0.6,
+          clearcoatRoughness: 0.12,
+          transmission: 0.14,
+          ior: 1.34,
+          reflectivity: 0.5,
+          vertexColors: true,
+          transparent: true,
+          opacity: wireframe ? 0.9 : 0.94,
+          wireframe: wireframe,
+          side: THREE.DoubleSide,
+        });
+      } else {
+        // High-contrast clinical platinum morphology
+        return new THREE.MeshPhysicalMaterial({
+          color: 0xf1f5f9, // Ice Silver Platinum
+          roughness: 0.28,
+          metalness: 0.08,
+          clearcoat: 0.5,
+          clearcoatRoughness: 0.15,
+          transparent: true,
+          opacity: wireframe ? 0.9 : 0.92,
+          wireframe: wireframe,
+          side: THREE.DoubleSide,
+        });
+      }
+    };
+
+    const material = createMaterial();
 
     if (objData) {
       const loader = new OBJLoader();
@@ -288,25 +334,24 @@ export const SSM3DReconstructionViewer: React.FC<SSM3DReconstructionViewerProps>
       }
       geometry.setAttribute('position', new THREE.BufferAttribute(posArray, 3));
 
-      // Optional vertex color assignment for bilateral split mode (Ice Silver / Champagne Gold)
+      // Bilateral anatomical coloration (Left Lung: Ice Silver / Platinum Rose, Right Lung: Champagne Gold / Marigold)
       if (colorMode === 'bilateral') {
         const colors = new Float32Array(vertices.length * 3);
         for (let i = 0; i < vertices.length; i++) {
           const x = vertices[i][0];
           if (x < 0) {
-            // Left lung (Ice Silver Platinum: 0.95, 0.98, 1.0)
+            // Left lung (Ice Silver Platinum with subtle rose-pearl undertone: 0.95, 0.93, 0.97)
             colors[i * 3] = 0.95;
-            colors[i * 3 + 1] = 0.98;
-            colors[i * 3 + 2] = 1.0;
+            colors[i * 3 + 1] = 0.93;
+            colors[i * 3 + 2] = 0.97;
           } else {
-            // Right lung (Warm Champagne Gold: 0.99, 0.88, 0.54)
-            colors[i * 3] = 0.99;
-            colors[i * 3 + 1] = 0.88;
-            colors[i * 3 + 2] = 0.54;
+            // Right lung (Warm Champagne Gold / Marigold: 1.0, 0.91, 0.68)
+            colors[i * 3] = 1.0;
+            colors[i * 3 + 1] = 0.91;
+            colors[i * 3 + 2] = 0.68;
           }
         }
         geometry.setAttribute('color', new THREE.BufferAttribute(colors, 3));
-        material.vertexColors = true;
       }
 
       const indices: number[] = [];
@@ -373,32 +418,32 @@ export const SSM3DReconstructionViewer: React.FC<SSM3DReconstructionViewerProps>
     const camera = cameraRef.current;
     const controls = controlsRef.current;
 
-    controls.target.set(0, 0, 0);
+    controls.target.set(0, 0, 12);
 
     switch (view) {
       case 'AP':
-        camera.position.set(0, -380, 0);
+        camera.position.set(0, -340, 12);
         camera.up.set(0, 0, 1);
         break;
       case 'PA':
-        camera.position.set(0, 380, 0);
+        camera.position.set(0, 340, 12);
         camera.up.set(0, 0, 1);
         break;
       case 'RL':
-        camera.position.set(380, 0, 0);
+        camera.position.set(340, 0, 12);
         camera.up.set(0, 0, 1);
         break;
       case 'LL':
-        camera.position.set(-380, 0, 0);
+        camera.position.set(-340, 0, 12);
         camera.up.set(0, 0, 1);
         break;
       case 'SI':
-        camera.position.set(0, 0, 380);
+        camera.position.set(0, 0, 340);
         camera.up.set(0, 1, 0);
         break;
       case 'OBLIQUE':
       default:
-        camera.position.set(0, -380, 160);
+        camera.position.set(0, -320, 60);
         camera.up.set(0, 0, 1);
         break;
     }
@@ -498,12 +543,26 @@ export const SSM3DReconstructionViewer: React.FC<SSM3DReconstructionViewerProps>
           </button>
 
           <button
-            onClick={() => setColorMode((c) => (c === 'silver' ? 'bilateral' : 'silver'))}
-            className={`p-1.5 rounded hover:bg-slate-100 text-xs transition-colors ${colorMode === 'bilateral' ? 'text-amber-800 font-semibold bg-amber-50' : 'text-[#5e4b75] hover:text-[#1a082e]'
-              }`}
-            title={colorMode === 'bilateral' ? 'Bilateral Color Partition' : 'Single Shaded Color'}
+            onClick={() => setColorMode((c) => (c === 'pleura' ? 'bilateral' : c === 'bilateral' ? 'platinum' : 'pleura'))}
+            className={`px-2 py-1 rounded text-xs font-medium flex items-center gap-1 transition-colors ${
+              colorMode === 'pleura'
+                ? 'bg-rose-100/90 text-rose-950 font-semibold border border-rose-300'
+                : colorMode === 'bilateral'
+                ? 'bg-amber-100/90 text-amber-950 font-semibold border border-amber-300'
+                : 'text-[#5e4b75] hover:text-[#1a082e] hover:bg-slate-100'
+            }`}
+            title={
+              colorMode === 'pleura'
+                ? 'Visual Mode: Organic Visceral Pleura (Click for Bilateral Lobar)'
+                : colorMode === 'bilateral'
+                ? 'Visual Mode: Bilateral Lobar Partition (Click for Platinum Diagnostic)'
+                : 'Visual Mode: High-Contrast Platinum (Click for Visceral Pleura)'
+            }
           >
             <Palette className="w-3.5 h-3.5" />
+            <span className="hidden sm:inline capitalize">
+              {colorMode === 'pleura' ? 'Visceral Pleura' : colorMode === 'bilateral' ? 'Bilateral' : 'Platinum'}
+            </span>
           </button>
 
           <button

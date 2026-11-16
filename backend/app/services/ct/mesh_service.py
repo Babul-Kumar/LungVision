@@ -79,6 +79,16 @@ class CTMeshService:
             pad_offset=pad_offset
         )
 
+        # Feature-preserving Taubin smoothing to remove marching cubes staircase terracing
+        if len(physical_vertices) > 0 and len(faces) > 0:
+            try:
+                raw_mesh = trimesh.Trimesh(vertices=physical_vertices, faces=faces, process=False)
+                if raw_mesh.is_watertight:
+                    smoothed_mesh = trimesh.smoothing.filter_taubin(raw_mesh, lamb=0.5, nu=-0.53, iterations=10)
+                    physical_vertices = np.asarray(smoothed_mesh.vertices, dtype=float)
+            except Exception as e:
+                logger.warning(f"Taubin smoothing skipped for mesh: {e}")
+
         meta = {
             "structure": structure,
             "vertex_count": len(physical_vertices),
