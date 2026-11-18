@@ -8,6 +8,7 @@
 [![Three.js](https://img.shields.io/badge/Three.js-r182-000000.svg?logo=threedotjs&logoColor=white)](https://threejs.org/)
 [![Docker](https://img.shields.io/badge/Docker-Ready-2496ed.svg?logo=docker&logoColor=white)](docker-compose.yml)
 [![Tests: 72/72 Passing](https://img.shields.io/badge/Tests-72%2F72%20Passing%20(100%25)-brightgreen.svg)](docs/REGRESSION_TEST_REPORT.md)
+[![Kaggle: Phase 7 Run](https://img.shields.io/badge/Kaggle-Phase%207%20Recovery%20Run-20beff.svg?logo=kaggle&logoColor=white)](https://www.kaggle.com/code/babulkumar07/lungvision-ai-phase-7-complete-recovery-run)
 [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
 
 **LungVision AI** is an advanced medical imaging research workstation and scientific deep learning platform. It unites **2D chest radiograph pathology triage**, **bi-planar patient-specific 3D lung surface reconstruction (Statistical Shape Modeling)**, **calibrated CT-to-DRR radiographic ray-casting**, and **volumetric 3D computed tomography (CT) multi-planar reconstruction (MPR)** with sub-millimetre LUNA16 pulmonary nodule mapping.
@@ -156,6 +157,37 @@ All neural network checkpoints and statistical shape models are permanently froz
 | `original_resnet18` | ResNet18 | 11,177,025 | `a293bd9e441b2713e62b7de208611bf7cc97676ea1291ce2818ff3a497528b2f` | IN-CXR $\to$ VinDr-CXR (15,000 CXRs) | Binary Abnormal: `0.176463` (at 90% Sensitivity) |
 | `blur_augmented_resnet18` | ResNet18 | 11,177,025 | `7d8634454d1ac0dfa2c2dbc8d0b08155512fb52b65c9db5a9171a5b59c7d3f24` | IN-CXR $\to$ VinDr-CXR (Blur Robust) | Binary Abnormal: `0.187923` (at 90% Sensitivity) |
 | `ssm_lung_pca_v1` | Point Distribution Model | 20 Modes (100% Var) | `e92cf88a3dae8cd893cda93efe33630ccb1f8259dd9e6c7aa9cd9ce8463e65aa` (4.36 MB) | LUNA16 Multi-Patient Cohort (430 verified scans) | Bounded $[-3\sigma, +3\sigma]$ Mahalanobis Radius |
+
+---
+
+### 3.1 Cloud-Scale Model Training & Kaggle Complete Recovery Run (Phase 7)
+
+While inference, evaluation, and regression testing execute seamlessly on local developer workstations, full-scale deep learning model training across the complete **NIH ChestX-ray14 dataset (112,120 radiographs, ~42 GB)** requires high-throughput cloud GPU infrastructure. Local development environments (e.g., an NVIDIA GeForce RTX 3050 Laptop GPU with 4GB VRAM and host CPU PyTorch builds) face distinct hardware constraints:
+* **Dataset Scale**: 112,120 high-resolution radiographs (~42 GB) across 30,805 unique patients exceed typical local working memory, disk caching, and data loader bandwidth for deep multi-epoch iterations.
+* **VRAM Bottlenecks**: Multi-scale feature pyramid architectures (`MultiScaleDenseNet121-FPN`) at $512 \times 512$ resolution with batch sizes of 4–32 require 16GB–32GB of dedicated VRAM, exceeding local 4GB mobile GPU limits.
+
+To solve this, the complete, mathematically guarded Phase 7 model training, checkpointing, and recovery run was executed and preserved in the cloud using **Kaggle GPU accelerators (NVIDIA Tesla T4, 16GB VRAM, 10-hour session budget)**:
+
+* **Official Kaggle Run**: [![Kaggle Notebook](https://img.shields.io/badge/Kaggle-Phase%207%20Complete%20Recovery%20Run-20beff.svg?logo=kaggle&logoColor=white)](https://www.kaggle.com/code/babulkumar07/lungvision-ai-phase-7-complete-recovery-run) [https://www.kaggle.com/code/babulkumar07/lungvision-ai-phase-7-complete-recovery-run](https://www.kaggle.com/code/babulkumar07/lungvision-ai-phase-7-complete-recovery-run)
+* **Local Version-Controlled Notebook**: [`notebook/notebook24632be2a1.ipynb`](notebook/notebook24632be2a1.ipynb) (Complete 44-cell executable notebook, identical to the Kaggle session output, available directly in this repository for local inspection, offline modification, or export to private GPU clusters).
+
+#### Phase 7 Cloud Run Architecture & Scientific Specifications
+1. **Zero-Patient-Leakage Cohort Partitioning**:
+   Reconstructed exact patient-disjoint splits across 112,120 chest radiographs with zero patient overlap:
+   - **Training Set**: 73,023 images (23,806 unique patients)
+   - **Validation Set**: 13,501 images (4,202 unique patients)
+   - **Official Test Set**: 25,596 images (2,797 unique patients)
+   - Verified split SHA-256 digest: `ca0d2ed9efe6c4a2b479b25d5c10e762bdffcda1eeaf5672fcca499e6ddb7a09`
+2. **MultiScaleDenseNet121-FPN Architecture**:
+   - DenseNet121 convolutional backbone with Feature Pyramid Network (FPN) lateral connections ($P_2, P_3, P_4, P_5$).
+   - Squeeze-and-Excitation (SE) channel attention blocks.
+   - Dual Global Average Pooling (GAP) + Global Max Pooling (GMP) head.
+   - Numerically guarded FP32 forward and loss computation to prevent non-finite gradient cascades.
+3. **Preserved Checkpoint & Validation Registry**:
+   - `msd121_512_weighted_bce_direct.pth`: Best validation macro AUROC `0.7786`, macro AUPRC `0.1201`.
+   - `msd121_224_weighted_bce_direct.pth` & `msd121_224_weighted_bce_letterbox.pth`.
+   - `msd121_224_focal_direct.pth` & `msd121_224_focal_letterbox.pth`.
+   - Attached Kaggle Output Dataset: [`babulkumar07/lungvision-ai-disease-classification-result`](https://www.kaggle.com/datasets/babulkumar07/lungvision-ai-disease-classification-result).
 
 ---
 
@@ -371,6 +403,9 @@ computer vision/
 │   └── 3d_reconstruction/
 │       ├── canonical_lung_mesh.obj    # Canonical watertight template (6,737 vertices)
 │       └── ssm_lung_pca_v1.json       # 20 principal variation modes explaining 100% variance (4.36 MB)
+│
+├── notebook/                          # Cloud training notebooks & reproducibility workflows
+│   └── notebook24632be2a1.ipynb       # Phase 7 Kaggle Complete Recovery Run (512x512 FP32)
 │
 ├── research/                          # Research Documentation, Benchmarks & Model Cards
 │   └── 3d_reconstruction/ssm/
