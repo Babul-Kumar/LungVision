@@ -11,6 +11,7 @@
 [![Kaggle: CSE471 Part 1](https://img.shields.io/badge/Kaggle-CSE471%20Part%201%20(IN--CXR)-20beff.svg?logo=kaggle&logoColor=white)](https://www.kaggle.com/code/babulkumar07/cse471)
 [![Kaggle: CSE471 Part 2](https://img.shields.io/badge/Kaggle-CSE471%20Part%202%20(NIH%20Audit)-20beff.svg?logo=kaggle&logoColor=white)](https://www.kaggle.com/code/babulkumar07/cse471part2)
 [![Kaggle: CSE471 Part 3](https://img.shields.io/badge/Kaggle-CSE471%20Part%203%20(Multi--Source)-20beff.svg?logo=kaggle&logoColor=white)](https://www.kaggle.com/code/babulkumar07/cse471part3)
+[![Kaggle: CSE471 Part 4](https://img.shields.io/badge/Kaggle-CSE471%20Part%204%20(3D%20CT%20Audit)-20beff.svg?logo=kaggle&logoColor=white)](https://www.kaggle.com/code/babulkumar07/cse471part4)
 [![Kaggle: Phase 7 Grid](https://img.shields.io/badge/Kaggle-Phase%207%20Grid%20(512x512)-20beff.svg?logo=kaggle&logoColor=white)](https://www.kaggle.com/code/babulkumar07/lungvision-ai-disease-classification512x512)
 [![Kaggle: Phase 7 Part 2](https://img.shields.io/badge/Kaggle-Phase%207%20Part%202-20beff.svg?logo=kaggle&logoColor=white)](https://www.kaggle.com/code/babulkumar07/lungvision-ai-disease-classification512x512-part2)
 [![Kaggle: Phase 7 Recovery](https://img.shields.io/badge/Kaggle-Phase%207%20Recovery%20Run-20beff.svg?logo=kaggle&logoColor=white)](https://www.kaggle.com/code/babulkumar07/lungvision-ai-phase-7-complete-recovery-run)
@@ -210,6 +211,8 @@ The baseline binary triage models (`original_resnet18` and `blur_augmented_resne
   * **Local Version-Controlled Notebook**: [`notebook/cse471part2.ipynb`](notebook/cse471part2.ipynb) (Complete 12-cell continuation notebook containing NIH external validation, IN-CXR vs NIH domain shift audit, controlled preprocessing experiments, and NIH expert-label evaluation).
 * **Official Kaggle Run (CSE471 Part 3 — Multi-Source IN-CXR + VinDr Audit & Joint Training)**: [![Kaggle Notebook](https://img.shields.io/badge/Kaggle-CSE471%20Part%203%20(Multi--Source)-20beff.svg?logo=kaggle&logoColor=white)](https://www.kaggle.com/code/babulkumar07/cse471part3) [https://www.kaggle.com/code/babulkumar07/cse471part3](https://www.kaggle.com/code/babulkumar07/cse471part3)
   * **Local Version-Controlled Notebook**: [`notebook/cse471part3.ipynb`](notebook/cse471part3.ipynb) (Complete 9-cell executable notebook covering IN-CXR + VinDr 27,600 image manifest unification, duplicate quarantine, pixel domain & padding audits, and multi-source ResNet18 baseline training achieving 0.95 macro source AUC).
+* **Official Kaggle Run (CSE471 Part 4 — 3D CT Geometry Audit, LUNA16 Nodule Mapping & Slicer)**: [![Kaggle Notebook](https://img.shields.io/badge/Kaggle-CSE471%20Part%204%20(3D%20CT%20Audit)-20beff.svg?logo=kaggle&logoColor=white)](https://www.kaggle.com/code/babulkumar07/cse471part4) [https://www.kaggle.com/code/babulkumar07/cse471part4](https://www.kaggle.com/code/babulkumar07/cse471part4)
+  * **Local Version-Controlled Notebook**: [`notebook/cse471part4.ipynb`](notebook/cse471part4.ipynb) (Complete 50-cell research notebook containing 3D volumetric CT input audits, LUNA16 MHD header inspection, world-to-voxel coordinate matrix transformations, 3D pulmonary surface extraction, sub-millimeter nodule coordinate mapping verification, and interactive 3-plane CT slice viewer).
 
 #### Key Research Contributions & Findings (from `cse471.ipynb`):
 1. **Multi-Dataset Ingestion & Integrity Audit**:
@@ -458,7 +461,7 @@ computer vision/
 │   ├── cse471.ipynb                   # Foundational ResNet18 Training & Dataset Audit (Part 1)
 │   ├── cse471part2.ipynb              # NIH External Validation & Domain Shift Audit (Part 2)
 │   ├── cse471part3.ipynb              # Multi-Source IN-CXR + VinDr Joint ResNet18 Training (Part 3)
-│   ├── cse471part4.ipynb              # Advanced Training & Generalization Experiments (Part 4)
+│   ├── cse471part4.ipynb              # 3D CT Geometry Audit, LUNA16 Nodule Mapping & Interactive Slicer (Part 4)
 │   ├── lungvision-ai-disease-classification.ipynb # Multi-Label Triage Forensic Failure Investigation
 │   ├── lungvision-ai-disease-classification-part2.ipynb # High-Resolution Disease Classification Diagnostics
 │   ├── lungvision-ai-disease-classification512x512.ipynb # Phase 7 Advanced Experiments Grid (8 Configurations)
