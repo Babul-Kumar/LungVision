@@ -10,6 +10,7 @@
 [![Tests: 72/72 Passing](https://img.shields.io/badge/Tests-72%2F72%20Passing%20(100%25)-brightgreen.svg)](docs/REGRESSION_TEST_REPORT.md)
 [![Kaggle: CSE471 Part 1](https://img.shields.io/badge/Kaggle-CSE471%20Part%201%20(IN--CXR)-20beff.svg?logo=kaggle&logoColor=white)](https://www.kaggle.com/code/babulkumar07/cse471)
 [![Kaggle: CSE471 Part 2](https://img.shields.io/badge/Kaggle-CSE471%20Part%202%20(NIH%20Audit)-20beff.svg?logo=kaggle&logoColor=white)](https://www.kaggle.com/code/babulkumar07/cse471part2)
+[![Kaggle: CSE471 Part 3](https://img.shields.io/badge/Kaggle-CSE471%20Part%203%20(Multi--Source)-20beff.svg?logo=kaggle&logoColor=white)](https://www.kaggle.com/code/babulkumar07/cse471part3)
 [![Kaggle: Phase 7 Grid](https://img.shields.io/badge/Kaggle-Phase%207%20Grid%20(512x512)-20beff.svg?logo=kaggle&logoColor=white)](https://www.kaggle.com/code/babulkumar07/lungvision-ai-disease-classification512x512)
 [![Kaggle: Phase 7 Part 2](https://img.shields.io/badge/Kaggle-Phase%207%20Part%202-20beff.svg?logo=kaggle&logoColor=white)](https://www.kaggle.com/code/babulkumar07/lungvision-ai-disease-classification512x512-part2)
 [![Kaggle: Phase 7 Recovery](https://img.shields.io/badge/Kaggle-Phase%207%20Recovery%20Run-20beff.svg?logo=kaggle&logoColor=white)](https://www.kaggle.com/code/babulkumar07/lungvision-ai-phase-7-complete-recovery-run)
@@ -207,6 +208,8 @@ The baseline binary triage models (`original_resnet18` and `blur_augmented_resne
   * **Local Version-Controlled Notebook**: [`notebook/cse471.ipynb`](notebook/cse471.ipynb) (Complete 45-cell foundational research notebook containing 6-dataset forensic audit, baseline training, Grad-CAM & occlusion interpretability, Gaussian blur sensitivity, sensitivity-first thresholding, and model registry packaging).
 * **Official Kaggle Run (CSE471 Part 2 — NIH External Validation, Domain Shift & Expert Audit)**: [![Kaggle Notebook](https://img.shields.io/badge/Kaggle-CSE471%20Part%202%20(NIH%20Audit)-20beff.svg?logo=kaggle&logoColor=white)](https://www.kaggle.com/code/babulkumar07/cse471part2) [https://www.kaggle.com/code/babulkumar07/cse471part2](https://www.kaggle.com/code/babulkumar07/cse471part2)
   * **Local Version-Controlled Notebook**: [`notebook/cse471part2.ipynb`](notebook/cse471part2.ipynb) (Complete 12-cell continuation notebook containing NIH external validation, IN-CXR vs NIH domain shift audit, controlled preprocessing experiments, and NIH expert-label evaluation).
+* **Official Kaggle Run (CSE471 Part 3 — Multi-Source IN-CXR + VinDr Audit & Joint Training)**: [![Kaggle Notebook](https://img.shields.io/badge/Kaggle-CSE471%20Part%203%20(Multi--Source)-20beff.svg?logo=kaggle&logoColor=white)](https://www.kaggle.com/code/babulkumar07/cse471part3) [https://www.kaggle.com/code/babulkumar07/cse471part3](https://www.kaggle.com/code/babulkumar07/cse471part3)
+  * **Local Version-Controlled Notebook**: [`notebook/cse471part3.ipynb`](notebook/cse471part3.ipynb) (Complete 9-cell executable notebook covering IN-CXR + VinDr 27,600 image manifest unification, duplicate quarantine, pixel domain & padding audits, and multi-source ResNet18 baseline training achieving 0.95 macro source AUC).
 
 #### Key Research Contributions & Findings (from `cse471.ipynb`):
 1. **Multi-Dataset Ingestion & Integrity Audit**:
@@ -454,6 +457,7 @@ computer vision/
 ├── notebook/                          # Cloud training notebooks & reproducibility workflows
 │   ├── cse471.ipynb                   # Foundational ResNet18 Training, Multi-Dataset Audit & Robustness (CSE471 Part 1)
 │   ├── cse471part2.ipynb              # NIH External Validation, Domain Shift & Expert-Label Audit (CSE471 Part 2)
+│   ├── cse471part3.ipynb              # Multi-Source IN-CXR + VinDr Audit, Pixel Preprocessing & Joint ResNet18 (CSE471 Part 3)
 │   ├── notebook24632be2a1.ipynb       # Phase 7 Kaggle Complete Recovery Run (512x512 FP32)
 │   ├── lungvision-ai-disease-classification512x512.ipynb # Phase 7 Advanced Experiments Grid (8 Configurations)
 │   └── lungvision-ai-disease-classification512x512-part2.ipynb # Phase 7 Part 2 Continuation (Stability & Recovery)
