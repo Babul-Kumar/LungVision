@@ -1,0 +1,9 @@
+experiment_id,checkpoint_exists,history_exists,checkpoint_valid,best_val_macro_auroc,best_epoch,note
+msd121_224_weighted_bce_direct,True,True,True,0.8197257752392035,4.0,validated
+msd121_224_weighted_bce_letterbox,True,True,True,0.8189340559809836,4.0,validated
+msd121_224_focal_direct,True,True,True,0.8143518440153699,5.0,validated
+msd121_224_focal_letterbox,True,False,True,0.7987826389747251,2.0,validated
+msd121_512_weighted_bce_direct,True,True,True,0.7050801934552804,1.0,validated
+msd121_512_weighted_bce_letterbox,False,False,False,,,checkpoint absent
+msd121_512_focal_direct,False,False,False,,,checkpoint absent
+msd121_512_focal_letterbox,False,False,False,,,checkpoint absent

@@ -1,0 +1,29 @@
+{
+  "seed": 42,
+  "split_method": "NIH official test list + GroupShuffleSplit(test_size=0.15, random_state=42) on official train_val pool",
+  "view_filter": [
+    "AP",
+    "PA"
+  ],
+  "labels": [
+    "Cardiomegaly",
+    "Edema",
+    "Consolidation",
+    "Pneumonia",
+    "Atelectasis",
+    "Pneumothorax"
+  ],
+  "counts": {
+    "train": 73023,
+    "validation": 13501,
+    "test": 25596
+  },
+  "patient_counts": {
+    "train": 23806,
+    "validation": 4202,
+    "test": 2797
+  },
+  "split_sha256": "ca0d2ed9efe6c4a2b479b25d5c10e762bdffcda1eeaf5672fcca499e6ddb7a09",
+  "manifest_file": "/kaggle/working/lungvision_phase7/manifests/nih_phase7_split_manifest.csv",
+  "nih_root": "/kaggle/input/datasets/nih-chest-xrays/data"
+}

@@ -1,0 +1,4 @@
+experiment_id,best_val_macro_auroc,checkpoint,history,status
+msd121_224_weighted_bce_direct,0.8197257752392035,/kaggle/working/lungvision_phase7/checkpoints/msd121_224_weighted_bce_direct.pth,/kaggle/working/lungvision_phase7/results/msd121_224_weighted_bce_direct_history.csv,TRAINED
+msd121_224_weighted_bce_letterbox,0.8189340559809836,/kaggle/working/lungvision_phase7/checkpoints/msd121_224_weighted_bce_letterbox.pth,/kaggle/working/lungvision_phase7/results/msd121_224_weighted_bce_letterbox_history.csv,TRAINED
+msd121_224_focal_direct,0.8143518440153699,/kaggle/working/lungvision_phase7/checkpoints/msd121_224_focal_direct.pth,/kaggle/working/lungvision_phase7/results/msd121_224_focal_direct_history.csv,TRAINED

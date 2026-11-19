@@ -1,0 +1,10 @@
+{
+  "experiment_id": "msd121_512_weighted_bce_direct",
+  "split_sha256": "ca0d2ed9efe6c4a2b479b25d5c10e762bdffcda1eeaf5672fcca499e6ddb7a09",
+  "use_amp": false,
+  "full_epochs_target": 5,
+  "session_budget_hours": 10.0,
+  "history_file": "/kaggle/working/lungvision_phase7/results/msd121_512_weighted_bce_direct_history.csv",
+  "best_checkpoint": "/kaggle/working/lungvision_phase7/checkpoints/msd121_512_weighted_bce_direct.pth",
+  "last_checkpoint": "/kaggle/working/lungvision_phase7/checkpoints/msd121_512_weighted_bce_direct_last.pth"
+}

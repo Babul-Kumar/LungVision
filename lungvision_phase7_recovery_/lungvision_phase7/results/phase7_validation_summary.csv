@@ -1,0 +1,9 @@
+experiment_id,image_size,loss,preprocessing,checkpoint_exists,history_exists,best_val_macro_auroc,best_epoch,epochs_in_history,history_best_val_macro_auroc
+msd121_224_weighted_bce_direct,224,weighted_bce,direct,True,True,0.8197257752392035,4.0,7,0.8197257752392035
+msd121_224_weighted_bce_letterbox,224,weighted_bce,letterbox,True,True,0.8189340559809836,4.0,7,0.8189340559809836
+msd121_224_focal_direct,224,focal,direct,True,True,0.8143518440153699,5.0,8,0.8143518440153699
+msd121_224_focal_letterbox,224,focal,letterbox,True,False,0.7987826389747251,2.0,0,
+msd121_512_weighted_bce_direct,512,weighted_bce,direct,True,True,0.7785675053084589,4.0,5,0.7785675053084589
+msd121_512_weighted_bce_letterbox,512,weighted_bce,letterbox,False,False,,,0,
+msd121_512_focal_direct,512,focal,direct,False,False,,,0,
+msd121_512_focal_letterbox,512,focal,letterbox,False,False,,,0,

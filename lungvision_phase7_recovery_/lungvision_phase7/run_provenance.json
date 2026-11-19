@@ -1,0 +1,83 @@
+{
+  "seed": 42,
+  "device": "cuda",
+  "gpu": "Tesla T4",
+  "python": "3.13.16",
+  "torch": "2.11.0+cu130",
+  "torchvision": "0.26.0+cu130",
+  "split_sha256": "ca0d2ed9efe6c4a2b479b25d5c10e762bdffcda1eeaf5672fcca499e6ddb7a09",
+  "labels": [
+    "Cardiomegaly",
+    "Edema",
+    "Consolidation",
+    "Pneumonia",
+    "Atelectasis",
+    "Pneumothorax"
+  ],
+  "experiments": [
+    {
+      "experiment_id": "msd121_224_weighted_bce_direct",
+      "architecture": "MultiScaleDenseNet121",
+      "image_size": 224,
+      "loss": "weighted_bce",
+      "preprocessing": "direct",
+      "seed": 42
+    },
+    {
+      "experiment_id": "msd121_224_weighted_bce_letterbox",
+      "architecture": "MultiScaleDenseNet121",
+      "image_size": 224,
+      "loss": "weighted_bce",
+      "preprocessing": "letterbox",
+      "seed": 42
+    },
+    {
+      "experiment_id": "msd121_224_focal_direct",
+      "architecture": "MultiScaleDenseNet121",
+      "image_size": 224,
+      "loss": "focal",
+      "preprocessing": "direct",
+      "seed": 42
+    },
+    {
+      "experiment_id": "msd121_224_focal_letterbox",
+      "architecture": "MultiScaleDenseNet121",
+      "image_size": 224,
+      "loss": "focal",
+      "preprocessing": "letterbox",
+      "seed": 42
+    },
+    {
+      "experiment_id": "msd121_512_weighted_bce_direct",
+      "architecture": "MultiScaleDenseNet121",
+      "image_size": 512,
+      "loss": "weighted_bce",
+      "preprocessing": "direct",
+      "seed": 42
+    },
+    {
+      "experiment_id": "msd121_512_weighted_bce_letterbox",
+      "architecture": "MultiScaleDenseNet121",
+      "image_size": 512,
+      "loss": "weighted_bce",
+      "preprocessing": "letterbox",
+      "seed": 42
+    },
+    {
+      "experiment_id": "msd121_512_focal_direct",
+      "architecture": "MultiScaleDenseNet121",
+      "image_size": 512,
+      "loss": "focal",
+      "preprocessing": "direct",
+      "seed": 42
+    },
+    {
+      "experiment_id": "msd121_512_focal_letterbox",
+      "architecture": "MultiScaleDenseNet121",
+      "image_size": 512,
+      "loss": "focal",
+      "preprocessing": "letterbox",
+      "seed": 42
+    }
+  ]
+}
