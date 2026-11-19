@@ -20,7 +20,11 @@ import numpy as np
 from PIL import Image
 
 REPO_ROOT = Path(__file__).resolve().parent.parent.parent
-PRODUCTION_CHECKPOINT = REPO_ROOT / "lungvision_disease_classification" / "checkpoints" / "densenet121_nih_best.pth"
+PRODUCTION_CHECKPOINT = (
+    REPO_ROOT / "models" / "densenet121" / "densenet121_nih_best.pth"
+    if (REPO_ROOT / "models" / "densenet121" / "densenet121_nih_best.pth").exists()
+    else REPO_ROOT / "lungvision_disease_classification" / "checkpoints" / "densenet121_nih_best.pth"
+)
 EXPECTED_SHA256 = "8d3690cd0438587a94afb8fd2ad84c0b30f9c1cc2727ee0eb03662a02ea020af"
 
 FROZEN_THRESHOLDS = {

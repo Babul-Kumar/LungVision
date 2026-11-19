@@ -159,12 +159,13 @@ flowchart TD
 
 All neural network checkpoints and statistical shape models are permanently frozen and audited:
 
-| Model ID | Base Architecture | Parameter Count | SHA-256 Digest | Primary Dataset | Calibrated Threshold(s) |
-| :--- | :--- | :---: | :---: | :--- | :--- |
-| `densenet121_nih_6disease` | DenseNet121 | 6,960,006 | `8d3690cd0438587a94afb8fd2ad84c0b30f9c1cc2727ee0eb03662a02ea020af` | NIH ChestX-ray14 (112,120 CXRs) | Cardiomegaly: `0.9502`<br>Edema: `0.8770`<br>Consolidation: `0.7329`<br>Pneumonia: `0.7529`<br>Atelectasis: `0.7495`<br>Pneumothorax: `0.5825` |
-| `original_resnet18` | ResNet18 | 11,177,025 | `a293bd9e441b2713e62b7de208611bf7cc97676ea1291ce2818ff3a497528b2f` | IN-CXR $\to$ VinDr-CXR (15,000 CXRs) | Binary Abnormal: `0.176463` (at 90% Sensitivity) |
-| `blur_augmented_resnet18` | ResNet18 | 11,177,025 | `7d8634454d1ac0dfa2c2dbc8d0b08155512fb52b65c9db5a9171a5b59c7d3f24` | IN-CXR $\to$ VinDr-CXR (Blur Robust) | Binary Abnormal: `0.187923` (at 90% Sensitivity) |
-| `ssm_lung_pca_v1` | Point Distribution Model | 20 Modes (100% Var) | `e92cf88a3dae8cd893cda93efe33630ccb1f8259dd9e6c7aa9cd9ce8463e65aa` (4.36 MB) | LUNA16 Multi-Patient Cohort (430 verified scans) | Bounded $[-3\sigma, +3\sigma]$ Mahalanobis Radius |
+| Model ID | Canonical Checkpoint Path | Base Architecture | Parameter Count | SHA-256 Digest | Primary Dataset | Calibrated Threshold(s) |
+| :--- | :--- | :--- | :---: | :---: | :--- | :--- |
+| `densenet121_nih_6disease` | `models/densenet121/densenet121_nih_best.pth` | DenseNet121 | 6,960,006 | `8d3690cd0438587a94afb8fd2ad84c0b30f9c1cc2727ee0eb03662a02ea020af` | NIH ChestX-ray14 (112,120 CXRs) | Cardiomegaly: `0.9502`<br>Edema: `0.8770`<br>Consolidation: `0.7329`<br>Pneumonia: `0.7529`<br>Atelectasis: `0.7495`<br>Pneumothorax: `0.5825` |
+| `original_resnet18` | `models/resnet18/original_resnet18.pth` | ResNet18 | 11,177,025 | `a293bd9e441b2713e62b7de208611bf7cc97676ea1291ce2818ff3a497528b2f` | IN-CXR $\to$ VinDr-CXR (15,000 CXRs) | Binary Abnormal: `0.176463` (at 90% Sensitivity) |
+| `blur_augmented_resnet18` | `models/resnet18/blur_augmented_resnet18.pth` | ResNet18 | 11,177,025 | `7d8634454d1ac0dfa2c2dbc8d0b08155512fb52b65c9db5a9171a5b59c7d3f24` | IN-CXR $\to$ VinDr-CXR (Blur Robust) | Binary Abnormal: `0.187923` (at 90% Sensitivity) |
+| `multiscale_densenet121_fpn_512` | `models/multiscale_densenet121/multiscale_densenet121_fpn_512_v1.pth` | DenseNet121 + FPN | 7,144,790 | `f64728d2742752085cd105d34af00795f53586b71abdf4a67acfa63c8d7b7d2c` | NIH ChestX-ray14 ($512 \times 512$) | Multi-Scale Lateral Fusion ($P_2-P_5$) |
+| `ssm_lung_pca_v1` | `models/ssm_reconstruction/ssm_lung_pca_v1.json` | Point Distribution Model | 20 Modes (100% Var) | `92714969943dbdaf081c7b11b90a7b85e0023649fbf9594cfb1ce8e783746df3` (4.36 MB) | LUNA16 Multi-Patient Cohort (430 verified scans) | Bounded $[-3\sigma, +3\sigma]$ Mahalanobis Radius |
 
 ---
 
@@ -458,10 +459,30 @@ computer vision/
 │   │   └── store/                     # Dual-mode HIPAA compliance audit stores
 │   └── tests/                         # Vitest feature & component test suite (26 tests)
 │
-├── data/                              # Precomputed 3D Scientific Artifacts
-│   └── 3d_reconstruction/
-│       ├── canonical_lung_mesh.obj    # Canonical watertight template (6,737 vertices)
-│       └── ssm_lung_pca_v1.json       # 20 principal variation modes explaining 100% variance (4.36 MB)
+├── data/                              # Precomputed 3D Scientific Artifacts & Manifests
+│   ├── 3d_reconstruction/
+│   │   ├── canonical_lung_mesh.obj    # Canonical watertight template (6,737 vertices)
+│   │   └── ssm_lung_pca_v1.json       # 20 principal variation modes explaining 100% variance (4.36 MB)
+│   └── manifests/                     # Unified dataset manifests & training split histories
+│       ├── chexpert_manifest.csv      # CheXpert multi-label external manifest (40.8 MB)
+│       ├── nih_manifest.csv           # NIH ChestX-ray14 split manifest (18.5 MB)
+│       └── nih_training_history.csv   # Training loss, validation loss & AUROC metrics
+│
+├── models/                            # Centralized Model Weights & Checkpoints Ledger
+│   ├── densenet121/
+│   │   └── densenet121_nih_best.pth   # Frozen 80.5 MB DenseNet121 weights (Macro AUC 0.8206)
+│   ├── resnet18/
+│   │   ├── original_resnet18.pth      # Baseline binary screening (AUC 0.9348)
+│   │   └── blur_augmented_resnet18.pth # Blur-robust binary screening (AUC 0.9411)
+│   ├── multiscale_densenet121/
+│   │   ├── multiscale_densenet121_fpn_512_v1.pth # Phase 6D 512x512 FPN model
+│   │   └── multiscale_densenet121_experimental.pth # 224x224 FPN baseline
+│   ├── ssm_reconstruction/
+│   │   ├── dual_view_shape_predictor_v2_best.pth # 512x512 Bi-planar shape predictor
+│   │   ├── canonical_lung_mesh.obj    # 6,737-vertex canonical lung template
+│   │   └── ssm_lung_pca_v1.json       # 20 PCA principal modes
+│   ├── model_registry.json            # Centralized model registry definition
+│   └── README.md                      # Complete model inventory & threshold ledger
 │
 ├── notebook/                          # Cloud training notebooks & reproducibility workflows
 │   ├── cse471.ipynb                   # Foundational ResNet18 Training & Dataset Audit (Part 1)
@@ -475,6 +496,9 @@ computer vision/
 │   └── notebook24632be2a1.ipynb       # Phase 7 Kaggle Complete Recovery Run (512x512 FP32)
 │
 ├── research/                          # Research Documentation, Benchmarks & Phase Audits
+│   ├── clinical_trials_and_evidence/  # Clinical studies, expert error analysis, VinDr audits & PRD
+│   ├── chexpert_nih_eval/             # CheXpert & NIH held-out test evaluations & subgroup metrics
+│   ├── model_registry/                # Historical training histories, experiment reports & calibration
 │   ├── phase2_audits/                 # Phase 2 Multi-Dataset & Preprocessing Audits (7 categories)
 │   ├── phase7_recovery/               # Phase 7 High-Resolution Cloud Recovery Run Outputs
 │   └── 3d_reconstruction/ssm/         # Statistical Shape Modeling reports, splits, and metrics
@@ -498,21 +522,7 @@ computer vision/
 │   ├── training/                      # Multi-scale & cloud training harnesses
 │   └── verification/                  # CT geometry, topology & manifest audit suite
 │
-├── lungvision_disease_classification/ # DenseNet121 model weights & training artifacts
-│   └── checkpoints/
-│       └── densenet121_nih_best.pth   # Frozen 84.4 MB DenseNet121 weights (Macro AUC 0.8206)
-│
-├── LungVision_AI_Final_Research_Bundle/ # ResNet18 weights & project governance
-│   ├── models/
-│   │   ├── original_resnet18/model.pth # 134 MB weights (Val AUC 0.9332)
-│   │   └── blur_augmented_resnet18/model.pth # 134 MB weights (Val AUC 0.9380)
-│   └── project_governance/            # Authoritative project governance files
-│       ├── PRD.md                     # Product Requirements Document
-│       ├── ARCHITECTURE.md            # Architectural specifications
-│       ├── RULES.md                   # Strict coding and medical ML rules
-│       ├── DESIGN.md                  # Design specifications
-│       ├── TASK.md                    # 13-phase implementation tracker
-│       └── MEMORY.md                  # Persistent engineering memory & decisions
+├── test/                              # CT test volumes & integration assets
 │
 └── docs/                              # Comprehensive technical documentation & audit suite
     ├── ARCHITECTURE_OVERVIEW.md       # High-level system topology

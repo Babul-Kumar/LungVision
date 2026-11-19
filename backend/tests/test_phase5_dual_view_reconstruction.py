@@ -232,7 +232,9 @@ def test_phase5_held_out_validation_report_metrics():
 def test_phase5_api_endpoint_isolation_and_production_preservation():
     """Gate H: Verify experimental endpoint operates and production model is 100% preserved."""
     # 1. Verify Production DenseNet121 Checkpoint SHA-256
-    prod_path = PROJECT_ROOT / "lungvision_disease_classification" / "checkpoints" / "densenet121_nih_best.pth"
+    primary_path = PROJECT_ROOT / "models" / "densenet121" / "densenet121_nih_best.pth"
+    legacy_path = PROJECT_ROOT / "lungvision_disease_classification" / "checkpoints" / "densenet121_nih_best.pth"
+    prod_path = primary_path if primary_path.exists() else legacy_path
     assert prod_path.exists(), "Production checkpoint must exist"
     with open(prod_path, "rb") as f:
         prod_sha256 = hashlib.sha256(f.read()).hexdigest()

@@ -45,7 +45,9 @@ def test_phase5c_all_deliverables_present():
 
 
 def test_production_invariants_preserved():
-    prod_ckpt = PROJECT_ROOT / "lungvision_disease_classification" / "checkpoints" / "densenet121_nih_best.pth"
+    primary_ckpt = PROJECT_ROOT / "models" / "densenet121" / "densenet121_nih_best.pth"
+    legacy_ckpt = PROJECT_ROOT / "lungvision_disease_classification" / "checkpoints" / "densenet121_nih_best.pth"
+    prod_ckpt = primary_ckpt if primary_ckpt.exists() else legacy_ckpt
     assert prod_ckpt.exists(), "Production DenseNet121 checkpoint missing"
     
     h = hashlib.sha256()

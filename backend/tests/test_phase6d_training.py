@@ -19,11 +19,23 @@ import pytest
 import torch
 
 REPO_ROOT = Path(__file__).resolve().parent.parent.parent
-PRODUCTION_CHECKPOINT = REPO_ROOT / "lungvision_disease_classification" / "checkpoints" / "densenet121_nih_best.pth"
+PRODUCTION_CHECKPOINT = (
+    REPO_ROOT / "models" / "densenet121" / "densenet121_nih_best.pth"
+    if (REPO_ROOT / "models" / "densenet121" / "densenet121_nih_best.pth").exists()
+    else REPO_ROOT / "lungvision_disease_classification" / "checkpoints" / "densenet121_nih_best.pth"
+)
 EXPECTED_PROD_SHA256 = "8d3690cd0438587a94afb8fd2ad84c0b30f9c1cc2727ee0eb03662a02ea020af"
 
-TARGET_CKPT_BACKEND = REPO_ROOT / "backend" / "lungvision_disease_classification" / "checkpoints" / "experimental" / "multiscale_densenet121_fpn_512_v1.pth"
-TARGET_CKPT_ROOT = REPO_ROOT / "lungvision_disease_classification" / "checkpoints" / "experimental" / "multiscale_densenet121_fpn_512_v1.pth"
+TARGET_CKPT_BACKEND = (
+    REPO_ROOT / "models" / "multiscale_densenet121" / "multiscale_densenet121_fpn_512_v1.pth"
+    if (REPO_ROOT / "models" / "multiscale_densenet121" / "multiscale_densenet121_fpn_512_v1.pth").exists()
+    else REPO_ROOT / "backend" / "lungvision_disease_classification" / "checkpoints" / "experimental" / "multiscale_densenet121_fpn_512_v1.pth"
+)
+TARGET_CKPT_ROOT = (
+    REPO_ROOT / "models" / "multiscale_densenet121" / "multiscale_densenet121_fpn_512_v1.pth"
+    if (REPO_ROOT / "models" / "multiscale_densenet121" / "multiscale_densenet121_fpn_512_v1.pth").exists()
+    else REPO_ROOT / "lungvision_disease_classification" / "checkpoints" / "experimental" / "multiscale_densenet121_fpn_512_v1.pth"
+)
 EXPECTED_512_SHA256 = "f64728d2742752085cd105d34af00795f53586b71abdf4a67acfa63c8d7b7d2c"
 
 FROZEN_THRESHOLDS = {

@@ -271,7 +271,9 @@ def test_gate_h_service_runtime_integration():
 
 def test_gate_i_production_preservation_invariants():
     """Test I: Absolute invariant test ensuring frozen DenseNet121 weights and thresholds remain identical."""
-    prod_ckpt = PROJECT_ROOT / "lungvision_disease_classification" / "checkpoints" / "densenet121_nih_best.pth"
+    primary_ckpt = PROJECT_ROOT / "models" / "densenet121" / "densenet121_nih_best.pth"
+    legacy_ckpt = PROJECT_ROOT / "lungvision_disease_classification" / "checkpoints" / "densenet121_nih_best.pth"
+    prod_ckpt = primary_ckpt if primary_ckpt.exists() else legacy_ckpt
     assert prod_ckpt.exists(), f"Production checkpoint missing: {prod_ckpt}"
 
     with open(prod_ckpt, "rb") as f:

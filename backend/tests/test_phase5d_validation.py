@@ -38,7 +38,9 @@ class TestPhase5DProductionInvariants:
     """Ensures production assets and frozen thresholds remain completely unaltered."""
 
     def test_production_densenet121_checkpoint_hash(self):
-        ckpt_path = REPO_ROOT / "lungvision_disease_classification" / "checkpoints" / "densenet121_nih_best.pth"
+        primary_ckpt = REPO_ROOT / "models" / "densenet121" / "densenet121_nih_best.pth"
+        legacy_ckpt = REPO_ROOT / "lungvision_disease_classification" / "checkpoints" / "densenet121_nih_best.pth"
+        ckpt_path = primary_ckpt if primary_ckpt.exists() else legacy_ckpt
         assert ckpt_path.exists(), f"Production checkpoint missing: {ckpt_path}"
         expected_sha = "8d3690cd0438587a94afb8fd2ad84c0b30f9c1cc2727ee0eb03662a02ea020af"
         actual_sha = compute_sha256(ckpt_path)

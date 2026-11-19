@@ -176,7 +176,7 @@ class RegistryService:
             name="MultiScaleDenseNet121-FPN High-Resolution Experimental Classifier",
             architecture="MultiScaleDenseNet121-FPN",
             task="Multi-label high-resolution chest radiograph screening (Research Experimental)",
-            checkpoint_path=str(settings.RESOLVED_DENSENET121_PATH.parent / "experimental" / "multiscale_densenet121_experimental.pth"),
+            checkpoint_path=str(settings.RESOLVED_MULTISCALE_PATH),
             sha256="c5884ee4ff2dee85c7b46af6cda496ad0664d92c6e0f468e22a8b12addc30ec4",
             input_size=[512, 512, 3],
             labels=[

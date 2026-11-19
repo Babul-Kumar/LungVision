@@ -100,7 +100,9 @@ def test_binary_xray_inference_augmented(client, sample_xray_png_bytes):
 def test_multilabel_xray_inference_real_radiograph(client):
     """Verifies DenseNet121 multi-label inference on an authentic, full-resolution chest X-ray image."""
     from pathlib import Path
-    img_path = Path("LungVision_AI_Final_Research_Bundle/external_validation_readiness/vindr_dicom_preview.png")
+    primary_img_path = Path("research/clinical_trials_and_evidence/external_validation_readiness/vindr_dicom_preview.png")
+    legacy_img_path = Path("LungVision_AI_Final_Research_Bundle/external_validation_readiness/vindr_dicom_preview.png")
+    img_path = primary_img_path if primary_img_path.exists() else legacy_img_path
     assert img_path.exists(), "Authentic chest X-ray sample must exist in research bundle"
     
     with open(img_path, "rb") as fp:

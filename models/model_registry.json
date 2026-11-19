@@ -1,0 +1,111 @@
+{
+    "project": "LungVision AI",
+    "version": "0.1.0",
+    "created_at_utc": "2026-11-03T19:32:56.999639+00:00",
+    "task": {
+        "name": "Binary chest X-ray classification",
+        "class_0": "Normal",
+        "class_1": "Abnormal",
+        "input": "Frontal chest X-ray",
+        "image_size": [
+            224,
+            224
+        ],
+        "channels": 3,
+        "output": "Abnormal-class sigmoid score"
+    },
+    "models": {
+        "original_resnet18": {
+            "checkpoint_epoch": 4,
+            "validation_auc": 0.9332060972537164,
+            "architecture": "ResNet18",
+            "number_of_parameters": 11177025,
+            "checkpoint": "models/original_resnet18/model.pth",
+            "threshold_calibration": {
+                "validation_auc": 0.9331821617535904,
+                "selected_threshold": 0.1764627248048782,
+                "target_sensitivity": 0.9,
+                "achieved_sensitivity": 0.9,
+                "achieved_specificity": 0.7952380952380952
+            }
+        },
+        "blur_augmented_resnet18": {
+            "checkpoint_epoch": 1,
+            "validation_auc": 0.9380372889896699,
+            "architecture": "ResNet18",
+            "number_of_parameters": 11177025,
+            "checkpoint": "models/blur_augmented_resnet18/model.pth",
+            "augmentation": {
+                "blur_probability": 0.35,
+                "kernel_sizes": [
+                    3,
+                    5
+                ],
+                "sigma_range": [
+                    0.3,
+                    0.8
+                ],
+                "rotation_degrees": 5
+            },
+            "threshold_calibration": {
+                "validation_auc": 0.93803728898967,
+                "selected_threshold": 0.187923327088356,
+                "target_sensitivity": 0.9,
+                "achieved_sensitivity": 0.9,
+                "achieved_specificity": 0.8222222222222222
+            }
+        }
+    },
+    "preprocessing": {
+        "resize": [
+            224,
+            224
+        ],
+        "color_mode": "RGB",
+        "normalization_mean": [
+            0.485,
+            0.456,
+            0.406
+        ],
+        "normalization_std": [
+            0.229,
+            0.224,
+            0.225
+        ]
+    },
+    "data": {
+        "dataset": "IN-CXR PNG derivative",
+        "total_images": 12600,
+        "training_images": 10080,
+        "validation_images": 1260,
+        "test_images": 1260,
+        "patient_level_independence_verified": false
+    },
+    "validation_status": {
+        "external_validation_completed": false,
+        "patient_level_validation_completed": false,
+        "clinical_validation_completed": false,
+        "intended_use": "Research-only decision-support prototype"
+    },
+    "artifacts": {
+        "additional_files": [
+            "training_history/original_training_history.csv",
+            "training_history/augmented_training_history.csv",
+            "validation_results/threshold_calibration_summary.csv",
+            "validation_results/original_threshold_details.csv",
+            "validation_results/augmented_threshold_details.csv",
+            "validation_results/augmentation_comparison.csv",
+            "test_results/test_model_comparison.csv",
+            "test_results/test_model_probabilities.csv",
+            "test_results/original_test_metrics.csv",
+            "test_results/original_test_predictions.csv",
+            "experiment_reports/image_quality_audit.csv",
+            "experiment_reports/spatial_audit_comparison.csv",
+            "experiment_reports/spatial_position_control.csv",
+            "experiment_reports/blur_robustness_metrics.csv",
+            "experiment_reports/probability_shift_statistics.csv",
+            "experiment_reports/occlusion_analysis_results.csv",
+            "experiment_reports/individual_occlusion_summary.csv"
+        ]
+    }
+}
