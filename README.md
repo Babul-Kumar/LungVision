@@ -8,6 +8,7 @@
 [![Three.js](https://img.shields.io/badge/Three.js-r182-000000.svg?logo=threedotjs&logoColor=white)](https://threejs.org/)
 [![Docker](https://img.shields.io/badge/Docker-Ready-2496ed.svg?logo=docker&logoColor=white)](docker-compose.yml)
 [![Tests: 72/72 Passing](https://img.shields.io/badge/Tests-72%2F72%20Passing%20(100%25)-brightgreen.svg)](docs/REGRESSION_TEST_REPORT.md)
+[![Kaggle: ResNet18 & Audit](https://img.shields.io/badge/Kaggle-ResNet18%20%26%20Audit%20(CSE471)-20beff.svg?logo=kaggle&logoColor=white)](https://www.kaggle.com/code/babulkumar07/cse471)
 [![Kaggle: Phase 7 Grid](https://img.shields.io/badge/Kaggle-Phase%207%20Grid%20(512x512)-20beff.svg?logo=kaggle&logoColor=white)](https://www.kaggle.com/code/babulkumar07/lungvision-ai-disease-classification512x512)
 [![Kaggle: Phase 7 Part 2](https://img.shields.io/badge/Kaggle-Phase%207%20Part%202-20beff.svg?logo=kaggle&logoColor=white)](https://www.kaggle.com/code/babulkumar07/lungvision-ai-disease-classification512x512-part2)
 [![Kaggle: Phase 7 Recovery](https://img.shields.io/badge/Kaggle-Phase%207%20Recovery%20Run-20beff.svg?logo=kaggle&logoColor=white)](https://www.kaggle.com/code/babulkumar07/lungvision-ai-phase-7-complete-recovery-run)
@@ -194,6 +195,45 @@ To solve this, the complete, mathematically guarded Phase 7 model training, chec
    - `msd121_224_weighted_bce_direct.pth` & `msd121_224_weighted_bce_letterbox.pth`.
    - `msd121_224_focal_direct.pth` & `msd121_224_focal_letterbox.pth`.
    - Attached Kaggle Output Dataset: [`babulkumar07/lungvision-ai-disease-classification-result`](https://www.kaggle.com/datasets/babulkumar07/lungvision-ai-disease-classification-result).
+
+---
+
+### 3.2 Foundational ResNet18 Binary Screening, Multi-Dataset Audit & Robustness Benchmarking (CSE471)
+
+The baseline binary triage models (`original_resnet18` and `blur_augmented_resnet18`), sensitivity-first calibration thresholds, and initial multi-dataset forensic audits were developed, validated, and packaged in the foundational **CSE471** research run:
+
+* **Official Kaggle Run (CSE471 Benchmark & Multi-Dataset Audit)**: [![Kaggle Notebook](https://img.shields.io/badge/Kaggle-ResNet18%20%26%20Dataset%20Audit%20(CSE471)-20beff.svg?logo=kaggle&logoColor=white)](https://www.kaggle.com/code/babulkumar07/cse471) [https://www.kaggle.com/code/babulkumar07/cse471](https://www.kaggle.com/code/babulkumar07/cse471)
+  * **Local Version-Controlled Notebooks**:
+    * [`notebook/cse471.ipynb`](notebook/cse471.ipynb): Complete 45-cell foundational research notebook containing 6-dataset forensic audit, baseline training, Grad-CAM & occlusion interpretability, Gaussian blur sensitivity, sensitivity-first thresholding, and model registry packaging.
+    * [`notebook/cse471part2.ipynb`](notebook/cse471part2.ipynb): Continuation notebook containing NIH external validation, IN-CXR vs NIH domain shift audit, controlled preprocessing experiments, and NIH expert-label evaluation.
+
+#### Key Research Contributions & Findings (from `cse471.ipynb`):
+1. **Multi-Dataset Ingestion & Integrity Audit**:
+   Audited six interconnected medical imaging datasets:
+   * **IN-CXR**: 12,600 verified chest radiographs (balanced 6,300 Normal / 6,300 Abnormal) used for primary binary screening.
+   * **RSNA Pneumonia**: 26,684 records (identified 20,672 empty annotation files and 9,555 bounding-box annotations).
+   * **TBX11K**: 8,811 annotated records reconciled against 11,702 total images.
+   * **MIMIC-CXR**: 86,003 records verified for multi-label abnormality transferability.
+   * **VinBigData**: 18,000 raw image files cataloged.
+   * **LUNA16**: 1,776 volumetric CT MHD headers verified referencing RAW/ZRAW volumes for 3D reconstruction and DRR forward projection.
+2. **ResNet18 Binary Screening Engine (`original_resnet18`)**:
+   * Baseline architecture: ResNet18 (11,177,025 parameters) trained on IN-CXR with ImageNet normalization ($224 \times 224$).
+   * Comprehensive held-out test evaluation on 1,260 images (630 Normal / 630 Abnormal):
+     * **AUC-ROC**: `0.9348` | **Average Precision (AUPRC)**: `0.9411`
+     * **Accuracy**: `86.11%` | **Balanced Accuracy**: `86.11%` | **Brier Score**: `0.1045`
+     * **Sensitivity**: `83.33%` | **Specificity**: `88.89%` | **F1 Score**: `0.8571`
+3. **Interpretability & Forensic Artefact Audits**:
+   * Evaluated model spatial bias via $8 \times 8$ grid patch intensity experiments and spatial feature distribution audits.
+   * Applied Grad-CAM and Occlusion Sensitivity mapping to verify that decisions stem from true pulmonary fields rather than peripheral artifacts, film labels, or scanner borders.
+4. **Blur Sensitivity & Blur-Augmented Fine-Tuning (`blur_augmented_resnet18`)**:
+   * Audited performance degradation across multi-level Gaussian blur perturbations ($\sigma \in [0.5, 3.0]$) to simulate low-dose and bedside mobile radiograph artifacts.
+   * Fine-tuned `blur_augmented_resnet18` with stochastic blur and rotation, significantly stabilizing sensitivity and predictive distribution under optical degradation.
+5. **Sensitivity-First Threshold Calibration**:
+   * Established fixed 90% Sensitivity operating points derived from validation ROC curves to minimize false negatives in preliminary clinical screening:
+     * $\tau_{\text{orig}} = 0.176463$
+     * $\tau_{\text{blur}} = 0.187923$
+6. **LungVision AI Model Registry Generation**:
+   * Automated packaging of `LungVision_AI_Model_Registry` (260.85 MB) and verification of SHA-256 digests permanently preserved in `LungVision_AI_Final_Research_Bundle/models/`.
 
 ---
 
@@ -411,6 +451,8 @@ computer vision/
 │       └── ssm_lung_pca_v1.json       # 20 principal variation modes explaining 100% variance (4.36 MB)
 │
 ├── notebook/                          # Cloud training notebooks & reproducibility workflows
+│   ├── cse471.ipynb                   # Foundational ResNet18 Training, Multi-Dataset Audit & Robustness (CSE471 Part 1)
+│   ├── cse471part2.ipynb              # NIH External Validation, Domain Shift & Expert-Label Audit (CSE471 Part 2)
 │   ├── notebook24632be2a1.ipynb       # Phase 7 Kaggle Complete Recovery Run (512x512 FP32)
 │   ├── lungvision-ai-disease-classification512x512.ipynb # Phase 7 Advanced Experiments Grid (8 Configurations)
 │   └── lungvision-ai-disease-classification512x512-part2.ipynb # Phase 7 Part 2 Continuation (Stability & Recovery)
