@@ -8,7 +8,8 @@
 [![Three.js](https://img.shields.io/badge/Three.js-r182-000000.svg?logo=threedotjs&logoColor=white)](https://threejs.org/)
 [![Docker](https://img.shields.io/badge/Docker-Ready-2496ed.svg?logo=docker&logoColor=white)](docker-compose.yml)
 [![Tests: 72/72 Passing](https://img.shields.io/badge/Tests-72%2F72%20Passing%20(100%25)-brightgreen.svg)](docs/REGRESSION_TEST_REPORT.md)
-[![Kaggle: Phase 7 Run](https://img.shields.io/badge/Kaggle-Phase%207%20Recovery%20Run-20beff.svg?logo=kaggle&logoColor=white)](https://www.kaggle.com/code/babulkumar07/lungvision-ai-phase-7-complete-recovery-run)
+[![Kaggle: Phase 7 Recovery](https://img.shields.io/badge/Kaggle-Phase%207%20Recovery%20Run-20beff.svg?logo=kaggle&logoColor=white)](https://www.kaggle.com/code/babulkumar07/lungvision-ai-phase-7-complete-recovery-run)
+[![Kaggle: Phase 7 Part 2](https://img.shields.io/badge/Kaggle-Phase%207%20Part%202-20beff.svg?logo=kaggle&logoColor=white)](https://www.kaggle.com/code/babulkumar07/lungvision-ai-disease-classification512x512-part2)
 [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
 
 **LungVision AI** is an advanced medical imaging research workstation and scientific deep learning platform. It unites **2D chest radiograph pathology triage**, **bi-planar patient-specific 3D lung surface reconstruction (Statistical Shape Modeling)**, **calibrated CT-to-DRR radiographic ray-casting**, and **volumetric 3D computed tomography (CT) multi-planar reconstruction (MPR)** with sub-millimetre LUNA16 pulmonary nodule mapping.
@@ -166,10 +167,12 @@ While inference, evaluation, and regression testing execute seamlessly on local 
 * **Dataset Scale**: 112,120 high-resolution radiographs (~42 GB) across 30,805 unique patients exceed typical local working memory, disk caching, and data loader bandwidth for deep multi-epoch iterations.
 * **VRAM Bottlenecks**: Multi-scale feature pyramid architectures (`MultiScaleDenseNet121-FPN`) at $512 \times 512$ resolution with batch sizes of 4–32 require 16GB–32GB of dedicated VRAM, exceeding local 4GB mobile GPU limits.
 
-To solve this, the complete, mathematically guarded Phase 7 model training, checkpointing, and recovery run was executed and preserved in the cloud using **Kaggle GPU accelerators (NVIDIA Tesla T4, 16GB VRAM, 10-hour session budget)**:
+To solve this, the complete, mathematically guarded Phase 7 model training, checkpointing, and recovery runs were executed and preserved in the cloud using **Kaggle GPU accelerators (NVIDIA Tesla T4, 16GB VRAM, 10-hour session budget)**:
 
-* **Official Kaggle Run**: [![Kaggle Notebook](https://img.shields.io/badge/Kaggle-Phase%207%20Complete%20Recovery%20Run-20beff.svg?logo=kaggle&logoColor=white)](https://www.kaggle.com/code/babulkumar07/lungvision-ai-phase-7-complete-recovery-run) [https://www.kaggle.com/code/babulkumar07/lungvision-ai-phase-7-complete-recovery-run](https://www.kaggle.com/code/babulkumar07/lungvision-ai-phase-7-complete-recovery-run)
-* **Local Version-Controlled Notebook**: [`notebook/notebook24632be2a1.ipynb`](notebook/notebook24632be2a1.ipynb) (Complete 44-cell executable notebook, identical to the Kaggle session output, available directly in this repository for local inspection, offline modification, or export to private GPU clusters).
+* **Official Kaggle Run (Part 1 — Complete Recovery Run)**: [![Kaggle Notebook](https://img.shields.io/badge/Kaggle-Phase%207%20Complete%20Recovery%20Run-20beff.svg?logo=kaggle&logoColor=white)](https://www.kaggle.com/code/babulkumar07/lungvision-ai-phase-7-complete-recovery-run) [https://www.kaggle.com/code/babulkumar07/lungvision-ai-phase-7-complete-recovery-run](https://www.kaggle.com/code/babulkumar07/lungvision-ai-phase-7-complete-recovery-run)
+* **Local Version-Controlled Notebook (Part 1)**: [`notebook/notebook24632be2a1.ipynb`](notebook/notebook24632be2a1.ipynb) (Complete 44-cell executable notebook, identical to the Kaggle session output, available directly in this repository for local inspection, offline modification, or export to private GPU clusters).
+* **Official Kaggle Run (Part 2 — Numerical Stability & Recovery)**: [![Kaggle Notebook](https://img.shields.io/badge/Kaggle-Phase%207%20Part%202%20Continuation-20beff.svg?logo=kaggle&logoColor=white)](https://www.kaggle.com/code/babulkumar07/lungvision-ai-disease-classification512x512-part2) [https://www.kaggle.com/code/babulkumar07/lungvision-ai-disease-classification512x512-part2](https://www.kaggle.com/code/babulkumar07/lungvision-ai-disease-classification512x512-part2)
+* **Local Version-Controlled Notebook (Part 2)**: [`notebook/lungvision-ai-disease-classification512x512-part2.ipynb`](notebook/lungvision-ai-disease-classification512x512-part2.ipynb) (Complete 42-cell executable continuation notebook with strict non-finite diagnostics, FP32 validation, atomic resume checkpoints, validation-phase resume, pre-epoch recovery points, and periodic batch progress logging).
 
 #### Phase 7 Cloud Run Architecture & Scientific Specifications
 1. **Zero-Patient-Leakage Cohort Partitioning**:
@@ -405,7 +408,8 @@ computer vision/
 │       └── ssm_lung_pca_v1.json       # 20 principal variation modes explaining 100% variance (4.36 MB)
 │
 ├── notebook/                          # Cloud training notebooks & reproducibility workflows
-│   └── notebook24632be2a1.ipynb       # Phase 7 Kaggle Complete Recovery Run (512x512 FP32)
+│   ├── notebook24632be2a1.ipynb       # Phase 7 Kaggle Complete Recovery Run (512x512 FP32)
+│   └── lungvision-ai-disease-classification512x512-part2.ipynb # Phase 7 Part 2 Continuation (Stability & Recovery)
 │
 ├── research/                          # Research Documentation, Benchmarks & Model Cards
 │   └── 3d_reconstruction/ssm/
