@@ -23,6 +23,70 @@ class RegistryService:
         """Loads model registry definitions from filesystem."""
         catalog: Dict[str, ModelRegistryEntry] = {}
 
+        # 0. Phase 7 MultiScaleDenseNet121 (Primary Production Validated)
+        catalog["lungvision_phase7_msd121_224_direct"] = ModelRegistryEntry(
+            id="lungvision_phase7_msd121_224_direct",
+            name="LungVision Phase 7 MultiScaleDenseNet121 Multi-Label Classifier",
+            architecture="MultiScaleDenseNet121",
+            task="Multi-label chest radiograph disease classification (Phase 7 Validated)",
+            checkpoint_path=str(BASE_DIR / "models" / "multiscale_densenet121" / "msd121_224_weighted_bce_direct.pth"),
+            sha256="7dc735ee00d9e57ece14cd33f2bdbd1e7fd226adca41cdb692ba0af2a33a9b23",
+            input_size=[224, 224, 3],
+            labels=[
+                "Cardiomegaly", "Edema", "Consolidation", "Pneumonia", "Atelectasis", "Pneumothorax"
+            ],
+            status="production_validated",
+            active_threshold_set="Operating Point A: Validation F1-Optimal (Phase 7 Calibrated)",
+            metrics={
+                "training_dataset": "NIH ChestX-ray14 (Phase 7 Recovery)",
+                "checkpoint_epoch": 4,
+                "macro_val_auc": 0.819726,
+                "parameters": 8071942,
+                "cardiomegaly_auc": 0.8857,
+                "edema_auc": 0.8758,
+                "consolidation_auc": 0.7945,
+                "pneumonia_auc": 0.7591,
+                "atelectasis_auc": 0.7936,
+                "pneumothorax_auc": 0.8095
+            },
+            calibration={
+                "Cardiomegaly": 0.87,
+                "Edema": 0.94,
+                "Consolidation": 0.79,
+                "Pneumonia": 0.55,
+                "Atelectasis": 0.67,
+                "Pneumothorax": 0.77,
+                "default_threshold": 0.50,
+                "active_threshold_set": "Operating Point A: Validation F1-Optimal (Phase 7 Calibrated)",
+                "alternative_operating_points": {
+                    "operating_point_A_f1_optimal": {
+                        "Cardiomegaly": 0.87,
+                        "Edema": 0.94,
+                        "Consolidation": 0.79,
+                        "Pneumonia": 0.55,
+                        "Atelectasis": 0.67,
+                        "Pneumothorax": 0.77
+                    },
+                    "operating_point_B_balanced_youden": {
+                        "Cardiomegaly": 0.50,
+                        "Edema": 0.50,
+                        "Consolidation": 0.50,
+                        "Pneumonia": 0.50,
+                        "Atelectasis": 0.50,
+                        "Pneumothorax": 0.50
+                    },
+                    "operating_point_C_high_sensitivity": {
+                        "Cardiomegaly": 0.35,
+                        "Edema": 0.30,
+                        "Consolidation": 0.40,
+                        "Pneumonia": 0.30,
+                        "Atelectasis": 0.45,
+                        "Pneumothorax": 0.40
+                    }
+                }
+            }
+        )
+
         # 1. DenseNet121 NIH 6-Disease
         catalog["densenet121_nih_6disease"] = ModelRegistryEntry(
             id="densenet121_nih_6disease",

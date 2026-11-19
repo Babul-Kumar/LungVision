@@ -5,6 +5,7 @@ from backend.app.api.v1.ct import router as ct_router
 from backend.app.api.v1.models import router as models_router
 from backend.app.api.v1.research import router as research_router
 from backend.app.api.v1.reconstruction import router as reconstruction_router
+from backend.app.api.v1.predictions import router as predictions_router
 
 
 api_router = APIRouter()
@@ -16,4 +17,5 @@ api_router.include_router(ct_router)
 api_router.include_router(models_router)
 api_router.include_router(research_router)
 api_router.include_router(reconstruction_router)
+api_router.include_router(predictions_router)
 

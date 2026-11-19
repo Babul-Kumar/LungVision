@@ -54,6 +54,44 @@
                 "achieved_sensitivity": 0.9,
                 "achieved_specificity": 0.8222222222222222
             }
+        },
+        "lungvision_phase7_msd121_224_direct": {
+            "checkpoint_epoch": 4,
+            "validation_macro_auc": 0.8197257752392035,
+            "architecture": "MultiScaleDenseNet121",
+            "number_of_parameters": 8071942,
+            "checkpoint": "models/multiscale_densenet121/msd121_224_weighted_bce_direct.pth",
+            "sha256": "7dc735ee00d9e57ece14cd33f2bdbd1e7fd226adca41cdb692ba0af2a33a9b23",
+            "status": "production_validated",
+            "image_size": [
+                224,
+                224
+            ],
+            "preprocessing": "direct",
+            "labels": [
+                "Cardiomegaly",
+                "Edema",
+                "Consolidation",
+                "Pneumonia",
+                "Atelectasis",
+                "Pneumothorax"
+            ],
+            "thresholds": {
+                "Cardiomegaly": 0.87,
+                "Edema": 0.94,
+                "Consolidation": 0.79,
+                "Pneumonia": 0.55,
+                "Atelectasis": 0.67,
+                "Pneumothorax": 0.77
+            },
+            "per_disease_auc": {
+                "Cardiomegaly": 0.8857,
+                "Edema": 0.8758,
+                "Consolidation": 0.7945,
+                "Pneumonia": 0.7591,
+                "Atelectasis": 0.7936,
+                "Pneumothorax": 0.8095
+            }
         }
     },
     "preprocessing": {

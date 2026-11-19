@@ -2,16 +2,17 @@
 
 ## 1. Executive Summary
 
-This report documents the rigorous full-stack regression verification performed on the refined LungVision AI platform under the Gravitas Engineering Reliability Runtime (`.gravitas/contract.json`).
+This report documents the rigorous full-stack regression verification performed on the refined LungVision AI platform following Phase 7 MultiScaleDenseNet121 integration.
 
 Verification encompassed:
 1. **Frontend Static Typing**: Strict TypeScript compiler check (`npx tsc --noEmit`).
-2. **Frontend Component & Feature Tests**: Vitest test runner across 10 test suites (26 tests total).
+2. **Frontend Component & Feature Tests**: Vitest test runner across 13 test suites (39 tests total).
 3. **Frontend Production Build**: Vite production bundler with optimized route chunk splitting and WebGL assets.
-4. **Backend Automated Tests**: Pytest test runner across 8 test suites (46 unit and integration tests total).
-5. **Multi-Patient SSM Pipeline**: Model integrity, zero patient leakage validation, and runtime deformation serving.
+4. **Backend Automated Tests**: Pytest test runner across 18 test suites (159 unit, integration, and security tests total).
+5. **Phase 7 Integration Verification**: Exact checkpoint SHA-256 integrity, 8,071,942 parameters, preprocessing parity ($0.0$ max diff), clinical quality checks, uncertainty scoring, and Grad-CAM.
+6. **Multi-Patient SSM Pipeline**: Model integrity, zero patient leakage validation, and runtime deformation serving.
 
-**Overall Test Results:** **72 / 72 Passing (100% PASS RATE)**
+**Overall Test Results:** **198 / 198 Passing (100% PASS RATE)**
 
 ---
 
@@ -26,9 +27,9 @@ Verification encompassed:
 ### 2.2 Vitest Suite Results (`npm test -- --run`)
 - **Command**: `vitest run --run`
 - **Status**: **PASSED**
-- **Test Files**: 10 passed (10 total)
-- **Tests**: 26 passed (26 total)
-- **Execution Time**: 7.82s
+- **Test Files**: 13 passed (13 total)
+- **Tests**: 39 passed (39 total)
+- **Execution Time**: 12.25s
 
 | Test Suite | File Path | Tests Passed | Status |
 | :--- | :--- | :---: | :---: |
@@ -39,14 +40,48 @@ Verification encompassed:
 | **DashboardPage Feature** | `tests/features/DashboardPage.test.tsx` | 1 / 1 | **PASSED** |
 | **App Root Integration** | `tests/App.test.tsx` | 1 / 1 | **PASSED** |
 | **CTExplorerPage Feature** | `tests/features/CTExplorerPage.test.tsx` | 5 / 5 | **PASSED** |
-| **DualViewXRayPage Feature** | `tests/features/DualViewXRayPage.test.tsx` | 4 / 4 | **PASSED** |
+| **DualViewXRayPage Feature** | `tests/features/DualViewXRayPage.test.tsx` | 5 / 5 | **PASSED** |
 | **ExplainabilityAndDualMode Feature** | `tests/features/ExplainabilityAndDualMode.test.tsx` | 4 / 4 | **PASSED** |
 | **ResearchPage Feature** | `tests/features/ResearchPage.test.tsx` | 2 / 2 | **PASSED** |
+| **ExternalValidationAudit Feature** | `tests/features/ExternalValidationAudit.test.tsx` | 3 / 3 | **PASSED** |
+| **Phase4ResearchComparison Feature** | `tests/features/Phase4ResearchComparison.test.tsx` | 5 / 5 | **PASSED** |
+| **Phase3ResearchDashboard Feature** | `tests/features/Phase3ResearchDashboard.test.tsx` | 4 / 4 | **PASSED** |
 
 ### 2.3 Production Build Output (`npm run build`)
 - **Status**: **PASSED**
-- **Build Time**: 12.18s
+- **Build Time**: 15.43s
 - **Transformed Modules**: 2,096 modules
+
+---
+
+## 3. Backend Regression Test Results
+
+- **Command**: `python -m pytest backend/tests/ -v`
+- **Status**: **PASSED**
+- **Test Suites**: 18 test files
+- **Total Tests**: 159 passed (159 total, 0 failed)
+- **Execution Time**: 94.33s
+
+| Test Suite | Test Cases | Status |
+| :--- | :---: | :---: |
+| `test_phase7_model_integration.py` | 9 | **PASSED** |
+| `test_ct_drr.py` | 5 | **PASSED** |
+| `test_ct_service.py` | 11 | **PASSED** |
+| `test_external_validation.py` | 5 | **PASSED** |
+| `test_health.py` | 3 | **PASSED** |
+| `test_model_registry.py` | 4 | **PASSED** |
+| `test_phase3_validation.py` | 7 | **PASSED** |
+| `test_phase4_model_improvement.py` | 7 | **PASSED** |
+| `test_phase4b_audit.py` | 7 | **PASSED** |
+| `test_phase5_audit.py` | 7 | **PASSED** |
+| `test_phase6_audit.py` | 7 | **PASSED** |
+| `test_phase6b_experiments.py` | 7 | **PASSED** |
+| `test_phase6c_audit.py` | 8 | **PASSED** |
+| `test_phase6d_training.py` | 7 | **PASSED** |
+| `test_security_validation.py` | 6 | **PASSED** |
+| `test_ssm_phase2b_pipeline.py` | 5 | **PASSED** |
+| `test_ssm_reconstruction.py` | 7 | **PASSED** |
+| `test_xray_inference.py` | 5 | **PASSED** |
 
 #### Generated Asset Chunks:
 - `dist/index.html`: 1.01 kB (gzip: 0.54 kB)

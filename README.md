@@ -7,7 +7,8 @@
 [![TypeScript 5.8](https://img.shields.io/badge/TypeScript-5.8+-3178c6.svg?logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
 [![Three.js](https://img.shields.io/badge/Three.js-r182-000000.svg?logo=threedotjs&logoColor=white)](https://threejs.org/)
 [![Docker](https://img.shields.io/badge/Docker-Ready-2496ed.svg?logo=docker&logoColor=white)](docker-compose.yml)
-[![Tests: 72/72 Passing](https://img.shields.io/badge/Tests-72%2F72%20Passing%20(100%25)-brightgreen.svg)](docs/REGRESSION_TEST_REPORT.md)
+[![Tests: 159/159 Passing](https://img.shields.io/badge/Tests-159%2F159%20Passing%20(100%25)-brightgreen.svg)](docs/REGRESSION_TEST_REPORT.md)
+[![Phase 7: Validated SOTA](https://img.shields.io/badge/Phase%207-MultiScaleDenseNet121%20(AUROC%200.8197)-success.svg)](docs/PHASE7_MODEL_INTEGRATION.md)
 [![Kaggle: CSE471 Part 1](https://img.shields.io/badge/Kaggle-CSE471%20Part%201%20(IN--CXR)-20beff.svg?logo=kaggle&logoColor=white)](https://www.kaggle.com/code/babulkumar07/cse471)
 [![Kaggle: CSE471 Part 2](https://img.shields.io/badge/Kaggle-CSE471%20Part%202%20(NIH%20Audit)-20beff.svg?logo=kaggle&logoColor=white)](https://www.kaggle.com/code/babulkumar07/cse471part2)
 [![Kaggle: CSE471 Part 3](https://img.shields.io/badge/Kaggle-CSE471%20Part%203%20(Multi--Source)-20beff.svg?logo=kaggle&logoColor=white)](https://www.kaggle.com/code/babulkumar07/cse471part3)
@@ -81,7 +82,17 @@ flowchart TD
 ## 2. Core Functional Capabilities
 
 ### A. 2D Chest Radiograph Pathology Screening & Calibration
-* **DenseNet121 Multi-Label Triage (`densenet121_nih_6disease`)**:
+* **Phase 7 MultiScaleDenseNet121 Engine (`lungvision_phase7_msd121_224_direct`) [NEW SOTA]**:
+  * **Macro Val AUROC**: **`0.819726`** across **13,501 validation cases** from NIH ChestX-ray14.
+  * **Architecture**: DenseNet121 backbone with intermediate multi-scale feature extraction ($P_2, P_3, P_4$), lateral $1\times 1$ projections, anti-aliased $3\times 3$ fusion (56×56 resolution), dual Global Average + Max Pooling, and 6 decoupled pathology classification heads (**8,071,942 trainable parameters**).
+  * **Pathologies**: Cardiomegaly (0.8857), Edema (0.8758), Consolidation (0.7945), Pneumonia (0.7591), Atelectasis (0.7936), Pneumothorax (0.8095).
+  * **Pre-Inference Quality Audit**: Bitstream decodability, minimum resolution ($\ge 128\times 128$), contrast/blank detection, and discrete Laplacian variance blur detection.
+  * **Calibrated Threshold Sets**: Operating Point A (Validation $F_1$-optimal: Cardiomegaly 0.87, Edema 0.94, Consolidation 0.79, Pneumonia 0.55, Atelectasis 0.67, Pneumothorax 0.77), Operating Point B (Balanced 0.50), and Operating Point C (High-Sensitivity Screening).
+  * **Uncertainty & Abstention**: Decision-boundary margin quantification ($|p - \tau|$), certainty classification (`HIGH`, `MODERATE`, `LOW`, `BORDERLINE`), and automated clinical triaging alerts (`HIGH_ACUITY_ALERT`, `EXPERT_REVIEW_RECOMMENDED`).
+  * **High-Resolution Explainability**: Grad-CAM computed directly from the 56×56 multi-scale fusion layer for sub-segmental lesion localization.
+  * **Documentation**: See [Phase 7 Model Integration](docs/PHASE7_MODEL_INTEGRATION.md), [Model Selection Report](docs/MODEL_SELECTION_REPORT.md), [Preprocessing Specification](docs/PREPROCESSING_SPECIFICATION.md), and [Threshold and Calibration](docs/THRESHOLD_AND_CALIBRATION.md).
+
+* **DenseNet121 Multi-Label Triage (`densenet121_nih_6disease`) [Frozen Baseline]**:
   * Triage across 6 verified thoracic conditions: **Cardiomegaly**, **Edema**, **Consolidation**, **Pneumonia**, **Atelectasis**, and **Pneumothorax**.
   * Evaluated across **112,120 NIH ChestX-ray14** images with frozen calibration thresholds derived at optimal validation $F_1$ score.
   * Direct bilinear resize to $224 \times 224$, ImageNet normalization, and sub-second CPU/GPU inference.

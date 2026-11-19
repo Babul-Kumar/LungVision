@@ -70,9 +70,56 @@ class XRayService:
                 logger.warning(f"Error reading thresholds CSV ({e}), using default verified constants.")
         return DEFAULT_NIH_THRESHOLDS.copy()
 
-    def predict_multilabel(self, image_bytes: bytes) -> XRayMultiLabelResponse:
+    def predict_multilabel(self, image_bytes: bytes, model_id: str = "densenet121_nih_6disease") -> XRayMultiLabelResponse:
         """Executes 6-disease multi-label classification on a chest radiograph."""
         start_time = time.perf_counter()
+
+        # Route to Phase 7 MultiScaleDenseNet121 if requested
+        if model_id in ("phase7", "lungvision_phase7", "lungvision_phase7_msd121_224_direct", "msd121_224_weighted_bce_direct"):
+            from backend.app.inference.prediction_engine import prediction_engine
+            res = prediction_engine.predict(image_bytes)
+            if res.get("status") == "REJECTED":
+                raise ValueError(res.get("error", "Image rejected by quality screening"))
+
+            elapsed_ms = (time.perf_counter() - start_time) * 1000.0
+            predictions_dict: Dict[str, DiseasePrediction] = {}
+            flagged_count = 0
+            highest_disease = LABELS_6_DISEASE[0]
+            highest_prob = -1.0
+
+            for disease in LABELS_6_DISEASE:
+                detail = res["findings"].get(disease, {})
+                prob = float(detail.get("probability", 0.0))
+                thresh = float(detail.get("threshold", 0.50))
+                flag = bool(detail.get("is_positive", False))
+                if flag:
+                    flagged_count += 1
+                if prob > highest_prob:
+                    highest_prob = prob
+                    highest_disease = disease
+                predictions_dict[disease] = DiseasePrediction(
+                    probability=round(prob, 4),
+                    threshold=round(thresh, 4),
+                    experimental_flag=flag
+                )
+
+            return XRayMultiLabelResponse(
+                model=ModelInfo(
+                    id="lungvision_phase7_msd121_224_direct",
+                    architecture="MultiScaleDenseNet121",
+                    task="Multi-label chest X-ray disease classification (Phase 7 Validated)",
+                    training_dataset="NIH ChestX-ray14",
+                    checkpoint_epoch=4,
+                    input_dimensions=[224, 224, 3]
+                ),
+                predictions=predictions_dict,
+                summary=PredictionSummary(
+                    flagged_conditions_count=flagged_count,
+                    highest_probability_disease=highest_disease,
+                    highest_probability_value=round(highest_prob, 4)
+                ),
+                inference_time_ms=round(elapsed_ms, 2)
+            )
 
         # 1. Preprocess input image to exact [1, 3, 224, 224] tensor
         input_tensor = preprocessor.preprocess_bytes(image_bytes)

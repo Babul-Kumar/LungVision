@@ -1,6 +1,7 @@
 from typing import Optional
+from pathlib import Path
 from fastapi import APIRouter, File, Query, Response, UploadFile, status
-from fastapi.responses import PlainTextResponse
+from fastapi.responses import HTMLResponse, PlainTextResponse
 from starlette.concurrency import run_in_threadpool
 from backend.app.config import settings
 from backend.app.core.security import validate_ct_archive
@@ -191,3 +192,34 @@ async def get_ct_drr(
         overlay_silhouette=overlay_silhouette,
         add_noise=add_noise
     )
+
+
+@router.get(
+    "/{scan_id}/interactive-viewer",
+    response_class=HTMLResponse,
+    summary="Get Synchronized Interactive 3D Workstation HTML"
+)
+async def get_interactive_viewer(scan_id: str):
+    """Serves the rich interactive 3D thoracic workstation with synchronized MPR cut planes and nodule explorer."""
+    project_root = Path(__file__).resolve().parent.parent.parent.parent
+    candidate_paths = [
+        project_root / "Viewer Result" / "lungvision_3d_lungs_interactive.html",
+        project_root / "Viewer Result" / "lungvision_3d_lungs.html",
+        Path("Viewer Result/lungvision_3d_lungs_interactive.html").resolve(),
+    ]
+
+    for p in candidate_paths:
+        if p.exists():
+            with open(p, "r", encoding="utf-8") as f:
+                return HTMLResponse(content=f.read())
+
+    return HTMLResponse(
+        content=(
+            "<div style='font-family:sans-serif;padding:3rem;text-align:center;color:#475569;'>"
+            "<h2>Interactive 3D Viewer Asset Not Found</h2>"
+            "<p>Run <code>python scripts/3d_reconstruction/visualize_3d_lungs.py</code> to regenerate.</p>"
+            "</div>"
+        ),
+        status_code=404
+    )
+

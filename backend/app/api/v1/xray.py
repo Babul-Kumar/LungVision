@@ -16,9 +16,13 @@ router = APIRouter(prefix="/xray", tags=["2D Chest X-Ray Inference"])
     summary="Multi-Label 6-Disease Classification"
 )
 async def predict_xray_multilabel(
-    file: UploadFile = File(..., description="Frontal chest X-ray image (PNG, JPEG, WebP)")
+    file: UploadFile = File(..., description="Frontal chest X-ray image (PNG, JPEG, WebP)"),
+    model_id: str = Form(
+        "densenet121_nih_6disease",
+        description="Target model: 'densenet121_nih_6disease' (frozen baseline) or 'lungvision_phase7_msd121_224_direct'"
+    )
 ) -> XRayMultiLabelResponse:
-    """Executes multi-label screening across 6 thoracic pathologies using DenseNet121.
+    """Executes multi-label screening across 6 thoracic pathologies using DenseNet121 or Phase 7 MultiScaleDenseNet121.
     
     Pathologies evaluated:
     - Cardiomegaly
@@ -28,11 +32,11 @@ async def predict_xray_multilabel(
     - Atelectasis
     - Pneumothorax
     
-    Includes calibrated NIH validation thresholds and experimental detection flags.
+    Includes calibrated thresholds and experimental detection flags.
     """
     content = await file.read()
     validate_image_file(file, content, settings.MAX_IMAGE_SIZE_BYTES)
-    return await run_in_threadpool(xray_service.predict_multilabel, content)
+    return await run_in_threadpool(xray_service.predict_multilabel, content, model_id=model_id)
 
 
 @router.post(

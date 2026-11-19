@@ -110,5 +110,11 @@ export const ctApi = {
     const res = await apiClient.get<DRRProjectionResponse>(`/api/v1/ct/${scanId}/drr?${params.toString()}`);
     return res.data;
   },
+
+  getInteractiveViewerUrl: (scanId: string): string => {
+    const baseUrl = import.meta.env.VITE_API_BASE_URL || 'http://127.0.0.1:8000';
+    return `${baseUrl}/api/v1/ct/${scanId}/interactive-viewer`;
+  },
 };
+
 

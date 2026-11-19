@@ -1,23 +1,28 @@
 """
-LungVision AI — High-Resolution Multi-Scale DenseNet121 Architecture.
+LungVision AI — MultiScaleDenseNet121 Architecture Definitions.
 
-Implements MultiScaleDenseNet121-FPN for thoracic radiograph screening:
-1. Feature extraction from intermediate DenseNet121 blocks:
-   - Level 2 (denseblock2): Stride 8 (e.g. 64x64 at 512x512) for sub-millimeter apical lines & atelectasis.
-   - Level 3 (denseblock3): Stride 16 (e.g. 32x32 at 512x512) for parenchymal airspace opacification & consolidations.
-   - Level 4 (denseblock4/norm5): Stride 32 (e.g. 16x16 at 512x512) for macroscopic cardiothoracic ratio & vascular redistribution.
-2. Feature Pyramid Network (FPN) lateral connections with top-down feature aggregation.
-3. Dual pooling (Global Average Pooling + Global Max Pooling) preserving localized focal spikes.
-4. Decoupled classification heads for fine-scale, mid-scale, and macroscopic conditions.
-5. Strict preservation of 6-label clinical ordering:
-   [Cardiomegaly, Edema, Consolidation, Pneumonia, Atelectasis, Pneumothorax].
+Contains:
+1. Phase7MultiScaleDenseNet121:
+   The experimentally validated Phase 7 recovery architecture (8,071,942 parameters).
+   Features DenseNet121 multi-scale intermediate extraction (P2, P3, P4),
+   lateral 1x1 projections, multi-scale feature fusion (384 -> 256),
+   dual GAP+GMP pooling (512 dims), dropout (0.25), and 6 decoupled linear heads.
+   Validated checkpoint: msd121_224_weighted_bce_direct.pth (Val Macro AUROC 0.819726).
+
+2. MultiScaleDenseNet121FPN:
+   The earlier Feature Pyramid Network (FPN) research variant with top-down connections,
+   coarse/mid/fine decoupled heads, and optional Squeeze-and-Excitation / GAP-only ablations.
+
+3. MultiScaleDenseNet121:
+   Unified entrypoint that returns Phase7MultiScaleDenseNet121 by default, or
+   MultiScaleDenseNet121FPN when legacy FPN/ablation parameters are specified.
 """
 
-import math
 from typing import Dict, List, Optional, Tuple, Union
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
+from torchvision import models
 from torchvision.models import densenet121, DenseNet121_Weights
 
 
@@ -30,6 +35,122 @@ DISEASE_LABELS = [
     "Pneumothorax"
 ]
 
+
+# =============================================================================
+# 1. PHASE 7 MULTISCALEDENSENET121 (PRODUCTION & EXPERIMENTALLY VALIDATED)
+# =============================================================================
+
+class Phase7MultiScaleDenseNet121(nn.Module):
+    """
+    Phase 7 MultiScaleDenseNet121 architecture.
+    
+    Source of truth: Phase 7 training & validation recovery run
+    (notebook/lungvision-ai-phase-7-recovery-run-part2.ipynb).
+    
+    Key characteristics:
+    - DenseNet121 backbone divided into sequential feature stages.
+    - Multi-scale intermediate features extracted at:
+        * p2: block1 (256 channels)
+        * p3: block2 (512 channels)
+        * p4: block3 (1024 channels)
+    - Lateral 1x1 projections (256->128, 512->128, 1024->128).
+    - Bilinear upsampling of p3, p4 to match p2 spatial resolution.
+    - 3-scale concatenation (384 channels) fused via 3x3 Conv + BatchNorm + ReLU (256 channels).
+    - Dual pooling: AdaptiveAvgPool2d(1) + AdaptiveMaxPool2d(1) -> 512 channels.
+    - Dropout (p=0.25).
+    - 6 decoupled disease classification heads (nn.Linear(512, 1)).
+    - Exact parameter count: 8,071,942.
+    - Output: [batch_size, 6] continuous logits.
+    """
+
+    def __init__(self, pretrained: bool = False, dropout: float = 0.25, num_classes: int = 6):
+        super().__init__()
+        self.num_classes = num_classes
+        self.dropout_rate = dropout
+
+        weights = models.DenseNet121_Weights.DEFAULT if pretrained else None
+        base = models.densenet121(weights=weights)
+        f = base.features
+
+        # DenseNet121 feature stages
+        self.stem = nn.Sequential(f.conv0, f.norm0, f.relu0, f.pool0)
+        self.block1 = f.denseblock1
+        self.trans1 = f.transition1
+        self.block2 = f.denseblock2
+        self.trans2 = f.transition2
+        self.block3 = f.denseblock3
+        self.trans3 = f.transition3
+        self.block4 = f.denseblock4
+        self.final_norm = f.norm5
+
+        # Lateral 1x1 projections: 256, 512, 1024 -> 128
+        self.lat2 = nn.Conv2d(256, 128, kernel_size=1)
+        self.lat3 = nn.Conv2d(512, 128, kernel_size=1)
+        self.lat4 = nn.Conv2d(1024, 128, kernel_size=1)
+
+        # Multi-scale feature fusion
+        self.fuse = nn.Sequential(
+            nn.Conv2d(128 * 3, 256, kernel_size=3, padding=1, bias=False),
+            nn.BatchNorm2d(256),
+            nn.ReLU(inplace=True)
+        )
+
+        # Dual pooling: GAP + GMP -> 256 + 256 = 512
+        self.avg_pool = nn.AdaptiveAvgPool2d(1)
+        self.max_pool = nn.AdaptiveMaxPool2d(1)
+        self.dropout = nn.Dropout(dropout)
+
+        # Decoupled pathology heads (6 independent binary heads)
+        self.heads = nn.ModuleList([
+            nn.Linear(512, 1) for _ in range(num_classes)
+        ])
+
+    def extract_multiscale_features(
+        self, x: torch.Tensor
+    ) -> Tuple[torch.Tensor, torch.Tensor, torch.Tensor]:
+        """Extract intermediate multi-scale feature maps (p2, p3, p4)."""
+        x = self.stem(x)
+        p2 = self.block1(x)
+        x = self.trans1(p2)
+        p3 = self.block2(x)
+        x = self.trans2(p3)
+        p4 = self.block3(x)
+        return p2, p3, p4
+
+    def forward_with_features(
+        self, x: torch.Tensor
+    ) -> Tuple[torch.Tensor, torch.Tensor]:
+        """Forward pass returning both logits and fused feature map (for Grad-CAM)."""
+        x = self.stem(x)
+        p2 = self.block1(x)
+        x = self.trans1(p2)
+        p3 = self.block2(x)
+        x = self.trans2(p3)
+        p4 = self.block3(x)
+        x = self.trans3(p4)
+        x = self.block4(x)
+        x = self.final_norm(x)
+
+        target_size = p2.shape[-2:]
+        l2 = self.lat2(p2)
+        l3 = F.interpolate(self.lat3(p3), size=target_size, mode="bilinear", align_corners=False)
+        l4 = F.interpolate(self.lat4(p4), size=target_size, mode="bilinear", align_corners=False)
+
+        fused = self.fuse(torch.cat([l2, l3, l4], dim=1))
+        pooled = torch.cat([self.avg_pool(fused), self.max_pool(fused)], dim=1).flatten(1)
+        pooled = self.dropout(pooled)
+        logits = torch.cat([head(pooled) for head in self.heads], dim=1)
+        return logits, fused
+
+    def forward(self, x: torch.Tensor) -> torch.Tensor:
+        """Forward pass producing 6 independent logits in standard clinical order."""
+        logits, _ = self.forward_with_features(x)
+        return logits
+
+
+# =============================================================================
+# 2. LEGACY FPN RESEARCH ARCHITECTURE (PHASE 4B / PHASE 6 ABLATIONS)
+# =============================================================================
 
 class ChannelAttention(nn.Module):
     """Squeeze-and-Excitation channel attention for multi-scale feature maps."""
@@ -51,18 +172,9 @@ class ChannelAttention(nn.Module):
         return x * w
 
 
-class MultiScaleDenseNet121(nn.Module):
-    """
-    Multi-Scale DenseNet121 with Feature Pyramid Network and Decoupled Pathology Heads.
-    Preserves fine spatial detail for apical pneumothorax and linear atelectasis while
-    maintaining macroscopic thoracic context for cardiomegaly and pulmonary edema.
+class MultiScaleDenseNet121FPN(nn.Module):
+    """Multi-Scale DenseNet121 with Feature Pyramid Network and Decoupled Pathology Heads."""
 
-    Supports controlled ablation flags:
-    - use_gmp: Whether to use Global Max Pooling alongside GAP (default True).
-               If False (Model E), uses Global Average Pooling only.
-    - use_se: Whether to apply Squeeze-and-Excitation channel attention (default True).
-              If False (Model F), uses identity shortcut without SE recalibration.
-    """
     def __init__(
         self,
         num_classes: int = 6,
@@ -78,14 +190,10 @@ class MultiScaleDenseNet121(nn.Module):
         self.use_gmp = use_gmp
         self.use_se = use_se
 
-        # Base DenseNet121 backbone
         weights = DenseNet121_Weights.DEFAULT if pretrained else None
         base_densenet = densenet121(weights=weights)
         features = base_densenet.features
 
-        # Partition DenseNet121 into 3 hierarchical stages:
-        # Stage 1 + 2: input -> conv0 -> norm0 -> relu0 -> pool0 -> denseblock1 -> transition1 -> denseblock2
-        # Output: [B, 512, H/8, W/8]
         self.stage_c2 = nn.Sequential(
             features.conv0,
             features.norm0,
@@ -95,28 +203,20 @@ class MultiScaleDenseNet121(nn.Module):
             features.transition1,
             features.denseblock2
         )
-
-        # Stage 3: transition2 -> denseblock3
-        # Output: [B, 1024, H/16, W/16]
         self.stage_c3 = nn.Sequential(
             features.transition2,
             features.denseblock3
         )
-
-        # Stage 4: transition3 -> denseblock4 -> norm5
-        # Output: [B, 1024, H/32, W/32]
         self.stage_c4 = nn.Sequential(
             features.transition3,
             features.denseblock4,
             features.norm5
         )
 
-        # Lateral 1x1 convolutions for FPN projection
         self.lateral_c4 = nn.Conv2d(1024, fpn_channels, kernel_size=1)
         self.lateral_c3 = nn.Conv2d(1024, fpn_channels, kernel_size=1)
         self.lateral_c2 = nn.Conv2d(512, fpn_channels, kernel_size=1)
 
-        # Anti-aliasing 3x3 convolutions
         self.smooth_p4 = nn.Sequential(
             nn.Conv2d(fpn_channels, fpn_channels, kernel_size=3, padding=1, bias=False),
             nn.BatchNorm2d(fpn_channels),
@@ -133,7 +233,6 @@ class MultiScaleDenseNet121(nn.Module):
             nn.ReLU(inplace=True)
         )
 
-        # Channel attention on multi-scale pyramid levels (or Identity if ablated)
         if use_se:
             self.att_p2 = ChannelAttention(fpn_channels)
             self.att_p3 = ChannelAttention(fpn_channels)
@@ -143,36 +242,27 @@ class MultiScaleDenseNet121(nn.Module):
             self.att_p3 = nn.Identity()
             self.att_p4 = nn.Identity()
 
-        # Pooling dimension: GAP + GMP -> 2 * fpn_channels = 512, or GAP only -> fpn_channels = 256
         pool_dim = fpn_channels * 2 if use_gmp else fpn_channels
         self.pool_dim = pool_dim
 
-        # Decoupled Pathology Heads:
-        # 1. Fine-scale head (from P2): Atelectasis (idx 4) & Pneumothorax (idx 5)
         self.head_fine = nn.Sequential(
             nn.Linear(pool_dim, 128),
             nn.ReLU(inplace=True),
             nn.Dropout(p=dropout_rate),
-            nn.Linear(128, 2)  # [Atelectasis, Pneumothorax]
+            nn.Linear(128, 2)
         )
-
-        # 2. Mid-scale head (from P3): Consolidation (idx 2) & Pneumonia (idx 3)
         self.head_mid = nn.Sequential(
             nn.Linear(pool_dim, 128),
             nn.ReLU(inplace=True),
             nn.Dropout(p=dropout_rate),
-            nn.Linear(128, 2)  # [Consolidation, Pneumonia]
+            nn.Linear(128, 2)
         )
-
-        # 3. Macroscopic coarse head (from P4): Cardiomegaly (idx 0) & Edema (idx 1)
         self.head_coarse = nn.Sequential(
             nn.Linear(pool_dim, 128),
             nn.ReLU(inplace=True),
             nn.Dropout(p=dropout_rate),
-            nn.Linear(128, 2)  # [Cardiomegaly, Edema]
+            nn.Linear(128, 2)
         )
-
-        # 4. Holistic Global Head (from concatenated P2 + P3 + P4 = 3 * pool_dim)
         self.head_holistic = nn.Sequential(
             nn.Linear(pool_dim * 3, 256),
             nn.ReLU(inplace=True),
@@ -180,12 +270,10 @@ class MultiScaleDenseNet121(nn.Module):
             nn.Linear(256, num_classes)
         )
 
-        # Blend weights between specialized heads and holistic head
         self.specialized_weight = nn.Parameter(torch.tensor(0.6))
         self.holistic_weight = nn.Parameter(torch.tensor(0.4))
 
     def _pool_features(self, p: torch.Tensor) -> torch.Tensor:
-        """Applies pooling: dual GAP + GMP if use_gmp is True; GAP only if False."""
         gap = F.adaptive_avg_pool2d(p, (1, 1)).flatten(1)
         if self.use_gmp:
             gmp = F.adaptive_max_pool2d(p, (1, 1)).flatten(1)
@@ -195,15 +283,10 @@ class MultiScaleDenseNet121(nn.Module):
     def extract_multiscale_features(
         self, x: torch.Tensor
     ) -> Tuple[torch.Tensor, torch.Tensor, torch.Tensor]:
-        """
-        Extracts multi-scale pyramid feature maps (P2, P3, P4).
-        Used for high-resolution visual explainability and feature inspection.
-        """
         c2 = self.stage_c2(x)
         c3 = self.stage_c3(c2)
         c4 = self.stage_c4(c3)
 
-        # Top-down FPN aggregation
         m4 = self.lateral_c4(c4)
         m3 = self.lateral_c3(c3) + F.interpolate(m4, size=c3.shape[2:], mode="nearest")
         m2 = self.lateral_c2(c2) + F.interpolate(m3, size=c2.shape[2:], mode="nearest")
@@ -211,35 +294,22 @@ class MultiScaleDenseNet121(nn.Module):
         p4 = self.att_p4(self.smooth_p4(m4))
         p3 = self.att_p3(self.smooth_p3(m3))
         p2 = self.att_p2(self.smooth_p2(m2))
-
         return p2, p3, p4
 
     def forward(self, x: torch.Tensor) -> torch.Tensor:
-        """
-        Forward pass producing 6 disease logits in standard clinical order:
-        [Cardiomegaly, Edema, Consolidation, Pneumonia, Atelectasis, Pneumothorax].
-        """
         p2, p3, p4 = self.extract_multiscale_features(x)
-
-        # Dual pooling per pyramid level
         feat_p2 = self._pool_features(p2)
         feat_p3 = self._pool_features(p3)
         feat_p4 = self._pool_features(p4)
 
-        # Specialized head predictions
-        out_coarse = self.head_coarse(feat_p4)  # [Cardiomegaly, Edema]
-        out_mid = self.head_mid(feat_p3)        # [Consolidation, Pneumonia]
-        out_fine = self.head_fine(feat_p2)      # [Atelectasis, Pneumothorax]
+        out_coarse = self.head_coarse(feat_p4)
+        out_mid = self.head_mid(feat_p3)
+        out_fine = self.head_fine(feat_p2)
 
-        # Assemble specialized 6-class logits:
-        # [Cardiomegaly, Edema, Consolidation, Pneumonia, Atelectasis, Pneumothorax]
         out_specialized = torch.cat([out_coarse, out_mid, out_fine], dim=1)
-
-        # Holistic multi-scale fusion prediction
         feat_fused = torch.cat([feat_p2, feat_p3, feat_p4], dim=1)
         out_holistic = self.head_holistic(feat_fused)
 
-        # Blended combination
         w_spec = torch.sigmoid(self.specialized_weight)
         w_holi = torch.sigmoid(self.holistic_weight)
         w_sum = w_spec + w_holi
@@ -249,36 +319,53 @@ class MultiScaleDenseNet121(nn.Module):
         logits = (w_spec * out_specialized) + (w_holi * out_holistic)
         return logits
 
-    def load_baseline_features(self, checkpoint_path: str) -> None:
-        """
-        Initializes backbone feature weights from the frozen NIH DenseNet121 checkpoint.
-        Leaves new FPN and decoupled heads initialized for fine-tuning.
-        """
-        state_dict = torch.load(checkpoint_path, map_location="cpu")
-        if "model_state_dict" in state_dict:
-            state_dict = state_dict["model_state_dict"]
 
-        temp_densenet = densenet121(num_classes=6)
-        # Load only features keys
-        features_only = {k: v for k, v in state_dict.items() if k.startswith("features.")}
-        temp_densenet.features.load_state_dict(features_only, strict=False)
+# =============================================================================
+# 3. UNIFIED DISPATCHER (PRESERVES 100% RETRO-COMPATIBILITY)
+# =============================================================================
 
-        features = temp_densenet.features
-        self.stage_c2 = nn.Sequential(
-            features.conv0,
-            features.norm0,
-            features.relu0,
-            features.pool0,
-            features.denseblock1,
-            features.transition1,
-            features.denseblock2
+def MultiScaleDenseNet121(
+    num_classes: int = 6,
+    pretrained: bool = False,
+    dropout: float = 0.25,
+    fpn_channels: Optional[int] = None,
+    dropout_rate: Optional[float] = None,
+    use_gmp: Optional[bool] = None,
+    use_se: Optional[bool] = None,
+    variant: Optional[str] = None,
+    **kwargs
+) -> nn.Module:
+    """
+    Factory constructor returning either:
+    1. Phase7MultiScaleDenseNet121 (default, 8,071,942 parameters, verified Phase 7 model).
+    2. MultiScaleDenseNet121FPN (when fpn_channels or FPN ablation flags are explicitly set).
+    """
+    # If caller specifies FPN parameters or asks for FPN variant
+    is_fpn_call = (
+        fpn_channels is not None or
+        use_gmp is False or
+        use_se is False or
+        (variant is not None and "fpn" in variant.lower())
+    )
+
+    if is_fpn_call:
+        eff_fpn_ch = fpn_channels if fpn_channels is not None else 256
+        eff_dropout = dropout_rate if dropout_rate is not None else dropout
+        eff_gmp = use_gmp if use_gmp is not None else True
+        eff_se = use_se if use_se is not None else True
+        return MultiScaleDenseNet121FPN(
+            num_classes=num_classes,
+            fpn_channels=eff_fpn_ch,
+            pretrained=pretrained,
+            dropout_rate=eff_dropout,
+            use_gmp=eff_gmp,
+            use_se=eff_se
         )
-        self.stage_c3 = nn.Sequential(
-            features.transition2,
-            features.denseblock3
-        )
-        self.stage_c4 = nn.Sequential(
-            features.transition3,
-            features.denseblock4,
-            features.norm5
-        )
+
+    # Otherwise return the verified Phase 7 recovery architecture
+    eff_dropout = dropout_rate if dropout_rate is not None else dropout
+    return Phase7MultiScaleDenseNet121(
+        pretrained=pretrained,
+        dropout=eff_dropout,
+        num_classes=num_classes
+    )

@@ -35,6 +35,9 @@ export const XrayPage: React.FC = () => {
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
   const [previewUrl, setPreviewUrl] = useState<string | null>(null);
   const [activeModelType, setActiveModelType] = useState<'multilabel' | 'binary'>('multilabel');
+  const [multilabelModelId, setMultilabelModelId] = useState<string>(
+    'lungvision_phase7_msd121_224_direct'
+  );
   const [binaryModelId, setBinaryModelId] = useState<'original_resnet18' | 'blur_augmented_resnet18'>(
     'original_resnet18'
   );
@@ -139,7 +142,7 @@ export const XrayPage: React.FC = () => {
 
     try {
       if (activeModelType === 'multilabel') {
-        const result = await xrayApi.predictMultiLabel(selectedFile);
+        const result = await xrayApi.predictMultiLabel(selectedFile, multilabelModelId);
         setMultiLabelResult(result);
         addHistoryItem({
           type: 'xray_multilabel',
@@ -436,6 +439,44 @@ export const XrayPage: React.FC = () => {
                   >
                     <RefreshCw className="w-3 h-3" />
                     <span>Replace Image</span>
+                  </button>
+                </div>
+              </div>
+            )}
+
+            {/* Multi-Label Model Selector if in Multi-Label Mode */}
+            {activeModelType === 'multilabel' && (
+              <div className="mt-4 pt-4 border-t border-[#e2e8f0] space-y-2">
+                <label className="text-[11px] font-semibold text-[#5e4b75] uppercase tracking-wider block">
+                  Select 6-Disease Classifier:
+                </label>
+                <div className="grid grid-cols-2 gap-2">
+                  <button
+                    type="button"
+                    onClick={() => setMultilabelModelId('lungvision_phase7_msd121_224_direct')}
+                    className={`p-2.5 rounded-lg border text-left text-xs transition-all ${
+                      multilabelModelId === 'lungvision_phase7_msd121_224_direct'
+                        ? 'border-amber-500 bg-amber-50 text-amber-950 font-semibold ring-1 ring-amber-400'
+                        : 'border-[#e2e8f0] text-[#5e4b75] hover:border-amber-400 hover:text-[#1a082e] hover:bg-slate-50'
+                    }`}
+                  >
+                    <div className="font-semibold text-amber-900 flex items-center justify-between">
+                      <span>Phase 7 MultiScale</span>
+                      <span className="text-[9px] bg-amber-200 text-amber-950 px-1 py-0.5 rounded font-mono font-bold">SOTA</span>
+                    </div>
+                    <div className="text-[10px] text-[#5e4b75] mt-0.5">8.07M params · AUROC 0.8197</div>
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => setMultilabelModelId('densenet121_nih_6disease')}
+                    className={`p-2.5 rounded-lg border text-left text-xs transition-all ${
+                      multilabelModelId === 'densenet121_nih_6disease'
+                        ? 'border-amber-500 bg-amber-50 text-amber-950 font-semibold ring-1 ring-amber-400'
+                        : 'border-[#e2e8f0] text-[#5e4b75] hover:border-amber-400 hover:text-[#1a082e] hover:bg-slate-50'
+                    }`}
+                  >
+                    <div className="font-semibold text-amber-900">DenseNet121 NIH</div>
+                    <div className="text-[10px] text-[#5e4b75] mt-0.5">6.96M params · Frozen NIH</div>
                   </button>
                 </div>
               </div>
