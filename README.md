@@ -8,7 +8,8 @@
 [![Three.js](https://img.shields.io/badge/Three.js-r182-000000.svg?logo=threedotjs&logoColor=white)](https://threejs.org/)
 [![Docker](https://img.shields.io/badge/Docker-Ready-2496ed.svg?logo=docker&logoColor=white)](docker-compose.yml)
 [![Tests: 72/72 Passing](https://img.shields.io/badge/Tests-72%2F72%20Passing%20(100%25)-brightgreen.svg)](docs/REGRESSION_TEST_REPORT.md)
-[![Kaggle: ResNet18 & Audit](https://img.shields.io/badge/Kaggle-ResNet18%20%26%20Audit%20(CSE471)-20beff.svg?logo=kaggle&logoColor=white)](https://www.kaggle.com/code/babulkumar07/cse471)
+[![Kaggle: CSE471 Part 1](https://img.shields.io/badge/Kaggle-CSE471%20Part%201%20(IN--CXR)-20beff.svg?logo=kaggle&logoColor=white)](https://www.kaggle.com/code/babulkumar07/cse471)
+[![Kaggle: CSE471 Part 2](https://img.shields.io/badge/Kaggle-CSE471%20Part%202%20(NIH%20Audit)-20beff.svg?logo=kaggle&logoColor=white)](https://www.kaggle.com/code/babulkumar07/cse471part2)
 [![Kaggle: Phase 7 Grid](https://img.shields.io/badge/Kaggle-Phase%207%20Grid%20(512x512)-20beff.svg?logo=kaggle&logoColor=white)](https://www.kaggle.com/code/babulkumar07/lungvision-ai-disease-classification512x512)
 [![Kaggle: Phase 7 Part 2](https://img.shields.io/badge/Kaggle-Phase%207%20Part%202-20beff.svg?logo=kaggle&logoColor=white)](https://www.kaggle.com/code/babulkumar07/lungvision-ai-disease-classification512x512-part2)
 [![Kaggle: Phase 7 Recovery](https://img.shields.io/badge/Kaggle-Phase%207%20Recovery%20Run-20beff.svg?logo=kaggle&logoColor=white)](https://www.kaggle.com/code/babulkumar07/lungvision-ai-phase-7-complete-recovery-run)
@@ -202,10 +203,10 @@ To solve this, the complete, mathematically guarded Phase 7 model training, chec
 
 The baseline binary triage models (`original_resnet18` and `blur_augmented_resnet18`), sensitivity-first calibration thresholds, and initial multi-dataset forensic audits were developed, validated, and packaged in the foundational **CSE471** research run:
 
-* **Official Kaggle Run (CSE471 Benchmark & Multi-Dataset Audit)**: [![Kaggle Notebook](https://img.shields.io/badge/Kaggle-ResNet18%20%26%20Dataset%20Audit%20(CSE471)-20beff.svg?logo=kaggle&logoColor=white)](https://www.kaggle.com/code/babulkumar07/cse471) [https://www.kaggle.com/code/babulkumar07/cse471](https://www.kaggle.com/code/babulkumar07/cse471)
-  * **Local Version-Controlled Notebooks**:
-    * [`notebook/cse471.ipynb`](notebook/cse471.ipynb): Complete 45-cell foundational research notebook containing 6-dataset forensic audit, baseline training, Grad-CAM & occlusion interpretability, Gaussian blur sensitivity, sensitivity-first thresholding, and model registry packaging.
-    * [`notebook/cse471part2.ipynb`](notebook/cse471part2.ipynb): Continuation notebook containing NIH external validation, IN-CXR vs NIH domain shift audit, controlled preprocessing experiments, and NIH expert-label evaluation.
+* **Official Kaggle Run (CSE471 Part 1 — Multi-Dataset Audit & ResNet18 Training)**: [![Kaggle Notebook](https://img.shields.io/badge/Kaggle-CSE471%20Part%201%20(IN--CXR)-20beff.svg?logo=kaggle&logoColor=white)](https://www.kaggle.com/code/babulkumar07/cse471) [https://www.kaggle.com/code/babulkumar07/cse471](https://www.kaggle.com/code/babulkumar07/cse471)
+  * **Local Version-Controlled Notebook**: [`notebook/cse471.ipynb`](notebook/cse471.ipynb) (Complete 45-cell foundational research notebook containing 6-dataset forensic audit, baseline training, Grad-CAM & occlusion interpretability, Gaussian blur sensitivity, sensitivity-first thresholding, and model registry packaging).
+* **Official Kaggle Run (CSE471 Part 2 — NIH External Validation, Domain Shift & Expert Audit)**: [![Kaggle Notebook](https://img.shields.io/badge/Kaggle-CSE471%20Part%202%20(NIH%20Audit)-20beff.svg?logo=kaggle&logoColor=white)](https://www.kaggle.com/code/babulkumar07/cse471part2) [https://www.kaggle.com/code/babulkumar07/cse471part2](https://www.kaggle.com/code/babulkumar07/cse471part2)
+  * **Local Version-Controlled Notebook**: [`notebook/cse471part2.ipynb`](notebook/cse471part2.ipynb) (Complete 12-cell continuation notebook containing NIH external validation, IN-CXR vs NIH domain shift audit, controlled preprocessing experiments, and NIH expert-label evaluation).
 
 #### Key Research Contributions & Findings (from `cse471.ipynb`):
 1. **Multi-Dataset Ingestion & Integrity Audit**:
