@@ -476,7 +476,8 @@ def run_post_fix_geometry_audit():
     }
 
     # Save deliverables
-    out_dir = BASE_DIR
+    out_dir = BASE_DIR / "docs" / "audits"
+    out_dir.mkdir(parents=True, exist_ok=True)
     volume_recon_path = out_dir / "CT_VOLUME_RECONCILIATION.json"
     with open(volume_recon_path, "w", encoding="utf-8") as f:
         json.dump(volume_reconciliation, f, indent=2)

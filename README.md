@@ -455,15 +455,20 @@ computer vision/
 │       └── ssm_lung_pca_v1.json       # 20 principal variation modes explaining 100% variance (4.36 MB)
 │
 ├── notebook/                          # Cloud training notebooks & reproducibility workflows
-│   ├── cse471.ipynb                   # Foundational ResNet18 Training, Multi-Dataset Audit & Robustness (CSE471 Part 1)
-│   ├── cse471part2.ipynb              # NIH External Validation, Domain Shift & Expert-Label Audit (CSE471 Part 2)
-│   ├── cse471part3.ipynb              # Multi-Source IN-CXR + VinDr Audit, Pixel Preprocessing & Joint ResNet18 (CSE471 Part 3)
-│   ├── notebook24632be2a1.ipynb       # Phase 7 Kaggle Complete Recovery Run (512x512 FP32)
+│   ├── cse471.ipynb                   # Foundational ResNet18 Training & Dataset Audit (Part 1)
+│   ├── cse471part2.ipynb              # NIH External Validation & Domain Shift Audit (Part 2)
+│   ├── cse471part3.ipynb              # Multi-Source IN-CXR + VinDr Joint ResNet18 Training (Part 3)
+│   ├── cse471part4.ipynb              # Advanced Training & Generalization Experiments (Part 4)
+│   ├── lungvision-ai-disease-classification.ipynb # Multi-Label Triage Forensic Failure Investigation
+│   ├── lungvision-ai-disease-classification-part2.ipynb # High-Resolution Disease Classification Diagnostics
 │   ├── lungvision-ai-disease-classification512x512.ipynb # Phase 7 Advanced Experiments Grid (8 Configurations)
-│   └── lungvision-ai-disease-classification512x512-part2.ipynb # Phase 7 Part 2 Continuation (Stability & Recovery)
+│   ├── lungvision-ai-disease-classification512x512-part2.ipynb # Phase 7 Part 2 Continuation (Stability & Recovery)
+│   └── notebook24632be2a1.ipynb       # Phase 7 Kaggle Complete Recovery Run (512x512 FP32)
 │
-├── research/                          # Research Documentation, Benchmarks & Model Cards
-│   └── 3d_reconstruction/ssm/
+├── research/                          # Research Documentation, Benchmarks & Phase Audits
+│   ├── phase2_audits/                 # Phase 2 Multi-Dataset & Preprocessing Audits (7 categories)
+│   ├── phase7_recovery/               # Phase 7 High-Resolution Cloud Recovery Run Outputs
+│   └── 3d_reconstruction/ssm/         # Statistical Shape Modeling reports, splits, and metrics
 │       ├── PHASE_2B_RESEARCH_REPORT.md # Comprehensive 10-section research paper
 │       ├── SSM_MODEL_CARD.md          # Standardized model card & ethical bounds
 │       ├── data_manifest.csv          # 430 verified CT scans & label mappings
@@ -471,12 +476,18 @@ computer vision/
 │       ├── training_metrics.json      # PCA eigenvalues & explained variance ratios
 │       └── validation_metrics.json    # Held-out generalization benchmarks (ASSD 0.072 mm)
 │
-├── scripts/
-│   └── 3d_reconstruction/
-│       ├── fit_ssm_pca.py             # Script that extracts template & fits PCA basis
-│       ├── generate_ssm_governance.py # Multi-patient data manifest & label reconciliation
-│       ├── generate_drr.py            # Forward projection validation harness
-│       └── validate_manifest.py       # Zero-patient-leakage split validator
+├── reports/                           # Experimental milestone deliverables & phase reports
+│   ├── phase6/                        # Forensic disease triage failure audit reports
+│   ├── phase6b/                       # Aspect-ratio & multi-scale ablation records
+│   ├── phase6c/                       # Checkpoint reproduction & external generalization reports
+│   └── phase6d/                       # Genuine 512x512 MultiScaleDenseNet121-FPN training deliverables
+│
+├── scripts/                           # Reproducibility pipelines & verification CLI tools
+│   ├── run_backend.py                 # Direct standalone Python backend launcher
+│   ├── 3d_reconstruction/            # SSM fitting, PCA decomposition & DRR synthesis
+│   ├── evaluation/                    # Phase 3-6 benchmark runners & statistical audits
+│   ├── training/                      # Multi-scale & cloud training harnesses
+│   └── verification/                  # CT geometry, topology & manifest audit suite
 │
 ├── lungvision_disease_classification/ # DenseNet121 model weights & training artifacts
 │   └── checkpoints/
@@ -494,14 +505,15 @@ computer vision/
 │       ├── TASK.md                    # 13-phase implementation tracker
 │       └── MEMORY.md                  # Persistent engineering memory & decisions
 │
-└── docs/                              # Comprehensive technical documentation suite
+└── docs/                              # Comprehensive technical documentation & audit suite
     ├── ARCHITECTURE_OVERVIEW.md       # High-level system topology
     ├── DEVELOPMENT_SETUP.md           # Developer onboarding guide
     ├── REPOSITORY_STRUCTURE.md        # Comprehensive file ledger
     ├── MODEL_ARTIFACT_INVENTORY.md    # Model provenance & hashes
     ├── REPOSITORY_CLEANUP_REPORT.md   # Cleanup and hardening record
     ├── UI_UX_IMPROVEMENT_REPORT.md    # Interface refinements record
-    └── REGRESSION_TEST_REPORT.md      # Automated test verification evidence
+    ├── REGRESSION_TEST_REPORT.md      # Automated test verification evidence
+    └── audits/                        # Consolidated forensic audits, geometry checks & failure reports
 ```
 
 ---
