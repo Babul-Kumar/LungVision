@@ -409,6 +409,7 @@ computer vision/
 │
 ├── notebook/                          # Cloud training notebooks & reproducibility workflows
 │   ├── notebook24632be2a1.ipynb       # Phase 7 Kaggle Complete Recovery Run (512x512 FP32)
+│   ├── lungvision-ai-disease-classification512x512.ipynb # Phase 7 Advanced Experiments Grid (8 Configurations)
 │   └── lungvision-ai-disease-classification512x512-part2.ipynb # Phase 7 Part 2 Continuation (Stability & Recovery)
 │
 ├── research/                          # Research Documentation, Benchmarks & Model Cards
