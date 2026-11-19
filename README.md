@@ -17,6 +17,7 @@
 [![Kaggle: Phase 7 Grid](https://img.shields.io/badge/Kaggle-Phase%207%20Grid%20(512x512)-20beff.svg?logo=kaggle&logoColor=white)](https://www.kaggle.com/code/babulkumar07/lungvision-ai-disease-classification512x512)
 [![Kaggle: Phase 7 Part 2](https://img.shields.io/badge/Kaggle-Phase%207%20Part%202-20beff.svg?logo=kaggle&logoColor=white)](https://www.kaggle.com/code/babulkumar07/lungvision-ai-disease-classification512x512-part2)
 [![Kaggle: Phase 7 Recovery](https://img.shields.io/badge/Kaggle-Phase%207%20Recovery%20Run-20beff.svg?logo=kaggle&logoColor=white)](https://www.kaggle.com/code/babulkumar07/lungvision-ai-phase-7-complete-recovery-run)
+[![Kaggle: Phase 7 Recovery Part 2](https://img.shields.io/badge/Kaggle-Phase%207%20Recovery%20Part%202-20beff.svg?logo=kaggle&logoColor=white)](https://www.kaggle.com/code/babulkumar07/lungvision-ai-phase-7-recovery-run-part2)
 [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
 
 **LungVision AI** is an advanced medical imaging research workstation and scientific deep learning platform. It unites **2D chest radiograph pathology triage**, **bi-planar patient-specific 3D lung surface reconstruction (Statistical Shape Modeling)**, **calibrated CT-to-DRR radiographic ray-casting**, and **volumetric 3D computed tomography (CT) multi-planar reconstruction (MPR)** with sub-millimetre LUNA16 pulmonary nodule mapping.
@@ -187,6 +188,8 @@ To solve this, the complete, mathematically guarded Phase 7 model training, chec
   * **Local Version-Controlled Notebook**: [`notebook/lungvision-ai-disease-classification512x512-part2.ipynb`](notebook/lungvision-ai-disease-classification512x512-part2.ipynb) (Complete 42-cell executable continuation notebook with strict non-finite diagnostics, FP32 validation, atomic resume checkpoints, validation-phase resume, pre-epoch recovery points, and periodic batch progress logging).
 * **Official Kaggle Run (Phase 7 Complete Recovery Run — 512×512 FP32)**: [![Kaggle Notebook](https://img.shields.io/badge/Kaggle-Phase%207%20Complete%20Recovery%20Run-20beff.svg?logo=kaggle&logoColor=white)](https://www.kaggle.com/code/babulkumar07/lungvision-ai-phase-7-complete-recovery-run) [https://www.kaggle.com/code/babulkumar07/lungvision-ai-phase-7-complete-recovery-run](https://www.kaggle.com/code/babulkumar07/lungvision-ai-phase-7-complete-recovery-run)
   * **Local Version-Controlled Notebook**: [`notebook/notebook24632be2a1.ipynb`](notebook/notebook24632be2a1.ipynb) (Complete 44-cell executable notebook safely continuing `msd121_512_weighted_bce_direct` from epoch-1 recovery checkpoint with full artifact preservation and validation summary).
+* **Official Kaggle Run (Phase 7 Recovery Run Part 2 — Validation-Only Final Evaluation)**: [![Kaggle Notebook](https://img.shields.io/badge/Kaggle-Phase%207%20Recovery%20Part%202%20(Validation)-20beff.svg?logo=kaggle&logoColor=white)](https://www.kaggle.com/code/babulkumar07/lungvision-ai-phase-7-recovery-run-part2) [https://www.kaggle.com/code/babulkumar07/lungvision-ai-phase-7-recovery-run-part2](https://www.kaggle.com/code/babulkumar07/lungvision-ai-phase-7-recovery-run-part2)
+  * **Local Version-Controlled Notebook**: [`notebook/lungvision-ai-phase-7-recovery-run-part2.ipynb`](notebook/lungvision-ai-phase-7-recovery-run-part2.ipynb) (Complete 52-cell validation-only final evaluation notebook: zero-test-leakage manifest verification, tensor audits, training history comparison & ranking, exact MultiScaleDenseNet121-FPN validation inference, per-disease AUROC/AUPRC, F1 validation threshold selection, and calibration diagnostics).
 
 #### Phase 7 Cloud Run Architecture & Scientific Specifications
 1. **Zero-Patient-Leakage Cohort Partitioning**:
@@ -493,6 +496,7 @@ computer vision/
 │   ├── lungvision-ai-disease-classification-part2.ipynb # DenseNet121 Held-Out Evaluation, CheXpert Audit & Bootstrapping
 │   ├── lungvision-ai-disease-classification512x512.ipynb # Phase 7 Advanced Experiments Grid (8 Configurations)
 │   ├── lungvision-ai-disease-classification512x512-part2.ipynb # Phase 7 Part 2 Continuation (Stability & Recovery)
+│   ├── lungvision-ai-phase-7-recovery-run-part2.ipynb # Phase 7 Validation-Only Final Evaluation & Calibration (Part 2)
 │   └── notebook24632be2a1.ipynb       # Phase 7 Kaggle Complete Recovery Run (512x512 FP32)
 │
 ├── research/                          # Research Documentation, Benchmarks & Phase Audits
